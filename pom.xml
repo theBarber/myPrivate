@@ -6,26 +6,59 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>${project.build.jdk}</source>
+					<target>${project.build.jdk}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
 	<properties>
 		<project.build.jdk>1.8</project.build.jdk>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project>
-			<build>
-				<testResources>
-					<testResource>
-						<directory>src/test/resources</directory>
-					</testResource>
-				</testResources>
-			</build>
-		</project>
+		<project.build.testResources.testResource.directory>src/test/resources</project.build.testResources.testResource.directory>
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java8</artifactId>
+			<version>1.2.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.9</version>
+		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>1.2.5</version>
-			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-jvm-deps</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>gherkin</artifactId>
+			<version>2.10.0</version>
 		</dependency>
 	</dependencies>
 </project>
