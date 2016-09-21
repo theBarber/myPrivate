@@ -2,8 +2,10 @@ package com.undertone.ramp.lift.adselector.automation;
 
 import static org.junit.Assert.fail;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.Description;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,8 +21,9 @@ public class TestSanity implements En {
 
     public TestSanity() {
 	Given("I have (\\d+) cukes in my belly", (Integer cukes) -> {
-	    System.out.format("Cukes: %n\n", cukes);
+	    Assert.assertThat("too much", cukes, CoreMatchers.is(30));
 	});
+
     }
 
     @Test
