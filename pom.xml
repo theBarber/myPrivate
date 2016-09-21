@@ -5,13 +5,22 @@
 	<artifactId>ramp-lift-ad-selector-automation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+
 	<properties>
 		<project.build.jdk>1.8</project.build.jdk>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project>
+			<build>
+				<testResources>
+					<testResource>
+						<directory>src/test/resources</directory>
+					</testResource>
+				</testResources>
+			</build>
+		</project>
 	</properties>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-java -->
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
