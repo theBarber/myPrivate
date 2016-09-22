@@ -11,7 +11,7 @@ import cucumber.api.java8.En;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:sanity.feature", plugin = { "pretty", "html:target/cucumber" })
+@CucumberOptions(features = "classpath:sanity.feature", plugin = { "pretty", "html:target/cucumber/sanity" })
 public class TestSanity implements En {
 
     public TestSanity() {

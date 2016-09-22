@@ -12,7 +12,7 @@ import cucumber.api.java8.En;
  * Created by nive on 2016-09-22.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty", "html:target/cucumber" })
+@CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty", "json:target/cucumber/s3" })
 public class S3LoaderTest implements En {
 
     public S3LoaderTest() {
