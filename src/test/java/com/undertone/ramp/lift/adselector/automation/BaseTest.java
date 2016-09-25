@@ -1,6 +1,7 @@
 package com.undertone.ramp.lift.adselector.automation;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -12,7 +13,6 @@ import org.junit.runner.RunWith;
 import cucumber.api.java8.En;
 import cucumber.api.java8.GlueBase;
 import cucumber.api.junit.Cucumber;
-import cucumber.runtime.junit.Assertions;
 
 @RunWith(Cucumber.class)
 public
@@ -20,13 +20,14 @@ public
 class BaseTest implements En, GlueBase {
 
     protected final String environmentName;
-    protected final Map<String, String> config = new HashMap<>();
+    protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
 
     // protected final List<UAS> uas_instances;
     public BaseTest() {
 	environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("ci").toLowerCase();
 	String environmentNameConfigPrefix = environmentName + ".";
 	Before(scenario -> {
+	    config.clear();
 	    Properties properties = new Properties();
 	    try {
 		properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
