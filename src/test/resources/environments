@@ -1,0 +1,3 @@
+ci.adselector.s3.bucket.name = bucket1234
+ci.adselector.s3.bucket.secret = aaaaaaaa
+ci.adselector.s3.bucket.key = zzzzzzzzzz
