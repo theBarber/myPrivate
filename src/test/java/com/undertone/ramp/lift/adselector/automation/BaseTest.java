@@ -3,6 +3,7 @@ package com.undertone.ramp.lift.adselector.automation;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.junit.Assert;
@@ -23,7 +24,7 @@ class BaseTest implements En, GlueBase {
 
     // protected final List<UAS> uas_instances;
     public BaseTest() {
-	environmentName = System.getenv("ENVIRONMENT").toLowerCase();
+	environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("ci").toLowerCase();
 	String environmentNameConfigPrefix = environmentName + ".";
 	Before(scenario -> {
 	    Properties properties = new Properties();
