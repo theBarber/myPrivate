@@ -1,10 +1,7 @@
 package com.utils;
 
 import com.jcraft.jsch.*;
-
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -37,22 +34,24 @@ public class SshAgent {
             System.out.println(e.getMessage());
         }
     }
-    public void enterSshCommand(String comm){
+    public void enterSshCommand(String comm, int waitSeconds){
+        Channel ssh = null;
         try {
-            Channel ssh = session.openChannel("shell");
+            ssh = session.openChannel("shell");
             PrintWriter out = new PrintWriter(ssh.getOutputStream());
             ssh.connect();
             out.println(comm);
             out.flush();
             out.close();
-
-
-
-        } catch (JSchException | IOException e) {
-            System.out.println(e.getMessage());
+                Thread.sleep(waitSeconds * 1000);
+            } catch (InterruptedException | JSchException | IOException e) {
+                System.out.println(e.getMessage());
+            }finally{
+            ssh.disconnect();
         }
+
     }
-    public File copyFileFromRemote(String fileToDownload){
+    public File copyFileFromRemote(String fileToDownload, int sec){
         ChannelSftp channel = null;
         File f = null;
         try {
@@ -63,8 +62,9 @@ public class SshAgent {
 
             FileOutputStream out = new FileOutputStream(f);
             channel.get(fileToDownload,out);
+            Thread.sleep(1000 * sec);
 
-        } catch (SftpException | JSchException | IOException e) {
+        } catch (SftpException | JSchException | IOException | InterruptedException e) {
             System.out.println(e.getMessage());
         }  finally {
             channel.disconnect();

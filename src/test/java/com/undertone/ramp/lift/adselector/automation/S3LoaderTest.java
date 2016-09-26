@@ -18,14 +18,14 @@ public class S3LoaderTest extends BaseTest {
 
     public S3LoaderTest() {
 	super();
-	Given("Loading new (.+) to s3", (String s) -> {
+	Given("Loading new (.+\\.json) to s3", (String s) -> {
 	    assertThat("not same file", s, is("aaaa"));
 	});
 	When("the add selector check for new plan in s3", () -> {
 
 	});
 	Then("The ad selector new plan (\\S+) should be (\\S+\\.json)", (String fn, String efn) -> {
-	    assertEquals(fn, efn);
+
 	});
     }
 }

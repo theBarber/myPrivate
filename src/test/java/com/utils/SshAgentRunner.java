@@ -1,5 +1,7 @@
 package com.utils;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import java.io.File;
 
 /**
@@ -13,10 +15,15 @@ public class SshAgentRunner {
 //            e.printStackTrace();
 //        }
         SshAgent sshAgent = new SshAgent("src\\test\\resources\\user_info.properties");
-
-        sshAgent.enterSshCommand("cat /var/log/ramp-lift-ad-selector/ad-selector.log.1 /var/log/ramp-lift-ad-selector/ad-selector.log > temp_logs\ntac temp_logs | egrep -o -m1 [_[:alnum:]]+\\.json > temp_file_name\nrm temp_logs");
-//        File f = sshAgent.copyFileFromRemote("temp_file_name");
-//        sshAgent.compareContent(f, "");
-//        sshAgent.close();
+        String command1 = StringEscapeUtils.
+                escapeJava("cat /var/log/ramp-lift-ad-selector/ad-selector.log.1 /var/log/ramp-lift-ad-selector/ad-selector.log > temp_logs");
+        String command2 = StringEscapeUtils.escapeJava("tac temp_logs | egrep  -m1 Loaded | egrep -o  solver_plan_[_[:alnum:]]+\\.json > res_log.txt");
+        sshAgent.enterSshCommand(command1,2);
+        sshAgent.enterSshCommand(command2,2);
+        File f = sshAgent.copyFileFromRemote("res_log.txt", 2);
+        sshAgent.enterSshCommand("rm temp_logs", 1);
+        sshAgent.enterSshCommand("rm res_log.txt", 1);
+        sshAgent.compareContent(f, "");
+        sshAgent.close();
     }
 }
