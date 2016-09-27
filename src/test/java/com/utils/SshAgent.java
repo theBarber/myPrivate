@@ -83,7 +83,7 @@ public class SshAgent {
             System.out.println(e.getMessage());
         }
         System.out.println(sb);
-        return sb.toString().equalsIgnoreCase(s);
+        return sb.toString().contains(s);
     }
 
 
