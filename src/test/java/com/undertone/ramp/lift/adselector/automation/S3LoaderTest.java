@@ -31,8 +31,14 @@ public class S3LoaderTest extends BaseTest {
 	    assertNotNull(res);
 	});
 	When("the add selector check for new plan in s3", () -> {
+        try {
+            // because of timing issue of the ad selector 5 minute interval
+            Thread.sleep(6*60*1000);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
 
-	});
+    });
 	Then("The ad selector new plan should be (\\S+\\.json)", (String efn) -> {
 		        SshAgent sshAgent = new SshAgent("src\\test\\resources\\user_info.properties");
         String command1 = StringEscapeUtils.
