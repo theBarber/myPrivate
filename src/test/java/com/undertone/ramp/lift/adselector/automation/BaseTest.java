@@ -34,7 +34,8 @@ class BaseTest implements En, GlueBase {
 	    } catch (IOException ioException) {
 		Assert.fail("load configuration of " + scenario.getName() + " failed: " + ioException.getMessage());
 	    }
-	    System.getenv().forEach((configurationKey, value) -> {
+	    properties.forEach((k, v) -> {
+		String configurationKey = k.toString(), value = v.toString();
 		if (configurationKey.startsWith(environmentNameConfigPrefix)) {
 		    config.put(configurationKey.substring(environmentNameConfigPrefix.length()), value);
 		}

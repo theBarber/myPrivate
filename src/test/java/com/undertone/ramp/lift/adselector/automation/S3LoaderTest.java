@@ -26,32 +26,36 @@ public class S3LoaderTest extends BaseTest {
 
     public S3LoaderTest() {
 	super();
-	Given("Loading new (\\S+\\.json) to (\\S+\\.json) s3", (String from, String  to) -> {
-		PutObjectResult res = S3Client.getInstance().uploadFile(from, to);
+	Given("Loading new (\\S+\\.json) to (\\S+\\.json) s3", (String from, String to) -> {
+	    PutObjectResult res = S3Client.getInstance().uploadFile(from, to);
 	    assertNotNull(res);
 	});
 	When("the add selector check for new plan in s3", () -> {
-        try {
-            // because of timing issue of the ad selector 5 minute interval
-            Thread.sleep(6*60*1000);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
+	    try {
+		// because of timing issue of the ad selector 5 minute interval
+		Thread.sleep(6 * 60 * 1000);
+	    } catch (InterruptedException e) {
+		System.out.println(e.getMessage());
+	    }
 
-    });
+	});
 	Then("The ad selector new plan should be (\\S+\\.json)", (String efn) -> {
-		        SshAgent sshAgent = new SshAgent("src\\test\\resources\\user_info.properties");
+	    
+	    
+	    
+	    SshAgent sshAgent = new SshAgent("src\\test\\resources\\user_info.properties");
         String command1 = StringEscapeUtils.
                 escapeJava("cat /var/log/ramp-lift-ad-selector/ad-selector.log.1 /var/log/ramp-lift-ad-selector/ad-selector.log > temp_logs");
         String command2 = StringEscapeUtils.escapeJava("tac temp_logs | egrep  -m1 Loaded | egrep -o  solver_plan_[_[:alnum:]]+\\.json > res_log.txt");
-        sshAgent.enterSshCommand(command1,2);
-        sshAgent.enterSshCommand(command2,2);
-        File f = sshAgent.copyFileFromRemote("res_log.txt", 2);
-        sshAgent.enterSshCommand("rm temp_logs", 1);
-        sshAgent.enterSshCommand("rm res_log.txt", 1);
-        boolean  res = sshAgent.compareContent(f, efn);
-        sshAgent.close();
-		Assert.assertTrue(res);
+	    sshAgent.enterSshCommand(command1, 2);
+	    sshAgent.enterSshCommand(command2, 2);
+	    File f = sshAgent.copyFileFromRemote("res_log.txt", 2);
+	    sshAgent.enterSshCommand("rm temp_logs", 1);
+	    
+	    sshAgent.enterSshCommand("rm res_log.txt", 1);
+	    boolean res = sshAgent.compareContent(f, efn);
+	    sshAgent.close();
+	    Assert.assertTrue(res);
 	});
     }
 }
