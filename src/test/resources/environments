@@ -1,3 +1,9 @@
 ci.adselector.s3.bucket.name = bucket1234
 ci.adselector.s3.bucket.secret = aaaaaaaa
 ci.adselector.s3.bucket.key = zzzzzzzzzz
+ci.de.rabbitmq.rouring_key =
+ci.de.rabbitmq.host =
+ci.de.rabbitmq.port =
+ci.de.rabbitmq.user =
+ci.de.rabbitmq.password =
+ci.de.rabbitmq.exchange_name =
