@@ -15,6 +15,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
+
 public class FluentWait<T> implements Wait<T> {
     public static final Duration FIVE_HUNDRED_MILLIS = Duration.of(500, MILLIS);
 
@@ -173,6 +177,34 @@ public class FluentWait<T> implements Wait<T> {
 
 	    public String toString() {
 		return isTrue.toString();
+	    }
+	});
+    }
+
+    /**
+     * Repeatedly applies this instance's input value to the given predicate
+     * until the timeout expires or the predicate evaluates to true.
+     *
+     * @param isTrue
+     *            The predicate to wait on.
+     * @throws TimeoutException
+     *             If the timeout expires.
+     */
+    public void until(final Matcher<T> isTrue) {
+	until(new Function<T, Boolean>() {
+	    public Boolean apply(T input) {
+		return isTrue.matches(input);
+	    }
+
+	    public String toString() {
+		Description description = new StringDescription();
+		description.appendText(" until ");
+		if (input == null) {
+		    isTrue.describeMismatch(input, description);
+		} else {
+		    isTrue.describeTo(description);
+		}
+		return description.toString();
 	    }
 	});
     }
