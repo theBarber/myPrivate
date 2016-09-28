@@ -1,14 +1,10 @@
-Feature: food
+Feature: tets example - food
 
-@OutOfScope
-Scenario: Some cukes
-  Given I have 18 cukes in my belly
+@Sanity
+Scenario: eating cakes
+  Given I have 30 cakes in my belly but my capacity is 88
+  And I eat more 10 cakes
 
-@OutOfScope
-Scenario: less cukes
-  Given I have 30 cukes in my belly
 
-@OutOfScope
-Scenario: exactly cukes
-  Given I have 45 cukes in my belly
+
   
