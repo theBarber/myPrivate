@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "callback_queue": "out_5a7bd88e714e_1",
+    "response_timeout": 10,
+    "server_name": "server1"
+  },
+  "body": {
+    "features": {
+      "zone_id": 2,
+      "brand_name": "",
+      "mobile_browser": "",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
+      "region": "nc",
+      "city": "durham",
+      "zip": "27707",
+      "area_codes": "919/984",
+      "gmt_offset": "-400",
+      "latitude": 35,
+      "longitude": -78,
+      "device": "",
+      "os": "",
+      "dma": "",
+      "country": "us"
+    },
+    "eligible_ads": [
+      {
+        "id": "15"
+      },
+      {
+        "id": "2"
+      }
+    ]
+  }
+}

@@ -16,7 +16,7 @@ import java.util.Properties;
  * Created by nive on 2016-09-27.
  */
 public class S3Client {
-    final private String PROP_PATH="src\\test\\resources\\user_info.properties";
+    final private String PROP_PATH="src/test/resources/user_info.properties";
     private static AmazonS3 amazonS3;
     private static S3Client client;
 
