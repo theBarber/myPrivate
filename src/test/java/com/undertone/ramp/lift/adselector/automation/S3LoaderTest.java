@@ -38,7 +38,7 @@ public class S3LoaderTest extends BaseTest {
 	When("the add selector check for new plan in s3", () -> {
 	    try {
 		// because of timing issue of the ad selector 5 minute interval
-		Thread.sleep(1 * 60 * 1000);
+		Thread.sleep(6 * 60 * 1000);
 	    } catch (InterruptedException e) {
 		System.out.println(e.getMessage());
 	    }
@@ -51,12 +51,12 @@ public class S3LoaderTest extends BaseTest {
 	    String command2 = StringEscapeUtils.escapeJava(
 		    "tac temp_logs | egrep  -m1 Loaded | egrep -o  solver_plan_[_[:alnum:]]+\\.json > res_log.txt");
 
-	    CliConnectionImpl cliConnection = uasCliConnections.get(0);
-	    try {
-		cliConnection.init();
-		cliConnection.connect();
-		cliConnection.handleCliCommand("command1", new CliCommand(command1));
-		cliConnection.handleCliCommand("command2", new CliCommand(command2));
+//	    CliConnectionImpl cliConnection = uasCliConnections.get(0);
+//	    try {
+//		cliConnection.init();
+//		cliConnection.connect();
+//		cliConnection.handleCliCommand("command1", new CliCommand(command1));
+//		cliConnection.handleCliCommand("command2", new CliCommand(command2));
 		File f = sshAgent.copyFileFromRemote("res_log.txt", 2);
 		sshAgent.enterSshCommand("rm temp_logs", 1);
 
@@ -64,9 +64,9 @@ public class S3LoaderTest extends BaseTest {
 		boolean res = sshAgent.compareContent(f, json);
 		sshAgent.close();
 		Assert.assertTrue(res);
-	    } catch (InterruptedException | IOException e) {
-		Assert.fail("test failed", e);
-	    }
+//	    } catch (InterruptedException | IOException e) {
+//		Assert.fail("test failed", e);
+//	    }
 	});
     }
 }

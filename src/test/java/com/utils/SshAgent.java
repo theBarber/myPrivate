@@ -63,7 +63,8 @@ public class SshAgent {
             FileOutputStream out = new FileOutputStream(f);
             channel.get(fileToDownload,out);
             Thread.sleep(1000 * sec);
-
+            out.flush();
+            out.close();
         } catch (SftpException | JSchException | IOException | InterruptedException e) {
             System.out.println(e.getMessage());
         }  finally {
