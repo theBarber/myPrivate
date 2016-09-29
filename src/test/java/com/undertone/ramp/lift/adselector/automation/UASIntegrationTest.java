@@ -21,15 +21,17 @@ import java.io.InputStreamReader;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty", "json:target/cucumber/s3" })
-public class UASIntegration extends BaseTest {
+public class UASIntegrationTest extends BaseTest {
 
     private String url;
     private int responseStatus;
-    public UASIntegration() {
+    public UASIntegrationTest() {
         super();
         Given("new request (\\S+\\.json) with zone (\\S+) to UASEndPoint" ,(String requestJson, String zoneId )->{
             CloseableHttpClient httpclient = HttpClients.createDefault();
-            url = "http://172.31.48.21:9000/af?zoneid=" + zoneId + "&ct=1";
+            String host= config.get("uas.host");
+            String port= config.get("uas.port");
+            url = "http://" + host + ":"+port + "/af?zoneid=" + zoneId + "&ct=1";
             HttpPost httpPost = new HttpPost(url);
             CloseableHttpResponse response = null;
             StringEntity entity = new StringEntity(requestJson, ContentType.APPLICATION_JSON);

@@ -7,6 +7,7 @@ ci.de.rabbitmq.port =
 ci.de.rabbitmq.user =
 ci.de.rabbitmq.password =
 ci.de.rabbitmq.exchange_name =
+ci.uas.host=172.31rrrrrrrrrrrrrrrrrrrrrrrrrrr
 
-stg.uas.host=172.31.48.21
-stg.uas.port=9000
+staging.uas.host=172.31.48.21
+staging.uas.port=9000
