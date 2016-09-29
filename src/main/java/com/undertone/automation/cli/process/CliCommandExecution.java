@@ -83,7 +83,7 @@ public class CliCommandExecution {
 	 * @throws Exception
 	 */
 	public void execute() throws IOException {
-		if (!Optional.ofNullable(cmd).filter(String::isEmpty).isPresent()) {
+		if (!Optional.ofNullable(cmd).filter(StringUtils.nonEmpty).isPresent()) {
 			throw new NullPointerException("command is not set");
 		}
 

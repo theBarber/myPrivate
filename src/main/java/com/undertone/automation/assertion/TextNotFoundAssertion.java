@@ -2,6 +2,8 @@ package com.undertone.automation.assertion;
 
 import java.util.Optional;
 
+import com.undertone.automation.support.StringUtils;
+
 
 /**
  * Asserts that given text does not exists in an actual text
@@ -37,7 +39,7 @@ public class TextNotFoundAssertion extends AbstractAssertionLogic<String> {
 
 	@Override
 	public void doAssertion() {
-		if (!Optional.ofNullable(actualText).filter(String::isEmpty).isPresent() && !Optional.ofNullable(expectedText).filter(String::isEmpty).isPresent()){
+		if (StringUtils.nullOrEmpty.test(actualText) && StringUtils.nullOrEmpty.test(expectedText)){
 			title="Both expected and actual strings are empty";
 			status = true;
 		} else {

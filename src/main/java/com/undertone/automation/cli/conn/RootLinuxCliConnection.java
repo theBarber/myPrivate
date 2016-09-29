@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.undertone.automation.cli.terminal.Prompt;
+import com.undertone.automation.support.StringUtils;
 
 
 public class RootLinuxCliConnection extends LinuxDefaultCliConnection {
@@ -19,7 +20,7 @@ public class RootLinuxCliConnection extends LinuxDefaultCliConnection {
 		
 		Prompt rootPrompt = new Prompt();
 		rootPrompt.setPrompt("# ");
-		if (!Optional.ofNullable(suUser).filter(String::isEmpty).isPresent()){
+		if (StringUtils.nonEmpty.test(suUser)){
 			rootPrompt.setCommandEnd(true);
 		}
 		else {

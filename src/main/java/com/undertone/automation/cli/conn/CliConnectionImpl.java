@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public abstract class CliConnectionImpl extends AbstractModuleImpl implements CliConnection {
-   static Logger Reporter = LoggerFactory.getLogger(CliConnectionImpl.class); 
+        protected Logger Reporter = LoggerFactory.getLogger(CliConnectionImpl.class); 
 	public static enum EnumConnectionType {
 		TELNET("telnet"), SSH("ssh"), SSH_RSA("ssh-rsa");
 		EnumConnectionType(String value) {
@@ -434,13 +434,13 @@ public abstract class CliConnectionImpl extends AbstractModuleImpl implements Cl
 			}
 			try {
 				if (!command.isSilent()) {
-//					Reporter.startLogToggle(title);
+				    cli.Reporter.info(title);
 				}
 				cli.command(command);
 
 				cli.setActual(command.getResult());
 				if (command.isFailed() && (!command.isIgnoreErrors()) && (!cli.isForceIgnoreAnyErrors())) {
-					Reporter.error(command.getFailCause() + "" + command.getResult());
+				    cli.Reporter.error(command.getFailCause() + "" + command.getResult());
 					IOException e = command.getThrown();
 					if (e != null) {
 						throw e;
@@ -449,7 +449,7 @@ public abstract class CliConnectionImpl extends AbstractModuleImpl implements Cl
 				}
 
 				if (!command.isSilent()) {
-					Reporter.info(command.getResult());
+				    cli.Reporter.info(command.getResult());
 				}
 				if (command.isIgnoreErrors() || (cli.isForceIgnoreAnyErrors())) {
 					;
@@ -463,10 +463,10 @@ public abstract class CliConnectionImpl extends AbstractModuleImpl implements Cl
 								AbstractAssertionLogic<String> stringAssertionLogic = (AbstractAssertionLogic<String>) analyzer;
 								if (!(command.isSilent() && stringAssertionLogic.isStatus())) {
 								    if (stringAssertionLogic.isStatus()){
-									Reporter.info(stringAssertionLogic.getTitle() + stringAssertionLogic.getMessage());
+									cli.Reporter.info(stringAssertionLogic.getTitle() + stringAssertionLogic.getMessage());
 								    }
 								    else {
-									Reporter.error(stringAssertionLogic.getTitle() + stringAssertionLogic.getMessage());
+									cli.Reporter.error(stringAssertionLogic.getTitle() + stringAssertionLogic.getMessage());
 								    }
 								}
 							}

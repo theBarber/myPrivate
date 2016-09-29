@@ -40,6 +40,11 @@ public abstract class StringUtils {
 		};
 	}
 
+    public final static Predicate<String> nonEmpty = s -> s != null && s.trim().length() > 0;
+
+    public final static Predicate<String> nullOrEmpty = s -> s == null || s.isEmpty();
+
+	
 	public final static Predicate<String> startsWith(final Collection<String> oneOfTheStrings) {
 //		List<Predicate<String>> startWithEitherString = new ArrayList<>();
 //		for (String string : oneOfTheStrings) {

@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import com.undertone.automation.support.StringUtils;
+
 /**
  * @author Aharon hacmon
  *
@@ -31,7 +33,7 @@ public class FailSafeAssertionListener<T> implements AssertionListener<T> {
 	 */
 	@Override
 	public void assertionFailed(T actual, AbstractAssertionLogic<T> logic) {
-		suppressed.add(new AssertionError(Optional.ofNullable(logic.message).filter(String::isEmpty).orElseGet(logic::getTitle)));
+		suppressed.add(new AssertionError(Optional.ofNullable(logic.message).filter(StringUtils.nonEmpty).orElseGet(logic::getTitle)));
 	}
 
 	/* (non-Javadoc)
@@ -40,7 +42,7 @@ public class FailSafeAssertionListener<T> implements AssertionListener<T> {
 	@Override
 	public void assertionFailed(T actual, AbstractAssertionLogic<T> logic,
 			Throwable t) {
-		suppressed.add(new AssertionError(Optional.ofNullable(logic.message).filter(String::isEmpty).orElseGet(logic::getTitle), t));
+		suppressed.add(new AssertionError(Optional.ofNullable(logic.message).filter(StringUtils.nonEmpty).orElseGet(logic::getTitle), t));
 
 	}
 	

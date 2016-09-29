@@ -12,6 +12,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.undertone.automation.support.StringUtils;
+
 /**
  * Monitors the allowed idle time of a machine. (Many devices forces log out in
  * case of the maximum idle time has passed) In order to activate this monitor
@@ -66,7 +68,7 @@ public class IdleMonitor extends Thread {
 			if (currentTimeMillis() - lastCommandTime > (timeout * 0.9)) {
 				synchronized (cli) {
 					CliCommand cmd = new CliCommand("");
-					if (!Optional.ofNullable(position).filter(String::isEmpty).isPresent()) {
+					if (StringUtils.nonEmpty.test(position)) {
 						cmd.setPosition(position);
 					}
 					PrintStream stream = cli.terminal.getPrintStream();
