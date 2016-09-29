@@ -20,7 +20,7 @@ public class RootLinuxCliConnection extends LinuxDefaultCliConnection {
 		
 		Prompt rootPrompt = new Prompt();
 		rootPrompt.setPrompt("# ");
-		if (StringUtils.nonEmpty.test(suUser)){
+		if (StringUtils.nullOrEmpty.test(suUser)){
 			rootPrompt.setCommandEnd(true);
 		}
 		else {

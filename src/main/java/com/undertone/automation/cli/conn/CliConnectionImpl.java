@@ -486,6 +486,9 @@ public abstract class CliConnectionImpl extends AbstractModuleImpl implements Cl
 	public synchronized void command(CliCommand command) throws InterruptedException {
 
 		lastCommandTime = System.currentTimeMillis();
+		if (cli==null){
+		    throw new IllegalStateException(this.toString()  + " is not initialized using init()");
+		}
 		cli.setDontWaitForPrompts(command.isDontWaitForPrompts());
 		try {
 			navigateToPosition(command);

@@ -5,6 +5,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 
+import com.undertone.automation.support.StringUtils;
+
+import cucumber.runtime.model.CucumberScenario;
+
 
 /**
  * Class for comparing between actual and expected states
@@ -225,7 +229,7 @@ public class Assert extends org.junit.Assert {
 	public static void fail(String message, Throwable throwable) {
 	    //XXX
 	    //TODO Auto-generated method stub
-	    fail(message);
+	    fail(message + "\n" + StringUtils.getStackTrace(throwable));
 	}
 
 	

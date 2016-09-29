@@ -63,12 +63,12 @@ public class SSHWithRSA extends SSH {
 	}
 
 	/* Authenticate */
-	if (passAuthentication && password != null) {
+	if (passAuthentication && privateKeyFile == null) {
 	    super.connect();
 	} else if (privateKeyAuthentication) {
 	    try {
 		if (privateKeyFile != null && privateKeyFile.isFile()) {
-		    isAuthenticated = conn.authenticateWithPublicKey(username, privateKeyFile, "");
+		    isAuthenticated = conn.authenticateWithPublicKey(username, privateKeyFile,"");
 		} else {
 		    Reporter.error("Connection to " + hostname
 			    + " Failed: Auth Error - The privateKeyFile should be init from the SUT with a valid path to ppk/pem RSA private key");
