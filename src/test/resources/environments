@@ -1,3 +1,10 @@
 ci.adselector.s3.bucket.name = bucket1234
 ci.adselector.s3.bucket.secret = aaaaaaaa
 ci.adselector.s3.bucket.key = zzzzzzzzzz
+ci.uas.cliconnection.hosts=[172.31.48.21,172.31.48.19]
+ci.uas.cliconnection.user=root
+ci.uas.cliconnection.password=
+ci.uas.cliconnection.keyname=ramplift-rackspace.pem
+
+staging.uas.cliconnection.user=ubuntu
+staging.uas.cliconnection.keyname=ramplift-rackspace.pem
