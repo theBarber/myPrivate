@@ -1,22 +1,23 @@
-ci.adselector.s3.bucket.name = bucket1234
-ci.adselector.s3.bucket.secret = aaaaaaaa
-ci.adselector.s3.bucket.key = zzzzzzzzzz
-ci.uas.cliconnection.hosts=[172.31.48.21,172.31.48.19]
-ci.uas.cliconnection.user=root
-ci.uas.cliconnection.password=
-ci.uas.cliconnection.keyname=ramplift-rackspace.pem
+staging.adselector.s3.bucket.name = bucket1234
+staging.adselector.s3.bucket.secret = aaaaaaaa
+staging.adselector.s3.bucket.key = zzzzzzzzzz
+staging.uas.cliconnection.hosts=[172.31.48.21,172.31.48.19]
+staging.uas.cliconnection.user=root
+staging.uas.cliconnection.password=
+staging.uas.cliconnection.keyname=ramplift-rackspace.pem
 
 staging.uas.cliconnection.user=ubuntu
 staging.uas.cliconnection.keyname=ramplift-rackspace.pem
 
-ci.de.rabbitmq.routing_key =
-ci.de.rabbitmq.host = 172.31.48.21
-ci.de.rabbitmq.port = 15672
-ci.de.rabbitmq.user = noam
-ci.de.rabbitmq.password = noam
-ci.de.rabbitmq.exchange_name = in
-ci.de.rabbitmq.routing_key = in1
-ci.de.rabbitmq.queue_name = aliveness-test
-ci.de.rabbitmq.request_message = {"metadata":{"callback_queue":"aliveness-test","response_timeout":10,"server_name":"server1"},"body":{"features":{"zone_id":1111111,"brand_name":"","mobile_browser":"","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393","region":"nc","city":"durham","zip":"27707","area_codes":"919/984","gmt_offset":"-400","latitude":35,"longitude":-78,"device":"","os":"","dma":"","country":"us"},"eligible_ads":[{"id":"111111"}]}}
+staging.de.rabbitmq.routing_key =
+staging.de.rabbitmq.host = 172.31.48.21
+staging.de.rabbitmq.port = 15672
+staging.de.rabbitmq.user = noam
+staging.de.rabbitmq.password = noam
+staging.de.rabbitmq.exchange_name = in
+staging.de.rabbitmq.routing_key = in1
+staging.de.rabbitmq.queue_name = aliveness-test
+staging.de.rabbitmq.request_message = {"metadata":{"callback_queue":"aliveness-test","response_timeout":10,"server_name":"server1"},"body":{"features":{"zone_id":1111111,"brand_name":"","mobile_browser":"","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393","region":"nc","city":"durham","zip":"27707","area_codes":"919/984","gmt_offset":"-400","latitude":35,"longitude":-78,"device":"","os":"","dma":"","country":"us"},"eligible_ads":[{"id":"111111"}]}}
+
 staging.uas.host=172.31.48.21
 staging.uas.port=9000
