@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
  * Created by noam on 29/09/16.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = { "pretty", "com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
+@CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty", "com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
 public class UASIntegrationTest extends BaseTest {
 
     private String url;
