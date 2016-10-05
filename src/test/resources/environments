@@ -6,9 +6,6 @@ staging.uas.cliconnection.user=root
 staging.uas.cliconnection.password=
 staging.uas.cliconnection.keyname=ramplift-rackspace.pem
 
-staging.uas.cliconnection.user=ubuntu
-staging.uas.cliconnection.keyname=ramplift-rackspace.pem
-
 staging.de.rabbitmq.routing_key =
 staging.de.rabbitmq.host = 172.31.48.21
 staging.de.rabbitmq.port = 15672
