@@ -17,7 +17,7 @@ import cucumber.api.junit.Cucumber;
  * Created by nive on 2016-09-28.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:RabbitMQ_integration.feature", plugin = { "pretty", "json:target/cucumber/rabbit" })
+@CucumberOptions(plugin = { "pretty", "com.undertone.automation.RotatingJSONFormatter:target/cucumber/rabbit_$TIMESTAMP$.json" })
 public class RabbitMQClientTest extends BaseTest implements MsgProcess {
     private static Logger logger = LoggerFactory.getLogger(RabbitMQClientTest.class);
     private BlockingDeque<String> returnQueue;

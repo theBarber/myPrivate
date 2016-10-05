@@ -58,6 +58,7 @@ public class BaseTest implements En, GlueBase {
 	});
 
 	Before(scenario -> {
+	    
 	    Properties properties = new Properties();
 	    try {
 		properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));

@@ -20,7 +20,7 @@ import cucumber.api.junit.Cucumber;
  * Created by nive on 2016-09-22.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty", "json:target/cucumber/s3" })
+@CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty" , "com.undertone.automation.RotatingJSONFormatter:target/cucumber/S3Loader_$TIMESTAMP$.json" })
 public class S3LoaderTest extends BaseTest {
 
     public S3LoaderTest() {
@@ -29,6 +29,7 @@ public class S3LoaderTest extends BaseTest {
 	Given("Loading new (\\S+\\.json) to (\\S+\\.json) s3", (String from, String to) -> {
 	    PutObjectResult res = S3Client.getInstance().uploadFile(from, to);
 	    assertNotNull(res);
+	    
 	});
 	When("the add selector check for new plan in s3", () -> {
 	    // try {

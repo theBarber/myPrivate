@@ -116,5 +116,10 @@
 			<artifactId>ganymed-ssh2</artifactId>
 			<version>262</version>
 		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-core</artifactId>
+			<version>1.2.5</version>
+		</dependency>
 	</dependencies>
 </project>
