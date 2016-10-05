@@ -2,10 +2,8 @@ package com.undertone.ramp.lift.adselector.automation;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
@@ -33,21 +31,20 @@ class BaseTest implements En, GlueBase {
 
     protected final String environmentName;
     protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
-    protected final List<CliConnectionImpl> uasCliConnections = new ArrayList<>();
+    protected final Map<String, CliConnectionImpl> uasCliConnections = new HashMap<>();
 
     // protected final Reporter reporter;
     // protected final List<UAS> uas_instances;
     public BaseTest() {
-	environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("ci").toLowerCase();
+	environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
 	String environmentNameConfigPrefix = environmentName + ".";
 	After(scenario -> {
 	    config.clear();
-	    uasCliConnections.forEach(CliConnection::disconnect);
+	    uasCliConnections.values().forEach(CliConnection::disconnect);
 	    uasCliConnections.clear();
 	});
 
 	Before(scenario -> {
-
 	    Properties properties = new Properties();
 	    try {
 		properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
@@ -61,7 +58,7 @@ class BaseTest implements En, GlueBase {
 		}
 	    });
 	    boolean isUasTest = scenario.getSourceTagNames().stream().map(String::toLowerCase)
-		    .anyMatch(tag -> tag.equals("@uas"));
+		    .anyMatch(tag -> tag.equals("@cli"));
 	    if (isUasTest) {
 		String uasCliConnectionUser = config.get("uas.cliconnection.user");
 		String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
@@ -91,8 +88,7 @@ class BaseTest implements En, GlueBase {
 			conn.setPrivateKey(keyFile);
 			conn.setProtocol(EnumConnectionType.SSH_RSA.value());
 		    }
-
-		    uasCliConnections.add(conn);
+		    uasCliConnections.put(host, conn);
 		});
 	    }
 	});
