@@ -11,7 +11,8 @@ public class SshAgent {
     private Session session;
 
     public SshAgent(String proFile){
-
+        String pem_key = System.getProperty("user.home") + "/.ssh/ramplift.pem";
+        System.out.println("pem key location: "+pem_key);
         final String PROP_NAME = proFile;
         try{
             Properties prop = new Properties();
@@ -20,7 +21,7 @@ public class SshAgent {
             inProp.close();
 
             JSch jsch = new JSch();
-            jsch.addIdentity(prop.getProperty("pem_key"));
+            jsch.addIdentity(pem_key);
 
             String host = prop.getProperty("host");
             String user = prop.getProperty("user");
