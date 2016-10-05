@@ -1,4 +1,4 @@
-package com.ramp.lift.automation.util;
+package com.undertone.automation.utils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -7,10 +7,6 @@ import java.util.concurrent.TimeoutException;
 import com.rabbitmq.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by noam on 01/05/16.

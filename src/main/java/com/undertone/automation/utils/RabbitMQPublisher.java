@@ -1,4 +1,4 @@
-package com.ramp.lift.automation.util;
+package com.undertone.automation.utils;
 
 
 import com.rabbitmq.client.AMQP;

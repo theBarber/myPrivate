@@ -1,4 +1,4 @@
-package com.utils;
+package com.undertone.automation.utils;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;

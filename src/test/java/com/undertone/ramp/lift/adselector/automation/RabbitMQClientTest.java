@@ -2,9 +2,9 @@ package com.undertone.ramp.lift.adselector.automation;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.ramp.lift.automation.util.MsgProcess;
-import com.ramp.lift.automation.util.RabbitMQConsumer;
-import com.ramp.lift.automation.util.RabbitMQPublisher;
+import com.undertone.automation.utils.MsgProcess;
+import com.undertone.automation.utils.RabbitMQConsumer;
+import com.undertone.automation.utils.RabbitMQPublisher;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.Assert;

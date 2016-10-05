@@ -1,8 +1,4 @@
-package com.utils;
-
-import org.apache.commons.lang.StringEscapeUtils;
-
-import java.io.File;
+package com.undertone.automation.utils;
 
 /**
  * Created by nive on 2016-09-25.

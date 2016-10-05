@@ -1,25 +1,16 @@
 package com.undertone.ramp.lift.adselector.automation;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
 import com.amazonaws.services.s3.model.PutObjectResult;
-import com.undertone.automation.assertion.Assert;
-import com.undertone.automation.cli.conn.CliCommand;
-import com.undertone.automation.cli.conn.CliConnection;
-import com.undertone.automation.cli.conn.CliConnectionImpl;
-import com.utils.S3Client;
-import com.utils.SshAgent;
+import com.undertone.automation.utils.S3Client;
+import com.undertone.automation.utils.SshAgent;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.runner.RunWith;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-
 import java.io.File;
-import java.io.IOException;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by nive on 2016-09-22.
@@ -38,7 +29,7 @@ public class S3LoaderTest extends BaseTest {
 	When("the add selector check for new plan in s3", () -> {
 	    try {
 		// because of timing issue of the ad selector 5 minute interval
-		Thread.sleep(6 * 60 * 1000);
+		Thread.sleep(1 * 60 * 1000);
 	    } catch (InterruptedException e) {
 		System.out.println(e.getMessage());
 	    }

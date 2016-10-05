@@ -1,4 +1,4 @@
-package com.utils;
+package com.undertone.automation.utils;
 
 import com.jcraft.jsch.*;
 import java.io.*;

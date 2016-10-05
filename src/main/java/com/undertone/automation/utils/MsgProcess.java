@@ -1,4 +1,4 @@
-package com.ramp.lift.automation.util;
+package com.undertone.automation.utils;
 
 /**
  * Created by noam on 28/09/16.
