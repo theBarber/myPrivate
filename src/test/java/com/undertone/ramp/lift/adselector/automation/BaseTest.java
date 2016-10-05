@@ -25,11 +25,9 @@ import com.undertone.automation.utils.RabbitMQPublisher;
 
 import cucumber.api.java8.En;
 import cucumber.api.java8.GlueBase;
-import cucumber.api.junit.Cucumber;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
 
-@RunWith(Cucumber.class)
 public class BaseTest implements En, GlueBase {
 
     protected final String environmentName;
