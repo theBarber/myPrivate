@@ -31,7 +31,8 @@ public class RabbitMQClientTest extends BaseTest implements MsgProcess {
 
     public RabbitMQClientTest() {
         super();
-        init();
+        Before(scenario->init());
+//        init();
         When("When putting a (\\S+) on RMQ with banner ID BI  which satisfy criteria A", (String req) -> {
             String msg = "{\"metadata\":{\"callback_queue\":\"integration-test\",\"response_timeout\":10,\"server_name\":\"server1\",\"context_id\":\"abcd\"},\"body\":{\"features\":{\"zone_id\":1111111,\"brand_name\":\"\",\"mobile_browser\":\"\",\"user_agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393\",\"region\":\"nc\",\"city\":\"durham\",\"zip\":\"27707\",\"area_codes\":\"919/984\",\"gmt_offset\":\"-400\",\"latitude\":35,\"longitude\":-78,\"device\":\"\",\"os\":\"\",\"dma\":\"\",\"country\":\"us\"},\"eligible_ads\":[{\"id\":\"111111\"}]}}";
             publisher.put(msg, "in1");
@@ -59,15 +60,15 @@ public class RabbitMQClientTest extends BaseTest implements MsgProcess {
 
         // will init all the values from the config map object
         ConnectionFactory fact = new ConnectionFactory();
-//        fact.setUsername(config.get("de.rabbitmq.user"));
-//        fact.setPassword(config.get("de.rabbitmq.password"));
-//        fact.setHost(config.get("de.rabbitmq.host"));
-//        fact.setPort(Integer.parseInt(config.get("de.rabbitmq.port")));
+        fact.setUsername(config.get("de.rabbitmq.user"));
+        fact.setPassword(config.get("de.rabbitmq.password"));
+        fact.setHost(config.get("de.rabbitmq.host"));
+        fact.setPort(Integer.parseInt(config.get("de.rabbitmq.port")));
 
-        fact.setUsername("noam");
-        fact.setPassword("noam");
-        fact.setHost("172.31.48.21");
-        fact.setPort(5672);
+//        fact.setUsername("noam");
+//        fact.setPassword("noam");
+//        fact.setHost("172.31.48.21");
+//        fact.setPort(5672);
         try {
             conn = fact.newConnection();
             //consumer_tag is basically thread num
@@ -88,6 +89,7 @@ public class RabbitMQClientTest extends BaseTest implements MsgProcess {
         try {
             returnQueue.put(msg);
         } catch (InterruptedException e) {
+            
             logger.error("Got exception ", e);
         }
     }
