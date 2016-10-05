@@ -57,9 +57,9 @@ class BaseTest implements En, GlueBase {
 		    config.put(configurationKey.substring(environmentNameConfigPrefix.length()), value);
 		}
 	    });
-	    boolean isUasTest = scenario.getSourceTagNames().stream().map(String::toLowerCase)
+	    boolean isCliTest = scenario.getSourceTagNames().stream().map(String::toLowerCase)
 		    .anyMatch(tag -> tag.equals("@cli"));
-	    if (isUasTest) {
+	    if (isCliTest) {
 		String uasCliConnectionUser = config.get("uas.cliconnection.user");
 		String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
 		String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
