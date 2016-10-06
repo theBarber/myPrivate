@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Assert;
-import org.junit.runner.RunWith;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.undertone.automation.cli.conn.CliConnection;
@@ -22,6 +22,7 @@ import com.undertone.automation.support.StringUtils;
 import com.undertone.automation.utils.MsgProcess;
 import com.undertone.automation.utils.RabbitMQConsumer;
 import com.undertone.automation.utils.RabbitMQPublisher;
+import com.undertone.ramp.lift.uas.automation.UASRequestModule;
 
 import cucumber.api.java8.En;
 import cucumber.api.java8.GlueBase;
@@ -40,10 +41,11 @@ public class BaseTest implements En, GlueBase {
     protected RabbitMQPublisher publisher;
     protected RabbitMQConsumer consumer;
     // protected final Reporter reporter;
-    // protected final List<UAS> uas_instances;
+    protected AtomicReference<UASRequestModule> uas = new AtomicReference<>();
 
     protected final String[] CLITESTS = new String[] { "@cli" };
     protected final String[] RABBITTESTS = new String[] { "@rabbitmq" };
+    protected final String[] UASTESTS = new String[] { "@uas" };
 
     public BaseTest() {
 	environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
@@ -56,9 +58,12 @@ public class BaseTest implements En, GlueBase {
 	    uasCliConnections.values().forEach(CliConnection::disconnect);
 	    uasCliConnections.clear();
 	});
+	After(UASTESTS, scenario -> {
+	    uas.set(null);
+	});
 
 	Before(scenario -> {
-	    
+
 	    Properties properties = new Properties();
 	    try {
 		properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
@@ -134,6 +139,20 @@ public class BaseTest implements En, GlueBase {
 		e.printStackTrace();
 	    }
 
+	});
+
+	Before(UASTESTS, scenario -> {
+	    UASRequestModule uas_ = new UASRequestModule();
+	    this.uas.set(uas_);
+	    uas_.setHost(config.get("uas.host"));
+	    uas_.setPort(config.get("uas.port"));
+	    try {
+		uas_.init();
+
+	    } catch (Exception e) {
+		com.undertone.automation.assertion.Assert.fail("unable to initialize UAS connection", e);
+		e.printStackTrace();
+	    }
 	});
     }
 
