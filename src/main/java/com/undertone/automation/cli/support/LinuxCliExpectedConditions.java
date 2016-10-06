@@ -16,10 +16,10 @@ import java.util.function.Predicate;
 
 public abstract class LinuxCliExpectedConditions {
 	@SuppressWarnings("unused")
-	private final int _;
+	private final int _0_;
 
 	private LinuxCliExpectedConditions() {
-		_ = 1;
+	    _0_ = 1;
 	}
 
 	/**

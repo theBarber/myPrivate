@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * @author guy.arieli
  * 
  */
-public abstract class CliConnectionImpl extends AbstractModuleImpl implements CliConnection {
+public abstract class CliConnectionImpl extends AbstractModuleImpl<String> implements CliConnection {
         protected Logger Reporter = LoggerFactory.getLogger(CliConnectionImpl.class); 
 	public static enum EnumConnectionType {
 		TELNET("telnet"), SSH("ssh"), SSH_RSA("ssh-rsa");
@@ -537,7 +537,7 @@ public abstract class CliConnectionImpl extends AbstractModuleImpl implements Cl
 				command.addResult(lastResult);
 				command.setResultPrompt(cli.getResultPrompt());
 				setActual(command.getResult());
-
+				actual(command.getResult());
 				// If log file name (+path) defined at the sut, CLI results will
 				// be save also to this file
 				// Add to the sut file under <conn><cli> the tag <cliLogFile>

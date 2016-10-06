@@ -1,6 +1,6 @@
 package com.undertone.automation.module;
 
-public class AbstractModuleImpl extends AbstractModule implements Namefull {
+public class AbstractModuleImpl<T> extends AbstractModule implements Namefull {
 
 	@Override
 	public void init() throws Exception {
@@ -19,5 +19,12 @@ public class AbstractModuleImpl extends AbstractModule implements Namefull {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public T actual() {
+	    return (T)super.getActual();
+	}
+	protected void actual(T is){
+	    this.setActual(is);
+	}
 }
