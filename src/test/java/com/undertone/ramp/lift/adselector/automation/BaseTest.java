@@ -22,6 +22,7 @@ import com.undertone.automation.support.StringUtils;
 import com.undertone.automation.utils.MsgProcess;
 import com.undertone.automation.utils.RabbitMQConsumer;
 import com.undertone.automation.utils.RabbitMQPublisher;
+import com.undertone.qa.CampaignManager;
 import com.undertone.ramp.lift.uas.automation.UASRequestModule;
 
 import cucumber.api.java8.En;
@@ -31,6 +32,7 @@ import gherkin.deps.com.google.gson.JsonParser;
 
 public class BaseTest implements En, GlueBase {
 
+    protected final CampaignManager campaignManager = new CampaignManager();
     protected final String environmentName;
     protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
     protected final Map<String, CliConnectionImpl> uasCliConnections = new HashMap<>();

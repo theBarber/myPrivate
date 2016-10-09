@@ -47,12 +47,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 	requestSubmitter = Executors.newFixedThreadPool(5);
     }
 
-    public void zoneRequest(int forZone) {
+    public void zoneRequest(String forZone) {
 	String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1";
 	request(url, true);
     }
 
-    public void zoneRequests(int forZone, int times) {
+    public void zoneRequests(String forZone, int times) {
 	reset();
 	String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1";
 
