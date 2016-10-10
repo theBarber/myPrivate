@@ -25,6 +25,7 @@ import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -36,6 +37,13 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private ExecutorService requestSubmitter;
     protected static final Pattern impressionURLPattern = Pattern
 	    .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/l[^?#]*\\?\\w*=\\w*(&\\w*=\\w*)*)");
+
+    protected static final Pattern clickURLPattern = Pattern
+	    .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/c\\?[^\'\\\"]*)[\'\\\"]");
+
+    protected static final String getGroup1(Matcher from) {
+	return from.group(1);
+    }
 
     public String getHost() {
 	return host;
@@ -59,7 +67,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
     public UASRequestModule() {
 	setActual(new ArrayList<>());
-	httpclient = HttpClients.createDefault();
+	httpclient = HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build())
+		.build();
 	requestSubmitter = Executors.newFixedThreadPool(5);
     }
 
@@ -111,9 +120,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 	actual().add(CompletableFuture.supplyAsync(() -> {
 	    try {
 		HttpResponse response = httpclient.execute(new HttpGet(url));
+		response.setEntity(new BufferedHttpEntity(response.getEntity()));
 		return response;
 	    } catch (IOException e) {
-		throw new RuntimeException("failed to send request", e);
+		throw new UncheckedIOException("failed to send request (" + url + ") ", e);
 	    }
 	}, requestSubmitter));
     }
@@ -136,22 +146,17 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     public static Optional<String> getImpressionUrlFrom(HttpResponse response) {
-	Matcher impressionURLMatcher = impressionURLPattern.matcher(getContentOf(response));
-	return Optional.of(impressionURLMatcher.find()).filter(found -> found)
-		.map(whenfound -> impressionURLMatcher.group(1));
-	// return impressionURLPattern.matcher(getContentOf(response)).group(1);
+	return Optional.of(impressionURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+		.map(UASRequestModule::getGroup1);
+    }
+
+    public static Optional<String> getClickUrlFrom(HttpResponse response) {
+	return Optional.of(clickURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+		.map(UASRequestModule::getGroup1);
     }
 
     public static String getContentOf(HttpResponse response) {
 	HttpEntity entity = response.getEntity();
-	if (!(entity instanceof BufferedHttpEntity)) {
-	    try {
-		response.setEntity(entity = new BufferedHttpEntity(entity));
-	    } catch (IOException cause) {
-		throw new UncheckedIOException(cause);
-	    }
-	}
-
 	Header contentType = entity.getContentType();
 	String contentCharsetName = Arrays.stream(contentType.getElements())
 		.filter(he -> he.getName().equals("charset")).findFirst().map(HeaderElement::getValue)

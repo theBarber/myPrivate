@@ -113,7 +113,7 @@ public class CampaignManager {
 
     public Optional<ZoneSet> createZoneSet(String name, String id, String forCampaignId) {
 	return campaigns.stream().filter(idIs(forCampaignId)).findFirst()
-		.map(c -> c.addZoneSet(new ZoneSet(name, forCampaignId)));
+		.map(c -> c.addZoneSet(new ZoneSet(name, id)));
     }
 
     public Optional<Zone> createZone(String name, String id, String forZoneSetId) {
@@ -123,6 +123,6 @@ public class CampaignManager {
     public <Z extends Zone> Optional<Z> createZone(String name, String id, String forZoneSetId,
 	    Function<Zone, Z> zoneEnricher) {
 	return campaigns.stream().flatMap(Campaign::getZoneSetAssoc).filter(idIs(forZoneSetId)).findFirst()
-		.map(zs -> zs.addZone(requireNonNull(zoneEnricher).apply(new Zone(name, forZoneSetId))));
+		.map(zs -> zs.addZone(requireNonNull(zoneEnricher).apply(new Zone(name, id))));
     }
 }
