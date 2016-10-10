@@ -1,17 +1,31 @@
 package com.undertone.ramp.lift.uas.automation;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
@@ -20,6 +34,8 @@ import com.undertone.automation.module.AbstractModuleImpl;
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
     private ExecutorService requestSubmitter;
+    protected static final Pattern impressionURLPattern = Pattern
+	    .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/l[^?#]*\\?\\w*=\\w*(&\\w*=\\w*)*)");
 
     public String getHost() {
 	return host;
@@ -106,6 +122,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 	return actual().stream();
     }
 
+    @Override
+    public void init() throws Exception {
+	super.init();
+	reset();
+    }
+
     protected final void reset() {
 	this.actual().stream().parallel().filter(((Predicate<Future<HttpResponse>>) Future::isDone).negate())
 		.forEach(f -> f.cancel(true));
@@ -113,4 +135,34 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 	this.actual().clear();
     }
 
+    public static Optional<String> getImpressionUrlFrom(HttpResponse response) {
+	Matcher impressionURLMatcher = impressionURLPattern.matcher(getContentOf(response));
+	return Optional.of(impressionURLMatcher.find()).filter(found -> found)
+		.map(whenfound -> impressionURLMatcher.group(1));
+	// return impressionURLPattern.matcher(getContentOf(response)).group(1);
+    }
+
+    public static String getContentOf(HttpResponse response) {
+	HttpEntity entity = response.getEntity();
+	if (!(entity instanceof BufferedHttpEntity)) {
+	    try {
+		response.setEntity(entity = new BufferedHttpEntity(entity));
+	    } catch (IOException cause) {
+		throw new UncheckedIOException(cause);
+	    }
+	}
+
+	Header contentType = entity.getContentType();
+	String contentCharsetName = Arrays.stream(contentType.getElements())
+		.filter(he -> he.getName().equals("charset")).findFirst().map(HeaderElement::getValue)
+		.filter(Charset::isSupported).orElse(Charset.defaultCharset().name());
+	try (BufferedReader content = new BufferedReader(
+		new InputStreamReader(entity.getContent(), contentCharsetName))) {
+	    return content.lines().collect(Collectors.joining(System.lineSeparator()));
+	} catch (UnsupportedEncodingException e) {
+	    throw new UncheckedIOException(contentCharsetName + " charset not supported", e); // should'nt
+	} catch (IOException cause) {
+	    throw new UncheckedIOException(cause);
+	}
+    }
 }
