@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.http.HttpResponse;
@@ -74,12 +75,12 @@ public class UASIntegrationTest extends BaseTest {
 	    campaign2.set(this.campaignManager.createCampaign("999-undefined-undefined-NaN", "2"));
 	    banner15.set(this.campaignManager.createBanner("Test Banner1", "15", campaign2.get().getId())
 		    .orElseThrow(IllegalArgumentException::new));
-	    
-	    banner17.set(this.campaignManager.createBanner("Test Banner2", "15", campaign2.get().getId())
+
+	    banner17.set(this.campaignManager.createBanner("Test Banner", "17", campaign2.get().getId())
 		    .orElseThrow(IllegalArgumentException::new));
 	    zoneSet719.set(this.campaignManager.createZoneSet("hwu zonesets", "719", campaign2.get().getId())
 		    .orElseThrow(IllegalArgumentException::new));
-	    
+
 	    zone2.set(campaignManager.createZone("qa.undertone.com - Full Banner", "2", zoneSet719.get().getId())
 		    .orElseThrow(IllegalArgumentException::new));
 	    zone3.set(campaignManager.createZone("qa.undertone.com - Half Banner", "3", zoneSet719.get().getId())
@@ -94,27 +95,8 @@ public class UASIntegrationTest extends BaseTest {
 	Then("The impressionUrl have (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the times",
 		(String fieldName, String entityType, String entityName, Double percent) -> {
 
-		    Optional<? extends WithId> expectedEntity = null;
-		    switch (entityType.toLowerCase()) {
-		    case "campaign":
-			// hardcoded:
-			expectedEntity = // campaign2.get();
-				campaignManager.getCampaign(entityName);
-			break;
-		    case "banner":
-			// hardcoded:
-			expectedEntity = Optional.of(banner15).map(AtomicReference::get);
-			// campaignManager.getBanner(entityName);
-			break;
-
-		    case "zone":
-			// hardcoded:
-			expectedEntity = // zone2.get();
-				campaignManager.getZone(entityName);
-			break;
-		    default:
-			Assert.assertThat(entityType, Matchers.isOneOf("campaign", "bunner", "zone"));
-		    }
+		    Assert.assertThat(entityType, Matchers.isOneOf("campaign", "banner", "zone"));
+		    Optional<? extends WithId> expectedEntity = campaignManager.getterFor(entityType).apply(entityName);
 		    Assert.assertTrue("Could not find " + entityType + " named " + entityName,
 			    expectedEntity.isPresent());
 
@@ -126,15 +108,21 @@ public class UASIntegrationTest extends BaseTest {
 			    .flatMap(entry -> entry.getValue().stream())
 			    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		    Assert.assertTrue(!theAmountOfTheOccurencesOfTheFieldValueById.isEmpty());
-		    
-		    double totalUrls = theAmountOfTheOccurencesOfTheFieldValueById.values().stream()
-			    .mapToLong(Long::longValue).sum();
-		    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById.getOrDefault(expectedEntity.get().getId(),0L)
-			    .doubleValue() / totalUrls;
+
+		    long totalResponses = uas.get().responses().filter(CompletableFuture::isDone)
+			    .filter(not(CompletableFuture::isCompletedExceptionally)).count();
+		    Assert.assertThat("total responses", totalResponses, Matchers.greaterThan(10l));
+
+		    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
+			    .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
 		    Assert.assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
 			    actualRate * 100, 5d);
 
 		});
+    }
+
+    private static <T> Predicate<T> not(Predicate<T> p) {
+	return p.negate();
     }
 
     private static Optional<URL> toURL(Optional<String> optionalurlstr) {

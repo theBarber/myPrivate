@@ -29,6 +29,10 @@ public class CampaignManager {
 		.filter(Named.nameIs(byName)).findFirst();
     }
 
+    
+    public Optional<Banner> getBanner(String byName) {
+  	return campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName)).findFirst();
+      }
     /**
      * get a zone that may result with the given campaign
      * 
@@ -124,5 +128,18 @@ public class CampaignManager {
 	    Function<Zone, Z> zoneEnricher) {
 	return campaigns.stream().flatMap(Campaign::getZoneSetAssoc).filter(idIs(forZoneSetId)).findFirst()
 		.map(zs -> zs.addZone(requireNonNull(zoneEnricher).apply(new Zone(name, id))));
+    }
+    
+    public Function<String,Optional<? extends WithId>> getterFor(String entityType){
+	switch (entityType.toLowerCase()) {
+	case "banner":
+	    return this::getBanner;
+	case "campaign":
+	    return this::getCampaign;
+	case "zone":
+	    return this::getZone;
+	default:
+	    return noSuchEntity->Optional.empty();
+	}
     }
 }
