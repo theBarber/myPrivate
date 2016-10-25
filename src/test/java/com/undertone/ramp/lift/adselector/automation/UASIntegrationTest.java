@@ -3,8 +3,7 @@ package com.undertone.ramp.lift.adselector.automation;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
-import static org.hamcrest.Matchers.everyItem;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -38,6 +37,7 @@ import com.undertone.qa.ZoneSet;
 import com.undertone.ramp.lift.uas.automation.UASRequestModule;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 
 /**
@@ -92,26 +92,45 @@ public class UASIntegrationTest extends BaseTest {
 			    .allMatch(Optional::isPresent));
 	});
 
-	Then("The impressionUrl has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",
-		(String fieldName, String entityType, String entityName, Double percent) -> {
+	Then("The responses has click-urls", () -> {
+	    Assert.assertTrue("all of the responses should have a url", uas.get().responses()
+		    .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
+	});
+	//
+	// When("I send a request to the first the imperssion urls", ()->{
+	// uas.get().responses()
+	// .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
+	// .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get).findFirst().
+	//
+	// });
+	Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",
+		(String urlType, String fieldName, String entityType, String entityName, Double percent) -> {
 
-		    Assert.assertThat(entityType, Matchers.isOneOf("campaign", "banner", "zone"));
+		    Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
+		    if (urlType.equalsIgnoreCase("impression")) {
+			urlExtractor = UASIntegrationTest::getImpressionUrl;
+		    } else if (urlType.equalsIgnoreCase("click")) {
+			urlExtractor = UASIntegrationTest::getClickUrl;
+			urlExtractor = urlExtractor.andThen(f -> f.thenApply(UASIntegrationTest::parsableClickUrl));
+		    }
+
+		    Assert.assertThat(entityType, isOneOf("campaign", "banner", "zone"));
 		    Optional<? extends WithId> expectedEntity = campaignManager.getterFor(entityType).apply(entityName);
 		    Assert.assertTrue("Could not find " + entityType + " named " + entityName,
 			    expectedEntity.isPresent());
 
 		    Map<String, Long> theAmountOfTheOccurencesOfTheFieldValueById = uas.get().responses()
-			    .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
-			    .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
-			    .map(UASIntegrationTest::splitQuery).flatMap(m -> m.entrySet().stream())
-			    .filter(entry -> fieldName.equals(entry.getKey()))
+			    .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
+			    .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
+			    .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
 			    .flatMap(entry -> entry.getValue().stream())
 			    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-		    Assert.assertTrue(!theAmountOfTheOccurencesOfTheFieldValueById.isEmpty());
 
-		    long totalResponses = uas.get().responses().filter(CompletableFuture::isDone)
-			    .filter(not(CompletableFuture::isCompletedExceptionally)).count();
-		    Assert.assertThat("total responses", totalResponses, Matchers.greaterThan(10l));
+		    Assert.assertThat(urlType + " urls grouped by " + fieldName,
+			    theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
+
+		    long totalResponses = uas.get().responses().filter(succeededFuture).count();
+		    Assert.assertThat("total responses", totalResponses, greaterThan(10l));
 
 		    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
 			    .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
@@ -121,9 +140,7 @@ public class UASIntegrationTest extends BaseTest {
 		});
     }
 
-    private static <T> Predicate<T> not(Predicate<T> p) {
-	return p.negate();
-    }
+    private static Predicate<CompletableFuture<?>> succeededFuture = c -> !c.isCompletedExceptionally();
 
     private static Optional<URL> toURL(Optional<String> optionalurlstr) {
 	if (optionalurlstr.isPresent()) {
@@ -154,4 +171,13 @@ public class UASIntegrationTest extends BaseTest {
     private static CompletableFuture<Optional<String>> getImpressionUrl(CompletableFuture<HttpResponse> future) {
 	return future.thenApply(UASRequestModule::getImpressionUrlFrom);
     }
+
+    private static Optional<String> parsableClickUrl(Optional<String> originalClickUrl) {
+	return originalClickUrl.map(s -> s.replaceAll("__", "&"));
+    }
+
+    private static CompletableFuture<Optional<String>> getClickUrl(CompletableFuture<HttpResponse> future) {
+	return future.thenApply(UASRequestModule::getClickUrlFrom);
+    }
+
 }
