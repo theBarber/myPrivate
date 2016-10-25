@@ -92,7 +92,7 @@ public class UASIntegrationTest extends BaseTest {
 			    .allMatch(Optional::isPresent));
 	});
 
-	Then("The impressionUrl have (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the times",
+	Then("The impressionUrl has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",
 		(String fieldName, String entityType, String entityName, Double percent) -> {
 
 		    Assert.assertThat(entityType, Matchers.isOneOf("campaign", "banner", "zone"));

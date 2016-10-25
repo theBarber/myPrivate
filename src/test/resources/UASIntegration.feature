@@ -21,9 +21,9 @@ Scenario: Send an ad request to UAS and parse impression url
 	##   When I send an ad-request for zone {pacing 200} is sent to UAS 
 	#	Then The response code is 200 
 	And The responses has impression-urls 
-	And The impressionUrl have bannerid field matching the id of the banner named {Test Banner1} 100% of the times 
-	And The impressionUrl have zoneid field matching the id of the zone named {qa.undertone.com - Full Banner} 100% of the times 
-	And The impressionUrl have campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the times 
+	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner1} 100% of the times 
+	And The impressionUrl has zoneid field matching the id of the zone named {qa.undertone.com - Full Banner} 100% of the time
+	And The impressionUrl has campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the time 
 	
 	#	
 	#	
@@ -51,10 +51,8 @@ Scenario: Send an ad request to UAS and parse impression url
 	##   When I send an ad-request for zone {pacing 200} is sent to UAS 
 	#	Then The response code is 200 
 	And The responses has impression-urls 
-	And The impressionUrl have bannerid field matching the id of the banner named {Test Banner} 50% of the times 
-	And The impressionUrl have zoneid field matching the id of the zone named {qa.undertone.com - Half Banner} 100% of the times 
-	And The impressionUrl have campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the times 
+	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time
+	And The impressionUrl has zoneid field matching the id of the zone named {qa.undertone.com - Half Banner} 100% of the time 
+	And The impressionUrl has campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the time 
 	
-	#	
-	#	
 	#    
