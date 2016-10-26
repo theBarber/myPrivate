@@ -1,3 +1,6 @@
 ci.adselector.s3.bucket.name = bucket1234
 ci.adselector.s3.bucket.secret = aaaaaaaa
 ci.adselector.s3.bucket.key = zzzzzzzzzz
+ci.workflow.db.jdbc.connection = jdbc:mysql://10.110.2.45/EMP
+ci.workflow.db.user = adserver
+ci.workflow.db.password = adserver
