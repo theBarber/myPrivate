@@ -29,14 +29,14 @@ Scenario: Send an ad request to UAS and parse impression url
 Scenario: Send an ad request to UAS and parse impression url 
 #	Given zone 3 is a test zone
 #	Given Manually zone 3 has banners 15  and 17 as eligible ads
-	
+
 	Given Campaign Manager with hardcoded campaign 
 	##	Given Campaign Manager api
 	##	Given Campaign Manager database
-
+	
 	#	#zone 3	
 	
-	When I send 200 times an ad request for zone named {qa.undertone.com - Half Banner} to UAS 
+	When I send 550 times an ad request for zone named {qa.undertone.com - Half Banner} to UAS 
 	Then The response code is 200 
 	And The responses has impression-urls 
 	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time 
@@ -45,4 +45,28 @@ Scenario: Send an ad request to UAS and parse impression url
 	And The responses has click-urls 
 	And The clickUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time 
 	
+	
+@Sanity 
+Scenario: Send an ad request to UAS and parse logs 
+	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS 
+	And The responses has impression-urls 
+	And  send impression request to UAS 
+	When I send the impression-urls 
+	
+	And sleep for 70 seconds 
+	Then we can get uas raw logs from server 
+	When Reading the request log files 
+	Then ZoneRequestId at column 1 is the same as in impression-url 
+	And zoneId with 2 exists in log in the 4 column 
+	And Banner with 15 exists in log in the 5 column 
+	And Campaign with 2 exists in log in the 6 column 
+	And experiment with 1234 exists in log in the 47 column 
+	When Reading the impression log files 
+	Then ZoneRequestId at column 1 is the same as in impression-url 
+	And experiment with 1234 exists in log in the 5 column 
+	When Reading the click log files 
+	Then ZoneRequestId at column 1 is the same as in impression-url 
+	And zoneId with 2 exists in log in the 4 column 
+	And Banner with 15 exists in log in the 5 column 
+	And experiment with 1234 exists in log in the 27 column 
 	#

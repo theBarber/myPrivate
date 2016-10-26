@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.*;
+import java.util.stream.Stream;
 
 import com.undertone.automation.cli.process.CliCommandExecution;
 import com.undertone.automation.cli.terminal.Prompt;
@@ -134,11 +135,11 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
 		return null;
 	}
 
-	public Iterator<String> fileList(String directory) throws Exception {
+	public Stream<String> fileList(String directory) throws IOException {
 		CliCommandExecution execution = new CliCommandExecution(this, "find '" + directory + "' -maxdepth 1 -type f");
 		execution.withTitle("list files in " + directory).error("No such file or directory").execute();
 		String[] files = execution.getResult().split("\n");
-		return Arrays.asList(files).iterator();
+		return Arrays.asList(files).stream();
 	}
 
 	public boolean isProccessRunning(String name) throws Exception {
