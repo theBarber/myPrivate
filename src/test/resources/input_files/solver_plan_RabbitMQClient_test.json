@@ -1,0 +1,2 @@
+{"buying_strategy_id": -1, "slices": [{"banner_id": 111111, "weight": 1000, "slice_id": "2_RabbitMQClient_Test", "start_time": 1475107200, "zone_id": 1111111, "end_time": 1475193599, "predicates": {"AND": [{"==": ["body.features.zone_id", 1111111]}, {"==": ["body.features.country", "us"]}]}, "buy_at_most": 15}]}
+

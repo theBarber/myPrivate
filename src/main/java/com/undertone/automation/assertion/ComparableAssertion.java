@@ -1,0 +1,57 @@
+package com.undertone.automation.assertion;
+
+import com.undertone.automation.support.CompareMethod;
+import com.undertone.automation.support.Formatter;
+import com.undertone.automation.support.FormatterImpl;
+
+public class ComparableAssertion<T extends Comparable<T>> extends AbstractAssertionLogic<T> {
+
+	private final T expected;
+
+	private String titleOfExaminedObject = "value";
+	private Formatter<T> formatter = new FormatterImpl<>();
+
+	private final CompareMethod compareMethod;
+
+	public ComparableAssertion(T expected, CompareMethod compareMethod) {
+		super();
+		this.expected = expected;
+		this.compareMethod = compareMethod;
+	}
+
+	public ComparableAssertion(CompareMethod compareMethod, T expected) {
+		this(expected, compareMethod);
+	}
+
+	public ComparableAssertion<T> examinedObjectTitled(String title) {
+		this.titleOfExaminedObject = title;
+		return this;
+
+	}
+
+	public ComparableAssertion<T> formatObjectWith(Formatter<T> formatter) {
+		this.formatter = formatter;
+		return this;
+	}
+
+	@Override
+	public void doAssertion() {
+		status = compareMethod.compare(actual, expected);
+		StringBuilder titleBuilder = new StringBuilder();
+		titleBuilder.append("Actual ").append(titleOfExaminedObject).append(" [").append(formatter.toString(actual))
+				.append("] is ");
+		if (!status) {
+			titleBuilder.append("NOT ");
+		}
+		titleBuilder.append(compareMethod.toString()).append(" [").append(formatter.toString(expected)).append("]");
+		this.title = titleBuilder.toString();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder(this.titleOfExaminedObject).append(" to be ");
+		builder.append(compareMethod.toString()).append(" ").append(formatter.toString(expected));
+		return builder.toString();
+	}
+
+}
