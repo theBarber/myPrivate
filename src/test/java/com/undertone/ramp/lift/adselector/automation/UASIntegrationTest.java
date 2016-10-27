@@ -5,9 +5,12 @@ import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.Matchers.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,13 +24,18 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.apache.http.HttpResponse;
 import org.hamcrest.Condition;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
+import com.undertone.automation.cli.process.CliCommandExecution;
+import com.undertone.automation.cli.support.CliConnectionWait;
+import com.undertone.automation.cli.support.LinuxCliExpectedConditions;
 import com.undertone.automation.module.WithId;
 import com.undertone.automation.support.StringUtils;
 import com.undertone.qa.Banner;
@@ -138,6 +146,27 @@ public class UASIntegrationTest extends BaseTest {
 			    actualRate * 100, 5d);
 
 		});
+	When("I read the latest (clk|imp) log file from uas", (String logType) -> {
+	    String directory = "/var/log/ut-ramp-uas/";
+	    List<String> allLines = new ArrayList<>();
+	    this.uasCliConnections.forEach((connectionName, conn) -> {
+		try {
+		    Optional<String> remoteFile = conn.fileList(directory)
+			    .filter(s -> logType.equals(s.substring(directory.length(), logType.length())))
+			    .sorted(String.CASE_INSENSITIVE_ORDER.reversed()).findFirst();
+
+		    File tempFile = File.createTempFile("tmp", remoteFile.get());
+		    conn.get(remoteFile.get(), tempFile);
+
+		    Files.lines(Paths.get(tempFile.toURI())).collect(Collectors.toCollection(() -> allLines));
+		    tempFile.delete();
+		} catch (IOException e) {
+		    Assert.fail(e.getMessage());
+		}
+
+	    });
+
+	});
     }
 
     private static Predicate<CompletableFuture<?>> succeededFuture = c -> !c.isCompletedExceptionally();

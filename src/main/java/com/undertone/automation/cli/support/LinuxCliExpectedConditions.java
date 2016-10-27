@@ -104,7 +104,7 @@ public abstract class LinuxCliExpectedConditions {
 		return new CliExpectedCondition<String>() {
 			@Override
 			public String toString() {
-				return "the directory " + directory.toString() + " to contain the file " + file;
+				return "the directory " + directory + " to contain the file " + file;
 			};
 
 			@Override
@@ -118,13 +118,7 @@ public abstract class LinuxCliExpectedConditions {
 
 			public String apply(LinuxDefaultCliConnection linux) {
 				try {
-					Iterator<String> filesInDirectory = linux.fileList(directory);
-					while (filesInDirectory.hasNext()) {
-						String currFileName = filesInDirectory.next();
-						if (0 == currFileName.compareTo(file)) {
-							return currFileName;
-						}
-					}
+				    return linux.fileList(directory).filter(currFileName->currFileName.substring(directory.length()).equals(file)).findFirst().orElse(null);
 				} catch (FileNotFoundException e) {
 					throw null;
 				} catch (IllegalArgumentException e) {
@@ -134,7 +128,6 @@ public abstract class LinuxCliExpectedConditions {
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
-				return null;
 			}
 		};
 	}
@@ -157,7 +150,7 @@ public abstract class LinuxCliExpectedConditions {
 		return new CliExpectedCondition<String>() {
 			@Override
 			public String toString() {
-				return "the directory " + directory.toString() + " to contain a file matchin the regular expression " + file;
+				return "the directory " + directory + " to contain a file matchin the regular expression " + file;
 			};
 
 			@Override
@@ -171,13 +164,7 @@ public abstract class LinuxCliExpectedConditions {
 
 			public String apply(LinuxDefaultCliConnection linux) {
 				try {
-					Iterator<String> filesInDirectory = linux.fileList(directory);
-					while (filesInDirectory.hasNext()) {
-						String currFileName = filesInDirectory.next();
-						if (currFileName.matches(file)) {
-							return currFileName;
-						}
-					}
+				   return linux.fileList(directory).filter(currFileName->currFileName.matches(file)).findFirst().orElse(null);
 				} catch (FileNotFoundException e) {
 					return null;
 				} catch (IllegalArgumentException e) {
@@ -188,7 +175,6 @@ public abstract class LinuxCliExpectedConditions {
 					throw new RuntimeException(e);
 				}
 
-				return null;
 			}
 		};
 	}

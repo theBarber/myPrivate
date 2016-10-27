@@ -35,7 +35,7 @@ public class BaseTest implements En, GlueBase {
     protected final CampaignManager campaignManager = new CampaignManager();
     protected final String environmentName;
     protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
-    protected final Map<String, CliConnectionImpl> uasCliConnections = new HashMap<>();
+    protected final Map<String, LinuxDefaultCliConnection> uasCliConnections = new HashMap<>();
 
     protected ConnectionFactory connectionFactory = null;
     protected com.rabbitmq.client.Connection rabbitClientConnection;
@@ -93,7 +93,7 @@ public class BaseTest implements En, GlueBase {
 
 	    hostsConfig.forEach(jsonElement -> {
 		String host = jsonElement.getAsString();
-		CliConnectionImpl conn;
+		LinuxDefaultCliConnection conn;
 
 		if (uasCliConnectionUser.equals("root")) {
 		    conn = new RootLinuxCliConnection();

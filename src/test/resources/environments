@@ -1,14 +1,6 @@
-<<<<<<< HEAD
-ci.adselector.s3.bucket.name = bucket1234
-ci.adselector.s3.bucket.secret = aaaaaaaa
-ci.adselector.s3.bucket.key = zzzzzzzzzz
-ci.workflow.db.jdbc.connection = jdbc:mysql://10.110.2.45/EMP
-ci.workflow.db.user = adserver
-ci.workflow.db.password = adserver
-=======
-staging.adselector.s3.bucket.name=bucket1234
-staging.adselector.s3.bucket.secret=aaaaaaaa
-staging.adselector.s3.bucket.key=zzzzzzzzzz
+staging.workflow.db.jdbc.connection = jdbc:mysql://10.110.2.45/EMP
+staging.workflow.db.user = adserver
+staging.workflow.db.password = adserver
 staging.uas.cliconnection.hosts=[172.31.48.21,172.31.48.19]
 staging.uas.cliconnection.user=root
 staging.uas.cliconnection.password=
@@ -26,4 +18,3 @@ staging.de.rabbitmq.request_message={"metadata":{"callback_queue":"aliveness-tes
 
 staging.uas.host=172.31.48.21
 staging.uas.port=9000
->>>>>>> 35a0fa87f690b981a1dc486eb39ac97ecf1496a5
