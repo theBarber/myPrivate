@@ -1,6 +1,6 @@
-staging.adselector.s3.bucket.name=bucket1234
-staging.adselector.s3.bucket.secret=aaaaaaaa
-staging.adselector.s3.bucket.key=zzzzzzzzzz
+staging.workflow.db.jdbc.connection = jdbc:mysql://10.110.2.45/EMP
+staging.workflow.db.user = adserver
+staging.workflow.db.password = adserver
 staging.uas.cliconnection.hosts=[172.31.48.21,172.31.48.19]
 staging.uas.cliconnection.user=root
 staging.uas.cliconnection.password=
