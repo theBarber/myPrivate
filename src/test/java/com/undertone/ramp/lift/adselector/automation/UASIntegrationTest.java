@@ -157,7 +157,8 @@ public class UASIntegrationTest extends BaseTest {
 	    });
 
 	});
-	When("I want to use cli to execute (cmd)", (String cmd) -> {
+	When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
+	    
 	    this.uasCliConnections.forEach((connectionName, conn) -> {
 		try {
 		    new CliCommandExecution(conn, cmd).execute();
