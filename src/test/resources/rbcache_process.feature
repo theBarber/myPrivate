@@ -7,6 +7,6 @@ Feature:cache process verification
     And limitations for zoneId 112211 is Firefox in Workflow DB
     When limitations for zoneId 112211 updated to Opera in Workflow DB
     Then limitations for zoneId 112211 is Opera in Workflow DB
-#    When zoneCache refreshed by cmd
+    When zoneCache refreshed by cmd
 #    Then limitation for zoneId 112211 in zoneCache is Opera
     And limitations for zoneId 112211 updated to Firefox in Workflow DB

@@ -1,5 +1,6 @@
 package com.undertone.ramp.lift.adselector.automation;
 
+import com.undertone.automation.cli.process.CliCommandExecution;
 import cucumber.api.CucumberOptions;
 import cucumber.api.PendingException;
 import cucumber.api.java8.En;
@@ -9,9 +10,9 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
-
-
+import java.io.IOException;
 import java.sql.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Itay.Pinhassi on 9/28/2016.
@@ -88,17 +89,16 @@ public class CacheProcessTest extends  BaseTest {
                 //Assert.fail(e.getMessage());
             }
         });
-//        When("^zoneCache refreshed by cmd$", () -> {
-//            String cmd = "docker exec ut-ramp-uas  adserver --cache zones";
-//            this.uasCliConnections.forEach((connectionName, conn) -> {
-//                try {
-//                    new CliCommandExecution(conn, cmd).execute();
-//
-//                } catch (IOException e) {
-//                    Assert.fail(e.getMessage());
-//                }
-//            });
-//        });
+        When("^zoneCache refreshed by cmd$", () -> {
+            String cmd = "docker exec ut-ramp-uas  adserver --cache zones";
+            this.uasCliConnections.forEach((connectionName, conn) -> {
+                try {
+                    new CliCommandExecution(conn, cmd).withTimeout(5, TimeUnit.MINUTES).execute();
+                } catch (IOException e) {
+                    Assert.fail(e.getMessage());
+                }
+            });
+        });
     }
 
 
