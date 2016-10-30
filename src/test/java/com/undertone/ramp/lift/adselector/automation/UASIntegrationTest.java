@@ -68,22 +68,9 @@ public class UASIntegrationTest extends BaseTest {
 		    this.uas.get().zoneRequests(zone.getId(), times);
 		});
 
-	Given("Campaign Manager with hardcoded campaign", () -> {
-	    Campaign campaign2 = this.campaignManager.createCampaign("999-undefined-undefined-NaN", "2");
 
-	    // Banner banner15 =
-	    this.campaignManager.createBanner("Test Banner1", "15", campaign2.getId()).get();
-	    // Banner banner17 =
-	    this.campaignManager.createBanner("Test Banner", "17", campaign2.getId()).get();
 
-	    ZoneSet zoneSet719 = this.campaignManager.createZoneSet("hwu zonesets", "719", campaign2.getId()).get();
 
-	    // Zone zone2 =
-	    campaignManager.createZone("qa.undertone.com - Full Banner", "2", zoneSet719.getId()).get();
-	    // Zone zone3 =
-	    campaignManager.createZone("qa.undertone.com - Half Banner", "3", zoneSet719.getId()).get();
-
-	});
 	Then("The responses has impression-urls", () -> {
 	    Assert.assertTrue("all of the responses should have a url",
 		    uas.get().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)

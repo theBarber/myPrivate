@@ -1,6 +1,7 @@
 package com.undertone.ramp.lift.adselector.automation;
 
 import com.undertone.automation.cli.process.CliCommandExecution;
+import com.undertone.qa.Zone;
 import cucumber.api.CucumberOptions;
 import cucumber.api.PendingException;
 import cucumber.api.java8.En;
@@ -11,8 +12,11 @@ import org.junit.Assert;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.sql.*;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 /**
  * Created by Itay.Pinhassi on 9/28/2016.
@@ -26,6 +30,7 @@ public class CacheProcessTest extends  BaseTest {
     Connection conn = null;
     ResultSet  result = null;
     public CacheProcessTest() {
+        super();
        // Class.forName("com.mysql.jdbc.Driver");
         com.mysql.jdbc.Driver.class.getCanonicalName();
 
@@ -90,15 +95,39 @@ public class CacheProcessTest extends  BaseTest {
             }
         });
         When("^zoneCache refreshed by cmd$", () -> {
-            String cmd = "docker exec ut-ramp-uas  adserver --cache zones";
-            this.uasCliConnections.forEach((connectionName, conn) -> {
+            String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
+
+            this.uasCliConnections.values().parallelStream().forEach(conn -> {
                 try {
-                    new CliCommandExecution(conn, cmd).withTimeout(5, TimeUnit.MINUTES).execute();
+                    System.out.println("Executing " + cacheZonesCmd + " on " + conn.getName() + "[" +  Thread.currentThread().getName());
+                    CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd).withTimeout(20, TimeUnit.MINUTES);
+                    zoneCacheExecution.execute();
                 } catch (IOException e) {
-                    Assert.fail(e.getMessage());
+                    throw new UncheckedIOException(e);
                 }
             });
+
         });
+        When("limitation for zone \\{([^}]+)\\} in zoneCache is (.*)", (String zoneName, String expectedLimitation)->{
+            String zoneInfoCmd = "docker exec ut-ramp-uas  adserver --zone " + campaignManager.getZone(zoneName).map(Zone::getId)
+                    .orElseThrow(()->new AssertionError("Zone " + zoneName + "does not exist in Campaign manager"));
+
+            this.uasCliConnections.values().stream().map(conn -> {
+                try {
+                    System.out.println("Executing " + zoneInfoCmd + " on " + conn.getName());
+                    CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, zoneInfoCmd).withTimeout(2, TimeUnit.MINUTES);
+                    zoneCacheExecution.execute();
+                    return zoneCacheExecution.getResult();
+                } catch (IOException e) {
+                    Assert.fail(e.getMessage());
+                    return null;
+                }
+            }).flatMap(executionResult -> Stream.of(executionResult.split("\n"))).filter(s-> s.startsWith("limitation")).forEach(limitationString -> {
+                Assert.assertThat("limitation result", limitationString,Matchers.containsString(expectedLimitation));
+            });
+        });
+
+
     }
 
 

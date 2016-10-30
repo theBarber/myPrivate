@@ -2,6 +2,7 @@ package com.undertone.ramp.lift.adselector.automation;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,8 @@ import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.undertone.qa.Campaign;
+import com.undertone.qa.ZoneSet;
 import org.junit.Assert;
 
 import com.rabbitmq.client.ConnectionFactory;
@@ -79,6 +82,7 @@ public class BaseTest implements En, GlueBase {
 		}
 	    });
 
+		load(campaignManager);
 	});
 
 	Before(CLITESTS, scenario -> {
@@ -104,14 +108,23 @@ public class BaseTest implements En, GlueBase {
 		conn.setHost(host);
 		conn.setUser(uasCliConnectionUser);
 		conn.setPassword(uasCliConnectionPassword);
-		conn.setConnectOnInit(true);
+		conn.setConnectOnInit(false);
+		conn.setUseThreads(true);
 
 		if (keyFile != null) {
 		    conn.setPrivateKey(keyFile);
 		    conn.setProtocol(EnumConnectionType.SSH_RSA.value());
 		}
+
 		uasCliConnections.put(host, conn);
 	    });
+		uasCliConnections.values().forEach(conn->{
+			try {
+				conn.init();
+			} catch (IOException e) {
+				throw new UncheckedIOException(e);
+			}
+		});
 
 	});
 
@@ -156,6 +169,30 @@ public class BaseTest implements En, GlueBase {
 		e.printStackTrace();
 	    }
 	});
+
     }
 
+
+
+    public static void 	load(CampaignManager campaignManager) {
+		Campaign emptyCampaign =campaignManager.createCampaign("null", "XXXXXX");
+		Campaign campaign2 = campaignManager.createCampaign("999-undefined-undefined-NaN", "2");
+
+		// Banner banner15 =
+		campaignManager.createBanner("Test Banner1", "15", campaign2.getId()).get();
+		// Banner banner17 =
+		campaignManager.createBanner("Test Banner", "17", campaign2.getId()).get();
+
+		ZoneSet zoneSet719 = campaignManager.createZoneSet("hwu zonesets", "719", campaign2.getId()).get();
+
+		ZoneSet zoneSet50161 = campaignManager.createZoneSet("IO 58815 - HBO Series - HBO The Brink - Billboard Media", "50161",emptyCampaign.getId()).get();
+
+		// Zone zone2 =
+		campaignManager.createZone("qa.undertone.com - Full Banner", "2", zoneSet719.getId()).get();
+		// Zone zone3 =
+		campaignManager.createZone("qa.undertone.com - Half Banner", "3", zoneSet719.getId()).get();
+		// Zone zone112211 =
+		campaignManager.createZone("INT03 - Billboard 970x250 - HBO Series - HBO The Brink", "112211", zoneSet50161.getId()).get();
+
+	}
 }
