@@ -3,7 +3,11 @@ package com.undertone.ramp.lift.adselector.automation;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isOneOf;
+import static org.hamcrest.Matchers.not;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,32 +24,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.apache.http.HttpResponse;
-import org.hamcrest.Condition;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
 import com.undertone.automation.cli.process.CliCommandExecution;
-import com.undertone.automation.cli.support.CliConnectionWait;
-import com.undertone.automation.cli.support.LinuxCliExpectedConditions;
 import com.undertone.automation.module.WithId;
 import com.undertone.automation.support.StringUtils;
-import com.undertone.qa.Banner;
 import com.undertone.qa.Campaign;
 import com.undertone.qa.Zone;
 import com.undertone.qa.ZoneSet;
 import com.undertone.ramp.lift.uas.automation.UASRequestModule;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 
 /**
@@ -58,12 +53,6 @@ public class UASIntegrationTest extends BaseTest {
     /*
      * for hard coded campaign manager
      */
-    private AtomicReference<Campaign> campaign2 = new AtomicReference<>();
-    private AtomicReference<Banner> banner15 = new AtomicReference<>();
-    private AtomicReference<Banner> banner17 = new AtomicReference<>();
-    private AtomicReference<ZoneSet> zoneSet719 = new AtomicReference<>();
-    private AtomicReference<Zone> zone2 = new AtomicReference<>();
-    private AtomicReference<Zone> zone3 = new AtomicReference<>();
 
     public UASIntegrationTest() {
 	super();
@@ -80,19 +69,20 @@ public class UASIntegrationTest extends BaseTest {
 		});
 
 	Given("Campaign Manager with hardcoded campaign", () -> {
-	    campaign2.set(this.campaignManager.createCampaign("999-undefined-undefined-NaN", "2"));
-	    banner15.set(this.campaignManager.createBanner("Test Banner1", "15", campaign2.get().getId())
-		    .orElseThrow(IllegalArgumentException::new));
+	    Campaign campaign2 = this.campaignManager.createCampaign("999-undefined-undefined-NaN", "2");
 
-	    banner17.set(this.campaignManager.createBanner("Test Banner", "17", campaign2.get().getId())
-		    .orElseThrow(IllegalArgumentException::new));
-	    zoneSet719.set(this.campaignManager.createZoneSet("hwu zonesets", "719", campaign2.get().getId())
-		    .orElseThrow(IllegalArgumentException::new));
+	    // Banner banner15 =
+	    this.campaignManager.createBanner("Test Banner1", "15", campaign2.getId()).get();
+	    // Banner banner17 =
+	    this.campaignManager.createBanner("Test Banner", "17", campaign2.getId()).get();
 
-	    zone2.set(campaignManager.createZone("qa.undertone.com - Full Banner", "2", zoneSet719.get().getId())
-		    .orElseThrow(IllegalArgumentException::new));
-	    zone3.set(campaignManager.createZone("qa.undertone.com - Half Banner", "3", zoneSet719.get().getId())
-		    .orElseThrow(IllegalArgumentException::new));
+	    ZoneSet zoneSet719 = this.campaignManager.createZoneSet("hwu zonesets", "719", campaign2.getId()).get();
+
+	    // Zone zone2 =
+	    campaignManager.createZone("qa.undertone.com - Full Banner", "2", zoneSet719.getId()).get();
+	    // Zone zone3 =
+	    campaignManager.createZone("qa.undertone.com - Half Banner", "3", zoneSet719.getId()).get();
+
 	});
 	Then("The responses has impression-urls", () -> {
 	    Assert.assertTrue("all of the responses should have a url",
@@ -167,6 +157,17 @@ public class UASIntegrationTest extends BaseTest {
 	    });
 
 	});
+	When("I want to use cli to execute (cmd)", (String cmd) -> {
+	    this.uasCliConnections.forEach((connectionName, conn) -> {
+		try {
+		    new CliCommandExecution(conn, cmd).execute();
+
+		} catch (IOException e) {
+		    Assert.fail(e.getMessage());
+		}
+	    });
+	});
+
     }
 
     private static Predicate<CompletableFuture<?>> succeededFuture = c -> !c.isCompletedExceptionally();
