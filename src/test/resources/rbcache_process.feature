@@ -1,7 +1,7 @@
 @cli
 Feature:cache process verification
 
-  @Itay222
+  @Sanity
   Scenario:verify UAS* zone cash updated - after updated in zone delivery limitations
     Given We have a connection to WF DB
 #    Given Campaign Manager with hardcoded campaign
