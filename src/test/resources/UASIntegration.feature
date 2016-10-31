@@ -2,7 +2,7 @@
 
 @campaign
 @hardcoded
-Feature: UAS Integration with Ad Selector
+Feature: UAS features
 Background:
     Given Campaign Manager with hardcoded campaign
 	@Sanity
