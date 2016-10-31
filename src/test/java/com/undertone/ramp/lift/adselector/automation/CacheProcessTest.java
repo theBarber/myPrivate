@@ -100,7 +100,8 @@ public class CacheProcessTest extends  BaseTest {
             this.uasCliConnections.values().parallelStream().forEach(conn -> {
                 try {
                     System.out.println("Executing " + cacheZonesCmd + " on " + conn.getName() + "[" +  Thread.currentThread().getName());
-                    CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd).withTimeout(20, TimeUnit.MINUTES);
+                    System.out.println("********************************************************************");
+                    CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd).withTimeout(3, TimeUnit.MINUTES);
                     zoneCacheExecution.execute();
                 } catch (IOException e) {
                     throw new UncheckedIOException(e);
@@ -111,7 +112,7 @@ public class CacheProcessTest extends  BaseTest {
         When("limitation for zone \\{([^}]+)\\} in zoneCache is (.*)", (String zoneName, String expectedLimitation)->{
             String zoneInfoCmd = "docker exec ut-ramp-uas  adserver --zone " + campaignManager.getZone(zoneName).map(Zone::getId)
                     .orElseThrow(()->new AssertionError("Zone " + zoneName + "does not exist in Campaign manager"));
-
+            System.out.println(zoneInfoCmd);
             this.uasCliConnections.values().stream().map(conn -> {
                 try {
                     System.out.println("Executing " + zoneInfoCmd + " on " + conn.getName());
