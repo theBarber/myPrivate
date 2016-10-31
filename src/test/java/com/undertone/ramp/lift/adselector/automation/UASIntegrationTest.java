@@ -49,13 +49,14 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty",
 	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
-public class UASIntegrationTest extends BaseTest {
+public class UASIntegrationTest extends CampaignManaging implements ResponseCodes {
     /*
      * for hard coded campaign manager
      */
 
     public UASIntegrationTest() {
 	super();
+		ThenResposeCodeIs();
 	When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
 	    Zone zone = this.campaignManager.getZone(zoneByName)
 		    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));

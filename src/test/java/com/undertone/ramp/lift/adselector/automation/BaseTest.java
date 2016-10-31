@@ -81,8 +81,6 @@ public class BaseTest implements En, GlueBase {
 		    config.put(configurationKey.substring(environmentNameConfigPrefix.length()), value);
 		}
 	    });
-
-		load(campaignManager);
 	});
 
 	Before(CLITESTS, scenario -> {
@@ -173,26 +171,4 @@ public class BaseTest implements En, GlueBase {
     }
 
 
-
-    public static void 	load(CampaignManager campaignManager) {
-		Campaign emptyCampaign =campaignManager.createCampaign("null", "XXXXXX");
-		Campaign campaign2 = campaignManager.createCampaign("999-undefined-undefined-NaN", "2");
-
-		// Banner banner15 =
-		campaignManager.createBanner("Test Banner1", "15", campaign2.getId()).get();
-		// Banner banner17 =
-		campaignManager.createBanner("Test Banner", "17", campaign2.getId()).get();
-
-		ZoneSet zoneSet719 = campaignManager.createZoneSet("hwu zonesets", "719", campaign2.getId()).get();
-
-		ZoneSet zoneSet50161 = campaignManager.createZoneSet("IO 58815 - HBO Series - HBO The Brink - Billboard Media", "50161",emptyCampaign.getId()).get();
-
-		// Zone zone2 =
-		campaignManager.createZone("qa.undertone.com - Full Banner", "2", zoneSet719.getId()).get();
-		// Zone zone3 =
-		campaignManager.createZone("qa.undertone.com - Half Banner", "3", zoneSet719.getId()).get();
-		// Zone zone112211 =
-		campaignManager.createZone("INT03 - Billboard 970x250 - HBO Series - HBO The Brink", "112211", zoneSet50161.getId()).get();
-
-	}
 }
