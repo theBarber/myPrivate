@@ -51,19 +51,19 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty",
 	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
-public class UASIntegrationTest extends BaseTest implements CampaignManaging , ResponseCodes  {
+public class UASIntegrationTest extends BaseTest implements CampaignManaging, ResponseCodes {
     /*
      * for hard coded campaign manager
      */
 
     public UASIntegrationTest() {
 	super();
-		ThenResposeCodeIs();
+	ThenResposeCodeIs();
 
-		Given("^Campaign Manager with hardcoded campaign$" ,()-> {
-			load(getCampaignManager());
-			Assume.assumeThat(getCampaignManager().getZone("qa.undertone.com - Full Banner") , Matchers.notNullValue() );
-		});
+	Given("^Campaign Manager with hardcoded campaign$", () -> {
+	    load(getCampaignManager());
+	    Assume.assumeThat(getCampaignManager().getZone("qa.undertone.com - Full Banner"), Matchers.notNullValue());
+	});
 	When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
 	    Zone zone = this.campaignManager.getZone(zoneByName)
 		    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
@@ -75,9 +75,6 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging , R
 			    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
 		    this.uas.get().zoneRequests(zone.getId(), times);
 		});
-
-
-
 
 	Then("The responses has impression-urls", () -> {
 	    Assert.assertTrue("all of the responses should have a url",
@@ -153,7 +150,7 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging , R
 
 	});
 	When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
-	    
+
 	    this.uasCliConnections.forEach((connectionName, conn) -> {
 		try {
 		    new CliCommandExecution(conn, cmd).execute();
