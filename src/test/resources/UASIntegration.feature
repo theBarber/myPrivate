@@ -1,7 +1,7 @@
 @uas 
 @campaign 
 @hardcoded 
-Feature: UAS features 
+Feature: UAS E2E Ad request flows (unknown zones)
 Background: 
 	Given Campaign Manager with hardcoded campaign 
 	
