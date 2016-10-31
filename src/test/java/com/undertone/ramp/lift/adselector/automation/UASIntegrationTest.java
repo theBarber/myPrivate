@@ -29,7 +29,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.http.HttpResponse;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.runner.RunWith;
 
 import com.undertone.automation.cli.process.CliCommandExecution;
@@ -49,7 +51,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty",
 	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
-public class UASIntegrationTest extends CampaignManaging implements ResponseCodes {
+public class UASIntegrationTest extends BaseTest implements CampaignManaging , ResponseCodes  {
     /*
      * for hard coded campaign manager
      */
@@ -57,6 +59,11 @@ public class UASIntegrationTest extends CampaignManaging implements ResponseCode
     public UASIntegrationTest() {
 	super();
 		ThenResposeCodeIs();
+
+		Given("^Campaign Manager with hardcoded campaign$" ,()-> {
+			load(getCampaignManager());
+			Assume.assumeThat(getCampaignManager().getZone("qa.undertone.com - Full Banner") , Matchers.notNullValue() );
+		});
 	When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
 	    Zone zone = this.campaignManager.getZone(zoneByName)
 		    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));

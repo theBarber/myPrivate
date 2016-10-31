@@ -1,13 +1,19 @@
-@uas 
-Feature: UAS Integration with Ad Selector 
-@Sanity 
-Scenario: Send an ad request to UAS and parse impression url 
+@uas
+
+@campaign
+@hardcoded
+Feature: UAS Integration with Ad Selector
+Background:
+    Given Campaign Manager with hardcoded campaign
+	@Sanity
+
+	Scenario: Send an ad request to UAS and parse impression url
 #	Given zone 2 is a test zone
 #	Given Manually zone 2 has banner 15 as eligible ad
 #	
 #	
 #	
-	Given Campaign Manager with hardcoded campaign 
+
 	##	Given Campaign Manager api
 	##	Given Campaign Manager database
 	
@@ -30,7 +36,7 @@ Scenario: Send an ad request to UAS and parse impression url
 #	Given zone 3 is a test zone
 #	Given Manually zone 3 has banners 15  and 17 as eligible ads
 
-	Given Campaign Manager with hardcoded campaign 
+
 	##	Given Campaign Manager api
 	##	Given Campaign Manager database
 	
@@ -45,28 +51,28 @@ Scenario: Send an ad request to UAS and parse impression url
 	And The responses has click-urls 
 	And The clickUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time 
 	
-	
-@Sanity 
-Scenario: Send an ad request to UAS and parse logs 
-	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS 
-	And The responses has impression-urls 
-	And  send impression request to UAS 
-	When I send the impression-urls 
-	
-	And sleep for 70 seconds 
-	Then we can get uas raw logs from server 
-	When Reading the request log files 
-	Then ZoneRequestId at column 1 is the same as in impression-url 
-	And zoneId with 2 exists in log in the 4 column 
-	And Banner with 15 exists in log in the 5 column 
-	And Campaign with 2 exists in log in the 6 column 
-	And experiment with 1234 exists in log in the 47 column 
-	When Reading the impression log files 
-	Then ZoneRequestId at column 1 is the same as in impression-url 
-	And experiment with 1234 exists in log in the 5 column 
-	When Reading the click log files 
-	Then ZoneRequestId at column 1 is the same as in impression-url 
-	And zoneId with 2 exists in log in the 4 column 
-	And Banner with 15 exists in log in the 5 column 
-	And experiment with 1234 exists in log in the 27 column 
-	#
+#
+#@Sanity
+#Scenario: Send an ad request to UAS and parse logs
+#	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS
+#	And The responses has impression-urls
+#	And  send impression request to UAS
+#	When I send the impression-urls
+#
+#	And sleep for 70 seconds
+#	Then we can get uas raw logs from server
+#	When Reading the request log files
+#	Then ZoneRequestId at column 1 is the same as in impression-url
+#	And zoneId with 2 exists in log in the 4 column
+#	And Banner with 15 exists in log in the 5 column
+#	And Campaign with 2 exists in log in the 6 column
+#	And experiment with 1234 exists in log in the 47 column
+#	When Reading the impression log files
+#	Then ZoneRequestId at column 1 is the same as in impression-url
+#	And experiment with 1234 exists in log in the 5 column
+#	When Reading the click log files
+#	Then ZoneRequestId at column 1 is the same as in impression-url
+#	And zoneId with 2 exists in log in the 4 column
+#	And Banner with 15 exists in log in the 5 column
+#	And experiment with 1234 exists in log in the 27 column
+#	#

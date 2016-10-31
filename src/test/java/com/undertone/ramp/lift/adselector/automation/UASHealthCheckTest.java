@@ -21,7 +21,7 @@ public class UASHealthCheckTest extends BaseTest  implements ResponseCodes {
 
     public UASHealthCheckTest() {
 	super();
-		ThenResposeCodeIs();
+		//ThenResposeCodeIs();
 	When("^Sending a healthceck request of (RabbitMQ|Couchbase|Redis|Workflow) to UAS$",
 		this::healthCheckRequestSkip);
 	When("^Sending a healthceck request to UAS$", this::healthCheckRequest);
