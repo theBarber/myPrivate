@@ -11,13 +11,10 @@ import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.undertone.qa.Campaign;
-import com.undertone.qa.ZoneSet;
 import org.junit.Assert;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.undertone.automation.cli.conn.CliConnection;
-import com.undertone.automation.cli.conn.CliConnectionImpl;
 import com.undertone.automation.cli.conn.CliConnectionImpl.EnumConnectionType;
 import com.undertone.automation.cli.conn.LinuxDefaultCliConnection;
 import com.undertone.automation.cli.conn.RootLinuxCliConnection;
@@ -28,6 +25,7 @@ import com.undertone.automation.utils.RabbitMQPublisher;
 import com.undertone.qa.CampaignManager;
 import com.undertone.ramp.lift.uas.automation.UASRequestModule;
 
+import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 import cucumber.api.java8.GlueBase;
 import gherkin.deps.com.google.gson.JsonArray;
@@ -68,7 +66,19 @@ public class BaseTest implements En, GlueBase {
 	});
 
 	Before(scenario -> {
-
+	    String userName = System.getProperty("user.name");
+	    if (!"jenkins".equals(userName)
+		    && scenario.getSourceTagNames().stream().noneMatch(s -> s.equals("@" + userName))) {
+		Exception notTaggedForYou = new Exception(
+			"the scenario " + scenario.getName() + " is not tagged for " + userName);
+		PendingException pex = new cucumber.api.PendingException();
+		StackTraceElement[] trace = new StackTraceElement[1];
+		trace[0] = Thread.currentThread().getStackTrace()[1];
+		pex.setStackTrace(trace);
+		notTaggedForYou.setStackTrace(trace);
+		pex.addSuppressed(notTaggedForYou);
+		throw pex;
+	    }
 	    Properties properties = new Properties();
 	    try {
 		properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
@@ -116,13 +126,13 @@ public class BaseTest implements En, GlueBase {
 
 		uasCliConnections.put(host, conn);
 	    });
-		uasCliConnections.values().forEach(conn->{
-			try {
-				conn.init();
-			} catch (IOException e) {
-				throw new UncheckedIOException(e);
-			}
-		});
+	    uasCliConnections.values().forEach(conn -> {
+		try {
+		    conn.init();
+		} catch (IOException e) {
+		    throw new UncheckedIOException(e);
+		}
+	    });
 
 	});
 
@@ -169,6 +179,5 @@ public class BaseTest implements En, GlueBase {
 	});
 
     }
-
 
 }
