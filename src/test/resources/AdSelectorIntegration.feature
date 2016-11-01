@@ -2,7 +2,7 @@
 @uas
 @campaign
 Feature: UAS Integration with Ad Selector
-
+@Sanity
 @campaign
   @hardcoded
   Scenario: zone id that exist in zone cache but does not exist it plan
