@@ -9,12 +9,10 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.not;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,22 +22,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.config.SocketConfig;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.runner.RunWith;
 
 import com.undertone.automation.cli.process.CliCommandExecution;
+import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 import com.undertone.automation.support.StringUtils;
-import com.undertone.qa.Campaign;
 import com.undertone.qa.Zone;
-import com.undertone.qa.ZoneSet;
+import com.undertone.ramp.lift.uas.automation.UASLogModule;
 import com.undertone.ramp.lift.uas.automation.UASRequestModule;
 
 import cucumber.api.CucumberOptions;
@@ -52,12 +58,16 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty",
 	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
 public class UASIntegrationTest extends BaseTest implements CampaignManaging, ResponseCodes {
-    /*
-     * for hard coded campaign manager
-     */
+    protected List<UASLogModule> logModules = new ArrayList<>();
+    public final Stream<String> forLogs = Stream.of("clk", "imp");
 
     public UASIntegrationTest() {
 	super();
+
+	Before(CLITESTS, 15000, 2, scenario -> {
+	    forLogs.map(logname -> new UASLogModule(super.uasCliConnections.values(), logname))
+		    .collect(Collectors.toCollection(() -> logModules));
+	});
 	ThenResposeCodeIs();
 
 	Given("^Campaign Manager with hardcoded campaign$", () -> {
@@ -129,24 +139,28 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging, Re
 
 		});
 	When("I read the latest (clk|imp) log file from uas", (String logType) -> {
-	    String directory = "/var/log/ut-ramp-uas/";
-	    List<String> allLines = new ArrayList<>();
-	    this.uasCliConnections.forEach((connectionName, conn) -> {
-		try {
-		    Optional<String> remoteFile = conn.fileList(directory)
-			    .filter(s -> logType.equals(s.substring(directory.length(), logType.length())))
-			    .sorted(String.CASE_INSENSITIVE_ORDER.reversed()).findFirst();
 
-		    File tempFile = File.createTempFile("tmp", remoteFile.get());
-		    conn.get(remoteFile.get(), tempFile);
-
-		    Files.lines(Paths.get(tempFile.toURI())).collect(Collectors.toCollection(() -> allLines));
-		    tempFile.delete();
-		} catch (IOException e) {
-		    Assert.fail(e.getMessage());
-		}
-
-	    });
+	    logModules.stream().filter(Named.nameIs(logType)).forEach(UASLogModule::readLogs);
+	    // String directory = "/var/log/ut-ramp-uas/";
+	    // List<String> allLines = new ArrayList<>();
+	    // this.uasCliConnections.forEach((connectionName, conn) -> {
+	    // try {
+	    // Optional<String> remoteFile = conn.fileList(directory)
+	    // .filter(s -> logType.equals(s.substring(directory.length(),
+	    // logType.length())))
+	    // .sorted(String.CASE_INSENSITIVE_ORDER.reversed()).findFirst();
+	    //
+	    // File tempFile = File.createTempFile("tmp", remoteFile.get());
+	    // conn.get(remoteFile.get(), tempFile);
+	    //
+	    // Files.lines(Paths.get(tempFile.toURI())).collect(Collectors.toCollection(()
+	    // -> allLines));
+	    // tempFile.delete();
+	    // } catch (IOException e) {
+	    // Assert.fail(e.getMessage());
+	    // }
+	    //
+	    // });
 
 	});
 	When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
@@ -161,6 +175,35 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging, Re
 	    });
 	});
 
+	When("^I send impression requests to UAS$", () -> {
+	    HttpClient httpclient = HttpClients.custom()
+		    .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
+	    uas.get().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
+		    .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
+		    .map(impurl -> CompletableFuture.supplyAsync(() -> {
+			try {
+			    HttpResponse response = httpclient.execute(new HttpGet(impurl.toString()));
+			    if (response.getEntity() != null) {
+				response.setEntity(new BufferedHttpEntity(response.getEntity()));
+			    }
+			    return response;
+			} catch (IOException e) {
+			    throw new UncheckedIOException("failed to send request (" + impurl + ") ", e);
+			}
+
+		    })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
+		    .forEach(statusCode -> {
+			Assert.assertThat("Status code of impression request", statusCode, is(204));
+		    });
+	});
+
+	When("^sleep for (\\d+) seconds$", (Integer seconds) -> {
+	    try {
+		TimeUnit.SECONDS.sleep(seconds);
+	    } catch (InterruptedException e) {
+		Assert.fail(e.getMessage());
+	    }
+	});
     }
 
     private static Predicate<CompletableFuture<?>> succeededFuture = c -> !c.isCompletedExceptionally();

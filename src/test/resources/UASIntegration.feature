@@ -1,7 +1,7 @@
 @uas 
 @campaign 
 @hardcoded 
-Feature: UAS E2E Ad request flows (unknown zones)
+Feature: UAS E2E Ad request flows (unknown zones) 
 Background: 
 	Given Campaign Manager with hardcoded campaign 
 	
@@ -9,9 +9,6 @@ Background:
 Scenario: Send an ad request to UAS and parse impression url 
 #	Given zone 2 is a test zone
 #	Given Manually zone 2 has banner 15 as eligible ad
-#	
-#	
-#	
 
 ##	Given Campaign Manager api
 ##	Given Campaign Manager database
@@ -52,16 +49,15 @@ Scenario: Send an ad request to UAS and parse impression url
 	
 	#
 @Sanity 
+@aharon 
+@cli 
 Scenario: Send an ad request to UAS and parse logs 
 	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS 
 	And The responses has impression-urls 
-	And  send impression request to UAS 
-	When I send the impression-urls 
-	
-	And sleep for 70 seconds 
-	Then we can get uas raw logs from server 
-	When Reading the request log files 
-	#	Then ZoneRequestId at column 1 is the same as in impression-url
+	And I send impression requests to UAS 
+	# And sleep for 70 seconds 
+	Then I read the latest imp log file from uas 
+	Then ZoneRequestId at column 1 is the same as in impression-url 
 	#	And zoneId with 2 exists in log in the 4 column
 	#	And Banner with 15 exists in log in the 5 column
 	#	And Campaign with 2 exists in log in the 6 column
