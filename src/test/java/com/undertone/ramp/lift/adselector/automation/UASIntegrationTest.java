@@ -128,7 +128,7 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging , R
 		    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
 			    .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
 		    Assert.assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
-			    actualRate * 100, 5d);
+			    actualRate * 100, 10d);
 
 		});
 	When("I read the latest (clk|imp) log file from uas", (String logType) -> {
