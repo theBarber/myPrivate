@@ -138,7 +138,7 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
 	public Stream<String> fileList(String directory) throws IOException {
 		CliCommandExecution execution = new CliCommandExecution(this, "find '" + directory + "' -maxdepth 1 -type f");
 		execution.withTitle("list files in " + directory).error("No such file or directory").execute();
-		String[] files = execution.getResult().split("\n");
+		String[] files = execution.getResult().split("\r\n");
 		return Arrays.asList(files).stream();
 	}
 
