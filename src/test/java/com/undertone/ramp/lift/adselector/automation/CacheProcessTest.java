@@ -109,9 +109,8 @@ public class CacheProcessTest extends  BaseTest {
             });
 
         });
-        When("limitation for zone \\{([^}]+)\\} in zoneCache is (.*)", (String zoneName, String expectedLimitation)->{
-            String zoneInfoCmd = "docker exec ut-ramp-uas  adserver --zone " + campaignManager.getZone(zoneName).map(Zone::getId)
-                    .orElseThrow(()->new AssertionError("Zone " + zoneName + "does not exist in Campaign manager"));
+        When("limitation for zone (.*) in zoneCache is (.*)", (String zoneId, String expectedLimitation)->{
+            String zoneInfoCmd = "docker exec ut-ramp-uas  adserver --zone " + zoneId;
             System.out.println(zoneInfoCmd);
             this.uasCliConnections.values().stream().map(conn -> {
                 try {
