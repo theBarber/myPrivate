@@ -1,6 +1,5 @@
 @uas 
-Feature:
-UAS should be able to test its connectivity to other components and log failures (if any) 
+Feature: UAS  connectivity to other components
 
 @Sanity 
 Scenario: 1. UAS is up 

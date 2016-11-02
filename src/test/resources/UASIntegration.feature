@@ -2,9 +2,9 @@
 
 @campaign
 @hardcoded
-Feature: UAS features
+Feature: UAS E2E Ad request flows (unknown zones)
 Background:
-    Given Campaign Manager with hardcoded campaign
+    Given Campaign Manager with hardcoded campaigns
 	@Sanity
 
 	Scenario: Send an ad request to UAS and parse impression url
@@ -32,7 +32,7 @@ Background:
 	And The impressionUrl has campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the time 
 	
 @Sanity 
-Scenario: Send an ad request to UAS and parse impression url 
+Scenario: Send an ad request to UAS and parse impression url (2 banners without limitations)
 #	Given zone 3 is a test zone
 #	Given Manually zone 3 has banners 15  and 17 as eligible ads
 
@@ -45,11 +45,13 @@ Scenario: Send an ad request to UAS and parse impression url
 	When I send 550 times an ad request for zone named {qa.undertone.com - Half Banner} to UAS 
 	Then The response code is 200 
 	And The responses has impression-urls 
-	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time 
+	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time
+	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner1} 50% of the time
 	And The impressionUrl has zoneid field matching the id of the zone named {qa.undertone.com - Half Banner} 100% of the time 
 	And The impressionUrl has campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the time 
 	And The responses has click-urls 
-	And The clickUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time 
+	And The clickUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time
+	And The clickUrl has bannerid field matching the id of the banner named {Test Banner1} 50% of the time
 	
 #
 #@Sanity
