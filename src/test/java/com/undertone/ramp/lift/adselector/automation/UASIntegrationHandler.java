@@ -60,7 +60,7 @@ public class UASIntegrationHandler extends BaseTest implements CampaignManaging 
 	super();
 		ThenResposeCodeIs();
 
-		Given("^Campaign Manager with hardcoded campaign$" ,()-> {
+		Given("^Campaign Manager with hardcoded campaigns$" ,()-> {
 			load(getCampaignManager());
 			Assume.assumeThat(getCampaignManager().getZone("qa.undertone.com - Full Banner") , Matchers.notNullValue() );
 		});

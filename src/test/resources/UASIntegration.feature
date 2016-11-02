@@ -4,7 +4,7 @@
 @hardcoded
 Feature: UAS E2E Ad request flows (unknown zones)
 Background:
-    Given Campaign Manager with hardcoded campaign
+    Given Campaign Manager with hardcoded campaigns
 	@Sanity
 
 	Scenario: Send an ad request to UAS and parse impression url
