@@ -1,7 +1,6 @@
 @cli
 @uas
 @campaign
-@Sanity
 Feature: UAS Integration with Ad Selector
   Background:
 
