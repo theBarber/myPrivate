@@ -51,12 +51,12 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty",
 	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
-public class UASIntegrationTest extends BaseTest implements CampaignManaging , ResponseCodes  {
+public class UASIntegrationHandler extends BaseTest implements CampaignManaging , ResponseCodes  {
     /*
      * for hard coded campaign manager
      */
 
-    public UASIntegrationTest() {
+    public UASIntegrationHandler() {
 	super();
 		ThenResposeCodeIs();
 
@@ -77,17 +77,15 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging , R
 		});
 
 
-
-
 	Then("The responses has impression-urls", () -> {
 	    Assert.assertTrue("all of the responses should have a url",
-		    uas.get().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
+		    uas.get().responses().map(UASIntegrationHandler::getImpressionUrl).map(CompletableFuture::join)
 			    .allMatch(Optional::isPresent));
 	});
 
 	Then("The responses has click-urls", () -> {
 	    Assert.assertTrue("all of the responses should have a url", uas.get().responses()
-		    .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
+		    .map(UASIntegrationHandler::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
 	});
 	//
 	// When("I send a request to the first the imperssion urls", ()->{
@@ -101,10 +99,10 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging , R
 
 		    Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
 		    if (urlType.equalsIgnoreCase("impression")) {
-			urlExtractor = UASIntegrationTest::getImpressionUrl;
+			urlExtractor = UASIntegrationHandler::getImpressionUrl;
 		    } else if (urlType.equalsIgnoreCase("click")) {
-			urlExtractor = UASIntegrationTest::getClickUrl;
-			urlExtractor = urlExtractor.andThen(f -> f.thenApply(UASIntegrationTest::parsableClickUrl));
+			urlExtractor = UASIntegrationHandler::getClickUrl;
+			urlExtractor = urlExtractor.andThen(f -> f.thenApply(UASIntegrationHandler::parsableClickUrl));
 		    }
 
 		    Assert.assertThat(entityType, isOneOf("campaign", "banner", "zone"));
@@ -113,8 +111,8 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging , R
 			    expectedEntity.isPresent());
 
 		    Map<String, Long> theAmountOfTheOccurencesOfTheFieldValueById = uas.get().responses()
-			    .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
-			    .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
+			    .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationHandler::toURL)
+			    .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationHandler::splitQuery)
 			    .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
 			    .flatMap(entry -> entry.getValue().stream())
 			    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -183,7 +181,7 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging , R
 	if (StringUtils.nullOrEmpty.test(url.getQuery())) {
 	    return Collections.emptyMap();
 	}
-	return Arrays.stream(url.getQuery().split("&")).map(UASIntegrationTest::splitQueryParameter).collect(
+	return Arrays.stream(url.getQuery().split("&")).map(UASIntegrationHandler::splitQueryParameter).collect(
 		groupingBy(SimpleImmutableEntry::getKey, LinkedHashMap::new, mapping(Map.Entry::getValue, toList())));
     }
 
