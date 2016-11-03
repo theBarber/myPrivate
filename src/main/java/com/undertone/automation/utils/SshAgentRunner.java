@@ -18,7 +18,7 @@ public class SshAgentRunner {
 //        sshAgent.compareContent(f, "");
 //        sshAgent.close();
 
-        S3Client s3client = S3Client.getInstance();
+        S3Client s3client = new S3Client();
         s3client.uploadFile("C:\\Users\\nive\\Desktop\\test.txt", "ramp-optimization/qa/nelzam/test.txt");
         s3client.deleteFile("ramp-optimization/qa/nelzam/test.txt");
     }
