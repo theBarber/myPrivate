@@ -46,7 +46,7 @@ public class AdSelectorIntegrationTest extends BaseTest implements CampaignManag
 
         Given("^Loading test_plan (.*) to S3 directory (.*)",(String from, String to)-> {
             URL url = getClass().getClassLoader().getResource(from);
-            PutObjectResult res = S3Client.getInstance().uploadFile(getClass().getClassLoader().getResource(from).getPath(), to);
+            PutObjectResult res = (new S3Client()).uploadFile(getClass().getClassLoader().getResource(from).getPath(), to);
 
             // TODO: 2016-10-31 add regex with timestamp to slice id
             try {
