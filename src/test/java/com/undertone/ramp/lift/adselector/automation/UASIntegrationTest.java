@@ -163,6 +163,25 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging, Re
 	    // });
 
 	});
+
+	Then("^I filter in the (clk|imp) log to the lines where id at column (\\d+) is the same as in impression-url$",
+		(String logType, Integer column) -> {
+
+		    URL impressionUrl = uas.get().responses().map(UASIntegrationTest::getImpressionUrl)
+			    .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
+			    .map(Optional::get).findFirst().get();
+
+		    String fieldValue = splitQuery(impressionUrl).get("id").get(0);
+		    UASLogModule logModule = logModules.stream().filter(Named.nameIs(logType)).findFirst()
+			    .orElseThrow(IllegalArgumentException::new);
+
+		    List<String> filteredRawData = new ArrayList<>();
+		    logModule.actual().filter(raw -> fieldValue.equals(raw.get(column))).flatMap(List::stream)
+			    .collect(Collectors.toCollection(() -> filteredRawData));
+		    logModule.setActual(filteredRawData);
+
+		});
+
 	When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
 
 	    this.uasCliConnections.forEach((connectionName, conn) -> {

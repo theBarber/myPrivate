@@ -33,10 +33,12 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
     public UASLogModule(Collection<LinuxDefaultCliConnection> connections, String logname) {
 	this.setName(logname);
 	connections.forEach(this.connections::add);
+	actual = new ArrayList<>();
+
     }
 
     public synchronized void readLogs() {
-	actual = new ArrayList<>();
+	getactual().clear();
 
 	AtomicReference<UncheckedIOException> exception = new AtomicReference<>();
 	connections.forEach(conn -> {

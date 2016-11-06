@@ -57,7 +57,8 @@ Scenario: Send an ad request to UAS and parse logs
 	And I send impression requests to UAS 
 	# And sleep for 70 seconds 
 	Then I read the latest imp log file from uas 
-	Then ZoneRequestId at column 1 is the same as in impression-url 
+#	Then ZoneRequestId at column 1 is the same as in impression-url
+	Then I filter in the imp log to the lines where id at column 0 is the same as in impression-url 
 	#	And zoneId with 2 exists in log in the 4 column
 	#	And Banner with 15 exists in log in the 5 column
 	#	And Campaign with 2 exists in log in the 6 column
