@@ -2,8 +2,6 @@
 @campaign 
 @hardcoded 
 Feature: UAS E2E Ad request flows (unknown zones) 
-Background: 
-    Given Campaign Manager with hardcoded campaigns
 	
 @Sanity 
 Scenario: Send an ad request to UAS and parse impression url 
@@ -40,7 +38,7 @@ Scenario: Send an ad request to UAS and parse impression url (2 banners without 
 
 	When I send 550 times an ad request for zone named {qa.undertone.com - Half Banner} to UAS 
 	Then The response code is 200 
-	And The responses has impression-urls 
+	# And The responses has impression-urls 
 	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time 
 	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner1} 50% of the time
 	And The impressionUrl has zoneid field matching the id of the zone named {qa.undertone.com - Half Banner} 100% of the time 
@@ -51,7 +49,7 @@ Scenario: Send an ad request to UAS and parse impression url (2 banners without 
 	
 	#
 @Sanity 
-@aharon 
+@aharon
 @cli 
 Scenario: Send an ad request to UAS and parse logs 
 	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS 
@@ -60,7 +58,7 @@ Scenario: Send an ad request to UAS and parse logs
 	# And sleep for 70 seconds 
 	Then I read the latest imp log file from uas 
 #	Then ZoneRequestId at column 1 is the same as in impression-url
-	Then I filter in the imp log to the lines where id at column 0 is the same as in impression-url 
+#	Then I filter in the imp log to the lines where id at column 0 is the same as in impression-url 
 	#	And zoneId with 2 exists in log in the 4 column
 	#	And Banner with 15 exists in log in the 5 column
 	#	And Campaign with 2 exists in log in the 6 column

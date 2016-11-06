@@ -1,7 +1,5 @@
 package com.undertone.automation.assertion;
 
-import java.util.Optional;
-
 import com.undertone.automation.support.StringUtils;
 
 

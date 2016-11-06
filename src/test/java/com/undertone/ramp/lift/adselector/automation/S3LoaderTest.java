@@ -20,17 +20,18 @@ import cucumber.api.junit.Cucumber;
  * Created by nive on 2016-09-22.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty" , "com.undertone.automation.RotatingJSONFormatter:target/cucumber/S3Loader_$TIMESTAMP$.json" })
+@CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty",
+	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/S3Loader_$TIMESTAMP$.json" })
 public class S3LoaderTest extends BaseTest {
 
     public S3LoaderTest() {
 	super();
 
 	Given("Loading new (\\S+\\.json) to (\\S+\\.json) s3", (String from, String to) -> {
-		S3Client client = new S3Client();
+	    S3Client client = new S3Client();
 	    PutObjectResult res = client.uploadFile(from, to);
 	    assertNotNull(res);
-	    
+
 	});
 	When("the add selector check for new plan in s3", () -> {
 	    // try {
@@ -49,8 +50,7 @@ public class S3LoaderTest extends BaseTest {
 		    "tac temp_logs | egrep  -m1 Loaded | egrep -o  solver_plan_[_[:alnum:]]+\\.json > res_log.txt");
 	    CliCommand concatLogs = new CliCommand(command1);
 	    CliCommand extractLine = new CliCommand(command2);
-
-	    uasCliConnections.forEach((host, cliConnection) -> {
+	    sut.uasCliConnections().forEach(cliConnection -> {
 		try {
 		    cliConnection.init();
 		    cliConnection.connect();

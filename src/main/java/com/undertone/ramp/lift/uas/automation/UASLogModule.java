@@ -1,8 +1,10 @@
 package com.undertone.ramp.lift.uas.automation;
 
+import static com.undertone.ramp.lift.uas.automation.SystemUnderTest.delegate;
+import static com.undertone.ramp.lift.uas.automation.SystemUnderTest.throwIfNeeded;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -33,14 +35,22 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
     public UASLogModule(Collection<LinuxDefaultCliConnection> connections, String logname) {
 	this.setName(logname);
 	connections.forEach(this.connections::add);
-	actual = new ArrayList<>();
+    }
 
+    @Override
+    public void init() throws Exception {
+	super.init();
+	actual = new ArrayList<>();
+    }
+
+    @Override
+    public void close(){
+	actual = new ArrayList<>();
     }
 
     public synchronized void readLogs() {
-	getactual().clear();
-
-	AtomicReference<UncheckedIOException> exception = new AtomicReference<>();
+	_actual().clear();
+	AtomicReference<RuntimeException> exception = new AtomicReference<>();
 	connections.forEach(conn -> {
 	    Optional<String> remoteFile;
 	    try {
@@ -58,7 +68,7 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
 			conn.get(remote,
 				tempFile = File.createTempFile("tmp", remote.substring(LOGDIRECTORY.length())));
 			Files.lines(Paths.get(tempFile.toURI())).forEach(line -> {
-			    getactual().add(Arrays.asList(line.split(SPLIT_BY_TAB)));
+			    _actual().add(Arrays.asList(line.split(SPLIT_BY_TAB)));
 			});
 			tempFile.delete();
 		    } catch (IOException e) {
@@ -72,40 +82,13 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
 	throwIfNeeded(exception);
     }
 
-    public static <E extends Exception> void throwIfNeeded(AtomicReference<? extends E> ref) throws E {
-	synchronized (ref) {
-	    if (ref.get() != null) {
-		throw ref.get();
-	    }
-	}
-    }
-
-    public static <E extends Exception> void delegate(AtomicReference<UncheckedIOException> ref, IOException cause) {
-	synchronized (ref) {
-	    if (ref.compareAndSet(null, new UncheckedIOException(cause))) {
-		// the reference was empty
-		// now it has one from the
-		// remove this frame of this method of the stacktrace
-		ref.updateAndGet(newEx -> {
-		    newEx.setStackTrace(Arrays.copyOfRange(newEx.getStackTrace(), 1, newEx.getStackTrace().length));
-		    return newEx;
-		});
-	    } else {
-		ref.updateAndGet(newEx -> {
-		    newEx.addSuppressed(cause);
-		    return newEx;
-		});
-	    }
-	}
-    }
-
     @Override
     public Stream<List<String>> actual() {
-	return getactual().stream();
+	return _actual().stream();
     };
 
     @SuppressWarnings("unchecked")
-    private Collection<List<String>> getactual() {
+    private Collection<List<String>> _actual() {
 	return (Collection<List<String>>) actual;
     }
 }

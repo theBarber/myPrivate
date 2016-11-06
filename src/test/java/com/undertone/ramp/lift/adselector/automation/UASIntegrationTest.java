@@ -35,9 +35,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.runner.RunWith;
 
 import com.undertone.automation.cli.process.CliCommandExecution;
@@ -57,43 +55,45 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty",
 	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
-public class UASIntegrationTest extends BaseTest implements CampaignManaging, ResponseCodes {
+public class UASIntegrationTest extends BaseTest {
     protected List<UASLogModule> logModules = new ArrayList<>();
     public final Stream<String> forLogs = Stream.of("clk", "imp");
 
     public UASIntegrationTest() {
 	super();
 
-	Before(CLITESTS, 15000, 2, scenario -> {
-	    forLogs.map(logname -> new UASLogModule(super.uasCliConnections.values(), logname))
-		    .collect(Collectors.toCollection(() -> logModules));
-	});
-	ThenResposeCodeIs();
-
-	Given("^Campaign Manager with hardcoded campaign$", () -> {
-	    load(getCampaignManager());
-	    Assume.assumeThat(getCampaignManager().getZone("qa.undertone.com - Full Banner"), Matchers.notNullValue());
-	});
+	// Before(CLITESTS, 15000, 2, scenario -> {
+	// forLogs.map(logname -> new
+	// UASLogModule(super.uasCliConnections.values(), logname))
+	// .collect(Collectors.toCollection(() -> logModules));
+	// });
+	// ThenResposeCodeIs();
+	//
+	// Given("^Campaign Manager with hardcoded campaign$", () -> {
+	// load(getCampaignManager());
+	// Assume.assumeThat(getCampaignManager().getZone("qa.undertone.com -
+	// Full Banner"), Matchers.notNullValue());
+	// });
 	When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
-	    Zone zone = this.campaignManager.getZone(zoneByName)
+	    Zone zone = sut.getCampaignManager().getZone(zoneByName)
 		    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
-	    this.uas.get().zoneRequest(zone.getId());
+	    sut.getUASRquestModule().zoneRequest(zone.getId());
 	});
 	When("I send (\\d+) times an ad request for zone named \\{([^}]+)\\} to UAS",
 		(Integer times, String zoneByName) -> {
-		    Zone zone = this.campaignManager.getZone(zoneByName)
+		    Zone zone = sut.getCampaignManager().getZone(zoneByName)
 			    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
-		    this.uas.get().zoneRequests(zone.getId(), times);
+		    sut.getUASRquestModule().zoneRequests(zone.getId(), times);
 		});
 
-	Then("The responses has impression-urls", () -> {
+	Then("The responses? has impression-urls?", () -> {
 	    Assert.assertTrue("all of the responses should have a url",
-		    uas.get().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
-			    .allMatch(Optional::isPresent));
+		    sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
+			    .map(CompletableFuture::join).allMatch(Optional::isPresent));
 	});
 
-	Then("The responses has click-urls", () -> {
-	    Assert.assertTrue("all of the responses should have a url", uas.get().responses()
+	Then("The responses? has click-urls?", () -> {
+	    Assert.assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
 		    .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
 	});
 	//
@@ -115,11 +115,11 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging, Re
 		    }
 
 		    Assert.assertThat(entityType, isOneOf("campaign", "banner", "zone"));
-		    Optional<? extends WithId> expectedEntity = campaignManager.getterFor(entityType).apply(entityName);
+		    Optional<? extends WithId> expectedEntity = sut.getCampaignManager().getterFor(entityType).apply(entityName);
 		    Assert.assertTrue("Could not find " + entityType + " named " + entityName,
 			    expectedEntity.isPresent());
 
-		    Map<String, Long> theAmountOfTheOccurencesOfTheFieldValueById = uas.get().responses()
+		    Map<String, Long> theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
 			    .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
 			    .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
 			    .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
@@ -129,7 +129,7 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging, Re
 		    Assert.assertThat(urlType + " urls grouped by " + fieldName,
 			    theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
 
-		    long totalResponses = uas.get().responses().filter(succeededFuture).count();
+		    long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
 		    Assert.assertThat("total responses", totalResponses, greaterThan(10l));
 
 		    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
@@ -167,7 +167,7 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging, Re
 	Then("^I filter in the (clk|imp) log to the lines where id at column (\\d+) is the same as in impression-url$",
 		(String logType, Integer column) -> {
 
-		    URL impressionUrl = uas.get().responses().map(UASIntegrationTest::getImpressionUrl)
+		    URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
 			    .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
 			    .map(Optional::get).findFirst().get();
 
@@ -184,7 +184,7 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging, Re
 
 	When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
 
-	    this.uasCliConnections.forEach((connectionName, conn) -> {
+	    sut.uasCliConnections().forEach(conn -> {
 		try {
 		    new CliCommandExecution(conn, cmd).execute();
 
@@ -197,7 +197,7 @@ public class UASIntegrationTest extends BaseTest implements CampaignManaging, Re
 	When("^I send impression requests to UAS$", () -> {
 	    HttpClient httpclient = HttpClients.custom()
 		    .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
-	    uas.get().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
+	    sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
 		    .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
 		    .map(impurl -> CompletableFuture.supplyAsync(() -> {
 			try {

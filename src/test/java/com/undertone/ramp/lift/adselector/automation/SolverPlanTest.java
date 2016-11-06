@@ -1,13 +1,5 @@
 package com.undertone.ramp.lift.adselector.automation;
 
-import com.undertone.automation.utils.S3Client;
-import cucumber.api.CucumberOptions;
-import cucumber.api.DataTable;
-import cucumber.api.junit.Cucumber;
-import org.junit.Assert;
-import org.junit.runner.RunWith;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +7,15 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.runner.RunWith;
+
+import com.undertone.automation.utils.S3Client;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.DataTable;
+import cucumber.api.junit.Cucumber;
 
 /**
  * Created by assafm on 02/11/2016.

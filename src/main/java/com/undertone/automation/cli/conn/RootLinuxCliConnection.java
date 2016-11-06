@@ -3,7 +3,6 @@ package com.undertone.automation.cli.conn;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import com.undertone.automation.cli.terminal.Prompt;
 import com.undertone.automation.support.StringUtils;

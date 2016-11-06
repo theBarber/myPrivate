@@ -5,9 +5,9 @@ package com.undertone.automation.cli.conn;
 
 import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
+
 //import static org.apache.commons.io.output.NullOutputStream.NULL_OUTPUT_STREAM;
 import java.io.PrintStream;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

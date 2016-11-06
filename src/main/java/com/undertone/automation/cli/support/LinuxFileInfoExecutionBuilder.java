@@ -5,10 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.undertone.automation.assertion.ComparableAssertion;
 import com.undertone.automation.cli.conn.CliConnection;
 import com.undertone.automation.cli.process.CliCommandExecution;
-import com.undertone.automation.support.CompareMethod;
 import com.undertone.automation.support.Formatter;
 import com.undertone.automation.support.Parser;
 
