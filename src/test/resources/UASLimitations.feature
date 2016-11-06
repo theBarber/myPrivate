@@ -15,7 +15,7 @@ Feature: UAS limitations filtering
 
 
   Scenario: limitations testing - Single banner with limitation (positive test)
-    #Given that I work on Firefox browser
+    #Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
     #When I send 10 times an ad request for zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)} to UAS
     #Then The response code is 200
     #And The responses has impression-urls
