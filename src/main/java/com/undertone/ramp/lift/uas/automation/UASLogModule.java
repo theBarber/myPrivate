@@ -44,7 +44,7 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
     }
 
     @Override
-    public void close(){
+    public void close() {
 	actual = new ArrayList<>();
     }
 

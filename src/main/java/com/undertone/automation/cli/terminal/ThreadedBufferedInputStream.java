@@ -9,86 +9,96 @@ import java.nio.IntBuffer;
 
 public class ThreadedBufferedInputStream extends InputStream {
 
-	ReaderThread reader;
-	public ThreadedBufferedInputStream(InputStream in){
-		reader = new ReaderThread(in);
-		reader.setName(Thread.currentThread().getName());
-		reader.start();
-	}
-	/* (non-Javadoc)
-	 * @see java.io.InputStream#read()
-	 */
-	@Override
-	public int read() throws IOException {
-		return reader.read();
-	}
-	@Override
-	public int available() throws IOException{
-		return reader.getSize();
-	}
+    ReaderThread reader;
+
+    public ThreadedBufferedInputStream(InputStream in) {
+	reader = new ReaderThread(in);
+	reader.setName(Thread.currentThread().getName());
+	reader.start();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.io.InputStream#read()
+     */
+    @Override
+    public int read() throws IOException {
+	return reader.read();
+    }
+
+    @Override
+    public int available() throws IOException {
+	return reader.getSize();
+    }
 
 }
-class ReaderThread extends Thread{
-	IntBuffer buffer;
-	int bufferSize;
-	InputStream in;
-	IOException e;
-	public ReaderThread(InputStream in){
-		System.out.println("ReaderThread init");
-		buffer = IntBuffer.allocate(1000);
-		this.in = in;
-		bufferSize = 0;
-	}
-	@Override
-	public void run(){
-		while (true){
-			int avail;
-			try {
-				avail = in.available();
-				if(avail > 0){
-					System.out.println("Avail: " + avail);
-					synchronized(buffer){
-						for(int i = 0; i < avail; i++){
-							System.out.println("read from buffer index: " + i);
-							int toPut = in.read();
-							buffer.put(toPut);
-							System.out.print((char)toPut);
-							bufferSize++;
-							buffer.notify();
-						}
-					}
-					System.out.println("Buffer was read");
-				}
-			} catch (IOException e) {
-				this.e = e;
-				return;
+
+class ReaderThread extends Thread {
+    IntBuffer buffer;
+    int bufferSize;
+    InputStream in;
+    IOException e;
+
+    public ReaderThread(InputStream in) {
+	System.out.println("ReaderThread init");
+	buffer = IntBuffer.allocate(1000);
+	this.in = in;
+	bufferSize = 0;
+    }
+
+    @Override
+    public void run() {
+	while (true) {
+	    int avail;
+	    try {
+		avail = in.available();
+		if (avail > 0) {
+		    System.out.println("Avail: " + avail);
+		    synchronized (buffer) {
+			for (int i = 0; i < avail; i++) {
+			    System.out.println("read from buffer index: " + i);
+			    int toPut = in.read();
+			    buffer.put(toPut);
+			    System.out.print((char) toPut);
+			    bufferSize++;
+			    buffer.notify();
 			}
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e1) {
-			}
+		    }
+		    System.out.println("Buffer was read");
 		}
+	    } catch (IOException e) {
+		this.e = e;
+		return;
+	    }
+	    try {
+		Thread.sleep(10);
+	    } catch (InterruptedException e1) {
+	    }
 	}
-	public int read() throws IOException{
-		if(e != null){
-			throw e;
-		}
-		synchronized(buffer){
-			if(bufferSize == 0){
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					throw new IOException("Interrupted");
-				}
-			}
-			System.out.println("Buffer size: " + bufferSize);
-			bufferSize--;
-			return buffer.get();
-		}
+    }
+
+    public int read() throws IOException {
+	if (e != null) {
+	    throw e;
 	}
-	public int getSize() throws IOException{
-		synchronized(buffer){
-			return bufferSize + in.available();
+	synchronized (buffer) {
+	    if (bufferSize == 0) {
+		try {
+		    wait();
+		} catch (InterruptedException e) {
+		    throw new IOException("Interrupted");
 		}
+	    }
+	    System.out.println("Buffer size: " + bufferSize);
+	    bufferSize--;
+	    return buffer.get();
 	}
+    }
+
+    public int getSize() throws IOException {
+	synchronized (buffer) {
+	    return bufferSize + in.available();
+	}
+    }
 }

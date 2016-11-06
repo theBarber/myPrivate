@@ -8,18 +8,18 @@ package com.undertone.automation.assertion;
  */
 public interface IAssertionLogic<T> {
 
-	/**
-	 * Perform assertion
-	 */
-	void doAssertion();
+    /**
+     * Perform assertion
+     */
+    void doAssertion();
 
-	/**
-	 * Set the actual object to perfrom logic on
-	 * 
-	 * @param actual
-	 */
-//	void setActual(Object actual);
-	
-	void setActual(T actual);
+    /**
+     * Set the actual object to perfrom logic on
+     * 
+     * @param actual
+     */
+    // void setActual(Object actual);
+
+    void setActual(T actual);
 
 }

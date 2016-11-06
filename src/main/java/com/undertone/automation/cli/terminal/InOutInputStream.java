@@ -13,15 +13,17 @@ import java.io.InputStream;
  *
  */
 public abstract class InOutInputStream extends InputStream {
-	protected InputStream in;
-	public void setInputStream(InputStream in){
-		this.in = in;
+    protected InputStream in;
+
+    public void setInputStream(InputStream in) {
+	this.in = in;
+    }
+
+    @Override
+    public void close() throws IOException {
+	if (in != null) {
+	    in.close();
 	}
-	@Override
-	public void close() throws IOException{
-		if(in != null){
-			in.close();
-		}
-	}
+    }
 
 }

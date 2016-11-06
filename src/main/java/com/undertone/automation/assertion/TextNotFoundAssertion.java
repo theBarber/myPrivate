@@ -2,7 +2,6 @@ package com.undertone.automation.assertion;
 
 import com.undertone.automation.support.StringUtils;
 
-
 /**
  * Asserts that given text does not exists in an actual text
  * 
@@ -11,50 +10,50 @@ import com.undertone.automation.support.StringUtils;
  */
 public class TextNotFoundAssertion extends AbstractAssertionLogic<String> {
 
-	private final String expectedText;
+    private final String expectedText;
 
-	private String actualText;
+    private String actualText;
 
-	private final boolean isRegex;
+    private final boolean isRegex;
 
-	/**
-	 * 
-	 * @param expectedText
-	 *            text to find in the actual text
-	 * @param isRegex
-	 *            If set to true the expected text would be handled as regular
-	 *            expression
-	 */
-	public TextNotFoundAssertion(String expectedText, boolean isRegex) {
-		super();
-		this.expectedText = expectedText;
-		this.isRegex = isRegex;
+    /**
+     * 
+     * @param expectedText
+     *            text to find in the actual text
+     * @param isRegex
+     *            If set to true the expected text would be handled as regular
+     *            expression
+     */
+    public TextNotFoundAssertion(String expectedText, boolean isRegex) {
+	super();
+	this.expectedText = expectedText;
+	this.isRegex = isRegex;
+    }
+
+    public TextNotFoundAssertion(String expectedText) {
+	this(expectedText, false);
+    }
+
+    @Override
+    public void doAssertion() {
+	if (StringUtils.nullOrEmpty.test(actualText) && StringUtils.nullOrEmpty.test(expectedText)) {
+	    title = "Both expected and actual strings are empty";
+	    status = true;
+	} else {
+	    FindTextAssertion findTextAssertion = new FindTextAssertion(expectedText, isRegex);
+	    findTextAssertion.setActual(actualText);
+	    findTextAssertion.doAssertion();
+	    status = !findTextAssertion.status;
+	    title = findTextAssertion.title.replace("can't be", "is");
 	}
 
-	public TextNotFoundAssertion(String expectedText) {
-		this(expectedText, false);
-	}
+    }
 
-	@Override
-	public void doAssertion() {
-		if (StringUtils.nullOrEmpty.test(actualText) && StringUtils.nullOrEmpty.test(expectedText)){
-			title="Both expected and actual strings are empty";
-			status = true;
-		} else {
-			FindTextAssertion findTextAssertion = new FindTextAssertion(expectedText, isRegex);
-			findTextAssertion.setActual(actualText);
-			findTextAssertion.doAssertion();
-			status = !findTextAssertion.status;
-			title = findTextAssertion.title.replace("can't be", "is");
-		}
-		
+    @Override
+    public void setActual(String actual) {
+	this.actual = actual;
+	if (actual != null) {
+	    actualText = (String) actual;
 	}
-	
-	@Override
-	public void setActual(String actual) {
-		this.actual = actual;
-		if (actual != null) {
-			actualText = (String) actual;
-		}
-	}
+    }
 }

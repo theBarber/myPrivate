@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This CLI connection enable you to describe the basic cli connection
- * using the SUT only without the need of code.<p>
+ * This CLI connection enable you to describe the basic cli connection using the
+ * SUT only without the need of code.
+ * <p>
  * 
- * To use it you can configure 3 connection parameters:<p>
- * <code>commandEndPrompts</code> enable you to set comma delemeted list of prompt
- * for example: "# ,> " will set "# " and "> " as command end prompts.<br>
+ * To use it you can configure 3 connection parameters:
+ * <p>
+ * <code>commandEndPrompts</code> enable you to set comma delemeted list of
+ * prompt for example: "# ,> " will set "# " and "> " as command end
+ * prompts.<br>
  * <code>loginPrompt</code> will use the user name when this prompt found.<br>
  * <code>passwordPrompt</code> will use the password when this prompt found.<br>
  * 
@@ -22,63 +25,64 @@ import java.util.List;
  *
  */
 public class BasicCliConnection extends CliConnectionImpl {
-	protected String commandEndPrompts;
-	protected String loginPrompt;
-	protected String passwordPrompt;
-	@Override
-	public Position[] getPositions() {
-		return null;
+    protected String commandEndPrompts;
+    protected String loginPrompt;
+    protected String passwordPrompt;
+
+    @Override
+    public Position[] getPositions() {
+	return null;
+    }
+
+    @Override
+    public Prompt[] getPrompts() {
+	List<Prompt> prompts = new ArrayList<>();
+	if (getCommandEndPrompts() != null) {
+	    String[] pString = getCommandEndPrompts().split(",");
+	    for (String ps : pString) {
+		Prompt p = new Prompt();
+		p.setCommandEnd(true);
+		p.setPrompt(ps);
+		prompts.add(p);
+	    }
+	}
+	if (getLoginPrompt() != null) {
+	    Prompt p = new Prompt();
+	    p.setPrompt(getLoginPrompt());
+	    p.setStringToSend(user);
+	    prompts.add(p);
+	}
+	if (getPasswordPrompt() != null) {
+	    Prompt p = new Prompt();
+	    p.setPrompt(getPasswordPrompt());
+	    p.setStringToSend(password);
+	    prompts.add(p);
 	}
 
-	@Override
-	public Prompt[] getPrompts() {
-		List<Prompt> prompts = new ArrayList<>();
-		if(getCommandEndPrompts() != null){
-			String[] pString = getCommandEndPrompts().split(",");
-			for(String ps: pString){
-				Prompt p = new Prompt();
-				p.setCommandEnd(true);
-				p.setPrompt(ps);
-				prompts.add(p);
-			}
-		}
-		if(getLoginPrompt() != null){
-			Prompt p = new Prompt();
-			p.setPrompt(getLoginPrompt());
-			p.setStringToSend(user);
-			prompts.add(p);
-		}
-		if(getPasswordPrompt() != null){
-			Prompt p = new Prompt();
-			p.setPrompt(getPasswordPrompt());
-			p.setStringToSend(password);
-			prompts.add(p);
-		}
-		
-		return prompts.toArray(new Prompt[0]);
-	}
+	return prompts.toArray(new Prompt[0]);
+    }
 
-	public String getCommandEndPrompts() {
-		return commandEndPrompts;
-	}
+    public String getCommandEndPrompts() {
+	return commandEndPrompts;
+    }
 
-	public void setCommandEndPrompts(String commandEndPrompts) {
-		this.commandEndPrompts = commandEndPrompts;
-	}
+    public void setCommandEndPrompts(String commandEndPrompts) {
+	this.commandEndPrompts = commandEndPrompts;
+    }
 
-	public String getLoginPrompt() {
-		return loginPrompt;
-	}
+    public String getLoginPrompt() {
+	return loginPrompt;
+    }
 
-	public void setLoginPrompt(String loginPrompt) {
-		this.loginPrompt = loginPrompt;
-	}
+    public void setLoginPrompt(String loginPrompt) {
+	this.loginPrompt = loginPrompt;
+    }
 
-	public String getPasswordPrompt() {
-		return passwordPrompt;
-	}
+    public String getPasswordPrompt() {
+	return passwordPrompt;
+    }
 
-	public void setPasswordPrompt(String passwordPrompt) {
-		this.passwordPrompt = passwordPrompt;
-	}
+    public void setPasswordPrompt(String passwordPrompt) {
+	this.passwordPrompt = passwordPrompt;
+    }
 }

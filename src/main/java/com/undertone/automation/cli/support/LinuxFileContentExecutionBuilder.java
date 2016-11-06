@@ -5,75 +5,75 @@ import com.undertone.automation.cli.conn.CliConnection;
 import com.undertone.automation.cli.process.CliCommandExecution;
 
 public class LinuxFileContentExecutionBuilder {
-	String name = "";
-	private final CliConnection cliConnection;
-	private boolean fromHead = false;
-	private int maxLines = 10;
+    String name = "";
+    private final CliConnection cliConnection;
+    private boolean fromHead = false;
+    private int maxLines = 10;
 
-	public LinuxFileContentExecutionBuilder(CliConnection cliConnection, String fileName) {
+    public LinuxFileContentExecutionBuilder(CliConnection cliConnection, String fileName) {
 
-		this.cliConnection = cliConnection;
-		this.name = fileName;
+	this.cliConnection = cliConnection;
+	this.name = fileName;
+    }
+
+    LinuxFileContentExecutionBuilder named(String name) {
+	this.name = name;
+	return this;
+    }
+
+    public CliCommandExecution build() {
+	if (name.length() == 0)
+	    throw new IllegalStateException("file name is not set");
+	StringBuilder command = new StringBuilder();
+	if (fromHead) {
+	    command.append("head ");
+	} else {
+	    command.append("tail ");
 	}
+	command.append("-n ").append(maxLines).append(" ");
+	command.append(name);
 
-	LinuxFileContentExecutionBuilder named(String name) {
-		this.name = name;
-		return this;
-	}
+	return new CliCommandExecution(cliConnection, command.toString());
+    }
 
-	public CliCommandExecution build() {
-		if (name.length() == 0)
-			throw new IllegalStateException("file name is not set");
-		StringBuilder command = new StringBuilder();
-		if (fromHead) {
-			command.append("head ");
-		} else {
-			command.append("tail ");
+    public CliExecutionExpectedCondition<String> containingText(final String expected) {
+	return new CliExecutionExpectedCondition<String>() {
+	    @Override
+	    public String toString() {
+		return "the file " + name + " to contain [" + expected + "]";
+	    }
+
+	    @Override
+	    public String apply(CliCommandExecution input) {
+		try {
+		    input.mustHaveResponse(expected).execute();
+		} catch (Exception e) {
+		    Assert.fail("execution failed", e);
 		}
-		command.append("-n ").append(maxLines).append(" ");
-		command.append(name);
+		return input.getResult();
+	    }
+	};
 
-		return new CliCommandExecution(cliConnection, command.toString());
-	}
+    }
 
-	public CliExecutionExpectedCondition<String> containingText(final String expected) {
-		return new CliExecutionExpectedCondition<String>() {
-			@Override
-			public String toString() {
-				return "the file " + name + " to contain [" + expected + "]";
-			}
+    public CliExecutionExpectedCondition<String> notContainingText(final String expected) {
 
-			@Override
-			public String apply(CliCommandExecution input) {
-				try {
-					input.mustHaveResponse(expected).execute();
-				} catch (Exception e) {
-					Assert.fail("execution failed", e);
-				}
-				return input.getResult();
-			}
-		};
+	return new CliExecutionExpectedCondition<String>() {
+	    @Override
+	    public String toString() {
+		return "the file " + name + " not to contain [" + expected + "]";
+	    }
 
-	}
+	    @Override
+	    public String apply(CliCommandExecution input) {
+		try {
+		    input.error(expected).execute();
+		} catch (Exception e) {
+		    Assert.fail("execution failed", e);
+		}
+		return input.getResult();
+	    }
+	};
 
-	public CliExecutionExpectedCondition<String> notContainingText(final String expected) {
-
-		return new CliExecutionExpectedCondition<String>() {
-			@Override
-			public String toString() {
-				return "the file " + name + " not to contain [" + expected + "]";
-			}
-
-			@Override
-			public String apply(CliCommandExecution input) {
-				try {
-					input.error(expected).execute();
-				} catch (Exception e) {
-					Assert.fail("execution failed", e);
-				}
-				return input.getResult();
-			}
-		};
-
-	}
+    }
 }
