@@ -30,7 +30,7 @@ public class SolverPlanTest extends BaseTest{
             uploadNew(slices.asList(String.class));
         });
         Then("^I will be able to start testing$" ,()-> {});
-        Then("^I restore the original solver plan$" ,(DataTable slices)-> {
+        Then("^I restore the original solver plan$" ,()-> {
             RestoreOriginal();
         });
         And("^I will finish testing$" ,()-> {});
