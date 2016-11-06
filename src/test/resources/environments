@@ -18,3 +18,6 @@ staging.de.rabbitmq.request_message={"metadata":{"callback_queue":"aliveness-tes
 
 staging.uas.host=172.31.48.21
 staging.uas.port=9000
+
+staging.as.solver_plan.file_path = ramp-optimization/runtime/hourly/solver
+staging.as.solver_plan.file_name = solver_plan_integration_test_201610311700.json

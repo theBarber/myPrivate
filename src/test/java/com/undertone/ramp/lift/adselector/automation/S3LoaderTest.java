@@ -27,7 +27,8 @@ public class S3LoaderTest extends BaseTest {
 	super();
 
 	Given("Loading new (\\S+\\.json) to (\\S+\\.json) s3", (String from, String to) -> {
-	    PutObjectResult res = S3Client.getInstance().uploadFile(from, to);
+		S3Client client = new S3Client();
+	    PutObjectResult res = client.uploadFile(from, to);
 	    assertNotNull(res);
 	    
 	});
