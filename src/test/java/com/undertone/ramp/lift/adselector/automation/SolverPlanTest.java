@@ -23,8 +23,8 @@ import java.util.List;
 @CucumberOptions(features = "classpath:UASLimitations.feature", plugin = { "pretty",
         "com.undertone.automation.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
-public class SolverPlanHandler extends BaseTest{
-    public SolverPlanHandler(){
+public class SolverPlanTest extends BaseTest{
+    public SolverPlanTest(){
         super();
         Given("^I upload a new solver plan with the following slices$" ,(DataTable slices)-> {
             uploadNew(slices.asList(String.class));
