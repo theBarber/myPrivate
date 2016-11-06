@@ -66,19 +66,19 @@ public class BaseTest implements En, GlueBase {
 	});
 
 	Before(scenario -> {
-	    String userName = System.getProperty("user.name");
-	    if (!"jenkins".equals(userName)
-		    && scenario.getSourceTagNames().stream().noneMatch(s -> s.equals("@" + userName))) {
-		Exception notTaggedForYou = new Exception(
-			"the scenario " + scenario.getName() + " is not tagged for " + userName);
-		PendingException pex = new cucumber.api.PendingException();
-		StackTraceElement[] trace = new StackTraceElement[1];
-		trace[0] = Thread.currentThread().getStackTrace()[1];
-		pex.setStackTrace(trace);
-		notTaggedForYou.setStackTrace(trace);
-		pex.addSuppressed(notTaggedForYou);
-		throw pex;
-	    }
+//	    String userName = System.getProperty("user.name");
+//	    if (!"jenkins".equals(userName)
+//		    && scenario.getSourceTagNames().stream().noneMatch(s -> s.equals("@" + userName))) {
+//		Exception notTaggedForYou = new Exception(
+//			"the scenario " + scenario.getName() + " is not tagged for " + userName);
+//		PendingException pex = new cucumber.api.PendingException();
+//		StackTraceElement[] trace = new StackTraceElement[1];
+//		trace[0] = Thread.currentThread().getStackTrace()[1];
+//		pex.setStackTrace(trace);
+//		notTaggedForYou.setStackTrace(trace);
+//		pex.addSuppressed(notTaggedForYou);
+//		throw pex;
+//	    }
 	    Properties properties = new Properties();
 	    try {
 		properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
