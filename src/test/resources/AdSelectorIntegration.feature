@@ -9,6 +9,7 @@ Feature: UAS Integration with Ad Selector
 	|{"buying_strategy_id": -1, "slices": [{"banner_id": 968473, "weight": 1000000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 11457, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 11457]}, {"==": ["body.features.dma", 99999]}]}, "buy_at_most": 100}]}|
 	|{"buying_strategy_id": -1, "slices": [{"banner_id": 968473, "weight": 1000000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 11457, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 11457]}, {"==": ["body.features.dma", 55]}]}, "buy_at_most": 100}]}   |
 		Then I will be able to start testing
+		And sleep for 120 seconds
 
 	Scenario: zone id that exist in zone cache but does not exist it plan
 		When I send 11 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS

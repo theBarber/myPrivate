@@ -12,6 +12,7 @@ Feature: UAS limitations filtering
       | {"buying_strategy_id": -1, "slices": [{"zone_id":37750,"slice_id":"$SLICE_ID$","banner_id":"968380","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",37750]}]},"buy_at_most":2000}]}   |
       | {"buying_strategy_id": -1, "slices": [{"zone_id":37750,"slice_id":"$SLICE_ID$","banner_id":"968381","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",37750]}]},"buy_at_most":2000}]}   |
     Then I will be able to start testing
+    And sleep for 120 seconds
 
 
   Scenario: limitations testing - Single banner with limitation (positive test)

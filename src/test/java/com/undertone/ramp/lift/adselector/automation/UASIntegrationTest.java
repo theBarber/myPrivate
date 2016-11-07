@@ -217,7 +217,7 @@ public class UASIntegrationTest extends BaseTest {
 		    });
 	});
 
-	When("^sleep for (\\d+) seconds$", (Integer seconds) -> {
+	And("^sleep for (\\d+) seconds$", (Integer seconds) -> {
 	    try {
 		TimeUnit.SECONDS.sleep(seconds);
 	    } catch (InterruptedException e) {
