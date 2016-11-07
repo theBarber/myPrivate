@@ -29,10 +29,10 @@ Feature: UAS Integration with Ad Selector
 		Then The response code is 200
 		And The banner to passback ratio for banner {968473} should be 100%
 
-#	Scenario: banner with buy_at_most limitation
-#		When I send 20 times an ad request for zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)} and zone limitation dma=100 to UAS
-#		Then The response code is 200
-#		And The banner to passback ratio for banner {968381} should be 50%
+	Scenario: banner with buy_at_most limitation
+		When I send 20 times an ad request for zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)} and zone limitation dma=100 to UAS
+		Then The response code is 200
+		And The banner to passback ratio for banner {968381} should be 50%
 
 	Scenario: Restore original plan to S3
 		Then I restore the original solver plan
