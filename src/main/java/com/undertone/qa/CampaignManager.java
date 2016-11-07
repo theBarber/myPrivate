@@ -29,10 +29,10 @@ public class CampaignManager {
 		.filter(Named.nameIs(byName)).findFirst();
     }
 
-    
     public Optional<Banner> getBanner(String byName) {
-  	return campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName)).findFirst();
-      }
+	return campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName)).findFirst();
+    }
+
     /**
      * get a zone that may result with the given campaign
      * 
@@ -116,8 +116,7 @@ public class CampaignManager {
     }
 
     public Optional<ZoneSet> createZoneSet(String name, String id, String forCampaignId) {
-	return campaigns.stream().filter(idIs(forCampaignId)).findFirst()
-		.map(c -> c.addZoneSet(new ZoneSet(name, id)));
+	return campaigns.stream().filter(idIs(forCampaignId)).findFirst().map(c -> c.addZoneSet(new ZoneSet(name, id)));
     }
 
     public Optional<Zone> createZone(String name, String id, String forZoneSetId) {
@@ -129,8 +128,8 @@ public class CampaignManager {
 	return campaigns.stream().flatMap(Campaign::getZoneSetAssoc).filter(idIs(forZoneSetId)).findFirst()
 		.map(zs -> zs.addZone(requireNonNull(zoneEnricher).apply(new Zone(name, id))));
     }
-    
-    public Function<String,Optional<? extends WithId>> getterFor(String entityType){
+
+    public Function<String, Optional<? extends WithId>> getterFor(String entityType) {
 	switch (entityType.toLowerCase()) {
 	case "banner":
 	    return this::getBanner;
@@ -139,7 +138,7 @@ public class CampaignManager {
 	case "zone":
 	    return this::getZone;
 	default:
-	    return noSuchEntity->Optional.empty();
+	    return noSuchEntity -> Optional.empty();
 	}
     }
 }

@@ -13,35 +13,35 @@ import java.io.InputStream;
  */
 public class UniteInputStream extends InputStream {
 
-	InputStream in;
-	InputStream err;
-	
-	public UniteInputStream(InputStream in, InputStream err){
-		this.in = in;
-		this.err = err;
-	}
-	
-	/**
-	 * @see java.io.InputStream#read()
-	 */
-	@Override
-	public int read() throws IOException {
-		if(err.available() > 0){
-			return err.read();
-		} else {
-			return in.read();
-		}
-	}
-	
+    InputStream in;
+    InputStream err;
+
+    public UniteInputStream(InputStream in, InputStream err) {
+	this.in = in;
+	this.err = err;
+    }
+
+    /**
+     * @see java.io.InputStream#read()
+     */
     @Override
-	public int available() throws IOException {
-		return in.available() + err.available();
+    public int read() throws IOException {
+	if (err.available() > 0) {
+	    return err.read();
+	} else {
+	    return in.read();
 	}
-    
+    }
+
     @Override
-	public void close() throws IOException{
-    	err.close();
-    	in.close();
+    public int available() throws IOException {
+	return in.available() + err.available();
+    }
+
+    @Override
+    public void close() throws IOException {
+	err.close();
+	in.close();
     }
 
 }

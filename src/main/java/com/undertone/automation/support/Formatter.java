@@ -9,5 +9,5 @@ package com.undertone.automation.support;
  *            the type of object to be formatted
  */
 public interface Formatter<T> {
-	public String toString(T t);
+    public String toString(T t);
 }

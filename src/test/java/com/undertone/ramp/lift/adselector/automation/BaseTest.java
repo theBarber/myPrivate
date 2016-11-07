@@ -24,7 +24,7 @@ public class BaseTest implements En, GlueBase {
 
     protected SystemUnderTest sut = SystemUnderTest.getInstance();
 
-//    protected final CampaignManager campaignManager = new CampaignManager();
+    // protected final CampaignManager campaignManager = new CampaignManager();
     protected final String environmentName;
     protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
     // protected final Map<String, LinuxDefaultCliConnection> uasCliConnections
@@ -36,7 +36,8 @@ public class BaseTest implements En, GlueBase {
     protected RabbitMQPublisher publisher;
     protected RabbitMQConsumer consumer;
     // protected final Reporter reporter;
-//    protected AtomicReference<UASRequestModule> uas = new AtomicReference<>();
+    // protected AtomicReference<UASRequestModule> uas = new
+    // AtomicReference<>();
 
     protected final String[] CLITESTS = new String[] { "@cli" };
     protected final String[] RABBITTESTS = new String[] { "@rabbitmq" };
@@ -53,9 +54,9 @@ public class BaseTest implements En, GlueBase {
 	// uasCliConnections.values().forEach(CliConnection::disconnect);
 	// uasCliConnections.clear();
 	// });
-//	After(UASTESTS, scenario -> {
-//	    uas.set(null);
-//	});
+	// After(UASTESTS, scenario -> {
+	// uas.set(null);
+	// });
 
 	Before(scenario -> {
 	    // String userName = System.getProperty("user.name");
@@ -88,48 +89,54 @@ public class BaseTest implements En, GlueBase {
 	    sut.setup(scenario.getSourceTagNames(), config);
 	});
 
-//	Before(CLITESTS, scenario -> {
-//	    String uasCliConnectionUser = config.get("uas.cliconnection.user");
-//	    String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
-//	    String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
-//	    String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
-//	    JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
-//	    File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
-//		    .map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename))
-//		    .filter(File::exists).filter(File::canRead).orElse(null);
-//
-//	    hostsConfig.forEach(jsonElement -> {
-//		String host = jsonElement.getAsString();
-//		LinuxDefaultCliConnection conn;
-//
-//		if (uasCliConnectionUser.equals("root")) {
-//		    conn = new RootLinuxCliConnection();
-//		} else {
-//		    conn = new LinuxDefaultCliConnection();
-//		}
-//
-//		conn.setHost(host);
-//		conn.setUser(uasCliConnectionUser);
-//		conn.setPassword(uasCliConnectionPassword);
-//		conn.setConnectOnInit(false);
-//		conn.setUseThreads(true);
-//
-//		if (keyFile != null) {
-//		    conn.setPrivateKey(keyFile);
-//		    conn.setProtocol(EnumConnectionType.SSH_RSA.value());
-//		}
-//
-//		uasCliConnections.put(host, conn);
-//	    });
-//	    uasCliConnections.values().forEach(conn -> {
-//		try {
-//		    conn.init();
-//		} catch (IOException e) {
-//		    throw new UncheckedIOException(e);
-//		}
-//	    });
-//
-//	});
+	// Before(CLITESTS, scenario -> {
+	// String uasCliConnectionUser = config.get("uas.cliconnection.user");
+	// String uasCliConnectionPassword =
+	// config.getOrDefault("uas.cliconnection.password", null);
+	// String cliConnectionsHostsParam =
+	// config.get("uas.cliconnection.hosts");
+	// String cliconnectionKeyname =
+	// config.getOrDefault("uas.cliconnection.keyname", "");
+	// JsonArray hostsConfig = new
+	// JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
+	// File keyFile =
+	// Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
+	// .map(filename -> new File(new File(System.getProperty("user.home"),
+	// ".ssh"), filename))
+	// .filter(File::exists).filter(File::canRead).orElse(null);
+	//
+	// hostsConfig.forEach(jsonElement -> {
+	// String host = jsonElement.getAsString();
+	// LinuxDefaultCliConnection conn;
+	//
+	// if (uasCliConnectionUser.equals("root")) {
+	// conn = new RootLinuxCliConnection();
+	// } else {
+	// conn = new LinuxDefaultCliConnection();
+	// }
+	//
+	// conn.setHost(host);
+	// conn.setUser(uasCliConnectionUser);
+	// conn.setPassword(uasCliConnectionPassword);
+	// conn.setConnectOnInit(false);
+	// conn.setUseThreads(true);
+	//
+	// if (keyFile != null) {
+	// conn.setPrivateKey(keyFile);
+	// conn.setProtocol(EnumConnectionType.SSH_RSA.value());
+	// }
+	//
+	// uasCliConnections.put(host, conn);
+	// });
+	// uasCliConnections.values().forEach(conn -> {
+	// try {
+	// conn.init();
+	// } catch (IOException e) {
+	// throw new UncheckedIOException(e);
+	// }
+	// });
+	//
+	// });
 
 	Before(RABBITTESTS, scenario -> {
 

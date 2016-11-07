@@ -12,5 +12,5 @@ import java.text.ParseException;
  */
 @FunctionalInterface
 public interface Parser<T> {
-	T parse(String source) throws ParseException;
+    T parse(String source) throws ParseException;
 }

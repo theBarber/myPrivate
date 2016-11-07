@@ -15,9 +15,9 @@ package com.undertone.automation.assertion;
  *            the type of actual. you may get it's value
  */
 public interface AssertionListener<T> {
-	public void assertionPassed(final T actual, final AbstractAssertionLogic<T> logic);
+    public void assertionPassed(final T actual, final AbstractAssertionLogic<T> logic);
 
-	public void assertionFailed(final T actual, final AbstractAssertionLogic<T> logic);
+    public void assertionFailed(final T actual, final AbstractAssertionLogic<T> logic);
 
-	public void assertionFailed(final T actual, final AbstractAssertionLogic<T> logic, Throwable t);
+    public void assertionFailed(final T actual, final AbstractAssertionLogic<T> logic, Throwable t);
 }

@@ -40,7 +40,7 @@ public class ZoneSet implements Named, WithId, Comparable<ZoneSet> {
 	return Comparator.comparing(ZoneSet::getId).compare(this, requireNonNull(that));
     }
 
-    <Z extends Zone> Z addZone(Z zone){
+    <Z extends Zone> Z addZone(Z zone) {
 	zones.add(zone);
 	return zone;
     }
