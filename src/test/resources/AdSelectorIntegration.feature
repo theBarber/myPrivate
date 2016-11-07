@@ -2,6 +2,7 @@
 @uas
 @campaign
 @hardcoded
+@Sanity
 Feature: UAS Integration with Ad Selector
 	Scenario: Upload new plan to S3
 		Given I upload a new solver plan with the following slices
