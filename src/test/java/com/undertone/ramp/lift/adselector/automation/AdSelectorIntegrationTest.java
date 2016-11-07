@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 
+import com.undertone.automation.utils.HttpContentTest;
+import com.undertone.qa.Zone;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
@@ -53,5 +55,21 @@ public class AdSelectorIntegrationTest extends BaseTest  {
                 Assert.assertNull(e.getMessage(),e);
             }
         });
+        Then("^The banner to passback ratio for banner \\{(.+)\\} should be (\\d+)%", (String bannerId, Integer percentage) -> {
+            long total  = sut.getUASRquestModule().responses().count();
+            long numOfImp = sut.getUASRquestModule().responses().filter(fh -> HttpContentTest.getContent(fh.join()).contains("/l?bannerid=")).count();
+            double actualRatio = numOfImp / (double) total;
+            final double neededRatio = percentage / 100.0;
+            Assert.assertEquals("Total impressions for banner "+bannerId+ " is: "+numOfImp+" out of "+ total+ " responses.", neededRatio, actualRatio, 0.1);
+
+        });
+//        "I send (\\d+) times an ad request for zone named \\{([^}]+)\\} and zone limitation (.*) to UAS"
+
+        When("^I send (\\d+) times an ad request for zone named \\{([^}]+)\\} and zone limitation (.*) to UAS",
+                (Integer times, String zoneByName, String param) -> {
+                    Zone zone = sut.getCampaignManager().getZone(zoneByName)
+                            .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+                    sut.getUASRquestModule().zoneRequestsWithGeo(zone.getId(), times, param);
+                });
     }
 }
