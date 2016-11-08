@@ -1,7 +1,7 @@
 @cli
 @Sanity
 Feature: cache process verification 
-Scenario: verify UAS* zone cash updated - after updated in zone delivery limitations
+Scenario: verify UAS* zone cash updated - after updated in limitations
 	Given We have a connection to WF DB 
 	When limitations for zoneId 112211 updated to Firefox in Workflow DB 
 	Then limitations for zoneId 112211 is Firefox in Workflow DB 
