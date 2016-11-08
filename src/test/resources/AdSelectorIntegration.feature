@@ -36,3 +36,4 @@ Feature: UAS Integration with Ad Selector
 	Scenario: Restore original plan to S3
 		Then I restore the original solver plan
 		And I will finish testing
+		And sleep for 70 seconds
