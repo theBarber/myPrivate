@@ -26,7 +26,7 @@ Scenario: Send an ad request to UAS and parse impression url
 	And The impressionUrl has campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the time 
 	
 @Sanity 
-Scenario: Send an ad request to UAS and parse impression url (2 banners without limitations)
+Scenario: Send an ad request to UAS and parse impression url - 2 banners without limitations
 #	Given zone 3 is a test zone
 #	Given Manually zone 3 has banners 15  and 17 as eligible ads
 
@@ -55,7 +55,7 @@ Scenario: Send an ad request to UAS and parse logs
 	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS 
 	And The responses has impression-urls 
 	And I send impression requests to UAS 
-	# And sleep for 70 seconds 
+	# And I sleep for 70 seconds
 	Then I read the latest imp log file from uas 
 #	Then ZoneRequestId at column 1 is the same as in impression-url
 #	Then I filter in the imp log to the lines where id at column 0 is the same as in impression-url 

@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,11 +80,20 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     public void zoneRequests(String forZone, int times, boolean toReset) {
-	if (toReset){
+	if (toReset) {
 	    reset();
 	}
 
 	String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1";
+
+	for (; times > 0; times--) {
+	    request(url, false);
+	}
+    }
+
+    public void zoneRequestsWithGeo(String forZone, int times, String params) {
+	reset();
+	String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1"+"&sim_geo=1&"+params;
 
 	for (; times > 0; times--) {
 	    request(url, false);
@@ -146,6 +158,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     protected final void reset() {
 	this.actual().stream().parallel().filter(((Predicate<Future<HttpResponse>>) Future::isDone).negate())
 		.forEach(f -> f.cancel(true));
+
 	this.actual().clear();
     }
 
