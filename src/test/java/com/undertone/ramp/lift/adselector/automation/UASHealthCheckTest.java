@@ -29,6 +29,7 @@ public class UASHealthCheckTest extends BaseTest {
 		this::healthCheckRequestSkip);
 	When("^Sending a healthceck request to UAS$", this::healthCheckRequest);
 	Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
+	Then("^All requests are sent$", this::allResponsesFinished);
 	Then("^The response contains (.*)$", (String something) -> {
 	    sut.getUASRquestModule().responses().map(f -> f.thenApply(UASRequestModule::getContentOf))
 		    .map(CompletableFuture::join).forEach(content -> {
@@ -47,16 +48,16 @@ public class UASHealthCheckTest extends BaseTest {
 	sut.getUASRquestModule().healthCheckRequest();
     }
 
-    public void ThenResposeCodeIs() {
-	if (this instanceof En) {
-	}
-    }
-
     public void allResponsesHaveCode(Integer expectedResponseCode) {
 	sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
 		.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
 		.forEach(CompletableFuture::join);
     }
+
+    public void allResponsesFinished() {
+	sut.getUASRquestModule().responses().forEach(CompletableFuture::join);
+    }
+
 
     public BiConsumer<Integer, Throwable> assertThatResponseCodeIs(int expected) {
 	return (statuscode, failure) -> {

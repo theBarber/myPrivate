@@ -8,6 +8,10 @@ public class HardCodedCampaignManager extends CampaignManager {
 	Campaign campaign2 = this.createCampaign("999-undefined-undefined-NaN", "2");
 	Campaign campaign3 = this.createCampaign("campaign3", "233711");
 	Campaign campaign4 = this.createCampaign("campaign4", "254974");
+	Campaign campaign5 = this.createCampaign("campaign5", "254975");
+	Campaign campaign6 = this.createCampaign("campaign6", "254973");
+	Campaign campaign7 = this.createCampaign("campaign7", "255177");
+	Campaign campaign8 = this.createCampaign("campaign8", "255174");
 
 	// Banner banner15 =
 	this.createBanner("Test Banner1", "15", campaign2.getId()).get();
@@ -17,6 +21,15 @@ public class HardCodedCampaignManager extends CampaignManager {
 	this.createBanner("Undertone [The Trade Desk] Xaxis Always On Billboard", "879498", campaign3.getId()).get();
 	// Banner banner968381 =
 	this.createBanner("Int-test-unlimited-banner", "968381", campaign4.getId()).get();
+	// Banner banner968382 =
+	this.createBanner("Int-test-FF-targeted-banner", "968382", campaign5.getId()).get();
+	// Banner banner968380 =
+	this.createBanner("Int-test-CH-targeted-banner", "968380", campaign6.getId()).get();
+	// Banner banner968474 =
+	this.createBanner("Int-test-IE-targeted-banner", "968474", campaign7.getId()).get();
+	// Banner banner968473 =
+	this.createBanner("Int-test-adselctor-default-value-2", "968473", campaign8.getId()).get();
+
 
 	ZoneSet zoneSet719 = this.createZoneSet("hwu zonesets", "719", campaign2.getId()).get();
 
@@ -36,8 +49,11 @@ public class HardCodedCampaignManager extends CampaignManager {
 	// Zone zone144960 =
 	this.createZone("INT3132 - Billboard 970x250 - TEST_1", "144960", zoneSet55023.getId()).get();
 	// Zone zone37750 =
-	this.createZone("QA-INT03 - Half Page Ad 300x600 - INT03AFP - Half Page Ad", "37750", zoneSet21808.getId())
-		.get();
+	this.createZone("QA-INT03 - Half Page Ad 300x600 - INT03AFP - Half Page Ad", "37750", zoneSet21808.getId()).get();
+	// Zone zone11457 =
+	this.createZone("QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)", "11457", zoneSet21808.getId()).get();
+	// Zone zone21694 =
+	this.createZone("QA-INT1961 - Half Page Ad", "21694", zoneSet21808.getId()).get();
 
     }
 

@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +28,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import com.undertone.automation.module.AbstractModuleImpl;
+import org.apache.http.message.BasicHeader;
 
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
@@ -64,6 +62,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private String host;
     private String port;
     protected CloseableHttpClient httpclient;
+    List<Header> httpHeaders = new ArrayList<Header>();
 
     public UASRequestModule() {
 	setActual(new ArrayList<>());
@@ -77,8 +76,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 	request(url, true);
     }
 
-    public void zoneRequests(String forZone, int times) {
-	reset();
+    public void zoneRequests(String forZone, int times, boolean toReset) {
+	if (toReset){
+	    reset();
+	}
+
 	String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1";
 
 	for (; times > 0; times--) {
@@ -119,9 +121,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
 	actual().add(CompletableFuture.supplyAsync(() -> {
 	    try {
-		HttpResponse response = httpclient.execute(new HttpGet(url));
+		HttpGet get = new HttpGet(url);
+		get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+		HttpResponse response = httpclient.execute(get);
 		response.setEntity(new BufferedHttpEntity(response.getEntity()));
 		return response;
+
 	    } catch (IOException e) {
 		throw new UncheckedIOException("failed to send request (" + url + ") ", e);
 	    }
@@ -141,8 +146,16 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     protected final void reset() {
 	this.actual().stream().parallel().filter(((Predicate<Future<HttpResponse>>) Future::isDone).negate())
 		.forEach(f -> f.cancel(true));
-
 	this.actual().clear();
+    }
+
+    public void addHttpHeader(String name, String value){
+	httpHeaders.removeIf(header -> header.getName().equals(name));
+	httpHeaders.add(new BasicHeader(name, value));
+    }
+
+    public void emptyHttpHeaders(){
+	httpHeaders.clear();
     }
 
     public static Optional<String> getImpressionUrlFrom(HttpResponse response) {

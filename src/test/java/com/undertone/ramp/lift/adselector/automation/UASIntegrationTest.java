@@ -28,6 +28,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.undertone.automation.utils.HttpContentTest;
+import com.undertone.ramp.lift.uas.automation.SystemUnderTest;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
@@ -62,126 +64,76 @@ public class UASIntegrationTest extends BaseTest {
     public UASIntegrationTest() {
 	super();
 
-	// Before(CLITESTS, 15000, 2, scenario -> {
-	// forLogs.map(logname -> new
-	// UASLogModule(super.uasCliConnections.values(), logname))
-	// .collect(Collectors.toCollection(() -> logModules));
-	// });
-	// ThenResposeCodeIs();
-	//
-	// Given("^Campaign Manager with hardcoded campaign$", () -> {
-	// load(getCampaignManager());
-	// Assume.assumeThat(getCampaignManager().getZone("qa.undertone.com -
-	// Full Banner"), Matchers.notNullValue());
-	// });
 	When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
 	    Zone zone = sut.getCampaignManager().getZone(zoneByName)
-		    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+			    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
 	    sut.getUASRquestModule().zoneRequest(zone.getId());
 	});
-	When("I send (\\d+) times an ad request for zone named \\{([^}]+)\\} to UAS",
-		(Integer times, String zoneByName) -> {
-		    Zone zone = sut.getCampaignManager().getZone(zoneByName)
-			    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
-		    sut.getUASRquestModule().zoneRequests(zone.getId(), times);
-		});
-
+	When("I send (\\d+) times an ad request for zone named \\{([^}]+)\\} to UAS", (Integer times, String zoneByName) -> {
+	    sendMultipleAdRequests(times, zoneByName, true);
+	});
+	When("I send (\\d+) additional ad requests for zone named \\{([^}]+)\\} to UAS", (Integer times, String zoneByName) -> {
+	    sendMultipleAdRequests(times, zoneByName, false);
+	});
 	Then("The responses? has impression-urls?", () -> {
 	    Assert.assertTrue("all of the responses should have a url",
-		    sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
-			    .map(CompletableFuture::join).allMatch(Optional::isPresent));
+			    sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
 	});
 
 	Then("The responses? has click-urls?", () -> {
-	    Assert.assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
-		    .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
+	    Assert.assertTrue("all of the responses should have a url",
+			    sut.getUASRquestModule().responses().map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
 	});
-	//
-	// When("I send a request to the first the imperssion urls", ()->{
-	// uas.get().responses()
-	// .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
-	// .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get).findFirst().
-	//
-	// });
-	Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",
-		(String urlType, String fieldName, String entityType, String entityName, Double percent) -> {
 
-		    Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
-		    if (urlType.equalsIgnoreCase("impression")) {
-			urlExtractor = UASIntegrationTest::getImpressionUrl;
-		    } else if (urlType.equalsIgnoreCase("click")) {
-			urlExtractor = UASIntegrationTest::getClickUrl;
-			urlExtractor = urlExtractor.andThen(f -> f.thenApply(UASIntegrationTest::parsableClickUrl));
-		    }
+	Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time", (String urlType, String fieldName, String entityType, String entityName, Double percent) -> {
 
-		    Assert.assertThat(entityType, isOneOf("campaign", "banner", "zone"));
-		    Optional<? extends WithId> expectedEntity = sut.getCampaignManager().getterFor(entityType)
-			    .apply(entityName);
-		    Assert.assertTrue("Could not find " + entityType + " named " + entityName,
-			    expectedEntity.isPresent());
+	    Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
+	    if (urlType.equalsIgnoreCase("impression")) {
+		urlExtractor = UASIntegrationTest::getImpressionUrl;
+	    } else if (urlType.equalsIgnoreCase("click")) {
+		urlExtractor = UASIntegrationTest::getClickUrl;
+		urlExtractor = urlExtractor.andThen(f -> f.thenApply(UASIntegrationTest::parsableClickUrl));
+	    }
 
-		    Map<String, Long> theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
-			    .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
-			    .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
+	    Assert.assertThat(entityType, isOneOf("campaign", "banner", "zone"));
+	    Optional<? extends WithId> expectedEntity = sut.getCampaignManager().getterFor(entityType).apply(entityName);
+	    Assert.assertTrue("Could not find " + entityType + " named " + entityName, expectedEntity.isPresent());
+
+	    Map<String, Long> theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses().map(urlExtractor).map(CompletableFuture::join)
+			    .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
 			    .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
 			    .flatMap(entry -> entry.getValue().stream())
 			    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-		    Assert.assertThat(urlType + " urls grouped by " + fieldName,
-			    theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
+	    Assert.assertThat(urlType + " urls grouped by " + fieldName, theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
 
-		    long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
-		    Assert.assertThat("total responses", totalResponses, greaterThan(10l));
+	    long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
+	    Assert.assertThat("total responses", totalResponses, greaterThan(9l));
 
-		    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
+	    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
 			    .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
-		    Assert.assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
-			    actualRate * 100, 10d);
+	    Assert.assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(), actualRate * 100, 10d);
 
-		});
+	});
 	When("I read the latest (clk|imp) log file from uas", (String logType) -> {
 
 	    logModules.stream().filter(Named.nameIs(logType)).forEach(UASLogModule::readLogs);
-	    // String directory = "/var/log/ut-ramp-uas/";
-	    // List<String> allLines = new ArrayList<>();
-	    // this.uasCliConnections.forEach((connectionName, conn) -> {
-	    // try {
-	    // Optional<String> remoteFile = conn.fileList(directory)
-	    // .filter(s -> logType.equals(s.substring(directory.length(),
-	    // logType.length())))
-	    // .sorted(String.CASE_INSENSITIVE_ORDER.reversed()).findFirst();
-	    //
-	    // File tempFile = File.createTempFile("tmp", remoteFile.get());
-	    // conn.get(remoteFile.get(), tempFile);
-	    //
-	    // Files.lines(Paths.get(tempFile.toURI())).collect(Collectors.toCollection(()
-	    // -> allLines));
-	    // tempFile.delete();
-	    // } catch (IOException e) {
-	    // Assert.fail(e.getMessage());
-	    // }
-	    //
-	    // });
-
 	});
 
 	Then("^I filter in the (clk|imp) log to the lines where id at column (\\d+) is the same as in impression-url$",
-		(String logType, Integer column) -> {
+			(String logType, Integer column) -> {
 
-		    URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
-			    .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
-			    .map(Optional::get).findFirst().get();
+			    URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
+					    .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get).findFirst().get();
 
-		    String fieldValue = splitQuery(impressionUrl).get("id").get(0);
-		    UASLogModule logModule = logModules.stream().filter(Named.nameIs(logType)).findFirst()
-			    .orElseThrow(IllegalArgumentException::new);
+			    String fieldValue = splitQuery(impressionUrl).get("id").get(0);
+			    UASLogModule logModule = logModules.stream().filter(Named.nameIs(logType)).findFirst().orElseThrow(IllegalArgumentException::new);
 
-		    List<String> filteredRawData = new ArrayList<>();
-		    logModule.actual().filter(raw -> fieldValue.equals(raw.get(column))).flatMap(List::stream)
-			    .collect(Collectors.toCollection(() -> filteredRawData));
-		    logModule.setActual(filteredRawData);
+			    List<String> filteredRawData = new ArrayList<>();
+			    logModule.actual().filter(raw -> fieldValue.equals(raw.get(column))).flatMap(List::stream).collect(Collectors.toCollection(() -> filteredRawData));
+			    logModule.setActual(filteredRawData);
 
-		});
+			});
 
 	When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
 
@@ -197,27 +149,41 @@ public class UASIntegrationTest extends BaseTest {
 
 	When("^I send impression requests to UAS$", () -> {
 	    HttpClient httpclient = HttpClients.custom()
-		    .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
-	    sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
-		    .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
-		    .map(impurl -> CompletableFuture.supplyAsync(() -> {
-			try {
-			    HttpResponse response = httpclient.execute(new HttpGet(impurl.toString()));
-			    if (response.getEntity() != null) {
-				response.setEntity(new BufferedHttpEntity(response.getEntity()));
-			    }
-			    return response;
-			} catch (IOException e) {
-			    throw new UncheckedIOException("failed to send request (" + impurl + ") ", e);
-			}
+			    .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
+	    sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
+			    .map(impurl -> CompletableFuture.supplyAsync(() -> {
+				try {
+				    HttpResponse response = httpclient.execute(new HttpGet(impurl.toString()));
+				    if (response.getEntity() != null) {
+					response.setEntity(new BufferedHttpEntity(response.getEntity()));
+				    }
+				    return response;
+				} catch (IOException e) {
+				    throw new UncheckedIOException("failed to send request (" + impurl + ") ", e);
+				}
 
-		    })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
-		    .forEach(statusCode -> {
-			Assert.assertThat("Status code of impression request", statusCode, is(204));
-		    });
+			    })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode).forEach(statusCode -> {
+		Assert.assertThat("Status code of impression request", statusCode, is(204));
+	    });
 	});
 
-	When("^sleep for (\\d+) seconds$", (Integer seconds) -> {
+	Given("I use \\{([^}]+)\\} as user-agent string to send my requests to uas", (String userAgentStr) -> {
+	    sut.getUASRquestModule().addHttpHeader("User-Agent", userAgentStr);
+	});
+
+	Then("I reset the http headers sent to uas$", (String userAgentStr) -> {
+	    sut.getUASRquestModule().emptyHttpHeaders();
+	});
+
+	Then("The passback ratio should be (\\d+)%", (Integer percentage) -> {
+	    long total  = sut.getUASRquestModule().responses().count();
+	    long numOfPassbacks = sut.getUASRquestModule().responses().filter(fh -> (!(HttpContentTest.getContent(fh.join()).contains("/l?bannerid=")))).count();
+	    double actualRatio = numOfPassbacks / (double) total;
+	    final double neededRatio = percentage / 100.0;
+	    Assert.assertEquals("Total passbacks is: "+ numOfPassbacks +" out of "+ total + " responses", neededRatio, actualRatio, 0.1);
+	});
+
+	And("^I sleep for (\\d+) seconds$", (Integer seconds) -> {
 	    try {
 		TimeUnit.SECONDS.sleep(seconds);
 	    } catch (InterruptedException e) {
@@ -243,8 +209,9 @@ public class UASIntegrationTest extends BaseTest {
 	if (StringUtils.nullOrEmpty.test(url.getQuery())) {
 	    return Collections.emptyMap();
 	}
-	return Arrays.stream(url.getQuery().split("&")).map(UASIntegrationTest::splitQueryParameter).collect(
-		groupingBy(SimpleImmutableEntry::getKey, LinkedHashMap::new, mapping(Map.Entry::getValue, toList())));
+	return Arrays.stream(url.getQuery().split("&")).map(UASIntegrationTest::splitQueryParameter)
+			.collect(groupingBy(SimpleImmutableEntry::getKey, LinkedHashMap::new,
+					mapping(Map.Entry::getValue, toList())));
     }
 
     public static SimpleImmutableEntry<String, String> splitQueryParameter(String it) {
@@ -266,4 +233,9 @@ public class UASIntegrationTest extends BaseTest {
 	return future.thenApply(UASRequestModule::getClickUrlFrom);
     }
 
+    private void sendMultipleAdRequests(Integer times, String zoneByName, boolean toReset) {
+	Zone zone = sut.getCampaignManager().getZone(zoneByName)
+			.orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+	sut.getUASRquestModule().zoneRequests(zone.getId(), times, toReset);
+    }
 }
