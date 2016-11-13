@@ -29,4 +29,9 @@ public class Zone implements Named, WithId, Comparable<Zone> {
     public int compareTo(Zone that) {
 	return Comparator.comparing(Zone::getId).compare(this, requireNonNull(that));
     }
+
+    @Override
+    public String toString() {
+	return "Zone " + getId() + " [name=" + getName() + "]";
+    }
 }
