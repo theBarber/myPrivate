@@ -62,29 +62,26 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
 	_actual().clear();
 	AtomicReference<RuntimeException> exception = new AtomicReference<>();
 	connections.forEach(conn -> {
-	    Optional<String> remoteFile;
 	    try {
 		if (!conn.isConnected()) {
 		    conn.connect();
 		}
-		remoteFile = conn.fileList(LOGDIRECTORY)
+		conn.fileList(LOGDIRECTORY)
 			.filter(s -> getName()
 				.equals(s.substring(LOGDIRECTORY.length(), LOGDIRECTORY.length() + getName().length())))
-			.sorted(String.CASE_INSENSITIVE_ORDER.reversed()).findFirst();
-
-		remoteFile.ifPresent(remote -> {
-		    File tempFile;
-		    try {
-			conn.get(remote,
-				tempFile = File.createTempFile("tmp", remote.substring(LOGDIRECTORY.length())));
-			Files.lines(Paths.get(tempFile.toURI())).forEach(line -> {
-			    _actual().add(Arrays.asList(line.split(SPLIT_BY_TAB)));
+			.sorted(String.CASE_INSENSITIVE_ORDER.reversed()).limit(3).forEach(remote -> {
+			    File tempFile;
+			    try {
+				conn.get(remote,
+					tempFile = File.createTempFile("tmp", remote.substring(LOGDIRECTORY.length())));
+				Files.lines(Paths.get(tempFile.toURI())).forEach(line -> {
+				    _actual().add(Arrays.asList(line.split(SPLIT_BY_TAB)));
+				});
+				tempFile.delete();
+			    } catch (IOException e) {
+				delegate(exception, e);
+			    }
 			});
-			tempFile.delete();
-		    } catch (IOException e) {
-			delegate(exception, e);
-		    }
-		});
 	    } catch (IOException e) {
 		delegate(exception, e);
 	    }
