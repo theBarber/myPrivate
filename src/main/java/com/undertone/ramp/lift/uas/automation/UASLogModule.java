@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import com.undertone.automation.cli.conn.LinuxDefaultCliConnection;
@@ -27,6 +28,7 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
     private static final String LOGDIRECTORY = "/var/log/ut-ramp-uas/";
     private static final String SPLIT_BY_TAB = "\t";
     private final Set<LinuxDefaultCliConnection> connections = new TreeSet<>(Comparator.comparing(Named::getName));
+    private Predicate<List<String>> filter;
 
     public UASLogModule(LinuxDefaultCliConnection connection, String logname) {
 	this(Collections.singleton(connection), logname);
@@ -38,8 +40,7 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
     }
 
     @Override
-    public void init() throws Exception {
-	super.init();
+    public void init() {
 	actual = new ArrayList<>();
     }
 
@@ -48,7 +49,16 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
 	actual = new ArrayList<>();
     }
 
-    public synchronized void readLogs() {
+    public UASLogModule filter(int column, String value) {
+	return this.filter(l -> l.get(column).equals(value));
+    }
+
+    public UASLogModule filter(Predicate<List<String>> filter) {
+	this.filter = filter;
+	return this;
+    }
+
+    public synchronized UASLogModule readLogs() {
 	_actual().clear();
 	AtomicReference<RuntimeException> exception = new AtomicReference<>();
 	connections.forEach(conn -> {
@@ -80,11 +90,12 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
 	    }
 	});
 	throwIfNeeded(exception);
+	return this;
     }
 
     @Override
     public Stream<List<String>> actual() {
-	return _actual().stream();
+	return _actual().stream().filter(Optional.ofNullable(filter).orElse(l -> !l.isEmpty()));
     };
 
     @SuppressWarnings("unchecked")
