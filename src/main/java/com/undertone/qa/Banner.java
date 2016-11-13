@@ -30,5 +30,10 @@ public class Banner implements Named, WithId, Comparable<Banner> {
     public int compareTo(Banner that) {
 	return Comparator.comparing(Banner::getId).compare(this, requireNonNull(that));
     }
+    
 
+    @Override
+    public String toString() {
+	return "Banner [name=" + getName() + "]";
+    }
 }
