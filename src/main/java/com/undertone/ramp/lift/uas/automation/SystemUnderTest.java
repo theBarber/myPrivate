@@ -2,6 +2,7 @@ package com.undertone.ramp.lift.uas.automation;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
+import com.undertone.automation.assertion.ScenarioWriter;
 import com.undertone.automation.cli.conn.CliConnection;
 import com.undertone.automation.cli.conn.CliConnectionImpl.EnumConnectionType;
 import com.undertone.automation.cli.conn.LinuxDefaultCliConnection;
@@ -19,6 +21,7 @@ import com.undertone.automation.support.StringUtils;
 import com.undertone.qa.CampaignManager;
 import com.undertone.qa.HardCodedCampaignManager;
 
+import cucumber.api.Scenario;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
 
@@ -30,13 +33,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> {
     protected CampaignManager campaignManager;
     private static SystemUnderTest instance = null;
 
+    private ScenarioWriter scenarioWriter;
+
     private SystemUnderTest() {
 	_o = 0;
     }
 
-    public void setup(Collection<String> forTags, Map<String, String> config) {
+    public synchronized void setup(Scenario scenario, Map<String, String> config) {
+	this.scenarioWriter = new ScenarioWriter(scenario);
 	AtomicReference<RuntimeException> exception = new AtomicReference<>();
-	forTags.stream().forEach(tag -> {
+	scenario.getSourceTagNames().stream().forEach(tag -> {
 	    switch (tag) {
 	    case "@cli":
 		if (uasCliConnections.isEmpty()) {
@@ -56,7 +62,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> {
 		}
 		break;
 	    case "@campaign":
-		if (forTags.contains("@hardcoded")) {
+		if (scenario.getSourceTagNames().contains("@hardcoded")) {
 		    campaignManager = new HardCodedCampaignManager();
 		} else {
 		    // XXX TODO figure out what and how to select and create
@@ -96,6 +102,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> {
 
 	throwIfNeeded(exception);
 	config.clear();
+	synchronized (this) {
+	    try {
+		scenarioWriter.flush();
+		scenarioWriter.close();
+	    } catch (IOException cause) {
+		throw new UncheckedIOException(cause);
+	    } finally {
+		scenarioWriter = null;
+	    }
+	}
     }
 
     public Stream<LinuxDefaultCliConnection> uasCliConnections() {

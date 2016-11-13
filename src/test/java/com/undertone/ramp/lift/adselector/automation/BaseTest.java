@@ -46,10 +46,11 @@ public class BaseTest implements En, GlueBase {
 	});
 
 	Before(scenario -> {
+
 	    String userName = System.getProperty("user.name");
 	    boolean onlyForUser = Boolean.getBoolean("for.user");
-	    if (!"jenkins".equals(userName)
-		    && onlyForUser && scenario.getSourceTagNames().stream().noneMatch(s -> s.equals("@" + userName))) {
+	    if (!"jenkins".equals(userName) && onlyForUser
+		    && scenario.getSourceTagNames().stream().noneMatch(s -> s.equals("@" + userName))) {
 		Exception notTaggedForYou = new Exception(
 			"the scenario " + scenario.getName() + " is not tagged for " + userName);
 		PendingException pex = new cucumber.api.PendingException();
@@ -72,7 +73,7 @@ public class BaseTest implements En, GlueBase {
 		    config.put(configurationKey.substring(environmentNameConfigPrefix.length()), value);
 		}
 	    });
-	    sut.setup(scenario.getSourceTagNames(), config);
+	    sut.setup(scenario, config);
 	});
 
 	Before(RABBITTESTS, scenario -> {
