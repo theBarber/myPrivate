@@ -39,7 +39,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> {
 	forTags.stream().forEach(tag -> {
 	    switch (tag) {
 	    case "@cli":
-		if (!uasCliConnections.isEmpty()) {
+		if (uasCliConnections.isEmpty()) {
 		    setupCli(config, exception);
 		}
 		break;

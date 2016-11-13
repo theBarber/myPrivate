@@ -11,7 +11,7 @@ Feature: UAS Integration with Ad Selector
 	|{"buying_strategy_id": -1, "slices": [{"banner_id": 968473, "weight": 10000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 11457, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 11457]}, {"==": ["body.features.dma", 55]}]}, "buy_at_most": 100}]}   |
 	|{"buying_strategy_id": -1, "slices": [{"banner_id": 15, "weight": 1000000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 2, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 2]}, {"==": ["body.features.dma", 100]}]}, "buy_at_most": 10}]}   |
 		Then I will be able to start testing
-		And sleep for 70 seconds
+		And I sleep for 70 seconds
 
 	Scenario: zone id that exist in zone cache but does not exist it plan
 		When I send 11 times an ad request for zone named {qa.undertone.com - Half Banner} to UAS
@@ -36,4 +36,4 @@ Feature: UAS Integration with Ad Selector
 	Scenario: Restore original plan to S3
 		Then I restore the original solver plan
 		And I will finish testing
-		And sleep for 70 seconds
+		And I sleep for 70 seconds

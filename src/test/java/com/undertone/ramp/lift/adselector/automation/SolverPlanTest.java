@@ -57,7 +57,7 @@ public class SolverPlanTest extends BaseTest {
 	    /* Delete original file from S3 */
 	    s3Client.deleteFile(s3PlanPath);
 	    /* Upload the new plan to S3 */
-		String s3NewPlanPath = config.get("as.solver_plan.file_path") + "/" + planFileName.substring(0, planFileName.lastIndexOf('.')) + "_int_test.json";
+	    String s3NewPlanPath = config.get("as.solver_plan.file_path") + "/" + planFileName.substring(0, planFileName.lastIndexOf('.')) + "_int_test.json";
 	    s3Client.uploadFile(planFileName, s3NewPlanPath);
 	    /* Delete the new plan from the disk */
 	    Files.delete(planLocalPath);
@@ -79,7 +79,7 @@ public class SolverPlanTest extends BaseTest {
 	    S3Client s3Client = new S3Client();
 	    /* Delete the new plan from S3 */
 	    String planFileName = config.get("as.solver_plan.file_name");
-	    String s3NewPlanPath = config.get("as.solver_plan.file_path") + "/" + "int_test_" + planFileName;
+	    String s3NewPlanPath = config.get("as.solver_plan.file_path") + "/" + planFileName.substring(0, planFileName.lastIndexOf('.')) + "_int_test.json";
 	    s3Client.deleteFile(s3NewPlanPath);
 	    /* upload the original plan back to S3 */
 	    String s3PlanPath = config.get("as.solver_plan.file_path") + "/" + planFileName;

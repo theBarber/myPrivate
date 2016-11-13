@@ -41,9 +41,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.runner.RunWith;
 
+import com.undertone.automation.assertion.ListItemAt;
 import com.undertone.automation.cli.process.CliCommandExecution;
 import com.undertone.automation.module.WithId;
 import com.undertone.automation.support.StringUtils;
+import com.undertone.automation.utils.HttpContentTest;
 import com.undertone.qa.Zone;
 import com.undertone.ramp.lift.uas.automation.UASRequestModule;
 
@@ -65,18 +67,6 @@ public class UASIntegrationTest extends BaseTest {
     public UASIntegrationTest() {
 	super();
 
-	// Before(CLITESTS, 15000, 2, scenario -> {
-	// forLogs.map(logname -> new
-	// UASLogModule(super.uasCliConnections.values(), logname))
-	// .collect(Collectors.toCollection(() -> logModules));
-	// });
-	// ThenResposeCodeIs();
-	//
-	// Given("^Campaign Manager with hardcoded campaign$", () -> {
-	// load(getCampaignManager());
-	// Assume.assumeThat(getCampaignManager().getZone("qa.undertone.com -
-	// Full Banner"), Matchers.notNullValue());
-	// });
 	When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
 	    Zone zone = sut.getCampaignManager().getZone(zoneByName)
 		    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
@@ -84,9 +74,11 @@ public class UASIntegrationTest extends BaseTest {
 	});
 	When("I send (\\d+) times an ad request for zone named \\{([^}]+)\\} to UAS",
 		(Integer times, String zoneByName) -> {
-		    Zone zone = sut.getCampaignManager().getZone(zoneByName)
-			    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
-		    sut.getUASRquestModule().zoneRequests(zone.getId(), times);
+		    sendMultipleAdRequests(times, zoneByName, true);
+		});
+	When("I send (\\d+) additional ad requests for zone named \\{([^}]+)\\} to UAS",
+		(Integer times, String zoneByName) -> {
+		    sendMultipleAdRequests(times, zoneByName, false);
 		});
 
 	Then("The responses? has impression-urls?", () -> {
@@ -135,7 +127,7 @@ public class UASIntegrationTest extends BaseTest {
 			    theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
 
 		    long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
-		    assertThat("total responses", totalResponses, greaterThan(10l));
+		    assertThat("total responses", totalResponses, greaterThan(9l));
 
 		    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
 			    .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
@@ -159,13 +151,14 @@ public class UASIntegrationTest extends BaseTest {
 		    assertThat(sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
 		});
 	And("The field (\\w+) in the (\\d+) column of the (clk|imp) log is the same as in impression-url",
-		(String fieldName, Integer column ,String logType) -> {
+		(String fieldName, Integer column, String logType) -> {
 		    URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
 			    .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
 			    .map(Optional::get).findFirst().get();
 		    String expectedFieldValue = splitQuery(impressionUrl).get(fieldName).get(0);
-		    assertThat(sut.logFor(logType).actual(), StreamMatchers.allMatch(Matchers.));
-		    
+		    assertThat(sut.logFor(logType).actual(),
+			    StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(expectedFieldValue))));
+
 		});
 
 	When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
@@ -200,7 +193,25 @@ public class UASIntegrationTest extends BaseTest {
 		    });
 	});
 
-	And("^sleep for (\\d+) seconds$", (Integer seconds) -> {
+	Given("I use \\{([^}]+)\\} as user-agent string to send my requests to uas", (String userAgentStr) -> {
+	    sut.getUASRquestModule().addHttpHeader("User-Agent", userAgentStr);
+	});
+
+	Then("I reset the http headers sent to uas$", (String userAgentStr) -> {
+	    sut.getUASRquestModule().emptyHttpHeaders();
+	});
+
+	Then("The passback ratio should be (\\d+)%", (Integer percentage) -> {
+	    long total = sut.getUASRquestModule().responses().count();
+	    long numOfPassbacks = sut.getUASRquestModule().responses()
+		    .filter(fh -> (!(HttpContentTest.getContent(fh.join()).contains("/l?bannerid=")))).count();
+	    double actualRatio = numOfPassbacks / (double) total;
+	    final double neededRatio = percentage / 100.0;
+	    assertEquals("Total passbacks is: " + numOfPassbacks + " out of " + total + " responses",
+		    neededRatio, actualRatio, 0.1);
+	});
+
+	And("^I sleep for (\\d+) seconds$", (Integer seconds) -> {
 	    try {
 		TimeUnit.SECONDS.sleep(seconds);
 	    } catch (InterruptedException e) {
@@ -249,4 +260,9 @@ public class UASIntegrationTest extends BaseTest {
 	return future.thenApply(UASRequestModule::getClickUrlFrom);
     }
 
+    private void sendMultipleAdRequests(Integer times, String zoneByName, boolean toReset) {
+	Zone zone = sut.getCampaignManager().getZone(zoneByName)
+		.orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+	sut.getUASRquestModule().zoneRequests(zone.getId(), times, toReset);
+    }
 }
