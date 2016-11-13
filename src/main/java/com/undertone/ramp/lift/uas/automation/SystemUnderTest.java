@@ -102,14 +102,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> {
 
 	throwIfNeeded(exception);
 	config.clear();
-	synchronized (this) {
-	    try {
-		scenarioWriter.flush();
-		scenarioWriter.close();
-	    } catch (IOException cause) {
-		throw new UncheckedIOException(cause);
-	    } finally {
-		scenarioWriter = null;
+	if (scenarioWriter != null) {
+	    synchronized (this) {
+		try {
+		    scenarioWriter.flush();
+		    scenarioWriter.close();
+		} catch (IOException cause) {
+		    throw new UncheckedIOException(cause);
+		} finally {
+		    scenarioWriter = null;
+		}
 	    }
 	}
     }

@@ -55,9 +55,8 @@ Scenario: Send an ad request to UAS and parse logs
 	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS 
 	And The responses has impression-urls 
 	And I send impression requests to UAS 
-	# And I sleep for 70 seconds
+	And I sleep for 70 seconds
 	Then I read the latest imp log file from uas 
-
 	Then I filter in the imp log to the lines where id at column 0 is the same as in impression-url 
 	And The field zoneId in the 4 column of the imp log is the same as in impression-url
 	And Banner with 15 exists in log in the 5 column
