@@ -157,8 +157,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> {
     }
 
     public UASLogModule logFor(String logType) {
-	return uasLogModulesByLogType.computeIfAbsent(logType,
-		logname -> new UASLogModule(uasCliConnections.values(), logname));
+	return uasLogModulesByLogType.computeIfAbsent(logType, logname -> {
+	    UASLogModule logModule = new UASLogModule(uasCliConnections.values(), logname);
+	    logModule.init();
+	    return logModule;
+	});
     }
 
     public CampaignManager getCampaignManager() {
