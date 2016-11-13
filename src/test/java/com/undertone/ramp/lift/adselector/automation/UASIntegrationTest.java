@@ -29,7 +29,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -60,12 +59,9 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = { "pretty",
 	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
 public class UASIntegrationTest extends BaseTest {
-    // protected List<UASLogModule> logModules = new ArrayList<>();
-    public final Stream<String> forLogs = Stream.of("clk", "imp");
 
     public UASIntegrationTest() {
 	super();
-
 	When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
 	    Zone zone = sut.getCampaignManager().getZone(zoneByName)
 		    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
@@ -147,7 +143,8 @@ public class UASIntegrationTest extends BaseTest {
 
 		    String idFieldValue = splitQuery(impressionUrl).get("id").get(0);
 		    sut.logFor(logType).filter(raw -> idFieldValue.equals(raw.get(column)));
-		    assertThat(sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
+		    assertThat("the log " + logType + " should contain a line with " + idFieldValue + " at column "
+			    + column, sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
 		});
 	And("The field (\\w+) in the (\\d+) column of the (clk|imp) log is the same as in impression-url",
 		(String fieldName, Integer column, String logType) -> {
