@@ -25,7 +25,7 @@ import cucumber.api.Scenario;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
 
-public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> {
+public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
     final int _o;
     protected final Map<String, LinuxDefaultCliConnection> uasCliConnections = new HashMap<>();
     protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
@@ -232,5 +232,36 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> {
 		throw ref.get();
 	    }
 	}
+    }
+
+    @Override
+    public Collection<String> getSourceTagNames() {
+	return scenarioWriter.getSourceTagNames();
+    }
+
+    @Override
+    public String getStatus() {
+	return scenarioWriter.getStatus();
+    }
+
+    @Override
+    public boolean isFailed() {
+	return scenarioWriter.isFailed();
+    }
+
+    @Override
+    public void embed(byte[] data, String mimeType) {
+	scenarioWriter.embed(data, mimeType);
+    }
+
+    @Override
+    public void write(String text) {
+	scenarioWriter.write(text);
+
+    }
+
+    @Override
+    public String getId() {
+	return scenarioWriter.getId();
     }
 }

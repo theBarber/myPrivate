@@ -38,7 +38,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.hamcrest.Matchers;
 import org.junit.runner.RunWith;
 
 import com.undertone.automation.assertion.ListItemAt;
@@ -207,11 +206,12 @@ public class UASIntegrationTest extends BaseTest {
 		    .filter(fh -> (!(HttpContentTest.getContent(fh.join()).contains("/l?bannerid=")))).count();
 	    double actualRatio = numOfPassbacks / (double) total;
 	    final double neededRatio = percentage / 100.0;
-	    assertEquals("Total passbacks is: " + numOfPassbacks + " out of " + total + " responses",
-		    neededRatio, actualRatio, 0.1);
+	    assertEquals("Total passbacks is: " + numOfPassbacks + " out of " + total + " responses", neededRatio,
+		    actualRatio, 0.1);
 	});
 
 	And("^I sleep for (\\d+) seconds$", (Integer seconds) -> {
+	    sut.write("sleeping " + seconds + " seconds");
 	    try {
 		TimeUnit.SECONDS.sleep(seconds);
 	    } catch (InterruptedException e) {
