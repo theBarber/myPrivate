@@ -1,5 +1,4 @@
 @cli
-@Sanity
 Feature: cache process verification 
 Scenario: verify UAS* zone cash updated - after updated in limitations
 	Given We have a connection to WF DB 
