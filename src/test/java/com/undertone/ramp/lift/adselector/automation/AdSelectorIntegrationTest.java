@@ -27,7 +27,7 @@ import cucumber.api.junit.Cucumber;
  * Created by nive on 2016-10-30.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:AdSelectorIntegration.feature", plugin = {
+@CucumberOptions(features = "classpath:AdSelectorIntegration.feature", plugin = { "pretty",
         "com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
 public class AdSelectorIntegrationTest extends BaseTest  {
     private String slice  = "{\"buying_strategy_id\": -1, \"slices\": [{\"banner_id\": 879498, \"weight\": 4, " +
