@@ -46,7 +46,7 @@ public class AdSelectorIntegrationTest extends BaseTest  {
                 File tmp = File.createTempFile("tempTest1", ".tmp");
                 Files.copy(Paths.get(url.toURI()),tmp.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 String tmpSlice = slice.replace("#sliceId#", String.valueOf(System.currentTimeMillis()));
-                System.out.println(tmpSlice);
+                sut.write(tmpSlice);
                 Files.write(Paths.get(tmp.toURI()), tmpSlice.getBytes(), StandardOpenOption.APPEND);
 
                 tmp.delete();

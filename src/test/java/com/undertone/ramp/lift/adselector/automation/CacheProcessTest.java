@@ -50,14 +50,14 @@ public class CacheProcessTest extends BaseTest {
 	    try {
 		Statement stmt = conn.createStatement();
 		String sqlQuery = "SELECT limitation FROM adserver.zones where zoneid =" + zoneId;
-		// System.out.println("1111111111111111111");
+		// sut.write("1111111111111111111");
 		ResultSet rs = stmt.executeQuery(sqlQuery);
 		rs.next();
-		System.out.println(rs.getString(1));
+		sut.write(rs.getString(1));
 		String currentLimitation = rs.getString(1).toString();
 		String[] parts = currentLimitation.split(",");
 		currentLimitation = parts[2];
-		System.out.println(currentLimitation);
+		sut.write(currentLimitation);
 		Assert.assertThat(currentLimitation, Matchers.containsString(expectedLimitation));
 	    } catch (SQLException e) {
 		e.printStackTrace();
@@ -84,7 +84,7 @@ public class CacheProcessTest extends BaseTest {
 			String limitation = "[[[41,\"=~\",\"" + newLimitation + "\"]]]";
 			String query = "UPDATE adserver.zones SET limitation ='" + limitation + "' WHERE zoneid='"
 				+ zoneId + "';";
-			System.out.println(query);
+			sut.write(query);
 			stmt.executeUpdate(query);
 
 		    } catch (SQLException e) {
@@ -97,9 +97,9 @@ public class CacheProcessTest extends BaseTest {
 
 	    sut.uasCliConnections().parallel().forEach(conn -> {
 		try {
-		    System.out.println("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
+		    sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
 			    + Thread.currentThread().getName());
-		    System.out.println("********************************************************************");
+		    sut.write("********************************************************************");
 		    CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
 			    .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
 		    zoneCacheExecution.execute();
@@ -111,10 +111,10 @@ public class CacheProcessTest extends BaseTest {
 	});
 	When("limitation for zone (.*) in zoneCache is (.*)", (String zoneId, String expectedLimitation) -> {
 	    String zoneInfoCmd = "docker exec ut-ramp-uas  adserver --zone " + zoneId;
-	    System.out.println(zoneInfoCmd);
+	    sut.write(zoneInfoCmd);
 	    sut.uasCliConnections().map(conn -> {
 		try {
-		    System.out.println("Executing " + zoneInfoCmd + " on " + conn.getName());
+		    sut.write("Executing " + zoneInfoCmd + " on " + conn.getName());
 		    CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, zoneInfoCmd).withTimeout(2,
 			    TimeUnit.MINUTES);
 		    zoneCacheExecution.execute();
