@@ -53,11 +53,22 @@ Scenario: Send an ad request to UAS and parse impression url - 2 banners without
 @cli
 Scenario: Send an ad request to UAS and parse logs 
 	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS 
-	And The responses has impression-urls 
-	And I send impression requests to UAS 
-#	And I sleep for 120 seconds
-	Then I read the latest imp log file from uas 
-	Then I filter in the imp log to the lines where id at column 1 is the same as in impression-url 
+	And The response has impression-url
+	And The response has click-url
+	And I sleep for 120 seconds
+	Then I read the latest req log file from uas
+	Then I filter in the req log to the lines where id at column 1 is the same as in impression-url 
+	And The field zoneid in the 4 column of the req log is the same as in impression-url
+	And The field bannerid in the 5 column of the req log is the same as in impression-url
+	And The field campaignid in the 6 column of the req log is the same as in impression-url
+	
+	When I send impression requests to UAS 
+	Then I read the latest imp log file from uas
+	And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
+	When I send click requests to UAS
+	Then I read the latest clk log file from uas
+	And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
+
 	#And The field zoneid in the 4 column of the imp log is the same as in impression-url
 	#And Banner with 15 exists in log in the 5 column
 	#And Campaign with 2 exists in log in the 6 column

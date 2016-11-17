@@ -130,11 +130,11 @@ public class UASIntegrationTest extends BaseTest {
 			    actualRate * 100, 10d);
 
 		});
-	When("I read the latest (clk|imp) log file from uas", (String logType) -> {
+	When("^I read the latest (clk|imp|req) log file from uas$", (String logType) -> {
 	    assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
 	});
 
-	Then("^I filter in the (clk|imp) log to the lines where id at column (\\d+) is the same as in impression-url$",
+	Then("^I filter in the (clk|imp|req) log to the lines where id at column (\\d+) is the same as in impression-url$",
 		(String logType, Integer column) -> {
 
 		    URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
@@ -146,7 +146,7 @@ public class UASIntegrationTest extends BaseTest {
 		    assertThat("the log " + logType + " should contain a line with " + idFieldValue + " at column "
 			    + column, sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
 		});
-	And("The field (\\w+) in the (\\d+) column of the (clk|imp) log is the same as in impression-url",
+	And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is the same as in impression-url",
 		(String fieldName, Integer column, String logType) -> {
 		    URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
 			    .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
@@ -181,6 +181,28 @@ public class UASIntegrationTest extends BaseTest {
 			    return response;
 			} catch (IOException e) {
 			    throw new UncheckedIOException("failed to send request (" + impurl + ") ", e);
+			}
+
+		    })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
+		    .forEach(statusCode -> {
+			assertThat("Status code of impression request", statusCode, is(204));
+		    });
+	});
+	
+	When("^I send click requests to UAS$", () -> {
+	    HttpClient httpclient = HttpClients.custom()
+		    .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
+	    sut.getUASRquestModule().responses().map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join)
+		    .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
+		    .map(click -> CompletableFuture.supplyAsync(() -> {
+			try {
+			    HttpResponse response = httpclient.execute(new HttpGet(click.toString()));
+			    if (response.getEntity() != null) {
+				response.setEntity(new BufferedHttpEntity(response.getEntity()));
+			    }
+			    return response;
+			} catch (IOException e) {
+			    throw new UncheckedIOException("failed to send request (" + click + ") ", e);
 			}
 
 		    })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
