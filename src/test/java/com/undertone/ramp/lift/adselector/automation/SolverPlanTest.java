@@ -45,10 +45,12 @@ public class SolverPlanTest extends BaseTest {
 	    /* Download existing plan */
 	    String planFileName = config.get("as.solver_plan.file_name");
 	    String s3PlanPath = config.get("as.solver_plan.file_path") + "/" + planFileName;
+	    sut.write("downloading file " + s3PlanPath);
 	    s3Client.downloadFile(s3PlanPath, planFileName);
 	    /* Backup existing plan */
 	    Path planLocalPath = Paths.get(planFileName);
 	    Path origPlanLocalPath = Paths.get(planFileName + ".tmp");
+	    
 	    Files.copy(planLocalPath, origPlanLocalPath);
 	    /* generate new slice IDs for the new slices */
 	    List<String> newSlices = generateNewSliceIDs(slices);
@@ -58,6 +60,7 @@ public class SolverPlanTest extends BaseTest {
 	    s3Client.deleteFile(s3PlanPath);
 	    /* Upload the new plan to S3 */
 	    String s3NewPlanPath = config.get("as.solver_plan.file_path") + "/" + planFileName.substring(0, planFileName.lastIndexOf('.')) + "_int_test.json";
+	    sut.write("uploading file " + s3NewPlanPath);
 	    s3Client.uploadFile(planFileName, s3NewPlanPath);
 	    /* Delete the new plan from the disk */
 	    Files.delete(planLocalPath);
