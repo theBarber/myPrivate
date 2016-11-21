@@ -4,14 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 
-public class Banner implements Named, WithId, Comparable<Banner> {
+public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 
-    private final String name, id;
+    private final String name;
+    private final int id;
 
-    public Banner(String name, String id) {
+    public Banner(@JsonProperty("creativeName") String name, @JsonProperty("creativeId") Integer id) {
 	this.name = requireNonNull(name);
 	this.id = requireNonNull(id);
     }
@@ -22,7 +24,7 @@ public class Banner implements Named, WithId, Comparable<Banner> {
     }
 
     @Override
-    public String getId() {
+    public Integer getId() {
 	return id;
     }
 
@@ -30,7 +32,6 @@ public class Banner implements Named, WithId, Comparable<Banner> {
     public int compareTo(Banner that) {
 	return Comparator.comparing(Banner::getId).compare(this, requireNonNull(that));
     }
-    
 
     @Override
     public String toString() {

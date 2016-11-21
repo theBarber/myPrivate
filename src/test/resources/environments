@@ -22,3 +22,7 @@ staging.uas.port=9000
 
 staging.as.solver_plan.file_path = ramp-optimization/runtime/hourly/solver
 staging.as.solver_plan.file_name = solver_plan_integration_test_20201031_170101.json
+
+
+staging.ramp.app.consul.host=consul-staging.ramp-ut.io
+staging.ramp.app.consul.port=8500

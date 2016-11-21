@@ -3,33 +3,54 @@ package com.undertone.qa;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 
-public class Campaign implements Named, WithId, Comparable<Campaign> {
+@SuppressWarnings("unused")
+@JsonTypeName("Campaign")
+@JsonSubTypes(@Type(CampaignPlus.class))
+@JsonTypeInfo(use = Id.CLASS, defaultImpl = CampaignPlus.class)
 
-    private final String name, id;
+public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
+
+    private String campaignName;
+    private Integer campaignId;
 
     private Set<Banner> banners = new TreeSet<>();
     final Set<ZoneSet> zoneSetAssoc = new TreeSet<>();
+    
+        
+    private Campaign() {
 
-    public Campaign(String name, String id) {
-	this.name = requireNonNull(name);
-	this.id = requireNonNull(id);
+    }
+
+    public Campaign(String campaignName, Integer campaignId) {
+	this.campaignName = requireNonNull(campaignName);
+	this.campaignId = requireNonNull(campaignId);
     }
 
     @Override
     public String getName() {
-	return name;
+	return campaignName;
     }
 
     @Override
-    public String getId() {
-	return id;
+    public Integer getId() {
+	return campaignId;
     }
 
     public Stream<Banner> banners() {
@@ -41,6 +62,7 @@ public class Campaign implements Named, WithId, Comparable<Campaign> {
 	return Comparator.comparing(Campaign::getId).compare(this, requireNonNull(that));
     }
 
+    @JsonIgnore
     public Stream<ZoneSet> getZoneSetAssoc() {
 	return zoneSetAssoc.stream();
     }
@@ -50,6 +72,7 @@ public class Campaign implements Named, WithId, Comparable<Campaign> {
 	return b;
     }
 
+    @JsonIgnore
     ZoneSet addZoneSet(ZoneSet zoneSet) {
 	zoneSetAssoc.add(zoneSet);
 	return zoneSet;
@@ -60,4 +83,20 @@ public class Campaign implements Named, WithId, Comparable<Campaign> {
 	return "Campaign [name=" + getName() + "]";
     }
 
+    private String getCampaignName() {
+	return campaignName;
+    }
+
+    private void setCampaignName(String campaignName) {
+	this.campaignName = campaignName;
+    }
+
+    @JsonProperty("Banners")
+    private void setBanners(List<Banner> banners) {
+	this.banners.addAll(banners);
+    }
+
+    private void setCampaignId(Integer campaignId) {
+	this.campaignId = campaignId;
+    }
 }

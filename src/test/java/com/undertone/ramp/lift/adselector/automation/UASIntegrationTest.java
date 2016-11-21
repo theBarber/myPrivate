@@ -106,7 +106,7 @@ public class UASIntegrationTest extends BaseTest {
 		    }
 
 		    assertThat(entityType, isOneOf("campaign", "banner", "zone"));
-		    Optional<? extends WithId> expectedEntity = sut.getCampaignManager().getterFor(entityType)
+		    Optional<? extends WithId<?>> expectedEntity = sut.getCampaignManager().getterFor(entityType)
 			    .apply(entityName);
 		    assertThat("Could not find " + entityType + " named " + entityName, expectedEntity,
 			    is(not(OptionalMatchers.empty())));

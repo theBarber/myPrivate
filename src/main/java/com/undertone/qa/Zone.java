@@ -7,10 +7,11 @@ import java.util.Comparator;
 import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 
-public class Zone implements Named, WithId, Comparable<Zone> {
-    private final String name, id;
+public class Zone implements Named, WithId<Integer>, Comparable<Zone> {
+    private final String name;
+    private final Integer id;
 
-    Zone(String name, String id) {
+    Zone(String name, Integer id) {
 	this.name = requireNonNull(name);
 	this.id = requireNonNull(id);
     }
@@ -21,7 +22,7 @@ public class Zone implements Named, WithId, Comparable<Zone> {
     }
 
     @Override
-    public String getId() {
+    public Integer getId() {
 	return id;
     }
 

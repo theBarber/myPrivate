@@ -42,7 +42,7 @@ public class CampaignManager {
      *            the name of the zone
      * @return
      */
-    public Optional<Zone> getZone(String forCampaignId, String byName) {
+    public Optional<Zone> getZone(Integer forCampaignId, String byName) {
 	return campaigns.stream().filter(WithId.idIs(forCampaignId)).flatMap(Campaign::getZoneSetAssoc)
 		.flatMap(ZoneSet::zones).filter(Optional.ofNullable(byName).map(Named::nameIs).orElse(b -> true))
 		.findFirst();
@@ -57,7 +57,7 @@ public class CampaignManager {
      *            the id
      * @return the newly created campaign
      */
-    public Campaign createCampaign(String name, String id) {
+    public Campaign createCampaign(String name, Integer id) {
 	return createCampaign(name, id, Function.identity());
     }
 
@@ -72,9 +72,9 @@ public class CampaignManager {
      *            a function that converts a campaign to a better one
      * @return the newly created campaign
      */
-    public <C extends Campaign> C createCampaign(String name, String id, Function<Campaign, C> campaignEnricher) {
+    public <C extends Campaign> C createCampaign(String name, Integer id, Function<Campaign, C> campaignEnricher) {
 	campaigns.stream().filter(WithId.idIs(id)).findFirst().ifPresent(c -> {
-	    throw new IllegalArgumentException("campaign " + c.toString() + " with id " + c.getId() + "already exists");
+	    throw new IllegalArgumentException("campaign " + c.toString() + " with id " + c.getId() + " already exists");
 	});
 	C res;
 	campaigns.add(requireNonNull(res = requireNonNull(campaignEnricher).apply(new Campaign(name, id))));
@@ -92,7 +92,7 @@ public class CampaignManager {
      *            the campaign to create the banner for
      * @return The created (and enriched) banner
      */
-    public Optional<Banner> createBanner(String name, String id, String forCampaignId) {
+    public Optional<Banner> createBanner(String name, Integer id, Integer forCampaignId) {
 	return createBanner(name, id, forCampaignId, identity());
     }
 
@@ -109,27 +109,27 @@ public class CampaignManager {
      *            a function that converts a banner to a better one
      * @return The created (and enriched) banner
      */
-    public <B extends Banner> Optional<B> createBanner(String name, String id, String forCampaignId,
+    public <B extends Banner> Optional<B> createBanner(String name, Integer id, Integer forCampaignId,
 	    Function<Banner, B> bannerEnricher) {
 	return campaigns.stream().filter(idIs(forCampaignId)).findFirst()
 		.map(c -> c.addBanner(bannerEnricher.apply(new Banner(name, id))));
     }
 
-    public Optional<ZoneSet> createZoneSet(String name, String id, String forCampaignId) {
+    public Optional<ZoneSet> createZoneSet(String name, Integer id, Integer forCampaignId) {
 	return campaigns.stream().filter(idIs(forCampaignId)).findFirst().map(c -> c.addZoneSet(new ZoneSet(name, id)));
     }
 
-    public Optional<Zone> createZone(String name, String id, String forZoneSetId) {
+    public Optional<Zone> createZone(String name, Integer id, Integer forZoneSetId) {
 	return createZone(name, id, forZoneSetId, identity());
     }
 
-    public <Z extends Zone> Optional<Z> createZone(String name, String id, String forZoneSetId,
+    public <Z extends Zone> Optional<Z> createZone(String name, Integer id, Integer forZoneSetId,
 	    Function<Zone, Z> zoneEnricher) {
 	return campaigns.stream().flatMap(Campaign::getZoneSetAssoc).filter(idIs(forZoneSetId)).findFirst()
 		.map(zs -> zs.addZone(requireNonNull(zoneEnricher).apply(new Zone(name, id))));
     }
 
-    public Function<String, Optional<? extends WithId>> getterFor(String entityType) {
+    public Function<String, Optional<? extends WithId<?>>> getterFor(String entityType) {
 	switch (entityType.toLowerCase()) {
 	case "banner":
 	    return this::getBanner;

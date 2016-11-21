@@ -74,12 +74,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 	requestSubmitter = Executors.newFixedThreadPool(5);
     }
 
-    public void zoneRequest(String forZone) {
+    public void zoneRequest(Integer forZone) {
 	String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1";
 	request(url, true);
     }
 
-    public void zoneRequests(String forZone, int times, boolean toReset) {
+    public void zoneRequests(Integer forZone, int times, boolean toReset) {
 	if (toReset) {
 	    reset();
 	}
@@ -91,9 +91,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 	}
     }
 
-    public void zoneRequestsWithGeo(String forZone, int times, String params) {
+    public void zoneRequestsWithGeo(Integer forZone, int times, String params) {
 	reset();
-	String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1"+"&sim_geo=1&"+params;
+	String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1" + "&sim_geo=1&" + params;
 
 	for (; times > 0; times--) {
 	    request(url, false);
@@ -162,12 +162,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 	this.actual().clear();
     }
 
-    public void addHttpHeader(String name, String value){
+    public void addHttpHeader(String name, String value) {
 	httpHeaders.removeIf(header -> header.getName().equals(name));
 	httpHeaders.add(new BasicHeader(name, value));
     }
 
-    public void emptyHttpHeaders(){
+    public void emptyHttpHeaders() {
 	httpHeaders.clear();
     }
 

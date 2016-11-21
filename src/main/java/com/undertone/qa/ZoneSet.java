@@ -10,13 +10,14 @@ import java.util.stream.Stream;
 import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 
-public class ZoneSet implements Named, WithId, Comparable<ZoneSet> {
+public class ZoneSet implements Named, WithId<Integer>, Comparable<ZoneSet> {
 
-    private final String name, id;
+    private final String name;
+    private final Integer id;
 
     private Set<Zone> zones = new TreeSet<>();
 
-    ZoneSet(String name, String id) {
+    ZoneSet(String name, Integer id) {
 	this.name = requireNonNull(name);
 	this.id = requireNonNull(id);
     }
@@ -27,7 +28,7 @@ public class ZoneSet implements Named, WithId, Comparable<ZoneSet> {
     }
 
     @Override
-    public String getId() {
+    public Integer getId() {
 	return id;
     }
 
