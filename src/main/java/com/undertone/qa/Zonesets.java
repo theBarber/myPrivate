@@ -1,7 +1,12 @@
 package com.undertone.qa;
 
 import java.util.List;
-
+/***
+ * This is the model of RampApp ZoneSets
+ * Sorry for the duplication with {@link ZoneSet}
+ * @author aharon
+ *
+ */
 public class Zonesets {
     List<Integer> include, exclude;
 

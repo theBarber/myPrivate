@@ -20,6 +20,7 @@ import com.undertone.automation.module.AbstractModuleImpl;
 import com.undertone.automation.support.StringUtils;
 import com.undertone.qa.CampaignManager;
 import com.undertone.qa.HardCodedCampaignManager;
+import com.undertone.qa.RampAppCampaignManager;
 
 import cucumber.api.Scenario;
 import gherkin.deps.com.google.gson.JsonArray;
@@ -65,8 +66,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		if (scenario.getSourceTagNames().contains("@hardcoded")) {
 		    campaignManager = new HardCodedCampaignManager();
 		} else {
-		    // XXX TODO figure out what and how to select and create
-		    // campaign manager
+		    campaignManager = new RampAppCampaignManager(config.get("ramp.app.consul.host"), Integer.valueOf(config.get("ramp.app.consul.port")),config.get("ramp.test.lineItemId"));
 		}
 		break;
 	    default:

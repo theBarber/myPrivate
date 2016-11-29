@@ -44,11 +44,13 @@ public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
     }
 
     @Override
+    @JsonIgnore
     public String getName() {
 	return campaignName;
     }
 
     @Override
+    @JsonProperty("campaignId")
     public Integer getId() {
 	return campaignId;
     }
@@ -82,11 +84,14 @@ public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
     public String toString() {
 	return "Campaign [name=" + getName() + "]";
     }
-
+    
+    @JsonProperty("campaignName")
     private String getCampaignName() {
 	return campaignName;
     }
 
+    
+    @JsonProperty("campaignName")
     private void setCampaignName(String campaignName) {
 	this.campaignName = campaignName;
     }
@@ -95,7 +100,8 @@ public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
     private void setBanners(List<Banner> banners) {
 	this.banners.addAll(banners);
     }
-
+    
+    @JsonProperty("campaignId")
     private void setCampaignId(Integer campaignId) {
 	this.campaignId = campaignId;
     }

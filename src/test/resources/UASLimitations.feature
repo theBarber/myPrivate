@@ -1,12 +1,11 @@
 @cli
 @uas
 @campaign
-@hardcoded
 @Sanity
 Feature: UAS limitations filtering
   Scenario: Upload new plan to S3
     Given I upload a new solver plan with the following slices
-      | {"buying_strategy_id": -1, "slices": [{"zone_id":11457,"slice_id":"$SLICE_ID$","banner_id":"968382","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",11457]}]},"buy_at_most":2000}]}   |
+      | {"buying_strategy_id": -1, "slices": [{"zone_id":11457,"slice_id":"${guid}","banner_id":"${workflow.banner(banner1235466)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",11457]}]},"buy_at_most":2000}]}   |
       | {"buying_strategy_id": -1, "slices": [{"zone_id":11457,"slice_id":"$SLICE_ID$","banner_id":"968380","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",11457]}]},"buy_at_most":2000}]}   |
       | {"buying_strategy_id": -1, "slices": [{"zone_id":11457,"slice_id":"$SLICE_ID$","banner_id":"968474","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",11457]}]},"buy_at_most":1}]}      |
       | {"buying_strategy_id": -1, "slices": [{"zone_id":37750,"slice_id":"$SLICE_ID$","banner_id":"968382","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",37750]}]},"buy_at_most":2000}]}   |

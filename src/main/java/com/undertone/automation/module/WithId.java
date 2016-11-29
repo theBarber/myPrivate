@@ -9,5 +9,4 @@ public interface WithId<T> {
     static <U> Predicate<WithId<U>> idIs(U id) {
 	return i -> Objects.equals(i.getId(), Objects.requireNonNull(id));
     }
-
 }

@@ -1,15 +1,10 @@
 package com.undertone.qa;
 
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 import java.time.temporal.Temporal;
-import java.time.temporal.TemporalField;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +14,7 @@ public class LineItem implements WithId<Integer> {
     public IO Io;
     public List<Campaign> campaigns;
     private Integer ioLineItemId = null;
-    private static DateTimeFormatter formatter;
+    public static final DateTimeFormatter formatter;
     static {
 	formatter = new DateTimeFormatterBuilder().append(DateTimeFormatter.ISO_LOCAL_DATE).appendLiteral(' ')
 		.append(DateTimeFormatter.ISO_LOCAL_TIME).toFormatter().withZone(ZoneOffset.UTC);
@@ -32,6 +27,7 @@ public class LineItem implements WithId<Integer> {
 	return Optional.ofNullable(this.ioLineItemId).orElseThrow(NullPointerException::new);
     }
 
+    
     public void setStartDate(String startDate) {
 	this.startDate = formatter.parse(startDate, ZonedDateTime::from);
 
@@ -47,6 +43,16 @@ public class LineItem implements WithId<Integer> {
 
     public Temporal getEndDate() {
 	return endDate;
+    }
+
+
+    private Integer getIoLineItemId() {
+        return ioLineItemId;
+    }
+
+
+    private void setIoLineItemId(Integer ioLineItemId) {
+        this.ioLineItemId = ioLineItemId;
     }
 
 }

@@ -8,7 +8,6 @@ import com.undertone.qa.LineItem;
 public class CreateCampaignRequest {
     Integer lineItemId;
     Temporal startDateTime, endDateTime;
-    String name;
 
     public CreateCampaignRequest(LineItem lineItem) {
 	this.lineItemId = lineItem.getId();
@@ -16,13 +15,16 @@ public class CreateCampaignRequest {
 	endDateTime = lineItem.getEndDate();
     }
 
-    public CreateCampaignRequest withName(String name) {
-	this.name = Objects.requireNonNull(name);
-	return this;
+    public Integer getLineItemId() {
+	return lineItemId;
     }
 
-    private String getName() {
-	return name;
+    public String getStartDateTime() {
+	return LineItem.formatter.format(startDateTime);
+    }
+
+    public String getEndDateTime() {
+	return LineItem.formatter.format(endDateTime);
     }
 
 }
