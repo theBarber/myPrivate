@@ -1,6 +1,6 @@
 @uas 
 @campaign 
-@hardcoded 
+
 Feature: UAS E2E Ad request flows (unknown zones) 
 	
 @Sanity 

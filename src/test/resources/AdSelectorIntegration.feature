@@ -1,7 +1,6 @@
 @cli
 @uas
 @campaign
-@hardcoded
 @Sanity
 Feature: UAS Integration with Ad Selector
 	Scenario: Upload new plan to S3
