@@ -119,7 +119,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager {
 	return super.getCampaign(byName);
     }
 
-    protected Optional<Campaign> createCampaign(String campaignName) {
+    public Optional<Campaign> createCampaign(String campaignName) {
 
 	String ioServiceName = consul.catalogClient().getServices().getResponse().keySet().stream()
 		.filter(serviceName -> serviceName.startsWith("io-service")).findFirst()
@@ -156,17 +156,16 @@ public class RampAppCampaignManager extends HardCodedCampaignManager {
 	    while (lineReader.ready()) {
 		System.out.println(lineReader.readLine());
 	    }
-	    Campaign tmpCampaign = m.readValue(createResponse.getEntity().getContent(), Campaign[].class)[0];
+	    Campaign tmpCampaign = m.readValue(createResponse.getEntity().getContent(), RenameCampaignsRequest.class)
+		    .getCampaignsArray()[0];
 	    Campaign campaign = new Campaign(campaignName, tmpCampaign.getId());
 
 	    HttpPut renameCampaignHttpRequest = new HttpPut(uri);
 	    renameCampaignHttpRequest.addHeader("content-type", "application/json");
-	    class renameCampaignsRequest {
-		public final Campaign[] campaignsArray = { campaign };
-	    }
 
 	    HttpEntity en;
-	    en = new StringEntity(m.writeValueAsString(new renameCampaignsRequest()), ContentType.APPLICATION_JSON);
+	    RenameCampaignsRequest renameCampaignTo = new RenameCampaignsRequest(new Campaign[] { campaign });
+	    en = new StringEntity(m.writeValueAsString(renameCampaignTo), ContentType.APPLICATION_JSON);
 	    renameCampaignHttpRequest.setEntity(en);
 	    BufferedReader reqLineReader = new BufferedReader(new InputStreamReader(en.getContent()));
 	    while (reqLineReader.ready()) {
@@ -178,8 +177,10 @@ public class RampAppCampaignManager extends HardCodedCampaignManager {
 		while (lineReader.ready()) {
 		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
 		}
-		Campaign tmpCampaign2 = m.readValue(renameResponse.getEntity().getContent(), Campaign.class);
-		System.out.println(tmpCampaign2.getName());
+		// Campaign tmpCampaign2 =
+		// m.readValue(renameResponse.getEntity().getContent(),
+		// Campaign[].class);
+		// System.out.println(tmpCampaign2.getName());
 	    }
 	    this.campaigns.add(campaign);
 	    return Optional.of(campaign);
