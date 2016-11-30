@@ -191,7 +191,7 @@ public class UASIntegrationTest extends BaseTest {
 	
 	When("^I send click requests to UAS$", () -> {
 	    HttpClient httpclient = HttpClients.custom()
-		    .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
+		    .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(60000).build()).build();
 	    sut.getUASRquestModule().responses().map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join)
 		    .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
 		    .map(click -> CompletableFuture.supplyAsync(() -> {
