@@ -64,6 +64,7 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
 	connections.forEach(conn -> {
 	    try {
 		if (!conn.isConnected()) {
+		    conn.init();
 		    conn.connect();
 		}
 		conn.fileList(LOGDIRECTORY)

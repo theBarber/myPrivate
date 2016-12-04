@@ -106,7 +106,7 @@ public class SSH extends Terminal {
 		isAuthenticated = false;
 	    }
 	}
-	if (isAuthenticated == false) {
+	if (isAuthenticated == false && Arrays.asList(authMethods).contains("keyboard-interactive")) {
 	    // we're still not authenticated - try keyboard interactive
 	    conn.authenticateWithKeyboardInteractive(username, new InteractiveLogic());
 	}
