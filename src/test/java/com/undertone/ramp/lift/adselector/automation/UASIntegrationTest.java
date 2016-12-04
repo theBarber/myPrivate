@@ -106,17 +106,17 @@ public class UASIntegrationTest extends BaseTest {
 		    }
 
 		    assertThat(entityType, isOneOf("campaign", "banner", "zone"));
-		    Optional<? extends WithId<?>> expectedEntity = sut.getCampaignManager().getterFor(entityType)
+		    Optional<? extends WithId<Integer>> expectedEntity = sut.getCampaignManager().getterFor(entityType)
 			    .apply(entityName);
 		    assertThat("Could not find " + entityType + " named " + entityName, expectedEntity,
 			    is(not(OptionalMatchers.empty())));
 
-		    Map<String, Long> theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
+		    Map<Integer, Long> theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
 			    .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
 			    .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
 			    .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
 			    .flatMap(entry -> entry.getValue().stream())
-			    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+			    .collect(Collectors.groupingBy(Integer::parseInt, Collectors.counting()));
 
 		    assertThat(urlType + " urls grouped by " + fieldName,
 			    theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
