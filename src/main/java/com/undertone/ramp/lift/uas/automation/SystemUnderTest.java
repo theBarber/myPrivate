@@ -1,5 +1,6 @@
 package com.undertone.ramp.lift.uas.automation;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -62,11 +63,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		    }
 		}
 		break;
+
 	    case "@campaign":
-		if (scenario.getSourceTagNames().contains("@hardcoded")) {
-		    campaignManager = new HardCodedCampaignManager();
-		} else {
-		    campaignManager = new RampAppCampaignManager(config.get("ramp.app.consul.host"), Integer.valueOf(config.get("ramp.app.consul.port")),config.get("ramp.test.lineItemId"));
+		if (campaignManager == null) {
+		    if (scenario.getSourceTagNames().contains("@hardcoded")) {
+			campaignManager = new HardCodedCampaignManager();
+		    } else {
+			campaignManager = new RampAppCampaignManager(config.get("ramp.app.consul.host"),
+				Integer.valueOf(config.get("ramp.app.consul.port")),
+				config.get("ramp.test.lineItemId"));
+		    }
 		}
 		break;
 	    default:
@@ -77,7 +83,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	throwIfNeeded(exception);
     }
 
-    public void teardown(Collection<String> forTags, Map<String, String> config) {
+    public synchronized void teardown(Collection<String> forTags, Map<String, String> config) {
 	AtomicReference<RuntimeException> exception = new AtomicReference<>();
 	forTags.stream().forEach(tag -> {
 	    switch (tag) {
@@ -91,6 +97,18 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		    try {
 			uas.close();
 		    } catch (Exception e) {
+			delegate(exception, e);
+		    }
+		}
+	    case "@campaign":
+		if (campaignManager != null) {
+		    try {
+			if (campaignManager instanceof Closeable) {
+			    Closeable cm = (Closeable) campaignManager;
+			    cm.close();
+			    cm = null;
+			}
+		    } catch (IOException e) {
 			delegate(exception, e);
 		    }
 		}

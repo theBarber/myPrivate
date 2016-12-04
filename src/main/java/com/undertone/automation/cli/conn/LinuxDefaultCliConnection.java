@@ -26,9 +26,10 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
 
     public LinuxDefaultCliConnection() {
 	setDump(true);
-	setUseTelnetInputStream(true);
+//	setUseTelnetInputStream(true);
 	setProtocol("ssh");
 	setPort(22);
+//	setVt100Filter(true);
     }
 
     public LinuxDefaultCliConnection(String host, String user, String password) {
@@ -46,7 +47,6 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
     @Override
     public void connect() throws IOException {
 	super.connect();
-	terminal.addFilter(new VT100FilterInputStream());
     }
 
     @Override

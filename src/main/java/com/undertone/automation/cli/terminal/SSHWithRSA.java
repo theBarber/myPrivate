@@ -6,6 +6,7 @@ package com.undertone.automation.cli.terminal;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +69,7 @@ public class SSHWithRSA extends SSH {
 	} else if (privateKeyAuthentication) {
 	    try {
 		if (privateKeyFile != null && privateKeyFile.isFile()) {
-		    isAuthenticated = conn.authenticateWithPublicKey(username, privateKeyFile, "");
+		    isAuthenticated = conn.authenticateWithPublicKey(username, privateKeyFile, Optional.of(password).orElse(""));
 		} else {
 		    Reporter.error("Connection to " + hostname
 			    + " Failed: Auth Error - The privateKeyFile should be init from the SUT with a valid path to ppk/pem RSA private key");

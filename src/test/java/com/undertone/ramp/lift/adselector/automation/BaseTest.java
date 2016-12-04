@@ -20,7 +20,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 import cucumber.api.java8.GlueBase;
 
-public class BaseTest implements En, GlueBase {
+public class BaseTest implements En {
 
     protected SystemUnderTest sut = SystemUnderTest.getInstance();
 

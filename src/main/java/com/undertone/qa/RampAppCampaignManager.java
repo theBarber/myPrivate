@@ -46,11 +46,11 @@ import com.google.common.net.HostAndPort;
 import com.orbitz.consul.Consul;
 import com.undertone.qa.ramp.app.api.CreateCampaignRequest;
 
-public class RampAppCampaignManager extends HardCodedCampaignManager {
+public class RampAppCampaignManager extends HardCodedCampaignManager implements AutoCloseable {
 
     protected CloseableHttpClient httpclient;
     protected final String lineItemId; // = "197419";
-    private Consul consul;
+    private static Consul consul;
     private ObjectMapper m = new ObjectMapper();
     AtomicReference<LineItem> lineItem = new AtomicReference<>();
     private final CookieStore cookieStore;
@@ -59,7 +59,13 @@ public class RampAppCampaignManager extends HardCodedCampaignManager {
 	super();
 	m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	this.lineItemId = lineItemId;
-	consul = Consul.builder().withHostAndPort(HostAndPort.fromParts(hostname, port)).build();
+	if (consul == null) {
+	    synchronized (RampAppCampaignManager.class) {
+		if (consul == null) {
+		    consul = Consul.builder().withHostAndPort(HostAndPort.fromParts(hostname, port)).build();
+		}
+	    }
+	}
 	cookieStore = new BasicCookieStore();
 	List<Header> defaultHeaders = new ArrayList<>();
 	defaultHeaders.add(new BasicHeader("rampInternal", "true"));
@@ -208,6 +214,11 @@ public class RampAppCampaignManager extends HardCodedCampaignManager {
 	}
 	System.out.println(manager.m.writeValueAsString(campaign.orElse(null)));
 
+    }
+
+    @Override
+    public void close() throws Exception {
+	this.httpclient.close();
     }
 
 }
