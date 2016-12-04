@@ -4,6 +4,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,6 +12,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
+
+import org.hamcrest.Matchers;
+import org.junit.Assume;
 
 import com.undertone.automation.assertion.ScenarioWriter;
 import com.undertone.automation.cli.conn.CliConnection;
@@ -167,8 +171,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	    if (keyFile != null) {
 		conn.setPrivateKey(keyFile);
 		conn.setProtocol(EnumConnectionType.SSH_RSA.value());
+	    } else {
+		Assume.assumeThat(conn.getPassword(),Matchers.notNullValue()); 
 	    }
-
+	    
 	    uasCliConnections.put(host, conn);
 	});
 	uasCliConnections.values().forEach(conn -> {
