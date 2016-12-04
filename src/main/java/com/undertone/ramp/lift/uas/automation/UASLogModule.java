@@ -20,8 +20,10 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import com.undertone.automation.cli.conn.CliConnection;
 import com.undertone.automation.cli.conn.LinuxDefaultCliConnection;
 import com.undertone.automation.module.AbstractModuleImpl;
+import com.undertone.automation.module.Module;
 import com.undertone.automation.module.Named;
 
 public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
@@ -42,11 +44,31 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
     @Override
     public void init() {
 	actual = new ArrayList<>();
+	AtomicReference<RuntimeException> exception = new AtomicReference<>();
+	connections.forEach(connection -> {
+	    try {
+		connection.init();
+	    } catch (Exception e) {
+		delegate(exception, e);
+	    }
+	});
+	throwIfNeeded(exception);
+
     }
 
     @Override
     public void close() {
 	actual = new ArrayList<>();
+	AtomicReference<RuntimeException> exception = new AtomicReference<>();
+
+	connections.forEach(connection -> {
+	    try {
+		connection.close();
+	    } catch (Exception e) {
+		delegate(exception, e);
+	    }
+	});
+	throwIfNeeded(exception);
     }
 
     public UASLogModule filter(int column, String value) {
@@ -64,7 +86,6 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
 	connections.forEach(conn -> {
 	    try {
 		if (!conn.isConnected()) {
-		    conn.init();
 		    conn.connect();
 		}
 		conn.fileList(LOGDIRECTORY)
