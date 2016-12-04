@@ -1,5 +1,8 @@
 package com.undertone.ramp.lift.uas.automation;
 
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
@@ -172,9 +175,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		conn.setPrivateKey(keyFile);
 		conn.setProtocol(EnumConnectionType.SSH_RSA.value());
 	    } else {
-		Assume.assumeThat(conn.getPassword(),Matchers.notNullValue()); 
+		Assume.assumeThat("connection " + conn.toString() + " password is not set", conn.getPassword(),
+			not(isEmptyOrNullString()));
 	    }
-	    
+
 	    uasCliConnections.put(host, conn);
 	});
 	uasCliConnections.values().forEach(conn -> {
