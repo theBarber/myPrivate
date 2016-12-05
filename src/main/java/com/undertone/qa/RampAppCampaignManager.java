@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,12 +37,14 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HostAndPort;
 import com.orbitz.consul.Consul;
 import com.undertone.qa.ramp.app.api.CreateCampaignRequest;
+import com.undertone.qa.ramp.app.api.CreativeRequest;
 import com.undertone.qa.ramp.app.api.CampaignsRequest;
 
 public class RampAppCampaignManager extends CampaignManager implements AutoCloseable {
@@ -223,18 +226,44 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 
     public Optional<Banner> createBanner(String withName, Integer forCampaignId) {
 
-	String ioServiceName = consul.catalogClient().getServices().getResponse().keySet().stream()
-		.filter(serviceName -> serviceName.startsWith("io-service")).findFirst()
-		.orElseThrow(() -> new RuntimeException(new ServiceNotFoundException("io-service")));
+	try {
+	    String ioServiceName = consul.catalogClient().getServices().getResponse().keySet().stream()
+		    .filter(serviceName -> serviceName.startsWith("io-service")).findFirst()
+		    .orElseThrow(() -> new RuntimeException(new ServiceNotFoundException("io-service")));
 
-	HttpHost host = consul.catalogClient().getService(ioServiceName).getResponse().stream().findFirst()
-		.map(cs -> new HttpHost(cs.getAddress(), cs.getServicePort(), "http")).get();
+	    HttpHost host = consul.catalogClient().getService(ioServiceName).getResponse().stream().findFirst()
+		    .map(cs -> new HttpHost(cs.getAddress(), cs.getServicePort(), "http")).get();
 
-	String uri = "/api/v1/io/line_item/" + lineItemId + "/creative";
-	HttpPost createBannerHttpRequest = new HttpPost(uri);
-	createBannerHttpRequest.addHeader("content-type", "application/json");
+	    String uri = "/api/v1/io/line_item/" + lineItemId + "/creative";
+	    HttpPost createCreativeHttpRequest = new HttpPost(uri);
+	    createCreativeHttpRequest.addHeader("content-type", "application/json");
 
-	return null;
+	    CreativeRequest creativeRequest = new CreativeRequest();
+	    creativeRequest.selectedCampaignIds = new ArrayList<>();
+	    creativeRequest.selectedCampaignIds.add(forCampaignId);
+	    HttpEntity en;
+	    en = new StringEntity(m.writeValueAsString(creativeRequest), ContentType.APPLICATION_JSON);
+	    createCreativeHttpRequest.setEntity(en);
+	    try (CloseableHttpResponse createBannerResponse = httpclient.execute(host, createCreativeHttpRequest)) {
+		createBannerResponse.setEntity(new BufferedHttpEntity(createBannerResponse.getEntity()));
+	 		BufferedReader lineReader = new BufferedReader(new InputStreamReader(createBannerResponse.getEntity().getContent()));
+	 		while (lineReader.ready()) {
+	 		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
+	 		}
+	 		// Campaign tmpCampaign2 =
+	 		// m.readValue(renameResponse.getEntity().getContent(),
+	 		// Campaign[].class);
+	 		// System.out.println(tmpCampaign2.getName());
+	 	    
+			// TODO Auto-generated catch block
+	    }	
+		    
+	    return Optional.empty();
+	} catch (UnsupportedCharsetException | UnsupportedOperationException | IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return Optional.empty();
+	}
     }
 
 }

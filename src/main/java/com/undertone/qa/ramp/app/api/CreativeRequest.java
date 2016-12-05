@@ -1,15 +1,17 @@
 package com.undertone.qa.ramp.app.api;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreativeRequest {
     @JsonProperty("creativeName")
-    String creativeName;
+    public String creativeName;
 
     @JsonProperty("creativeName")
-    Integer[] selectedCampaignIds;
+    public List<Integer> selectedCampaignIds;
 
     @JsonProperty("status")
-    int status = 0;
-    
+    public int status = 0;
+
 }
