@@ -51,9 +51,15 @@ public class CreateCampaigns extends BaseTest {
 	Given("^Campaign named \\{([^}]+)\\} has a creative with banner named \\{([^}]+)\\}$", (String c,String b) -> {
 	    Optional<Campaign> campaign = Optional.of(c).flatMap(rampAppCampaignManager::getCampaign);
 	    Optional<Banner> banner = campaign.flatMap(cmp->cmp.banners().filter(Named.nameIs(b)).findFirst());
+	    
 	    if (!banner.isPresent()){
-		throw new PendingException("implementation of rampAppCampaignManager.createBanner() is missing");
-		//XXX TODO rampAppCampaignManager.createBanner();
+		if (!banner.isPresent())
+		    throw new PendingException("implementation of rampAppCampaignManager.createBanner() is missing");
+		//XXX TODO 
+		Assert.assertThat("campaign named [" + c + "] does not exist", campaign,
+			    is(not(OptionalMatchers.empty())));
+		Integer campaignId = campaign.map(Campaign::getId).get();
+		banner = rampAppCampaignManager.createBanner(b,campaignId);
 		
 	    }
 	    
