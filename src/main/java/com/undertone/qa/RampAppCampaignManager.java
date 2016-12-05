@@ -45,6 +45,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HostAndPort;
 import com.orbitz.consul.Consul;
 import com.undertone.qa.ramp.app.api.CreateCampaignRequest;
+import com.undertone.qa.ramp.app.api.RenameCampaignsRequest;
 
 public class RampAppCampaignManager extends HardCodedCampaignManager implements AutoCloseable {
 
