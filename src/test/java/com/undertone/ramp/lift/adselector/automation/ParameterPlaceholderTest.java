@@ -1,6 +1,7 @@
 package com.undertone.ramp.lift.adselector.automation;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.text.MatchesPattern.matchesPattern;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -8,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.regex.Pattern;
+
+import javax.annotation.MatchesPattern;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +19,6 @@ import org.junit.Test;
 import com.undertone.automation.ParameterPlaceholderParser;
 import com.undertone.automation.ParameterProvider;
 import com.undertone.automation.assertion.Assert;
-import com.undertone.automation.assertion.StringMatchesPattern;
 import com.undertone.automation.module.WithId;
 import com.undertone.automation.module.WithStringId;
 
@@ -150,14 +153,13 @@ public class ParameterPlaceholderTest {
     public void testTimestamp() {
 
 	String paramedString = "Testing Parameter ${system.currenttimemillis}!";
-	Assert.assertThat(parser.replacePlaceholderOf(paramedString),
-		new StringMatchesPattern("Testing Parameter \\d{13}!"));
+	Assert.assertThat(parser.replacePlaceholderOf(paramedString), matchesPattern("Testing Parameter \\d{13}!"));
     }
 
     @Test
     public void testTodayTimestamp() {
 	String secondsSinceEpochOfToday = String.valueOf(Instant.now().truncatedTo(ChronoUnit.DAYS).getEpochSecond());
-	long millisOfASingleDay = ChronoUnit.DAYS.getDuration().toMillis();//86400000
+	long millisOfASingleDay = ChronoUnit.DAYS.getDuration().toMillis();// 86400000
 
 	String paramedString = "Testing Parameter ${long.divide(${long.truncate(${system.currenttimemillis}:"
 		+ millisOfASingleDay + ")}:1000)} ";
@@ -177,19 +179,19 @@ public class ParameterPlaceholderTest {
     public void testGuid() {
 	String paramedString = "Testing Parameter ${guid}";
 	Assert.assertThat(parser.replacePlaceholderOf(paramedString),
-		new StringMatchesPattern("Testing Parameter \\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}"));
+		matchesPattern("Testing Parameter \\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}"));
     }
 
     @Test
     public void testEmptyString1() {
 	String paramedString = "Testing Parameter ${string.isempty(:1:2)}";
-	Assert.assertThat(parser.replacePlaceholderOf(paramedString), new StringMatchesPattern("Testing Parameter 1"));
+	Assert.assertThat(parser.replacePlaceholderOf(paramedString), is("Testing Parameter 1"));
     }
 
     @Test
     public void testEmptyString2() {
 	String paramedString = "Testing Parameter ${string.isempty(x:1:2)}";
-	Assert.assertThat(parser.replacePlaceholderOf(paramedString), new StringMatchesPattern("Testing Parameter 2"));
+	Assert.assertThat(parser.replacePlaceholderOf(paramedString), is("Testing Parameter 2"));
     }
 
     @Test
@@ -201,13 +203,13 @@ public class ParameterPlaceholderTest {
     @Test
     public void testEqualsString1() {
 	String paramedString = "Testing Parameter ${string.equals(a:a:1:2)}";
-	Assert.assertThat(parser.replacePlaceholderOf(paramedString), new StringMatchesPattern("Testing Parameter 1"));
+	Assert.assertThat(parser.replacePlaceholderOf(paramedString), is("Testing Parameter 1"));
     }
 
     @Test
     public void testEqualsString2() {
 	String paramedString = "Testing Parameter ${string.equals(a:b:1:2)}";
-	Assert.assertThat(parser.replacePlaceholderOf(paramedString), new StringMatchesPattern("Testing Parameter 2"));
+	Assert.assertThat(parser.replacePlaceholderOf(paramedString), is("Testing Parameter 2"));
     }
 
     @Test

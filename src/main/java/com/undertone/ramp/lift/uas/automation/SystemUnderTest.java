@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 import org.hamcrest.Matchers;
 import org.junit.Assume;
 
+import com.undertone.automation.assertion.Assert;
 import com.undertone.automation.assertion.ScenarioWriter;
 import com.undertone.automation.cli.conn.CliConnection;
 import com.undertone.automation.cli.conn.CliConnectionImpl.EnumConnectionType;
@@ -152,8 +153,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
 	JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
 	File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
-		.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename))
-		.filter(File::exists).filter(File::canRead).orElse(null);
+		.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename)).orElse(null);
 
 	hostsConfig.forEach(jsonElement -> {
 	    String host = jsonElement.getAsString();
@@ -172,10 +172,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	    conn.setUseThreads(true);
 
 	    if (keyFile != null) {
+		Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
+			org.hamcrest.io.FileMatchers.anExistingFile());
+		Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
+			org.hamcrest.io.FileMatchers.aReadableFile());
 		conn.setPrivateKey(keyFile);
 		conn.setProtocol(EnumConnectionType.SSH_RSA.value());
 	    } else {
-		Assume.assumeThat("connection " + conn.toString() + " password is not set", conn.getPassword(),
+		Assume.assumeThat("connection to " + host + " password is not set", conn.getPassword(),
 			not(isEmptyOrNullString()));
 	    }
 
