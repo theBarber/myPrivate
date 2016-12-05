@@ -3,36 +3,40 @@ package com.undertone.ramp.lift.adselector.automation;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assume.assumeThat;
 
 import java.util.Optional;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.experimental.theories.DataPoint;
-import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
+import com.undertone.automation.module.Named;
+import com.undertone.qa.Banner;
 import com.undertone.qa.Campaign;
 import com.undertone.qa.CampaignManager;
 import com.undertone.qa.RampAppCampaignManager;
 
 import co.unruly.matchers.OptionalMatchers;
 import cucumber.api.CucumberOptions;
+import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:CreateCampaigns.feature")
+@CucumberOptions(features = "classpath:CreateCampaigns.feature", tags = "@campaign")
+
 public class CreateCampaigns extends BaseTest {
 
+    RampAppCampaignManager rampAppCampaignManager =null;
+    
     public CreateCampaigns() {
 	super();
-	Given("^Campaign named \\{([^}]+)\\}$", (String c) -> {
+	
+	Before(()->{
 	    CampaignManager manager = sut.getCampaignManager();
 	    Assert.assertThat("Manager that can access the RampApp API", manager, instanceOf(RampAppCampaignManager.class));
-	    RampAppCampaignManager rampAppCampaignManager = (RampAppCampaignManager) manager;
+	    rampAppCampaignManager = (RampAppCampaignManager) manager;
+	    
+	});
+	Given("^Campaign named \\{([^}]+)\\}$", (String c) -> {
 	    
 	    Optional<Campaign> campaign = Optional.of(c).flatMap(rampAppCampaignManager::getCampaign);
 	    if (!campaign.isPresent()) {
@@ -41,6 +45,18 @@ public class CreateCampaigns extends BaseTest {
 
 	    Assert.assertThat("campaign named [" + c + "] does not exist", campaign,
 		    is(not(OptionalMatchers.empty())));
+	});
+	
+	
+	Given("^Campaign named \\{([^}]+)\\} has a creative with banner named \\{([^}]+)\\}$", (String c,String b) -> {
+	    Optional<Campaign> campaign = Optional.of(c).flatMap(rampAppCampaignManager::getCampaign);
+	    Optional<Banner> banner = campaign.flatMap(cmp->cmp.banners().filter(Named.nameIs(b)).findFirst());
+	    if (!banner.isPresent()){
+		throw new PendingException("implementation of rampAppCampaignManager.createBanner() is missing");
+		//XXX TODO rampAppCampaignManager.createBanner();
+		
+	    }
+	    
 	});
     }
 

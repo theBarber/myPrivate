@@ -4,11 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
@@ -38,16 +36,15 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HostAndPort;
 import com.orbitz.consul.Consul;
 import com.undertone.qa.ramp.app.api.CreateCampaignRequest;
-import com.undertone.qa.ramp.app.api.RenameCampaignsRequest;
+import com.undertone.qa.ramp.app.api.CampaignsRequest;
 
-public class RampAppCampaignManager extends HardCodedCampaignManager implements AutoCloseable {
+public class RampAppCampaignManager extends CampaignManager implements AutoCloseable {
 
     protected CloseableHttpClient httpclient;
     protected final String lineItemId; // = "197419";
@@ -138,13 +135,15 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	String uri = "/api/v1/io/campaigns";
 	HttpPost createCampaignHttpRequest = new HttpPost(uri);
 	createCampaignHttpRequest.addHeader("content-type", "application/json");
-	CreateCampaignRequest createCampaignRequestBody = new CreateCampaignRequest(lineItem.get());
-	class CampaignsRequest {
-	    public final CreateCampaignRequest[] campaignsArray = { createCampaignRequestBody };
-	}
+	// CreateCampaignRequest createCampaignRequestBody = new
+	// CreateCampaignRequest(lineItem.get());
+	// class CampaignsRequest {
+	// public final CreateCampaignRequest[] campaignsArray = {
+	// createCampaignRequestBody };
+	// }
 
 	try {
-	    CampaignsRequest request = new CampaignsRequest();
+	    CampaignsRequest request = new CampaignsRequest(new Campaign[] {});
 	    HttpEntity en;
 	    en = new StringEntity(m.writeValueAsString(request), ContentType.APPLICATION_JSON);
 	    createCampaignHttpRequest.setEntity(en);
@@ -163,7 +162,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    while (lineReader.ready()) {
 		System.out.println(lineReader.readLine());
 	    }
-	    Campaign tmpCampaign = m.readValue(createResponse.getEntity().getContent(), RenameCampaignsRequest.class)
+	    Campaign tmpCampaign = m.readValue(createResponse.getEntity().getContent(), CampaignsRequest.class)
 		    .getCampaignsArray()[0];
 	    Campaign campaign = new Campaign(campaignName, tmpCampaign.getId());
 
@@ -171,7 +170,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    renameCampaignHttpRequest.addHeader("content-type", "application/json");
 
 	    HttpEntity en;
-	    RenameCampaignsRequest renameCampaignTo = new RenameCampaignsRequest(new Campaign[] { campaign });
+	    CampaignsRequest renameCampaignTo = new CampaignsRequest(new Campaign[] { campaign });
 	    en = new StringEntity(m.writeValueAsString(renameCampaignTo), ContentType.APPLICATION_JSON);
 	    renameCampaignHttpRequest.setEntity(en);
 	    BufferedReader reqLineReader = new BufferedReader(new InputStreamReader(en.getContent()));
@@ -220,6 +219,22 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
     @Override
     public void close() throws Exception {
 	this.httpclient.close();
+    }
+
+    public Optional<Banner> createBanner(String withName, Integer forCampaignId) {
+
+	String ioServiceName = consul.catalogClient().getServices().getResponse().keySet().stream()
+		.filter(serviceName -> serviceName.startsWith("io-service")).findFirst()
+		.orElseThrow(() -> new RuntimeException(new ServiceNotFoundException("io-service")));
+
+	HttpHost host = consul.catalogClient().getService(ioServiceName).getResponse().stream().findFirst()
+		.map(cs -> new HttpHost(cs.getAddress(), cs.getServicePort(), "http")).get();
+
+	String uri = "/api/v1/io/line_item/" + lineItemId + "/creative";
+	HttpPost createBannerHttpRequest = new HttpPost(uri);
+	createBannerHttpRequest.addHeader("content-type", "application/json");
+
+	return null;
     }
 
 }
