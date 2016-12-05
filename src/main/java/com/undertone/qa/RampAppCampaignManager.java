@@ -241,23 +241,29 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 	    CreativeRequest creativeRequest = new CreativeRequest();
 	    creativeRequest.selectedCampaignIds = new ArrayList<>();
 	    creativeRequest.selectedCampaignIds.add(forCampaignId);
+	    creativeRequest.creativeName = withName;
+	    creativeRequest.htmlTemplate = new StringBuilder("<html>").append("<body>")
+		    .append("<a href='http://localhost/").append(forCampaignId).append("'>").append(withName)
+		    .append("</a>").append("</body>").append("</html>").toString();
 	    HttpEntity en;
 	    en = new StringEntity(m.writeValueAsString(creativeRequest), ContentType.APPLICATION_JSON);
 	    createCreativeHttpRequest.setEntity(en);
+	    
 	    try (CloseableHttpResponse createBannerResponse = httpclient.execute(host, createCreativeHttpRequest)) {
 		createBannerResponse.setEntity(new BufferedHttpEntity(createBannerResponse.getEntity()));
-	 		BufferedReader lineReader = new BufferedReader(new InputStreamReader(createBannerResponse.getEntity().getContent()));
-	 		while (lineReader.ready()) {
-	 		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
-	 		}
-	 		// Campaign tmpCampaign2 =
-	 		// m.readValue(renameResponse.getEntity().getContent(),
-	 		// Campaign[].class);
-	 		// System.out.println(tmpCampaign2.getName());
-	 	    
-			// TODO Auto-generated catch block
-	    }	
-		    
+		BufferedReader lineReader = new BufferedReader(
+			new InputStreamReader(createBannerResponse.getEntity().getContent()));
+		while (lineReader.ready()) {
+		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
+		}
+		// Campaign tmpCampaign2 =
+		// m.readValue(renameResponse.getEntity().getContent(),
+		// Campaign[].class);
+		// System.out.println(tmpCampaign2.getName());
+
+		// TODO Auto-generated catch block
+	    }
+
 	    return Optional.empty();
 	} catch (UnsupportedCharsetException | UnsupportedOperationException | IOException e) {
 	    // TODO Auto-generated catch block

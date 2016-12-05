@@ -53,8 +53,9 @@ public class CreateCampaigns extends BaseTest {
 	    Optional<Banner> banner = campaign.flatMap(cmp->cmp.banners().filter(Named.nameIs(b)).findFirst());
 	    
 	    if (!banner.isPresent()){
-		if (!banner.isPresent())
-		    throw new PendingException("implementation of rampAppCampaignManager.createBanner() is missing");
+//		if (!banner.isPresent()){
+//		    throw new PendingException("implementation of rampAppCampaignManager.createBanner() is missing");
+//		}
 		//XXX TODO 
 		Assert.assertThat("campaign named [" + c + "] does not exist", campaign,
 			    is(not(OptionalMatchers.empty())));
