@@ -1,4 +1,3 @@
-@cli
 @uas
 @campaign
 @Sanity

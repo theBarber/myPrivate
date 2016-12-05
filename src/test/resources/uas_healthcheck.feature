@@ -1,6 +1,6 @@
-@uas
+@uas 
 @Sanity 
-Feature: UAS connectivity to other components
+Feature: UAS connectivity to other components 
 
 Scenario: 1. UAS is up 
 	When Sending a healthceck request to UAS 
@@ -22,10 +22,10 @@ Scenario: 5. Uas is connected to Workflow
 	When Sending a healthceck request of Workflow to UAS 
 	Then The response code is 200 
 	
-@campaign
-@Sanity
+@campaign 
+@Sanity 
 Scenario: 6. Uas is responsive to zone request 
-	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS
+	When I send 1 times an ad request for zone named {qa.undertone.com - Full Banner} to UAS 
 	Then The response code is 200 
 	And The response contains script 
 	And The response has impression-url 

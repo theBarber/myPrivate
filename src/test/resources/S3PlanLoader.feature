@@ -1,5 +1,5 @@
-@S3
-Feature: S3Loader
+@S3 
+Feature: S3Loader 
 #@Sanity
 #@cli
 #  Scenario: Download plan file slices from S3
