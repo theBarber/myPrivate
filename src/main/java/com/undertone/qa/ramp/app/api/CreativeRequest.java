@@ -32,4 +32,9 @@ public class CreativeRequest {
     @JsonProperty("htmlCache")
     public int htmlCache = 0;
 
+    @JsonProperty("adUnitId")
+    public int adUnitId = 1;
+
+    @JsonProperty("appendCode")
+    public String appendCode = "";
 }

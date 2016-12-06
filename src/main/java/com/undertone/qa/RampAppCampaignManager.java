@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Predicate;
 
 import javax.management.ServiceNotFoundException;
 
@@ -101,14 +102,7 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 	    return campaign;
 	}
 
-	String ioServiceName = consul.catalogClient().getServices().getResponse().keySet().stream()
-		.filter(serviceName -> serviceName.startsWith("io-service")).findFirst()
-		.orElseThrow(() -> new RuntimeException(new ServiceNotFoundException("io-service")));
-	System.out.println(ioServiceName);
-	// http://service.url/api/v1/io/line_item/:lineItemId
-	HttpHost host = consul.catalogClient().getService(ioServiceName).getResponse().stream().findFirst()
-		.map(cs -> new HttpHost(cs.getAddress(), cs.getServicePort(), "http")).get();
-
+	HttpHost host = this.getAddressOfService("io-service");
 	String uri = "/api/v1/io/line_item/" + lineItemId;
 
 	try {
@@ -127,14 +121,6 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
     }
 
     public Optional<Campaign> createCampaign(String campaignName) {
-
-	String ioServiceName = consul.catalogClient().getServices().getResponse().keySet().stream()
-		.filter(serviceName -> serviceName.startsWith("io-service")).findFirst()
-		.orElseThrow(() -> new RuntimeException(new ServiceNotFoundException("io-service")));
-
-	HttpHost host = consul.catalogClient().getService(ioServiceName).getResponse().stream().findFirst()
-		.map(cs -> new HttpHost(cs.getAddress(), cs.getServicePort(), "http")).get();
-
 	String uri = "/api/v1/io/campaigns";
 	HttpPost createCampaignHttpRequest = new HttpPost(uri);
 	createCampaignHttpRequest.addHeader("content-type", "application/json");
@@ -158,7 +144,7 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 	    return Optional.empty();
 	}
 
-	try (CloseableHttpResponse createResponse = httpclient.execute(host, createCampaignHttpRequest)) {
+	try (CloseableHttpResponse createResponse = this.execute("io-service", createCampaignHttpRequest)) {
 	    createResponse.setEntity(new BufferedHttpEntity(createResponse.getEntity()));
 	    BufferedReader lineReader = new BufferedReader(
 		    new InputStreamReader(createResponse.getEntity().getContent()));
@@ -180,7 +166,7 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 	    while (reqLineReader.ready()) {
 		System.out.println(reqLineReader.readLine());
 	    }
-	    try (CloseableHttpResponse renameResponse = httpclient.execute(host, renameCampaignHttpRequest)) {
+	    try (CloseableHttpResponse renameResponse = this.execute("io-service", renameCampaignHttpRequest)) {
 		renameResponse.setEntity(new BufferedHttpEntity(renameResponse.getEntity()));
 		lineReader = new BufferedReader(new InputStreamReader(renameResponse.getEntity().getContent()));
 		while (lineReader.ready()) {
@@ -227,13 +213,6 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
     public Optional<Banner> createBanner(String withName, Integer forCampaignId) {
 
 	try {
-	    String ioServiceName = consul.catalogClient().getServices().getResponse().keySet().stream()
-		    .filter(serviceName -> serviceName.startsWith("io-service")).findFirst()
-		    .orElseThrow(() -> new RuntimeException(new ServiceNotFoundException("io-service")));
-
-	    HttpHost host = consul.catalogClient().getService(ioServiceName).getResponse().stream().findFirst()
-		    .map(cs -> new HttpHost(cs.getAddress(), cs.getServicePort(), "http")).get();
-
 	    String uri = "/api/v1/io/line_item/" + lineItemId + "/creative";
 	    HttpPost createCreativeHttpRequest = new HttpPost(uri);
 	    createCreativeHttpRequest.addHeader("content-type", "application/json");
@@ -248,8 +227,8 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 	    HttpEntity en;
 	    en = new StringEntity(m.writeValueAsString(creativeRequest), ContentType.APPLICATION_JSON);
 	    createCreativeHttpRequest.setEntity(en);
-	    
-	    try (CloseableHttpResponse createBannerResponse = httpclient.execute(host, createCreativeHttpRequest)) {
+
+	    try (CloseableHttpResponse createBannerResponse = this.execute("io-service", createCreativeHttpRequest)) {
 		createBannerResponse.setEntity(new BufferedHttpEntity(createBannerResponse.getEntity()));
 		BufferedReader lineReader = new BufferedReader(
 			new InputStreamReader(createBannerResponse.getEntity().getContent()));
@@ -270,6 +249,25 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 	    e.printStackTrace();
 	    return Optional.empty();
 	}
+    }
+
+    private HttpHost getAddressOfService(String prefix) {
+	Predicate<String> withThePrefix = s -> s.startsWith(prefix);
+	String serviceName = consul.catalogClient().getServices().getResponse().keySet().stream().filter(withThePrefix)
+		.findFirst().orElseThrow(() -> new RuntimeException(new ServiceNotFoundException("io-service")));
+
+	return consul.catalogClient().getService(serviceName).getResponse().stream().findFirst()
+		.map(cs -> new HttpHost(cs.getAddress(), cs.getServicePort(), "http")).get();
+    }
+
+    private CloseableHttpResponse execute(final String serviceName, final HttpRequest request)
+	    throws ClientProtocolException, IOException {
+	return this.execute(getAddressOfService(serviceName), request);
+    }
+
+    private CloseableHttpResponse execute(final HttpHost target, final HttpRequest request)
+	    throws IOException, ClientProtocolException {
+	return httpclient.execute(target, request);
     }
 
 }
