@@ -38,29 +38,32 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HostAndPort;
 import com.orbitz.consul.Consul;
-import com.undertone.qa.ramp.app.api.CreateCampaignRequest;
-import com.undertone.qa.ramp.app.api.CreativeRequest;
 import com.undertone.qa.ramp.app.api.CampaignsRequest;
+import com.undertone.qa.ramp.app.api.CreativeRequest;
 
-public class RampAppCampaignManager extends CampaignManager implements AutoCloseable {
+import gherkin.deps.com.google.gson.JsonArray;
+import gherkin.deps.com.google.gson.JsonParser;
+
+public class RampAppCampaignManager extends HardCodedCampaignManager implements AutoCloseable {
 
     protected CloseableHttpClient httpclient;
     protected final String lineItemId; // = "197419";
+    protected final JsonArray lineItemIds;
     private static Consul consul;
     private ObjectMapper m = new ObjectMapper();
-    AtomicReference<LineItem> lineItem = new AtomicReference<>();
+    // AtomicReference<LineItem> lineItem = new AtomicReference<>();
     private final CookieStore cookieStore;
 
-    public RampAppCampaignManager(final String hostname, final int port, String lineItemId) {
+    public RampAppCampaignManager(final String hostname, final int port, String lineItemIds) {
 	super();
 	m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-	this.lineItemId = lineItemId;
+	this.lineItemIds = new JsonParser().parse(lineItemIds).getAsJsonArray();
+	this.lineItemId = this.lineItemIds.get(0).getAsString();
 	if (consul == null) {
 	    synchronized (RampAppCampaignManager.class) {
 		if (consul == null) {
@@ -68,12 +71,13 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 		}
 	    }
 	}
+
 	cookieStore = new BasicCookieStore();
 	List<Header> defaultHeaders = new ArrayList<>();
 	defaultHeaders.add(new BasicHeader("rampInternal", "true"));
 	httpclient = HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(100000).build())
 		.setDefaultHeaders(defaultHeaders).setDefaultCookieStore(this.cookieStore).build();
-
+	super.buildHardCodedCampaignsAndZones();
     }
 
     RampAppCampaignManager authenticate(String email, String password, String authenticity_token)
@@ -103,20 +107,21 @@ public class RampAppCampaignManager extends CampaignManager implements AutoClose
 	}
 
 	HttpHost host = this.getAddressOfService("io-service");
-	String uri = "/api/v1/io/line_item/" + lineItemId;
 
-	try {
-	    URL url = new URL(host.getSchemeName(), host.getHostName(), host.getPort(), uri);
-	    lineItem.set(lineItemFrom(host, url));
-	    lineItem.get().campaigns.stream().map(CampaignPlus.class::cast).forEach(c -> {
-		if (!this.campaigns.contains(c)) {
-		    this.campaigns.add(c);
-		    c.zonesets().forEach(zonesetid -> createZoneSet("ZoneSet #" + zonesetid, zonesetid, c.getId()));
-		}
-	    });
-	} catch (Exception e) {
-	    throw new UncheckedIOException(new IOException(e));
-	}
+	lineItemIds.forEach(liId -> {
+	    String uri = "/api/v1/io/line_item/" + liId.getAsString();
+	    try {
+		URL url = new URL(host.getSchemeName(), host.getHostName(), host.getPort(), uri);
+		lineItemFrom(host, url).campaigns.stream().map(CampaignPlus.class::cast).forEach(c -> {
+		    if (!this.campaigns.contains(c)) {
+			this.campaigns.add(c);
+			c.zonesets().forEach(zonesetid -> createZoneSet("ZoneSet #" + zonesetid, zonesetid, c.getId()));
+		    }
+		});
+	    } catch (Exception e) {
+		throw new UncheckedIOException(new IOException(e));
+	    }
+	});
 	return super.getCampaign(byName);
     }
 
