@@ -14,6 +14,7 @@ import com.undertone.qa.Banner;
 import com.undertone.qa.Campaign;
 import com.undertone.qa.CampaignManager;
 import com.undertone.qa.RampAppCampaignManager;
+import com.undertone.qa.Zone;
 
 import co.unruly.matchers.OptionalMatchers;
 import cucumber.api.CucumberOptions;
@@ -53,10 +54,9 @@ public class CreateCampaigns extends BaseTest {
 	    Optional<Banner> banner = campaign.flatMap(cmp -> cmp.banners().filter(Named.nameIs(b)).findFirst());
 
 	    if (!banner.isPresent()) {
-		// if (!banner.isPresent()){
-		// throw new PendingException("implementation of
-		// rampAppCampaignManager.createBanner() is missing");
-		// }
+		if (!banner.isPresent()) {
+		    throw new PendingException("implementation of rampAppCampaignManager.createBanner() is missing");
+		}
 		// XXX TODO
 		Assert.assertThat("campaign named [" + c + "] does not exist", campaign,
 			is(not(OptionalMatchers.empty())));
@@ -65,6 +65,12 @@ public class CreateCampaigns extends BaseTest {
 
 	    }
 
+	});
+
+	Given("^Zone named \\{([^}]+)\\}$", (String z) -> {
+	    Optional<Zone> zone = rampAppCampaignManager.getZone(z);
+	    Assert.assertThat("zone named [" + z + "] does not exist", zone, is(not(OptionalMatchers.empty())));
+	    // XXX add code to create zone whenever possible
 	});
     }
 
