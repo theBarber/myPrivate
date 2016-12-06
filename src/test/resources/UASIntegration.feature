@@ -3,6 +3,11 @@
 @Sanity 
 Feature: UAS E2E Ad request flows (unknown zones) 
 
+Background: 
+	Given Zone named {qa.undertone.com - Full Banner} 
+	Given Zone named {qa.undertone.com - Half Banner} 
+	Given Campaign named {999-undefined-undefined-NaN} 
+	
 Scenario: Send an ad request to UAS and parse impression url 
 #	Given zone 2 is a test zone
 #	Given Manually zone 2 has banner 15 as eligible ad
@@ -29,8 +34,8 @@ Scenario:
 	When I send 550 times an ad request for zone named {qa.undertone.com - Half Banner} to UAS 
 	Then The response code is 200 
 	# And The responses has impression-urls 
-	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time 
 	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner1} 50% of the time 
+	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner2} 50% of the time 
 	And The impressionUrl has zoneid field matching the id of the zone named {qa.undertone.com - Half Banner} 100% of the time 
 	And The impressionUrl has campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the time 
 	And The responses has click-urls 

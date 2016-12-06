@@ -5,8 +5,10 @@ Feature: UAS Integration with Ad Selector
 
 
 Background:
+	Given Zone named {qa.undertone.com - Full Banner}
 	Given Zone named {qa.undertone.com - Half Banner}
-	 
+	Given Zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)}
+ 
 
 Scenario: Upload new plan to S3 
 	Given I upload a new solver plan with the following slices 
