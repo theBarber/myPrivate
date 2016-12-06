@@ -2,6 +2,7 @@ package com.undertone.qa;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.IntStream;
 
@@ -34,7 +35,7 @@ public class CampaignPlus extends Campaign {
 
     @JsonProperty("limitation")
     public CampaignPlus withLimitation(String limitation) {
-	this.limitation = Objects.requireNonNull(limitation);
+	this.limitation = Optional.ofNullable(limitation).orElse("");
 	isDirty.set(true);
 	return this;
     }
