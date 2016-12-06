@@ -7,11 +7,11 @@ public class HardCodedCampaignManager extends CampaignManager {
     }
 
     public void buildHardCodedCampaignsAndZones() {
-	Campaign emptyCampaign = this.createCampaign("null", -1);
+//	Campaign emptyCampaign = this.createCampaign("null", -1);
 	Campaign campaign2 = this.getCampaign("Test Advertiser - Remnant Campaign")
 		.orElseThrow(() -> new CampaignDoesNotExistException("Test Advertiser - Remnant Campaign"));
-	Campaign campaign196117 = this.getCampaign("Undertone Test Advertiser - Contract Campaign")
-		.orElseThrow(() -> new CampaignDoesNotExistException("Undertone Test Advertiser - Contract Campaign"));
+//	Campaign campaign196117 = this.getCampaign("Undertone Test Advertiser - Contract Campaign")
+//		.orElseThrow(() -> new CampaignDoesNotExistException("Undertone Test Advertiser - Contract Campaign"));
 
 	// Campaign campaign3 = this.createCampaign("campaign3", 233711);
 	// Campaign campaign4 = this.createCampaign("campaign4", 254974);
@@ -21,9 +21,9 @@ public class HardCodedCampaignManager extends CampaignManager {
 	// Campaign campaign8 = this.createCampaign("campaign8", 255174);
 
 	// Banner banner15 =
-//	this.createBanner("Test Banner1", 15, campaign2.getId()).get();
+//	this.createBanner("Test Banner1", 15, campaign2.getId());
 	// Banner banner17 =
-	this.createBanner("Test Banner", 17, campaign2.getId()).get();
+//	this.createBanner("Test Banner", 17, campaign2.getId());
 	// Banner banner879498 =
 	// this.createBanner("Undertone [The Trade Desk] Xaxis Always On
 	// Billboard", 879498, campaign3.getId()).get();
