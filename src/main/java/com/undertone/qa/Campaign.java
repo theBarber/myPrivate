@@ -96,7 +96,6 @@ public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
 	this.campaignName = campaignName;
     }
 
-    @JsonProperty("Banners")
     private void setBanners(List<Banner> banners) {
 	this.banners.addAll(banners);
     }

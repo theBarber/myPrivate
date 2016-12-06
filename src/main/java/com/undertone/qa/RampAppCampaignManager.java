@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javax.management.ServiceNotFoundException;
 
@@ -43,6 +44,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HostAndPort;
 import com.orbitz.consul.Consul;
+import com.undertone.qa.ramp.app.api.Banners;
 import com.undertone.qa.ramp.app.api.CampaignsRequest;
 import com.undertone.qa.ramp.app.api.CreativeRequest;
 
@@ -113,9 +115,13 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    try {
 		URL url = new URL(host.getSchemeName(), host.getHostName(), host.getPort(), uri);
 		lineItemFrom(host, url).campaigns.stream().map(CampaignPlus.class::cast).forEach(c -> {
+
 		    if (!this.campaigns.contains(c)) {
 			this.campaigns.add(c);
 			c.zonesets().forEach(zonesetid -> createZoneSet("ZoneSet #" + zonesetid, zonesetid, c.getId()));
+			getBanners(c.getId()).ifPresent(s->s.forEach(b->{
+			    createBanner(b.getName(), b.getId(), c.getId());
+			}));
 		    }
 		});
 	    } catch (Exception e) {
@@ -123,6 +129,19 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    }
 	});
 	return super.getCampaign(byName);
+    }
+
+    public Optional<Stream<Banner>> getBanners(int forCampaign) {
+	
+	HttpHost host = this.getAddressOfService("io-service");
+	String uri = "/api/v1/io/campaigns/" + forCampaign + "/banners";
+	HttpRequest req = new HttpGet(uri);
+	    try (CloseableHttpResponse r = httpclient.execute(host, req)) {
+	        return Optional.of (m.readValue(r.getEntity().getContent(), Banners.class).stream());
+	    } catch (Exception e) {
+		return Optional.empty();
+	    }
+
     }
 
     public Optional<Campaign> createCampaign(String campaignName) {
