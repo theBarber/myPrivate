@@ -4,9 +4,8 @@ Feature: create test data via API
 Scenario Outline: generate campaigns via API only if needed 
 	Given Campaign named {<c>} 
 	And Campaign named {<c>} has a creative with banner named {<b>} 
-	
-	And Banner named {<b>} 
 	And Zone named {<z>} 
+
 	And Zoneset named {<zs>} 
 	And Zone named {<z>} is in the zoneset named {<zs>} 
 	And Campaign named {<c>} zoneset list contains the zoneset named {<zs>} 

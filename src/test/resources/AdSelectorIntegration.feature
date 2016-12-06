@@ -2,7 +2,12 @@
 @campaign 
 @Sanity 
 Feature: UAS Integration with Ad Selector 
-@cli 
+
+
+Background:
+	Given Zone named {qa.undertone.com - Half Banner}
+	 
+
 Scenario: Upload new plan to S3 
 	Given I upload a new solver plan with the following slices 
 		|{"buying_strategy_id": -1, "slices": [{"banner_id": 968381, "weight": 1000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 37750, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 37750]}]}, "buy_at_most": 10}]}|
