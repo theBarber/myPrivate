@@ -36,6 +36,7 @@ public class BaseTest implements En {
     protected final String[] CLITESTS = new String[] { "@cli" };
     protected final String[] RABBITTESTS = new String[] { "@rabbitmq" };
     protected final String[] UASTESTS = new String[] { "@uas" };
+    protected final String[] CAMPAIGNTESTS = new String[] { "@campaign" };
 
     public BaseTest() {
 	environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
