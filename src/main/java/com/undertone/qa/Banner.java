@@ -13,7 +13,7 @@ public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
     private final String name;
     private final int id;
 
-    public Banner(@JsonProperty("creativeName") String name, @JsonProperty("creativeId") Integer id) {
+    public Banner(@JsonProperty("creativeName") String name, @JsonProperty("bannerId") Integer id) {
 	this.name = requireNonNull(name);
 	this.id = requireNonNull(id);
     }
