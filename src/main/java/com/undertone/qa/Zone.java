@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 
@@ -11,7 +12,7 @@ public class Zone implements Named, WithId<Integer>, Comparable<Zone> {
     private final String name;
     private final Integer id;
 
-    Zone(String name, Integer id) {
+    Zone(@JsonProperty("zoneName") String name, @JsonProperty("zoneId") Integer id) {
 	this.name = requireNonNull(name);
 	this.id = requireNonNull(id);
     }

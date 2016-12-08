@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -28,6 +29,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.ContentType;
@@ -44,6 +46,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HostAndPort;
 import com.orbitz.consul.Consul;
+import com.undertone.automation.module.Named;
+import com.undertone.automation.module.WithId;
 import com.undertone.qa.ramp.app.api.Banners;
 import com.undertone.qa.ramp.app.api.CampaignsRequest;
 import com.undertone.qa.ramp.app.api.CreativeRequest;
@@ -119,7 +123,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 		    if (!this.campaigns.contains(c)) {
 			this.campaigns.add(c);
 			c.zonesets().forEach(zonesetid -> createZoneSet("ZoneSet #" + zonesetid, zonesetid, c.getId()));
-			getBanners(c.getId()).ifPresent(s->s.forEach(b->{
+			getBanners(c.getId()).ifPresent(s -> s.forEach(b -> {
 			    createBanner(b.getName(), b.getId(), c.getId());
 			}));
 		    }
@@ -131,16 +135,29 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	return super.getCampaign(byName);
     }
 
+    private Optional<CampaignPlus> getRemoteCampaign(String byName, String fromLineItem) {
+	String uri = "/api/v1/io/line_item/" + fromLineItem;
+	HttpHost host = this.getAddressOfService("io-service");
+
+	try {
+	    URL url = new URL(host.getSchemeName(), host.getHostName(), host.getPort(), uri);
+	    return lineItemFrom(host, url).campaigns.stream().map(CampaignPlus.class::cast).filter(Named.nameIs(byName))
+		    .findAny();
+	} catch (Exception e) {
+	    throw new UncheckedIOException(new IOException(e));
+	}
+    }
+
     public Optional<Stream<Banner>> getBanners(int forCampaign) {
-	
+
 	HttpHost host = this.getAddressOfService("io-service");
 	String uri = "/api/v1/io/campaigns/" + forCampaign + "/banners";
 	HttpRequest req = new HttpGet(uri);
-	    try (CloseableHttpResponse r = httpclient.execute(host, req)) {
-	        return Optional.of (m.readValue(r.getEntity().getContent(), Banners.class).stream());
-	    } catch (Exception e) {
-		return Optional.empty();
-	    }
+	try (CloseableHttpResponse r = httpclient.execute(host, req)) {
+	    return Optional.of(m.readValue(r.getEntity().getContent(), Banners.class).stream());
+	} catch (Exception e) {
+	    return Optional.empty();
+	}
 
     }
 
@@ -175,8 +192,12 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    while (lineReader.ready()) {
 		System.out.println(lineReader.readLine());
 	    }
-	    Campaign tmpCampaign = m.readValue(createResponse.getEntity().getContent(), CampaignsRequest.class)
-		    .getCampaignsArray()[0];
+	    Campaign[] tmpCampaigns = m.readValue(createResponse.getEntity().getContent(), CampaignsRequest.class)
+		    .getCampaignsArray();
+	    if (tmpCampaigns.length < 1) {
+		return Optional.empty();
+	    }
+	    Campaign tmpCampaign = tmpCampaigns[0];
 	    Campaign campaign = new Campaign(campaignName, tmpCampaign.getId());
 
 	    HttpPut renameCampaignHttpRequest = new HttpPut(uri);
@@ -209,24 +230,41 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
     }
 
+    public Optional<CampaignPlus> updateCampaign(Campaign campaign) {
+	String uri = "/api/v1/io/campaigns";
+
+	HttpPut updateCampaignHttpRequest = new HttpPut(uri);
+	try {
+	    HttpEntity en;
+	    CampaignsRequest updateCampaignTo = new CampaignsRequest(new Campaign[] { campaign });
+	    en = new StringEntity(m.writeValueAsString(updateCampaignTo), ContentType.APPLICATION_JSON);
+	    updateCampaignHttpRequest.setEntity(en);
+	    BufferedReader reqLineReader = new BufferedReader(new InputStreamReader(en.getContent()));
+	    while (reqLineReader.ready()) {
+		System.out.println(reqLineReader.readLine());
+	    }
+
+	    try (CloseableHttpResponse updateResponse = this.execute("io-service", updateCampaignHttpRequest)) {
+		updateResponse.setEntity(new BufferedHttpEntity(updateResponse.getEntity()));
+		BufferedReader lineReader = new BufferedReader(
+			new InputStreamReader(updateResponse.getEntity().getContent()));
+		while (lineReader.ready()) {
+		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
+		}
+		return getRemoteCampaign(campaign.getName(), lineItemId);
+	    }
+	} catch (Exception e) {
+	    return Optional.empty();
+	}
+
+    }
+
     LineItem lineItemFrom(HttpHost host, URL url) throws JsonParseException, JsonMappingException,
 	    UnsupportedOperationException, IOException, URISyntaxException {
 	HttpRequest req = new HttpGet(url.toURI());
 	try (CloseableHttpResponse r = httpclient.execute(host, req)) {
 	    return m.readValue(r.getEntity().getContent(), LineItem.class);
 	}
-    }
-
-    public static void main(String[] args) throws ClientProtocolException, IOException {
-	RampAppCampaignManager manager = new RampAppCampaignManager("consul-staging.ramp-ut.io", 8500, "197419");
-	String campaignName = "G13";
-
-	Optional<Campaign> campaign = Optional.of(campaignName).flatMap(manager::getCampaign);
-	if (!campaign.isPresent()) {
-	    campaign = Optional.of(campaignName).flatMap(manager::createCampaign);
-	}
-	System.out.println(manager.m.writeValueAsString(campaign.orElse(null)));
-
     }
 
     @Override
@@ -294,4 +332,61 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	return httpclient.execute(target, request);
     }
 
+    public Optional<ZoneSet> getZoneset(String byName) {
+	HttpHost host = this.getAddressOfService("zone-service");
+
+	URI uri = null;
+	try {
+	    uri = new URIBuilder().setPath("/api/v1/zones/zonesets").addParameter("name", byName).build();
+	} catch (URISyntaxException e1) {
+	    e1.printStackTrace();
+	    return Optional.empty();
+	}
+
+	HttpGet req = new HttpGet(uri);
+	try (CloseableHttpResponse r = httpclient.execute(host, req)) {
+	    r.setEntity(new BufferedHttpEntity(r.getEntity()));
+	    BufferedReader lineReader = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
+	    while (lineReader.ready()) {
+		System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
+	    }
+	    return Optional.ofNullable(m.readValue(r.getEntity().getContent(), ZoneSet[].class)[0]);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    return Optional.empty();
+	}
+    }
+
+    public Optional<Zone> getZone(String byName, String forZoneset) {
+	return getZoneset(forZoneset).map(WithId::getId).map(String::valueOf).flatMap(zonesetsIds -> {
+
+	    HttpHost host = this.getAddressOfService("zone-service");
+	    URI uri = null;
+	    try {
+		uri = new URIBuilder().setPath("/api/v1/zones/zonesets/zones").addParameter("zonesetsIds", zonesetsIds)
+			.build();
+	    } catch (URISyntaxException e) {
+		e.printStackTrace();
+		return Optional.empty();
+	    }
+	    HttpGet req = new HttpGet(uri);
+	    try (CloseableHttpResponse r = httpclient.execute(host, req)) {
+		r.setEntity(new BufferedHttpEntity(r.getEntity()));
+		BufferedReader lineReader = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
+		// System.err.println(r.getEntity().getContentLength());
+		while (lineReader.ready()) {
+		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
+		}
+
+		List<Zone> zones = Arrays.asList(m.readValue(r.getEntity().getContent(), Zone[].class));
+		zones.forEach(System.out::println);
+
+		return zones.stream().filter(Named.nameIs(byName)).findFirst();
+
+	    } catch (Exception e) {
+		e.printStackTrace();
+		return Optional.empty();
+	    }
+	});
+    }
 }

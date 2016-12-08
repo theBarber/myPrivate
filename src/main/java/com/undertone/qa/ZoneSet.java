@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 
@@ -17,7 +18,7 @@ public class ZoneSet implements Named, WithId<Integer>, Comparable<ZoneSet> {
 
     private Set<Zone> zones = new TreeSet<>();
 
-    ZoneSet(String name, Integer id) {
+    ZoneSet(@JsonProperty("zonesetName") String name, @JsonProperty("zonesetId") Integer id) {
 	this.name = requireNonNull(name);
 	this.id = requireNonNull(id);
     }

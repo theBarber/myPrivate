@@ -8,8 +8,8 @@ public class HardCodedCampaignManager extends CampaignManager {
 
     public void buildHardCodedCampaignsAndZones() {
 //	Campaign emptyCampaign = this.createCampaign("null", -1);
-	Campaign campaign2 = this.getCampaign("Test Advertiser - Remnant Campaign")
-		.orElseThrow(() -> new CampaignDoesNotExistException("Test Advertiser - Remnant Campaign"));
+//	Campaign campaign2 = this.getCampaign("Test Advertiser - Remnant Campaign")
+//		.orElseThrow(() -> new CampaignDoesNotExistException("Test Advertiser - Remnant Campaign"));
 //	Campaign campaign196117 = this.getCampaign("Undertone Test Advertiser - Contract Campaign")
 //		.orElseThrow(() -> new CampaignDoesNotExistException("Undertone Test Advertiser - Contract Campaign"));
 
@@ -43,7 +43,7 @@ public class HardCodedCampaignManager extends CampaignManager {
 	// this.createBanner("Int-test-adselctor-default-value-2", 968473,
 	// campaign8.getId()).get();
 
-	ZoneSet zoneSet719 = this.createZoneSet("hwu zonesets", 719, campaign2.getId()).get();
+//	ZoneSet zoneSet719 = this.createZoneSet("hwu zonesets", 719, campaign2.getId()).get();
 
 	// ZoneSet zoneSet50161 = this
 	// .createZoneSet("IO 58815 - HBO Series - HBO The Brink - Billboard
@@ -57,9 +57,9 @@ public class HardCodedCampaignManager extends CampaignManager {
 	// campaign4.getId()).get();
 
 	// Zone zone2 =
-	this.createZone("qa.undertone.com - Full Banner", 2, zoneSet719.getId()).get();
+//	this.createZone("qa.undertone.com - Full Banner", 2, zoneSet719.getId()).get();
 	// Zone zone3 =
-	this.createZone("qa.undertone.com - Half Banner", 3, zoneSet719.getId()).get();
+//	this.createZone("qa.undertone.com - Half Banner", 3, zoneSet719.getId()).get();
 	// Zone zone112211 =
 	// this.createZone("INT03 - Billboard 970x250 - HBO Series - HBO The
 	// Brink", 112211, zoneSet50161.getId()).get();
