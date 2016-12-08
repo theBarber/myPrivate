@@ -4,9 +4,9 @@
 Feature: UAS E2E Ad request flows (unknown zones) 
 
 Background: 
-	Given Zone named {qa.undertone.com - Full Banner} 
-	Given Zone named {qa.undertone.com - Half Banner} 
-	Given Campaign named {999-undefined-undefined-NaN} 
+	Given Zone named {qa.undertone.com - Full Banner}
+	Given Zone named {qa.undertone.com - Half Banner}
+	Given Campaign named {999-undefined-undefined-NaN}
 	
 Scenario: Send an ad request to UAS and parse impression url 
 #	Given zone 2 is a test zone
