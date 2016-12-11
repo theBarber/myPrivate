@@ -5,28 +5,28 @@ Feature: UAS limitations filtering
 
 
 Background: 
-	Given Campaign named {Int-test-FF-targeted} 
-	And Campaign named {Int-test-FF-targeted} is in the zoneset named {Undertone_Testing} 
-	And Campaign named {Int-test-FF-targeted} has a creative with banner named {Int-test-FF-targeted-banner} 
+	Given Campaign named {Int-test-FF-targeted}
+	And Campaign named {Int-test-FF-targeted} is in the zoneset named {Undertone_Testing}
+	And Campaign named {Int-test-FF-targeted} has a creative with banner named {Int-test-FF-targeted-banner}
 	
-	Given Campaign named {Int-test-CH-targeted} 
-	And Campaign named {Int-test-CH-targeted} is in the zoneset named {Undertone_Testing} 
-	And Campaign named {Int-test-CH-targeted} has a creative with banner named {Int-test-CH-targeted-banner} 
+	Given Campaign named {Int-test-CH-targeted}
+	And Campaign named {Int-test-CH-targeted} is in the zoneset named {Undertone_Testing}
+	And Campaign named {Int-test-CH-targeted} has a creative with banner named {Int-test-CH-targeted-banner}
 	
-	Given Campaign named {Int-test-no-limit} 
-	And Campaign named {Int-test-no-limit} is in the zoneset named {Undertone_Testing} 
-	And Campaign named {Int-test-no-limit} has a creative with banner named {Int-test-unlimited-banner} 
+	Given Campaign named {Int-test-no-limit}
+	And Campaign named {Int-test-no-limit} is in the zoneset named {Undertone_Testing}
+	And Campaign named {Int-test-no-limit} has a creative with banner named {Int-test-unlimited-banner}
 	
-	Given Campaign named {Int-test-check-adselector-default-2} 
-	And Campaign named {Int-test-check-adselector-default-2} is in the zoneset named {Undertone_Testing} 
-	And Campaign named {Int-test-check-adselector-default-2} has a creative with banner named {Int-test-adselctor-default-value-2} 
+	Given Campaign named {Int-test-check-adselector-default-2}
+	And Campaign named {Int-test-check-adselector-default-2} is in the zoneset named {Undertone_Testing}
+	And Campaign named {Int-test-check-adselector-default-2} has a creative with banner named {Int-test-adselctor-default-value-2}
 	
-	Given Campaign named {Int-test-IE-targeted} 
-	And Campaign named {Int-test-IE-targeted} is in the zoneset named {Undertone_Testing} 
-	And Campaign named {Int-test-IE-targeted} has a creative with banner named {Int-test-IE-targeted-banner} 
+	Given Campaign named {Int-test-IE-targeted}
+	And Campaign named {Int-test-IE-targeted} is in the zoneset named {Undertone_Testing}
+	And Campaign named {Int-test-IE-targeted} has a creative with banner named {Int-test-IE-targeted-banner}
 	
-	Given Zone named {INT2434 - Tracking Pixel (1x1) - _40243_Nexage} is in the zoneset named {Undertone_Testing} 
-	Given Zone named {INT2434 - Tracking Pixel (1x1) - _40243_Brightroll} is in the zoneset named {Undertone_Testing} 
+	Given Zone named {INT2434 - Tracking Pixel (1x1) - _40243_Nexage} is in the zoneset named {Undertone_Testing}
+	Given Zone named {INT2434 - Tracking Pixel (1x1) - _40243_Brightroll} is in the zoneset named {Undertone_Testing}
 	
 	
 Scenario: Upload new plan to S3 
