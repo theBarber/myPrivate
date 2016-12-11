@@ -50,6 +50,8 @@ import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 import com.undertone.qa.ramp.app.api.Banners;
 import com.undertone.qa.ramp.app.api.CampaignsRequest;
+import com.undertone.qa.ramp.app.api.CreateCampaignRequest;
+import com.undertone.qa.ramp.app.api.CreateCampaignsRequestWrapper;
 import com.undertone.qa.ramp.app.api.CreativeRequest;
 
 import gherkin.deps.com.google.gson.JsonArray;
@@ -165,17 +167,12 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	String uri = "/api/v1/io/campaigns";
 	HttpPost createCampaignHttpRequest = new HttpPost(uri);
 	createCampaignHttpRequest.addHeader("content-type", "application/json");
-	// CreateCampaignRequest createCampaignRequestBody = new
-	// CreateCampaignRequest(lineItem.get());
-	// class CampaignsRequest {
-	// public final CreateCampaignRequest[] campaignsArray = {
-	// createCampaignRequestBody };
-	// }
+	CreateCampaignRequest createCampaignRequestBody = new CreateCampaignRequest(lineItem(lineItemId));
 
 	try {
-	    CampaignsRequest request = new CampaignsRequest(new Campaign[] {});
+	    CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequestBody);
 	    HttpEntity en;
-	    en = new StringEntity(m.writeValueAsString(request), ContentType.APPLICATION_JSON);
+	    en = new StringEntity(m.writeValueAsString(requestWrapper), ContentType.APPLICATION_JSON);
 	    createCampaignHttpRequest.setEntity(en);
 	    BufferedReader reqLineReader = new BufferedReader(new InputStreamReader(en.getContent()));
 	    while (reqLineReader.ready()) {
@@ -259,10 +256,19 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
     }
 
+    LineItem lineItem(String id) {
+	String uri = "/api/v1/io/line_item/" + id;
+	try (CloseableHttpResponse r = this.execute("io-service", new HttpGet(uri))) {
+	    return m.readValue(r.getEntity().getContent(), LineItem.class);
+	} catch (IOException e) {
+	    throw new UncheckedIOException(e);
+	}
+    }
+
     LineItem lineItemFrom(HttpHost host, URL url) throws JsonParseException, JsonMappingException,
 	    UnsupportedOperationException, IOException, URISyntaxException {
 	HttpRequest req = new HttpGet(url.toURI());
-	try (CloseableHttpResponse r = httpclient.execute(host, req)) {
+	try (CloseableHttpResponse r = this.execute(host, req)) {
 	    return m.readValue(r.getEntity().getContent(), LineItem.class);
 	}
     }
@@ -350,7 +356,8 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    while (lineReader.ready()) {
 		System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
 	    }
-	    return Optional.ofNullable(m.readValue(r.getEntity().getContent(), ZoneSet[].class)[0]);
+	    List<ZoneSet> responseZoneSets =  Arrays.asList(m.readValue(r.getEntity().getContent(), ZoneSet[].class));
+	    return responseZoneSets.stream().filter(Named.nameIs(byName)).findFirst();
 	} catch (Exception e) {
 	    e.printStackTrace();
 	    return Optional.empty();
@@ -363,8 +370,8 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    HttpHost host = this.getAddressOfService("zone-service");
 	    URI uri = null;
 	    try {
-		uri = new URIBuilder().setPath("/api/v1/zones/zonesets/zones").addParameter("zonesetsIds", String.valueOf(zonesetsIds))
-			.build();
+		uri = new URIBuilder().setPath("/api/v1/zones/zonesets/zones")
+			.addParameter("zonesetsIds", String.valueOf(zonesetsIds)).build();
 	    } catch (URISyntaxException e) {
 		e.printStackTrace();
 		return Optional.empty();
@@ -380,7 +387,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
 		List<Zone> zones = Arrays.asList(m.readValue(r.getEntity().getContent(), Zone[].class));
 		zones.forEach(System.out::println);
-		zones.forEach(z->this.createZone(z.getName(), z.getId(), zonesetsIds));
+		zones.forEach(z -> this.createZone(z.getName(), z.getId(), zonesetsIds));
 		return this.getZone(byName);
 
 	    } catch (Exception e) {
