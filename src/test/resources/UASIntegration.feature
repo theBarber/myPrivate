@@ -4,9 +4,12 @@
 Feature: UAS E2E Ad request flows (unknown zones) 
 
 Background: 
-	Given Zone named {qa.undertone.com - Full Banner}
-	Given Zone named {qa.undertone.com - Half Banner}
-	Given Campaign named {999-undefined-undefined-NaN}
+	Given Campaign named {Test Advertiser - Remnant Campaign}
+	And Campaign named {Test Advertiser - Remnant Campaign} has a creative with banner named {Test Banner1}
+	And Campaign named {Test Advertiser - Remnant Campaign} has a creative with banner named {Test Banner2}
+	And Campaign named {Test Advertiser - Remnant Campaign} is in the zoneset named {hwu zonesets}
+	Given Zone named {qa.undertone.com - Full Banner} is in the zoneset named {hwu zonesets}
+	Given Zone named {qa.undertone.com - Half Banner} is in the zoneset named {hwu zonesets}
 	
 Scenario: Send an ad request to UAS and parse impression url 
 #	Given zone 2 is a test zone
@@ -37,7 +40,7 @@ Scenario:
 	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner1} 50% of the time 
 	And The impressionUrl has bannerid field matching the id of the banner named {Test Banner2} 50% of the time 
 	And The impressionUrl has zoneid field matching the id of the zone named {qa.undertone.com - Half Banner} 100% of the time 
-	And The impressionUrl has campaignid field matching the id of the campaign named {999-undefined-undefined-NaN} 100% of the time 
+	And The impressionUrl has campaignid field matching the id of the campaign named {Test Advertiser - Remnant Campaign} 100% of the time 
 	And The responses has click-urls 
 	And The clickUrl has bannerid field matching the id of the banner named {Test Banner} 50% of the time 
 	And The clickUrl has bannerid field matching the id of the banner named {Test Banner1} 50% of the time 
