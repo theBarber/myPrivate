@@ -264,8 +264,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	Integer forCampaignId = getCampaign(forCampaignName).map(Campaign::getId).get();
 
 	try {
-	    String uri = "/api/v1/io/line_item/" + lineItemId + "/creative";
-	    HttpPost createCreativeHttpRequest = new HttpPost(uri);
+	    HttpPost createCreativeHttpRequest = new HttpPost("/api/v1/io/line_item/" + lineItemId + "/creative");
 	    createCreativeHttpRequest.addHeader("content-type", "application/json");
 
 	    CreativeRequest creativeRequest = new CreativeRequest();
@@ -278,19 +277,25 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    HttpEntity en;
 	    en = new StringEntity(m.writeValueAsString(creativeRequest), ContentType.APPLICATION_JSON);
 	    createCreativeHttpRequest.setEntity(en);
-
+	    try (BufferedReader lineReader = new BufferedReader(new InputStreamReader(en.getContent()))) {
+		while (lineReader.ready()) {
+		    System.out.println(lineReader.readLine());
+		}
+	    }
 	    try (CloseableHttpResponse createBannerResponse = this.execute("io-service", createCreativeHttpRequest)) {
 		createBannerResponse.setEntity(new BufferedHttpEntity(createBannerResponse.getEntity()));
-		BufferedReader lineReader = new BufferedReader(
-			new InputStreamReader(createBannerResponse.getEntity().getContent()));
-		while (lineReader.ready()) {
-		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
+		try (BufferedReader lineReader = new BufferedReader(
+			new InputStreamReader(createBannerResponse.getEntity().getContent()))) {
+		    while (lineReader.ready()) {
+			System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
+		    }
 		}
-		// TODO Auto-generated catch block
+		// XXX bug #UT-1909 Auto-generated catch block 
+		
 	    }
 
-	    return getRemoteCampaign(forCampaignName, lineItemId).map(Campaign::banners)
-		    .flatMap(s -> s.filter(Named.nameIs(withName)).findFirst());
+	    return Optional.empty();
+//	    getRemoteCampaign(forCampaignName, lineItemId).map(Campaign::banners)		    .flatMap(banners -> banners.filter(Named.nameIs(withName)).findFirst());
 	} catch (UnsupportedCharsetException | UnsupportedOperationException | IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
