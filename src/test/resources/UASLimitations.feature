@@ -2,6 +2,14 @@
 @campaign
 @Sanity
 Feature: UAS limitations filtering
+
+
+Background: 
+	Given Zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)}
+	Given Zone named 
+	Given Campaign named {999-undefined-undefined-NaN}
+
+
   Scenario: Upload new plan to S3
     Given I upload a new solver plan with the following slices
       | {"buying_strategy_id": -1, "slices": [{"zone_id":11457,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-FF-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",11457]}]},"buy_at_most":2000}]}   |
