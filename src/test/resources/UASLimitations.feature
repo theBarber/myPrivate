@@ -6,7 +6,7 @@ Feature: UAS limitations filtering
 
 Background: 
 	Given Campaign named {Int-test-FF-targeted}
-	Given Campaign named {Int-test-FF-targeted} limitations are {[[~200fgbnsjdfisiodf]]} 
+	Given Campaign named {Int-test-FF-targeted} limitations are {[[[1,\"==\",2600]]]} 
 	And Campaign named {Int-test-FF-targeted} is in the zoneset named {Undertone_Testing}
 	And Campaign named {Int-test-FF-targeted} has a creative with banner named {Int-test-FF-targeted-banner}
 	

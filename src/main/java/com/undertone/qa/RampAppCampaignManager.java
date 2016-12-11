@@ -260,7 +260,8 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	this.httpclient.close();
     }
 
-    public Optional<Banner> createBanner(String withName, Integer forCampaignId) {
+    public Optional<Banner> createBanner(String withName, String forCampaignName) {
+	Integer forCampaignId = getCampaign(forCampaignName).map(Campaign::getId).get();
 
 	try {
 	    String uri = "/api/v1/io/line_item/" + lineItemId + "/creative";
@@ -285,15 +286,11 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 		while (lineReader.ready()) {
 		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
 		}
-		// Campaign tmpCampaign2 =
-		// m.readValue(renameResponse.getEntity().getContent(),
-		// Campaign[].class);
-		// System.out.println(tmpCampaign2.getName());
-
 		// TODO Auto-generated catch block
 	    }
 
-	    return Optional.empty();
+	    return getRemoteCampaign(forCampaignName, lineItemId).map(Campaign::banners)
+		    .flatMap(s -> s.filter(Named.nameIs(withName)).findFirst());
 	} catch (UnsupportedCharsetException | UnsupportedOperationException | IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();

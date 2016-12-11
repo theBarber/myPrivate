@@ -58,8 +58,8 @@ public class CreateCampaigns extends BaseTest {
 	    if (!banner.isPresent()) {
 		Assert.assertThat("campaign named [" + c + "] does not exist", campaign,
 			is(not(OptionalMatchers.empty())));
-		Integer campaignId = campaign.map(Campaign::getId).get();
-		banner = rampAppCampaignManager.createBanner(b, campaignId);
+		String campaignName = campaign.map(Campaign::getName).get();
+		banner = rampAppCampaignManager.createBanner(b, campaignName);
 		Assert.assertThat("banner named [" + b + "] does not exist", banner, is(not(OptionalMatchers.empty())));
 	    }
 	});
