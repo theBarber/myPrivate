@@ -60,7 +60,7 @@ import gherkin.deps.com.google.gson.JsonParser;
 public class RampAppCampaignManager extends HardCodedCampaignManager implements AutoCloseable {
 
     protected CloseableHttpClient httpclient;
-    protected final String lineItemId; // = "197419";
+    protected final String lineItemId;
     protected final JsonArray lineItemIds;
     private static Consul consul;
     private ObjectMapper m = new ObjectMapper();
@@ -114,13 +114,9 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    return campaign;
 	}
 
-	HttpHost host = this.getAddressOfService("io-service");
-
 	lineItemIds.forEach(liId -> {
-	    String uri = "/api/v1/io/line_item/" + liId.getAsString();
 	    try {
-		URL url = new URL(host.getSchemeName(), host.getHostName(), host.getPort(), uri);
-		lineItemFrom(host, url).campaigns.stream().map(CampaignPlus.class::cast).forEach(c -> {
+		lineItem(liId.getAsString()).campaigns.stream().map(CampaignPlus.class::cast).forEach(c -> {
 
 		    if (!this.campaigns.contains(c)) {
 			this.campaigns.add(c);
@@ -138,12 +134,8 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
     }
 
     private Optional<CampaignPlus> getRemoteCampaign(String byName, String fromLineItem) {
-	String uri = "/api/v1/io/line_item/" + fromLineItem;
-	HttpHost host = this.getAddressOfService("io-service");
-
 	try {
-	    URL url = new URL(host.getSchemeName(), host.getHostName(), host.getPort(), uri);
-	    return lineItemFrom(host, url).campaigns.stream().map(CampaignPlus.class::cast).filter(Named.nameIs(byName))
+	    return lineItem(fromLineItem).campaigns.stream().map(CampaignPlus.class::cast).filter(Named.nameIs(byName))
 		    .findAny();
 	} catch (Exception e) {
 	    throw new UncheckedIOException(new IOException(e));
@@ -228,9 +220,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
     }
 
     public Optional<CampaignPlus> updateCampaign(Campaign campaign) {
-	String uri = "/api/v1/io/campaigns";
-
-	HttpPut updateCampaignHttpRequest = new HttpPut(uri);
+	HttpPut updateCampaignHttpRequest = new HttpPut("/api/v1/io/campaigns");
 	try {
 	    HttpEntity en;
 	    CampaignsRequest updateCampaignTo = new CampaignsRequest(new Campaign[] { campaign });
@@ -262,14 +252,6 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    return m.readValue(r.getEntity().getContent(), LineItem.class);
 	} catch (IOException e) {
 	    throw new UncheckedIOException(e);
-	}
-    }
-
-    LineItem lineItemFrom(HttpHost host, URL url) throws JsonParseException, JsonMappingException,
-	    UnsupportedOperationException, IOException, URISyntaxException {
-	HttpRequest req = new HttpGet(url.toURI());
-	try (CloseableHttpResponse r = this.execute(host, req)) {
-	    return m.readValue(r.getEntity().getContent(), LineItem.class);
 	}
     }
 
@@ -356,7 +338,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    while (lineReader.ready()) {
 		System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
 	    }
-	    List<ZoneSet> responseZoneSets =  Arrays.asList(m.readValue(r.getEntity().getContent(), ZoneSet[].class));
+	    List<ZoneSet> responseZoneSets = Arrays.asList(m.readValue(r.getEntity().getContent(), ZoneSet[].class));
 	    return responseZoneSets.stream().filter(Named.nameIs(byName)).findFirst();
 	} catch (Exception e) {
 	    e.printStackTrace();
