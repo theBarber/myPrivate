@@ -358,12 +358,12 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
     }
 
     public Optional<Zone> getZone(String byName, String forZoneset) {
-	return getZoneset(forZoneset).map(WithId::getId).map(String::valueOf).flatMap(zonesetsIds -> {
+	return getZoneset(forZoneset).map(WithId::getId).flatMap(zonesetsIds -> {
 
 	    HttpHost host = this.getAddressOfService("zone-service");
 	    URI uri = null;
 	    try {
-		uri = new URIBuilder().setPath("/api/v1/zones/zonesets/zones").addParameter("zonesetsIds", zonesetsIds)
+		uri = new URIBuilder().setPath("/api/v1/zones/zonesets/zones").addParameter("zonesetsIds", String.valueOf(zonesetsIds))
 			.build();
 	    } catch (URISyntaxException e) {
 		e.printStackTrace();
@@ -380,8 +380,8 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
 		List<Zone> zones = Arrays.asList(m.readValue(r.getEntity().getContent(), Zone[].class));
 		zones.forEach(System.out::println);
-
-		return zones.stream().filter(Named.nameIs(byName)).findFirst();
+		zones.forEach(z->this.createZone(z.getName(), z.getId(), zonesetsIds));
+		return this.getZone(byName);
 
 	    } catch (Exception e) {
 		e.printStackTrace();

@@ -1,7 +1,16 @@
 @uas 
 @Sanity 
+@campaign
 Feature: UAS connectivity to other components 
 
+Background: 
+	Given Campaign named {Test Advertiser - Remnant Campaign}
+	And Campaign named {Test Advertiser - Remnant Campaign} has a creative with banner named {Test Banner1}
+	And Campaign named {Test Advertiser - Remnant Campaign} has a creative with banner named {Test Banner2}
+	And Campaign named {Test Advertiser - Remnant Campaign} is in the zoneset named {hwu zonesets}
+	Given Zone named {qa.undertone.com - Full Banner} is in the zoneset named {hwu zonesets}
+	Given Zone named {qa.undertone.com - Half Banner} is in the zoneset named {hwu zonesets}
+	
 Scenario: 1. UAS is up 
 	When Sending a healthceck request to UAS 
 	Then The response code is 200 
