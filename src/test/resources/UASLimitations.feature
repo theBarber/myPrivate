@@ -6,6 +6,7 @@ Feature: UAS limitations filtering
 
 Background: 
 	Given Campaign named {Int-test-FF-targeted}
+	Given Campaign named {Int-test-FF-targeted} limitations are {[[~200fgbnsjdfisiodf]]} 
 	And Campaign named {Int-test-FF-targeted} is in the zoneset named {Undertone_Testing}
 	And Campaign named {Int-test-FF-targeted} has a creative with banner named {Int-test-FF-targeted-banner}
 	
@@ -28,15 +29,14 @@ Background:
 	Given Zone named {INT2434 - Tracking Pixel (1x1) - _40243_Nexage} is in the zoneset named {Undertone_Testing}
 	Given Zone named {INT2434 - Tracking Pixel (1x1) - _40243_Brightroll} is in the zoneset named {Undertone_Testing}
 	
-	
 Scenario: Upload new plan to S3 
 	Given I upload a new solver plan with the following slices 
-		| {"buying_strategy_id": -1, "slices": [{"zone_id":11457,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-FF-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",11457]}]},"buy_at_most":2000}]}   |
-		| {"buying_strategy_id": -1, "slices": [{"zone_id":11457,"slice_id":"$SLICE_ID$","banner_id":"968380","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",11457]}]},"buy_at_most":2000}]}   |
-		| {"buying_strategy_id": -1, "slices": [{"zone_id":11457,"slice_id":"$SLICE_ID$","banner_id":"968474","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",11457]}]},"buy_at_most":1}]}      |
-		| {"buying_strategy_id": -1, "slices": [{"zone_id":37750,"slice_id":"$SLICE_ID$","banner_id":"968382","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",37750]}]},"buy_at_most":2000}]}   |
-		| {"buying_strategy_id": -1, "slices": [{"zone_id":37750,"slice_id":"$SLICE_ID$","banner_id":"968380","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",37750]}]},"buy_at_most":2000}]}   |
-		| {"buying_strategy_id": -1, "slices": [{"zone_id":37750,"slice_id":"$SLICE_ID$","banner_id":"968381","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",37750]}]},"buy_at_most":2000}]}   |
+		| {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Nexage)}         ,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-FF-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Nexage)}      ]}]},"buy_at_most":2000}]}   |
+		| {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Nexage)}         ,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-CH-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Nexage)}      ]}]},"buy_at_most":2000}]}   |
+		| {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Nexage)}         ,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-IE-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Nexage)}      ]}]},"buy_at_most":1}]}      |
+		| {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Brightroll)}     ,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-FF-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Brightroll)}  ]}]},"buy_at_most":2000}]}   |
+		| {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Brightroll)}     ,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-CH-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Brightroll)}  ]}]},"buy_at_most":2000}]}   |
+		| {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Brightroll)}     ,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-IE-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Brightroll)}  ]}]},"buy_at_most":2000}]}   |
 	And I sleep for 70 seconds 
 	Then I will be able to start testing 
 	
@@ -56,7 +56,9 @@ Scenario:
 	And The passback ratio should be 95% 
 	
 Scenario: 
-	limitations testing - 2 banners with limitations - positive + negative tests 
+	limitations testing - 2 banners with limitations - positive + negative tests
+	# depends on previous scenario
+	 
 	Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas 
 	When I send 10 times an ad request for zone named {INT2434 - Tracking Pixel (1x1) - _40243_Nexage} to UAS 
 	And  All requests are sent 
