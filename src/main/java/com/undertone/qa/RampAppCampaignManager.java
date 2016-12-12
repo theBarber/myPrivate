@@ -53,6 +53,7 @@ import com.undertone.qa.ramp.app.api.CampaignsRequest;
 import com.undertone.qa.ramp.app.api.CreateCampaignRequest;
 import com.undertone.qa.ramp.app.api.CreateCampaignsRequestWrapper;
 import com.undertone.qa.ramp.app.api.CreativeRequest;
+import com.undertone.qa.ramp.app.api.CreativeResponse;
 
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
@@ -120,7 +121,9 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
 		    if (!this.campaigns.contains(c)) {
 			this.campaigns.add(c);
+			// XXX switch to Zoneset by name
 			c.zonesets().forEach(zonesetid -> createZoneSet("ZoneSet #" + zonesetid, zonesetid, c.getId()));
+
 			getBanners(c.getId()).ifPresent(s -> s.forEach(b -> {
 			    createBanner(b.getName(), b.getId(), c.getId());
 			}));
@@ -282,20 +285,28 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 		    System.out.println(lineReader.readLine());
 		}
 	    }
-	    try (CloseableHttpResponse createBannerResponse = this.execute("io-service", createCreativeHttpRequest)) {
-		createBannerResponse.setEntity(new BufferedHttpEntity(createBannerResponse.getEntity()));
+	    try (CloseableHttpResponse createCreativeResponse = this.execute("io-service", createCreativeHttpRequest)) {
+		createCreativeResponse.setEntity(new BufferedHttpEntity(createCreativeResponse.getEntity()));
 		try (BufferedReader lineReader = new BufferedReader(
-			new InputStreamReader(createBannerResponse.getEntity().getContent()))) {
+			new InputStreamReader(createCreativeResponse.getEntity().getContent()))) {
 		    while (lineReader.ready()) {
 			System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
 		    }
 		}
-		// XXX bug #UT-1909 Auto-generated catch block 
-		
+		CreativeResponse creativeResponse = m.readValue(createCreativeResponse.getEntity().getContent(),
+			CreativeResponse.class);
+		Optional<? extends Banner> banner = getBanners(forCampaignId).flatMap(banners -> banners
+			.filter(BannerFromCreative.class::isInstance).map(BannerFromCreative.class::cast)
+			.filter(bfc -> bfc.getCreativeId().equals(creativeResponse.getId())).findFirst());
+		return banner.flatMap(b -> super.createBanner(creativeResponse.getName(), b.getId(), forCampaignId));
+		// XXX bug #UT-1909 Auto-generated catch block
+
 	    }
 
-	    return Optional.empty();
-//	    getRemoteCampaign(forCampaignName, lineItemId).map(Campaign::banners)		    .flatMap(banners -> banners.filter(Named.nameIs(withName)).findFirst());
+	    // return Optional.empty();
+	    // getRemoteCampaign(forCampaignName,
+	    // lineItemId).map(Campaign::banners) .flatMap(banners ->
+	    // banners.filter(Named.nameIs(withName)).findFirst());
 	} catch (UnsupportedCharsetException | UnsupportedOperationException | IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
