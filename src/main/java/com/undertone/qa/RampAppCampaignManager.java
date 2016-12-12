@@ -265,9 +265,27 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
     public Optional<Banner> createBanner(String withName, String forCampaignName) {
 	Integer forCampaignId = getCampaign(forCampaignName).map(Campaign::getId).get();
+	String creativeUri = "/api/v1/io/line_item/" + lineItemId + "/creative";
+	Optional<CreativeResponse> res;
+	try (CloseableHttpResponse getCreativeHttpResponse = this.execute("io-service", new HttpGet(creativeUri))) {
+	    getCreativeHttpResponse.setEntity(new BufferedHttpEntity(getCreativeHttpResponse.getEntity()));
+
+	    try (BufferedReader lineReader = new BufferedReader(
+		    new InputStreamReader(getCreativeHttpResponse.getEntity().getContent()))) {
+		while (lineReader.ready()) {
+		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
+		}
+	    }
+	    CreativeResponse creativeResponse = m.readValue(getCreativeHttpResponse.getEntity().getContent(),
+		    CreativeResponse.class);
+
+	    res = Optional.of(creativeResponse);
+	} catch (Exception e) {
+	    res = Optional.empty();
+	}
 
 	try {
-	    HttpPost createCreativeHttpRequest = new HttpPost("/api/v1/io/line_item/" + lineItemId + "/creative");
+	    HttpPost createCreativeHttpRequest = new HttpPost(creativeUri);
 	    createCreativeHttpRequest.addHeader("content-type", "application/json");
 
 	    CreativeRequest creativeRequest = new CreativeRequest();
@@ -362,7 +380,6 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
     public Optional<Zone> getZone(String byName, String forZoneset) {
 	return getZoneset(forZoneset).map(WithId::getId).flatMap(zonesetsIds -> {
 
-	    HttpHost host = this.getAddressOfService("zone-service");
 	    URI uri = null;
 	    try {
 		uri = new URIBuilder().setPath("/api/v1/zones/zonesets/zones")
@@ -372,7 +389,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 		return Optional.empty();
 	    }
 	    HttpGet req = new HttpGet(uri);
-	    try (CloseableHttpResponse r = httpclient.execute(host, req)) {
+	    try (CloseableHttpResponse r = this.execute("zone-service", req)) {
 		r.setEntity(new BufferedHttpEntity(r.getEntity()));
 		BufferedReader lineReader = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
 		// System.err.println(r.getEntity().getContentLength());
