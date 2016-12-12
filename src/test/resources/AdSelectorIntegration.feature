@@ -1,6 +1,6 @@
 @uas 
 @campaign 
-@Sanity 
+#@Sanity 
 Feature: UAS Integration with Ad Selector 
 
 Background: zones and campaigns etc, exists
