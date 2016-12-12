@@ -1,6 +1,5 @@
 @uas 
 @campaign 
-#@Sanity 
 Feature: UAS Integration with Ad Selector 
 
 Background: zones and campaigns etc, exists
@@ -42,3 +41,4 @@ Scenario: Restore original plan to S3
 	Then I restore the original solver plan 
 	And I will finish testing 
 	And I sleep for 70 seconds
+	
