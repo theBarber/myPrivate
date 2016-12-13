@@ -6,14 +6,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 
-public class CreativeResponse implements WithId<Integer>, Named {
+public class Creative implements WithId<Integer>, Named {
 
     final private Integer creativeId;
     final private String creativeName;
+    final private Integer adUnitId;
 
-    public CreativeResponse(@JsonProperty("creativeId")Integer creativeId, @JsonProperty("creativeName")String creativeName) {
+    public Creative(@JsonProperty("creativeId") Integer creativeId,
+	    @JsonProperty("creativeName") String creativeName, @JsonProperty("adUnitId") Integer adUnitId) {
 	this.creativeId = Objects.requireNonNull(creativeId);
 	this.creativeName = Objects.requireNonNull(creativeName);
+	this.adUnitId = adUnitId;
     }
 
     @Override
@@ -24,5 +27,9 @@ public class CreativeResponse implements WithId<Integer>, Named {
     @Override
     public Integer getId() {
 	return this.creativeId;
+    }
+
+    public Integer getAdUnitId() {
+	return adUnitId;
     }
 }
