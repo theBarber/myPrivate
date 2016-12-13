@@ -10,13 +10,19 @@ import java.net.URL;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.management.ServiceNotFoundException;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -52,8 +58,9 @@ import com.undertone.qa.ramp.app.api.Banners;
 import com.undertone.qa.ramp.app.api.CampaignsRequest;
 import com.undertone.qa.ramp.app.api.CreateCampaignRequest;
 import com.undertone.qa.ramp.app.api.CreateCampaignsRequestWrapper;
+import com.undertone.qa.ramp.app.api.Creative;
 import com.undertone.qa.ramp.app.api.CreativeRequest;
-import com.undertone.qa.ramp.app.api.CreativeResponse;
+import com.undertone.qa.ramp.app.api.LineItemCreative;
 
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
@@ -117,18 +124,23 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
 	lineItemIds.forEach(liId -> {
 	    try {
-		lineItem(liId.getAsString()).campaigns.stream().map(CampaignPlus.class::cast).forEach(c -> {
+		lineItem(liId.getAsString()).campaigns.stream().filter(Named.nameIs(byName))
+			.map(CampaignPlus.class::cast).forEach(c -> {
 
-		    if (!this.campaigns.contains(c)) {
-			this.campaigns.add(c);
-			// XXX switch to Zoneset by name
-			c.zonesets().forEach(zonesetid -> createZoneSet("ZoneSet #" + zonesetid, zonesetid, c.getId()));
+			    if (!this.campaigns.contains(c)) {
+				this.campaigns.add(c);
+				c.zonesets().forEach(zonesetid -> {
+				    ZoneSet zSet = this.getZoneset(zonesetid)
+					    .orElseThrow(() -> new CampaignDoesNotExistException(byName));
+				    createZoneSet(zSet.getName(), zSet.getId(), c.getId());
 
-			getBanners(c.getId()).ifPresent(s -> s.forEach(b -> {
-			    createBanner(b.getName(), b.getId(), c.getId());
-			}));
-		    }
-		});
+				});
+
+				getBanners(c.getId()).ifPresent(banners -> banners.forEach(b -> {
+				    createBanner(b.getName(), b.getId(), c.getId());
+				}));
+			    }
+			});
 	    } catch (Exception e) {
 		throw new UncheckedIOException(new IOException(e));
 	    }
@@ -213,9 +225,11 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 		// m.readValue(renameResponse.getEntity().getContent(),
 		// Campaign[].class);
 		// System.out.println(tmpCampaign2.getName());
+	    
 	    }
-	    this.campaigns.add(campaign);
-	    return Optional.of(campaign);
+	    Optional<Campaign> campaignResult = getCampaign(campaignName);
+	    campaignResult.ifPresent(this.campaigns::add);
+	    return campaignResult;
 	} catch (Exception e) {
 	    return Optional.empty();
 	}
@@ -263,11 +277,9 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	this.httpclient.close();
     }
 
-    public Optional<Banner> createBanner(String withName, String forCampaignName) {
-	Integer forCampaignId = getCampaign(forCampaignName).map(Campaign::getId).get();
-	String creativeUri = "/api/v1/io/line_item/" + lineItemId + "/creative";
-	Optional<CreativeResponse> res;
-	try (CloseableHttpResponse getCreativeHttpResponse = this.execute("io-service", new HttpGet(creativeUri))) {
+    public Optional<Creative> getCreative(String c) {
+	try (CloseableHttpResponse getCreativeHttpResponse = this.execute("io-service",
+		new HttpGet("/api/v1/io/line_item/" + lineItemId + "/creative"))) {
 	    getCreativeHttpResponse.setEntity(new BufferedHttpEntity(getCreativeHttpResponse.getEntity()));
 
 	    try (BufferedReader lineReader = new BufferedReader(
@@ -276,13 +288,27 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 		    System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
 		}
 	    }
-	    CreativeResponse creativeResponse = m.readValue(getCreativeHttpResponse.getEntity().getContent(),
-		    CreativeResponse.class);
+	    return m.readValue(getCreativeHttpResponse.getEntity().getContent(), LineItemCreative.class).creatives
+		    .stream().filter(Named.nameIs(c)).findFirst();
 
-	    res = Optional.of(creativeResponse);
 	} catch (Exception e) {
-	    res = Optional.empty();
+	    e.printStackTrace();
+	    return Optional.empty();
+
 	}
+    }
+
+    public Optional<Creative> cloneCreative(Creative source, String name, int adunitid) {
+	Optional<Creative> res = Optional.empty();
+	res.orElseThrow(CampaignDoesNotExistException::new);
+	return res;
+    }
+
+    public Optional<Banner> createBanner(String withName, String forCampaignName) {
+	Integer forCampaignId = getCampaign(forCampaignName).map(Campaign::getId).get();
+	String creativeUri = "/api/v1/io/line_item/" + lineItemId + "/creative";
+
+	Creative creative = getCreative(withName).orElseThrow(CampaignDoesNotExistException::new);
 
 	try {
 	    HttpPost createCreativeHttpRequest = new HttpPost(creativeUri);
@@ -295,6 +321,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    creativeRequest.htmlTemplate = new StringBuilder("<html>").append("<body>")
 		    .append("<a href='http://localhost/").append(forCampaignId).append("'>").append(withName)
 		    .append("</a>").append("</body>").append("</html>").toString();
+
 	    HttpEntity en;
 	    en = new StringEntity(m.writeValueAsString(creativeRequest), ContentType.APPLICATION_JSON);
 	    createCreativeHttpRequest.setEntity(en);
@@ -311,8 +338,8 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 			System.out.println(lineReader.readLine().replaceAll("\\\n", "\n"));
 		    }
 		}
-		CreativeResponse creativeResponse = m.readValue(createCreativeResponse.getEntity().getContent(),
-			CreativeResponse.class);
+		Creative creativeResponse = m.readValue(createCreativeResponse.getEntity().getContent(),
+			Creative.class);
 		Optional<? extends Banner> banner = getBanners(forCampaignId).flatMap(banners -> banners
 			.filter(BannerFromCreative.class::isInstance).map(BannerFromCreative.class::cast)
 			.filter(bfc -> bfc.getCreativeId().equals(creativeResponse.getId())).findFirst());
@@ -377,6 +404,41 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	}
     }
 
+    private Set<ZoneSet> zonesetView = Collections.emptySet();
+
+    public Optional<ZoneSet> getZoneset(Integer byId) {
+	Optional<ZoneSet> fromTheView = zonesetView.stream().filter(WithId.idIs(byId)).findFirst();
+	if (fromTheView.isPresent()) {
+	    return fromTheView;
+	}
+
+	URI uri = null;
+	try {
+	    uri = new URIBuilder().setPath("/api/v1/zones/zonesets").addParameter("id", String.valueOf(byId)).build();
+	} catch (URISyntaxException e1) {
+	    e1.printStackTrace();
+	    return Optional.empty();
+	}
+
+	HttpGet req = new HttpGet(uri);
+	try (CloseableHttpResponse r = this.execute("zone-service", req)) {
+	    r.setEntity(new BufferedHttpEntity(r.getEntity()));
+	    // BufferedReader lineReader = new BufferedReader(new
+	    // InputStreamReader(r.getEntity().getContent()));
+	    // while (lineReader.ready()) {
+	    // System.out.println(lineReader.readLine().replaceAll("\\\n",
+	    // "\n"));
+	    // }
+	    List<ZoneSet> responseZoneSets = Arrays.asList(m.readValue(r.getEntity().getContent(), ZoneSet[].class));
+	    zonesetView = responseZoneSets.stream()
+		    .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(WithId::getId))));
+	    return responseZoneSets.stream().filter(WithId.idIs(byId)).findFirst();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    return Optional.empty();
+	}
+    }
+
     public Optional<Zone> getZone(String byName, String forZoneset) {
 	return getZoneset(forZoneset).map(WithId::getId).flatMap(zonesetsIds -> {
 
@@ -408,4 +470,5 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	    }
 	});
     }
+
 }
