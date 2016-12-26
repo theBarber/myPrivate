@@ -10,18 +10,19 @@ import java.util.stream.Stream;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
-import com.undertone.automation.module.Named;
 import com.undertone.qa.Banner;
+import com.undertone.qa.BannerFromCreative;
 import com.undertone.qa.Campaign;
 import com.undertone.qa.CampaignManager;
 import com.undertone.qa.CampaignPlus;
 import com.undertone.qa.RampAppCampaignManager;
+import com.undertone.qa.Zone;
 import com.undertone.qa.ZoneSet;
+import com.undertone.qa.ramp.app.api.Creative;
 
 import co.unruly.matchers.OptionalMatchers;
 import co.unruly.matchers.StreamMatchers;
 import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
@@ -53,7 +54,11 @@ public class CreateCampaigns extends BaseTest {
 
 	Given("^Campaign named \\{([^}]+)\\} has a creative with banner named \\{([^}]+)\\}$", (String c, String b) -> {
 	    Optional<Campaign> campaign = Optional.of(c).flatMap(rampAppCampaignManager::getCampaign);
-	    Optional<Banner> banner = campaign.flatMap(cmp -> cmp.banners().filter(Named.nameIs(b)).findFirst());
+	    Optional<Creative> creative = rampAppCampaignManager.getCreative(b);
+
+	    Optional<? extends Banner> banner = campaign.flatMap(cmp -> cmp.banners()
+		    .filter(BannerFromCreative.class::isInstance).map(BannerFromCreative.class::cast)
+		    .filter(BannerFromCreative.fromCreative(creative)).findFirst());
 
 	    if (!banner.isPresent()) {
 		Assert.assertThat("campaign named [" + c + "] does not exist", campaign,
@@ -78,6 +83,19 @@ public class CreateCampaigns extends BaseTest {
 
 	});
 
+	Given("^Creative named \\{([^}]+)\\} with ad unit id (\\d+)\\. If needed - clone from creative \\{([^}]+)\\}$", 
+		(String c, Integer adunitid, String src) -> {
+	    Optional<Creative> creative = rampAppCampaignManager.getCreative(c);
+	    if (!creative.isPresent()){
+		Optional<Creative> srcCreative =  rampAppCampaignManager.getCreative(src);
+		creative = rampAppCampaignManager.cloneCreative(srcCreative.get(), c, adunitid);
+	    }
+	    Assert.assertThat("Creative named {" + c + "} is not attached to adunit " + adunitid,
+		    rampAppCampaignManager.getCreative(c).map(Creative::getAdUnitId),
+		    OptionalMatchers.contains(adunitid));
+
+	});
+
 	Given("^Zoneset named \\{([^}]+)\\}$", (String z) -> {
 	    Assert.assertThat("zoneset named [" + z + "] does not exist", rampAppCampaignManager.getZoneset(z),
 		    is(not(OptionalMatchers.empty())));
@@ -88,10 +106,13 @@ public class CreateCampaigns extends BaseTest {
 		    is(not(OptionalMatchers.empty())));
 	});
 
+	Given("^Zone named \\{([^}]+)\\} with ad unit id (\\d+)$", (String z, Integer adunitid) -> {
+	    Assert.assertThat("zone named {" + z + "} is not attached to adunit " + adunitid,
+		    rampAppCampaignManager.getZone(z).map(Zone::getAdunitid), OptionalMatchers.contains(adunitid));
+	});
+
 	Given("^Campaign named \\{([^}]+)\\} is in the zoneset named \\{([^}]+)\\}$", (String c, String zs) -> {
-
 	    Optional<Stream<ZoneSet>> oczs = rampAppCampaignManager.getCampaign(c).map(Campaign::getZoneSetAssoc);
-
 	    Assert.assertThat("campaign named {" + c + "} does not exist", oczs, is(not(OptionalMatchers.empty())));
 	    Stream<ZoneSet> czs = oczs.get();
 	    ZoneSet expectedZoneset = rampAppCampaignManager.getZoneset(zs).orElseThrow(() -> {

@@ -11,6 +11,7 @@ import com.undertone.automation.module.WithId;
 public class Zone implements Named, WithId<Integer>, Comparable<Zone> {
     private final String name;
     private final Integer id;
+    private Integer adunitid;
 
     Zone(@JsonProperty("zoneName") String name, @JsonProperty("zoneId") Integer id) {
 	this.name = requireNonNull(name);
@@ -35,5 +36,13 @@ public class Zone implements Named, WithId<Integer>, Comparable<Zone> {
     @Override
     public String toString() {
 	return "Zone " + getId() + " [name=" + getName() + "]";
+    }
+
+    public Integer getAdunitid() {
+        return adunitid;
+    }
+    @JsonProperty("adunitId")
+    private void setAdunitid(Integer adunitid) {
+        this.adunitid = adunitid;
     }
 }

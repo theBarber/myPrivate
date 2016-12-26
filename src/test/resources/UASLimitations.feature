@@ -1,33 +1,42 @@
 @uas 
 @campaign 
-@Sanity 
+@Sanity
+@Limitation
 Feature: UAS limitations filtering 
 
-
 Background: 
-	Given Campaign named {Int-test-FF-targeted}
-	Given Campaign named {Int-test-FF-targeted} limitations are {[[[1,\"==\",2600]]]} 
-	And Campaign named {Int-test-FF-targeted} is in the zoneset named {Undertone_Testing}
-	And Campaign named {Int-test-FF-targeted} has a creative with banner named {Int-test-FF-targeted-banner}
+
+	Given Campaign named {Int-test-FF-targeted} 
+	And Campaign named {Int-test-FF-targeted} limitations are {[]} 
+	And Creative named {Int-test-FF-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
+	And Campaign named {Int-test-FF-targeted} has a creative with banner named {Int-test-FF-targeted-banner} 
+	And Campaign named {Int-test-FF-targeted} is in the zoneset named {Undertone_Testing} 
 	
-	Given Campaign named {Int-test-CH-targeted}
-	And Campaign named {Int-test-CH-targeted} is in the zoneset named {Undertone_Testing}
-	And Campaign named {Int-test-CH-targeted} has a creative with banner named {Int-test-CH-targeted-banner}
+	Given Campaign named {Int-test-CH-targeted} 
+	And Campaign named {Int-test-CH-targeted} limitations are {[]} 
+	And Creative named {Int-test-CH-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
+	And Campaign named {Int-test-CH-targeted} has a creative with banner named {Int-test-CH-targeted-banner} 
+	And Campaign named {Int-test-CH-targeted} is in the zoneset named {Undertone_Testing} 
 	
-	Given Campaign named {Int-test-no-limit}
-	And Campaign named {Int-test-no-limit} is in the zoneset named {Undertone_Testing}
-	And Campaign named {Int-test-no-limit} has a creative with banner named {Int-test-unlimited-banner}
+	Given Campaign named {Int-test-no-limit} 
+	And Campaign named {Int-test-no-limit} limitations are {[]} 
+	And Creative named {Int-test-unlimited-banner} with ad unit id 58. If needed - clone from creative {new} 
+	And Campaign named {Int-test-no-limit} has a creative with banner named {Int-test-unlimited-banner} 
+	And Campaign named {Int-test-no-limit} is in the zoneset named {Undertone_Testing} 
 	
-	Given Campaign named {Int-test-check-adselector-default-2}
-	And Campaign named {Int-test-check-adselector-default-2} is in the zoneset named {Undertone_Testing}
-	And Campaign named {Int-test-check-adselector-default-2} has a creative with banner named {Int-test-adselctor-default-value-2}
+	Given Campaign named {Int-test-check-adselector-default-2} 
+	And Creative named {Int-test-adselctor-default-value-2} with ad unit id 58. If needed - clone from creative {new} 
+	And Campaign named {Int-test-check-adselector-default-2} is in the zoneset named {Undertone_Testing} 
+	And Campaign named {Int-test-check-adselector-default-2} has a creative with banner named {Int-test-adselctor-default-value-2} 
 	
-	Given Campaign named {Int-test-IE-targeted}
-	And Campaign named {Int-test-IE-targeted} is in the zoneset named {Undertone_Testing}
-	And Campaign named {Int-test-IE-targeted} has a creative with banner named {Int-test-IE-targeted-banner}
+	Given Campaign named {Int-test-IE-targeted} 
+	And Creative named {Int-test-IE-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
 	
-	Given Zone named {INT2434 - Tracking Pixel (1x1) - _40243_Nexage} is in the zoneset named {Undertone_Testing}
-	Given Zone named {INT2434 - Tracking Pixel (1x1) - _40243_Brightroll} is in the zoneset named {Undertone_Testing}
+	And Campaign named {Int-test-IE-targeted} has a creative with banner named {Int-test-IE-targeted-banner} 
+	And Campaign named {Int-test-IE-targeted} is in the zoneset named {Undertone_Testing} 
+	
+	Given Zone named {INT00 - Billboard 970x250 - _44732_MediaMind_Billboard} is in the zoneset named {_44732_pub certification_IAB_RisingStars} 
+	Given Zone named {INT00 - Billboard 970x250 - _44732_Pointroll_Billboard} is in the zoneset named {_44732_pub certification_IAB_RisingStars} 
 	
 Scenario: Upload new plan to S3 
 	Given I upload a new solver plan with the following slices 
