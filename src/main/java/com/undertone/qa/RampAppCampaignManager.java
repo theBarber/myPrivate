@@ -22,7 +22,8 @@ import java.util.stream.Stream;
 
 import javax.management.ServiceNotFoundException;
 
-import org.apache.commons.lang3.NotImplementedException;
+import com.google.common.net.HostAndPort;
+import com.orbitz.consul.Consul;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -46,12 +47,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.net.HostAndPort;
-import com.orbitz.consul.Consul;
 import com.undertone.automation.module.Named;
 import com.undertone.automation.module.WithId;
 import com.undertone.qa.ramp.app.api.Banners;

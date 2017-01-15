@@ -7,7 +7,6 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,7 +15,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
-import org.hamcrest.Matchers;
 import org.junit.Assume;
 
 import com.undertone.automation.assertion.Assert;
@@ -41,6 +39,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
     protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
     protected UASRequestModule uas;
     protected CampaignManager campaignManager;
+    protected SqlConnectionModule rampAdminDbConnector;
     private static SystemUnderTest instance = null;
 
     private ScenarioWriter scenarioWriter;
@@ -83,6 +82,20 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		    }
 		}
 		break;
+
+	    case "@ramp_admin_db":
+	        if (rampAdminDbConnector == null) {
+		    rampAdminDbConnector = new SqlConnectionModule(config.get("ramp.admin.db.jdbc.connection"),
+				    config.get("ramp.admin.db.user"),
+				    config.get("ramp.admin.db.password"));
+		    try{
+			rampAdminDbConnector.init();
+		    }
+		    catch (Exception e){
+			delegate(exception, e);
+		    }
+		}
+	        break;
 	    default:
 		break;
 	    }
@@ -108,6 +121,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 			delegate(exception, e);
 		    }
 		}
+		break;
 	    case "@campaign":
 		if (campaignManager != null) {
 		    try {
@@ -120,10 +134,21 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 			delegate(exception, e);
 		    }
 		}
+		break;
+
+	    case "@ramp_admin_db":
+		if (rampAdminDbConnector != null) {
+		    try {
+			rampAdminDbConnector.close();
+		    } catch (Exception e) {
+			delegate(exception, e);
+		    }
+		}
+		break;
+
 	    default:
 		break;
 	    }
-
 	});
 
 	throwIfNeeded(exception);
@@ -216,6 +241,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
     public CampaignManager getCampaignManager() {
 	return campaignManager;
+    }
+
+    public SqlConnectionModule getRampAdminDbConnector(){
+	return rampAdminDbConnector;
     }
 
     @Override

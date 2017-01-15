@@ -1,6 +1,9 @@
 staging.workflow.db.jdbc.connection = jdbc:mysql://10.110.2.45/adserver
 staging.workflow.db.user = adserver
 staging.workflow.db.password = adserver
+staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
+staging.ramp.admin.db.user = dev_manager
+staging.ramp.admin.db.password = dev123456
 staging.uas.cliconnection.hosts=[172.31.48.21]
 #staging.uas.cliconnection.hosts=[172.31.48.21]
 staging.uas.cliconnection.user=root
