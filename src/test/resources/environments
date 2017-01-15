@@ -1,8 +1,8 @@
 staging.workflow.db.jdbc.connection = jdbc:mysql://10.110.2.45/adserver
 staging.workflow.db.user = adserver
 staging.workflow.db.password = adserver
-staging.uas.cliconnection.hosts=[172.31.48.21]
-#staging.uas.cliconnection.hosts=[172.31.48.21]
+staging.uas.cliconnection.hosts=[172.31.48.26]
+#staging.uas.cliconnection.hosts=[172.31.48.26]
 staging.uas.cliconnection.user=root
 staging.uas.cliconnection.password=
 staging.uas.cliconnection.keyname=ramplift-rackspace.pem

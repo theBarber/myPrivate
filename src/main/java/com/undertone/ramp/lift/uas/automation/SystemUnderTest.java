@@ -1,24 +1,5 @@
 package com.undertone.ramp.lift.uas.automation;
 
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.not;
-
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.math.MathContext;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Stream;
-
-import org.hamcrest.Matchers;
-import org.junit.Assume;
-
 import com.undertone.automation.assertion.Assert;
 import com.undertone.automation.assertion.ScenarioWriter;
 import com.undertone.automation.cli.conn.CliConnection;
@@ -30,10 +11,21 @@ import com.undertone.automation.support.StringUtils;
 import com.undertone.qa.CampaignManager;
 import com.undertone.qa.HardCodedCampaignManager;
 import com.undertone.qa.RampAppCampaignManager;
-
 import cucumber.api.Scenario;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
+import org.junit.Assume;
+
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
+
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
     final int _o;
