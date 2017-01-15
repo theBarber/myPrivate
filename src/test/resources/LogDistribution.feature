@@ -1,10 +1,11 @@
 @cli 
 Feature: test log fetch
 Scenario: test log fetch
-	Given Delete test_file logs
+	Given I Delete req logs
+	And I calculate the values distribution from log req and column 47
 	And Send 100 request with zone 1111
-	When I read req logs distribution at column 47
-	Then The distribution should have 5% difference at most
+	Then value {1} from column 47 appears {33} percent of the time
+	And value {2} from column 47 appears {33} percent of the time
 
 
 
