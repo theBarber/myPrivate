@@ -19,7 +19,7 @@ public class LogDistributionTest extends BaseTest {
     private double sumOfRequestsInLog;
     public LogDistributionTest(){
         super();
-        Given("^I read (req) logs distributionInLog at column (\\d+)$", (String req, Integer index) -> {
+        When("^I read (req) logs distribution at column (\\d+)$", (String req, Integer index) -> {
             sut.logFor(req).readLogs().actual().map(l -> l.get(index)).forEach(s -> {
                 distributionInLog.computeIfAbsent(s, key -> 1.0);
                 distributionInLog.computeIfPresent(s,(k, v) -> v+1);
