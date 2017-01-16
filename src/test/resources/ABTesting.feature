@@ -58,7 +58,7 @@ Scenario: Single experiment group scenario
 
 
 
-	Scenario: 3 different ad-units + 2 groups scenario
+	Scenario: 2 different ad-units + 2 groups scenario
 		Given I create new experiment groups with the following fields
 			|name						  			 |active|startDate            |endDate              |adUnits|zoneTypes|lbTraffic|
 			|rampLift_system_tests_experiment_group_1|1     |2017-01-01 00:00:00  |2020-01-01 00:00:00  |1      |RON      |2        |
