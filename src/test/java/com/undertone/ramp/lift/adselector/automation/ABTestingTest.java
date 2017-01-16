@@ -1,15 +1,16 @@
 package com.undertone.ramp.lift.adselector.automation;
 
+import com.mysql.jdbc.*;
 import com.undertone.qa.ramp.models.Experiment;
 import com.undertone.qa.ramp.models.ExperimentGroup;
+import com.undertone.ramp.lift.uas.automation.SqlConnectionModule;
 import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
+import java.sql.*;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,29 +34,31 @@ public class ABTestingTest extends BaseTest{
     List<Integer> createdExperimentGroupIds = new ArrayList<>();
     List<Integer> createdExperimentIds = new ArrayList<>();
 
-    public ABTestingTest(){
+    public ABTestingTest() {
 	super();
 
 	Given("^I create new experiment groups with the following fields$", (DataTable experimentGroupsTable) -> {
-	    try{
-		List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
-		ExperimentGroup theGroup = experimentGroupsList.get(0);
-		Connection dbConnection = sut.getRampAdminDbConnector().actual();
-		Statement stmt = dbConnection.createStatement();
-		String maxGroupQuery = "SELECT max(id) FROM staging_ramp_admin.experiment_group";
-		ResultSet rs = stmt.executeQuery(maxGroupQuery);
-		rs.next();
-		int maxGroupId = rs.getInt(1);
-		String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		theGroup.setId(maxGroupId + 1);
-		theGroup.setCreatedAt(today);
-		theGroup.setUpdatedAt(today);
-		String insertGroupQuery = "INSERT INTO staging_ramp_admin.experiment_group VALUES (" + theGroup.toString() + ")";
-		stmt.executeUpdate(insertGroupQuery);
-		createdExperimentGroupIds.add(maxGroupId + 1);
-	    }catch (SQLException e){
-		fail(e.getMessage());
-	    }
+	    List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
+	    Connection dbConnection = sut.getRampAdminDbConnector().actual();
+	    experimentGroupsList.forEach(experimentGroup -> {
+		try {
+		    Statement stmt = dbConnection.createStatement();
+		    String maxGroupQuery = "SELECT max(id) FROM staging_ramp_admin.experiment_group";
+		    ResultSet rs = stmt.executeQuery(maxGroupQuery);
+		    rs.next();
+		    int maxGroupId = rs.getInt(1);
+		    String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		    experimentGroup.setId(maxGroupId + 1);
+		    experimentGroup.setCreatedAt(today);
+		    experimentGroup.setUpdatedAt(today);
+		    String insertGroupQuery =
+				    "INSERT INTO staging_ramp_admin.experiment_group VALUES (" + experimentGroup.toString() + ")";
+		    stmt.executeUpdate(insertGroupQuery);
+		    createdExperimentGroupIds.add(maxGroupId + 1);
+		} catch (SQLException e) {
+		    fail(e.getMessage());
+		}
+	    });
 	});
 
 	And("^I create new experiments for group named \\{([^}]+)\\} with the following fields$", (String experimentGroupName, DataTable experimentsTable) -> {
@@ -104,28 +107,23 @@ public class ABTestingTest extends BaseTest{
 	    }
 	});
 
-	And("^I clean the created experiments$", () -> {
-	    try{
-		Connection dbConnection = sut.getRampAdminDbConnector().actual();
+	After(scenario -> {
+	    try {
+		Connection dbConnection = DriverManager.getConnection(config.get("ramp.admin.db.jdbc.connection"),
+				config.get("ramp.admin.db.user"), config.get("ramp.admin.db.password"));
 		Statement stmt = dbConnection.createStatement();
-		String experimentsToDelete = createdExperimentIds.stream().map(i->i.toString()).collect(Collectors.joining(","));
-		String deleteExperimentsQuery = "DELETE FROM staging_ramp_admin.experiment where id in (" + experimentsToDelete + ")";
+		String experimentsToDelete = createdExperimentIds.stream().map(i -> i.toString()).collect(Collectors.joining(","));
+		String deleteExperimentsQuery =
+				"DELETE FROM staging_ramp_admin.experiment where id in (" + experimentsToDelete + ")";
 		stmt.executeUpdate(deleteExperimentsQuery);
-	    }catch (SQLException e) {
-		fail(e.getMessage());
-	    }
-	});
-
-	And("^I clean the created experiment groups$", () -> {
-	    try{
-		Connection dbConnection = sut.getRampAdminDbConnector().actual();
-		Statement stmt = dbConnection.createStatement();
-		String experimentsGroupToDelete = createdExperimentGroupIds.stream().map(i->i.toString()).collect(Collectors.joining(","));
+		String experimentsGroupToDelete = createdExperimentGroupIds.stream().map(i -> i.toString()).collect(Collectors.joining(","));
 		String deleteGroupsQuery = "DELETE FROM staging_ramp_admin.experiment_group where id in (" + experimentsGroupToDelete + ")";
 		stmt.executeUpdate(deleteGroupsQuery);
-	    }catch (SQLException e) {
+		dbConnection.close();
+	    } catch (Exception e) {
 		fail(e.getMessage());
 	    }
+
 	});
     }
 }

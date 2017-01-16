@@ -154,6 +154,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		if (rampAdminDbConnector != null) {
 		    try {
 			rampAdminDbConnector.close();
+			rampAdminDbConnector = null;
 		    } catch (Exception e) {
 			delegate(exception, e);
 		    }
@@ -167,7 +168,6 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	});
 
 	throwIfNeeded(exception);
-	config.clear();
 	if (scenarioWriter != null) {
 	    synchronized (this) {
 		try {

@@ -41,6 +41,19 @@ public class BaseTest implements En {
     public BaseTest() {
 	environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
 	String environmentNameConfigPrefix = environmentName + ".";
+	Properties properties = new Properties();
+	try {
+	    properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
+	} catch (IOException ioException) {
+	    Assert.fail("load configuration failed: " + ioException.getMessage());
+	}
+	properties.forEach((k, v) -> {
+	    String configurationKey = k.toString(), value = v.toString();
+	    if (configurationKey.startsWith(environmentNameConfigPrefix)) {
+		config.put(configurationKey.substring(environmentNameConfigPrefix.length()), value);
+	    }
+	});
+
 	After(scenario -> {
 	    sut.teardown(scenario.getSourceTagNames(), config);
 	});
@@ -61,18 +74,7 @@ public class BaseTest implements En {
 		pex.addSuppressed(notTaggedForYou);
 		throw pex;
 	    }
-	    Properties properties = new Properties();
-	    try {
-		properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
-	    } catch (IOException ioException) {
-		Assert.fail("load configuration of " + scenario.getName() + " failed: " + ioException.getMessage());
-	    }
-	    properties.forEach((k, v) -> {
-		String configurationKey = k.toString(), value = v.toString();
-		if (configurationKey.startsWith(environmentNameConfigPrefix)) {
-		    config.put(configurationKey.substring(environmentNameConfigPrefix.length()), value);
-		}
-	    });
+
 	    sut.setup(scenario, config);
 	});
 
