@@ -34,6 +34,18 @@ import com.undertone.qa.RampAppCampaignManager;
 import cucumber.api.Scenario;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
+import org.junit.Assume;
+
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
+
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
     final int _o;
@@ -41,6 +53,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
     protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
     protected UASRequestModule uas;
     protected CampaignManager campaignManager;
+    protected SqlConnectionModule rampAdminDbConnector;
     private static SystemUnderTest instance = null;
 
     private ScenarioWriter scenarioWriter;
@@ -83,6 +96,20 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		    }
 		}
 		break;
+
+	    case "@ramp_admin_db":
+	        if (rampAdminDbConnector == null) {
+		    rampAdminDbConnector = new SqlConnectionModule(config.get("ramp.admin.db.jdbc.connection"),
+				    config.get("ramp.admin.db.user"),
+				    config.get("ramp.admin.db.password"));
+		    try{
+			rampAdminDbConnector.init();
+		    }
+		    catch (Exception e){
+			delegate(exception, e);
+		    }
+		}
+	        break;
 	    default:
 		break;
 	    }
@@ -108,6 +135,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 			delegate(exception, e);
 		    }
 		}
+		break;
 	    case "@campaign":
 		if (campaignManager != null) {
 		    try {
@@ -120,6 +148,19 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 			delegate(exception, e);
 		    }
 		}
+		break;
+
+	    case "@ramp_admin_db":
+		if (rampAdminDbConnector != null) {
+		    try {
+			rampAdminDbConnector.close();
+			rampAdminDbConnector = null;
+		    } catch (Exception e) {
+			delegate(exception, e);
+		    }
+		}
+		break;
+
 	    default:
 		break;
 	    }
@@ -127,7 +168,6 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	});
 
 	throwIfNeeded(exception);
-	config.clear();
 	if (scenarioWriter != null) {
 	    synchronized (this) {
 		try {
@@ -216,6 +256,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
     public CampaignManager getCampaignManager() {
 	return campaignManager;
+    }
+
+    public SqlConnectionModule getRampAdminDbConnector(){
+	return rampAdminDbConnector;
     }
 
     @Override

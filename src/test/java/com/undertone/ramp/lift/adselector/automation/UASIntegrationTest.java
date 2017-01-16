@@ -71,6 +71,10 @@ public class UASIntegrationTest extends BaseTest {
 		(Integer times, String zoneByName) -> {
 		    sendMultipleAdRequests(times, zoneByName, true);
 		});
+	When("I send (\\d+) times an ad request for zone id \\{(\\d+)\\} to UAS",
+			(Integer times, Integer zoneId) -> {
+			    sendMultipleAdRequests(times, zoneId, true);
+			});
 	When("I send (\\d+) additional ad requests for zone named \\{([^}]+)\\} to UAS",
 		(Integer times, String zoneByName) -> {
 		    sendMultipleAdRequests(times, zoneByName, false);
@@ -283,5 +287,9 @@ public class UASIntegrationTest extends BaseTest {
 	Zone zone = sut.getCampaignManager().getZone(zoneByName)
 		.orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
 	sut.getUASRquestModule().zoneRequests(zone.getId(), times, toReset);
+    }
+
+    private void sendMultipleAdRequests(Integer times, Integer zoneId, boolean toReset) {
+	sut.getUASRquestModule().zoneRequests(zoneId, times, toReset);
     }
 }

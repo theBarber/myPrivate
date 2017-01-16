@@ -3,18 +3,13 @@
  */
 package com.undertone.automation.cli.conn;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.*;
-import java.util.stream.Stream;
-
 import com.undertone.automation.cli.process.CliCommandExecution;
 import com.undertone.automation.cli.terminal.Prompt;
 import com.undertone.automation.cli.terminal.SSH;
-import com.undertone.automation.cli.terminal.VT100FilterInputStream;
+
+import java.io.*;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Default CliConnection for a Cli connection to a linux machine. Protocol is
@@ -135,7 +130,11 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
 	}
 	return null;
     }
-
+	public Stream<String> deleteFiles(String file2Del) throws IOException {
+		CliCommandExecution execution = new CliCommandExecution(this, "rm -v "+file2Del);
+		execution.withTitle("delete files: "+file2Del).error("No able delete such files").execute();
+		return Stream.of(execution.getResult().split("\r\n"));
+	}
     public Stream<String> fileList(String directory) throws IOException {
 	CliCommandExecution execution = new CliCommandExecution(this, "find '" + directory + "' -maxdepth 1 -type f");
 	execution.withTitle("list files in " + directory).error("No such file or directory").execute();
@@ -177,4 +176,5 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
 	execution.execute();
 	return TimeZone.getTimeZone(execution.getResult());
     }
+
 }
