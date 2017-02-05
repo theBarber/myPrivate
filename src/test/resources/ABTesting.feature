@@ -4,7 +4,7 @@
 @ramp_admin_db
 Feature: A/B testing functionality
 
-@Sanity-basic
+@Sanity
 Scenario: Single experiment group scenario
 	Given I create new experiment groups with the following fields
 		|name						  			 |active|startDate            |endDate              |adUnits|zoneTypes|lbTraffic|
