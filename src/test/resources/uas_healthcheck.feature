@@ -1,5 +1,5 @@
 @uas 
-@Sanity 
+@Sanity-basic
 Feature: UAS connectivity to other components 
 
 Scenario: 1. UAS is up 
