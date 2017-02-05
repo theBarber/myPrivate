@@ -107,23 +107,23 @@ public class ABTestingTest extends BaseTest{
 	    }
 	});
 
-	After(scenario -> {
-	    try {
-		Connection dbConnection = DriverManager.getConnection(config.get("ramp.admin.db.jdbc.connection"),
-				config.get("ramp.admin.db.user"), config.get("ramp.admin.db.password"));
-		Statement stmt = dbConnection.createStatement();
-		String experimentsToDelete = createdExperimentIds.stream().map(i -> i.toString()).collect(Collectors.joining(","));
-		String deleteExperimentsQuery =
-				"DELETE FROM staging_ramp_admin.experiment where id in (" + experimentsToDelete + ")";
-		stmt.executeUpdate(deleteExperimentsQuery);
-		String experimentsGroupToDelete = createdExperimentGroupIds.stream().map(i -> i.toString()).collect(Collectors.joining(","));
-		String deleteGroupsQuery = "DELETE FROM staging_ramp_admin.experiment_group where id in (" + experimentsGroupToDelete + ")";
-		stmt.executeUpdate(deleteGroupsQuery);
-		dbConnection.close();
-	    } catch (Exception e) {
-		fail(e.getMessage());
-	    }
-
-	});
+//	After(scenario -> {
+//	    try {
+//		Connection dbConnection = DriverManager.getConnection(config.get("ramp.admin.db.jdbc.connection"),
+//				config.get("ramp.admin.db.user"), config.get("ramp.admin.db.password"));
+//		Statement stmt = dbConnection.createStatement();
+//		String experimentsToDelete = createdExperimentIds.stream().map(i -> i.toString()).collect(Collectors.joining(","));
+//		String deleteExperimentsQuery =
+//				"DELETE FROM staging_ramp_admin.experiment where id in (" + experimentsToDelete + ")";
+//		stmt.executeUpdate(deleteExperimentsQuery);
+//		String experimentsGroupToDelete = createdExperimentGroupIds.stream().map(i -> i.toString()).collect(Collectors.joining(","));
+//		String deleteGroupsQuery = "DELETE FROM staging_ramp_admin.experiment_group where id in (" + experimentsGroupToDelete + ")";
+//		stmt.executeUpdate(deleteGroupsQuery);
+//		dbConnection.close();
+//	    } catch (Exception e) {
+//		fail(e.getMessage());
+//	    }
+//
+//	});
     }
 }
