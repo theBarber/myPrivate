@@ -1,7 +1,7 @@
 @uas 
+@Sanity
+Feature: UAS connectivity to other components
 @Sanity-basic
-Feature: UAS connectivity to other components 
-
 Scenario: 1. UAS is up 
 	When Sending a healthceck request to UAS 
 	Then The response code is 200 
