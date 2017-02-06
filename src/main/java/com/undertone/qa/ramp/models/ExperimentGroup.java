@@ -69,7 +69,8 @@ public class ExperimentGroup {
 		+ "'" + zoneTypes + "'" + ","
 		+ "'" + createdAt + "'" + ","
 		+ "'" + updatedAt + "'" + ","
-		+ lbTraffic;
+		+ lbTraffic + ","
+		+ null;
     }
 
 }
