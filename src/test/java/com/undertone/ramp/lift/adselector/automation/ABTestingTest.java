@@ -106,7 +106,7 @@ public class ABTestingTest extends BaseTest{
 		fail(e.getMessage());
 	    }
 	});
-
+/*
 	After(scenario -> {
 	    try {
 		Connection dbConnection = DriverManager.getConnection(config.get("ramp.admin.db.jdbc.connection"),
@@ -125,5 +125,7 @@ public class ABTestingTest extends BaseTest{
 	    }
 
 	});
+*/
+
     }
 }
