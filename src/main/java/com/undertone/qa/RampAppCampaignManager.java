@@ -362,7 +362,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
     private HttpHost getAddressOfService(String prefix) {
 	Predicate<String> withThePrefix = s -> s.startsWith(prefix);
 	String serviceName = consul.catalogClient().getServices().getResponse().keySet().stream().filter(withThePrefix)
-		.findFirst().orElseThrow(() -> new RuntimeException(new ServiceNotFoundException("io-service")));
+		.findFirst().orElseThrow(() -> new RuntimeException(new ServiceNotFoundException(prefix)));
 
 	return consul.catalogClient().getService(serviceName).getResponse().stream().findFirst()
 		.map(cs -> new HttpHost(cs.getAddress(), cs.getServicePort(), "http")).get();
