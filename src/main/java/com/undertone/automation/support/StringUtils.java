@@ -3,7 +3,7 @@ package com.undertone.automation.support;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.*;
-import java.util.function.Function;
+//import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -60,12 +60,12 @@ public abstract class StringUtils {
 	return "";
     }
 
-    private static final Function<StackTraceElement, String> getClassNameFunction = new Function<StackTraceElement, String>() {
-	@Override
-	public String apply(StackTraceElement input) {
-	    return input.getClassName();
-	}
-    };
+//    private static final Function<StackTraceElement, String> getClassNameFunction = new Function<StackTraceElement, String>() {
+//	@Override
+//	public String apply(StackTraceElement input) {
+//	    return input.getClassName();
+//	}
+//    };
 
     public static String getStackTrace(Throwable t, Set<String> packagesToFilter) {
 	if (t != null) {
