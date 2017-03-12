@@ -1,5 +1,6 @@
 @uas
 @Sanity
+@uas_healthcheck
 Feature: UAS connectivity to other components
 @Sanity-basic
 Scenario: 1. UAS is up 
