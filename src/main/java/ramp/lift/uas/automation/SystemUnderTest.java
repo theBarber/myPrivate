@@ -55,7 +55,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
     protected CampaignManager campaignManager;
     protected SqlConnectionModule rampAdminDbConnector;
     private static SystemUnderTest instance = null;
-
+    public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
+    
     private ScenarioWriter scenarioWriter;
 
     private SystemUnderTest() {
@@ -65,14 +66,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
     public synchronized void setup(Scenario scenario, Map<String, String> config) {
 	this.scenarioWriter = new ScenarioWriter(scenario);
 	AtomicReference<RuntimeException> exception = new AtomicReference<>();
-	scenario.getSourceTagNames().stream().forEach(tag -> {
+	SETUP_CONF.forEach(tag -> {
 	    switch (tag) {
-	    case "@cli":
+	    case "cli":
 		if (uasCliConnections.isEmpty()) {
 		    setupCli(config, exception);
 		}
 		break;
-	    case "@uas":
+	    case "uas":
 		if (uas == null) {
 		    try {
 			uas = new UASRequestModule();
@@ -85,9 +86,9 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		}
 		break;
 
-	    case "@campaign":
+	    case "campaign":
 		if (campaignManager == null) {
-		    if (scenario.getSourceTagNames().contains("@hardcoded")) {
+		    if (scenario.getSourceTagNames().contains("hardcoded")) {
 			campaignManager = new HardCodedCampaignManager();
 		    } else {
 			campaignManager = new RampAppCampaignManager(config.get("ramp.app.consul.host"),
@@ -97,7 +98,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		}
 		break;
 
-	    case "@ramp_admin_db":
+	    case "ramp_admin_db":
 	        if (rampAdminDbConnector == null) {
 		    rampAdminDbConnector = new SqlConnectionModule(config.get("ramp.admin.db.jdbc.connection"),
 				    config.get("ramp.admin.db.user"),
@@ -120,14 +121,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
     public synchronized void teardown(Collection<String> forTags, Map<String, String> config) {
 	AtomicReference<RuntimeException> exception = new AtomicReference<>();
-	forTags.stream().forEach(tag -> {
+	SETUP_CONF.stream().forEach(tag -> {
 	    switch (tag) {
-	    case "@cli":
+	    case "cli":
 		if (!uasCliConnections.isEmpty()) {
 		    teardownCli();
 		}
 		break;
-	    case "@uas":
+	    case "uas":
 		if (uas != null) {
 		    try {
 			uas.close();
@@ -136,7 +137,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		    }
 		}
 		break;
-	    case "@campaign":
+	    case "campaign":
 		if (campaignManager != null) {
 		    try {
 			if (campaignManager instanceof Closeable) {
@@ -150,7 +151,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		}
 		break;
 
-	    case "@ramp_admin_db":
+	    case "ramp_admin_db":
 		if (rampAdminDbConnector != null) {
 		    try {
 			rampAdminDbConnector.close();
