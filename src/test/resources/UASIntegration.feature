@@ -1,8 +1,8 @@
 @uas
 @campaign
 Feature: UAS E2E Ad request flows (unknown zones) 
-# @Sanity
 
+@Sanity
 Background:
 	Given Campaign named {Test Advertiser - Remnant Campaign}
 	And Campaign named {Test Advertiser - Remnant Campaign} has a creative with banner named {Test Banner1}

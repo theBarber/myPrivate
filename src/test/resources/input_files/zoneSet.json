@@ -1,0 +1,15 @@
+{
+	"zonesetId": 62123,
+    "zonesetName": "zoneset-auto-1-test-dnu",
+	"Zones": [
+	{
+		"zoneId": 155502,
+		"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test",
+		"adUnitId": 10,
+		"isSync": true,
+		"limitation": "[]",
+		"isSecure": false,
+		"status": 0
+	}
+	]
+ }

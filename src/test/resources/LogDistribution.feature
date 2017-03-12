@@ -1,4 +1,4 @@
-@cli 
+#@cli 
 Feature: test log fetch
 Scenario: test log fetch
 	Given I Delete req logs

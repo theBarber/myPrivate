@@ -1,0 +1,87 @@
+{
+  "startDate": "2016-09-12 00:00:00",
+  "endDate": "2017-08-31 23:59:59",
+  "ioId": 75396,
+  "geoTargetingInfo": "United States",
+  "ioLineItemId": 197420,
+  "pricingConvention": "CPM",
+  "productId": 12,
+  "Io": {
+    "timeZone": "America/New_York",
+    "currency": "USD",
+    "ioId": 75396,
+    "name": "RAMP Test IO",
+    "advertiserId": 20116
+  },
+  "Product": {
+    "DeviceTypes": [
+      {
+        "code": "1",
+        "label": "Desktop"
+      }
+    ],
+    "name": "Desktop In-Page Blend",
+    "defaultDeviceTypeIds": "1",
+    "productId": 12,
+    "MediaTypes": [
+      {
+        "code": "1",
+        "label": "Display",
+        "ProductMediaTypes": {
+          "productId": 12,
+          "mediaTypeId": 1
+        }
+      }
+    ]
+  },
+   "Campaigns": [
+   {
+      "deliveryMethod": 4,
+      "factor": 110,
+      "isRTB": false,
+      "campaignId": 269740,
+      "ioLineItemId": 197420,
+      "advertiserId": 0,
+      "isSync": false,
+      "pacing": 25,
+      "goalType": "impressions",
+      "optimize": 0,
+      "sessionCapping": 3,
+      "capping": 0,
+      "campaignName": "ramp-lift-auto-campaign1-test",
+      "optimizeReason": "10",
+      "status": 1,
+      "skipDailyGoal": false,
+      "priority": 1,
+      "block": 86400,
+      "Zonesets": {
+        "include": [
+          62123
+        ],
+        "exclude": []
+      },
+      "CampaignLifetimeStat": null,
+      "Banners": [
+		{
+           "bannerId": 1031511,
+           "bannerName": "75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test",
+           "creativeType": "html",
+           "status": 0
+        }
+		],
+      "IoLineItem": {
+        "startDate": "2017-03-06 11:49:11",
+        "endDate": "2017-03-06 23:59:59",
+        "ioLineItemId": 197420,
+        "Io": {
+          "ioId": 75396,
+          "timeZone": "America/New_York"
+        }
+      },
+      "isUnlimited": false,
+      "endDateTime": "2017-08-31 23:59:59",
+      "startDateTime": "2017-03-06 03:25:43",
+      "CDM": 4
+    }
+	]
+}
