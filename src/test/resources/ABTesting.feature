@@ -13,7 +13,7 @@ Scenario: Single experiment group scenario
 		|rampLift_system_tests_experiment_control_1|1     |33        |1        |0        |
 	And I sleep for 40 seconds 
 	And I Delete req logs 
-	When I send 1000 times an ad request for zone id {62123} to UAS 
+	When I send 1000 times an ad request for zone id {155502} to UAS 
 	Then The response code is 200 
 	And I calculate the values distribution from log req and column 47 
 	And Experiment named {rampLift_system_tests_experiment_test_1} was selected {33} percent of the time 
@@ -35,7 +35,7 @@ Scenario: 2 identical groups scenario including activation/deactivation experime
 		|rampLift_system_tests_experiment_control_2|1     |10        |1        |0        |
 	And I sleep for 40 seconds 
 	And I Delete req logs 
-	When I send 500 times an ad request for zone id {62123} to UAS 
+	When I send 500 times an ad request for zone id {155502} to UAS 
 	Then The response code is 200 
 	And I calculate the values distribution from log req and column 47 
 	And Experiment named {rampLift_system_tests_experiment_test_1} was selected {20} percent of the time 
@@ -47,7 +47,7 @@ Scenario: 2 identical groups scenario including activation/deactivation experime
 	And I set the activation status of experiment named {rampLift_system_tests_experiment_control_1} to {0} 
 	And I sleep for 40 seconds 
 	And I Delete req logs 
-	And I send 500 times an ad request for zone id {62123} to UAS 
+	And I send 500 times an ad request for zone id {155502} to UAS 
 	Then The response code is 200 
 	And I calculate the values distribution from log req and column 47 
 	And Experiment named {rampLift_system_tests_experiment_test_2} was selected {10} percent of the time 
