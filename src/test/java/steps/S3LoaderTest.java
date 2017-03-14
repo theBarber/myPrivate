@@ -21,7 +21,7 @@ import infra.utils.S3Client;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty",
-	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/S3Loader_$TIMESTAMP$.json" })
+	"infra.RotatingJSONFormatter:target/cucumber/S3Loader_$TIMESTAMP$.json" })
 public class S3LoaderTest extends BaseTest {
 
     public S3LoaderTest() {

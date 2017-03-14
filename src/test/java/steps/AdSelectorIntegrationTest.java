@@ -28,7 +28,7 @@ import infra.utils.S3Client;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:AdSelectorIntegration.feature", plugin = { "pretty",
-        "com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
+        "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
 public class AdSelectorIntegrationTest extends BaseTest  {
     private String slice  = "{\"buying_strategy_id\": -1, \"slices\": [{\"banner_id\": 879498, \"weight\": 4, " +
             "\"slice_id\": \"#sliceId#\", \"start_time\": 1477872001, " +
