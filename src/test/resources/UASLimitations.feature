@@ -1,7 +1,6 @@
-@uas 
-@campaign 
 @Sanity
-@Limitation
+@UASLimitationsFiltering
+@Integration
 Feature: UAS limitations filtering 
 
 #Background: 
@@ -94,7 +93,6 @@ Scenario: limitations testing - 3 banners, 2 of them with limitations
 	And The impressionUrl has bannerid field matching the id of the banner named {Int-test-FF-targeted-banner} 17% of the time 
 	And The impressionUrl has bannerid field matching the id of the banner named {Int-test-CH-targeted-banner} 17% of the time 
 	And The impressionUrl has bannerid field matching the id of the banner named {Int-test-unlimited-banner} 66% of the time 
-	
 	
 	
 Scenario: Restore original plan to S3 

@@ -7,16 +7,15 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
-import org.hamcrest.Matchers;
 import org.junit.Assume;
 
 import cucumber.api.Scenario;
@@ -28,24 +27,11 @@ import gherkin.deps.com.google.gson.JsonParser;
 import infra.assertion.Assert;
 import infra.assertion.ScenarioWriter;
 import infra.cli.conn.CliConnection;
+import infra.cli.conn.CliConnectionImpl.EnumConnectionType;
 import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.conn.RootLinuxCliConnection;
-import infra.cli.conn.CliConnectionImpl.EnumConnectionType;
 import infra.module.AbstractModuleImpl;
 import infra.support.StringUtils;
-
-import org.junit.Assume;
-
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Stream;
-
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.not;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
     final int _o;
@@ -187,7 +173,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	return this.uasCliConnections.values().stream();
     }
 
-    protected void setupCli(Map<String, String> config, AtomicReference<RuntimeException> exception) {
+	protected void setupCli(Map<String, String> config, AtomicReference<RuntimeException> exception) {
 	String uasCliConnectionUser = config.get("uas.cliconnection.user");
 	String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
 	String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
@@ -195,7 +181,9 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
 	File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
 		.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename)).orElse(null);
-
+	//InputStream  keyFile = ClassLoader.class.getResourceAsStream(cliconnectionKeyname);
+//	File keyFile = new File(ClassLoader.class.getResource(cliconnectionKeyname).toString());
+	
 	hostsConfig.forEach(jsonElement -> {
 	    String host = jsonElement.getAsString();
 	    LinuxDefaultCliConnection conn;

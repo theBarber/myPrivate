@@ -24,7 +24,7 @@ import infra.cli.process.CliCommandExecution;
  * Created by Itay.Pinhassi on 9/28/2016.
  */
 @CucumberOptions(features = "classpath:rbcache_process.feature", plugin = { "pretty",
-	"com.undertone.automation.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
+	"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 
 public class CacheProcessTest extends BaseTest {

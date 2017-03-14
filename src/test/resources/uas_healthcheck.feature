@@ -1,7 +1,8 @@
-@uas
 @Sanity
 @uas_healthcheck
+@Integration
 Feature: UAS connectivity to other components
+
 @Sanity-basic
 Scenario: 1. UAS is up 
 	When Sending a healthceck request to UAS 
@@ -23,9 +24,6 @@ Scenario: 5. Uas is connected to Workflow
 	When Sending a healthceck request of Workflow to UAS 
 	Then The response code is 200 
 	
-@campaign 
-@Sanity-basic
-@Sanity 
 Scenario: 6. Uas is responsive to zone request 
 	When I send 1 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS 
 	Then The response code is 200 

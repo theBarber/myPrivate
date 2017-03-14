@@ -81,13 +81,6 @@ public class UASIntegrationTest extends BaseTest {
 		(Integer times, String zoneByName) -> {
 		    sendMultipleAdRequests(times, zoneByName, false);
 		});
-//	
-//	Then("^The response contains (.*)$", (String something) -> {
-//		    sut.getUASRquestModule().responses().map(f -> f.thenApply(UASRequestModule::getContentOf))
-//			    .map(CompletableFuture::join).forEach(content -> {
-//				Assert.assertThat(content, containsString(something));
-////			    });
-//	});
 	
 	Then("The responses? has impression-urls?", () -> {
 	    assertThat(
