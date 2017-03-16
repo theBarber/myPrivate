@@ -39,7 +39,7 @@
       "deliveryMethod": 4,
       "factor": 110,
       "isRTB": false,
-      "campaignId": 269740,
+      "campaignId": 272002,
       "ioLineItemId": 197420,
       "advertiserId": 0,
       "isSync": false,
@@ -50,7 +50,7 @@
       "capping": 0,
       "campaignName": "ramp-lift-auto-campaign1-test",
       "optimizeReason": "10",
-      "status": 1,
+      "status": 0,
       "skipDailyGoal": false,
       "priority": 1,
       "block": 86400,
@@ -63,25 +63,57 @@
       "CampaignLifetimeStat": null,
       "Banners": [
 		{
-           "bannerId": 1031511,
+           "bannerId": 1033866,
            "bannerName": "75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test",
            "creativeType": "html",
            "status": 0
         }
 		],
-      "IoLineItem": {
-        "startDate": "2017-03-06 11:49:11",
-        "endDate": "2017-03-06 23:59:59",
-        "ioLineItemId": 197420,
-        "Io": {
-          "ioId": 75396,
-          "timeZone": "America/New_York"
-        }
-      },
       "isUnlimited": false,
-      "endDateTime": "2017-08-31 23:59:59",
-      "startDateTime": "2017-03-06 03:25:43",
       "CDM": 4
+    },
+    {
+      "deliveryMethod": 0,
+      "factor": 110,
+      "isRTB": false,
+      "campaignId": 271962,
+      "ioLineItemId": 197420,
+      "advertiserId": 20116,
+      "isSync": false,
+      "pacing": 25,
+      "goalType": "impressions",
+      "optimize": 0,
+      "sessionCapping": 3,
+      "capping": 0,
+      "campaignName": "ramp-lift-auto-campaign2-test-2banners",
+      "optimizeReason": "10",
+      "status": 0,
+      "skipDailyGoal": false,
+      "priority": -2,
+      "block": 86400,
+      "Zonesets": {
+        "include": [
+          62130
+        ],
+        "exclude": []
+      },
+      "CampaignLifetimeStat": null,
+      "Banners": [
+		{
+           "bannerId": 1033837,
+           "bannerName": "75396-197420-270914-Medium Rectangle 300x250-test",
+           "creativeType": "html",
+           "status": 0
+        },
+        {
+           "bannerId": 1033838,
+           "bannerName": "75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test",
+           "creativeType": "html",
+           "status": 0
+        }
+		],
+      "isUnlimited": false,
+      "CDM": 0
     }
 	]
 }

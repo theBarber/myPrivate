@@ -1,5 +1,8 @@
 package entities;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,28 +19,26 @@ public class HardCodedCampaignManager extends CampaignManager {
 	}
 
 	public void initHardCodedEntities() {
-		this.li = initLineItem();
-		this.zoneset = initZoneSet();
+		initLineItem();
+		initZoneSets();
 	}
 
-	public LineItem initLineItem() {
+	public void initLineItem() {
 		try {
-			return m.readValue(ClassLoader.class.getResourceAsStream(LINEITEM_FILE), LineItem.class);
+			this.li = m.readValue(ClassLoader.class.getResourceAsStream(LINEITEM_FILE), LineItem.class);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 
 		}
-		return li;
 	}	
 	
-	public ZoneSet initZoneSet() {
+	public void initZoneSets() {
 		try {
-			return m.readValue(ClassLoader.class.getResourceAsStream(ZONESET_FILE), ZoneSet.class);
+			this.zonesets =  Arrays.asList(m.readValue(ClassLoader.class.getResourceAsStream(ZONESET_FILE), ZoneSet[].class));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		return zoneset;
 	}
 }

@@ -31,7 +31,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	// final Set<Campaign> campaigns = new TreeSet<>();
 	LineItem li;
-	ZoneSet zoneset;
+	List<ZoneSet> zonesets;
 	
 	public CampaignManager() {
 
@@ -42,7 +42,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	}
 
 	public final Optional<Zone> getZone(String byName) {
-		return zoneset.zones().filter(Named.nameIs(byName)).findFirst();
+		return zonesets.stream().flatMap(z -> z.zones()).filter(Named.nameIs(byName)).findFirst();
 //		return li.campaigns.stream().flatMap(Campaign::getZoneSetAssoc).flatMap(ZoneSet::zones)
 //				.filter(Named.nameIs(byName)).findFirst();
 	}
@@ -53,11 +53,11 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	
 	
 	public Optional<ZoneSet> getZoneset(Integer byId) {
-		return Optional.of(zoneset);
+		return zonesets.stream().filter(WithId.idIs(byId)).findFirst();
 	}
 	
 	public Optional<ZoneSet> getZoneset(String byName) {
-		return Optional.of(zoneset);
+		return zonesets.stream().filter(Named.nameIs(byName)).findFirst();
 	}
 
 
