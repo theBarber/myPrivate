@@ -15,7 +15,6 @@
 			<url>http://jcenter.bintray.com</url>
 		</repository>
 	</repositories>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -47,8 +46,6 @@
 		<amqp.client>3.5.6</amqp.client>
 		<com.orbitz.consul.version>0.13.3</com.orbitz.consul.version>
 	</properties>
-
-
 	<dependencies>
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
