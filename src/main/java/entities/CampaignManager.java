@@ -33,7 +33,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	LineItem li;
 	List<ZoneSet> zonesets;
 	
-	public CampaignManager() {
+	CampaignManager() {
 
 	}
 
@@ -42,12 +42,12 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	}
 
 	public final Optional<Zone> getZone(String byName) {
-		return zonesets.stream().flatMap(z -> z.zones()).filter(Named.nameIs(byName)).findFirst();
+		return zonesets.stream().flatMap(ZoneSet::zones).filter(Named.nameIs(byName)).findFirst();
 //		return li.campaigns.stream().flatMap(Campaign::getZoneSetAssoc).flatMap(ZoneSet::zones)
 //				.filter(Named.nameIs(byName)).findFirst();
 	}
 
-	public final Optional<Banner> getBanner(String byName) {
+	private Optional<Banner> getBanner(String byName) {
 		return li.campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName)).findFirst();
 	}
 	
@@ -61,7 +61,8 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	}
 
 
-	/**
+	// this is not javadoc, comment out
+	/*
 	 * get a zone that may result with the given campaign
 	 * 
 	 * @param forCampaignId
