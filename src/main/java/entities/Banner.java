@@ -22,6 +22,10 @@ public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 		this.id = requireNonNull(id);
 	}
 
+	/**
+	 * A {@link Banner} has a name.
+	 * @return the name of this banner
+	 */
 	@Override
 	public String getName() {
 		return name;
