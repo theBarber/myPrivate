@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
@@ -34,7 +33,6 @@ public class CacheProcessTest extends BaseTest {
 
     public CacheProcessTest() {
 	super();
-	// Class.forName("com.mysql.jdbc.Driver");
 	com.mysql.jdbc.Driver.class.getCanonicalName();
 
 	Given("^We have a connection to WF DB$", () -> {
@@ -47,17 +45,16 @@ public class CacheProcessTest extends BaseTest {
 	    }
 	});
 
-	Given("^limitations for zoneId (\\d+) is (.*) in Workflow DB$", (Integer zoneId, String expectedLimitation) -> {
+	Given("^limitations for zoneId (\\d+) is \\{([^}]+)\\} in Workflow DB$", (Integer zoneId, String expectedLimitation) -> {
 	    try {
 		Statement stmt = conn.createStatement();
 		String sqlQuery = "SELECT limitation FROM adserver.zones where zoneid =" + zoneId;
-		// sut.write("1111111111111111111");
 		ResultSet rs = stmt.executeQuery(sqlQuery);
 		rs.next();
 		sut.write(rs.getString(1));
 		String currentLimitation = rs.getString(1).toString();
-		String[] parts = currentLimitation.split(",");
-		currentLimitation = parts[2];
+//		String[] parts = currentLimitation.split(",");
+//		currentLimitation = parts[2];
 		sut.write(currentLimitation);
 		Assert.assertThat(currentLimitation, Matchers.containsString(expectedLimitation));
 	    } catch (SQLException e) {
@@ -78,12 +75,11 @@ public class CacheProcessTest extends BaseTest {
 		Assert.fail(e.getMessage());
 	    }
 	});
-	And("^limitations for zoneId (\\d+) updated to (.*) in Workflow DB$",
+	And("^limitations for zoneId (\\d+) updated to \\{([^}]+)\\} in Workflow DB$",
 		(Integer zoneId, String newLimitation) -> {
 		    try {
 			Statement stmt = conn.createStatement();
-			String limitation = "[[[41,\"=~\",\"" + newLimitation + "\"]]]";
-			String query = "UPDATE adserver.zones SET limitation ='" + limitation + "' WHERE zoneid='"
+			String query = "UPDATE adserver.zones SET limitation ='" + newLimitation + "' WHERE zoneid='"
 				+ zoneId + "';";
 			sut.write(query);
 			stmt.executeUpdate(query);
@@ -110,7 +106,7 @@ public class CacheProcessTest extends BaseTest {
 	    });
 
 	});
-		When("limitation for zone (.*) in zoneCache is (.*)", (String zoneId, String expectedLimitation) -> {
+		When("limitation for zone (.*) in zoneCache is \\{([^}]+)\\}", (String zoneId, String expectedLimitation) -> {
 			String zoneInfoCmd = "docker exec ut-ramp-uas  adserver --zone " + zoneId;
 			sut.write(zoneInfoCmd);
 
@@ -120,12 +116,15 @@ public class CacheProcessTest extends BaseTest {
 					CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, zoneInfoCmd).withTimeout(2,
 							TimeUnit.MINUTES);
 					zoneCacheExecution.execute();
+					
+					//b.get(zoneCacheExecution.getResult()).
+					sut.write(Stream.of(zoneCacheExecution.getResult().split("\n")).filter(s->s.startsWith("limitation")).findFirst().get());
 					return Stream.of(zoneCacheExecution.getResult().split("\n")).filter(s->s.startsWith("limitation"));
 				} catch (IOException e) {
 					Assert.fail(e.getMessage());
 					throw new UncheckedIOException(e);
 				}
-			}), StreamMatchers.allMatch(Matchers.startsWith(expectedLimitation)));
+			}), StreamMatchers.contains(expectedLimitation));
 		});
 
     }
