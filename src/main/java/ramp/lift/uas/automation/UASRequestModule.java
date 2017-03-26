@@ -69,7 +69,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
 	public UASRequestModule() {
 		setActual(new ArrayList<>());
-		httpclient = HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build())
+		httpclient = HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build())
 				.build();
 		requestSubmitter = Executors.newFixedThreadPool(5);
 	}
