@@ -16,14 +16,17 @@ Scenario: Single experiment group scenario
 #		|name						  	           |active|allocation|isControl|isDefault|
 #		|rampLift_system_tests_experiment_test_1   |1     |33        |0        |0        |
 #		|rampLift_system_tests_experiment_control_1|1     |33        |1        |0        |
-#	And I sleep for 40 seconds 
+
+    Given I change the active flag of experiment group {rampLift_system_tests_experiment_group_1} to {active}   
+	And I sleep for 40 seconds 
 	And I Delete req logs 
-	When I send 1000 times an ad request for zone id {155502} to UAS 
+	When I send 1000 times an ad request for zone id {155605} to UAS 
 	Then The response code is 200 
 	And I calculate the values distribution from log req and column 47 
 	And Experiment named {rampLift_system_tests_experiment_test_1} was selected {33} percent of the time 
 	And Experiment named {rampLift_system_tests_experiment_control_1} was selected {33} percent of the time 
-	And Default experiment was selected {34} percent of the time 
+	And Default experiment was selected {34} percent of the time
+	Given I change the active flag of experiment group {rampLift_system_tests_experiment_group_1} to {deactive}
 	
 Scenario: 2 identical groups scenario including activation/deactivation experiment 
 	Given I create new experiment groups with the following fields 
