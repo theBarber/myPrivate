@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.fail;
@@ -25,24 +27,32 @@ import static org.junit.Assert.fail;
 @RunWith(Cucumber.class)
 
 public class LogDistributionTest extends BaseTest {
-    private HashMap<Integer, HashMap<String, Double>> dist = new HashMap<>();
+    private HashMap<Integer, Map<String, Long>> dist = new HashMap<>();
     public LogDistributionTest(){
         super();
         Given("^I calculate the values distribution from log (req|imp|clk) and column (\\d+)$", (String logFile, Integer index) -> {
             dist.clear();
-            HashMap<String, Double> table = new HashMap<String, Double>();
-            sut.logFor(logFile).readLogs().actual().map(l -> l.get(index)).forEach(s -> {
-                table.computeIfAbsent(s, key -> 1.0);
-                table.computeIfPresent(s,(k, v) -> v+1);
-            });
+            
+            Map<String, Long> table = sut.logFor(logFile).readLogs().actual().collect(Collectors.groupingBy(l->l.get(index),Collectors.counting()));
             dist.put(index, table);
             System.out.println("Log distribution map for column " + index + " is: " + table);
         });
+        
+        Given("^I calculate the values distribution from log (req|imp|clk) group by column (\\d+) {[^}]} where coloumn (\\d+) = (\\d+)$", (String logFile, Integer c1, Integer c2,Integer v) -> {
+//            dist.clear();
+            
+            Map<String, Long> table = sut.logFor(logFile).readLogs().actual().filter(ls->ls.get(c2).equals(v)).collect(Collectors.groupingBy(l->l.get(c1),Collectors.counting()));
+
+//            dist.put(index, table);
+            System.out.println("Log distribution map for column " + c1 + " is: " + table);
+        });
+        
+        
         Given("^I Delete (req|imp|clk|test_file) logs$",(String file)->{
             sut.logFor(file).deleteLogFiles(file,true).actual();
         });
         Then("^value \\{(\\d+)\\} from column \\{(\\d+)\\} appears \\{(\\d+)\\} percent of the time$", (String value, Integer column, Integer percentage) -> {
-            Double numOfAppearances = dist.get(column).values().stream().reduce((a,b)-> a+b).orElse(0.0);
+            Long numOfAppearances = dist.get(column).values().stream().reduce(Long::sum).orElse(0l);
             Double percent = (numOfAppearances == 0.0)? 0.0 : (dist.get(column).get(value)/numOfAppearances) * 100;
             Assert.assertEquals("Column value distribution not accurate for value=" + value, percentage * 1.0, percent, 10.0);
         });
@@ -78,10 +88,10 @@ public class LogDistributionTest extends BaseTest {
 
     private void validateExperimentDistribution(int experimentId, Integer percentage){
         Integer experimentIdColumnNumber = 47;
-        Double numOfAppearances = dist.get(experimentIdColumnNumber).values().stream().reduce((a, b) -> a + b).orElse(0.0);
+        Long numOfAppearances = dist.get(experimentIdColumnNumber).values().stream().reduce(Long::sum).orElse(0l);
         Double percent = (numOfAppearances == 0.0) ?
                         0.0 :
-                        (Optional.ofNullable(dist.get(experimentIdColumnNumber).get(String.valueOf(experimentId))).orElse(0.0) / numOfAppearances) * 100;
+                        (Optional.ofNullable(dist.get(experimentIdColumnNumber).get(String.valueOf(experimentId))).orElse(0l) / numOfAppearances) * 100;
         Assert.assertEquals("Column value distribution not accurate for experiment=" + experimentId, percentage * 1.0,
                         percent, 10.0);
 

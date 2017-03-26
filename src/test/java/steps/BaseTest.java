@@ -59,7 +59,6 @@ public class BaseTest implements En {
 		});
 
 		Before(scenario -> {
-
 			String userName = System.getProperty("user.name");
 			boolean onlyForUser = Boolean.getBoolean("for.user");
 			if (!"jenkins".equals(userName) && onlyForUser

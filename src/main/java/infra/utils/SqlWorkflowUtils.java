@@ -1,10 +1,13 @@
 package infra.utils;
 
+import static org.junit.Assert.fail;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.junit.Assert;
+import org.junit.internal.runners.statements.Fail;
 
 import ramp.lift.uas.automation.SystemUnderTest;
 
@@ -24,7 +27,7 @@ public class SqlWorkflowUtils {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Assert.fail(e.getMessage());
+			fail(e.getMessage());
 		}
 		return limitation;
 	}
@@ -35,10 +38,12 @@ public class SqlWorkflowUtils {
 			String query = "UPDATE adserver.zones SET limitation ='" + newLimitation + "' WHERE zoneid='"
 					+ zoneId + "';";
 			sut.write(query);
-			stmt.executeUpdate(query);
+			if (stmt.executeUpdate(query) != 1) {
+				fail("update limitation in zone " + zoneId + " failed");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Assert.fail(e.getMessage());
+			fail(e.getMessage());
 		}
 	}
 }

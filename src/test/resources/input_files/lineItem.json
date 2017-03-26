@@ -39,7 +39,7 @@
       "deliveryMethod": 4,
       "factor": 110,
       "isRTB": false,
-      "campaignId": 272002,
+      "campaignId": 272887,
       "ioLineItemId": 197420,
       "advertiserId": 0,
       "isSync": false,
@@ -63,8 +63,8 @@
       "CampaignLifetimeStat": null,
       "Banners": [
 		{
-           "bannerId": 1033866,
-           "bannerName": "75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test",
+           "bannerId": 1034505,
+           "bannerName": "75396-197420-272887-Medium Rectangle 300x250--ramp-lift-auto-banner1-test",
            "creativeType": "html",
            "status": 0
         }
@@ -76,7 +76,7 @@
       "deliveryMethod": 0,
       "factor": 110,
       "isRTB": false,
-      "campaignId": 271962,
+      "campaignId": 272888,
       "ioLineItemId": 197420,
       "advertiserId": 20116,
       "isSync": false,
@@ -100,14 +100,14 @@
       "CampaignLifetimeStat": null,
       "Banners": [
 		{
-           "bannerId": 1033837,
-           "bannerName": "75396-197420-270914-Medium Rectangle 300x250-test",
+           "bannerId": 1034506,
+           "bannerName": "75396-197420-272888-Medium Rectangle 300x250-ramp-lift-auto-banner2-test",
            "creativeType": "html",
            "status": 0
         },
         {
-           "bannerId": 1033838,
-           "bannerName": "75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test",
+           "bannerId": 1034507,
+           "bannerName": "75396-197420-272888-Medium Rectangle 300x250-TestCreativeHTML",
            "creativeType": "html",
            "status": 0
         }
