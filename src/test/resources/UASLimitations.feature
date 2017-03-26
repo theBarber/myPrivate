@@ -1,43 +1,41 @@
-@uas 
-@campaign 
 @Sanity
-@Limitation
+@UASLimitationsFiltering
+@Integration
 Feature: UAS limitations filtering 
 
-Background: 
-
-	Given Campaign named {Int-test-FF-targeted} 
-	And Campaign named {Int-test-FF-targeted} limitations are {[]} 
-	And Creative named {Int-test-FF-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
-	And Campaign named {Int-test-FF-targeted} has a creative with banner named {Int-test-FF-targeted-banner} 
-	And Campaign named {Int-test-FF-targeted} is in the zoneset named {Undertone_Testing} 
-	
-	Given Campaign named {Int-test-CH-targeted} 
-	And Campaign named {Int-test-CH-targeted} limitations are {[]} 
-	And Creative named {Int-test-CH-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
-	And Campaign named {Int-test-CH-targeted} has a creative with banner named {Int-test-CH-targeted-banner} 
-	And Campaign named {Int-test-CH-targeted} is in the zoneset named {Undertone_Testing} 
-	
-	Given Campaign named {Int-test-no-limit} 
-	And Campaign named {Int-test-no-limit} limitations are {[]} 
-	And Creative named {Int-test-unlimited-banner} with ad unit id 58. If needed - clone from creative {new} 
-	And Campaign named {Int-test-no-limit} has a creative with banner named {Int-test-unlimited-banner} 
-	And Campaign named {Int-test-no-limit} is in the zoneset named {Undertone_Testing} 
-	
-	Given Campaign named {Int-test-check-adselector-default-2} 
-	And Creative named {Int-test-adselctor-default-value-2} with ad unit id 58. If needed - clone from creative {new} 
-	And Campaign named {Int-test-check-adselector-default-2} is in the zoneset named {Undertone_Testing} 
-	And Campaign named {Int-test-check-adselector-default-2} has a creative with banner named {Int-test-adselctor-default-value-2} 
-	
-	Given Campaign named {Int-test-IE-targeted} 
-	And Creative named {Int-test-IE-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
-	
-	And Campaign named {Int-test-IE-targeted} has a creative with banner named {Int-test-IE-targeted-banner} 
-	And Campaign named {Int-test-IE-targeted} is in the zoneset named {Undertone_Testing} 
-	
-	Given Zone named {INT00 - Billboard 970x250 - _44732_MediaMind_Billboard} is in the zoneset named {_44732_pub certification_IAB_RisingStars} 
-	Given Zone named {INT00 - Billboard 970x250 - _44732_Pointroll_Billboard} is in the zoneset named {_44732_pub certification_IAB_RisingStars} 
-	
+#Background: 
+#	Given Campaign named {Int-test-FF-targeted} 
+#	And Campaign named {Int-test-FF-targeted} limitations are {[]} 
+#	And Creative named {Int-test-FF-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
+#	And Campaign named {Int-test-FF-targeted} has a creative with banner named {Int-test-FF-targeted-banner} 
+#	And Campaign named {Int-test-FF-targeted} is in the zoneset named {Undertone_Testing} 
+#	
+#	Given Campaign named {Int-test-CH-targeted} 
+#	And Campaign named {Int-test-CH-targeted} limitations are {[]} 
+#	And Creative named {Int-test-CH-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
+#	And Campaign named {Int-test-CH-targeted} has a creative with banner named {Int-test-CH-targeted-banner} 
+#	And Campaign named {Int-test-CH-targeted} is in the zoneset named {Undertone_Testing} 
+#	
+#	Given Campaign named {Int-test-no-limit} 
+#	And Campaign named {Int-test-no-limit} limitations are {[]} 
+#	And Creative named {Int-test-unlimited-banner} with ad unit id 58. If needed - clone from creative {new} 
+#	And Campaign named {Int-test-no-limit} has a creative with banner named {Int-test-unlimited-banner} 
+#	And Campaign named {Int-test-no-limit} is in the zoneset named {Undertone_Testing} 
+#	
+#	Given Campaign named {Int-test-check-adselector-default-2} 
+#	And Creative named {Int-test-adselctor-default-value-2} with ad unit id 58. If needed - clone from creative {new} 
+#	And Campaign named {Int-test-check-adselector-default-2} is in the zoneset named {Undertone_Testing} 
+#	And Campaign named {Int-test-check-adselector-default-2} has a creative with banner named {Int-test-adselctor-default-value-2} 
+#	
+#	Given Campaign named {Int-test-IE-targeted} 
+#	And Creative named {Int-test-IE-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
+#	
+#	And Campaign named {Int-test-IE-targeted} has a creative with banner named {Int-test-IE-targeted-banner} 
+#	And Campaign named {Int-test-IE-targeted} is in the zoneset named {Undertone_Testing} 
+#	
+#	Given Zone named {INT00 - Billboard 970x250 - _44732_MediaMind_Billboard} is in the zoneset named {_44732_pub certification_IAB_RisingStars} 
+#	Given Zone named {INT00 - Billboard 970x250 - _44732_Pointroll_Billboard} is in the zoneset named {_44732_pub certification_IAB_RisingStars} 
+#	
 Scenario: Upload new plan to S3 
 	Given I upload a new solver plan with the following slices 
 		| {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Nexage)}         ,"slice_id":"${guid}","banner_id":"${workflow.banner(Int-test-FF-targeted-banner)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - Tracking Pixel (1x1) - _40243_Nexage)}      ]}]},"buy_at_most":2000}]}   |
@@ -95,7 +93,6 @@ Scenario: limitations testing - 3 banners, 2 of them with limitations
 	And The impressionUrl has bannerid field matching the id of the banner named {Int-test-FF-targeted-banner} 17% of the time 
 	And The impressionUrl has bannerid field matching the id of the banner named {Int-test-CH-targeted-banner} 17% of the time 
 	And The impressionUrl has bannerid field matching the id of the banner named {Int-test-unlimited-banner} 66% of the time 
-	
 	
 	
 Scenario: Restore original plan to S3 

@@ -1,5 +1,5 @@
-@uas 
-@campaign
+@UASIntegrationWithAdSelector
+@Integration
 @Sanity-basic
 Feature: UAS Integration with Ad Selector 
 
@@ -7,7 +7,7 @@ Background: zones and campaigns etc, exists
 	Given Zoneset named {hwu zonesets}
 	Given Zone named {qa.undertone.com - Full Banner} is in the zoneset named {hwu zonesets}
 	Given Zone named {qa.undertone.com - Half Banner} is in the zoneset named {hwu zonesets}
-#	Given Zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)}  is in the zoneset named {hwu zonesets}
+	Given Zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)}  is in the zoneset named {hwu zonesets}
 
 Scenario: Upload new plan to S3 
 	Given I upload a new solver plan with the following slices 
