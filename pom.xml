@@ -15,7 +15,6 @@
 			<url>http://jcenter.bintray.com</url>
 		</repository>
 	</repositories>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -152,6 +151,11 @@
 			<groupId>org.immutables</groupId>
 			<artifactId>value</artifactId>
 			<version>2.1.19</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-picocontainer</artifactId>
+			<version>1.2.2</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -1,4 +1,5 @@
 @rabbitmq 
+@Integration
 Feature: RMQ integration 
 Scenario: 
 	Put request on RabbitMQ and getting possitive reply from RabbitMQ with one of the banners id 

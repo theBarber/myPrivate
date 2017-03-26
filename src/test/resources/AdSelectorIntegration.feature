@@ -1,5 +1,5 @@
-@uas 
-@campaign 
+@UASIntegrationWithAdSelector
+@Integration
 Feature: UAS Integration with Ad Selector 
 
 Background: zones and campaigns etc, exists
