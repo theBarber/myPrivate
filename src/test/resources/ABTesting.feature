@@ -1,17 +1,22 @@
 @ABTesting
 @Integration
+@campaign
+@hardcoded
+@ramp_admin_db 
 Feature: A/B testing functionality 
 
-@Sanity 
+@Sanity
+@cli
+@uas
 Scenario: Single experiment group scenario 
-	Given I create new experiment groups with the following fields 
-		|name						  			 |active|startDate            |endDate              |adUnits|zoneTypes|lbTraffic|
-		|rampLift_system_tests_experiment_group_1|1     |2017-01-01 00:00:00  |2020-01-01 00:00:00  |1      |RON      |2        |
-	And I create new experiments for group named {rampLift_system_tests_experiment_group_1} with the following fields 
-		|name						  	           |active|allocation|isControl|isDefault|
-		|rampLift_system_tests_experiment_test_1   |1     |33        |0        |0        |
-		|rampLift_system_tests_experiment_control_1|1     |33        |1        |0        |
-	And I sleep for 40 seconds 
+#	Given I create new experiment groups with the following fields 
+#		|name						  			 |active|startDate            |endDate              |adUnits|zoneTypes|lbTraffic|
+#		|rampLift_system_tests_experiment_group_1|1     |2017-01-01 00:00:00  |2020-01-01 00:00:00  |1      |RON      |2        |
+#	And I create new experiments for group named {rampLift_system_tests_experiment_group_1} with the following fields 
+#		|name						  	           |active|allocation|isControl|isDefault|
+#		|rampLift_system_tests_experiment_test_1   |1     |33        |0        |0        |
+#		|rampLift_system_tests_experiment_control_1|1     |33        |1        |0        |
+#	And I sleep for 40 seconds 
 	And I Delete req logs 
 	When I send 1000 times an ad request for zone id {155502} to UAS 
 	Then The response code is 200 
