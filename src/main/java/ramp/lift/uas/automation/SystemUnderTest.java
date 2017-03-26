@@ -53,14 +53,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	public synchronized void setup(Scenario scenario, Map<String, String> config) {
 		this.scenarioWriter = new ScenarioWriter(scenario);
 		AtomicReference<RuntimeException> exception = new AtomicReference<>();
-		SETUP_CONF.forEach(tag -> {
+	scenario.getSourceTagNames().forEach(tag -> {
 			switch (tag) {
-			case "cli":
+	    case "@cli":
 				if (uasCliConnections.isEmpty()) {
 					setupCli(config, exception);
 				}
 				break;
-			case "uas":
+	    case "@uas":
 				if (uas == null) {
 					try {
 						uas = new UASRequestModule();
@@ -73,9 +73,9 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				}
 				break;
 
-			case "campaign":
+	    case "@campaign":
 				if (campaignManager == null) {
-					if (scenario.getSourceTagNames().contains("hardcoded")) {
+		    if (scenario.getSourceTagNames().contains("@hardcoded")) {
 						campaignManager = new HardCodedCampaignManager();
 					} else {
 						campaignManager = new RampAppCampaignManager(config.get("ramp.app.consul.host"),
@@ -85,10 +85,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				}
 				break;
 
-			case "ramp_admin_db":
+	    case "@ramp_admin_db":
 				if (rampAdminDbConnector == null) {
 					rampAdminDbConnector = new SqlConnectionModule(config.get("ramp.admin.db.jdbc.connection"),
-							config.get("ramp.admin.db.user"), config.get("ramp.admin.db.password"));
+				    config.get("ramp.admin.db.user"),
+				    config.get("ramp.admin.db.password"));
 					try {
 						rampAdminDbConnector.init();
 					} catch (Exception e) {
@@ -97,7 +98,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				}
 				break;
 
-			case "workflow_db":
+			case "@workflow_db":
 				if (workflowDbConnector == null) {
 					workflowDbConnector = new SqlConnectionModule(config.get("workflow.db.jdbc.connection"),
 							config.get("workflow.db.user"), config.get("workflow.db.password"));
@@ -120,12 +121,12 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		AtomicReference<RuntimeException> exception = new AtomicReference<>();
 		SETUP_CONF.stream().forEach(tag -> {
 			switch (tag) {
-			case "cli":
+	    case "@cli":
 				if (!uasCliConnections.isEmpty()) {
 					teardownCli();
 				}
 				break;
-			case "uas":
+	    case "@uas":
 				if (uas != null) {
 					try {
 						uas.close();
@@ -134,7 +135,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 					}
 				}
 				break;
-			case "campaign":
+	    case "@campaign":
 				if (campaignManager != null) {
 					try {
 						if (campaignManager instanceof Closeable) {
@@ -148,7 +149,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				}
 				break;
 
-			case "ramp_admin_db":
+	    case "@ramp_admin_db":
 				if (rampAdminDbConnector != null) {
 					try {
 						rampAdminDbConnector.close();
@@ -159,7 +160,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				}
 				break;
 
-			case "workflow_db":
+			case "@workflow_db":
 				if (workflowDbConnector != null) {
 					try {
 						workflowDbConnector.close();

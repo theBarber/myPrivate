@@ -1,8 +1,13 @@
 @ABTesting
 @Integration
+@campaign
+@hardcoded
+@ramp_admin_db 
 Feature: A/B testing functionality 
 
-@Sanity 
+@Sanity
+@cli
+@uas
 Scenario: Single experiment group scenario 
 #	Given I create new experiment groups with the following fields 
 #		|name						  			 |active|startDate            |endDate              |adUnits|zoneTypes|lbTraffic|
@@ -13,7 +18,7 @@ Scenario: Single experiment group scenario
 #		|rampLift_system_tests_experiment_control_1|1     |33        |1        |0        |
 #	And I sleep for 40 seconds 
 #	And I Delete req logs 
-	When I send 1000 times an ad request for zone id {155502} to UAS 
+	When I send 1000 times an ad request for zone id {155605} to UAS 
 	Then The response code is 200 
 	And I calculate the values distribution from log req and column 47 
 	And Experiment named {rampLift_system_tests_experiment_control_1} was selected {33} percent of the time 

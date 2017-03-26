@@ -1,9 +1,9 @@
 [{
-	"zonesetId": 62123,
+	"zonesetId": 62185,
     "zonesetName": "zoneset-auto-1-test-dnu",
 	"Zones": [
 	{
-		"zoneId": 155502,
+		"zoneId": 155605,
 		"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test",
 		"adUnitId": 10,
 		"isSync": true,
@@ -13,11 +13,11 @@
 	]
  },
  {
-	"zonesetId": 62130,
+	"zonesetId": 62365,
     "zonesetName": "zoneset-auto-2-test-dnu",
 	"Zones": [
 	{
-		"zoneId": 155510,
+		"zoneId": 156242,
 		"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone2-test-2banners",
 		"adUnitId": 10,
 		"isSync": true,
