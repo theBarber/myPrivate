@@ -38,14 +38,14 @@ public class LogDistributionTest extends BaseTest {
             System.out.println("Log distribution map for column " + index + " is: " + table);
         });
         
-        Given("^I calculate the values distribution from log (req|imp|clk) group by column (\\d+) {[^}]} where coloumn (\\d+) = (\\d+)$", (String logFile, Integer c1, Integer c2,Integer v) -> {
-//            dist.clear();
-            
-            Map<String, Long> table = sut.logFor(logFile).readLogs().actual().filter(ls->ls.get(c2).equals(v)).collect(Collectors.groupingBy(l->l.get(c1),Collectors.counting()));
-
-//            dist.put(index, table);
-            System.out.println("Log distribution map for column " + c1 + " is: " + table);
-        });
+//        Given("^I calculate the values distribution from log (req|imp|clk) group by column (\\d+) {[^}]} where coloumn (\\d+) = (\\d+)$", (String logFile, Integer c1, Integer c2,Integer v) -> {
+////            dist.clear();
+//            
+//            Map<String, Long> table = sut.logFor(logFile).readLogs().actual().filter(ls->ls.get(c2).equals(v)).collect(Collectors.groupingBy(l->l.get(c1),Collectors.counting()));
+//
+////            dist.put(index, table);
+//            System.out.println("Log distribution map for column " + c1 + " is: " + table);
+//        });
         
         
         Given("^I Delete (req|imp|clk|test_file) logs$",(String file)->{

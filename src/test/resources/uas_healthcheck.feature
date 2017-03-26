@@ -1,6 +1,7 @@
 @Sanity
 @uas_healthcheck
 @Integration
+@uas
 Feature: UAS connectivity to other components
 
 @Sanity-basic
