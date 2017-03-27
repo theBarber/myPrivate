@@ -42,17 +42,19 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected SqlConnectionModule rampAdminDbConnector;
 	protected SqlConnectionModule workflowDbConnector;
 	private static SystemUnderTest instance = null;
-	public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
-
+	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
+	private Map<String, String> config;
 	private ScenarioWriter scenarioWriter;
-
+	private AtomicReference<RuntimeException> exception;
+	
 	private SystemUnderTest() {
 		_o = 0;
 	}
 
 	public synchronized void setup(Scenario scenario, Map<String, String> config) {
 		this.scenarioWriter = new ScenarioWriter(scenario);
-		AtomicReference<RuntimeException> exception = new AtomicReference<>();
+		this.config = config;
+		this.exception =  new AtomicReference<>();
 	scenario.getSourceTagNames().forEach(tag -> {
 			switch (tag) {
 	    case "@cli":
@@ -119,14 +121,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public synchronized void teardown(Collection<String> forTags, Map<String, String> config) {
 		AtomicReference<RuntimeException> exception = new AtomicReference<>();
-		SETUP_CONF.stream().forEach(tag -> {
-			switch (tag) {
-	    case "@cli":
+//		SETUP_CONF.stream().forEach(tag -> {
+//			switch (tag) {
+//	    case "@cli":
 				if (!uasCliConnections.isEmpty()) {
 					teardownCli();
 				}
-				break;
-	    case "@uas":
+//				break;
+//	    case "@uas":
 				if (uas != null) {
 					try {
 						uas.close();
@@ -134,8 +136,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						delegate(exception, e);
 					}
 				}
-				break;
-	    case "@campaign":
+//				break;
+//	    case "@campaign":
 				if (campaignManager != null) {
 					try {
 						if (campaignManager instanceof Closeable) {
@@ -147,9 +149,9 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						delegate(exception, e);
 					}
 				}
-				break;
+//				break;
 
-	    case "@ramp_admin_db":
+//	    case "@ramp_admin_db":
 				if (rampAdminDbConnector != null) {
 					try {
 						rampAdminDbConnector.close();
@@ -158,9 +160,9 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						delegate(exception, e);
 					}
 				}
-				break;
+//				break;
 
-			case "@workflow_db":
+//			case "@workflow_db":
 				if (workflowDbConnector != null) {
 					try {
 						workflowDbConnector.close();
@@ -169,12 +171,12 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						delegate(exception, e);
 					}
 				}
-				break;
-			default:
-				break;
-			}
+//				break;
+//			default:
+//				break;
+//			}
 
-		});
+//		});
 
 		throwIfNeeded(exception);
 		if (scenarioWriter != null) {
@@ -192,6 +194,9 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 	public Stream<LinuxDefaultCliConnection> uasCliConnections() {
+	  if (uasCliConnections.isEmpty()) {
+        setupCli(config, exception);
+    }
 		return this.uasCliConnections.values().stream();
 	}
 
@@ -256,6 +261,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 	public UASRequestModule getUASRquestModule() {
+	  if (uas == null) {
+        try {
+            uas = new UASRequestModule();
+            uas.setHost(config.get("uas.host"));
+            uas.setPort(config.get("uas.port"));
+            uas.init();
+        } catch (Exception e) {
+            delegate(exception, e);
+        }
+    }
 		return this.uas;
 	}
 
@@ -268,14 +283,36 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 	public CampaignManager getCampaignManager() {
+	  if (campaignManager == null) {
+                    campaignManager = new HardCodedCampaignManager();
+	  }
 		return campaignManager;
 	}
 
 	public SqlConnectionModule getRampAdminDbConnector() {
+	  if (rampAdminDbConnector == null) {
+        rampAdminDbConnector = new SqlConnectionModule(config.get("ramp.admin.db.jdbc.connection"),
+        config.get("ramp.admin.db.user"),
+        config.get("ramp.admin.db.password"));
+        try {
+            rampAdminDbConnector.init();
+        } catch (Exception e) {
+            delegate(exception, e);
+        }
+    }
 		return rampAdminDbConnector;
 	}
 	
 	public SqlConnectionModule getWorkflowDbConnector() {
+	  if (workflowDbConnector == null) {
+        workflowDbConnector = new SqlConnectionModule(config.get("workflow.db.jdbc.connection"),
+                config.get("workflow.db.user"), config.get("workflow.db.password"));
+        try {
+            workflowDbConnector.init();
+        } catch (Exception e) {
+            delegate(exception, e);
+        }
+    }
 		return workflowDbConnector;
 	}
 
