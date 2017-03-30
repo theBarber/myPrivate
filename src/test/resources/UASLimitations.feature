@@ -54,16 +54,14 @@ Scenario: limitations testing - Single banner with limitation - positive test
 	And The responses has impression-urls 
 	And The impressionUrl has bannerid field matching the id of the banner named {Int-test-FF-targeted-banner} 100% of the time 
 	
-Scenario: 
-	limitations testing - Single banner with limitation - negative test including non-default selection validation 
+Scenario: limitations testing - Single banner with limitation - negative test including non-default selection validation 
 	Given I use {Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)} as user-agent string to send my requests to uas 
 	When I send 100 times an ad request for zone named {INT2434 - Tracking Pixel (1x1) - _40243_Nexage} to UAS 
 	Then The response code is 200 
 	And The impressionUrl has bannerid field matching the id of the banner named {Int-test-IE-targeted-banner} 5% of the time 
 	And The passback ratio should be 95% 
 	
-Scenario: 
-	limitations testing - 2 banners with limitations - positive + negative tests
+Scenario: limitations testing - 2 banners with limitations - positive + negative tests
 	# depends on previous scenario
 	 
 	Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas 

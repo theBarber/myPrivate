@@ -3,11 +3,11 @@
 @Sanity-basic
 Feature: UAS Integration with Ad Selector 
 
-Background: zones and campaigns etc, exists
-	Given Zoneset named {hwu zonesets}
-	Given Zone named {qa.undertone.com - Full Banner} is in the zoneset named {hwu zonesets}
-	Given Zone named {qa.undertone.com - Half Banner} is in the zoneset named {hwu zonesets}
-	Given Zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)}  is in the zoneset named {hwu zonesets}
+#Background: zones and campaigns etc, exists
+#	Given Zoneset named {hwu zonesets}
+#	Given Zone named {qa.undertone.com - Full Banner} is in the zoneset named {hwu zonesets}
+#	Given Zone named {qa.undertone.com - Half Banner} is in the zoneset named {hwu zonesets}
+#	Given Zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)}  is in the zoneset named {hwu zonesets}
 
 Scenario: Upload new plan to S3 
 	Given I upload a new solver plan with the following slices 
@@ -19,22 +19,22 @@ Scenario: Upload new plan to S3
 	And I sleep for 70 seconds 
 	
 Scenario: zone id that exist in zone cache but does not exist it plan 
-	When I send 11 times an ad request for zone named {qa.undertone.com - Half Banner} to UAS 
+	When I send 11 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS 
 	Then The response code is 200 
 	And The responses has impression-urls 
 	
 Scenario: valid banner that not pass all predicates with existing zone 
-	When I send 1 times an ad request for zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)} and zone limitation dma=11 to UAS 
+	When I send 1 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} and zone limitation dma=11 to UAS 
 	Then The response code is 200 
 	And The banner to passback ratio for banner {968473} should be 100% 
 	
 Scenario: valid banner that pass all predicates with existing zone 
-	When I send 1 times an ad request for zone named {QA-INT01 - Half Page Ad 300x600 - INT01N - Half Page Ad (300 x 600)} and zone limitation dma=55 to UAS 
+	When I send 1 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} and zone limitation dma=55 to UAS 
 	Then The response code is 200 
 	And The banner to passback ratio for banner {968473} should be 100% 
 	
 Scenario: banner with buy_at_most limitation 
-	When I send 20 times an ad request for zone named {qa.undertone.com - Full Banner} and zone limitation dma=100 to UAS 
+	When I send 20 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} and zone limitation dma=100 to UAS 
 	Then The response code is 200 
 	And The banner to passback ratio for banner {15} should be 50% 
 	
