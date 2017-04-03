@@ -20,7 +20,7 @@ import infra.utils.SqlWorkflowUtils;
 /**
  * Created by Itay.Pinhassi on 9/28/2016.
  */
-@CucumberOptions(features = "classpath:rbcache_process.feature", plugin = { "pretty",
+@CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = { "pretty",
 		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 

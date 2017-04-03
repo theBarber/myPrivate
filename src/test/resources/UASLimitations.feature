@@ -29,7 +29,6 @@ Feature: UAS limitations filtering
 #	
 #	Given Campaign named {Int-test-IE-targeted} 
 #	And Creative named {Int-test-IE-targeted-banner} with ad unit id 58. If needed - clone from creative {new} 
-#	
 #	And Campaign named {Int-test-IE-targeted} has a creative with banner named {Int-test-IE-targeted-banner} 
 #	And Campaign named {Int-test-IE-targeted} is in the zoneset named {Undertone_Testing} 
 #	
