@@ -13,6 +13,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
@@ -25,7 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -39,6 +43,7 @@ import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
@@ -73,6 +78,16 @@ public class UASIntegrationTest extends BaseTest {
 		(Integer times, String zoneByName) -> {
 		    sendMultipleAdRequests(times, zoneByName, true);
 		});
+
+			When("I send (\\d+) times an ad request with query parameters for zone named \\{([^}]+)\\} to UAS",
+					(Integer times, String zoneByName) -> {
+						sendMultipleAdRequestsWithParams(times, zoneByName, true);
+					});
+
+      When("I send ad requests I sleep (\\d+) millis",
+          (Long millis) -> {
+            sut.getUASRquestModule().thatSleeps(millis);
+          });
 	When("I send (\\d+) times an ad request for zone id \\{(\\d+)\\} to UAS",
 			(Integer times, Integer zoneId) -> {
 			    sendMultipleAdRequests(times, zoneId, true);
@@ -81,7 +96,45 @@ public class UASIntegrationTest extends BaseTest {
 		(Integer times, String zoneByName) -> {
 		    sendMultipleAdRequests(times, zoneByName, false);
 		});
-	
+
+			When("I send (\\d+) additional ad requests with query parameters for zone named \\{([^}]+)\\} to UAS",
+					(Integer times, String zoneByName) -> {
+						sendMultipleAdRequestsWithParams(times, zoneByName, false);
+					});
+
+			When("^I send impression requests to UAS immediately(!)?$", (String exclamationMark) -> {
+        ExecutorService impExecutorService = Executors.newFixedThreadPool(5,new ThreadFactoryBuilder().setNameFormat("Impression Sender").build());
+			  HttpClient httpclient = HttpClients.custom()
+						.setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
+				LongAdder impressionsSent = new LongAdder();
+				sut.getUASRquestModule().responses().parallel().map(UASIntegrationTest::getImpressionUrl).forEach(cf->cf.whenCompleteAsync((impurl,th)->
+					{
+						if (th==null) {
+							impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
+								System.out.println(url);
+								try {
+									HttpResponse response = httpclient.execute(new HttpGet(url));
+
+                  int sc = response.getStatusLine().getStatusCode();
+                  if (sc == 204){
+                    impressionsSent.increment();
+                  }
+									if (response.getEntity() != null) {
+										response.setEntity(new BufferedHttpEntity(response.getEntity()));
+									}
+								} catch (IOException e) {
+									throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+                }
+              });
+						}
+					}
+				,impExecutorService).join());
+        if (null != exclamationMark){
+          assertEquals("Number of impression urls sent", sut.getUASRquestModule().responses().count(),
+              impressionsSent.longValue(), 10d);
+        }
+			});
+
 	Then("The responses? has impression-urls?", () -> {
 	    assertThat(
 		    "all of the responses should have a url", sut.getUASRquestModule().responses()
@@ -93,7 +146,19 @@ public class UASIntegrationTest extends BaseTest {
 	    assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
 		    .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
 	});
-	//
+
+			Then("The responses? are passback?", () -> {
+
+				Map<Boolean,Long> countUrls =
+						sut.getUASRquestModule().responses()
+						.map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join).collect(Collectors.groupingBy(Optional::isPresent ,Collectors.counting()));
+
+				assertThat(
+						"all of the responses should not have an impression url", countUrls.getOrDefault(true,0l),
+						Matchers.is(0l));
+			});
+
+			//
 	// When("I send a request to the first the imperssion urls", ()->{
 	// uas.get().responses()
 	// .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
@@ -225,6 +290,10 @@ public class UASIntegrationTest extends BaseTest {
 	    sut.getUASRquestModule().addHttpHeader("User-Agent", userAgentStr);
 	});
 
+			Given("I add (\\w+) query parameter with value \\{([^}]+)\\} to send my requests to uas", (String paramName, String paramValue) -> {
+				sut.getUASRquestModule().addQueryParam(paramName, paramValue);
+			});
+
 	Then("I reset the http headers sent to uas$", (String userAgentStr) -> {
 	    sut.getUASRquestModule().emptyHttpHeaders();
 	});
@@ -294,6 +363,12 @@ public class UASIntegrationTest extends BaseTest {
 		.orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
 	sut.getUASRquestModule().zoneRequests(zone.getId(), times, toReset);
     }
+
+	private void sendMultipleAdRequestsWithParams(Integer times, String zoneByName, boolean toReset) {
+		Zone zone = sut.getCampaignManager().getZone(zoneByName)
+				.orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+		sut.getUASRquestModule().zoneRequestsWithParams(zone.getId(), times, toReset);
+	}
 
     private void sendMultipleAdRequests(Integer times, Integer zoneId, boolean toReset) {
 	sut.getUASRquestModule().zoneRequests(zoneId, times, toReset);
