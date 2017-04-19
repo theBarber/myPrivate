@@ -27,14 +27,14 @@ import infra.utils.S3Client;
  * Created by nive on 2016-10-30.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:AdSelectorIntegration.feature", plugin = { "pretty",
+@CucumberOptions(features = "classpath:AdSelectorBase.feature", plugin = { "pretty",
         "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" })
-public class AdSelectorIntegrationTest extends BaseTest  {
+public class AdSelectorBaseTest extends BaseTest  {
     private String slice  = "{\"buying_strategy_id\": -1, \"slices\": [{\"banner_id\": 879498, \"weight\": 4, " +
             "\"slice_id\": \"#sliceId#\", \"start_time\": 1477872001, " +
             "\"zone_id\": 144960, \"end_time\": 1477958399, " +
             "\"predicates\": {\"AND\": [{\"==\": [\"body.features.zone_id\", 144960]}]}, \"buy_at_most\": 100}]}";
-    public AdSelectorIntegrationTest(){
+    public AdSelectorBaseTest(){
         super();
 
         Given("^Loading test_plan (.*) to S3 directory (.*)",(String from, String to)-> {
@@ -63,13 +63,11 @@ public class AdSelectorIntegrationTest extends BaseTest  {
             Assert.assertEquals("Total impressions for banner "+bannerId+ " is: "+numOfImp+" out of "+ total+ " responses.", neededRatio, actualRatio, 0.1);
 
         });
-//        "I send (\\d+) times an ad request for zone named \\{([^}]+)\\} and zone limitation (.*) to UAS"
-
-//        When("^I send (\\d+) times an ad request for zone named \\{([^}]+)\\} and zone limitation (.*) to UAS",
-//                (Integer times, String zoneByName, String param) -> {
-//                    Zone zone = sut.getCampaignManager().getZone(zoneByName)
-//                            .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
-//                    sut.getUASRquestModule().zoneRequestsWithGeo(zone.getId(), times, param);
-//                });
+        When("^I send (\\d+) times an ad request for zone named \\{([^}]+)\\} and zone limitation (.*) to UAS",
+                (Integer times, String zoneByName, String param) -> {
+                    Zone zone = sut.getCampaignManager().getZone(zoneByName)
+                            .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+                    sut.getUASRquestModule().zoneRequestsWithGeo(zone.getId(), times, param);
+                });
     }
 }

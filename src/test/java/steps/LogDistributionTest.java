@@ -22,7 +22,7 @@ import static org.junit.Assert.fail;
  * Created by nive on 2017-01-12.
  */
 
-@CucumberOptions(features = "classpath:ABTesting.feature", plugin = { "pretty",
+@CucumberOptions(features = "classpath:LogDistribution.feature", plugin = { "pretty",
         "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 
@@ -91,7 +91,7 @@ public class LogDistributionTest extends BaseTest {
         Long numOfAppearances = dist.get(experimentIdColumnNumber).values().stream().reduce(Long::sum).orElse(0l);
         Double percent = (numOfAppearances == 0.0) ?
                         0.0 :
-                        (Optional.ofNullable(dist.get(experimentIdColumnNumber).get(String.valueOf(experimentId))).orElse(0l) / numOfAppearances) * 100;
+                        (Optional.ofNullable(dist.get(experimentIdColumnNumber).get(String.valueOf(experimentId))).orElse(0l) * 100) / numOfAppearances;
         Assert.assertEquals("Column value distribution not accurate for experiment=" + experimentId, percentage * 1.0,
                         percent, 10.0);
 

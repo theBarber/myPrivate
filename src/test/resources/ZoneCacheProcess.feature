@@ -8,4 +8,4 @@ Scenario: verify UAS* zone cash updated - after updated in limitations
 	When limitations for zoneId 155605 updated to {[[[41,"=~","Opera"]]]} in Workflow DB 
 	And zoneCache refreshed by cmd 
 	Then limitation for zone 155605 in zoneCache contains {Opera} 
-	
+	When limitations for zoneId 155605 updated to {[]} in Workflow DB 

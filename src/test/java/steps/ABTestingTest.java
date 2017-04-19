@@ -1,20 +1,16 @@
 package steps;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.runner.RunWith;
-
 import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
 import entities.ramp.models.Experiment;
 import entities.ramp.models.ExperimentGroup;
 import infra.utils.SqlRampAdminUtils;
+
+import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by AssafM on 11/01/2017.
@@ -31,6 +27,17 @@ public class ABTestingTest extends BaseTest {
 
 	public ABTestingTest() {
 		super();
+		Given("^I set the activation status of experiment group named \\{([^}]+)\\} and his experiments to \\{([^}]+)\\}$",
+            (String experimentGroupName, String activationStatus) -> {
+              int status = 0;
+              if (activationStatus.equals("active")) {
+                status = 1;
+              } 
+              
+              SqlRampAdminUtils.setActivationStatusHierarchy(experimentGroupName, status);
+
+            });
+		
 		Given("^I create new experiment groups with the following fields$", (DataTable experimentGroupsTable) -> {
 			List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
 			latestExperimentGroupIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment_group");
@@ -48,32 +55,17 @@ public class ABTestingTest extends BaseTest {
 
 		And("^I set the activation status of experiment named \\{([^}]+)\\} to \\{(\\d+)\\}$",
 				(String experimentName, Integer activationStatus) -> {
-					SqlRampAdminUtils.setActivationStatusOfExperimentNamed(experimentName, activationStatus);
+					SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "experiment");
 				});
 
 		After(1,scenario -> {
-			try {
-				Connection dbConnection;
-
-				dbConnection = DriverManager.getConnection(config.get("ramp.admin.db.jdbc.connection"),
-						config.get("ramp.admin.db.user"), config.get("ramp.admin.db.password"));
-
-				Statement stmt = dbConnection.createStatement();
-				if (latestExperimentGroupIdBeforeTest > 0) {
-					SqlRampAdminUtils.deleteFromTableFromId(latestExperimentGroupIdBeforeTest, "experiment_group",
-							stmt);
-				}
-
-				if (latestExperimentIdBeforeTest > 0) {
-					SqlRampAdminUtils.deleteFromTableFromId(latestExperimentIdBeforeTest, "experiment", stmt);
-				}
-
-				dbConnection.close();
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		  inactive the test experiment groups and experiments
+			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_single_experiment_group_scenario", 0);
+			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_2_identical_groups_scenario_1", 0); 
+			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_2_identical_groups_scenario_2", 0);      
+			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_multiple_zone_types_scenario_1", 0);  
+			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_multiple_zone_types_scenario_2", 0);  
+//              SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_test_experiment_group", 1);
 		});
 	}
 }
