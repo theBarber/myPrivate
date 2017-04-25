@@ -91,7 +91,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   }
 
   public void zoneRequest(Integer forZone) {
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1";
+    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1&stid=999";
     request(url, true);
   }
 
@@ -100,7 +100,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       reset();
     }
 
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1";
+    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1&stid=999";
 
     for (; times > 0; times--) {
       request(url, false);
@@ -112,7 +112,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       reset();
     }
 
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1";
+    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1&stid=999";
 
     for (NameValuePair nvp : queryParams) {
       url = url + "&" + nvp.toString();
@@ -125,7 +125,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   public void zoneRequestsWithGeo(Integer forZone, int times, String params) {
     reset();
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1" + "&sim_geo=1&" + params;
+    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1stid=999" + "&sim_geo=1&" + params;
 
     for (; times > 0; times--) {
       request(url, false);
@@ -139,7 +139,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   public void healthCheckRequest() {
 
-    String url = "http://" + host + ":" + port + "/health";
+    String url = "http://" + host + ":" + port + "/health?stid=999";
     request(url, true);
   }
 
@@ -159,7 +159,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         skipFlag = 0b0111;
         break;
     }
-    String url = "http://" + host + ":" + port + "/health?skip=" + skipFlag;
+    String url = "http://" + host + ":" + port + "/health?stid=999&skip=" + skipFlag;
     request(url, true);
   }
 
@@ -224,10 +224,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
 
   public Optional<String> getImpressionUrl(String url) {
-    return Optional.of(impressionURLPattern.matcher(url)).filter(Matcher::find)
-        .map( m-> {
-          return new StringBuilder(url).replace(m.start(2),m.end(2),getHost() + ":" + getPort()).toString();
-        });
+    return Optional.of(impressionURLPattern.matcher(url))
+        .filter(Matcher::find)
+        .map(UASRequestModule::getGroup1);
   }
 
   public static Optional<String> getClickUrlFrom(HttpResponse response) {
