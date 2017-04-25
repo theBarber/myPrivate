@@ -50,7 +50,7 @@ Scenario: 2 identical groups scenario including activation/deactivation experime
 	And Experiment named {rampLift_2_identical_groups_scenario_test_1} was selected {20} percent of the time 
 	And Experiment named {rampLift_2_identical_groups_scenario_control_1} was selected {20} percent of the time 
 	And Default experiment was selected {60} percent of the time 
-	
+
 	
 #Scenario: 2 different ad-units + 2 groups scenario 
 ##	Given I create new experiment groups with the following fields 
@@ -80,7 +80,7 @@ Scenario: 2 identical groups scenario including activation/deactivation experime
 
 Scenario: Single experiment group with multiple zone types - the experiment selected
 	Given I set the activation status of experiment group named {rampLift_multiple_zone_types_scenario_1} and his experiments to {active}
-	And I sleep for 250 seconds 
+	And I sleep for 100 seconds 
 	And I Delete req logs 
 	When I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 
@@ -91,7 +91,7 @@ Scenario: Single experiment group with multiple zone types - the experiment sele
 
 Scenario: Single experiment group with multiple zone types - the experiment wasn't selected
 	Given I set the activation status of experiment group named {rampLift_multiple_zone_types_scenario_2} and his experiments to {active}
-	And I sleep for 250 seconds 
+	And I sleep for 150 seconds 
 	And I Delete req logs 
 	When I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 

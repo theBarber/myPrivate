@@ -1,6 +1,6 @@
 @Sanity
 @UASLimitationsFiltering
-@Integration
+#@Integration
 Feature: UAS limitations filtering 
 
 #Background: 
