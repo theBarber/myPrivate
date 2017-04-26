@@ -125,7 +125,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   public void zoneRequestsWithGeo(Integer forZone, int times, String params) {
     reset();
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1stid=999" + "&sim_geo=1&" + params;
+    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&sim_geo=1&" + params;
 
     for (; times > 0; times--) {
       request(url, false);
