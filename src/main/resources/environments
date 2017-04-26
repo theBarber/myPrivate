@@ -21,8 +21,8 @@ staging.de.rabbitmq.routing_key=in1
 staging.de.rabbitmq.queue_name=aliveness-test
 staging.de.rabbitmq.request_message={"metadata":{"callback_queue":"aliveness-test","response_timeout":10,"server_name":"server1"},"body":{"features":{"zone_id":1111111,"brand_name":"","mobile_browser":"","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393","region":"nc","city":"durham","zip":"27707","area_codes":"919/984","gmt_offset":"-400","latitude":35,"longitude":-78,"device":"","os":"","dma":"","country":"us"},"eligible_ads":[{"id":"111111"}]}}
 
-staging.uas.host=172.31.48.15
-staging.uas.port=9000
+staging.uas.host=stgads.undertone.com
+staging.uas.port=80
 
 staging.as.solver_plan.file_path = ramp-optimization/runtime/hourly/solver
 staging.as.solver_plan.file_name = solver_plan_integration_test_20201031_170101.json
