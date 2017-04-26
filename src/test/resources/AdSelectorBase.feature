@@ -29,6 +29,5 @@ Scenario: valid banner that pass all predicates with existing zone
 	
 Scenario: Restore original plan to S3 
 	Then I restore the original solver plan 
-	And I will finish testing 
-	And I sleep for 70 seconds
+	And I will finish testing
 	
