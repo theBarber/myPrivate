@@ -46,4 +46,19 @@ public class SqlWorkflowUtils {
 			fail(e.getMessage());
 		}
 	}
+	
+	public static void setColumnInWorkflow(String tableName, String columnName, String columnValue, String columnNameToChange, String columnValueToChange) {
+      try {
+          Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
+          String query = "UPDATE adserver." + tableName + " SET " + columnNameToChange + " ='" + columnValueToChange + "' WHERE " + columnName + "='"
+                  + columnValue + "';";
+          sut.write(query);
+          if (stmt.executeUpdate(query) != 1) {
+              fail("update " + columnNameToChange + " to " + columnValueToChange + " failed");
+          }
+      } catch (SQLException e) {
+          e.printStackTrace();
+          fail(e.getMessage());
+      }
+  }
 }

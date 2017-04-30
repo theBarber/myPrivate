@@ -9,7 +9,6 @@ Scenario: Upload new plan to S3
 		|{"buying_strategy_id": -1, "slices": [{"banner_id": 1040820, "weight": 10000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 156242, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 156242]}, {"==": ["body.features.dma", 99999]}]}, "buy_at_most": 100}]}|
 		|{"buying_strategy_id": -1, "slices": [{"banner_id": 1040820, "weight": 10000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 156242, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 156242]}, {"==": ["body.features.dma", 55]}]}, "buy_at_most": 100}]}   |
 		|{"buying_strategy_id": -1, "slices": [{"banner_id": 1040819, "weight": 1000000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 156242, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 156242]}, {"==": ["body.features.dma", 100]}]}, "buy_at_most": 10}]}   |
-	Then I will be able to start testing 
 	And I sleep for 70 seconds 
 	
 Scenario: zone id that exist in zone cache but does not exist in plan 
@@ -29,5 +28,4 @@ Scenario: valid banner that pass all predicates with existing zone
 	
 Scenario: Restore original plan to S3 
 	Then I restore the original solver plan 
-	And I will finish testing
 	

@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import ramp.lift.uas.automation.UASRequestModule;
 
-@CucumberOptions(features = "classpath:uas_healthcheck.feature", plugin = { "pretty",
+@CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",
 		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 public class UASHealthCheckTest extends BaseTest {

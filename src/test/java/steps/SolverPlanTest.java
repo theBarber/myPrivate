@@ -36,13 +36,13 @@ public class SolverPlanTest extends BaseTest {
 		    .map(parameterPlaceholderParser::replacePlaceholderOf).collect(Collectors.toList());
 	    uploadNew(slicesAsList);
 	});
-	Then("^I will be able to start testing$", () -> {
-	});
+//	Then("^I will be able to start testing$", () -> {
+//	});
 	Then("^I restore the original solver plan$", () -> {
 	    RestoreOriginal();
 	});
-	And("^I will finish testing$", () -> {
-	});
+//	And("^I will finish testing$", () -> {
+//	});
     }
 
     private void uploadNew(List<String> slices) {

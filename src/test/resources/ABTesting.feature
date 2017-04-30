@@ -1,5 +1,5 @@
 @ABTesting
-@Integration
+#@Integration
 @campaign
 @hardcoded
 @ramp_admin_db 

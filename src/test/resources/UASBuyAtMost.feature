@@ -1,6 +1,6 @@
 @Sanity
 @UASBuyAtMost
-@Integration
+#@Integration
 @hardcoded
 Feature: UAS buy at most
 
