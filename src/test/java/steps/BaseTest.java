@@ -41,18 +41,33 @@ public class BaseTest implements En {
 	public BaseTest() {
 		environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
 		String environmentNameConfigPrefix = environmentName + ".";
+		String allEnvironmentsNameDefaultConfigPrefix = "*.";
+		String allEnvironmentsNameOverrideConfigPrefix = "-.";
+		
 		Properties properties = new Properties();
 		try {
 			properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
 		} catch (IOException ioException) {
 			Assert.fail("load configuration failed: " + ioException.getMessage());
 		}
+	      properties.forEach((k, v) -> {
+            String configurationKey = k.toString(), value = v.toString();
+            if (configurationKey.startsWith(allEnvironmentsNameDefaultConfigPrefix)) {
+                config.put(configurationKey.substring(allEnvironmentsNameDefaultConfigPrefix.length()), value);
+            }
+        });
 		properties.forEach((k, v) -> {
 			String configurationKey = k.toString(), value = v.toString();
 			if (configurationKey.startsWith(environmentNameConfigPrefix)) {
 				config.put(configurationKey.substring(environmentNameConfigPrefix.length()), value);
 			}
 		});
+	    properties.forEach((k, v) -> {
+            String configurationKey = k.toString(), value = v.toString();
+            if (configurationKey.startsWith(allEnvironmentsNameOverrideConfigPrefix)) {
+                config.put(configurationKey.substring(allEnvironmentsNameOverrideConfigPrefix.length()), value);
+            }
+        });
 
 		After(scenario -> {
 			sut.teardown(scenario.getSourceTagNames(), config);
