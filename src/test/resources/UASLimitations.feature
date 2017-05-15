@@ -1,3 +1,4 @@
+@Integration
 @Sanity
 @UASLimitationsFiltering
 @cli
