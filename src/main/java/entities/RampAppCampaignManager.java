@@ -227,7 +227,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
 			}
 			Optional<Campaign> campaignResult = getCampaign(campaignName);
-			campaignResult.ifPresent(this.li.campaigns::add);
+			//campaignResult.ifPresent(this.io.lineItems().campaigns::add);
 			return campaignResult;
 		} catch (Exception e) {
 			return Optional.empty();

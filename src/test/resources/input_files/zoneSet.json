@@ -25,5 +25,19 @@
 		"status": 0
 	}
 	]
+ },
+ {
+	"zonesetId": 63225,
+    "zonesetName": "zoneset-auto-3-test-dnu",
+	"Zones": [
+	{
+		"zoneId": 158810,
+		"zoneName": "INT2434 - See Through - ramp-lift-auto-zone-limitations-test",
+		"adUnitId": 83,
+		"isSync": true,
+		"isSecure": false,
+		"status": 0
+	}
+	]
  }
  ]

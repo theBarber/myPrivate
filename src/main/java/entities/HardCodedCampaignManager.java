@@ -25,7 +25,7 @@ public class HardCodedCampaignManager extends CampaignManager {
 
 	public void initLineItem() {
 		try {
-			this.li = m.readValue(ClassLoader.class.getResourceAsStream(LINEITEM_FILE), LineItem.class);
+			this.io = m.readValue(ClassLoader.class.getResourceAsStream(LINEITEM_FILE), IO.class);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

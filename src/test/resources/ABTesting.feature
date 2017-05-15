@@ -1,5 +1,4 @@
 @ABTesting
-#@Integration
 @campaign
 @hardcoded
 @ramp_admin_db 
@@ -15,6 +14,7 @@ Background: inactive all the experiments and experiment groups
 	Given I set the activation status of experiment group named {rampLift_multiple_zone_types_scenario_1} and his experiments to {inactive}
 	Given I set the activation status of experiment group named {rampLift_multiple_zone_types_scenario_2} and his experiments to {inactive}
 	Given I set the activation status of experiment group named {rampLift_adUnit_scenario} and his experiments to {inactive}
+	Given I set the activation status of experiment group named {rampLift_NDQ_scenario} and his experiments to {inactive}
 	
 @Sanity	
 Scenario: 1. Single experiment group scenario
