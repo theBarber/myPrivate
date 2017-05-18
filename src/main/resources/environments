@@ -1,4 +1,6 @@
 staging.workflow.db.jdbc.connection = jdbc:mysql://172.31.32.57/adserver
+integration.workflow.db.jdbc.connection = jdbc:mysql://10.6.7.129/adserver
+
 *.workflow.db.user = adserver
 *.workflow.db.password = adserver
 
