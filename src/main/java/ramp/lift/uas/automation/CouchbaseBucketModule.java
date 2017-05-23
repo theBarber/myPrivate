@@ -51,4 +51,7 @@ public class CouchbaseBucketModule extends AbstractModuleImpl<Void>{
     bucket.upsert(doc);
   }
 
+  public void deleteDocument(String key){
+    bucket.remove(key);
+  }
 }

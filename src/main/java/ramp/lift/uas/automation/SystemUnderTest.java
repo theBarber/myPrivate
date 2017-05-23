@@ -42,7 +42,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected CampaignManager campaignManager;
 	protected SqlConnectionModule rampAdminDbConnector;
 	protected SqlConnectionModule workflowDbConnector;
-	protected CouchbaseBucketModule userinfoBucket;
+	protected CouchbaseBucketModule userInfoBucket;
+	protected CouchbaseBucketModule userHistoryBucket;
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
 	private Map<String, String> config;
@@ -65,10 +66,15 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				}
 				break;
 			case "@userinfo":
-				if (userinfoBucket == null) {
-					userinfoBucket = createUserinfoBucket(config);
+				if (userInfoBucket == null) {
+					userInfoBucket = createCouchbaseBucketModule("user-info", config);
 				}
 				break;
+			case "@userhistory":
+				if (userHistoryBucket == null) {
+					userHistoryBucket = createCouchbaseBucketModule("user-history", config);
+			}
+			break;
 	    case "@uas":
 				if (uas == null) {
 					try {
@@ -126,19 +132,19 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		throwIfNeeded(exception);
 	}
 
-	private CouchbaseBucketModule createUserinfoBucket(Map<String, String> config) {
-		String nodesParam = config.get("couchbase.nodes");
+	private CouchbaseBucketModule createCouchbaseBucketModule(String name, Map<String, String> config) {
+		String nodesParam = config.get(name + ".couchbase.nodes");
 		JsonArray nodesConfig = new JsonParser().parse(nodesParam).getAsJsonArray();
 
 		List<String> nodes = new ArrayList<>(nodesConfig.size());
 		nodesConfig.forEach(jsonElement -> nodes.add(jsonElement.getAsString()));
-		CouchbaseBucketModule userinfoModule = new CouchbaseBucketModule("user-info", nodes);
+		CouchbaseBucketModule module = new CouchbaseBucketModule(name, nodes);
 		try {
-			userinfoModule.init();
+			module.init();
 		} catch (Exception e) {
 			delegate(exception, e);
 		}
-		return userinfoModule;
+		return module;
 	}
 
 	public synchronized void teardown(Collection<String> forTags, Map<String, String> config) {
@@ -149,10 +155,18 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				if (!uasCliConnections.isEmpty()) {
 					teardownCli();
 				}
-				if (userinfoBucket !=null){
+				if (userInfoBucket !=null){
 					try {
-						userinfoBucket.close();
-						userinfoBucket = null;
+						userInfoBucket.close();
+						userInfoBucket = null;
+					} catch (Exception e) {
+						delegate(exception, e);
+					}
+				}
+				if (userHistoryBucket !=null){
+					try {
+						userHistoryBucket.close();
+						userHistoryBucket = null;
 					} catch (Exception e) {
 						delegate(exception, e);
 					}
@@ -347,11 +361,18 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 
-	public CouchbaseBucketModule getUserinfoBucket() {
-		if(userinfoBucket == null){
-			userinfoBucket =  createUserinfoBucket(config);
+	public CouchbaseBucketModule getUserInfoBucket() {
+		if(userInfoBucket == null){
+			userInfoBucket =  createCouchbaseBucketModule("user-info", config);
 		}
-		return userinfoBucket;
+		return userInfoBucket;
+	}
+
+	public CouchbaseBucketModule getUserHistoryBucket() {
+		if(userHistoryBucket == null){
+			userHistoryBucket =  createCouchbaseBucketModule("user-history", config);
+		}
+		return userHistoryBucket;
 	}
 
 	@Override

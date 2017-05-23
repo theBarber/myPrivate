@@ -17,10 +17,13 @@ public class CrossDeviceCappingTest extends BaseTest{
     super();
 
     Given("I add device ([a-zA-Z0-9]*) with record <([^>]*)> to user info graph", (String paramName, String paramValue) -> {
-      sut.getUserinfoBucket().insertDocument(paramName, paramValue);
+      sut.getUserInfoBucket().insertDocument(paramName, paramValue);
+    });
+
+    Then("I delete the history of ([a-zA-Z0-9]*) from user history", (String paramName) -> {
+      sut.getUserHistoryBucket().deleteDocument(paramName);
     });
 
   }
-
 
 }
