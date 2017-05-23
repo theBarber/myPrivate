@@ -7,6 +7,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -41,6 +42,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected CampaignManager campaignManager;
 	protected SqlConnectionModule rampAdminDbConnector;
 	protected SqlConnectionModule workflowDbConnector;
+	protected CouchbaseBucketModule userInfoBucket;
+	protected CouchbaseBucketModule userHistoryBucket;
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
 	private Map<String, String> config;
@@ -62,6 +65,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 					setupCli(config, exception);
 				}
 				break;
+			case "@userinfo":
+				if (userInfoBucket == null) {
+					userInfoBucket = createCouchbaseBucketModule("user-info", config);
+				}
+				break;
+			case "@userhistory":
+				if (userHistoryBucket == null) {
+					userHistoryBucket = createCouchbaseBucketModule("user-history", config);
+			}
+			break;
 	    case "@uas":
 				if (uas == null) {
 					try {
@@ -119,6 +132,21 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		throwIfNeeded(exception);
 	}
 
+	private CouchbaseBucketModule createCouchbaseBucketModule(String name, Map<String, String> config) {
+		String nodesParam = config.get(name + ".couchbase.nodes");
+		JsonArray nodesConfig = new JsonParser().parse(nodesParam).getAsJsonArray();
+
+		List<String> nodes = new ArrayList<>(nodesConfig.size());
+		nodesConfig.forEach(jsonElement -> nodes.add(jsonElement.getAsString()));
+		CouchbaseBucketModule module = new CouchbaseBucketModule(name, nodes);
+		try {
+			module.init();
+		} catch (Exception e) {
+			delegate(exception, e);
+		}
+		return module;
+	}
+
 	public synchronized void teardown(Collection<String> forTags, Map<String, String> config) {
 		AtomicReference<RuntimeException> exception = new AtomicReference<>();
 //		SETUP_CONF.stream().forEach(tag -> {
@@ -126,6 +154,22 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 //	    case "@cli":
 				if (!uasCliConnections.isEmpty()) {
 					teardownCli();
+				}
+				if (userInfoBucket !=null){
+					try {
+						userInfoBucket.close();
+						userInfoBucket = null;
+					} catch (Exception e) {
+						delegate(exception, e);
+					}
+				}
+				if (userHistoryBucket !=null){
+					try {
+						userHistoryBucket.close();
+						userHistoryBucket = null;
+					} catch (Exception e) {
+						delegate(exception, e);
+					}
 				}
 //				break;
 //	    case "@uas":
@@ -314,6 +358,21 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
         }
     }
 		return workflowDbConnector;
+	}
+
+
+	public CouchbaseBucketModule getUserInfoBucket() {
+		if(userInfoBucket == null){
+			userInfoBucket =  createCouchbaseBucketModule("user-info", config);
+		}
+		return userInfoBucket;
+	}
+
+	public CouchbaseBucketModule getUserHistoryBucket() {
+		if(userHistoryBucket == null){
+			userHistoryBucket =  createCouchbaseBucketModule("user-history", config);
+		}
+		return userHistoryBucket;
 	}
 
 	@Override
