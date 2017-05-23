@@ -24,6 +24,14 @@ public class CrossDeviceCappingTest extends BaseTest{
       sut.getUserHistoryBucket().deleteDocument(paramName);
     });
 
+
+    Given("I add cookie (\\w+) with value \\{([^}]+)\\} to my requests to uas", (String paramName, String paramValue) -> {
+      sut.getUASRquestModule().addCookie(paramName, paramValue);
+    });
+
+    Given("I clear all cookies from uas requests", () -> {
+      sut.getUASRquestModule().clearCookies();
+    });
   }
 
 }
