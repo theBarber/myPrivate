@@ -37,3 +37,5 @@ integration.uas.port=9000
 # staging.ramp.app.consul.host=consul-staging.ramp-ut.io
 # staging.ramp.app.consul.port=8500
 # staging.ramp.test.lineItemId=[198082]
+
+*.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]

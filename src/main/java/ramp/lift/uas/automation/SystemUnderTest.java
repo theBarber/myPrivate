@@ -7,6 +7,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -41,6 +42,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected CampaignManager campaignManager;
 	protected SqlConnectionModule rampAdminDbConnector;
 	protected SqlConnectionModule workflowDbConnector;
+	protected CouchbaseBucketModule userinfoBucket;
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
 	private Map<String, String> config;
@@ -60,6 +62,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	    case "@cli":
 				if (uasCliConnections.isEmpty()) {
 					setupCli(config, exception);
+				}
+				break;
+			case "@userinfo":
+				if (userinfoBucket == null) {
+					userinfoBucket = createUserinfoBucket(config);
 				}
 				break;
 	    case "@uas":
@@ -119,6 +126,21 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		throwIfNeeded(exception);
 	}
 
+	private CouchbaseBucketModule createUserinfoBucket(Map<String, String> config) {
+		String nodesParam = config.get("couchbase.nodes");
+		JsonArray nodesConfig = new JsonParser().parse(nodesParam).getAsJsonArray();
+
+		List<String> nodes = new ArrayList<>(nodesConfig.size());
+		nodesConfig.forEach(jsonElement -> nodes.add(jsonElement.getAsString()));
+		CouchbaseBucketModule userinfoModule = new CouchbaseBucketModule("user-info", nodes);
+		try {
+			userinfoModule.init();
+		} catch (Exception e) {
+			delegate(exception, e);
+		}
+		return userinfoModule;
+	}
+
 	public synchronized void teardown(Collection<String> forTags, Map<String, String> config) {
 		AtomicReference<RuntimeException> exception = new AtomicReference<>();
 //		SETUP_CONF.stream().forEach(tag -> {
@@ -126,6 +148,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 //	    case "@cli":
 				if (!uasCliConnections.isEmpty()) {
 					teardownCli();
+				}
+				if (userinfoBucket !=null){
+					try {
+						userinfoBucket.close();
+						userinfoBucket = null;
+					} catch (Exception e) {
+						delegate(exception, e);
+					}
 				}
 //				break;
 //	    case "@uas":
@@ -314,6 +344,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
         }
     }
 		return workflowDbConnector;
+	}
+
+
+	public CouchbaseBucketModule getUserinfoBucket() {
+		if(userinfoBucket == null){
+			userinfoBucket =  createUserinfoBucket(config);
+		}
+		return userinfoBucket;
 	}
 
 	@Override
