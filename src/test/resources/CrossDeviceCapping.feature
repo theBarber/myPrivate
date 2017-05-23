@@ -2,6 +2,7 @@
 @CrossDeviceCapping
 @userinfo
 @userhistory
+@uas
 Feature: Cross Device Capping
 
   Scenario: Upload user graph to couchbase

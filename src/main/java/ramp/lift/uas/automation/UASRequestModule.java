@@ -26,11 +26,15 @@ import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicHeader;
 
 import infra.module.AbstractModuleImpl;
@@ -78,6 +82,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   private String port;
   private long withSleepInMillis = 0l;
   protected CloseableHttpClient httpclient;
+  HttpClientContext context;
   List<Header> httpHeaders = new ArrayList<Header>();
   List<NameValuePair> queryParams = new ArrayList<>();
 
@@ -88,6 +93,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         .build();
     requestSubmitter = Executors.newFixedThreadPool(5, new ThreadFactoryBuilder()
         .setNameFormat("Ad request submitter").build());
+
+    CookieStore cookieStore = new BasicCookieStore();
+    context = HttpClientContext.create();
+    context.setCookieStore(cookieStore);
   }
 
   public void zoneRequest(Integer forZone) {
@@ -172,7 +181,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       try {
         HttpGet get = new HttpGet(url);
         get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
-        HttpResponse response = httpclient.execute(get);
+        HttpResponse response = httpclient.execute(get, context);
         response.setEntity(new BufferedHttpEntity(response.getEntity()));
         try {
           if (withSleepInMillis > 0){
@@ -261,5 +270,16 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   public void emptyQueryParams() {
     queryParams.clear();
+  }
+
+  public void addCookie(String key, String value) {
+    BasicClientCookie cookie = new BasicClientCookie(key, value);
+    cookie.setDomain("stgads.undertone.com");
+    cookie.setPath("/");
+    context.getCookieStore().addCookie(cookie);
+  }
+
+  public void clearCookies() {
+    context.getCookieStore().clear();
   }
 }
