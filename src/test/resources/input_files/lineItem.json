@@ -13,7 +13,7 @@
 				"name": "Desktop In-Page Blend"
 			},
 
-			"Campaigns": 
+			"Campaigns":
 			[
 				{
 					"campaignId": 270477,
@@ -81,7 +81,90 @@
 				}
 			]
 		},
+		{
+			"ioLineItemId": 209943,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 175,
+				"name": "See-Through"
+			},
 
+			"Campaigns":
+			[
+				{
+					"campaignId": 277924,
+					"campaignName": "75396-209943-1-test-2",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							64185
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1079324,
+							"bannerName": "75396-209943-277924-See Through-RampLift-1"
+						}
+					],
+
+					"isUnlimited": false,
+					"CDM": 4
+				}
+			]
+		},
+		{
+			"ioLineItemId": 209942,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 175,
+				"name": "See-Through"
+			},
+
+			"Campaigns":
+			[
+				{
+					"campaignId": 277923,
+					"campaignName": "75396-209942-1-Test-3",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							64186
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1079323,
+							"bannerName": "75396-209942-277923-See Through-RampLift-1"
+						}
+					],
+
+					"isUnlimited": false,
+					"CDM": 4
+				}
+			]
+		},
 		{
 			"ioLineItemId": 208153,
 			"pricingConvention": "CPM",
