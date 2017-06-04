@@ -30,6 +30,7 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -82,6 +83,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   private String port;
   private long withSleepInMillis = 0l;
   protected CloseableHttpClient httpclient;
+
+  public HttpClientContext getContext() {
+    return context;
+  }
+
   HttpClientContext context;
   List<Header> httpHeaders = new ArrayList<Header>();
   List<NameValuePair> queryParams = new ArrayList<>();
@@ -179,8 +185,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
     actual().add(CompletableFuture.supplyAsync(() -> {
       try {
+        System.out.println("Zone Request to: " + url);
         HttpGet get = new HttpGet(url);
         get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+        context.getCookieStore().getCookies().stream().filter(c -> c.getName().equals("UTID")).map(Cookie::getValue)
+          .map (s->"UTID = " + s ).forEach(System.out::println);
         HttpResponse response = httpclient.execute(get, context);
         response.setEntity(new BufferedHttpEntity(response.getEntity()));
         try {

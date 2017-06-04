@@ -39,7 +39,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.CoreMatchers;
@@ -106,14 +108,20 @@ public class UASIntegrationTest extends BaseTest {
         ExecutorService impExecutorService = Executors.newFixedThreadPool(5,new ThreadFactoryBuilder().setNameFormat("Impression Sender").build());
 			  HttpClient httpclient = HttpClients.custom()
 						.setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
+				final HttpClientContext ctx = sut.getContext();
 				LongAdder impressionsSent = new LongAdder();
 				sut.getUASRquestModule().responses().parallel().map(UASIntegrationTest::getImpressionUrl).forEach(cf->cf.whenCompleteAsync((impurl,th)->
 					{
 						if (th==null) {
 							impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
-								System.out.println(url);
+								synchronized (System.out) {
+									System.out.println(url);
+									ctx.getCookieStore().getCookies().stream().filter(c -> c.getName().equals("UTID")).map(Cookie::getValue)
+										.forEach(System.out::println);
+								}
 								try {
-									HttpResponse response = httpclient.execute(new HttpGet(url));
+
+									HttpResponse response = httpclient.execute(new HttpGet(url), ctx);
 
                   int sc = response.getStatusLine().getStatusCode();
                   if (sc == 204){
@@ -197,7 +205,7 @@ public class UASIntegrationTest extends BaseTest {
 			    theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
 
 		    long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
-		    assertThat("total responses", totalResponses, greaterThan(9l));
+		    assertThat("total responses", totalResponses, greaterThan(0L));
 
 		    double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
 			    .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;

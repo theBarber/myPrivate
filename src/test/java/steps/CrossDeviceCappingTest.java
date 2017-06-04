@@ -3,6 +3,7 @@ package steps;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
+import com.couchbase.client.java.error.DocumentDoesNotExistException;
 
 /**
  * Created by kereng on 5/23/2017.
@@ -21,7 +22,12 @@ public class CrossDeviceCappingTest extends BaseTest{
     });
 
     Then("I delete the history of ([a-zA-Z0-9]*) from user history", (String paramName) -> {
-      sut.getUserHistoryBucket().deleteDocument(paramName);
+      try{
+        sut.getUserHistoryBucket().deleteDocument(paramName);
+      } catch (DocumentDoesNotExistException e) {
+        System.out.println(e.getMessage());
+      }
+
     });
 
 
