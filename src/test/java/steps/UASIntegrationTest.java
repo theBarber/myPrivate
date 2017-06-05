@@ -114,15 +114,8 @@ public class UASIntegrationTest extends BaseTest {
 					{
 						if (th==null) {
 							impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
-								synchronized (System.out) {
-									System.out.println(url);
-									ctx.getCookieStore().getCookies().stream().filter(c -> c.getName().equals("UTID")).map(Cookie::getValue)
-										.forEach(System.out::println);
-								}
 								try {
-
 									HttpResponse response = httpclient.execute(new HttpGet(url), ctx);
-
                   int sc = response.getStatusLine().getStatusCode();
                   if (sc == 204){
                     impressionsSent.increment();
