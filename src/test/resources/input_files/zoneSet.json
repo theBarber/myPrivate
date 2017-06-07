@@ -1,43 +1,71 @@
 [{
 	"zonesetId": 62185,
-    "zonesetName": "zoneset-auto-1-test-dnu",
+	"zonesetName": "zoneset-auto-1-test-dnu",
 	"Zones": [
-	{
-		"zoneId": 155605,
-		"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test",
-		"adUnitId": 10,
-		"isSync": true,
-		"isSecure": false,
-		"status": 0
-	}
+		{
+			"zoneId": 155605,
+			"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test",
+			"adUnitId": 10,
+			"isSync": true,
+			"isSecure": false,
+			"status": 0
+		}
 	]
- },
- {
-	"zonesetId": 62365,
-    "zonesetName": "zoneset-auto-2-test-dnu",
-	"Zones": [
+},
 	{
-		"zoneId": 156242,
-		"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone2-test-2banners",
-		"adUnitId": 10,
-		"isSync": true,
-		"isSecure": false,
-		"status": 0
-	}
-	]
- },
- {
-	"zonesetId": 63225,
-    "zonesetName": "zoneset-auto-3-test-dnu",
-	"Zones": [
+		"zonesetId": 64185,
+		"zonesetName": "test-lift-2-dnu",
+		"Zones": [
+			{
+				"zoneId": 160092,
+				"zoneName": "INT2434 - See Through - Test-Lift2",
+				"adUnitId": 83,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
 	{
-		"zoneId": 158810,
-		"zoneName": "INT2434 - See Through - ramp-lift-auto-zone-limitations-test",
-		"adUnitId": 83,
-		"isSync": true,
-		"isSecure": false,
-		"status": 0
+		"zonesetId": 64186,
+		"zonesetName": "test-lift-3-dnu",
+		"Zones": [
+			{
+				"zoneId": 160093,
+				"zoneName": "INT2434 - See Through - Test-Lift3",
+				"adUnitId": 83,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
+	{
+		"zonesetId": 62365,
+		"zonesetName": "zoneset-auto-2-test-dnu",
+		"Zones": [
+			{
+				"zoneId": 156242,
+				"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone2-test-2banners",
+				"adUnitId": 10,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
+	{
+		"zonesetId": 63225,
+		"zonesetName": "zoneset-auto-3-test-dnu",
+		"Zones": [
+			{
+				"zoneId": 158810,
+				"zoneName": "INT2434 - See Through - ramp-lift-auto-zone-limitations-test",
+				"adUnitId": 83,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
 	}
-	]
- }
- ]
+]
