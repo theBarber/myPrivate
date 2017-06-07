@@ -25,7 +25,7 @@ public class HardCodedCampaignManager extends CampaignManager {
 
 	public void initLineItem() {
 		try {
-			this.io = m.readValue(ClassLoader.class.getResourceAsStream(LINEITEM_FILE), IO.class);
+			this.io = m.readValue(this.getClass().getResourceAsStream(LINEITEM_FILE), IO.class);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -35,7 +35,7 @@ public class HardCodedCampaignManager extends CampaignManager {
 	
 	public void initZoneSets() {
 		try {
-			this.zonesets =  Arrays.asList(m.readValue(ClassLoader.class.getResourceAsStream(ZONESET_FILE), ZoneSet[].class));
+			this.zonesets =  Arrays.asList(m.readValue(this.getClass().getResourceAsStream(ZONESET_FILE), ZoneSet[].class));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
