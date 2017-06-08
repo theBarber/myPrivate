@@ -115,6 +115,7 @@ public class UASIntegrationTest extends BaseTest {
 						if (th==null) {
 							impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
 								try {
+									url = (url.contains("stid=")) ? url.replaceAll("(&?stid=)(\\d+)", "$1999") : url.concat("&stid=999");
 									HttpResponse response = httpclient.execute(new HttpGet(url), ctx);
                   int sc = response.getStatusLine().getStatusCode();
                   if (sc == 204){

@@ -1,18 +1,26 @@
 package steps;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
+import gherkin.deps.com.google.gson.JsonArray;
+import gherkin.deps.com.google.gson.JsonElement;
+import gherkin.deps.com.google.gson.JsonParser;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.config.SocketConfig;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -26,6 +34,8 @@ import com.couchbase.client.java.error.DocumentDoesNotExistException;
     "infra.RotatingJSONFormatter:target/cucumber/crossDevice_$TIMESTAMP$.json" })
 
 public class CrossDeviceCappingTest extends BaseTest{
+
+  public final String START_REFRESH_CACHE = "start refresh cache";
 
   public CrossDeviceCappingTest() {
     super();
@@ -59,47 +69,49 @@ public class CrossDeviceCappingTest extends BaseTest{
       sut.getUASRquestModule().clearCookies();
     });
     Then("^I refresh staging delivery engine data cache$", () -> {
-      // Write code here that turns the phrase above into concrete actions
-      URIBuilder uriBuilderIad1 = new URIBuilder()
-        .setScheme("http")
-        .setParameter("action","start")
-        .setPath("delivery_engine/refreshCache")
-        .setPort(8877)
-        .setHost("172.31.48.15");
-
-      URIBuilder uriBuilderIad2 = new URIBuilder()
-        .setScheme("http")
-        .setParameter("action","start")
-        .setPath("delivery_engine/refreshCache")
-        .setPort(8877)
-        .setHost("172.31.48.26");
+      JsonArray hostsArray = new JsonParser().parse(config.get("uas.cliconnection.hosts")).getAsJsonArray();
+      CountDownLatch latch = new CountDownLatch(hostsArray.size());
 
       try {
-        URI iad1 = uriBuilderIad1.build();
-        URI iad2 = uriBuilderIad2.build();
 
-        HttpPost postIad1 = new HttpPost(iad1);
-        HttpPost postIad2 = new HttpPost(iad2);
+        for (JsonElement el  : hostsArray) {
+          URIBuilder uriBuilderIad1 = new URIBuilder()
+            .setScheme("http")
+            .setPath("/delivery_engine/refreshCache")
+            .setPort(8877)
+            .setHost(el.getAsString());
 
-        HttpClient httpclient = HttpClients.custom()
-          .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
-        HttpResponse httpResponse1 = httpclient.execute(postIad1);
-        HttpResponse httpResponse2 = httpclient.execute(postIad2);
-        boolean code1 = httpResponse1.getStatusLine().getStatusCode() == 200;
-        boolean code2 = httpResponse2.getStatusLine().getStatusCode() == 200;
-        Assert.assertTrue("status code should be 200", code1);
-        Assert.assertTrue("status code should be 200", code2);
-        // TODO: 05/06/17 need to complete this issue
+          StringEntity entity = new StringEntity("{\"action\":\"start\"}", ContentType.TEXT_PLAIN);
+          URI iad1 = uriBuilderIad1.build();
+          HttpPost postIad1 = new HttpPost(iad1);
+          postIad1.setEntity(entity);
 
+          HttpClient httpclient = HttpClients.custom()
+            .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
+
+          CompletableFuture.runAsync(() -> {
+            try {
+              HttpResponse httpResponse1 = httpclient.execute(postIad1);
+              Assert.assertEquals("status code should be 200", 200, httpResponse1.getStatusLine().getStatusCode());
+              BufferedReader bufferedReader1 =
+                new BufferedReader(new InputStreamReader(httpResponse1.getEntity().getContent()));
+              boolean isRefresh1 = bufferedReader1.lines()
+                .collect(Collectors.joining("\n"))
+                .contains(START_REFRESH_CACHE);
+              Assert.assertTrue("data cache should start refresh", isRefresh1);
+              bufferedReader1.close();
+              latch.countDown();
+            } catch (Exception e) {
+              System.out.println(e.getMessage());
+              Assert.fail("http post fail");
+            }
+          });
+
+        }
+        latch.await(3, TimeUnit.SECONDS);
       } catch (Exception e) {
         System.out.println(e.getMessage());
       }
-
-
-
-
-
-
     });
   }
 
