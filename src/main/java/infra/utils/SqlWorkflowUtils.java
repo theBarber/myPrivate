@@ -54,11 +54,24 @@ public class SqlWorkflowUtils {
                   + columnValue + "';";
           sut.write(query);
           if (stmt.executeUpdate(query) != 1) {
-              fail("update " + columnNameToChange + " to " + columnValueToChange + " failed");
+              System.out.println("update " + columnNameToChange + " to " + columnValueToChange + " failed");
           }
       } catch (SQLException e) {
           e.printStackTrace();
           fail(e.getMessage());
       }
   }
+	
+	public static ResultSet getEntityByName(String tableName, String columnName, String columnValue) {
+	  ResultSet rs = null;
+	  try {
+        Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
+        String sqlQuery = "SELECT * FROM adserver." + tableName + " where " + columnName + " = '" + columnValue + "';";
+        rs = stmt.executeQuery(sqlQuery);
+          rs.next();
+        } catch (SQLException e) {
+          fail("failed to find " + tableName + " name: " + columnName);
+        }
+        return rs;
+	}
 }

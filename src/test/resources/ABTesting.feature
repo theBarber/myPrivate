@@ -10,7 +10,6 @@ Background: inactive all the experiments and experiment groups
 	Given I set the activation status of experiment group named {rampLift_single_experiment_group_scenario} and his experiments to {inactive}
 	Given I set the activation status of experiment group named {rampLift_2_identical_groups_scenario_1} and his experiments to {inactive}
 	Given I set the activation status of experiment group named {rampLift_2_identical_groups_scenario_2} and his experiments to {inactive}
-	Given I set the activation status of experiment group named {rampLift_test_experiment_group} and his experiments to {inactive}
 	Given I set the activation status of experiment group named {rampLift_multiple_zone_types_scenario_1} and his experiments to {inactive}
 	Given I set the activation status of experiment group named {rampLift_multiple_zone_types_scenario_2} and his experiments to {inactive}
 	Given I set the activation status of experiment group named {rampLift_adUnit_scenario} and his experiments to {inactive}
@@ -19,7 +18,7 @@ Background: inactive all the experiments and experiment groups
 @Sanity	
 Scenario: 1. Single experiment group scenario
 	Given I set the activation status of experiment group named {rampLift_single_experiment_group_scenario} and his experiments to {active}
-	And I sleep for 150 seconds 
+	And I sleep for 180 seconds 
 	And I Delete req logs
 	When I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 
@@ -31,7 +30,7 @@ Scenario: 1. Single experiment group scenario
 Scenario: 2. 2 identical groups scenario including activation/deactivation experiment 
 	Given I set the activation status of experiment group named {rampLift_2_identical_groups_scenario_1} and his experiments to {active}
 	Given I set the activation status of experiment group named {rampLift_2_identical_groups_scenario_2} and his experiments to {active}
-	And I sleep for 150 seconds 
+	And I sleep for 180 seconds 
 	And I Delete req logs 
 	When I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 
@@ -43,7 +42,7 @@ Scenario: 2. 2 identical groups scenario including activation/deactivation exper
 	And Default experiment was selected {40} percent of the time
 	And I set the activation status of experiment named {rampLift_2_identical_groups_scenario_test_2} to {0}
 	And I set the activation status of experiment named {rampLift_2_identical_groups_scenario_control_2} to {0}
-	And I sleep for 250 seconds 
+	And I sleep for 180 seconds 
 	And I Delete req logs 
 	And I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 
@@ -54,7 +53,7 @@ Scenario: 2. 2 identical groups scenario including activation/deactivation exper
 
 Scenario: 3. Single experiment group with multiple zone types - the experiment selected
 	Given I set the activation status of experiment group named {rampLift_multiple_zone_types_scenario_1} and his experiments to {active}
-	And I sleep for 150 seconds 
+	And I sleep for 180 seconds 
 	And I Delete req logs 
 	When I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 
@@ -65,7 +64,7 @@ Scenario: 3. Single experiment group with multiple zone types - the experiment s
 
 Scenario: 4. Single experiment group with multiple zone types - the experiment wasn't selected
 	Given I set the activation status of experiment group named {rampLift_multiple_zone_types_scenario_2} and his experiments to {active}
-	And I sleep for 150 seconds 
+	And I sleep for 180 seconds 
 	And I Delete req logs 
 	When I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 
@@ -74,7 +73,7 @@ Scenario: 4. Single experiment group with multiple zone types - the experiment w
 	
 Scenario: 5. Single experiment group - the zone not apply for Ad_unit condition - the experiment wasn't selected
 	Given I set the activation status of experiment group named {rampLift_adUnit_scenario} and his experiments to {active}
-	And I sleep for 150 seconds 
+	And I sleep for 180 seconds 
 	And I Delete req logs 
 	When I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 
