@@ -362,6 +362,7 @@ public class UASIntegrationTest extends BaseTest {
         .forEach(cf -> cf.whenCompleteAsync((impurl, th) -> {
           if (th == null) {
             impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
+              url = (url.contains("stid=")) ? url.replaceAll("&stid=0", "&stid=999") : url.concat("&stid=999");
               System.out.println(url);
               try {
                 HttpResponse response = httpclient.execute(new HttpGet(url));
