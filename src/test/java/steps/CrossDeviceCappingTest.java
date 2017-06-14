@@ -9,10 +9,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonElement;
 import gherkin.deps.com.google.gson.JsonParser;
+import infra.utils.SqlWorkflowUtils;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -112,6 +114,17 @@ public class CrossDeviceCappingTest extends BaseTest{
       } catch (Exception e) {
         System.out.println(e.getMessage());
       }
+    });
+    Given("^I change IO id \\{(\\d+)\\} cross device Capping to \\{([^}]+)\\}$", (String ioId, String cappingState) -> {
+
+      String crossCapping = "1";
+      if (cappingState.equalsIgnoreCase("inactive")) {
+        crossCapping = "0";
+      }
+
+      SqlWorkflowUtils.setColumnInWorkflow("ios","id",ioId,
+        "cap_across_devices", crossCapping);
+
     });
   }
 
