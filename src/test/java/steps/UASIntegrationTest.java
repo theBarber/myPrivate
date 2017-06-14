@@ -104,38 +104,14 @@ public class UASIntegrationTest extends BaseTest {
           sendMultipleAdRequestsWithParams(times, zoneByName, false);
         });
 
-			When("^I send impression requests to UAS immediately(!)?$", (String exclamationMark) -> {
-        ExecutorService impExecutorService = Executors.newFixedThreadPool(5,new ThreadFactoryBuilder().setNameFormat("Impression Sender").build());
-			  HttpClient httpclient = HttpClients.custom()
-						.setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
-				final HttpClientContext ctx = sut.getContext();
-				LongAdder impressionsSent = new LongAdder();
-				sut.getUASRquestModule().responses().parallel().map(UASIntegrationTest::getImpressionUrl).forEach(cf->cf.whenCompleteAsync((impurl,th)->
-					{
-						if (th==null) {
-							impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
-								try {
-									url = (url.contains("stid=")) ? url.replaceAll("&stid=0", "&stid=999") : url.concat("&stid=999");
-									HttpResponse response = httpclient.execute(new HttpGet(url), ctx);
-                  int sc = response.getStatusLine().getStatusCode();
-                  if (sc == 204){
-                    impressionsSent.increment();
-                  }
-									if (response.getEntity() != null) {
-										response.setEntity(new BufferedHttpEntity(response.getEntity()));
-									}
-								} catch (IOException e) {
-									throw new UncheckedIOException("failed to send request (" + url + ") ", e);
-                }
-              });
-						}
-					}
-				,impExecutorService).join());
-        if (null != exclamationMark){
-          assertEquals("Number of impression urls sent", sut.getUASRquestModule().responses().count(),
-              impressionsSent.longValue(), 2);
-				}
-			});
+    When("^I send impression requests to UAS immediately(!)?$", (String exclamationMark) -> {
+      LongAdder impressionsSent = sendImpressionRequestsToUASImmediately();
+
+      if (null != exclamationMark) {
+        assertEquals("Number of impression urls sent", sut.getUASRquestModule().responses().count(),
+          impressionsSent.longValue(), 10d);
+      }
+    });
 
     Then("The responses? has impression-urls?", () -> {
       assertThat(
