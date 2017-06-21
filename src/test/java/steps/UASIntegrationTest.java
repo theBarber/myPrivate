@@ -112,7 +112,14 @@ public class UASIntegrationTest extends BaseTest {
           impressionsSent.longValue(), 10d);
       }
     });
+    When("^I send impression requests to UAS immediately with delta \\{(\\d+)\\}$", (Integer delta) -> {
+      LongAdder impressionsSent = sendImpressionRequestsToUASImmediately();
 
+
+        assertEquals("Number of impression urls sent", sut.getUASRquestModule().responses().count(),
+          impressionsSent.longValue(), delta);
+
+    });
     Then("The responses? has impression-urls?", () -> {
       assertThat(
           "all of the responses should have a url", sut.getUASRquestModule().responses()
@@ -360,15 +367,14 @@ public class UASIntegrationTest extends BaseTest {
     HttpClient httpclient = HttpClients.custom()
         .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
     LongAdder impressionsSent = new LongAdder();
+    final HttpClientContext ctx = sut.getContext();
     sut.getUASRquestModule().responses().parallel().map(UASIntegrationTest::getImpressionUrl)
         .forEach(cf -> cf.whenCompleteAsync((impurl, th) -> {
           if (th == null) {
             impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
               url = (url.contains("stid=")) ? url.replaceAll("&stid=0", "&stid=999") : url.concat("&stid=999");
-              System.out.println(url);
               try {
-                HttpResponse response = httpclient.execute(new HttpGet(url));
-
+                HttpResponse response = httpclient.execute(new HttpGet(url),ctx);
                 int sc = response.getStatusLine().getStatusCode();
                 if (sc == 204) {
                   impressionsSent.increment();
