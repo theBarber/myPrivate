@@ -39,7 +39,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.CoreMatchers;
@@ -104,13 +106,20 @@ public class UASIntegrationTest extends BaseTest {
 
     When("^I send impression requests to UAS immediately(!)?$", (String exclamationMark) -> {
       LongAdder impressionsSent = sendImpressionRequestsToUASImmediately();
-      
+
       if (null != exclamationMark) {
         assertEquals("Number of impression urls sent", sut.getUASRquestModule().responses().count(),
-            impressionsSent.longValue(), 10d);
+          impressionsSent.longValue(), 10d);
       }
     });
+    When("^I send impression requests to UAS immediately with delta \\{(\\d+)\\}$", (Integer delta) -> {
+      LongAdder impressionsSent = sendImpressionRequestsToUASImmediately();
 
+
+        assertEquals("Number of impression urls sent", sut.getUASRquestModule().responses().count(),
+          impressionsSent.longValue(), delta);
+
+    });
     Then("The responses? has impression-urls?", () -> {
       assertThat(
           "all of the responses should have a url", sut.getUASRquestModule().responses()
@@ -173,8 +182,8 @@ public class UASIntegrationTest extends BaseTest {
           assertThat(urlType + " urls grouped by " + fieldName,
               theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
 
-          long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
-          assertThat("total responses", totalResponses, greaterThan(9l));
+		    long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
+		    assertThat("total responses", totalResponses, greaterThan(0L));
 
           double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
               .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
@@ -358,15 +367,14 @@ public class UASIntegrationTest extends BaseTest {
     HttpClient httpclient = HttpClients.custom()
         .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
     LongAdder impressionsSent = new LongAdder();
+    final HttpClientContext ctx = sut.getContext();
     sut.getUASRquestModule().responses().parallel().map(UASIntegrationTest::getImpressionUrl)
         .forEach(cf -> cf.whenCompleteAsync((impurl, th) -> {
           if (th == null) {
             impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
               url = (url.contains("stid=")) ? url.replaceAll("&stid=0", "&stid=999") : url.concat("&stid=999");
-              System.out.println(url);
               try {
-                HttpResponse response = httpclient.execute(new HttpGet(url));
-
+                HttpResponse response = httpclient.execute(new HttpGet(url),ctx);
                 int sc = response.getStatusLine().getStatusCode();
                 if (sc == 204) {
                   impressionsSent.increment();

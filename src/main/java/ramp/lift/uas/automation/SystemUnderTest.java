@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
+import org.apache.http.client.protocol.HttpClientContext;
 import org.junit.Assume;
 
 import cucumber.api.Scenario;
@@ -145,6 +146,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 			delegate(exception, e);
 		}
 		return module;
+	}
+
+	public HttpClientContext getContext() {
+		return uas.getContext();
 	}
 
 	public synchronized void teardown(Collection<String> forTags, Map<String, String> config) {
