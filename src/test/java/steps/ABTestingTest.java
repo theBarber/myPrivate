@@ -60,13 +60,12 @@ public class ABTestingTest extends BaseTest {
 
 		After(1,scenario -> {
 //		  inactive the test experiment groups and experiments
-			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_single_experiment_group_scenario", 0);
-			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_2_identical_groups_scenario_1", 0); 
-			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_2_identical_groups_scenario_2", 0);      
-			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_multiple_zone_types_scenario_1", 0);  
-			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_multiple_zone_types_scenario_2", 0);  
-			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_adUnit_scenario", 0); 
-              SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_test_experiment_group", 0);
+//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_single_experiment_group_scenario", 0);
+//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_2_identical_groups_scenario_1", 0); 
+//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_2_identical_groups_scenario_2", 0);      
+//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_multiple_zone_types_scenario_1", 0);  
+//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_multiple_zone_types_scenario_2", 0);  
+//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_adUnit_scenario", 0); 
 		});
 	}
 }

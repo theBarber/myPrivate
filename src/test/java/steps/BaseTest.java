@@ -22,7 +22,7 @@ import ramp.lift.uas.automation.SystemUnderTest;
 
 public class BaseTest implements En {
 
-	protected SystemUnderTest sut = SystemUnderTest.getInstance();
+	protected static SystemUnderTest sut = SystemUnderTest.getInstance();
 
 	protected final String environmentName;
 	protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
