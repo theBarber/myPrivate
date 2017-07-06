@@ -8,7 +8,7 @@ staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniioj
 staging.ramp.admin.db.user = dev_manager
 staging.ramp.admin.db.password = dev123456
 
-staging.uas.cliconnection.hosts=[172.31.48.15,172.31.48.26]
+staging.uas.cliconnection.hosts=[172.31.48.35,172.31.48.29,172.31.48.8]
 integration.uas.cliconnection.hosts=[172.31.48.11]
 *.uas.cliconnection.user=root
 *.uas.cliconnection.password=

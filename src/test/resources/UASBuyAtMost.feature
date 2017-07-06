@@ -8,7 +8,6 @@ Feature: UAS buy at most
     Given I upload a new solver plan with the following slices
       | {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test)},"slice_id":"${guid}","banner_id":"${workflow.banner(75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test)}      ]}]},"buy_at_most":500}]}   |
     And I sleep for 70 seconds
-    Then I will be able to start testing
 
   Scenario: buy at most testing - Single banner - positive test
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko with BuyAtMostTest} as user-agent string to send my requests to uas

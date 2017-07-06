@@ -6,6 +6,7 @@ import cucumber.api.junit.Cucumber;
 import entities.ramp.models.Experiment;
 import entities.ramp.models.ExperimentGroup;
 import infra.utils.SqlRampAdminUtils;
+import ramp.lift.uas.automation.RampAppRequestModule;
 
 import org.junit.runner.RunWith;
 
@@ -38,6 +39,10 @@ public class ABTestingTest extends BaseTest {
 
             });
 		
+		Given("^Unable all experiment groups$", () -> {
+              SqlRampAdminUtils.unableAllExperimentGroups();
+            });
+		
 		Given("^I create new experiment groups with the following fields$", (DataTable experimentGroupsTable) -> {
 			List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
 			latestExperimentGroupIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment_group");
@@ -57,15 +62,15 @@ public class ABTestingTest extends BaseTest {
 				(String experimentName, Integer activationStatus) -> {
 					SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "experiment");
 				});
+		
+		And("^I update the s3 experiment data$", () -> {
+		  RampAppRequestModule appReqModule = new RampAppRequestModule();
+		  appReqModule.requestToRampApp("http://services-ramp-staging.ramp-ut.io:3002/api/v1/experiments?active=true");
+		});
 
 		After(1,scenario -> {
 //		  inactive the test experiment groups and experiments
-//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_single_experiment_group_scenario", 0);
-//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_2_identical_groups_scenario_1", 0); 
-//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_2_identical_groups_scenario_2", 0);      
-//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_multiple_zone_types_scenario_1", 0);  
-//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_multiple_zone_types_scenario_2", 0);  
-//			  SqlRampAdminUtils.setActivationStatusHierarchy("rampLift_adUnit_scenario", 0); 
+			  SqlRampAdminUtils.unableAllExperimentGroups();
 		});
 	}
 }

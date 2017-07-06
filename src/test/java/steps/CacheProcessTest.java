@@ -43,7 +43,7 @@ public class CacheProcessTest extends BaseTest {
 		When("^zoneCache refreshed by cmd$", () -> {
 			String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
 
-			sut.uasCliConnections().parallel().forEach(conn -> {
+			sut.uasCliConnections().forEach(conn -> {
 				try {
 					sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
 							+ Thread.currentThread().getName());
