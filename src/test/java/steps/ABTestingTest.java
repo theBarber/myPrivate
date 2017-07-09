@@ -68,9 +68,9 @@ public class ABTestingTest extends BaseTest {
 		  appReqModule.requestToRampApp("http://services-ramp-staging.ramp-ut.io:3002/api/v1/experiments?active=true");
 		});
 
-		After(1,scenario -> {
-//		  inactive the test experiment groups and experiments
-			  SqlRampAdminUtils.unableAllExperimentGroups();
-		});
+//		After(1,scenario -> {
+////		  inactive the test experiment groups and experiments
+//			  SqlRampAdminUtils.unableAllExperimentGroups();
+//		});
 	}
 }
