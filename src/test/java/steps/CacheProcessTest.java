@@ -69,7 +69,7 @@ public class CacheProcessTest extends BaseTest {
 
   }
 
-  public void refreshZoneCache() {
+  public static void refreshZoneCache() {
     String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
 
     sut.uasCliConnections().forEach(conn -> {
