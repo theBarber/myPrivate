@@ -8,7 +8,7 @@ staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniioj
 staging.ramp.admin.db.user = dev_manager
 staging.ramp.admin.db.password = dev123456
 
-staging.uas.cliconnection.hosts=[172.31.48.35,172.31.48.29,172.31.48.8]
+staging.uas.cliconnection.hosts=[172.31.48.35]
 integration.uas.cliconnection.hosts=[172.31.48.11]
 *.uas.cliconnection.user=root
 *.uas.cliconnection.password=
@@ -24,9 +24,9 @@ integration.uas.cliconnection.hosts=[172.31.48.11]
 # staging.de.rabbitmq.queue_name=aliveness-test
 # staging.de.rabbitmq.request_message={"metadata":{"callback_queue":"aliveness-test","response_timeout":10,"server_name":"server1"},"body":{"features":{"zone_id":1111111,"brand_name":"","mobile_browser":"","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393","region":"nc","city":"durham","zip":"27707","area_codes":"919/984","gmt_offset":"-400","latitude":35,"longitude":-78,"device":"","os":"","dma":"","country":"us"},"eligible_ads":[{"id":"111111"}]}}
 
-staging.uas.host=stgads.undertone.com
+staging.uas.host=172.31.48.35
 integration.uas.host=172.31.48.11
-staging.uas.port=80
+staging.uas.port=9000
 integration.uas.port=9000
 
 

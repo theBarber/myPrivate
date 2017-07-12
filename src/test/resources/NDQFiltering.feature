@@ -8,8 +8,8 @@
 @uas	
 Feature: NDQ filtering validation
 
-Background: inactive all the experiments and experiment groups
-	Given Unable all experiment groups
+Background: setup
+	Given I setup the db
 
 Scenario: verify NDQ filtering on test experiment level 
 	Given I set the activation status of experiment group named {rampLift_NDQ_scenario} and his experiments to {active}

@@ -64,6 +64,10 @@ public class NDQFilteringTest extends BaseTest {
       assertEquals("Number of impression urls sent as the number of NDQ", experimentNdq,
           impressionsSent.intValue(), 3d);
     });
+    
+    Given("^I setup the db$", () -> {
+      setupDB();
+    });
   }
 }
 
