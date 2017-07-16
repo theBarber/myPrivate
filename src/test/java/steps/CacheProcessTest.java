@@ -70,19 +70,27 @@ public class CacheProcessTest extends BaseTest {
   }
 
   public static void refreshZoneCache() {
-    String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
-
-    sut.uasCliConnections().forEach(conn -> {
-      try {
-        sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
-            + Thread.currentThread().getName());
-        sut.write("********************************************************************");
-        CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
-            .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
-        zoneCacheExecution.execute();
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
-    });
+//    boolean isReady = false;
+//    int timeOut = 5000;
+    
+    sut.getUASRquestModule().zoneCacheRequest("refresh");
+//    sut.getUASRquestModule().zoneCacheRequest("query_status");
+    
+//    sut.getUASRquestModule().responses().filter(fh -> HttpContentTest.getContent(fh.join()).contains("ready"));
+    
+//    String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
+//
+//    sut.uasCliConnections().forEach(conn -> {
+//      try {
+//        sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
+//            + Thread.currentThread().getName());
+//        sut.write("********************************************************************");
+//        CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
+//            .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
+//        zoneCacheExecution.execute();
+//      } catch (IOException e) {
+//        throw new UncheckedIOException(e);
+//      }
+//    });
   }
 }

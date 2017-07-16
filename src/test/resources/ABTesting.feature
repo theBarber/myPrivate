@@ -3,11 +3,12 @@
 @hardcoded
 @ramp_admin_db 
 @cli
-@uas	
+@uas
+@Integration	
 Feature: A/B testing functionality 
 
-Background: inactive all the experiments and experiment groups
-	Given Unable all experiment groups
+Background: setup
+	Given I setup the db
 	
 @Sanity	
 Scenario: 1. Single experiment group scenario
