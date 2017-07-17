@@ -3,7 +3,6 @@
 @userinfo
 @userhistory
 @uas
-@Integration
 Feature: Cross Device Capping Experiment
   Background:
     Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from user history

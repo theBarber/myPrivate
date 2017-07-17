@@ -105,6 +105,20 @@ public class SqlRampAdminUtils {
 		}
 	}
 	
+	public static void unableAllExperimentGroups() {
+      try {
+          Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
+
+          String updateExperimentQuery = "UPDATE staging_ramp_admin.experiment_group set active=0 where id !=0;";
+      
+          if (stmt.executeUpdate(updateExperimentQuery) < 1) {
+              fail("set activation status failed");
+          }
+      } catch (SQLException e) {
+          fail(e.getMessage());
+      }
+  }
+	
 	//set the activation status of the experiment group and his experiments
 	public static void setActivationStatusHierarchy(String experimentGroupName, Integer activationStatus) {
       try {
@@ -133,7 +147,6 @@ public class SqlRampAdminUtils {
 		try {
 			//Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
 			String deleteQuery = "DELETE FROM staging_ramp_admin." + tableName + " where id > " + idToStartFrom;
-
 			if (stmt.executeUpdate(deleteQuery) != 1) {
 				fail("delete from " + tableName + " from id " + idToStartFrom + " failed");
 			}

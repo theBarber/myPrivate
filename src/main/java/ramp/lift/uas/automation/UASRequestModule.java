@@ -46,7 +46,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   private ExecutorService requestSubmitter;
   private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_]";
   protected static final Pattern impressionURLPattern = Pattern
-      .compile("(https?:\\/\\/([^:/?#]*(?::[0-9]+)?)\\/l\\?"
+      .compile("(https?:\\/\\/([^:/?#]*(?::[0-9]+)?)\\/l[^?#]*\\?"
           + lettersDigitsAndHyphen
           + "*=" + lettersDigitsAndHyphen
           + "*(&" + lettersDigitsAndHyphen
@@ -175,6 +175,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         break;
     }
     String url = "http://" + host + ":" + port + "/health?stid=999&skip=" + skipFlag;
+    request(url, true);
+  }
+
+  public void zoneCacheRequest(String action) {
+    String url = "http://" + host + ":" + port + "/zonecache?action=" + action;
     request(url, true);
   }
 

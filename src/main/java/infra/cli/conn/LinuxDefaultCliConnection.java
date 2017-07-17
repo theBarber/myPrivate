@@ -131,7 +131,7 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
 	return null;
     }
 	public Stream<String> deleteFiles(String file2Del) throws IOException {
-		CliCommandExecution execution = new CliCommandExecution(this, "rm -v "+file2Del);
+		CliCommandExecution execution = new CliCommandExecution(this, "rm -f "+file2Del);
 		execution.withTitle("delete files: "+file2Del).error("No able delete such files").execute();
 		return Stream.of(execution.getResult().split("\r\n"));
 	}
