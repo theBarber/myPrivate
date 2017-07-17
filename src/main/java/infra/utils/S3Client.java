@@ -2,10 +2,16 @@ package infra.utils;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.*;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
+
 import org.junit.Assert;
 
 import java.io.BufferedReader;
@@ -32,7 +38,9 @@ public class S3Client {
 	}
 	AWSCredentials s3Credential = new BasicAWSCredentials(prop.getProperty("s3_access_key"),
 		prop.getProperty("s3_secret_key"));
-	amazonS3 = new AmazonS3Client(s3Credential);
+	
+	AWSCredentialsProvider credentialsProvider = new AWSStaticCredentialsProvider(s3Credential);
+	amazonS3 = AmazonS3ClientBuilder.standard().withRegion(prop.getProperty("s3_region")).withCredentials(credentialsProvider).build();
 
     }
 
