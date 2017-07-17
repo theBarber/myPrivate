@@ -4,6 +4,9 @@
 @uas
 Feature: UAS connectivity to other components
 
+Background: setup
+	Given I setup the db
+	
 @Sanity-basic
 Scenario: 1. UAS is up 
 	When Sending a healthceck request to UAS 
