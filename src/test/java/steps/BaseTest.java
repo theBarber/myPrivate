@@ -132,7 +132,7 @@ public class BaseTest implements En {
     CacheProcessTest.refreshZoneCache();
     
     try {
-      TimeUnit.SECONDS.sleep(100);
+      TimeUnit.SECONDS.sleep(140);
     } catch (InterruptedException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
