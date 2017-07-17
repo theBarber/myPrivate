@@ -129,7 +129,7 @@ public class BaseTest implements En {
     SqlWorkflowUtils.setLimitationForZone(155605, "[]");
     SqlWorkflowUtils.setLimitationForZone(156242, "[]");
     SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
-    CacheProcessTest.refreshZoneCache();
+    CacheProcessTest.refreshZoneCache("http");
     
     try {
       TimeUnit.SECONDS.sleep(140);
