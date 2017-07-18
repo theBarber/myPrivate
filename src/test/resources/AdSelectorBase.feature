@@ -3,6 +3,9 @@
 @Sanity-basic
 Feature: UAS Integration with Ad Selector 
 
+Background: setup
+	Given I setup the db
+	
 Scenario: Upload new plan to S3 
 	Given I upload a new solver plan with the following slices 
 		|{"buying_strategy_id": -1, "slices": [{"banner_id": 1038966, "weight": 1000, "slice_id": "$SLICE_ID$", "start_time": 1477872001, "zone_id": 155605, "end_time": 1477958399, "predicates": {"AND": [{"==": ["body.features.zone_id", 155605]}]}, "buy_at_most": 10}]}|

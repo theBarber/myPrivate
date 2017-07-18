@@ -16,7 +16,7 @@ Scenario: verify NDQ filtering on test experiment level
 	Given I set the {units} of campaign name {ramp-lift-auto-campaign1-test} to {3000}
 	Given I set the {impressions} in {campaign_lifetime_stats} of campaign name {ramp-lift-auto-campaign1-test} to {0}
 	Given I set the {impressions} in {campaign_today_stats} of campaign name {ramp-lift-auto-campaign1-test} to {0}
-	And zoneCache refreshed by cmd
+	And zoneCache refreshed by http
 	And I update the s3 experiment data
 	Then I refresh staging delivery engine data cache
 	And I sleep for 200 seconds 
@@ -29,7 +29,7 @@ Scenario: verify NDQ filtering on control experiment level
 	Given I set the {units} of campaign name {ramp-lift-auto-campaign1-test} to {4000}	
 	Given I set the {impressions} in {campaign_lifetime_stats} of campaign name {ramp-lift-auto-campaign1-test} to {0}
 	Given I set the {impressions} in {campaign_today_stats} of campaign name {ramp-lift-auto-campaign1-test} to {0}
-	And zoneCache refreshed by cmd
+	And zoneCache refreshed by http
 	And I update the s3 experiment data
 	Then I refresh staging delivery engine data cache
 	And I sleep for 200 seconds 
