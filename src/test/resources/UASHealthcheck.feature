@@ -3,9 +3,6 @@
 @Integration
 @uas
 Feature: UAS connectivity to other components
-
-Background: setup
-	Given I setup the db
 	
 @Sanity-basic
 Scenario: 1. UAS is up 
@@ -32,6 +29,7 @@ Scenario: 5. Uas is connected to Workflow
 @hardcoded
 @Sanity 
 Scenario: 6. Uas is responsive to zone request 
+	Given I setup the db
 	When I send 1 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS 
 	Then The response code is 200 
 	And The response contains script 

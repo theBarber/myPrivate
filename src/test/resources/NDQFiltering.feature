@@ -19,7 +19,7 @@ Scenario: verify NDQ filtering on test experiment level
 	And zoneCache refreshed by http
 	And I update the s3 experiment data
 	Then I refresh staging delivery engine data cache
-	And I sleep for 200 seconds 
+	And I sleep for 150 seconds 
     Given I compute the NDQ of campaign name {ramp-lift-auto-campaign1-test}
 	When I send 100 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
 	And I send the same amount of impressions url as the number of NDQ
@@ -32,7 +32,7 @@ Scenario: verify NDQ filtering on control experiment level
 	And zoneCache refreshed by http
 	And I update the s3 experiment data
 	Then I refresh staging delivery engine data cache
-	And I sleep for 200 seconds 
+	And I sleep for 150 seconds 
     Given I compute the NDQ of campaign name {ramp-lift-auto-campaign1-test}
 	When I send 100 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
 	And I send the same amount of impressions url as the number of NDQ

@@ -4,7 +4,6 @@
 @ramp_admin_db 
 @cli
 @uas
-#@Integration	
 Feature: A/B testing functionality 
 
 Background: setup

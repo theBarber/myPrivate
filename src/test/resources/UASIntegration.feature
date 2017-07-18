@@ -7,18 +7,20 @@ Feature: UAS E2E Ad request flows (unknown zones)
 Background: setup
 	Given I setup the db
 
-@Sanity
-Scenario: Send an ad request to UAS and parse impression url 
-	When I send 40 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS	
-	##   When I send an ad-request for zone {pacing 200} is sent to UAS
-	And The response contains script 
-	And The responses has impression-urls
-	And The impressionUrl has bannerid field matching the id of the banner named {75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test} 100% of the time
-	And The impressionUrl has zoneid field matching the id of the zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} 100% of the time
-	And The impressionUrl has campaignid field matching the id of the campaign named {ramp-lift-auto-campaign1-test} 100% of the time
-	
+#@Sanity
+#Scenario: Send an ad request to UAS and parse impression url 
+#	When I send 40 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS	
+#	##   When I send an ad-request for zone {pacing 200} is sent to UAS
+#	And The response contains script 
+#	And The responses has impression-urls
+#	And The impressionUrl has bannerid field matching the id of the banner named {75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test} 100% of the time
+#	And The impressionUrl has zoneid field matching the id of the zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} 100% of the time
+#	And The impressionUrl has campaignid field matching the id of the campaign named {ramp-lift-auto-campaign1-test} 100% of the time
+#	
 Scenario: Send ad requests to UAS and parse impression url - 2 banners without limitations
-	When I send 550 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone2-test-2banners} to UAS
+	And I Delete imp logs
+	And I Delete req logs
+	When I send 1000 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone2-test-2banners} to UAS
 	And The responses has impression-urls
 	And The impressionUrl has bannerid field matching the id of the banner named {75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test} 50% of the time 
 	And The impressionUrl has bannerid field matching the id of the banner named {75396-197420-270914-Medium Rectangle 300x250-test} 50% of the time 
