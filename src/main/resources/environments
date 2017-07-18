@@ -1,40 +1,36 @@
 staging.workflow.db.jdbc.connection = jdbc:mysql://172.31.32.57/adserver
-dev.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
+dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
+dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
 integration.workflow.db.jdbc.connection = jdbc:mysql://10.6.7.129/adserver
 
 *.workflow.db.user = adserver
 *.workflow.db.password = adserver
 
 staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
-staging.ramp.admin.db.user = dev_manager
-staging.ramp.admin.db.password = dev123456
+*.ramp.admin.db.user = dev_manager
+*.ramp.admin.db.password = dev123456
+
+dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
+dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
 
 staging.uas.cliconnection.hosts=[172.31.48.35]
 integration.uas.cliconnection.hosts=[172.31.48.11]
-dev1.uas.cliconnection.hosts=[127.0.0.1:9022]
-dev2.uas.cliconnection.hosts=[127.0.0.1:9022]
+dev1.uas.cliconnection.hosts=[127.0.0.1:19022]
+dev2.uas.cliconnection.hosts=[127.0.0.1:19022]
 *.uas.cliconnection.user=root
 *.uas.cliconnection.password=
 *.uas.cliconnection.keyname=ramplift-rackspace.pem
 
-# staging.de.rabbitmq.routing_key=
-# staging.de.rabbitmq.host=172.31.48.15
-# staging.de.rabbitmq.port=5672
-# staging.de.rabbitmq.user=noam
-# staging.de.rabbitmq.password=noam
-# staging.de.rabbitmq.exchange_name=in
-# staging.de.rabbitmq.routing_key=in1
-# staging.de.rabbitmq.queue_name=aliveness-test
-# staging.de.rabbitmq.request_message={"metadata":{"callback_queue":"aliveness-test","response_timeout":10,"server_name":"server1"},"body":{"features":{"zone_id":1111111,"brand_name":"","mobile_browser":"","user_agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393","region":"nc","city":"durham","zip":"27707","area_codes":"919/984","gmt_offset":"-400","latitude":35,"longitude":-78,"device":"","os":"","dma":"","country":"us"},"eligible_ads":[{"id":"111111"}]}}
 
 staging.uas.host=172.31.48.35
-dev1.uas.host=127.0.0.1
-dev2.uas.host=127.0.0.1
+dev1.uas.host=dev1.undertone.com
+dev2.uas.host=dev2.undertone.com
 integration.uas.host=172.31.48.11
-staging.uas.port=9000
-integration.uas.port=9000
-dev1.uas.port=9000
-dev2.uas.port=9000
+*.uas.port=9000
+# staging.uas.port=9000
+# integration.uas.port=9000
+# dev1.uas.port=9000
+# dev2.uas.port=9000
 
 
 
