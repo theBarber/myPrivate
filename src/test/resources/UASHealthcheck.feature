@@ -3,6 +3,7 @@
 @Integration
 @uas
 Feature: UAS connectivity to other components
+
 	
 @Sanity-basic
 Scenario: 1. UAS is up 
@@ -35,3 +36,17 @@ Scenario: 6. Uas is responsive to zone request
 	And The response contains script 
 	And The response has impression-url 
 	And The response has click-url		
+
+@campaign 
+@hardcoded
+@Sanity 
+@Stress
+Scenario: 7. Uas is responsive to a lot of zone requests
+	Given I setup the db
+	When I send 1000 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
+	And I send impression requests to UAS immediately! 
+	Then The response code is 200 
+	And The response contains script 
+	And The response has impression-url 
+	And The response has click-url		
+ 

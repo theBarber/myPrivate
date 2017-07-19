@@ -177,7 +177,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     String url = "http://" + host + ":" + port + "/health?stid=999&skip=" + skipFlag;
     request(url, true);
   }
-  
+
   public void zoneCacheRequest(String action) {
     String url = "http://" + host + ":" + port + "/zonecache?action=" + action;
     request(url, true);
