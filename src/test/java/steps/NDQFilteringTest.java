@@ -62,7 +62,7 @@ public class NDQFilteringTest extends BaseTest {
       LongAdder impressionsSent = UASIntegrationTest.sendImpressionRequestsToUASImmediately();
       System.out.println("impressionsSent: " + impressionsSent);
       assertEquals("Number of impression urls sent as the number of NDQ", experimentNdq,
-          impressionsSent.intValue(), 4d);
+          impressionsSent.intValue(), 6d);
     });
     
     Given("^I setup the db$", () -> {
