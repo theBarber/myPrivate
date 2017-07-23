@@ -14,7 +14,7 @@ dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl
 dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
 
 staging.uas.cliconnection.hosts=[172.31.48.35]
-integration.uas.cliconnection.hosts=[172.31.48.11]
+integration.uas.cliconnection.hosts=[172.31.48.25,172.31.48.17]
 dev1.uas.cliconnection.hosts=[127.0.0.1:19022]
 dev2.uas.cliconnection.hosts=[127.0.0.1:19022]
 *.uas.cliconnection.user=root
@@ -25,7 +25,7 @@ dev2.uas.cliconnection.hosts=[127.0.0.1:19022]
 staging.uas.host=172.31.48.35
 dev1.uas.host=dev1.undertone.com
 dev2.uas.host=dev2.undertone.com
-integration.uas.host=172.31.48.11
+integration.uas.host=int.undertone.com
 *.uas.port=9000
 # staging.uas.port=9000
 # integration.uas.port=9000
