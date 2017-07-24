@@ -1,5 +1,6 @@
 @NDQFiltering
-@Integration
+#@Integration
+#we currently don't need to execute the tests. jira item - UT-4339
 @campaign
 @hardcoded
 @ramp_admin_db
