@@ -4,13 +4,14 @@
 @ramp_admin_db 
 @cli
 @uas
-@Integration
+#@Integration
+#we currently don't need to execute all tests, only test 1. jira item - UT-4338
 Feature: A/B testing functionality 
 
 Background: setup
 	Given I setup the db
 	
-@Sanity	
+@Sanity	@Integration
 Scenario: 1. Single experiment group scenario
 	Given I set the activation status of experiment group named {rampLift_single_experiment_group_scenario} and his experiments to {active}
 	And I sleep for 120 seconds
