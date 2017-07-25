@@ -22,12 +22,12 @@ dev2.uas.cliconnection.hosts=[127.0.0.1:19022]
 *.uas.cliconnection.keyname=ramplift-rackspace.pem
 
 
-staging.uas.host=172.31.48.35
+staging.uas.host=stgads.undertone.com
 dev1.uas.host=dev1.undertone.com
 dev2.uas.host=dev2.undertone.com
-integration.uas.host=int.undertone.com
+integration.uas.host=intads.undertone.com
 *.uas.port=9000
-# staging.uas.port=9000
+staging.uas.port=80
 # integration.uas.port=9000
 # dev1.uas.port=9000
 # dev2.uas.port=9000
