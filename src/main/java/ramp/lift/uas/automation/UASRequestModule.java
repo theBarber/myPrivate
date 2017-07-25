@@ -63,12 +63,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     return from.group(2);
   }
 
-  public String getHost() {
-    return host;
+  public String getDomain() {
+    return domain;
   }
 
-  public void setHost(String host) {
-    this.host = host;
+  public void setDomain(String host) {
+    this.domain = host;
   }
 
   public String getPort() {
@@ -79,7 +79,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     this.port = port;
   }
 
-  private String host;
+  private String domain;
   private String port;
   private long withSleepInMillis = 0l;
   protected CloseableHttpClient httpclient;
@@ -106,7 +106,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   }
 
   public void zoneRequest(Integer forZone) {
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1&stid=999";
+    String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/af?zoneid=" + forZone + "&ct=1&stid=999";
     request(url, true);
   }
 
@@ -115,7 +115,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       reset();
     }
 
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1&stid=999";
+    String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/af?zoneid=" + forZone + "&ct=1&stid=999";
 
     for (; times > 0; times--) {
       request(url, false);
@@ -127,7 +127,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       reset();
     }
 
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1&stid=999";
+    String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/af?zoneid=" + forZone + "&ct=1&stid=999";
 
     for (NameValuePair nvp : queryParams) {
       url = url + "&" + nvp.toString();
@@ -140,7 +140,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   public void zoneRequestsWithGeo(Integer forZone, int times, String params) {
     reset();
-    String url = "http://" + host + ":" + port + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&sim_geo=1&" + params;
+    String url = "http://" + domain +Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&sim_geo=1&" + params;
 
     for (; times > 0; times--) {
       request(url, false);
@@ -154,7 +154,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   public void healthCheckRequest() {
 
-    String url = "http://" + host + ":" + port + "/health?stid=999";
+    String url = "http://" + domain  + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/health?stid=999";
     request(url, true);
   }
 
@@ -174,12 +174,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         skipFlag = 0b0111;
         break;
     }
-    String url = "http://" + host + ":" + port + "/health?stid=999&skip=" + skipFlag;
+    String url = "http://" + domain +Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/health?stid=999&skip=" + skipFlag;
     request(url, true);
   }
 
   public void zoneCacheRequest(String action) {
-    String url = "http://" + host + ":" + port + "/zonecache?action=" + action;
+    String url = "http://" + domain +Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/zonecache?action=" + action;
     request(url, true);
   }
 
@@ -285,7 +285,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   public void addCookie(String key, String value) {
     BasicClientCookie cookie = new BasicClientCookie(key, value);
-    cookie.setDomain("stgads.undertone.com");
+    cookie.setDomain(domain);
     cookie.setPath("/");
     context.getCookieStore().addCookie(cookie);
   }
