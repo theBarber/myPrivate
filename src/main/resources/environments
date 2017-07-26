@@ -23,7 +23,7 @@ dev2.uas.cliconnection.hosts=[127.0.0.1:19022]
 *.uas.cliconnection.keyname=ramplift-rackspace.pem
 
 
-staging.uas.doamin=stgads.undertone.com
+staging.uas.domain=stgads.undertone.com
 dev1.uas.domain=dev1.undertone.com
 dev2.uas.domain=dev2.undertone.com
 integration.uas.domain=intads.undertone.com
