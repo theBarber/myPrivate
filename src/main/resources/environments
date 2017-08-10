@@ -11,31 +11,36 @@ integration.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkn
 *.ramp.admin.db.user = dev_manager
 *.ramp.admin.db.password = dev123456
 
-dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
-dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
+dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/sharedev_ramp_admin
+dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/sharedev_ramp_admin
 
 staging.uas.cliconnection.hosts=[172.31.48.35]
 integration.uas.cliconnection.hosts=[172.31.48.25,172.31.48.17]
-dev1.uas.cliconnection.hosts=[127.0.0.1:19022]
-dev2.uas.cliconnection.hosts=[127.0.0.1:19022]
+dev1.uas.cliconnection.hosts=[192.168.56.100]
+dev2.uas.cliconnection.hosts=[127.0.0.1]
 *.uas.cliconnection.user=root
 *.uas.cliconnection.password=
 *.uas.cliconnection.keyname=ramplift-rackspace.pem
 
+dev1.uas.cliconnection.user=dev
+dev1.uas.cliconnection.password=secret
+dev1.uas.cliconnection.keyname=
 
 staging.uas.domain=stgads.undertone.com
+
+# add to your /etc/hosts a line with the ip of your uas to this domain
 dev1.uas.domain=dev1.undertone.com
+
 dev2.uas.domain=dev2.undertone.com
 integration.uas.domain=intads.undertone.com
 *.uas.port=
 # integration.uas.port=9000
-# dev1.uas.port=9000
-# dev2.uas.port=9000
 
 
-
-staging.as.solver_plan.file_path = ramp-optimization/runtime/hourly/solver
-staging.as.solver_plan.file_name = solver_plan_integration_test_20201031_170101.json
+staging.as.solver_plan.file_path=ramp-optimization/runtime/hourly/solver
+dev1.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
+dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
+*.as.solver_plan.file_name=solver_plan_integration_test_20201031_170101.json
 
 
 # staging.ramp.app.consul.host=consul-staging.ramp-ut.io
