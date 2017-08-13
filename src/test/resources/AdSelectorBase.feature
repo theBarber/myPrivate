@@ -1,6 +1,5 @@
 @UASIntegrationWithAdSelector
 @Integration
-@Sanity-basic
 Feature: UAS Integration with Ad Selector 
 
 Background: setup
