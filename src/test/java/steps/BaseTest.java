@@ -125,7 +125,7 @@ public class BaseTest implements En {
 
   public void setupDB(){
     // clean db
-    SqlRampAdminUtils.unableAllExperimentGroups();
+    //SqlRampAdminUtils.unableAllExperimentGroups();
     SqlWorkflowUtils.setLimitationForZone(155605, "[]");
     SqlWorkflowUtils.setLimitationForZone(156242, "[]");
     SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
