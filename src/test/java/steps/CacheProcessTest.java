@@ -81,13 +81,13 @@ public class CacheProcessTest extends BaseTest {
     } else if (action.equals("cmd")) {
       String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
       
-      sut.uasCliConnections().parallel().forEach(conn -> {
+      sut.uasCliConnections().forEach(conn -> {
         try {
           sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
               + Thread.currentThread().getName());
           sut.write("********************************************************************");
           CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
-              .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
+              .error("Couldn't run query").withTimeout(5, TimeUnit.MINUTES);
           zoneCacheExecution.execute();
         } catch (IOException e) {
           throw new UncheckedIOException(e);
