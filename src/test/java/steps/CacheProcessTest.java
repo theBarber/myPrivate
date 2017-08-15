@@ -87,7 +87,7 @@ public class CacheProcessTest extends BaseTest {
               + Thread.currentThread().getName());
           sut.write("********************************************************************");
           CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
-              .error("Couldn't run query").withTimeout(5, TimeUnit.MINUTES);
+              .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
           zoneCacheExecution.execute();
         } catch (IOException e) {
           throw new UncheckedIOException(e);
