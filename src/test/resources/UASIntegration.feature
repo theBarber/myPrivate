@@ -2,6 +2,7 @@
 @Integration
 @cli
 @uas
+@stable
 Feature: UAS E2E Ad request flows (unknown zones) 
 
 Background: setup

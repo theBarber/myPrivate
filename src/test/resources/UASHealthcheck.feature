@@ -2,6 +2,7 @@
 @uas_healthcheck
 @Integration
 @uas
+@stable
 Feature: UAS connectivity to other components
 
 	
