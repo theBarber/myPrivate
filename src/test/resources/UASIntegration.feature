@@ -28,19 +28,19 @@ Scenario: Send ad requests to UAS and parse impression url - 2 banners without l
 	And The clickUrl has bannerid field matching the id of the banner named {75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test} 50% of the time 
 	And The clickUrl has bannerid field matching the id of the banner named {75396-197420-270914-Medium Rectangle 300x250-test} 50% of the time 
 
-Scenario: Send an ad request to UAS and parse logs 
-	When I send 10 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS 
-	And The response has impression-url 
-	And The response has click-url 
-	When I send impression requests to UAS 
-	And I sleep for 120 seconds 
-	Then I read the latest req log file from uas 
-	Then I filter in the req log to the lines where id at column 1 is the same as in impression-url 
-	And The field zoneid in the 4 column of the req log is the same as in impression-url 
-	And The field bannerid in the 5 column of the req log is the same as in impression-url 
-	And The field campaignid in the 6 column of the req log is the same as in impression-url 	
-	Then I read the latest imp log file from uas 
-	And I filter in the imp log to the lines where id at column 1 is the same as in impression-url 
-	When I send click requests to UAS 
-	Then I read the latest clk log file from uas 
-	And I filter in the clk log to the lines where id at column 1 is the same as in impression-url 
+#Scenario: Send an ad request to UAS and parse logs
+#	When I send 10 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
+#	And The response has impression-url
+#	And The response has click-url
+#	When I send impression requests to UAS
+#	And I sleep for 120 seconds
+#	Then I read the latest req log file from uas
+#	Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
+#	And The field zoneid in the 4 column of the req log is the same as in impression-url
+#	And The field bannerid in the 5 column of the req log is the same as in impression-url
+#	And The field campaignid in the 6 column of the req log is the same as in impression-url
+#	Then I read the latest imp log file from uas
+#	And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
+#	When I send click requests to UAS
+#	Then I read the latest clk log file from uas
+#	And I filter in the clk log to the lines where id at column 1 is the same as in impression-url

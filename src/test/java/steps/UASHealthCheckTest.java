@@ -34,7 +34,7 @@ public class UASHealthCheckTest extends BaseTest {
 			Assert.assertThat(content, Matchers.containsString(something));
 		});
 	}
-	
+
 	public void healthCheckRequestSkip(String servicenameToSkip) {
 		sut.getUASRquestModule().healthCheckRequestSkip(servicenameToSkip);
 	}
