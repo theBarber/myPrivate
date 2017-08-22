@@ -31,7 +31,7 @@ Scenario: 5. Uas is connected to Workflow
 @hardcoded
 @Sanity 
 Scenario: 6. Uas is responsive to zone request 
-	Given I setup the db
+#	Given I setup the db
 	When I send 1 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS 
 	Then The response code is 200 
 	And The response contains script 
@@ -43,7 +43,7 @@ Scenario: 6. Uas is responsive to zone request
 @Sanity 
 @Stress
 Scenario: 7. Uas is responsive to a lot of zone requests
-	Given I setup the db
+#	Given I setup the db
 	When I send 1000 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
 	And I send impression requests to UAS immediately! 
 	Then The response code is 200 
