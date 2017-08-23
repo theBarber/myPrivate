@@ -5,8 +5,8 @@
 @stable
 Feature: UAS E2E Ad request flows (unknown zones) 
 
-Background: setup
-	Given I setup the db
+#Background: setup
+#	Given I setup the db
 
 @Sanity
 Scenario: Send an ad request to UAS and parse impression url
