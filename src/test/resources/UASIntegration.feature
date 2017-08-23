@@ -5,13 +5,13 @@
 @stable
 Feature: UAS E2E Ad request flows (unknown zones) 
 
-#Background: setup
-#	Given I setup the db
+Background: setup
+	Given I setup the db
 
 @Sanity
 Scenario: Send an ad request to UAS and parse impression url
 	Given I setup the db
-	When I send 40 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS	
+	When I send 10 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
 	##   When I send an ad-request for zone {pacing 200} is sent to UAS
 	And The response contains script 
 	And The responses has impression-urls
