@@ -1,6 +1,8 @@
 package ramp.lift.uas.automation;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
+import java.beans.IntrospectionException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -81,7 +83,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   private String domain;
   private String port;
-  private long withSleepInMillis = 0l;
+  private long withSleepInMillis = 10;
   protected CloseableHttpClient httpclient;
 
   public HttpClientContext getContext() {
@@ -120,6 +122,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     for (; times > 0; times--) {
       request(url, false);
     }
+  }
+  //For Sahar's Checks
+  public String getUASRequestURLWithZone(Integer forZone)
+  {
+    return "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/af?zoneid=" + forZone + "&ct=1&stid=999";
   }
 
   public void zoneRequestsWithParams(Integer forZone, int times, boolean toReset) {
@@ -241,7 +248,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     return Optional.of(impressionURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
         .map(UASRequestModule::getGroup1);
   }
-
 
   public Optional<String> getImpressionUrl(String url) {
     return Optional.of(impressionURLPattern.matcher(url))

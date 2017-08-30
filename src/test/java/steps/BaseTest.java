@@ -124,16 +124,18 @@ public class BaseTest implements En {
 //    });
 
   public void setupDB(){
+
     // clean db
     //SqlRampAdminUtils.unableAllExperimentGroups();
     SqlWorkflowUtils.setLimitationForZone(155605, "[]");
     SqlWorkflowUtils.setLimitationForZone(156242, "[]");
     SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
     CacheProcessTest.refreshZoneCache("cmd");
-    
+    //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream()); // TODO: understand why 2 of the banners has different name from DB
+
     try {
       TimeUnit.SECONDS.sleep(100);
-      System.out.println("sleeping 100 seconds");
+      sut.write("sleeping 100 seconds");
     } catch (InterruptedException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

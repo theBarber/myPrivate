@@ -35,6 +35,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
@@ -60,6 +61,8 @@ import infra.module.WithId;
 import infra.support.StringUtils;
 import infra.utils.HttpContentTest;
 import ramp.lift.uas.automation.UASRequestModule;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 /**
  * Created by noam on 29/09/16.
@@ -187,11 +190,15 @@ public class UASIntegrationTest extends BaseTest {
 
           double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
               .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
+
+          //*sahar: print the map when there is a problem
+//          theAmountOfTheOccurencesOfTheFieldValueById.forEach((k,v)->sut.write("Item : " + k + " Count : " + v));
           assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
               actualRate * 100, 10d);
 
         });
     When("^I read the latest (clk|imp|req) log file from uas$", (String logType) -> {
+
       assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
     });
 
@@ -332,8 +339,8 @@ public class UASIntegrationTest extends BaseTest {
     final String value = idx > 0 && it.length() > idx + 1 ? it.substring(idx + 1) : null;
     return new SimpleImmutableEntry<>(key, value);
   }
-
-  private static CompletableFuture<Optional<String>> getImpressionUrl(CompletableFuture<HttpResponse> future) {
+//Sahar's checks (was private)
+  public static CompletableFuture<Optional<String>> getImpressionUrl(CompletableFuture<HttpResponse> future) {
     return future.thenApply(UASRequestModule::getImpressionUrlFrom);
   }
 

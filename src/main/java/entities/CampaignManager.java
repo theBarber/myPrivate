@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
@@ -17,6 +18,11 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	CampaignManager() {
 
 	}
+    //sahar
+	public Stream<Banner> getTestBannersStream()
+    {
+        return io.lineItems().flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners));
+    }
 
 	public Optional<Campaign> getCampaign(String byName) {
 

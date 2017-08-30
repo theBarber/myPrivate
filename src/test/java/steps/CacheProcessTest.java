@@ -28,6 +28,7 @@ public class CacheProcessTest extends BaseTest {
 
   public CacheProcessTest() {
     super();
+
     Given("^limitations for zoneId (\\d+) is \\{([^}]+)\\} in Workflow DB$",
         (Integer zoneId, String expectedLimitation) -> {
           String currentLimitation = SqlWorkflowUtils.getLimitationForZone(zoneId);
@@ -80,7 +81,7 @@ public class CacheProcessTest extends BaseTest {
       // sut.getUASRquestModule().responses().filter(fh -> HttpContentTest.getContent(fh.join()).contains("ready"));
     } else if (action.equals("cmd")) {
       String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
-      
+      String restartUASServerCmd = "docker-compose -f /opt/docker-compose.yml restart ut-ramp-uas";
       sut.uasCliConnections().forEach(conn -> {
         try {
           sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
@@ -89,6 +90,9 @@ public class CacheProcessTest extends BaseTest {
           CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
               .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
           zoneCacheExecution.execute();
+            CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
+                    .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
+            restartUASServer.execute();
         } catch (IOException e) {
           throw new UncheckedIOException(e);
         }
