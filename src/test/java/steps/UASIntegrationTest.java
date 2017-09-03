@@ -192,7 +192,7 @@ public class UASIntegrationTest extends BaseTest {
               .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
 
           //*sahar: print the map when there is a problem
-//          theAmountOfTheOccurencesOfTheFieldValueById.forEach((k,v)->sut.write("Item : " + k + " Count : " + v));
+          theAmountOfTheOccurencesOfTheFieldValueById.forEach((k,v)->sut.write("Item : " + k + " Count : " + v));
           assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
               actualRate * 100, 10d);
 

@@ -131,7 +131,7 @@ public class BaseTest implements En {
     SqlWorkflowUtils.setLimitationForZone(156242, "[]");
     SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
     CacheProcessTest.refreshZoneCache("cmd");
-    //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream()); // TODO: understand why 2 of the banners has different name from DB
+    //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream());
 
     try {
       TimeUnit.SECONDS.sleep(100);

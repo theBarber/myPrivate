@@ -80,6 +80,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				if (uas == null) {
 					try {
 						uas = new UASRequestModule();
+						//uas.setDomain(config.get("uas.host"));
 						uas.setDomain(config.get("uas.domain"));
 						uas.setPort(config.get("uas.port"));
 						uas.init();

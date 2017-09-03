@@ -26,6 +26,8 @@ dev1.uas.cliconnection.user=dev
 dev1.uas.cliconnection.password=secret
 dev1.uas.cliconnection.keyname=
 
+# staging.uas.host=172.31.48.35
+# staging.uas.port=9000
 staging.uas.domain=stgads.undertone.com
 
 # add to your /etc/hosts a line with the ip of your uas to this domain
