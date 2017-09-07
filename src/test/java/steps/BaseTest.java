@@ -127,8 +127,7 @@ public class BaseTest implements En {
 
     // clean db
     //SqlRampAdminUtils.unableAllExperimentGroups();
-    SqlWorkflowUtils.setLimitationForZone(155605, "[]");
-    SqlWorkflowUtils.setLimitationForZone(156242, "[]");
+    //SqlWorkflowUtils.setLimitationForZone(161482, "[]");
     SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
     CacheProcessTest.refreshZoneCache("cmd");
     //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream());

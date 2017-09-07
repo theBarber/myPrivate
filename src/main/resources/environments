@@ -14,7 +14,7 @@ integration.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkn
 dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/sharedev_ramp_admin
 dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/sharedev_ramp_admin
 
-staging.uas.cliconnection.hosts=[172.31.48.35]
+staging.uas.cliconnection.hosts=[172.31.48.35,172.31.48.29]
 integration.uas.cliconnection.hosts=[172.31.48.19,172.31.48.20]
 dev1.uas.cliconnection.hosts=[192.168.56.101]
 dev2.uas.cliconnection.hosts=[127.0.0.1]

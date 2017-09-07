@@ -79,6 +79,7 @@ public class UASIntegrationTest extends BaseTest {
           .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
       sut.getUASRquestModule().zoneRequest(zone.getId());
     });
+
     When("I send (\\d+) times an ad request for zone named \\{([^}]+)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequests(times, zoneByName, true);
@@ -90,9 +91,9 @@ public class UASIntegrationTest extends BaseTest {
         });
 
     When("I send ad requests I sleep (\\d+) millis",
-        (Long millis) -> {
-          sut.getUASRquestModule().thatSleeps(millis);
-        });
+              (Long millis) -> {
+                  sut.getUASRquestModule().thatSleeps(millis);
+              });
     When("I send (\\d+) times an ad request for zone id \\{(\\d+)\\} to UAS",
         (Integer times, Integer zoneId) -> {
           sendMultipleAdRequests(times, zoneId, true);

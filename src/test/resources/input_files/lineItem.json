@@ -299,6 +299,46 @@
 					"CDM": 3
 				}
 			]
+		},
+		{
+			"ioLineItemId": 210722,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+			},
+
+			"Campaigns":
+			[
+				{
+					"campaignId": 278956,
+					"campaignName": "75396-210722-ramp-lift-Test 1",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							63709
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1090122,
+							"bannerName": "75396-210722-278956-See Through-RampLift-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				}
+			]
 		}
 	]
 }
