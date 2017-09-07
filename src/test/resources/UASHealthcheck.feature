@@ -36,7 +36,7 @@ Scenario: 6. Uas is responsive to zone request
 	Then The response code is 200 
 	And The response contains script 
 	And The response has impression-url 
-	And The response has click-url		
+	# And The response has click-url		
 
 #@campaign
 #@hardcoded
