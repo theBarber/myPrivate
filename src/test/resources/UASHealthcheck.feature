@@ -32,11 +32,11 @@ Scenario: 5. Uas is connected to Workflow
 @Sanity 
 Scenario: 6. Uas is responsive to zone request 
 #	Given I setup the db
-	When I send 1 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS 
+	When I send 1 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 	Then The response code is 200 
 	And The response contains script 
 	And The response has impression-url 
-	# And The response has click-url		
+	And The response has click-url
 
 #@campaign
 #@hardcoded
