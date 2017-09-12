@@ -201,6 +201,7 @@ public class UASIntegrationTest extends BaseTest {
     When("^I read the latest (clk|imp|req) log file from uas$", (String logType) -> {
 
       assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
+
     });
 
     Then("^I filter in the (clk|imp|req) log to the lines where id at column (\\d+) is the same as in impression-url$",
@@ -221,9 +222,12 @@ public class UASIntegrationTest extends BaseTest {
               .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
               .map(Optional::get).findFirst().get();
           String expectedFieldValue = splitQuery(impressionUrl).get(fieldName).get(0);
+          //---------------------checks-------------------------
+          sut.write("the expected FieldValue is:" + expectedFieldValue);
+          sut.logFor(logType).actual().forEach(m-> sut.write("the actual FieldValue: " + m.get(column)));
+          //---------------------checks-------------------------
           assertThat(sut.logFor(logType).actual(),
               StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(expectedFieldValue))));
-
         });
 
     When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {

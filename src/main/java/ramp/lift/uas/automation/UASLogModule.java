@@ -5,6 +5,8 @@ import static ramp.lift.uas.automation.SystemUnderTest.throwIfNeeded;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -105,18 +107,21 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
                 }
                 conn.fileList(LOGDIRECTORY) //taking all the wanted type files (such as reg file)
                                 .filter(s ->getName() //get name = (req\imp\clk)
-                                .equals(s.substring(LOGDIRECTORY.length(), LOGDIRECTORY.length() + getName().length()))) // getting just the once of (req\imp\clk)
+                                .equals(s.substring(LOGDIRECTORY.length(), LOGDIRECTORY.length() + getName().length()))) // getting just those who are (req\imp\clk)
                         .sorted(String.CASE_INSENSITIVE_ORDER.reversed()).limit(3).forEach(remote -> { //remote = remote file name
                     File tempFile;
                     try {
                         conn.get(remote,
                                 tempFile = File.createTempFile("tmp", remote.substring(LOGDIRECTORY.length())));
-                        Files.lines(Paths.get(tempFile.toURI())).forEach(line -> { //reading all the lines
+                        Files.lines(Paths.get(tempFile.toURI()), StandardCharsets.ISO_8859_1).forEach(line -> { //reading all the lines
                             _actual().add(Arrays.asList(line.split(SPLIT_BY_TAB))); //adding the lines to list inside this object
                         });
                         tempFile.delete();
                     } catch (IOException e) {
                         delegate(exception, e);
+                    }catch (UncheckedIOException e)
+                    {
+                        e.printStackTrace();
                     }
                 });
             } catch (IOException e) {
@@ -130,12 +135,12 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
     @Override
     public Stream<List<String>> actual() {
         //sahar check: printing the file-----------------------------
-        _actual().stream().filter(Optional.ofNullable(filter).orElse(l -> !l.isEmpty())).forEach(m-> System.out.println(m));
+        //_actual().stream().filter(Optional.ofNullable(filter).orElse(l -> !l.isEmpty())).forEach(m-> System.out.println(m));
         //-----------------------------------------
         return _actual().stream().filter(Optional.ofNullable(filter).orElse(l -> !l.isEmpty()));
     }
 
-    ;
+
 
     @SuppressWarnings("unchecked")
     private Collection<List<String>> _actual() {
