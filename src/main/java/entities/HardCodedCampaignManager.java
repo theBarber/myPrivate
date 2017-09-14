@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class HardCodedCampaignManager extends CampaignManager {
 
-	private ObjectMapper m = new ObjectMapper();
+	protected ObjectMapper m = new ObjectMapper();
 	final private String LINEITEM_FILE = "/input_files/lineItem.json";
 	final private String ZONESET_FILE = "/input_files/zoneSet.json";
 	

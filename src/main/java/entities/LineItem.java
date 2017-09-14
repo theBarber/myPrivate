@@ -55,7 +55,7 @@ public class LineItem implements WithId<Integer> {
     }
 
 
-    private void setIoLineItemId(Integer ioLineItemId) {
+    public void setIoLineItemId(Integer ioLineItemId) {
         this.ioLineItemId = ioLineItemId;
     }
 

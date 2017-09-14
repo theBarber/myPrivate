@@ -64,15 +64,14 @@ import infra.module.WithId;
 
 public class RampAppCampaignManager extends HardCodedCampaignManager implements AutoCloseable {
 
-	protected CloseableHttpClient httpclient;
-	protected final String lineItemId;
-	protected final JsonArray lineItemIds;
+	private CloseableHttpClient httpclient;
+	private final String lineItemId;
+	private final JsonArray lineItemIds;
 	private static Consul consul;
 	
-	protected final Set<Creative> creatives = new TreeSet<>();
-	
-	private ObjectMapper m = new ObjectMapper();
 	// AtomicReference<LineItem> lineItem = new AtomicReference<>();
+	//protected final Set<Creative> creatives = new TreeSet<>();
+	//private ObjectMapper m = new ObjectMapper(); exist in his parent
 	private final CookieStore cookieStore;
 
 	public RampAppCampaignManager(final String hostname, final int port, String lineItemIds) {
@@ -202,7 +201,7 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 			}
 			Campaign tmpCampaign = tmpCampaigns[0];
 			Campaign campaign = new Campaign(campaignName, tmpCampaign.getId());
-
+//--------------------rename--------------
 			HttpPut renameCampaignHttpRequest = new HttpPut(uri);
 			renameCampaignHttpRequest.addHeader("content-type", "application/json");
 
@@ -312,7 +311,6 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 		try {
 			HttpPost createCreativeHttpRequest = new HttpPost(creativeUri);
 			createCreativeHttpRequest.addHeader("content-type", "application/json");
-
 			CreativeRequest creativeRequest = new CreativeRequest();
 			creativeRequest.selectedCampaignIds = new ArrayList<>();
 			creativeRequest.selectedCampaignIds.add(forCampaignId);
