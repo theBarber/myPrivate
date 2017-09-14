@@ -21,7 +21,6 @@
 Scenario: Send an ad request to UAS and parse logs
         Given I Delete req logs
         Given I Delete imp logs
-        Given I Delete clk logs
         When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
         And The response has impression-url
         And The response has click-url
@@ -34,6 +33,7 @@ Scenario: Send an ad request to UAS and parse logs
         And The field campaignid in the 6 column of the req log is the same as in impression-url
         Then I read the latest imp log file from uas
         And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
+        Given I Delete clk logs
         When I send click requests to UAS
         Then I read the latest clk log file from uas
         And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
