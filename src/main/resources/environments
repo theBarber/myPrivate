@@ -34,7 +34,7 @@ staging.uas.domain=stgads.undertone.com
 dev1.uas.domain=dev1.undertone.com
 
 dev2.uas.domain=dev2.undertone.com
-integration.uas.domain=intads.undertone.com
+integration.uas.domain=intads.undertone.com:9000
 *.uas.port=
 # integration.uas.port=9000
 
@@ -47,7 +47,7 @@ dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 
 # staging.ramp.app.consul.host=consul-staging.ramp-ut.io
 # staging.ramp.app.consul.port=8500
-# staging.ramp.test.lineItemId=[198082]
+# staging.ramp.test.lineItemId=[210722]
 
 *.user-info.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
 *.user-history.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]

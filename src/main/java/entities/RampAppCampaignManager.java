@@ -66,7 +66,6 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 
 	private CloseableHttpClient httpclient;
 	private final String lineItemId;
-	private final JsonArray lineItemIds;
 	private static Consul consul;
 	
 	// AtomicReference<LineItem> lineItem = new AtomicReference<>();
@@ -74,11 +73,11 @@ public class RampAppCampaignManager extends HardCodedCampaignManager implements 
 	//private ObjectMapper m = new ObjectMapper(); exist in his parent
 	private final CookieStore cookieStore;
 
-	public RampAppCampaignManager(final String hostname, final int port, String lineItemIds) {
+	public RampAppCampaignManager(final String hostname, final int port, String lineItemIdsJson) {
 		super();
 		m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		this.lineItemIds = new JsonParser().parse(lineItemIds).getAsJsonArray();
-		this.lineItemId = this.lineItemIds.get(0).getAsString();
+		JsonArray lineItemIds = new JsonParser().parse(lineItemIdsJson).getAsJsonArray();
+		this.lineItemId = lineItemIds.get(0).getAsString();
 		if (consul == null) {
 			synchronized (RampAppCampaignManager.class) {
 				if (consul == null) {

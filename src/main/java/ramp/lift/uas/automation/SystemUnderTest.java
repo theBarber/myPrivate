@@ -92,15 +92,15 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	    case "@campaign":
 				if (campaignManager == null) {
-		    if (scenario.getSourceTagNames().contains("@hardcoded")) {
-						campaignManager = new HardCodedCampaignManager();
-					} else {
+					if (scenario.getSourceTagNames().contains("@RampAppCampaignManager")) {
 						campaignManager = new RampAppCampaignManager(config.get("ramp.app.consul.host"),
 								Integer.valueOf(config.get("ramp.app.consul.port")),
 								config.get("ramp.test.lineItemId"));
+					} else {
+						campaignManager = new HardCodedCampaignManager();
 					}
-				}
-				break;
+					}
+						break;
 
 	    case "@ramp_admin_db":
 				if (rampAdminDbConnector == null) {

@@ -9,10 +9,11 @@ public class CreateCampaignRequest {
     Integer lineItemId;
     Temporal startDateTime, endDateTime;
 
+
     public CreateCampaignRequest(LineItem lineItem) {
-	this.lineItemId = lineItem.getId();
-	startDateTime = lineItem.getStartDate();
-	endDateTime = lineItem.getEndDate();
+        this.lineItemId = lineItem.getId();
+        startDateTime = lineItem.getStartDate();
+        endDateTime = lineItem.getEndDate();
     }
 
     public Integer getLineItemId() {

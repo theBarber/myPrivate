@@ -3,11 +3,11 @@
 	@cli
 	@uas
 	@stable
-	Feature: UAS E2E Ad request flows (unknown zones)
+	Feature: UAS Ad request flows
 
 	@Sanity
 	Scenario: Send an ad request to UAS and parse impression url
-#	 	Given I setup the db
+	 	Given I setup the db
 		When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 	 ##   When I send an ad-request for zone {pacing 200} is sent to UAS
 		And The response contains script
@@ -25,7 +25,6 @@ Scenario: Send an ad request to UAS and parse logs
         And The response has impression-url
         And The response has click-url
         When I send impression requests to UAS
-#        And I sleep for 10 seconds
         Then I read the latest req log file from uas
         Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
         And The field zoneid in the 4 column of the req log is the same as in impression-url
