@@ -1,8 +1,18 @@
 package steps;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
+
+import com.google.common.io.Files;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.hamcrest.Matchers;
@@ -31,6 +41,7 @@ public class UASHealthCheckTest extends BaseTest {
 
 	public void healthCheckResponseContains(String something) {
 		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+			//System.out.println(content); // for checks only
 			Assert.assertThat(content, Matchers.containsString(something));
 		});
 	}

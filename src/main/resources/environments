@@ -1,5 +1,6 @@
 staging.workflow.db.jdbc.connection = jdbc:mysql://172.31.32.57/adserver
-dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
+# dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
+dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.34.113/adserver
 dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
 integration.workflow.db.jdbc.connection = jdbc:mysql://10.6.7.129/adserver
 

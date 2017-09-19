@@ -125,11 +125,15 @@ public class UASIntegrationTest extends BaseTest {
 
     });
     Then("The responses? has impression-urls?", () -> {
-      assertThat(
-          "all of the responses should have a url", sut.getUASRquestModule().responses()
-              .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join),
+        Stream<Optional<String>> impressionURLResponses = sut.getUASRquestModule().responses()
+                .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join);
+        assertThat(
+          "all of the responses should have a url", impressionURLResponses,
           StreamMatchers.allMatch(is(not(OptionalMatchers.empty()))));
-    });
+        //print check
+       /* sut.getUASRquestModule().responses()
+                .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join).forEach(response->System.out.println("the request was: "+ response.get()));
+    */});
 
     Then("The responses? has click-urls?", () -> {
       assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
