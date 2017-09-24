@@ -133,8 +133,8 @@ public class BaseTest implements En {
     //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream());
 
     try {
-      TimeUnit.SECONDS.sleep(100);
-      sut.write("sleeping 100 seconds");
+      TimeUnit.SECONDS.sleep(10);
+      sut.write("sleeping 10 seconds");
     } catch (InterruptedException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
