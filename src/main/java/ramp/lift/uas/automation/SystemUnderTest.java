@@ -17,13 +17,13 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
+import entities.RampAppCreateCampaign;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.junit.Assume;
 
 import cucumber.api.Scenario;
 import entities.CampaignManager;
 import entities.HardCodedCampaignManager;
-import entities.RampAppCampaignManager;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
 import infra.assertion.Assert;
@@ -37,6 +37,7 @@ import infra.support.StringUtils;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
 	final int _o;
+	private RampAppCreateCampaign rampAppCreateCampaign;
 	protected final Map<String, LinuxDefaultCliConnection> uasCliConnections = new HashMap<>();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
@@ -91,22 +92,19 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				break;
 
 	    case "@campaign":
-				if (campaignManager == null) {
-					if (scenario.getSourceTagNames().contains("@RampAppCampaignManager")) {
-						campaignManager = new RampAppCampaignManager(config.get("ramp.app.consul.host"),
-								Integer.valueOf(config.get("ramp.app.consul.port")),
-								config.get("ramp.test.lineItemId"));
-					} else {
+				if (campaignManager == null)
 						campaignManager = new HardCodedCampaignManager();
-					}
-					}
 						break;
-
+		case "@RampAppCreateCampaign":
+				if(rampAppCreateCampaign == null)
+						rampAppCreateCampaign = new RampAppCreateCampaign(config.get("ramp.app.consul.host"),
+										(config.get("ramp.app.consul.port")));
+				break;
 	    case "@ramp_admin_db":
 				if (rampAdminDbConnector == null) {
 					rampAdminDbConnector = new SqlConnectionModule(config.get("ramp.admin.db.jdbc.connection"),
-				    config.get("ramp.admin.db.user"),
-				    config.get("ramp.admin.db.password"));
+					config.get("ramp.admin.db.user"),
+					config.get("ramp.admin.db.password"));
 					try {
 						rampAdminDbConnector.init();
 					} catch (Exception e) {
@@ -221,6 +219,17 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						delegate(exception, e);
 					}
 				}
+				if(rampAppCreateCampaign != null)
+				{
+					try {
+						AutoCloseable cm = (AutoCloseable) rampAppCreateCampaign;
+						cm.close();
+						cm = null;
+					}
+					catch (Exception e) {
+						delegate(exception, e);
+					}
+				}
 //				break;
 //			default:
 //				break;
@@ -332,11 +341,21 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		});
 	}
 
+
 	public CampaignManager getCampaignManager() {
 	  if (campaignManager == null) {
                     campaignManager = new HardCodedCampaignManager();
 	  }
 		return campaignManager;
+	}
+
+	public RampAppCreateCampaign getRampAppCreateCampaign() {
+		if(rampAppCreateCampaign == null)
+		{
+			rampAppCreateCampaign =  new RampAppCreateCampaign(config.get("ramp.app.consul.host"),
+										(config.get("ramp.app.consul.port")));
+		}
+		return rampAppCreateCampaign;
 	}
 
 	public SqlConnectionModule getRampAdminDbConnector() {

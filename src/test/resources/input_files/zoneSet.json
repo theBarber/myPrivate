@@ -81,5 +81,19 @@
         "status": 0
       }
     ]
-  }
+  },
+	{
+		"zonesetId": 65745,
+		"zonesetName": "SaharTest-DNU",
+		"Zones": [
+			{
+				"zoneId": 169072,
+				"zoneName": "INT2434 - See Through - SaharTest-DNU",
+				"adUnitId": 83,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	}
 ]

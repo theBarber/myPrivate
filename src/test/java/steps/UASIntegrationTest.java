@@ -159,53 +159,9 @@ public class UASIntegrationTest extends BaseTest {
     // .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get).findFirst().
     //
     // });
-    Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",
-        (String urlType, String fieldName, String entityType, String entityName, Double percent) -> {
-
-          Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
-          if (urlType.equalsIgnoreCase("impression")) {
-            urlExtractor = UASIntegrationTest::getImpressionUrl;
-          } else if (urlType.equalsIgnoreCase("click")) {
-            urlExtractor = UASIntegrationTest::getClickUrl;
-            urlExtractor = urlExtractor.andThen(cf -> {
-              CompletableFuture<Optional<String>> fixedOptionalUrlCF = cf
-                  .thenApply(UASIntegrationTest::parsableClickUrl);
-              return fixedOptionalUrlCF;
-            });
-          }
-
-          assertThat(entityType, isOneOf("campaign", "banner", "zone"));
-          Optional<? extends WithId<Integer>> expectedEntity = sut.getCampaignManager().getterFor(entityType)
-              .apply(entityName);
-          assertThat("Could not find " + entityType + " named " + entityName, expectedEntity,
-              is(not(OptionalMatchers.empty())));
-
-          Map<Integer, Long> theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
-              .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
-              .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
-              .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
-              .flatMap(entry -> entry.getValue().stream())
-              .collect(Collectors.groupingBy(Integer::parseInt, Collectors.counting()));
-
-          assertThat(urlType + " urls grouped by " + fieldName,
-              theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
-
-		    long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
-		    assertThat("total responses", totalResponses, greaterThan(0L));
-
-          double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
-              .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
-
-          //*sahar: print the map when there is a problem
-          theAmountOfTheOccurencesOfTheFieldValueById.forEach((k,v)->sut.write("Item : " + k + " Count : " + v));
-          assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
-              actualRate * 100, 10d);
-
-        });
+    Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
     When("^I read the latest (clk|imp|req) log file from uas$", (String logType) -> {
-
       assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
-
     });
 
     Then("^I filter in the (clk|imp|req) log to the lines where id at column (\\d+) is the same as in impression-url$",
@@ -406,4 +362,46 @@ public class UASIntegrationTest extends BaseTest {
         }, impExecutorService).join());
     return impressionsSent;
   }
+    public void checkTheNumberOfSelectedEntity(String urlType, String fieldName, String entityType, String entityName, Double percent)
+    {
+        Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
+        if (urlType.equalsIgnoreCase("impression")) {
+            urlExtractor = UASIntegrationTest::getImpressionUrl;
+        } else if (urlType.equalsIgnoreCase("click")) {
+            urlExtractor = UASIntegrationTest::getClickUrl;
+            urlExtractor = urlExtractor.andThen(cf -> {
+                CompletableFuture<Optional<String>> fixedOptionalUrlCF = cf
+                        .thenApply(UASIntegrationTest::parsableClickUrl);
+                return fixedOptionalUrlCF;
+            });
+        }
+
+        assertThat(entityType, isOneOf("campaign", "banner", "zone"));
+        Optional<? extends WithId<Integer>> expectedEntity = sut.getCampaignManager().getterFor(entityType)
+                .apply(entityName);
+        assertThat("Could not find " + entityType + " named " + entityName, expectedEntity,
+                is(not(OptionalMatchers.empty())));
+
+        Map<Integer, Long> theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
+                .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
+                .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
+                .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
+                .flatMap(entry -> entry.getValue().stream())
+                .collect(Collectors.groupingBy(Integer::parseInt, Collectors.counting()));
+
+        assertThat(urlType + " urls grouped by " + fieldName,
+                theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
+
+        long totalResponses = sut.getUASRquestModule().responses().filter(succeededFuture).count();
+        assertThat("total responses", totalResponses, greaterThan(0L));
+
+        double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
+                .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
+
+        //*sahar: print the map when there is a problem
+        theAmountOfTheOccurencesOfTheFieldValueById.forEach((k,v)->sut.write("Item : " + k + " Count : " + v));
+        assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
+                actualRate * 100, 10d);
+    }
 }
+

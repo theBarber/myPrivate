@@ -9,8 +9,7 @@
 	Scenario: Send an ad request to UAS and parse impression url
 #	 	Given I setup the db
 		When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
-	 ##   When I send an ad-request for zone {pacing 200} is sent to UAS
-		And The response contains script
+	 	And The response contains script
 		And The responses has impression-urls
 		And The impressionUrl has bannerid field matching the id of the banner named {75396-210722-278956-See Through-RampLift-1} 100% of the time
 		And The impressionUrl has zoneid field matching the id of the zone named {INT2434 - See Through - RAMP Lift Test 1} 100% of the time

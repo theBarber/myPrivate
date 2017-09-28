@@ -16,7 +16,6 @@ public class ZoneSet implements Named, WithId<Integer>, Comparable<ZoneSet> {
 
 	private final String name;
 	private final Integer id;
-
 	@JsonProperty("Zones")
 	private Set<Zone> zones = new TreeSet<>();
 

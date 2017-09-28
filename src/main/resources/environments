@@ -1,6 +1,6 @@
 staging.workflow.db.jdbc.connection = jdbc:mysql://172.31.32.57/adserver
-# dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
-dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.34.113/adserver
+dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
+# dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.34.113/adserver
 dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
 integration.workflow.db.jdbc.connection = jdbc:mysql://10.6.7.129/adserver
 
@@ -46,9 +46,19 @@ dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 *.as.solver_plan.file_name=solver_plan_20201031_170101.json
 
 
-# staging.ramp.app.consul.host=consul-staging.ramp-ut.io
-# staging.ramp.app.consul.port=8500
-# staging.ramp.test.lineItemId=[210722]
+staging.ramp.app.consul.host=services-ramp-staging.ramp-ut.io
+staging.ramp.app.consul.port=3003
+staging.ramp.test.lineItemId=210722
+staging.ramp.test.zonesetId=65745
+staging.ramp.test.creativeId = 204
+
+integration.ramp.app.consul.host=services-ramp-integration.ramp-ut.io
+integration.ramp.app.consul.port=3003
+integration.ramp.test.lineItemId=[210722]
+
+dev1.ramp.app.consul.host=[172.19.35.74]
+dev1.ramp.app.consul.port=3003
+dev1.ramp.test.lineItemId=[210722]
 
 *.user-info.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
 *.user-history.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]

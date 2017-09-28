@@ -6,7 +6,7 @@ public class CreateCampaignsRequestWrapper {
     private final CreateCampaignRequest[] campaignsArray;
 
     public CreateCampaignsRequestWrapper(@JsonProperty("campaignsArray") CreateCampaignRequest... campaignsArray) {
-	this.campaignsArray = campaignsArray;
+	    this.campaignsArray = campaignsArray;
     }
 
     @JsonProperty("campaignsArray")

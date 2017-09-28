@@ -69,7 +69,7 @@ public class BaseTest implements En {
       if (configurationKey.startsWith(allEnvironmentsNameOverrideConfigPrefix)) {
         config.put(configurationKey.substring(allEnvironmentsNameOverrideConfigPrefix.length()), value);
       }
-    });
+  });
 
     After(scenario -> {
       sut.teardown(scenario.getSourceTagNames(), config);

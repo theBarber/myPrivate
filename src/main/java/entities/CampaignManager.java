@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class CampaignManager implements ParameterProvider<WithId<Integer>> {
@@ -18,12 +19,16 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	CampaignManager() {
 
 	}
-    //sahar
-	public Stream<Banner> getTestBannersStream()
-    {
-        return io.lineItems().flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners));
-    }
+//    //sahar
+//	public Stream<Banner> getTestBannersStream()
+//    {
+//        return io.lineItems().flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners));
+//    }
 
+    public Optional<LineItem> getLineItem(Integer LineItemID)
+	{
+		return io.lineItems().filter(WithId.idIs(LineItemID)).findFirst();
+	}
 	public Optional<Campaign> getCampaign(String byName) {
 
 	  return io.lineItems().flatMap(li -> li.campaigns.stream().filter(Named.nameIs(byName))).findFirst();
@@ -33,7 +38,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 		return zonesets.stream().flatMap(ZoneSet::zones).filter(Named.nameIs(byName)).findFirst();
 	}
 
-	private Optional<Banner> getBanner(String byName) {
+	public Optional<Banner> getBanner(String byName) {
 		return io.lineItems().flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName))).findFirst();
 	}
 	
@@ -41,9 +46,14 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	public Optional<ZoneSet> getZoneset(Integer byId) {
 		return zonesets.stream().filter(WithId.idIs(byId)).findFirst();
 	}
-	
+
 	public Optional<ZoneSet> getZoneset(String byName) {
 		return zonesets.stream().filter(Named.nameIs(byName)).findFirst();
+	}
+
+	//unchecked
+	public Optional<LineItem> getLineItemAsociatedToCampaign(String CampaignName) {
+		return io.lineItems().filter(lineItem -> lineItem.campaigns.stream().anyMatch(Named.nameIs(CampaignName))).findFirst();
 	}
 
 

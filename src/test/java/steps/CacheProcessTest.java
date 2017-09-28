@@ -89,7 +89,7 @@ public class CacheProcessTest extends BaseTest {
               + Thread.currentThread().getName());
           sut.write("********************************************************************");
           CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
-              .error("Couldn't run query").withTimeout(6, TimeUnit.MINUTES);
+              .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
           zoneCacheExecution.execute();
             CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
                     .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);

@@ -9,12 +9,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
@@ -23,13 +19,13 @@ import infra.module.WithId;
 
 @SuppressWarnings("unused")
 @JsonTypeName("Campaign")
-@JsonSubTypes(@Type(CampaignPlus.class))
 @JsonTypeInfo(use = Id.CLASS, defaultImpl = CampaignPlus.class)
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
 
 	private String campaignName;
 	private Integer campaignId;
+	private Integer LineItemID;
 
 	@JsonProperty("Banners")
 	private Set<Banner> banners = new TreeSet<>();
@@ -56,6 +52,7 @@ public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
 	}
 
 	public Stream<Banner> banners() {
+
 		return this.banners.stream();
 	}
 
@@ -64,9 +61,14 @@ public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
 		return Comparator.comparing(Campaign::getId).compare(this, requireNonNull(that));
 	}
 
-	<B extends Banner> B addBanner(B b) {
+	/*<B extends Banner> B addBanner(B b) {
 		banners.add(b);
 		return b;
+	}*/
+
+	public Set<Banner> getBanners()
+	{
+		return banners;
 	}
 
 	@Override
@@ -84,12 +86,21 @@ public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
 		this.campaignName = campaignName;
 	}
 
-	private void setBanners(List<Banner> banners) {
+	public void setBanners(List<Banner> banners) {
 		this.banners.addAll(banners);
 	}
 
+	public void setBannersFromSet(Set<Banner> banners) {
+		this.banners.addAll(banners);
+	}
 	@JsonProperty("campaignId")
 	private void setCampaignId(Integer campaignId) {
 		this.campaignId = campaignId;
 	}
+	//only for check
+	public void addBanner(Banner banner)
+	{
+		banners.add(banner);
+	}
+
 }

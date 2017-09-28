@@ -59,4 +59,8 @@ public class LineItem implements WithId<Integer> {
         this.ioLineItemId = ioLineItemId;
     }
 
+    public void addCampaign(Campaign campaign)
+    {
+        campaigns.add(campaign);
+    }
 }

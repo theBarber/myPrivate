@@ -8,7 +8,7 @@ public class CampaignsRequest {
     private final Campaign[] campaignsArray;
 
     public CampaignsRequest(@JsonProperty("campaignsArray") Campaign... campaignsArray) {
-	this.campaignsArray = campaignsArray;
+	    this.campaignsArray = campaignsArray;
     }
 
     @JsonProperty("campaignsArray")
