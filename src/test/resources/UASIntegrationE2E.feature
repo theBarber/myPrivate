@@ -1,3 +1,5 @@
+@cli
+@uas
 @RampAppCreateCampaign
     
 Feature: UAS E2E Ad request flow - with new entities

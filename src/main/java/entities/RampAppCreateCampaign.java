@@ -119,9 +119,9 @@ public class RampAppCreateCampaign implements AutoCloseable {
 	private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName,String lineItemId, Integer creativeID, Integer zonesetID)
 	{
 		Zonesets zonesets = new Zonesets();
-		zonesets.setInclude(new ArrayList<Integer>(){{add(new Integer(zonesetID));}});
+		zonesets.setInclude(new ArrayList<Integer>(){{add(zonesetID);}});
 		return new CreateCampaignRequest(campaignName,lineItemId,
-				zonesets, new ArrayList<Integer>(){{add(new Integer(creativeID));}},
+				zonesets, new ArrayList<Integer>(){{add(creativeID);}},
 				dateFromNow(-1),dateFromNow(1));
 	}
 
