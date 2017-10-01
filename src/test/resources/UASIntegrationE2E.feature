@@ -7,9 +7,10 @@ Feature: UAS E2E Ad request flow - with new entities
     Scenario: Create new campaign, send ad request and
         Given I disable all campaigns named {Ramp-lift-Test-1-Campaign-SystemTest} in DB
         When I create new Campaign named {Ramp-lift-Test-1-Campaign-SystemTest} using ramp-app api's for LineItem 210722 associated to creative 204 with zoneset 65745
+        And I add the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} to line item 210722 locally
         Then I get the Campaign named {Ramp-lift-Test-1-Campaign-SystemTest} using ramp-app api's in order to set the banners
         And I update the created campaign {Ramp-lift-Test-1-Campaign-SystemTest} banners name to {RampLift-1-bannerCreatedTest-} concatenating the serial number
-        And  I update the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} status to be 0
+        And  I update the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} status to be 0 in the DB
         And I refresh the zone Cache
         When I send 10 times an ad request for zone named {INT2434 - See Through - SaharTest-DNU} to UAS
         And The response contains script
@@ -23,7 +24,7 @@ Feature: UAS E2E Ad request flow - with new entities
     Scenario: Send an ad request to UAS and parse logs
         Given I Delete req logs
         Given I Delete imp logs
-        When I send 10 times an ad request for zone named {INT2434 - See Through - SaharTest-DNU} to UAS
+        When I send 20 times an ad request for zone named {INT2434 - See Through - SaharTest-DNU} to UAS
         And The response has impression-url
         And The response has click-url
         When I send impression requests to UAS
@@ -38,6 +39,5 @@ Feature: UAS E2E Ad request flow - with new entities
         When I send click requests to UAS
         Then I read the latest clk log file from uas
         And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
-        Then I update the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} status to be 1
-        Then I update the created banner named {RampLift-1-bannerCreatedTest-1} status to be 1
-#        delete the created banners and campaigns?
+        Then I update the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} status to be 1 in the DB
+        Then I update the created banner named {RampLift-1-bannerCreatedTest-1} status to be 1 in the DB

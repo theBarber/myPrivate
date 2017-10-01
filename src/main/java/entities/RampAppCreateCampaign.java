@@ -90,10 +90,7 @@ public class RampAppCreateCampaign implements AutoCloseable {
 		try {
 			HttpEntity entity = new StringEntity(mapper.writeValueAsString(requestWrapper), ContentType.APPLICATION_JSON);
 			httpPost.setEntity(entity);
-			BufferedReader reqLineReader = new BufferedReader(new InputStreamReader(entity.getContent()));
-			while (reqLineReader.ready()) {
-				System.out.println("sending request to Ramp api with: \n"+ reqLineReader.readLine());
-			}
+			printEntityContent(entity);
 			createCampaignResponse = httpclient.execute(httpPost);
 		}catch (IOException e)
 		{
@@ -123,6 +120,19 @@ public class RampAppCreateCampaign implements AutoCloseable {
 		return new CreateCampaignRequest(campaignName,lineItemId,
 				zonesets, new ArrayList<Integer>(){{add(creativeID);}},
 				dateFromNow(-1),dateFromNow(1));
+	}
+
+	private void printEntityContent(HttpEntity entity)
+	{
+		try {
+			BufferedReader reqLineReader = new BufferedReader(new InputStreamReader(entity.getContent()));
+			while (reqLineReader.ready()) {
+				System.out.println("sending request to Ramp api with: \n" + reqLineReader.readLine());
+			}
+		}catch (IOException e)
+		{
+			throw new UncheckedIOException("failed to print the content ", e);
+		}
 	}
 
 	public CloseableHttpResponse getCampaignRequest(Integer campaignID)

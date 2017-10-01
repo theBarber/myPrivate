@@ -35,6 +35,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.sun.org.apache.xpath.internal.SourceTreeManager;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -161,6 +162,15 @@ public class UASIntegrationTest extends BaseTest {
     // });
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
     When("^I read the latest (clk|imp|req) log file from uas$", (String logType) -> {
+        //---------------------checks-------------------------
+        sut.logFor(logType).readLogs().actual().forEach(m->{
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < m.size(); i++) {
+                stringBuilder.append(m.get(i)).append("\t");
+            }
+            sut.write(stringBuilder.toString());
+        } );
+        //---------------------checks-------------------------
       assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
     });
 
@@ -182,10 +192,13 @@ public class UASIntegrationTest extends BaseTest {
               .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
               .map(Optional::get).findFirst().get();
           String expectedFieldValue = splitQuery(impressionUrl).get(fieldName).get(0);
+
           //---------------------checks-------------------------
-          sut.write("the expected FieldValue is:" + expectedFieldValue);
-          sut.logFor(logType).actual().forEach(m-> sut.write("the actual FieldValue: " + m.get(column)));
+            Stream<List<String>> steamList = sut.logFor(logType).actual();
+            sut.write("the expected of the "+logType+" FieldValue is:" + expectedFieldValue);
+            steamList.forEach(m-> sut.write("the actual FieldValue of the logType "+logType+"is: "+ m.get(column)));
           //---------------------checks-------------------------
+
           assertThat(sut.logFor(logType).actual(),
               StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(expectedFieldValue))));
         });
