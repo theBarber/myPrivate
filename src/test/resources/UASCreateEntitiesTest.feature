@@ -75,7 +75,7 @@ Scenario: 1 - create campaigns with specific line item, creative, zoneset
         And I update last created campaign named {Ramp-lift-Test-server-5} units to be {2000} in the DB
         And I update last created campaign named {Ramp-lift-Test-server-5} priority to be {-2} in the DB
         And I update last created campaign named {Ramp-lift-Test-server-5} status to be {0} in the DB
-#
+
     Scenario: 6 - create campaigns with specific line item, creative, zoneset
         When I create new Campaign named {Ramp-lift-Test-direct-6a} using ramp-app api's for LineItem 215959 associated to creative 960 with zoneset 65885
         And I get the banners of campaign named {Ramp-lift-Test-direct-6a} and print it

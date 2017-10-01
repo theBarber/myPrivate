@@ -24,7 +24,7 @@ Feature: UAS E2E Ad request flow - with new entities
     Scenario: Send an ad request to UAS and parse logs
         Given I Delete req logs
         Given I Delete imp logs
-        When I send 20 times an ad request for zone named {INT2434 - See Through - SaharTest-DNU} to UAS
+        When I send 10 times an ad request for zone named {INT2434 - See Through - SaharTest-DNU} to UAS
         And The response has impression-url
         And The response has click-url
         When I send impression requests to UAS
