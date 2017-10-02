@@ -16,8 +16,6 @@ import entities.Banner;
 import entities.Campaign;
 import entities.CampaignManager;
 import entities.CampaignPlus;
-import entities.RampAppCampaignManager;
-import entities.ramp.app.api.Creative;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:CreateCampaigns.feature", tags = "@campaign")

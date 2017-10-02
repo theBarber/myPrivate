@@ -6,15 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.junit.Assert;
-import org.junit.internal.runners.statements.Fail;
-
 import ramp.lift.uas.automation.SystemUnderTest;
 
 public class SqlWorkflowUtils {
-	
+
 	protected static SystemUnderTest sut = SystemUnderTest.getInstance();
-		
+
 	public static String getLimitationForZone(int zoneId) {
 		String limitation = "";
 		try {
@@ -31,7 +28,7 @@ public class SqlWorkflowUtils {
 		}
 		return limitation;
 	}
-	
+
 	public static void setLimitationForZone(Integer zoneId, String newLimitation) {
 		try {
 			Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
@@ -54,7 +51,7 @@ public class SqlWorkflowUtils {
                   + columnValue + "';";
           sut.write(query);
           if (stmt.executeUpdate(query) != 1) {
-              System.out.println("update " + columnNameToChange + " to " + columnValueToChange + " failed");
+              System.out.println("update " + columnNameToChange + " to " + columnValueToChange + " failed"); //always happening?
           }
       } catch (SQLException e) {
           e.printStackTrace();

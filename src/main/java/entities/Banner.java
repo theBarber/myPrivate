@@ -6,18 +6,19 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import entities.ramp.app.api.Creative;
 import infra.module.Named;
 import infra.module.WithId;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 
-	private final String name;
+	private String name;
 	private final int id;
 
-	public Banner(@JsonProperty("bannerName") String name, @JsonProperty("bannerId") Integer id) {
+	public Banner(@JsonProperty("creativeName") String name, @JsonProperty("bannerId") Integer id) {
 		this.name = requireNonNull(name);
 		this.id = requireNonNull(id);
 	}
@@ -46,4 +47,8 @@ public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 		return "Banner [name=" + getName() + "]";
 	}
 
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 }

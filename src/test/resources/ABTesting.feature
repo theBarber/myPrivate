@@ -73,6 +73,6 @@ Scenario: 5. Single experiment group - the zone not apply for Ad_unit condition 
 	And I Delete req logs 
 	When I send 500 times an ad request for zone id {156242} to UAS 
 	Then The response code is 200 
-	And I calculate the values distribution from log req and column 47 
+	And I calculate the values distribution from log req and column 47
 	And Default experiment was selected {100} percent of the time
 

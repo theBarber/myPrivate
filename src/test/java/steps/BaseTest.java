@@ -28,17 +28,17 @@ public class BaseTest implements En {
 
   protected final String environmentName;
   protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
-
-  protected ConnectionFactory connectionFactory = null;
-  protected com.rabbitmq.client.Connection rabbitClientConnection;
-
-  protected RabbitMQPublisher publisher;
-  protected RabbitMQConsumer consumer;
-
-  protected final String[] CLITESTS = new String[] {"@cli"};
-  protected final String[] RABBITTESTS = new String[] {"@rabbitmq"};
-  protected final String[] UASTESTS = new String[] {"@uas"};
   protected final String[] CAMPAIGNTESTS = new String[] {"@campaign"};
+
+  //protected com.rabbitmq.client.Connection rabbitClientConnection;
+  //protected ConnectionFactory connectionFactory = null;
+
+  // protected RabbitMQConsumer consumer;
+  // protected RabbitMQPublisher publisher;
+
+  //protected final String[] RABBITTESTS = new String[] {"@rabbitmq"};
+  //protected final String[] UASTESTS = new String[] {"@uas"};
+  //protected final String[] CLITESTS = new String[] {"@cli"};
 
   public BaseTest() {
     environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
@@ -69,7 +69,7 @@ public class BaseTest implements En {
       if (configurationKey.startsWith(allEnvironmentsNameOverrideConfigPrefix)) {
         config.put(configurationKey.substring(allEnvironmentsNameOverrideConfigPrefix.length()), value);
       }
-    });
+  });
 
     After(scenario -> {
       sut.teardown(scenario.getSourceTagNames(), config);
@@ -94,45 +94,47 @@ public class BaseTest implements En {
       sut.setup(scenario, config);
     });
 
-    Before(RABBITTESTS, scenario -> {
 
-      // the consumer will wait on this queue
-
-      // will init all the values from the config map object
-      connectionFactory = new ConnectionFactory();
-      connectionFactory.setUsername(config.get("de.rabbitmq.user"));
-      connectionFactory.setPassword(config.get("de.rabbitmq.password"));
-      connectionFactory.setHost(config.get("de.rabbitmq.host"));
-      connectionFactory.setPort(Integer.parseInt(config.get("de.rabbitmq.port")));
-
-      try {
-        rabbitClientConnection = connectionFactory.newConnection();
-        // consumer_tag is basically thread num
-        publisher = new RabbitMQPublisher("in", rabbitClientConnection.createChannel());
-        if (this instanceof MsgProcess) {
-          MsgProcess thisAsMsgProcess = (MsgProcess) this;
-          consumer = new RabbitMQConsumer(thisAsMsgProcess, rabbitClientConnection.createChannel(), "test",
-              "out", "integration-test", "integration-test");
-          consumer.start();
-        }
-      } catch (IOException | TimeoutException e) {
-        infra.assertion.Assert.fail("unable to initialize rabbitmq connection", e);
-        e.printStackTrace();
-      }
-
-    });
-  }
+  }//    Before(RABBITTESTS, scenario -> {
+//
+//      // the consumer will wait on this queue
+//
+//      // will init all the values from the config map object
+//      connectionFactory = new ConnectionFactory();
+//      connectionFactory.setUsername(config.get("de.rabbitmq.user"));
+//      connectionFactory.setPassword(config.get("de.rabbitmq.password"));
+//      connectionFactory.setHost(config.get("de.rabbitmq.host"));
+//      connectionFactory.setPort(Integer.parseInt(config.get("de.rabbitmq.port")));
+//
+//      try {
+//        rabbitClientConnection = connectionFactory.newConnection();
+//        // consumer_tag is basically thread num
+//        publisher = new RabbitMQPublisher("in", rabbitClientConnection.createChannel());
+//        if (this instanceof MsgProcess) {
+//          MsgProcess thisAsMsgProcess = (MsgProcess) this;
+//          consumer = new RabbitMQConsumer(thisAsMsgProcess, rabbitClientConnection.createChannel(), "test",
+//              "out", "integration-test", "integration-test");
+//          consumer.start();
+//        }
+//      } catch (IOException | TimeoutException e) {
+//        infra.assertion.Assert.fail("unable to initialize rabbitmq connection", e);
+//        e.printStackTrace();
+//      }
+//
+//    });
 
   public void setupDB(){
+
     // clean db
     //SqlRampAdminUtils.unableAllExperimentGroups();
-    SqlWorkflowUtils.setLimitationForZone(155605, "[]");
-    SqlWorkflowUtils.setLimitationForZone(156242, "[]");
-    SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
+    //SqlWorkflowUtils.setLimitationForZone(161482, "[]");
+    //SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
     CacheProcessTest.refreshZoneCache("cmd");
-    
+    //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream());
+
     try {
-      TimeUnit.SECONDS.sleep(100);
+      TimeUnit.SECONDS.sleep(10);
+      sut.write("sleeping 10 seconds");
     } catch (InterruptedException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

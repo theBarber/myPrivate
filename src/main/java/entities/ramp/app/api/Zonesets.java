@@ -2,6 +2,7 @@ package entities.ramp.app.api;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import entities.ZoneSet;
 /***
  * This is the model of RampApp ZoneSets
@@ -12,19 +13,23 @@ import entities.ZoneSet;
 public class Zonesets {
     List<Integer> include, exclude;
 
-    private List<Integer> getInclude() {
+    @JsonProperty("include")
+    public List<Integer> getInclude() {
         return include;
     }
 
-    private void setInclude(List<Integer> include) {
+    @JsonProperty("include")
+    public void setInclude(List<Integer> include) {
         this.include = include;
     }
 
-    private List<Integer> getExclude() {
+    @JsonProperty("exclude")
+    public List<Integer> getExclude() {
         return exclude;
     }
 
-    private void setExclude(List<Integer> exclude) {
+    @JsonProperty("exclude")
+    public void setExclude(List<Integer> exclude) {
         this.exclude = exclude;
     }
     

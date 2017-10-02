@@ -67,5 +67,33 @@
 				"status": 0
 			}
 		]
+	},
+    {
+    "zonesetId": 63709,
+    "zonesetName": "RAMP Lift Test 1 DNU",
+    "Zones": [
+      {
+        "zoneId": 161482,
+        "zoneName": "INT2434 - See Through - RAMP Lift Test 1",
+        "adUnitId": 83,
+        "isSync": true,
+        "isSecure": false,
+        "status": 0
+      }
+    ]
+  },
+	{
+		"zonesetId": 65745,
+		"zonesetName": "SaharTest-DNU",
+		"Zones": [
+			{
+				"zoneId": 169072,
+				"zoneName": "INT2434 - See Through - SaharTest-DNU",
+				"adUnitId": 83,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
 	}
 ]

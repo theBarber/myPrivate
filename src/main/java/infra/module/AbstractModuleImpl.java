@@ -12,7 +12,7 @@ public class AbstractModuleImpl<T> extends AbstractModule implements Namefull {
 
     @Override
     public String getName() {
-	return name;
+	    return name;
     }
 
     @Override

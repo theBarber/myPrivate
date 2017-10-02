@@ -4,8 +4,8 @@
 @hardcoded 
 Feature: UAS buy at most 
 
-Background: Upload new plan to S3 
-	Given I setup the db 
+#Background: Upload new plan to S3
+#	Given I setup the db
 
 Scenario: buy at most testing - Single banner - positive test 
 	Given I upload a new solver plan with the following slices 

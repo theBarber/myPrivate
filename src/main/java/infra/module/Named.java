@@ -7,6 +7,6 @@ public interface Named {
     public String getName();
 
     static Predicate<Named> nameIs(String name) {
-	return n -> n.getName().equals(Objects.requireNonNull(name));
+	    return n -> n.getName().equals(Objects.requireNonNull(name));
     }
 }

@@ -20,7 +20,7 @@ public class AdSelectorBaseTest extends BaseTest  {
             "\"predicates\": {\"AND\": [{\"==\": [\"body.features.zone_id\", 144960]}]}, \"buy_at_most\": 100}]}";
     public AdSelectorBaseTest(){
         super();
-
+//
 //        Given("^Loading test_plan (.*) to S3 directory (.*)",(String from, String to)-> {
 //            URL url = getClass().getClassLoader().getResource(from);
 //            PutObjectResult res = (new S3Client()).uploadFile(getClass().getClassLoader().getResource(from).getPath(), to);
