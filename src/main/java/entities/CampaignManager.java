@@ -19,11 +19,6 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	CampaignManager() {
 
 	}
-//    //sahar
-//	public Stream<Banner> getTestBannersStream()
-//    {
-//        return io.lineItems().flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners));
-//    }
 
     public Optional<LineItem> getLineItem(Integer LineItemID)
 	{
@@ -49,11 +44,6 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	public Optional<ZoneSet> getZoneset(String byName) {
 		return zonesets.stream().filter(Named.nameIs(byName)).findFirst();
-	}
-
-	//unchecked
-	public Optional<LineItem> getLineItemAsociatedToCampaign(String CampaignName) {
-		return io.lineItems().filter(lineItem -> lineItem.campaigns.stream().anyMatch(Named.nameIs(CampaignName))).findFirst();
 	}
 
 

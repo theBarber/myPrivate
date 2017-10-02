@@ -49,8 +49,6 @@ dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 staging.ramp.app.consul.host=services-ramp-staging.ramp-ut.io
 staging.ramp.app.consul.port=3003
 staging.ramp.test.lineItemId=210722
-staging.ramp.test.zonesetId=65745
-staging.ramp.test.creativeId = 204
 
 integration.ramp.app.consul.host=services-ramp-integration.ramp-ut.io
 integration.ramp.app.consul.port=3003

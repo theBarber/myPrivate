@@ -120,6 +120,8 @@ public class RampAppCreateCampaign implements AutoCloseable {
 		return new CreateCampaignRequest(campaignName,lineItemId,
 				zonesets, new ArrayList<Integer>(){{add(creativeID);}},
 				dateFromNow(-1),dateFromNow(1));
+
+
 	}
 
 	private void printEntityContent(HttpEntity entity)
