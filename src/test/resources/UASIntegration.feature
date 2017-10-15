@@ -32,6 +32,7 @@ Scenario: Send an ad request to UAS and parse logs
         Then I read the latest imp log file from uas
         And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
         Given I Delete clk logs
+        And I sleep for 5 seconds
         When I send click requests to UAS
         Then I read the latest clk log file from uas
         And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
