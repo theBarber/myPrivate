@@ -163,13 +163,13 @@ public class UASIntegrationTest extends BaseTest {
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
     When("^I read the latest (clk|imp|req) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
-        sut.logFor(logType).readLogs().actual().forEach(m->{
+        /*sut.logFor(logType).readLogs().actual().forEach(m->{
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < m.size(); i++) {
                 stringBuilder.append(m.get(i)).append("\t");
             }
             sut.write(stringBuilder.toString());
-        } );
+        } );*/
         //---------------------checks-------------------------
       assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
     });

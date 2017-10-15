@@ -97,8 +97,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						break;
 		case "@RampAppCreateCampaign":
 				if(rampAppCreateCampaign == null)
-						rampAppCreateCampaign = new RampAppCreateCampaign(config.get("ramp.app.consul.host"),
-										(config.get("ramp.app.consul.port")));
+						rampAppCreateCampaign = new RampAppCreateCampaign(config.get("ramp.app.host"),
+										(config.get("ramp.app.port")));
 				break;
 	    case "@ramp_admin_db":
 				if (rampAdminDbConnector == null) {
@@ -352,8 +352,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	public RampAppCreateCampaign getRampAppCreateCampaign() {
 		if(rampAppCreateCampaign == null)
 		{
-			rampAppCreateCampaign =  new RampAppCreateCampaign(config.get("ramp.app.consul.host"),
-										(config.get("ramp.app.consul.port")));
+			rampAppCreateCampaign =  new RampAppCreateCampaign(config.get("ramp.app.host"),
+										(config.get("ramp.app.port")));
 		}
 		return rampAppCreateCampaign;
 	}

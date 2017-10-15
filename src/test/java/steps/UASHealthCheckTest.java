@@ -31,9 +31,9 @@ public class UASHealthCheckTest extends BaseTest {
 	public UASHealthCheckTest() {
 		super();
 		// ThenResposeCodeIs();
-		When("^Sending a healthceck request of (RabbitMQ|Couchbase|Redis|Workflow) to UAS$",
+		When("^Sending a healthcheck request of (RabbitMQ|Couchbase|Redis|Workflow) to UAS$",
 				this::healthCheckRequestSkip);
-		When("^Sending a healthceck request to UAS$", this::healthCheckRequest);
+		When("^Sending a healthcheck request to UAS$", this::healthCheckRequest);
 		Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains (.*)$", this::healthCheckResponseContains);

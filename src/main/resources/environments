@@ -41,21 +41,22 @@ integration.uas.domain=intads.undertone.com:9000
 
 
 staging.as.solver_plan.file_path=ramp-optimization/runtime/hourly/solver
+integration.as.solver_plan.file_path=ramp-optimization/runtime/hourly/solver
 dev1.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
-*.as.solver_plan.file_name=solver_plan_20201031_170101.json
+*.as.solver_plan.file_name=solver_v2_plan_20201031_170101.json
 
 
-staging.ramp.app.consul.host=services-ramp-staging.ramp-ut.io
-staging.ramp.app.consul.port=3003
+staging.ramp.app.host=services-ramp-staging.ramp-ut.io
+staging.ramp.app.port=3003
 staging.ramp.test.lineItemId=210722
 
-integration.ramp.app.consul.host=services-ramp-integration.ramp-ut.io
-integration.ramp.app.consul.port=3003
+integration.ramp.app.host=services-ramp-integration.ramp-ut.io
+integration.ramp.app.port=3003
 integration.ramp.test.lineItemId=[210722]
 
-dev1.ramp.app.consul.host=[172.19.35.74]
-dev1.ramp.app.consul.port=3003
+dev1.ramp.app.host=[172.19.35.74]
+dev1.ramp.app.port=3003
 dev1.ramp.test.lineItemId=[210722]
 
 *.user-info.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]

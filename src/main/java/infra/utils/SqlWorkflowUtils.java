@@ -50,8 +50,8 @@ public class SqlWorkflowUtils {
           String query = "UPDATE adserver." + tableName + " SET " + columnNameToChange + " ='" + columnValueToChange + "' WHERE " + columnName + "='"
                   + columnValue + "';";
           sut.write(query);
-          if (stmt.executeUpdate(query) != 1) {
-              System.out.println("update " + columnNameToChange + " to " + columnValueToChange + " failed"); //always happening?
+          if (stmt.executeUpdate(query) == 1) {
+              System.out.println("update " + columnNameToChange + " to " + columnValueToChange + " succeeded");
           }
       } catch (SQLException e) {
           e.printStackTrace();

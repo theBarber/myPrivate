@@ -101,10 +101,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         .build();
     requestSubmitter = Executors.newFixedThreadPool(5, new ThreadFactoryBuilder()
         .setNameFormat("Ad request submitter").build());
-
-    CookieStore cookieStore = new BasicCookieStore();
     context = HttpClientContext.create();
-    context.setCookieStore(cookieStore);
+   /* CookieStore cookieStore = new BasicCookieStore();
+       context.setCookieStore(cookieStore);*/
   }
 
   public void zoneRequest(Integer forZone) {
