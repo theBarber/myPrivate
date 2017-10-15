@@ -27,28 +27,28 @@ Scenario: 5. Uas is connected to Workflow
 	When Sending a healthcheck request of Workflow to UAS
 	Then The response code is 200
 
-@campaign
-@hardcoded
-@Sanity
-Scenario: 6. Uas is responsive to zone request
-	When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
-	Then The response code is 200
-	And The response contains script
-	And The response has impression-url
-	And The response has click-url
-
-@campaign
-@hardcoded
-@Sanity
-@Stress
-Scenario: 7. Uas is responsive to a lot of zone requests
-	When I send 500 times an ad request with query parameters for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
-	And I add optimize query parameter with value {0} to send my requests to uas
-	And I send impression requests to UAS immediately!
-	Then The response code is 200
-	And The response contains script
-	And The response has impression-url
-	And The response has click-url
+#@campaign
+#@hardcoded
+#@Sanity
+#Scenario: 6. Uas is responsive to zone request
+#	When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
+#	Then The response code is 200
+#	And The response contains script
+#	And The response has impression-url
+#	And The response has click-url
+#
+#@campaign
+#@hardcoded
+#@Sanity
+#@Stress
+#Scenario: 7. Uas is responsive to a lot of zone requests
+#	When I send 500 times an ad request with query parameters for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
+#	And I add optimize query parameter with value {0} to send my requests to uas
+#	And I send impression requests to UAS immediately!
+#	Then The response code is 200
+#	And The response contains script
+#	And The response has impression-url
+#	And The response has click-url
 
 
 
