@@ -91,6 +91,9 @@ public class UASIntegrationTest extends BaseTest {
           sendMultipleAdRequestsWithParams(times, zoneByName, true);
         });
 
+    And("i set new generic cookie",() ->
+        sut.getUASRquestModule().setGenericCookie());
+
     When("I send ad requests I sleep (\\d+) millis",
               (Long millis) -> {
                   sut.getUASRquestModule().thatSleeps(millis);
