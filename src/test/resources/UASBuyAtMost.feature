@@ -27,5 +27,5 @@ Scenario: buy at most testing - Single banner - positive test
 
 	Scenario: Delete the test plan to S3
 		Then I delete the test solver plan
-		And I sleep for 20 seconds
+		And I sleep for 50 seconds
 
