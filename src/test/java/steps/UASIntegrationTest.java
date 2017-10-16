@@ -276,7 +276,7 @@ public class UASIntegrationTest extends BaseTest {
           sut.getUASRquestModule().addQueryParam(paramName, paramValue);
         });
 
-    Then("I reset the http headers sent to uas$", (String userAgentStr) -> {
+    Then("I reset the http headers sent to uas$", () -> {
       sut.getUASRquestModule().emptyHttpHeaders();
     });
 
