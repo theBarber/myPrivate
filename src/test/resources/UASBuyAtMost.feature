@@ -27,5 +27,12 @@ Scenario: buy at most testing - Single banner - positive test
 
 	Scenario: Delete the test plan to S3
 		Then I delete the test solver plan
-		And I sleep for 50 seconds
+		And I sleep for 70 seconds
 
+	Scenario: 7. Uas is responsive to a lot of zone requests
+		When I send 600 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
+		And I send impression requests to UAS immediately!
+		Then The response code is 200
+		And The response contains script
+		And The response has impression-url
+		And The response has click-url
