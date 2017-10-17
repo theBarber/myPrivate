@@ -7,7 +7,7 @@
 
 	@Sanity
 	Scenario: Send an ad request to UAS and parse impression url
-#	 	Given I setup the db
+	 	Given I setup the db
 		When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 	 	And The response contains script
 		And The responses has impression-urls

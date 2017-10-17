@@ -2,37 +2,17 @@ package steps;
 
 import co.unruly.matchers.OptionalMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.xpath.internal.SourceTreeManager;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.CampaignsRequest;
 import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.config.SocketConfig;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.hamcrest.Matchers;
-import org.joda.time.format.DateTimeFormat;
 import org.junit.runner.RunWith;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UncheckedIOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
@@ -44,7 +24,7 @@ import static org.junit.Assert.assertThat;
         "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 public class UASIntegrationE2E extends BaseTest {
-    private RampAppCreateCampaign rampAppCampaignManager;
+    private RampAppCreateEntitiesManager RampAppCreateEntitiesManager;
     private ObjectMapper mapper = new ObjectMapper();
     private Campaign lastCreatedCampaign;
 
@@ -58,12 +38,11 @@ public class UASIntegrationE2E extends BaseTest {
         And("I update last created campaign named \\{([^}]+)\\} (\\w+) to be \\{([^}]+)\\} in the DB", this::updateLastCreatedCampaignDB);
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("I get the banners of campaign named \\{([^}]+)\\} and print it",this::printBannersOfLastCreatedCampaign);
-
     }
 
     private void createCampaign(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID) {
-        rampAppCampaignManager = sut.getRampAppCreateCampaign();
-        CloseableHttpResponse createCampaignResponse = rampAppCampaignManager.createCampaign(campaignName,lineItemId, creativeID, zonesetID);
+        RampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();
+        CloseableHttpResponse createCampaignResponse = RampAppCreateEntitiesManager.createCampaign(campaignName,lineItemId, creativeID, zonesetID);
         setLastCreatedCampaignEntityFromResponse(createCampaignResponse);
         addBannersToLastCreatedCampaignFromGetCampaignRequest();
         addLastCreatedCampaignToLineItemList(lineItemId);
@@ -71,7 +50,7 @@ public class UASIntegrationE2E extends BaseTest {
 
     private void addBannersToLastCreatedCampaignFromGetCampaignRequest()
     {
-        CloseableHttpResponse getCampaignResponse = rampAppCampaignManager.getCampaignRequest(lastCreatedCampaign.getId());
+        CloseableHttpResponse getCampaignResponse = RampAppCreateEntitiesManager.getCampaignRequest(lastCreatedCampaign.getId());
         Campaign[] tmpCampaign;
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(getCampaignResponse.getEntity()), Campaign[].class);
@@ -146,7 +125,7 @@ public class UASIntegrationE2E extends BaseTest {
 
     private void printBannersOfLastCreatedCampaign(String campaignName)
     {
-        CloseableHttpResponse getCampaignResponse = rampAppCampaignManager.getCampaignRequest(lastCreatedCampaign.getId());
+        CloseableHttpResponse getCampaignResponse = RampAppCreateEntitiesManager.getCampaignRequest(lastCreatedCampaign.getId());
         Campaign[] tmpCampaign;
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(getCampaignResponse.getEntity()), Campaign[].class);

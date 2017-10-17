@@ -4,64 +4,36 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.UnsupportedCharsetException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.management.ServiceNotFoundException;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.net.HostAndPort;
-import com.orbitz.consul.Consul;
 import entities.ramp.app.api.*;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequest;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.config.SocketConfig;
-import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import gherkin.deps.com.google.gson.JsonArray;
-import gherkin.deps.com.google.gson.JsonParser;
-import infra.module.Named;
-import infra.module.WithId;
-import org.apache.http.util.EntityUtils;
-import org.omg.CORBA.INTERNAL;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 /**
+ * created by Sahar
  * assumptions:
  * campaign is created for specific lineItem, zonset, and creative (all of them are not created here)
  * add campaign to lineItem List is not made here
  */
-public class RampAppCreateCampaign implements AutoCloseable {
+public class RampAppCreateEntitiesManager implements AutoCloseable {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private CloseableHttpClient httpclient;
@@ -69,7 +41,7 @@ public class RampAppCreateCampaign implements AutoCloseable {
 	private String port;
 
 
-	public RampAppCreateCampaign(String host, String port) {
+	public RampAppCreateEntitiesManager(String host, String port) {
 		this.host = host;
 		this.port = port;
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
