@@ -101,10 +101,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         .build();
     requestSubmitter = Executors.newFixedThreadPool(5, new ThreadFactoryBuilder()
         .setNameFormat("Ad request submitter").build());
-
-    CookieStore cookieStore = new BasicCookieStore();
     context = HttpClientContext.create();
-    context.setCookieStore(cookieStore);
+    CookieStore cookieStore = new BasicCookieStore();
+       context.setCookieStore(cookieStore);
   }
 
   public void zoneRequest(Integer forZone) {
@@ -118,7 +117,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/af?zoneid=" + forZone + "&ct=1&stid=999";
-
     for (; times > 0; times--) {
       request(url, false);
     }
@@ -294,6 +292,13 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     cookie.setDomain(domain);
     cookie.setPath("/");
     context.getCookieStore().addCookie(cookie);
+  }
+
+  public void setGenericCookie()
+  {
+    clearCookies();
+    BasicCookieStore cookie = new BasicCookieStore();
+    context.setCookieStore(cookie);
   }
 
   public void clearCookies() {

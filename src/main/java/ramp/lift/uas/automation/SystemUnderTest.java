@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
-import entities.RampAppCreateCampaign;
+import entities.RampAppCreateEntitiesManager;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.junit.Assume;
 
@@ -37,7 +37,7 @@ import infra.support.StringUtils;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
 	final int _o;
-	private RampAppCreateCampaign rampAppCreateCampaign;
+	private RampAppCreateEntitiesManager rampAppCreateEntitiesManager;
 	protected final Map<String, LinuxDefaultCliConnection> uasCliConnections = new HashMap<>();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
@@ -95,10 +95,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				if (campaignManager == null)
 						campaignManager = new HardCodedCampaignManager();
 						break;
-		case "@RampAppCreateCampaign":
-				if(rampAppCreateCampaign == null)
-						rampAppCreateCampaign = new RampAppCreateCampaign(config.get("ramp.app.consul.host"),
-										(config.get("ramp.app.consul.port")));
+		case "@RampAppCreateEntitiesManager":
+				if(rampAppCreateEntitiesManager == null)
+						rampAppCreateEntitiesManager = new RampAppCreateEntitiesManager(config.get("ramp.app.host"),
+										(config.get("ramp.app.port")));
 				break;
 	    case "@ramp_admin_db":
 				if (rampAdminDbConnector == null) {
@@ -219,10 +219,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						delegate(exception, e);
 					}
 				}
-				if(rampAppCreateCampaign != null)
+				if(rampAppCreateEntitiesManager != null)
 				{
 					try {
-						AutoCloseable cm = (AutoCloseable) rampAppCreateCampaign;
+						AutoCloseable cm = (AutoCloseable) rampAppCreateEntitiesManager;
 						cm.close();
 						cm = null;
 					}
@@ -349,13 +349,13 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return campaignManager;
 	}
 
-	public RampAppCreateCampaign getRampAppCreateCampaign() {
-		if(rampAppCreateCampaign == null)
+	public RampAppCreateEntitiesManager getRampAppCreateEntitiesManager() {
+		if(rampAppCreateEntitiesManager == null)
 		{
-			rampAppCreateCampaign =  new RampAppCreateCampaign(config.get("ramp.app.consul.host"),
-										(config.get("ramp.app.consul.port")));
+			rampAppCreateEntitiesManager =  new RampAppCreateEntitiesManager(config.get("ramp.app.host"),
+										(config.get("ramp.app.port")));
 		}
-		return rampAppCreateCampaign;
+		return rampAppCreateEntitiesManager;
 	}
 
 	public SqlConnectionModule getRampAdminDbConnector() {

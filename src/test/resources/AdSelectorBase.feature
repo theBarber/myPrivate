@@ -29,5 +29,5 @@ Scenario: valid banner that pass all predicates with existing zone
 	And The banner to passback ratio for banner {1040820} should be 100% 
 	
 Scenario: Restore original plan to S3 
-	Then I restore the original solver plan 
+
 	
