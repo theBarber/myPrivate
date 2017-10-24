@@ -81,7 +81,7 @@
         "status": 0
       }
     ]
-  },
+  	},
 	{
 		"zonesetId": 65745,
 		"zonesetName": "SaharTest-DNU",
@@ -95,5 +95,34 @@
 				"status": 0
 			}
 		]
+	},
+	{
+		"zonesetId": 65745,
+		"zonesetName": "SaharTest-DNU",
+		"Zones": [
+			{
+				"zoneId": 169072,
+				"zoneName": "INT2434 - See Through - SaharTest-DNU",
+				"adUnitId": 83,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
+	{
+		"zonesetId": 21601,
+		"zonesetName": "IO 36687_Amex_Filmstrip",
+		"Zones": [
+			{
+				"zoneId": 37770,
+				"zoneName": "INT829AMEX - Filmstrip 300x600",
+				"adUnitId": 59,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
 	}
+
 ]

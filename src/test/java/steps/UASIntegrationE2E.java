@@ -41,7 +41,7 @@ public class UASIntegrationE2E extends BaseTest {
     }
 
     private void createCampaign(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID) {
-        RampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();
+        RampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();                                       // can be in Before statement
         CloseableHttpResponse createCampaignResponse = RampAppCreateEntitiesManager.createCampaign(campaignName,lineItemId, creativeID, zonesetID);
         setLastCreatedCampaignEntityFromResponse(createCampaignResponse);
         addBannersToLastCreatedCampaignFromGetCampaignRequest();
@@ -50,7 +50,7 @@ public class UASIntegrationE2E extends BaseTest {
 
     private void addBannersToLastCreatedCampaignFromGetCampaignRequest()
     {
-        CloseableHttpResponse getCampaignResponse = RampAppCreateEntitiesManager.getCampaignRequest(lastCreatedCampaign.getId());
+        CloseableHttpResponse getCampaignResponse = RampAppCreateEntitiesManager.getCampaignRequest(lastCreatedCampaign.getId()); //last created campaign can be null
         Campaign[] tmpCampaign;
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(getCampaignResponse.getEntity()), Campaign[].class);

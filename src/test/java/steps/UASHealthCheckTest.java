@@ -41,7 +41,7 @@ public class UASHealthCheckTest extends BaseTest {
 
 	public void healthCheckResponseContains(String something) {
 		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-			//System.out.println(content); // for checks only
+//			System.out.println(content); // for checks only
 			Assert.assertThat(content, Matchers.containsString(something));
 		});
 	}

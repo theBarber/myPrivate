@@ -1,4 +1,4 @@
-{
+[{
 	"ioId": 75396,
 	"name": "RAMP Test IO",
 	"advertiserId": 20116,
@@ -341,4 +341,54 @@
 			]
 		}
 	]
-}
+},
+	{
+		"ioId": 62355,
+		"name": "RAMP programmatic IO",
+		"advertiserId": 20116,
+		"LI":
+		[
+			{
+				"ioLineItemId": 216655,
+				"pricingConvention": "CPM",
+				"Product":
+				{
+					"productId": 98,
+					"name": "Billboard"
+				},
+
+				"Campaigns":
+				[
+					{
+						"campaignId": 290505,
+						"campaignName": "62355-216655-4-oded1",
+						"goalType": "impressions",
+						"deliveryMethod": 1,
+						"Zonesets":
+						{
+							"include":
+							[
+								21601
+							],
+
+							"exclude":
+							[
+
+							]
+						},
+
+						"Banners":
+						[
+							{
+								"bannerId": 1157881,
+								"creativeName": "290505-10000-59-ramp-lift-programmatic-banner1-test"
+							}
+						],
+
+						"isUnlimited": true
+					}
+				]
+			}
+		]
+	}
+]

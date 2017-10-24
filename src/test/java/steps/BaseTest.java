@@ -30,7 +30,7 @@ public class BaseTest implements En {
   protected final String environmentName;
   protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
   protected final String[] CAMPAIGNTESTS = new String[] {"@campaign"};
-
+  protected final String[] PROGRAMMATIC = new String[] {"@programmatic"};
   //protected com.rabbitmq.client.Connection rabbitClientConnection;
   //protected ConnectionFactory connectionFactory = null;
 
