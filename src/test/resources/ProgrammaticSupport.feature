@@ -9,7 +9,7 @@ Background:  verify only campaign_id linked to zone_id
     Scenario: verify programmatic guarantee Ad delivered & win price written to UAS
         Given banner_id 1157881 linked to deal_id 10000 with IO 62355
         And banner_id 1157881 exist in s3 banner cache
-#        And banner_id 1157881 exist in ramp-lift-services banner cache
+        And banner_id 1157881 exist in ramp-lift-services banner cache
         Given I Delete req logs
         When I send 10 times an ad request with parameter {loc=test1.com} for zone named {INT829AMEX - Filmstrip 300x600} to UAS
         And The response has impression-url

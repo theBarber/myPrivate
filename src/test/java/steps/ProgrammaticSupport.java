@@ -82,7 +82,7 @@ public class ProgrammaticSupport extends BaseTest{
 //            String body = handler.handleResponse(response);
 
 //            InputStream content = response.getEntity().getContent();
-//            System.out.println("bla bla bla" + getEntity(response.getEntity()));
+            System.out.println("bla bla bla" + getEntity(response.getEntity()));
 //            Assert.assertThat("The chache doesn't contains the value of: "+bannerId,isResponseContains(response.getEntity(),String.valueOf(bannerId)),is(true));
         }catch (IOException e)
         {
@@ -153,11 +153,11 @@ public class ProgrammaticSupport extends BaseTest{
     private HttpClient getHttpBannerCacheServicesClient()
     {
         List<Header> defaultHeaders = new ArrayList<Header>(){{
-            add(new BasicHeader("Accept", "application/json"));
+           // add(new BasicHeader("Accept", "application/json"));
             add(new BasicHeader("Content-Type", "application/json"));
         }};
         return HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(100000).build())
-                .setDefaultHeaders(defaultHeaders).setDefaultCookieStore(new BasicCookieStore()).build();
+                .setDefaultHeaders(defaultHeaders).build();
     }
 
     private String getServiceAddress(String service)
