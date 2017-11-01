@@ -46,6 +46,7 @@ dev1.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 *.as.solver_plan.file_name=solver_v2_plan_20201031_170101.json
 
+integration.banner_cache.file_path =ramp-optimization-integration/entities_data/banners_meta_data.json
 
 staging.ramp.app.host=services-ramp-staging.ramp-ut.io
 staging.ramp.app.port=3003

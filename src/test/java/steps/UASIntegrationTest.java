@@ -86,6 +86,11 @@ public class UASIntegrationTest extends BaseTest {
           sendMultipleAdRequests(times, zoneByName, true);
         });
 
+      When("I send (\\d+) times an ad request with parameter \\{([^}]+)\\} for zone named \\{([^}]+)\\} to UAS",
+              (Integer times,String parameter, String zoneByName) -> {
+                  sendMultipleAdRequestsWithParameter(times,parameter, zoneByName, true);
+              });
+
     When("I send (\\d+) times an ad request with query parameters for zone named \\{([^}]+)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequestsWithParams(times, zoneByName, true);
@@ -166,7 +171,7 @@ public class UASIntegrationTest extends BaseTest {
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
     When("^I read the latest (clk|imp|req) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
-        /*sut.logFor(logType).readLogs().actual().forEach(m->{
+      /*  sut.logFor(logType).readLogs().actual().forEach(m->{
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < m.size(); i++) {
                 stringBuilder.append(m.get(i)).append("\t");
@@ -212,6 +217,11 @@ public class UASIntegrationTest extends BaseTest {
           assertThat(sut.logFor(logType).actual(),
               StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(expectedFieldValue))));
         });
+      And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is \\{([^}]+)\\}",
+              (String fieldName, Integer column, String logType, String value) -> {
+                  assertThat(sut.logFor(logType).actual(),
+                          StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(value))));
+              });
 
     When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
       sut.uasCliConnections().forEach(conn -> {
@@ -317,7 +327,7 @@ public class UASIntegrationTest extends BaseTest {
     if (StringUtils.nullOrEmpty.test(url.getQuery())) {
       return Collections.emptyMap();
     }
-    return Arrays.stream(url.getQuery().split("&")).map(UASIntegrationTest::splitQueryParameter).collect(
+      return  Arrays.stream(url.getQuery().split("&")).map(UASIntegrationTest::splitQueryParameter).collect(
         groupingBy(SimpleImmutableEntry::getKey, LinkedHashMap::new, mapping(Map.Entry::getValue, toList())));
   }
 
@@ -345,6 +355,12 @@ public class UASIntegrationTest extends BaseTest {
         .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
     sut.getUASRquestModule().zoneRequests(zone.getId(), times, toReset);
   }
+
+    private void sendMultipleAdRequestsWithParameter(Integer times,String parameter, String zoneByName, boolean toReset) {
+        Zone zone = sut.getCampaignManager().getZone(zoneByName)
+                .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+        sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(),parameter, times, toReset);
+    }
 
   private void sendMultipleAdRequestsWithParams(Integer times, String zoneByName, boolean toReset) {
     Zone zone = sut.getCampaignManager().getZone(zoneByName)

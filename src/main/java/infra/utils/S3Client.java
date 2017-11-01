@@ -7,18 +7,14 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.PutObjectResult;
+import com.amazonaws.services.s3.model.*;
 
 import org.junit.Assert;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
+
+import static org.hamcrest.core.Is.is;
 
 /**
  * Created by nive on 2016-09-27.
@@ -78,4 +74,38 @@ public class S3Client {
 	    Assert.fail(e.getMessage());
 	}
     }
+
+	public void assertFileContains(String fileName, String value) {
+		S3Object res = null;
+		try {
+			int bucketDel = fileName.indexOf('/');
+			String uploadKey = fileName.substring(bucketDel + 1);
+			res = amazonS3.getObject(new GetObjectRequest(fileName.substring(0, bucketDel), uploadKey));
+		} catch (AmazonClientException e) {
+			Assert.fail(e.getMessage());
+		}
+		Assert.assertThat("The s3 file doesn't contains the value of: "+value,isFileContentContains(res.getObjectContent(),value),is(true));
+	}
+
+	private boolean isFileContentContains(InputStream inputStreamContent, String value)
+	{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStreamContent));
+		try{
+			while (reader.ready()) {
+				String line = reader.readLine();
+				if(line!=null) // maybe adding check that smaller than 200 character not valid..
+				{
+					if(line.contains(value))
+						return true;
+				}else
+					{
+						break;
+					}
+			}
+		}catch (IOException e)
+		{
+			Assert.fail(e.getMessage());
+		}
+	return false;
+	}
 }

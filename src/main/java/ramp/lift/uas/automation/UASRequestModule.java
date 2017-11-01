@@ -121,10 +121,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       request(url, false);
     }
   }
-  //For Sahar's Checks
-  public String getUASRequestURLWithZone(Integer forZone)
+
+  private String getURL(Integer forZone, String extraParameter)
   {
-    return "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/af?zoneid=" + forZone + "&ct=1&stid=999";
+    return "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/af?zoneid=" + forZone + "&ct=1&stid=999" + extraParameter;
   }
 
   public void zoneRequestsWithParams(Integer forZone, int times, boolean toReset) {
@@ -137,6 +137,18 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     for (NameValuePair nvp : queryParams) {
       url = url + "&" + nvp.toString();
     }
+
+    for (; times > 0; times--) {
+      request(url, false);
+    }
+  }
+
+  public void zoneRequestsWithParameter(Integer forZone,String parameter, int times, boolean toReset) {
+    if (toReset) {
+      reset();
+    }
+
+    String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/af?zoneid=" + forZone + "&ct=1&stid=999"+"&"+parameter;
 
     for (; times > 0; times--) {
       request(url, false);
