@@ -362,6 +362,8 @@ public class UASIntegrationTest extends BaseTest {
         sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(),parameter, times, toReset);
     }
 
+
+
   private void sendMultipleAdRequestsWithParams(Integer times, String zoneByName, boolean toReset) {
     Zone zone = sut.getCampaignManager().getZone(zoneByName)
         .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));

@@ -1,9 +1,9 @@
-@programmatic
-@cli
 @stable
+  @cli
+  @integration
+  @programmatic
 Feature: Programmatic flow support
-
-Background:  verify only campaign_id linked to zone_id
+ Background:  verify only campaign_id linked to zone_id
             verify deal_id exists in GW mock
 
     Scenario: verify programmatic guarantee Ad delivered & win price written to UAS
@@ -26,7 +26,12 @@ Background:  verify only campaign_id linked to zone_id
        And The field domain in the 62 column of the req log is {test1.com}
 
 #    Scenario: programmatic guarantee ad vs nonGuarantee ad with the same priority,score and bid - verify guarantee has been selected
+#      need to be in one line
+
+#      When I send 10 times an ad request with parameter {loc=test2.com} for zone named {INT829AMEX - Filmstrip 300x600} to UAS
+
 #
+
 #    Scenario: programmatic nonGuarantee ad 1 with bid:1 vs nonGuarantee 2 ad with bid:2 with the same priority,score - verify nonGuarantee 2 has been selected
 #
 #    Scenario: programmatic guarantee ad 1 with bid:1 vs guarantee 2 ad with bid:2 with the same priority,score - verify error / passback
@@ -36,3 +41,7 @@ Background:  verify only campaign_id linked to zone_id
 #    Scenario: programmatic direct ad 1 with bid:1 vs guarantee 2 ad with bid:0 that has higher priority - verify direct has been selected
 #
 #
+
+
+
+

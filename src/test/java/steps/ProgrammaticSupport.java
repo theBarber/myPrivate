@@ -16,10 +16,17 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
+import org.glassfish.jersey.client.ClientConfig;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,7 +54,6 @@ public class ProgrammaticSupport extends BaseTest{
         Given("^banner_id (\\d+) linked to deal_id (\\d+) with IO (\\d+)$", this::assertBannerLinkedToDeal);
         And("banner_id (\\d+) exist in s3 banner cache", this::assertBannerExistInS3BannerCache);
         And("banner_id (\\d+) exist in ramp-lift-services banner cache", this::assertBannerExistInRampLiftServicesBannerCache);
-
         And("^verify banner_id (\\d+) exists in zone_cache$", (Integer deal_id) -> {
             //CacheProcessTest.getBannerFromZoneCache(deal_id); need to implement that
             throw new PendingException();
@@ -70,42 +76,19 @@ public class ProgrammaticSupport extends BaseTest{
 
     public void assertBannerExistInRampLiftServicesBannerCache(Integer bannerId)
     {
-        HttpResponse response;
-        String url = "http://172.31.48.20:8877/delivery_engine/refreshCache"; //TODO: need to be generic
-        HttpPost httpPost = new HttpPost(url);
-        HttpClient httpclient = getHttpBannerCacheServicesClient();
-        try
-        {
-            HttpEntity entity = new StringEntity("{\"action\":\"info\"}", ContentType.APPLICATION_JSON);
-            httpPost.setEntity(entity);
-            response = httpclient.execute(httpPost);
-//            String body = handler.handleResponse(response);
+        ClientConfig clientConfig = new ClientConfig();
+        Client client = ClientBuilder.newClient(clientConfig);
+        WebTarget webTarget = client.target("http://172.31.48.20:8877"); //TODO: need to be generic
 
-//            InputStream content = response.getEntity().getContent();
-            System.out.println("bla bla bla" + getEntity(response.getEntity()));
-//            Assert.assertThat("The chache doesn't contains the value of: "+bannerId,isResponseContains(response.getEntity(),String.valueOf(bannerId)),is(true));
-        }catch (IOException e)
-        {
-            e.printStackTrace();
-            throw new UncheckedIOException("failed to send request (" + url + ") ", e);
-        }
-    }
-
-    private boolean isResponseContains(HttpEntity entity, String value)
-    {
-
-        try {
-            BufferedReader reqLineReader = new BufferedReader(new InputStreamReader(entity.getContent()));
-            while (reqLineReader.ready()) {
-              String line = reqLineReader.readLine();
-              if(line.contains(value))
-                  return true;
-            }
-        }catch (IOException e)
-        {
-            throw new UncheckedIOException("failed to get the content ", e);
-        }
-        return false;
+        Response response = webTarget
+                .path("/delivery_engine/refreshCache")
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.json("{\"action\":\"info\"}"));
+        Assert.assertNotNull(response);
+        String responseStr = response.readEntity(String.class);
+        Assert.assertEquals(200, response.getStatus());
+        Assert.assertNotNull(responseStr);
+        Assert.assertThat(responseStr, Matchers.containsString(String.valueOf(bannerId)));
     }
 
     private String getDeal(String deal_id,String IO_ID)
@@ -150,15 +133,6 @@ public class ProgrammaticSupport extends BaseTest{
                 .setDefaultHeaders(defaultHeaders).setDefaultCookieStore(new BasicCookieStore()).build();
     }
 
-    private HttpClient getHttpBannerCacheServicesClient()
-    {
-        List<Header> defaultHeaders = new ArrayList<Header>(){{
-           // add(new BasicHeader("Accept", "application/json"));
-            add(new BasicHeader("Content-Type", "application/json"));
-        }};
-        return HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(100000).build())
-                .setDefaultHeaders(defaultHeaders).build();
-    }
 
     private String getServiceAddress(String service)
     {
