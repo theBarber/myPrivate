@@ -1,8 +1,7 @@
 @cli
 @uas
 @RampAppCreateCampaign
-    
-Feature: UAS E2E Ad request flow - with new entities
+    Feature: UAS E2E Ad request flow - with new entities
 
     Scenario: Create new campaign, send ad request and
         Given I disable all campaigns named {Ramp-lift-Test-1-Campaign-SystemTest} in DB

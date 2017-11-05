@@ -1,6 +1,5 @@
   @programmatic
   @cli
-  @integration
   @uas
   @stable
   Feature: Programmatic flow support

@@ -41,11 +41,11 @@ import static org.hamcrest.core.Is.is;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:ProgrammaticSupport.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/ProgrammaticSupport_$TIMESTAMP$.json"})
-public class ProgrammaticSupport extends BaseTest{
+public class ProgrammaticSupportTest extends BaseTest{
     private String host;
 
 
-    public ProgrammaticSupport() {
+    public ProgrammaticSupportTest() {
         super();
         Before(PROGRAMMATIC, (scenario) -> {
             host = sut.getProgrammaticHost();
