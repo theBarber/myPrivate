@@ -1,10 +1,12 @@
+  @programmatic
   @cli
   @integration
-  @programmatic
+  @uas
+  @stable
   Feature: Programmatic flow support
 #  Background:  verify only campaign_id linked to zone_id
 #            verify deal_id exists in GW mock
-    @stable
+
     Scenario: verify programmatic guarantee Ad delivered & win price written to UAS
         Given banner_id 1157881 linked to deal_id 10000 with IO 62355
         And banner_id 1157881 exist in s3 banner cache
@@ -24,10 +26,10 @@
        And The field isProgrammaticflag in the 60 column of the req log is {1}
        And The field domain in the 62 column of the req log is {test1.com}
 
-#    Scenario: programmatic guarantee ad vs nonGuarantee ad with the same priority,score and bid - verify guarantee has been selected
+    Scenario: programmatic guarantee ad vs nonGuarantee ad with the same priority,score and bid - verify guarantee has been selected
 #      need to be in one line
 
-#      When I send 10 times an ad request with parameter {loc=test2.com} for zone named {INT829AMEX - Filmstrip 300x600} to UAS
+      When I send 10 times an ad request with parameter {loc=test2.com} for zone named {INT829AMEX - Filmstrip 300x600} to UAS
 
 #
 
