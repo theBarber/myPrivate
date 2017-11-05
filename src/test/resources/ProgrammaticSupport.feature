@@ -1,10 +1,10 @@
-@stable
   @cli
   @integration
   @programmatic
-Feature: Programmatic flow support
- Background:  verify only campaign_id linked to zone_id
-            verify deal_id exists in GW mock
+  @stable
+  Feature: Programmatic flow support
+#  Background:  verify only campaign_id linked to zone_id
+#            verify deal_id exists in GW mock
 
     Scenario: verify programmatic guarantee Ad delivered & win price written to UAS
         Given banner_id 1157881 linked to deal_id 10000 with IO 62355
