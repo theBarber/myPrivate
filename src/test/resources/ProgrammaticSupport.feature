@@ -4,7 +4,7 @@
   @stable
   Feature: Programmatic flow support
   
-    Scenario: verify programmatic guarantee Ad delivered & win price written to UAS
+  Scenario: verify programmatic guarantee Ad delivered & win price written to UAS
         Given banner_id 1157881 linked to deal_id 10000 with IO 62355
         And banner_id 1157881 exist in s3 banner cache
         And banner_id 1157881 exist in ramp-lift-services banner cache
