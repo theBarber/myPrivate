@@ -86,6 +86,11 @@ public class UASIntegrationTest extends BaseTest {
           sendMultipleAdRequests(times, zoneByName, true);
         });
 
+      When("I send (\\d+) times an ad request with parameter \\{([^}]+)\\} for zone id \\{(\\d+)\\} to UAS",
+              (Integer times,String parameter, Integer zoneId) -> {
+                  sendMultipleZoneIDAdRequestsWithParameter(times,parameter, zoneId, true);
+              });
+
       When("I send (\\d+) times an ad request with parameter \\{([^}]+)\\} for zone named \\{([^}]+)\\} to UAS",
               (Integer times,String parameter, String zoneByName) -> {
                   sendMultipleAdRequestsWithParameter(times,parameter, zoneByName, true);
@@ -362,6 +367,10 @@ public class UASIntegrationTest extends BaseTest {
         sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(),parameter, times, toReset);
     }
 
+    private void sendMultipleZoneIDAdRequestsWithParameter(Integer times,String parameter, Integer zoneID, boolean toReset)
+    {
+        sut.getUASRquestModule().zoneRequestsWithParameter(zoneID,parameter, times, toReset);
+    }
 
 
   private void sendMultipleAdRequestsWithParams(Integer times, String zoneByName, boolean toReset) {
