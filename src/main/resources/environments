@@ -16,7 +16,8 @@ dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl
 dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/sharedev_ramp_admin
 
 staging.uas.cliconnection.hosts=[172.31.48.35,172.31.48.29]
-integration.uas.cliconnection.hosts=[172.31.48.19,172.31.48.20]
+# integration.uas.cliconnection.hosts=[172.31.48.19,172.31.48.20]
+integration.uas.cliconnection.hosts=[172.31.48.20]
 dev1.uas.cliconnection.hosts=[192.168.56.101]
 dev2.uas.cliconnection.hosts=[127.0.0.1]
 *.uas.cliconnection.user=root
@@ -27,17 +28,18 @@ dev1.uas.cliconnection.user=dev
 dev1.uas.cliconnection.password=secret
 dev1.uas.cliconnection.keyname=
 
-# staging.uas.host=172.31.48.35
-# staging.uas.port=9000
-staging.uas.domain=stgads.undertone.com
+staging.uas.domain=172.31.48.35
+staging.uas.port=9000
+# staging.uas.domain=stgads.undertone.com
 
 # add to your /etc/hosts a line with the ip of your uas to this domain
 dev1.uas.domain=dev1.undertone.com
 
 dev2.uas.domain=dev2.undertone.com
-integration.uas.domain=intads.undertone.com:9000
+integration.uas.domain=172.31.48.20
+integration.uas.port=9000
+# integration.uas.domain=intads.undertone.com
 *.uas.port=
-# integration.uas.port=9000
 
 
 staging.as.solver_plan.file_path=ramp-optimization/runtime/hourly/solver

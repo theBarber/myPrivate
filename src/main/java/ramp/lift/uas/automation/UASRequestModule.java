@@ -316,4 +316,15 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   public void clearCookies() {
     context.getCookieStore().clear();
   }
+
+    public void sendMultipleDynamicTagRequests(Integer times, String publisherId, String _domain,boolean toReset) {
+      if (toReset) {
+        reset();
+      }
+
+      String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/dj?pid=" + publisherId+ "&domain="+_domain;
+      for (; times > 0; times--) {
+        request(url, false);
+    }
+    }
 }

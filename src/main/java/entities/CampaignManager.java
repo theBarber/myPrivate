@@ -4,6 +4,7 @@ import infra.ParameterProvider;
 import infra.module.Named;
 import infra.module.WithId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,8 +37,12 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	public Optional<Banner> getBanner(String byName) {
 		return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName))).findFirst();
 	}
-	
-	
+
+	public List<ZoneSet> getZonesets()
+	{
+		return zonesets;
+	}
+
 	public Optional<ZoneSet> getZoneset(Integer byId) {
 		return zonesets.stream().filter(WithId.idIs(byId)).findFirst();
 	}

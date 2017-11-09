@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class HardCodedCampaignManager extends CampaignManager {
 	
 	public void initZoneSets() {
 		try {
-			this.zonesets =  Arrays.asList(m.readValue(this.getClass().getResourceAsStream(ZONESET_FILE), ZoneSet[].class));
+			this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(this.getClass().getResourceAsStream(ZONESET_FILE), ZoneSet[].class)));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

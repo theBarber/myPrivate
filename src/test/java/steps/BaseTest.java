@@ -31,6 +31,8 @@ public class BaseTest implements En {
   protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
   protected final String[] CAMPAIGNTESTS = new String[] {"@campaign"};
   protected final String[] PROGRAMMATIC = new String[] {"@programmatic"};
+  protected final String[] DYNAMICTAG = new String[] {"@DinamicTag"};
+
   //protected com.rabbitmq.client.Connection rabbitClientConnection;
   //protected ConnectionFactory connectionFactory = null;
 
