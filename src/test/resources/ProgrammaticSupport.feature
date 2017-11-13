@@ -14,6 +14,7 @@
                 And The response contains script
                 And The impressionUrl has bannerid field matching the id of the banner named {290505-10000-59-ramp-lift-programmatic-banner1-test} 100% of the time
                 When I send impression requests to UAS
+                And I sleep for 5 seconds
                 Then I read the latest req log file from uas
                 Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
                 And The field bidNumebr in the 59 column of the req log is {2.000000}
@@ -27,7 +28,7 @@
                 Then The response code is 200
                 And The response contains script
                 And The response contains 1158454
-                And I sleep for 2 seconds
+                And I sleep for 5 seconds
                 Then I read the latest req log file from uas
                 And The field isProgrammaticflag in the 60 column of the req log is {1}
 
@@ -38,7 +39,7 @@
                 Then The response code is 200
                 And The response contains script
                 And The response contains 1158520
-                And I sleep for 2 seconds
+                And I sleep for 5 seconds
                 Then I read the latest req log file from uas
                 And The field isProgrammaticflag in the 60 column of the req log is {1}
 
@@ -48,7 +49,7 @@
                 Then The response code is 200
                 And The response contains script
                 And The response contains 1158519
-                And I sleep for 2 seconds
+                And I sleep for 5 seconds
                 Then I read the latest req log file from uas
                 And The field isProgrammaticflag in the 60 column of the req log is {1}
 
@@ -70,7 +71,7 @@
                 Then The response code is 200
                 And The response contains script
                 And The response contains 1158475
-                And I sleep for 2 seconds
+                And I sleep for 5 seconds
                 Then I read the latest req log file from uas
                 And The field isProgrammaticflag in the 60 column of the req log is {1}
 

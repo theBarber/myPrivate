@@ -24,7 +24,7 @@ Scenario: Send an ad request to UAS and parse logs
         And The response has impression-url
         And The response has click-url
         When I send impression requests to UAS
-        And I sleep for 2 seconds
+        And I sleep for 5 seconds
 		Then I read the latest req log file from uas
         Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
         And The field zoneid in the 4 column of the req log is the same as in impression-url
@@ -34,6 +34,6 @@ Scenario: Send an ad request to UAS and parse logs
         And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
         Given I Delete clk logs
         When I send click requests to UAS
-        And I sleep for 2 seconds
+        And I sleep for 5 seconds
         Then I read the latest clk log file from uas
         And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
