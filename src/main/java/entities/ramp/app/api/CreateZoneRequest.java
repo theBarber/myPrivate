@@ -9,8 +9,11 @@ public class CreateZoneRequest {
     private String updatedAt;
     private String webSectionId;
     private String passback;
+    private String zoneTypeId;
+    private String affiliateId;
 
-    public CreateZoneRequest(@JsonProperty("zoneName")String zoneName, @JsonProperty("adUnitId")String adUnitId, @JsonProperty("limitation")String limitation,@JsonProperty("webSectionId")String webSectionId,  @JsonProperty("updatedAt")String updatedAt, @JsonProperty("passback")String passback)
+    public CreateZoneRequest(@JsonProperty("zoneName")String zoneName, @JsonProperty("adUnitId")String adUnitId, @JsonProperty("limitation")String limitation,@JsonProperty("webSectionId")String webSectionId,
+                             @JsonProperty("updatedAt")String updatedAt, @JsonProperty("passback")String passback,@JsonProperty("zoneTypeId")String zoneTypeId,@JsonProperty("affiliateId") String affiliateId)
     {
         this.zoneName = zoneName;
         this.adUnitId = adUnitId;
@@ -18,6 +21,8 @@ public class CreateZoneRequest {
         this.updatedAt = updatedAt;
         this.passback = passback;
         this.webSectionId = webSectionId;
+        this.zoneTypeId = zoneTypeId;
+        this.affiliateId = affiliateId;
     }
 
     public void setZoneName(String zoneName) {
@@ -66,5 +71,21 @@ public class CreateZoneRequest {
 
     public void setWebSectionId(String webSectionId) {
         this.webSectionId = webSectionId;
+    }
+
+    public String getZoneTypeId() {
+        return zoneTypeId;
+    }
+
+    public void setZoneTypeId(String zoneTypeId) {
+        this.zoneTypeId = zoneTypeId;
+    }
+
+    public String getAffiliateId() {
+        return affiliateId;
+    }
+
+    public void setAffiliateId(String affiliateId) {
+        this.affiliateId = affiliateId;
     }
 }

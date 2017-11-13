@@ -45,7 +45,7 @@ public class UASIntegrationE2E extends BaseTest {
         rampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();                                       // can be in Before statement
         CloseableHttpResponse createCampaignResponse = rampAppCreateEntitiesManager.createCampaign(campaignName,lineItemId, creativeID, zonesetID,priority);
         setLastCreatedCampaignEntityFromResponse(createCampaignResponse);
-        addBannersToLastCreatedCampaignFromGetCampaignRequest();
+        addBannersToLastCreatedCampaignFromGetCampaignRequest(); //relevant only in integration, remove it!
         addLastCreatedCampaignToLineItemList(lineItemId);
     }
 
@@ -54,6 +54,7 @@ public class UASIntegrationE2E extends BaseTest {
         Optional<ZoneSet> zoneset = sut.getCampaignManager().getZoneset(zonesetName);
         createCampaign(campaignName,lineItemId,creativeID,zoneset.get().getId(),priority);
         updateBannersName(campaignName,campaignName+"banner-");
+        updateLastCreatedCampaignDB(campaignName,"status","0");
     }
 
 
@@ -76,8 +77,8 @@ public class UASIntegrationE2E extends BaseTest {
 
      private void addLastCreatedCampaignToLineItemList(Integer lineItemId)
     {
-         LineItem li = sut.getCampaignManager().getLineItem(lineItemId).orElseThrow(() -> new AssertionError("The Line item "+lineItemId+" does not exist!"));
-         li.addCampaign(lastCreatedCampaign);
+        LineItem li = sut.getCampaignManager().getLineItem(lineItemId).orElseThrow(() -> new AssertionError("The lineItem " + lineItemId + " does not exist!"));
+        li.addCampaign(lastCreatedCampaign);
     }
 
     private void setLastCreatedCampaignEntityFromResponse(CloseableHttpResponse createCampaignResponse)

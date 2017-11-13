@@ -34,7 +34,6 @@ public class Zone implements Named, WithId<Integer>, Comparable<Zone> {
 		this.limitation = limitation;
 		this.webSectionID = webSectionID;
 	}
-
 	@Override
 	@JsonProperty("zoneName")
 	public String getName() {

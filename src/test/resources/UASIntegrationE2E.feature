@@ -8,15 +8,15 @@
         When I create new Campaign named {Ramp-lift-Test-1-Campaign-SystemTest} using ramp-app api's for LineItem 210722 associated to creative 204 with zoneset 65745 with priority {-1}
         And I update the created campaign {Ramp-lift-Test-1-Campaign-SystemTest} banners name to {RampLift-1-bannerCreatedTest-} chained with the serial number
         And  I update the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} status to be 0 in the DB
-#        And I refresh the zone Cache
-#        When I send 100 times an ad request for zone named {INT2434 - See Through - SaharTest-DNU} to UAS
-#        And The response contains script
-#        And The responses has impression-urls
-#        And The impressionUrl has bannerid field matching the id of the banner named {RampLift-1-bannerCreatedTest-1} 100% of the time
-#        And The impressionUrl has zoneid field matching the id of the zone named {INT2434 - See Through - SaharTest-DNU} 100% of the time
-#        And The impressionUrl has campaignid field matching the id of the campaign named {Ramp-lift-Test-1-Campaign-SystemTest} 100% of the time
-#        And The responses has click-urls
-#        And The clickUrl has bannerid field matching the id of the banner named {RampLift-1-bannerCreatedTest-1} 100% of the time
+        And I refresh the zone Cache
+        When I send 100 times an ad request for zone named {INT2434 - See Through - SaharTest-DNU} to UAS
+        And The response contains script
+        And The responses has impression-urls
+        And The impressionUrl has bannerid field matching the id of the banner named {RampLift-1-bannerCreatedTest-1} 100% of the time
+        And The impressionUrl has zoneid field matching the id of the zone named {INT2434 - See Through - SaharTest-DNU} 100% of the time
+        And The impressionUrl has campaignid field matching the id of the campaign named {Ramp-lift-Test-1-Campaign-SystemTest} 100% of the time
+        And The responses has click-urls
+        And The clickUrl has bannerid field matching the id of the banner named {RampLift-1-bannerCreatedTest-1} 100% of the time
 #
 #      Scenario: Send an ad request to UAS and parse logs
 #        Given I Delete req logs

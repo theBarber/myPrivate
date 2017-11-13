@@ -21,6 +21,15 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	}
 
+	/*public LineItem addNewLineItem(Integer io_id, Integer lineItemID)
+	{
+		if(io.stream().flatMap(x -> x.lineItems()).filter(WithId.idIs(lineItemID)).findFirst().isPresent())
+			return null;
+		else
+			io.stream().filter(WithId.idIs(io_id)).findFirst().
+
+	}*/
+
     public Optional<LineItem> getLineItem(Integer LineItemID)
 	{
 		return io.stream().flatMap(x -> x.lineItems()).filter(WithId.idIs(LineItemID)).findFirst();

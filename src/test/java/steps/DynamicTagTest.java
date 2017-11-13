@@ -31,7 +31,7 @@ public class DynamicTagTest extends BaseTest{
         });
 
         Given("i remove all zones related to web_section id (\\d+)",this::removeAllZonesFrom);
-        Then("i create new zone named \\{([^}]+)\\} with limitation \\{([^}]+)\\} with adUnitId (\\w+) and web_section id (\\d+)",this::createNewZone);
+        Then("i create new zone named \\{([^}]+)\\} with limitation \\{([^}]+)\\} with adUnitId (\\w+) and web_section id (\\d+) with affiliateId (\\d+) with po_line_item_id (\\d+)",this::createNewZone);
         Then("i update daily capping for publisher id (\\d+) with product id (\\d+) to be (\\d+)",this::updateProductDailyCappingForPublisher);
         Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
     }
@@ -41,12 +41,18 @@ public class DynamicTagTest extends BaseTest{
         SqlWorkflowUtils.setColumnInWorkflow("zones", "web_section_id",String.valueOf(web_sectionID), "status", "1");
     }
 
-    private void createNewZone(String zoneAndZonesetName, String limitation,String adUnitId, String web_section_id)
+    private void createNewZone(String zoneAndZonesetName, String limitation,String adUnitId, String web_section_id, String affiliateId, String po_lineItem_id)
     {
-        Zone createdZone = RampAppCreateEntitiesManager.createZone(zoneAndZonesetName, adUnitId, limitation, web_section_id);
-        ZoneSet createdZoneset = RampAppCreateEntitiesManager.createZoneset(zoneAndZonesetName,new TreeSet<Zone>(){{add(createdZone);}},"1","0");
-        createdZoneset.addZone(createdZone);
+        Zone createdZone = RampAppCreateEntitiesManager.createZone(zoneAndZonesetName, adUnitId, limitation, web_section_id, affiliateId);
+        ZoneSet createdZoneset = RampAppCreateEntitiesManager.createZoneset(zoneAndZonesetName,new TreeSet<Zone>(){{add(createdZone);}},"1","1");
+        createdZoneset.addZone(createdZone); //need to be inside line 47
         addCreatedZonesetToCampaignManager(createdZoneset);
+        update_po_line_item_zones_InDB(createdZone.getId(), po_lineItem_id); // ------------need to be from api!!!!!!!--------------
+    }
+
+    private void update_po_line_item_zones_InDB(Integer zoneId, String po_line_item_ID)
+    {
+        SqlWorkflowUtils.WorkflowQuery("INSERT INTO `adserver`.`po_line_items_zones` (`po_line_item_id`, `zone_id`, `created_by`, `updated_by`) VALUES ('"+po_line_item_ID+"', '"+zoneId+"', '974', '974');");
     }
 
     private void addCreatedZonesetToCampaignManager(ZoneSet zoneSet)

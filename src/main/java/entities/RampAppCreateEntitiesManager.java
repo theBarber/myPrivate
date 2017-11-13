@@ -123,9 +123,9 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return getCampaignResponse;
 	}
 
-	public Zone createZone(String zoneName, String adUnitID, String limitation,String webSectionID)
+	public Zone createZone(String zoneName, String adUnitID, String limitation,String webSectionID, String affiliateId)
 	{
-		CloseableHttpResponse createZoneResponse = createZoneRequest(zoneName,adUnitID,limitation,webSectionID);
+		CloseableHttpResponse createZoneResponse = createZoneRequest(zoneName,adUnitID,limitation,webSectionID,affiliateId);
 		Zone zone = getCreatedZoneFromResponse(createZoneResponse);
 		zone.set(zoneName,adUnitID,limitation,webSectionID);
 		return zone;
@@ -145,11 +145,11 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return zone;
 	}
 
-	private CloseableHttpResponse createZoneRequest(String zoneName, String adunit, String limitation,String webSectionID)
+	private CloseableHttpResponse createZoneRequest(String zoneName, String adunit, String limitation,String webSectionID,String affiliateId)
 	{
 		CloseableHttpResponse createZoneResponse;
 		String url = getServiceAddress("/test/zones/zonesets/zones");
-		CreateZoneRequest createZoneRequest = new CreateZoneRequest(zoneName,adunit,limitation,webSectionID,dateFromNow(0),"");
+		CreateZoneRequest createZoneRequest = new CreateZoneRequest(zoneName,adunit,limitation,webSectionID,dateFromNow(0),"","12",affiliateId);
 
 		HttpPost httpPost = new HttpPost(url);
 		try {

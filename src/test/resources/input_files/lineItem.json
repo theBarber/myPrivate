@@ -5,6 +5,36 @@
 	"LI": 
 	[
 		{
+			"ioLineItemId": 197418,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 120,
+				"name": "Screen shift"
+			},
+			"Campaigns":[]
+		},
+		{
+			"ioLineItemId": 211456,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 124,
+				"name": "Page Grabber Mobile"
+			},
+			"Campaigns":[]
+		},
+		{
+			"ioLineItemId": 215982,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 151,
+				"name": "Page Grabber (Cross Screen)"
+			},
+			"Campaigns":[]
+		},
+		{
 			"ioLineItemId": 197420,
 			"pricingConvention": "CPM",
 			"Product": 
