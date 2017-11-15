@@ -2,7 +2,6 @@
 @UASBuyAtMost 
 @Integration 
 @hardcoded
-@stable
 Feature: UAS buy at most 
 
 Scenario: buy at most testing - Single banner - positive test
