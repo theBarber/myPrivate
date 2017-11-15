@@ -12,7 +12,67 @@
 				"productId": 120,
 				"name": "Screen shift"
 			},
-			"Campaigns":[]
+			"Campaigns":
+			[
+				{
+					"campaignId": 291514,
+					"campaignName": "DT-SS-Test-1-campaign-high-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67603
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157107 ,
+							"creativeName": "DT-SS-Test-1-campaign-high-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
+				{
+					"campaignId": 291570,
+					"campaignName": "DT-SS-Test-1-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67603
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157158,
+							"creativeName": "DT-SS-Test-1-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				}
+			]
 		},
 		{
 			"ioLineItemId": 211456,
@@ -22,7 +82,67 @@
 				"productId": 124,
 				"name": "Page Grabber Mobile"
 			},
-			"Campaigns":[]
+			"Campaigns":
+			[
+				{
+					"campaignId": 291521,
+					"campaignName": "DT-PGM-Test-1-campaign-high-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67604
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157116,
+							"creativeName": "DT-PGM-Test-1-campaign-high-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
+				{
+					"campaignId": 291572,
+					"campaignName": "DT-PGM-Test-1-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67604
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157160,
+							"creativeName": "DT-PGM-Test-1-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				}
+			]
 		},
 		{
 			"ioLineItemId": 215982,
@@ -32,7 +152,68 @@
 				"productId": 151,
 				"name": "Page Grabber (Cross Screen)"
 			},
-			"Campaigns":[]
+			"Campaigns":
+			[
+				{
+					"campaignId": 291542,
+					"campaignName": "DT-PGC-Test-1-campaign-high-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67627
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157136,
+							"creativeName": "DT-PGC-Test-1-campaign-high-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
+				{
+					"campaignId": 291573,
+					"campaignName": "DT-PGC-Test-1-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67627
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157161,
+							"creativeName": "DT-PGC-Test-1-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				}
+
+			]
 		},
 		{
 			"ioLineItemId": 197420,

@@ -3,6 +3,7 @@ package steps;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -66,6 +67,8 @@ public class CrossDeviceCappingTest extends BaseTest{
     Given("I add cookie (\\w+) with value \\{([^}]+)\\} to my requests to uas", (String paramName, String paramValue) -> {
       sut.getUASRquestModule().addCookie(paramName, paramValue);
     });
+
+
 
     Given("I clear all cookies from uas requests", () -> {
       sut.getUASRquestModule().clearCookies();

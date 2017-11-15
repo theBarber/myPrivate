@@ -30,6 +30,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.cookie.Cookie;
@@ -97,7 +98,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   public UASRequestModule() {
     setActual(new ArrayList<>());
     httpclient = HttpClients.custom()
-        .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build())
+        .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(10000).build())
         .build();
     requestSubmitter = Executors.newFixedThreadPool(5, new ThreadFactoryBuilder()
         .setNameFormat("Ad request submitter").build());
