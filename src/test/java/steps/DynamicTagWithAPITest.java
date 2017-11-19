@@ -30,15 +30,8 @@ public class DynamicTagWithAPITest extends BaseTest{
             RampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();
         });
 
-        Given("i remove all zones related to web_section id (\\d+)",this::removeAllZonesFrom);
-        Then("i create new zone named \\{([^}]+)\\} with limitation \\{([^}]+)\\} with adUnitId (\\w+) and web_section id (\\d+) with affiliateId (\\d+) with po_line_item_id (\\d+)",this::createNewZone);
-        Then("i update daily capping for publisher id (\\d+) with product id (\\d+) to be (\\d+)",this::updateProductDailyCappingForPublisher);
-        Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
-    }
 
-    private void removeAllZonesFrom(Integer web_sectionID)
-    {
-        SqlWorkflowUtils.setColumnInWorkflow("zones", "web_section_id",String.valueOf(web_sectionID), "status", "1");
+        Then("i create new zone named \\{([^}]+)\\} with limitation \\{([^}]+)\\} with adUnitId (\\w+) and web_section id (\\d+) with affiliateId (\\d+) with po_line_item_id (\\d+)",this::createNewZone);
     }
 
     private void createNewZone(String zoneAndZonesetName, String limitation,String adUnitId, String web_section_id, String affiliateId, String po_lineItem_id)
@@ -60,14 +53,7 @@ public class DynamicTagWithAPITest extends BaseTest{
         sut.getCampaignManager().getZonesets().add(zoneSet);
     }
 
-    private void updateProductDailyCappingForPublisher(Integer publisherId,Integer productID, Integer value)
-    {
-        SqlWorkflowUtils.WorkflowQuery("UPDATE adserver.publishers_products SET daily_cap_per_user="+value+" WHERE publisher_id = "+publisherId+" and product_id ="+productID);
-    }
 
-    private void sendDynamicTagRequestsToUAS(Integer times, String publisherId, String domain)
-    {
-        sut.getUASRquestModule().sendMultipleDynamicTagRequests(times,publisherId, domain,true);
 
-    }
+
 }

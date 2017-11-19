@@ -13,10 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,6 +40,8 @@ import org.apache.http.message.BasicHeader;
 
 import infra.module.AbstractModuleImpl;
 import org.apache.http.message.BasicNameValuePair;
+
+import static org.junit.Assert.fail;
 
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
@@ -318,14 +317,30 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     context.getCookieStore().clear();
   }
 
-    public void sendMultipleDynamicTagRequests(Integer times, String publisherId, String _domain,boolean toReset) {
+    public void sendMultipleDynamicTagRequests(Integer times, String publisherId, String domainParam,boolean toReset) {
       if (toReset) {
         reset();
       }
 
-      String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/dj?pid=" + publisherId+ "&domain="+_domain;
+      String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/dj?pid=" + publisherId+ "&domain="+domainParam;
       for (; times > 0; times--) {
         request(url, false);
     }
     }
+//temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary
+  public void sendMultipleDynamicTagSynchronizedRequests(Integer times, String publisherId, String domainParam, boolean toReset) {
+    if (toReset) {
+      reset();
+    }
+
+    String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/dj?pid=" + publisherId+ "&domain="+domainParam;
+    for (; times > 0; times--) {
+      request(url, false);
+      try {
+        TimeUnit.SECONDS.sleep(2); //not good not good not good not good not good not good not good not good not good not good not good not good !
+      } catch (InterruptedException e) {
+        fail(e.getMessage());
+      }
+    }
+  }
 }

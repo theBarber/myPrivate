@@ -9,8 +9,8 @@ Feature: Dynamic Tag flow support with API
 #    And I send 1 times an ad request for zone named {zone-test1} to UAS
 #    And The response contains script
 
-#Scenario: creating test 1 entities
-#        Given i remove all zones related to web_section id 8758
+Scenario: creating test 1 entities
+#        Given i remove all zones related to web_section id 11784
 #        Then i update daily capping for publisher id 3470 with product id 120 to be 1
 #        Then i update daily capping for publisher id 3470 with product id 124 to be 1
 #        Then i update daily capping for publisher id 3470 with product id 151 to be 1
