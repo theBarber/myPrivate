@@ -1,6 +1,6 @@
+  @programmatic
   @cli
   @uas
-  @stable
   Feature: Programmatic flow support
     Scenario: 1. verify programmatic guarantee Ad delivered & written in uas logs
                 Given banner_id 1157881 linked to deal_id 10000 with IO 62355
