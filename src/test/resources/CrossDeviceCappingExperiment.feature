@@ -3,9 +3,6 @@
 @userinfo
 @userhistory
 @uas
-#@Integration
-#we currently don't need to execute the tests. jira item - UT-4339
-
 Feature: Cross Device Capping Experiment
   Background:
     Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from user history

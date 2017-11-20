@@ -3,22 +3,17 @@
 @userinfo
 @userhistory
 @uas
-#@Integration
-#we currently don't need to execute the tests. jira item - UT-4339
-
 Feature: Cross Device Capping No Experiment
   Background:
     Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from user history
     Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from user history
     Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from user history
     Given I clear all cookies from uas requests
-
   Scenario: test old uas logic
     Given I change IO id {75396} cross device Capping to {active}
     Given I set the activation status of experiment group named {rampLift_NDQ_scenario} and his experiments to {inactive}
     Given I set the activation status of experiment group named {rampLift_capping_scenario} and his experiments to {inactive}
     Then I refresh staging delivery engine data cache
-
 
 #UTID 44444444444444444444444444444444 to 41hun7qe6bn47gfxgfbzwh938
 #UTID 22222222222222222222222222222222 to deviceId 20qxblv735tk3q7yq7nzy8mjm
@@ -176,13 +171,6 @@ Feature: Cross Device Capping No Experiment
     Then The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
-
-
-
-
-
-
-
 
   Scenario: verify campaign capping enforced when sending zone requests from same user (same cookie) - in time frame
     Given I change IO id {75396} cross device Capping to {inactive}

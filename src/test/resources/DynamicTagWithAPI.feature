@@ -9,11 +9,15 @@ Feature: Dynamic Tag flow support with API
 #    And I send 1 times an ad request for zone named {zone-test1} to UAS
 #    And The response contains script
 
-Scenario: creating test 1 entities
-#        Given i remove all zones related to web_section id 11784
-#        Then i update daily capping for publisher id 3470 with product id 120 to be 1
-#        Then i update daily capping for publisher id 3470 with product id 124 to be 1
-#        Then i update daily capping for publisher id 3470 with product id 151 to be 1
+  Scenario: creating test 1 entities
+    And i remove all zones from publishers: {3470,3605,3323}, apart from zones:{170943,170947,170970,171069,171089,171071,171072,171073}
+    Then i create new zone named {DT-test1-SS} with limitation {[[[1,"!~",2601]]]} with adUnitId 69 and web_section id 8758 with affiliateId 3470 with po_line_item_id 62758
+    And i create new Campaign named {DT-SS-high-priority-test-1} for LineItem 210722 associated to creative 159 with zoneset named {DT-test1-SS} with priority {-2}
+    And I refresh the zone Cache
+
+
+#Scenario: creating test 1 entities
+#        And i remove all zones from publishers: {3470,3605,3323}, apart from zones:{170943,170947,170970,171069,171089,171071,171072,171073}
 #        Then i create new zone named {DT-test1-SS} with limitation {[[[1,"!~",2601]]]} with adUnitId 69 and web_section id 289 with affiliateId 3470 with po_line_item_id 62910
 #        And i create new zone named {DT-test1-pgm} with limitation {[[[1,"!~",2601]]]} with adUnitId 75 and web_section id 289 with affiliateId 3470 with po_line_item_id 59326
 #        And i create new zone named {DT-test1-pgc} with limitation {[[[1,"!~",2601]]]} with adUnitId 61 and web_section id 289 with affiliateId 3470 with po_line_item_id 59324
