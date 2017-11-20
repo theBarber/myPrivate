@@ -1,4 +1,3 @@
-  @programmatic
   @cli
   @uas
   @stable
