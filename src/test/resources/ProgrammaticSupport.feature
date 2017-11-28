@@ -16,8 +16,8 @@
                 And I sleep for 5 seconds
                 Then I read the latest req log file from uas
                 Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
-                And The field bidNumebr in the 59 column of the req log is {2.000000}
                 And The field isProgrammaticflag in the 60 column of the req log is {1}
+                And The field bidNumebr in the 59 column of the req log is {2.000000}
                 And The field domain in the 62 column of the req log is {test1.com}
 
     Scenario: 2. programmatic guarantee ad vs nonGuarantee ad with the same priority,score and bid - verify guarantee has been selected
