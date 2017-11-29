@@ -39,5 +39,4 @@
         Then I update the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} status to be 1 in the DB
         Then I update the created banner named {RampLift-1-bannerCreatedTest-1} status to be 1 in the DB
 
-
 #   s bannerid field matching the id of the banner named {75396-197420-270914-Medium Rectangle 300x250-test} 50% of the time
