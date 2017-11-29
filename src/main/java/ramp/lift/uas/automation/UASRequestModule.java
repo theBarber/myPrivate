@@ -350,7 +350,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
   }
 
-  public void sendMultipleHeaderBiddingRequests(Integer times, String url, String requestBody, String response, String env, boolean toReset) throws IOException {
+  public void sendMultipleHeaderBiddingRequests(Integer times, String url, String requestBody, String response, String env,int statusCode, boolean toReset) throws IOException {
     if (toReset) {
       reset();
     }
@@ -359,9 +359,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     for (; times > 0; times--) {
       res = postRequest(url, requestBody,env,false);
       Header location = res.getFirstHeader("Location");
-      int statusCode = res.getStatusLine().getStatusCode();
+      int actualStatusCode = res.getStatusLine().getStatusCode();
       res.getEntity().getContent();
       String s = new BufferedReader(new InputStreamReader(res.getEntity().getContent())).lines().collect(Collectors.joining(""));
+      assertEquals(statusCode,actualStatusCode);
       assertEquals(response.trim(),s.trim());
       System.out.println(s);
     }
