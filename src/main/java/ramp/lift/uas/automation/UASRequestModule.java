@@ -350,74 +350,74 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
   }
 
-  public void sendMultipleHeaderBiddingRequests(Integer times, String url, String requestBody, String response, String env,int statusCode, boolean toReset) throws IOException {
-    if (toReset) {
-      reset();
-    }
-    HttpResponse res;
-
-    for (; times > 0; times--) {
-      res = postRequest(url, requestBody,env,false);
-      Header location = res.getFirstHeader("Location");
-      int actualStatusCode = res.getStatusLine().getStatusCode();
-      res.getEntity().getContent();
-      String s = new BufferedReader(new InputStreamReader(res.getEntity().getContent())).lines().collect(Collectors.joining(""));
-      assertEquals(statusCode,actualStatusCode);
-      assertEquals(response.trim(),s.trim());
-      System.out.println(s);
-    }
-  }
-
-  private HttpResponse postRequest(String url, String body, String env, boolean toReset) {
-    if (toReset) {
-      reset();
-    }
-
-
-      try {
-          //List<Header> headers = new ArrayList<Header>(){{
-          //    add(new BasicHeader("content-type", "text/plain"));
-          //}};
-          if (env == "No") {// E2E test
-              HttpPost post = new HttpPost(url);
-              addHttpHeader("Content-Type", "text/plain");
-              post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
-              StringEntity postingString = new StringEntity(body);
-              post.setEntity(postingString);
-              HttpResponse response = httpclient.execute(post, context);
-              int statusCode = response.getStatusLine().getStatusCode();
-              response.setEntity(new BufferedHttpEntity(response.getEntity()));
-              try {
-                  if (withSleepInMillis > 0) {
-                      Thread.sleep(withSleepInMillis);
-                  }
-              } catch (InterruptedException e) {
-                  withSleepInMillis = 0;
-              }
-              return response;
-          }
-          else  //component test
-          {
-              HttpPost post = new HttpPost(url);
-              addHttpHeader("Content-Type", "application/json");
-              addHttpHeader("Accept", "application/json");
-              post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
-              StringEntity postingString = new StringEntity(body);
-              post.setEntity(postingString);
-              HttpResponse response = httpclient.execute(post, context);
-              int statusCode = response.getStatusLine().getStatusCode();
-              response.setEntity(new BufferedHttpEntity(response.getEntity()));
-              try {
-                  if (withSleepInMillis > 0) {
-                      Thread.sleep(withSleepInMillis);
-                  }
-              } catch (InterruptedException e) {
-                  withSleepInMillis = 0;
-              }
-              return response;
-          }
-      } catch (IOException e) {
-        throw new UncheckedIOException("failed to send request (" + url + ") ", e);
-      }
-  }
+//  public void sendMultipleHeaderBiddingRequests(Integer times, String url, String requestBody, String response, String env,int statusCode, boolean toReset) throws IOException {
+//    if (toReset) {
+//      reset();
+//    }
+//    HttpResponse res;
+//
+//    for (; times > 0; times--) {
+//      res = postRequest(url, requestBody,env,false);
+//      Header location = res.getFirstHeader("Location");
+//      int actualStatusCode = res.getStatusLine().getStatusCode();
+//      res.getEntity().getContent();
+//      String s = new BufferedReader(new InputStreamReader(res.getEntity().getContent())).lines().collect(Collectors.joining(""));
+//      assertEquals(statusCode,actualStatusCode);
+//      assertEquals(response.trim(),s.trim());
+//      System.out.println(s);
+//    }
+//  }
+//
+//  private HttpResponse postRequest(String url, String body, String env, boolean toReset) {
+//    if (toReset) {
+//      reset();
+//    }
+//
+//
+//      try {
+//          //List<Header> headers = new ArrayList<Header>(){{
+//          //    add(new BasicHeader("content-type", "text/plain"));
+//          //}};
+//          if (env == "No") {// E2E test
+//              HttpPost post = new HttpPost(url);
+//              addHttpHeader("Content-Type", "text/plain");
+//              post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+//              StringEntity postingString = new StringEntity(body);
+//              post.setEntity(postingString);
+//              HttpResponse response = httpclient.execute(post, context);
+//              int statusCode = response.getStatusLine().getStatusCode();
+//              response.setEntity(new BufferedHttpEntity(response.getEntity()));
+//              try {
+//                  if (withSleepInMillis > 0) {
+//                      Thread.sleep(withSleepInMillis);
+//                  }
+//              } catch (InterruptedException e) {
+//                  withSleepInMillis = 0;
+//              }
+//              return response;
+//          }
+//          else  //component test
+//          {
+//              HttpPost post = new HttpPost(url);
+//              addHttpHeader("Content-Type", "application/json");
+//              addHttpHeader("Accept", "application/json");
+//              post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+//              StringEntity postingString = new StringEntity(body);
+//              post.setEntity(postingString);
+//              HttpResponse response = httpclient.execute(post, context);
+//              int statusCode = response.getStatusLine().getStatusCode();
+//              response.setEntity(new BufferedHttpEntity(response.getEntity()));
+//              try {
+//                  if (withSleepInMillis > 0) {
+//                      Thread.sleep(withSleepInMillis);
+//                  }
+//              } catch (InterruptedException e) {
+//                  withSleepInMillis = 0;
+//              }
+//              return response;
+//          }
+//      } catch (IOException e) {
+//        throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+//      }
+//  }
 }
