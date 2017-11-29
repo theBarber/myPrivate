@@ -36,16 +36,16 @@ import java.util.*;
 public class HeaderBiddingTest extends BaseTest{
     private ObjectMapper mapper = new ObjectMapper();
     private entities.RampAppCreateEntitiesManager RampAppCreateEntitiesManager;
-    private List<String> testScenarios;
     private static final String HBInputFilePath = "input_files/HBInput.xlsx";
     private String url = "";
     private String HBrequestBody = "";
     private String HBresponse= "";
     private String testType = "";
+    private int statusCode = 0;
     public HeaderBiddingTest()
     {
         super();
-        testScenarios = new ArrayList<String>();
+
         Before(HEADERBIDDING, (scenario) -> {
             RampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();
         });
@@ -57,7 +57,7 @@ public class HeaderBiddingTest extends BaseTest{
     private void sendHeaderBiddingRequestsToUAS(Integer times)
     {
        try {
-           sut.getUASRquestModule().sendMultipleHeaderBiddingRequests(times,url,HBrequestBody,HBresponse,testType,true);
+           sut.getUASRquestModule().sendMultipleHeaderBiddingRequests(times,url,HBrequestBody,HBresponse,testType,statusCode,true);
        } catch (IOException e) {
            e.printStackTrace();
        }
@@ -77,7 +77,7 @@ public class HeaderBiddingTest extends BaseTest{
                 Row currentRow = iterator.next();
                 //getCellTypeEnum shown as deprecated for version 3.15
                 //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
-                String src = formatter.formatCellValue(currentRow.getCell(0)).toString().trim();
+                String src = formatter.formatCellValue(currentRow.getCell(0)).trim();
                 String dest = scenario.trim();
                 if(src.contentEquals(dest)) {// we found the row for relevant scenario
                     testType = formatter.formatCellValue(currentRow.getCell(7));
@@ -85,6 +85,7 @@ public class HeaderBiddingTest extends BaseTest{
                         url = "http://" + formatter.formatCellValue(currentRow.getCell(1)) + "/hb?pid=" + formatter.formatCellValue(currentRow.getCell(2)) + "&domain=" + formatter.formatCellValue(currentRow.getCell(3)) + "&optimize=" + formatter.formatCellValue(currentRow.getCell(6));
                         HBrequestBody = formatter.formatCellValue(currentRow.getCell(4));
                         HBresponse = formatter.formatCellValue(currentRow.getCell(5));
+                        statusCode = Integer.parseInt(formatter.formatCellValue(currentRow.getCell(8)));
                         break;
                     }
                     else //component testing
@@ -99,7 +100,8 @@ public class HeaderBiddingTest extends BaseTest{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }catch (NullPointerException e) {
+            e.printStackTrace();
         }
-
     }
 }
