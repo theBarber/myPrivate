@@ -82,7 +82,7 @@ public class HeaderBiddingTest extends BaseTest{
                 if(src.contentEquals(dest)) {// we found the row for relevant scenario
                     testType = formatter.formatCellValue(currentRow.getCell(7));
                     if (testType.contentEquals("No")) {
-                        url = "http://" + formatter.formatCellValue(currentRow.getCell(1)) + "/hb?pid=" + formatter.formatCellValue(currentRow.getCell(2)) + "&domain=" + formatter.formatCellValue(currentRow.getCell(3)) + "&optimize=" + formatter.formatCellValue(currentRow.getCell(6));
+                        url = "http://" + formatter.formatCellValue(currentRow.getCell(1)) + "/hb?pid=" + formatter.formatCellValue(currentRow.getCell(2)) + "&domain=" + formatter.formatCellValue(currentRow.getCell(3)) + "&optimize=" + formatter.formatCellValue(currentRow.getCell(6)) + "&unlimited=1&ct=1";
                         HBrequestBody = formatter.formatCellValue(currentRow.getCell(4));
                         HBresponse = formatter.formatCellValue(currentRow.getCell(5));
                         statusCode = Integer.parseInt(formatter.formatCellValue(currentRow.getCell(8)));

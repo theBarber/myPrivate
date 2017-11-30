@@ -42,6 +42,7 @@ import org.apache.http.message.BasicHeader;
 
 import infra.module.AbstractModuleImpl;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 
 import static org.junit.Assert.assertEquals;
@@ -374,29 +375,35 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
 
-      try {
-          //List<Header> headers = new ArrayList<Header>(){{
-          //    add(new BasicHeader("content-type", "text/plain"));
-          //}};
-          if (env == "No") {// E2E test
-              HttpPost post = new HttpPost(url);
-              addHttpHeader("Content-Type", "text/plain");
-              post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
-              StringEntity postingString = new StringEntity(body);
-              post.setEntity(postingString);
-              HttpResponse response = httpclient.execute(post, context);
-              int statusCode = response.getStatusLine().getStatusCode();
-              response.setEntity(new BufferedHttpEntity(response.getEntity()));
-              try {
-                  if (withSleepInMillis > 0) {
-                      Thread.sleep(withSleepInMillis);
-                  }
-              } catch (InterruptedException e) {
-                  withSleepInMillis = 0;
-              }
-              return response;
+    try {
+      //List<Header> headers = new ArrayList<Header>(){{
+      //    add(new BasicHeader("content-type", "text/plain"));
+      //}};
+      //if (env == "No") {// E2E test
+        HttpPost post = new HttpPost(url);
+        addHttpHeader("Content-Type", "text/plain");
+        post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+        StringEntity postingString = new StringEntity(body);
+        post.setEntity(postingString);
+        HttpResponse response = httpclient.execute(post, context);
+        int statusCode = response.getStatusLine().getStatusCode();
+        if (response.getEntity() != null) {
+          response.setEntity(new BufferedHttpEntity(response.getEntity()));
+        }
+        else
+        {
+          response.setEntity(new StringEntity(""));
+        }
+        try {
+          if (withSleepInMillis > 0) {
+            Thread.sleep(withSleepInMillis);
           }
-          else  //component test
+        } catch (InterruptedException e) {
+          withSleepInMillis = 0;
+        }
+        return response;
+      //}
+/*          else  //component test
           {
               HttpPost post = new HttpPost(url);
               addHttpHeader("Content-Type", "application/json");
@@ -415,9 +422,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                   withSleepInMillis = 0;
               }
               return response;
-          }
-      } catch (IOException e) {
-        throw new UncheckedIOException("failed to send request (" + url + ") ", e);
-      }
+          }*/
+    } catch (IOException e) {
+      throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+    }
   }
 }

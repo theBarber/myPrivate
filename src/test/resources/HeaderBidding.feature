@@ -36,3 +36,7 @@ Feature: Header Bidding flow support
     Scenario: Send HB request with wrong values
         Given i load scenario {Send HB request with wrong values} input data
         Then i send 1 times Header Bidding ad request to UAS for the scenario
+
+    Scenario: Send HB request with one size
+        Given i load scenario {Send HB request with one size} input data
+        Then i send 1 times Header Bidding ad request to UAS for the scenario
