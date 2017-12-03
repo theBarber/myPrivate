@@ -1,5 +1,5 @@
 @HeaderBidding
-@stable
+#@stable
 Feature: Header Bidding flow support
 
     Scenario: send HB request without params
