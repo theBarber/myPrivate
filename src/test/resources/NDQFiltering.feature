@@ -1,6 +1,4 @@
 @NDQFiltering
-#@Integration
-#we currently don't need to execute the tests. jira item - UT-4339
 @campaign
 @hardcoded
 @ramp_admin_db
@@ -37,5 +35,4 @@ Scenario: verify NDQ filtering on control experiment level
     Given I compute the NDQ of campaign name {ramp-lift-auto-campaign1-test}
 	When I send 100 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
 	And I send the same amount of impressions url as the number of NDQ
-	Given I set the {units} of campaign name {ramp-lift-auto-campaign1-test} to {-1}	
-	
+	Given I set the {units} of campaign name {ramp-lift-auto-campaign1-test} to {-1}
