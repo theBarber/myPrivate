@@ -20,7 +20,7 @@ Scenario: 1. Single experiment group scenario
 	And Experiment named {rampLift_single_experiment_group_scenario_control} was selected {33} percent of the time 
 	And Experiment named {rampLift_single_experiment_group_scenario_test} was selected {33} percent of the time 
 	And Default experiment was selected {34} percent of the time
-#
+
 #Scenario: 2. 2 identical groups scenario including activation/deactivation experiment
 #	Given I set the activation status of experiment group named {rampLift_2_identical_groups_scenario_1} and his experiments to {active}
 #	Given I set the activation status of experiment group named {rampLift_2_identical_groups_scenario_2} and his experiments to {active}
