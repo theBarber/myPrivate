@@ -2,8 +2,7 @@
 @UASBuyAtMost 
 @Integration 
 @hardcoded
-@stable
-Feature: UAS buy at most 
+Feature: UAS buy at most
 
 Scenario: buy at most testing - Single banner - positive test
 		Given I upload a new solver plan with the following slices

@@ -16,9 +16,10 @@ import infra.module.WithId;
 public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 
 	private String name;
-	private final int id;
+	private Integer id;
 
-	public Banner(@JsonProperty("creativeName") String name, @JsonProperty("bannerId") Integer id) {
+	public Banner(){}
+	public Banner(String name, Integer id) {
 		this.name = requireNonNull(name);
 		this.id = requireNonNull(id);
 	}
@@ -28,11 +29,13 @@ public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 	 * @return the name of this banner
 	 */
 	@Override
+	@JsonProperty("creativeName")
 	public String getName() {
 		return name;
 	}
 
 	@Override
+	@JsonProperty("bannerId")
 	public Integer getId() {
 		return id;
 	}
@@ -46,9 +49,14 @@ public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 	public String toString() {
 		return "Banner [name=" + getName() + "]";
 	}
-
+	@JsonProperty("creativeName")
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	@JsonProperty("bannerId")
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

@@ -4,6 +4,7 @@ import infra.ParameterProvider;
 import infra.module.Named;
 import infra.module.WithId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,20 +14,29 @@ import java.util.stream.Stream;
 
 public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
-	IO io;
+	List<IO> io;
 	List<ZoneSet> zonesets;
 	
 	CampaignManager() {
 
 	}
 
+	/*public LineItem addNewLineItem(Integer io_id, Integer lineItemID)
+	{
+		if(io.stream().flatMap(x -> x.lineItems()).filter(WithId.idIs(lineItemID)).findFirst().isPresent())
+			return null;
+		else
+			io.stream().filter(WithId.idIs(io_id)).findFirst().
+
+	}*/
+
     public Optional<LineItem> getLineItem(Integer LineItemID)
 	{
-		return io.lineItems().filter(WithId.idIs(LineItemID)).findFirst();
+		return io.stream().flatMap(x -> x.lineItems()).filter(WithId.idIs(LineItemID)).findFirst();
 	}
 	public Optional<Campaign> getCampaign(String byName) {
 
-	  return io.lineItems().flatMap(li -> li.campaigns.stream().filter(Named.nameIs(byName))).findFirst();
+	  return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().filter(Named.nameIs(byName))).findFirst();
 	}
 
 	public final Optional<Zone> getZone(String byName) {
@@ -34,10 +44,14 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	}
 
 	public Optional<Banner> getBanner(String byName) {
-		return io.lineItems().flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName))).findFirst();
+		return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName))).findFirst();
 	}
-	
-	
+
+	public List<ZoneSet> getZonesets()
+	{
+		return zonesets;
+	}
+
 	public Optional<ZoneSet> getZoneset(Integer byId) {
 		return zonesets.stream().filter(WithId.idIs(byId)).findFirst();
 	}

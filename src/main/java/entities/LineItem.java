@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +62,8 @@ public class LineItem implements WithId<Integer> {
 
     public void addCampaign(Campaign campaign)
     {
+        if(campaigns == null)
+            campaigns = new ArrayList<>();
         campaigns.add(campaign);
     }
 }

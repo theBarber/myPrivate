@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
         "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 public class UASIntegrationE2E extends BaseTest {
-    private RampAppCreateEntitiesManager RampAppCreateEntitiesManager;
+    private RampAppCreateEntitiesManager rampAppCreateEntitiesManager;
     private ObjectMapper mapper = new ObjectMapper();
     private Campaign lastCreatedCampaign;
 
@@ -32,25 +32,35 @@ public class UASIntegrationE2E extends BaseTest {
     {
         super();
         Given("I disable all campaigns named \\{([^}]+)\\} in DB", this::disableAllCampaignsNamed);
-        When("I create new Campaign named \\{([^}]+)\\} using ramp-app api's for LineItem (\\d+) associated to creative (\\d+) with zoneset (\\d+)", this::createCampaign);
+        When("I create new Campaign named \\{([^}]+)\\} using ramp-app api's for LineItem (\\d+) associated to creative (\\d+) with zoneset (\\d+) with priority \\{([^}]+)\\}", this::createCampaign);
         And("I update the created campaign \\{([^}]+)\\} banners name to \\{([^}]+)\\} chained with the serial number",this::updateBannersName);
         And("I update the created (\\w+) named \\{([^}]+)\\} (\\w+) to be (\\w+) in the DB", this::updateDB);
         And("I update last created campaign named \\{([^}]+)\\} (\\w+) to be \\{([^}]+)\\} in the DB", this::updateLastCreatedCampaignDB);
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("I get the banners of campaign named \\{([^}]+)\\} and print it",this::printBannersOfLastCreatedCampaign);
+        And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
     }
 
-    private void createCampaign(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID) {
-        RampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();
-        CloseableHttpResponse createCampaignResponse = RampAppCreateEntitiesManager.createCampaign(campaignName,lineItemId, creativeID, zonesetID);
+    private void createCampaign(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID,String priority) {
+        rampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();                                       // can be in Before statement
+        CloseableHttpResponse createCampaignResponse = rampAppCreateEntitiesManager.createCampaign(campaignName,lineItemId, creativeID, zonesetID,priority);
         setLastCreatedCampaignEntityFromResponse(createCampaignResponse);
-        addBannersToLastCreatedCampaignFromGetCampaignRequest();
+        addBannersToLastCreatedCampaignFromGetCampaignRequest(); //relevant only in integration, remove it!
         addLastCreatedCampaignToLineItemList(lineItemId);
     }
 
+    private void createCampaignWithZonesetName(String campaignName, Integer lineItemId, Integer creativeID, String zonesetName,String priority)
+    {
+        Optional<ZoneSet> zoneset = sut.getCampaignManager().getZoneset(zonesetName);
+        createCampaign(campaignName,lineItemId,creativeID,zoneset.get().getId(),priority);
+        updateBannersName(campaignName,campaignName+"banner-");
+        updateLastCreatedCampaignDB(campaignName,"status","0");
+    }
+
+
     private void addBannersToLastCreatedCampaignFromGetCampaignRequest()
     {
-        CloseableHttpResponse getCampaignResponse = RampAppCreateEntitiesManager.getCampaignRequest(lastCreatedCampaign.getId());
+        CloseableHttpResponse getCampaignResponse = rampAppCreateEntitiesManager.getCampaignRequest(lastCreatedCampaign.getId()); //last created campaign can be null
         Campaign[] tmpCampaign;
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(getCampaignResponse.getEntity()), Campaign[].class);
@@ -67,13 +77,14 @@ public class UASIntegrationE2E extends BaseTest {
 
      private void addLastCreatedCampaignToLineItemList(Integer lineItemId)
     {
-         LineItem li = sut.getCampaignManager().getLineItem(lineItemId).orElseThrow(() -> new AssertionError("The Line item "+lineItemId+" does not exist!"));
-         li.addCampaign(lastCreatedCampaign);
+        LineItem li = sut.getCampaignManager().getLineItem(lineItemId).orElseThrow(() -> new AssertionError("The lineItem " + lineItemId + " does not exist!"));
+        li.addCampaign(lastCreatedCampaign);
     }
 
     private void setLastCreatedCampaignEntityFromResponse(CloseableHttpResponse createCampaignResponse)
     {
-        Campaign[] tmpCampaign = null;
+         Campaign[] tmpCampaign = null;
+
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(createCampaignResponse.getEntity()), CampaignsRequest.class).getCampaignsArray();
 
@@ -125,7 +136,7 @@ public class UASIntegrationE2E extends BaseTest {
 
     private void printBannersOfLastCreatedCampaign(String campaignName)
     {
-        CloseableHttpResponse getCampaignResponse = RampAppCreateEntitiesManager.getCampaignRequest(lastCreatedCampaign.getId());
+        CloseableHttpResponse getCampaignResponse = rampAppCreateEntitiesManager.getCampaignRequest(lastCreatedCampaign.getId());
         Campaign[] tmpCampaign;
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(getCampaignResponse.getEntity()), Campaign[].class);

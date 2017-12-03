@@ -135,7 +135,7 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
     @Override
     public Stream<List<String>> actual() {
         //sahar check: printing the file-----------------------------
-        //_actual().stream().filter(Optional.ofNullable(filter).orElse(l -> !l.isEmpty())).forEach(m-> System.out.println(m));
+//                _actual().stream().filter(Optional.ofNullable(filter).orElse(l -> !l.isEmpty())).forEach(m-> System.out.println(m));
         //-----------------------------------------
         return _actual().stream().filter(Optional.ofNullable(filter).orElse(l -> !l.isEmpty()));
     }

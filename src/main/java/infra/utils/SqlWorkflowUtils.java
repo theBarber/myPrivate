@@ -57,8 +57,21 @@ public class SqlWorkflowUtils {
           e.printStackTrace();
           fail(e.getMessage());
       }
-  }
-	
+  	}
+
+	public static void WorkflowQuery(String query) {
+		try {
+			Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
+			sut.write(query);
+			if (stmt.executeUpdate(query) == 1) {
+				System.out.println(query + " succeeded");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+
 	public static ResultSet getEntityByName(String tableName, String columnName, String columnValue) {
 	  ResultSet rs = null;
 	  try {

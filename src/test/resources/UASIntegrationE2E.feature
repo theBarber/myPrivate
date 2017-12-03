@@ -1,12 +1,11 @@
 @cli
 @uas
 @RampAppCreateCampaign
-    
-Feature: UAS E2E Ad request flow - with new entities
+    Feature: UAS E2E Ad request flow - with new entities
 
     Scenario: Create new campaign, send ad request and
         Given I disable all campaigns named {Ramp-lift-Test-1-Campaign-SystemTest} in DB
-        When I create new Campaign named {Ramp-lift-Test-1-Campaign-SystemTest} using ramp-app api's for LineItem 210722 associated to creative 204 with zoneset 65745
+        When I create new Campaign named {Ramp-lift-Test-1-Campaign-SystemTest} using ramp-app api's for LineItem 210722 associated to creative 204 with zoneset 65745 with priority {-1}
         And I update the created campaign {Ramp-lift-Test-1-Campaign-SystemTest} banners name to {RampLift-1-bannerCreatedTest-} chained with the serial number
         And  I update the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} status to be 0 in the DB
         And I refresh the zone Cache
@@ -39,6 +38,5 @@ Feature: UAS E2E Ad request flow - with new entities
         And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
         Then I update the created campaign named {Ramp-lift-Test-1-Campaign-SystemTest} status to be 1 in the DB
         Then I update the created banner named {RampLift-1-bannerCreatedTest-1} status to be 1 in the DB
-
 
 #   s bannerid field matching the id of the banner named {75396-197420-270914-Medium Rectangle 300x250-test} 50% of the time

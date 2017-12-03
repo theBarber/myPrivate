@@ -7,21 +7,32 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import infra.module.Named;
 import infra.module.WithId;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ZoneSet implements Named, WithId<Integer>, Comparable<ZoneSet> {
 
-	private final String name;
-	private final Integer id;
+	private String name;
+	private Integer id;
 	@JsonProperty("Zones")
 	private Set<Zone> zones = new TreeSet<>();
 
-	public ZoneSet(@JsonProperty("zonesetName") String name, @JsonProperty("zonesetId") Integer id) {
-		this.name = requireNonNull(name);
-		this.id = requireNonNull(id);
+	public ZoneSet(){}
+
+	public ZoneSet( String name,  Integer id) {
+		this.name = name;
+		this.id = id;
+	}
+	@JsonProperty("zonesetName")
+	public void setName(String name) {
+		this.name = name;
+	}
+	@JsonProperty("zonesetId")
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override
@@ -43,8 +54,7 @@ public class ZoneSet implements Named, WithId<Integer>, Comparable<ZoneSet> {
 		return Comparator.comparing(ZoneSet::getId).compare(this, requireNonNull(that));
 	}
 
-	<Z extends Zone> Z addZone(Z zone) {
+	public void addZone(Zone zone) {
 		zones.add(zone);
-		return zone;
 	}
 }

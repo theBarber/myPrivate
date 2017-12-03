@@ -1,9 +1,510 @@
-{
+[{
 	"ioId": 75396,
 	"name": "RAMP Test IO",
 	"advertiserId": 20116,
 	"LI": 
 	[
+		{
+			"ioLineItemId": 197418,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 120,
+				"name": "Screen shift"
+			},
+			"Campaigns":
+			[
+				{
+					"campaignId": 291514,
+					"campaignName": "DT-SS-Test-1-campaign-high-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67603
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1197504 ,
+							"creativeName": "DT-SS-Test-1-campaign-high-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
+				{
+					"campaignId": 291570,
+					"campaignName": "DT-SS-Test-1-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67603
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157158,
+							"creativeName": "DT-SS-Test-1-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				},
+				{
+				"campaignId": 291602,
+				"campaignName": "DT-SS-Test-2-campaign-high-priority",
+				"goalType": "impressions",
+				"deliveryMethod": 4,
+				"Zonesets":
+				{
+					"include":
+					[
+						67725
+					],
+
+					"exclude":
+					[
+
+					]
+				},
+
+				"Banners":
+				[
+					{
+						"bannerId": 1157197,
+						"creativeName": "DT-SS-Test-2-campaign-high-priority-banner-1"
+					}
+				],
+
+				"isUnlimited": true,
+				"CDM": 2
+			},
+				{
+					"campaignId": 291603,
+					"campaignName": "DT-SS-Test-2-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67725
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157198,
+							"creativeName": "DT-SS-Test-2-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				},
+				{
+					"campaignId": 291608,
+					"campaignName": "DT-SS-Test-3-campaign-first-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67728
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1197513,
+							"creativeName": "DT-SS-Test-3-campaign-first-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				}
+			]
+		},
+		{
+			"ioLineItemId": 211456,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 124,
+				"name": "Page Grabber Mobile"
+			},
+			"Campaigns":
+			[
+				{
+					"campaignId": 291521,
+					"campaignName": "DT-PGM-Test-1-campaign-high-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67604
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1197506,
+							"creativeName": "DT-PGM-Test-1-campaign-high-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
+				{
+					"campaignId": 291572,
+					"campaignName": "DT-PGM-Test-1-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67604
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157160,
+							"creativeName": "DT-PGM-Test-1-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				},
+				{
+				"campaignId": 291604,
+				"campaignName": "DT-PGM-Test-2-campaign-high-priority",
+				"goalType": "impressions",
+				"deliveryMethod": 4,
+				"Zonesets":
+				{
+					"include":
+					[
+						67726
+					],
+
+					"exclude":
+					[
+
+					]
+				},
+
+				"Banners":
+				[
+					{
+						"bannerId": 1157199,
+						"creativeName": "DT-PGM-Test-2-campaign-high-priority-banner-1-notActive"
+					}
+				],
+
+				"isUnlimited": true,
+				"CDM": 2
+			},
+				{
+					"campaignId": 291605,
+					"campaignName": "DT-PGM-Test-2-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67726
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1197510,
+							"creativeName": "DT-PGM-Test-2-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				},
+				{
+					"campaignId": 291609,
+					"campaignName": "DT-PGM-Test-3-campaign-second-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67726
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1197514,
+							"creativeName": "DT-PGM-Test-3-campaign-second-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				},
+				{
+					"campaignId": 291619,
+					"campaignName": "DT-PGM-Test-2-campaign-high-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67745
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1197512,
+							"creativeName": "DT-PGM-Test-2-campaign-high-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				}
+			]
+		},
+		{
+			"ioLineItemId": 215982,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 151,
+				"name": "Page Grabber (Cross Screen)"
+			},
+			"Campaigns":
+			[
+				{
+					"campaignId": 291542,
+					"campaignName": "DT-PGC-Test-1-campaign-high-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67627
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157136,
+							"creativeName": "DT-PGC-Test-1-campaign-high-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
+				{
+					"campaignId": 291573,
+					"campaignName": "DT-PGC-Test-1-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67627
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1197509,
+							"creativeName": "DT-PGC-Test-1-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				},
+				{
+					"campaignId": 291606,
+					"campaignName": "DT-PGC-Test-2-campaign-high-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67727
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157201,
+							"creativeName": "DT-PGC-Test-2-campaign-high-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				},
+				{
+					"campaignId": 291607,
+					"campaignName": "DT-PGC-Test-2-campaign-low-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67727
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157201,
+							"creativeName": "DT-PGC-Test-2-campaign-low-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				},
+				{
+					"campaignId": 291610,
+					"campaignName": "DT-PGC-Test-3-campaign-third-priority",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67730
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1157205,
+							"creativeName": "DT-PGC-Test-3-campaign-third-priority-banner-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 2
+				}
+
+			]
+		},
 		{
 			"ioLineItemId": 197420,
 			"pricingConvention": "CPM",
@@ -341,4 +842,54 @@
 			]
 		}
 	]
-}
+},
+	{
+		"ioId": 62355,
+		"name": "RAMP programmatic IO",
+		"advertiserId": 20116,
+		"LI":
+		[
+			{
+				"ioLineItemId": 216655,
+				"pricingConvention": "CPM",
+				"Product":
+				{
+					"productId": 98,
+					"name": "Billboard"
+				},
+
+				"Campaigns":
+				[
+					{
+						"campaignId": 290505,
+						"campaignName": "62355-216655-4-oded1",
+						"goalType": "impressions",
+						"deliveryMethod": 1,
+						"Zonesets":
+						{
+							"include":
+							[
+								21601
+							],
+
+							"exclude":
+							[
+
+							]
+						},
+
+						"Banners":
+						[
+							{
+								"bannerId": 1157881,
+								"creativeName": "290505-10000-59-ramp-lift-programmatic-banner1-test"
+							}
+						],
+
+						"isUnlimited": true
+					}
+				]
+			}
+		]
+	}
+]

@@ -15,8 +15,9 @@ public class CreateCampaignRequest {
     private List<Integer> selectedCreativeIds;
     private String startDateTime;
     private String endDateTime;
+    private String priority;
 
-    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeIds, String startDateTime, String endDateTime)
+    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeIds, String startDateTime, String endDateTime,String priority)
     {
         this.campaignName = campaignName;
         this.lineItemId = lineItemId;
@@ -24,6 +25,7 @@ public class CreateCampaignRequest {
         this.selectedCreativeIds = selectedCreativeIds;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        this.priority = priority;
     }
     @JsonProperty("campaignName")
     public String getCampaignName() {
@@ -80,5 +82,14 @@ public class CreateCampaignRequest {
 
     public void setEndDateTime(String endDateTime) {
         this.endDateTime = endDateTime;
+    }
+
+    @JsonProperty("priority")
+    public String getPriority() {
+        return priority;
+    }
+    @JsonProperty("priority")
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 }

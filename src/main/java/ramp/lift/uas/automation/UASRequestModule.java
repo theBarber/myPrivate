@@ -13,10 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,10 +27,13 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -42,6 +42,13 @@ import org.apache.http.message.BasicHeader;
 
 import infra.module.AbstractModuleImpl;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
@@ -97,7 +104,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   public UASRequestModule() {
     setActual(new ArrayList<>());
     httpclient = HttpClients.custom()
-        .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build())
+        .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(10000).build())
         .build();
     requestSubmitter = Executors.newFixedThreadPool(5, new ThreadFactoryBuilder()
         .setNameFormat("Ad request submitter").build());
@@ -121,10 +128,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       request(url, false);
     }
   }
-  //For Sahar's Checks
-  public String getUASRequestURLWithZone(Integer forZone)
+
+  private String getURL(Integer forZone, String extraParameter)
   {
-    return "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/af?zoneid=" + forZone + "&ct=1&stid=999";
+    return "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/af?zoneid=" + forZone + "&ct=1&stid=999" + extraParameter;
   }
 
   public void zoneRequestsWithParams(Integer forZone, int times, boolean toReset) {
@@ -137,6 +144,18 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     for (NameValuePair nvp : queryParams) {
       url = url + "&" + nvp.toString();
     }
+
+    for (; times > 0; times--) {
+      request(url, false);
+    }
+  }
+
+  public void zoneRequestsWithParameter(Integer forZone,String parameter, int times, boolean toReset) {
+    if (toReset) {
+      reset();
+    }
+
+    String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/af?zoneid=" + forZone + "&ct=1&stid=999"+"&"+parameter;
 
     for (; times > 0; times--) {
       request(url, false);
@@ -303,5 +322,109 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   public void clearCookies() {
     context.getCookieStore().clear();
+  }
+
+    public void sendMultipleDynamicTagRequests(Integer times, String publisherId, String domainParam,boolean toReset) {
+      if (toReset) {
+        reset();
+      }
+
+      String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/dj?pid=" + publisherId+ "&domain="+domainParam;
+      for (; times > 0; times--) {
+        request(url, false);
+    }
+    }
+//temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary
+  public void sendMultipleDynamicTagSynchronizedRequests(Integer times, String publisherId, String domainParam, boolean toReset) {
+    if (toReset) {
+      reset();
+    }
+
+    String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/dj?pid=" + publisherId+ "&domain="+domainParam;
+    for (; times > 0; times--) {
+      request(url, false);
+      try {
+        TimeUnit.SECONDS.sleep(2); //not good not good not good not good not good not good not good not good not good not good not good not good !
+      } catch (InterruptedException e) {
+        fail(e.getMessage());
+      }
+    }
+  }
+
+  public void sendMultipleHeaderBiddingRequests(Integer times, String url, String requestBody, String response, String env,int statusCode, boolean toReset) throws IOException {
+    if (toReset) {
+      reset();
+    }
+    HttpResponse res;
+
+    for (; times > 0; times--) {
+      res = postRequest(url, requestBody,env,false);
+      Header location = res.getFirstHeader("Location");
+      int actualStatusCode = res.getStatusLine().getStatusCode();
+      res.getEntity().getContent();
+      String s = new BufferedReader(new InputStreamReader(res.getEntity().getContent())).lines().collect(Collectors.joining(""));
+      assertEquals(statusCode,actualStatusCode);
+      assertEquals(response.trim(),s.trim());
+      System.out.println(s);
+    }
+  }
+
+  private HttpResponse postRequest(String url, String body, String env, boolean toReset) {
+    if (toReset) {
+      reset();
+    }
+
+
+    try {
+      //List<Header> headers = new ArrayList<Header>(){{
+      //    add(new BasicHeader("content-type", "text/plain"));
+      //}};
+      //if (env == "No") {// E2E test
+        HttpPost post = new HttpPost(url);
+        addHttpHeader("Content-Type", "text/plain");
+        post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+        StringEntity postingString = new StringEntity(body);
+        post.setEntity(postingString);
+        HttpResponse response = httpclient.execute(post, context);
+        int statusCode = response.getStatusLine().getStatusCode();
+        if (response.getEntity() != null) {
+          response.setEntity(new BufferedHttpEntity(response.getEntity()));
+        }
+        else
+        {
+          response.setEntity(new StringEntity(""));
+        }
+        try {
+          if (withSleepInMillis > 0) {
+            Thread.sleep(withSleepInMillis);
+          }
+        } catch (InterruptedException e) {
+          withSleepInMillis = 0;
+        }
+        return response;
+      //}
+/*          else  //component test
+          {
+              HttpPost post = new HttpPost(url);
+              addHttpHeader("Content-Type", "application/json");
+              addHttpHeader("Accept", "application/json");
+              post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+              StringEntity postingString = new StringEntity(body);
+              post.setEntity(postingString);
+              HttpResponse response = httpclient.execute(post, context);
+              int statusCode = response.getStatusLine().getStatusCode();
+              response.setEntity(new BufferedHttpEntity(response.getEntity()));
+              try {
+                  if (withSleepInMillis > 0) {
+                      Thread.sleep(withSleepInMillis);
+                  }
+              } catch (InterruptedException e) {
+                  withSleepInMillis = 0;
+              }
+              return response;
+          }*/
+    } catch (IOException e) {
+      throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+    }
   }
 }

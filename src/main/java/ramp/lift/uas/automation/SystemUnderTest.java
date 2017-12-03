@@ -448,6 +448,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		}
 	}
 
+	public String getProgrammaticHost()
+	{
+		return config.get("programmatic.host") + Optional.ofNullable(config.get("programmatic.port")).filter(s->!s.isEmpty()).map(s->":"+s).orElse("");
+	}
+
 	@Override
 	public Collection<String> getSourceTagNames() {
 		return scenarioWriter.getSourceTagNames();
