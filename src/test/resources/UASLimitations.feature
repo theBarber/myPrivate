@@ -28,7 +28,7 @@ Scenario: limitations testing - 2 banners with limitation
 	Then The response code is 200
 	And The response contains script
 	Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-	When I send 1 additional ad requests for zone named {INT2434 - See Through - ramp-lift-auto-zone-limitations-test} to UAS
+	When I send 100 additional ad requests for zone named {INT2434 - See Through - ramp-lift-auto-zone-limitations-test} to UAS
 	And The response contains script
 	And  All requests are sent
 	And The impressionUrl has bannerid field matching the id of the banner named {75396-208153-275580-See Through-RampLift-1} 50% of the time
