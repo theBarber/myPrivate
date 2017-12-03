@@ -344,7 +344,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     for (; times > 0; times--) {
       request(url, false);
       try {
-        TimeUnit.SECONDS.sleep(2); //not good not good not good not good not good not good not good not good not good not good not good not good !
+        TimeUnit.SECONDS.sleep(1); //not good not good not good not good not good not good not good not good not good not good not good not good !
       } catch (InterruptedException e) {
         fail(e.getMessage());
       }

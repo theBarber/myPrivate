@@ -35,7 +35,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197504 ,
+							"bannerId": 1200036 ,
 							"creativeName": "DT-SS-Test-1-campaign-high-priority-banner-1"
 						}
 					],
@@ -151,7 +151,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197513,
+							"bannerId": 1200038,
 							"creativeName": "DT-SS-Test-3-campaign-first-priority-banner-1"
 						}
 					],
@@ -192,7 +192,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197506,
+							"bannerId": 1200039,
 							"creativeName": "DT-PGM-Test-1-campaign-high-priority-banner-1"
 						}
 					],
@@ -279,7 +279,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197510,
+							"bannerId": 1200042,
 							"creativeName": "DT-PGM-Test-2-campaign-low-priority-banner-1"
 						}
 					],
@@ -308,7 +308,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197514,
+							"bannerId": 1200041,
 							"creativeName": "DT-PGM-Test-3-campaign-second-priority-banner-1"
 						}
 					],
@@ -407,7 +407,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197509,
+							"bannerId": 1200045,
 							"creativeName": "DT-PGC-Test-1-campaign-low-priority-banner-1"
 						}
 					],
