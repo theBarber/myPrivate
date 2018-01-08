@@ -68,6 +68,10 @@ public class NDQFilteringTest extends BaseTest {
     Given("^I setup the db$", () -> {
       setupDB();
     });
+
+    Given("I restart \\{([^}]+)\\}",(String serverName) -> {
+      restartServerNamed(serverName);
+    });
   }
 }
 

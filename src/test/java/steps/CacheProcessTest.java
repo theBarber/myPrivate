@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.fail;
+
 /**
  * Created by Itay.Pinhassi on 9/28/2016.
  */
@@ -84,20 +86,41 @@ public class CacheProcessTest extends BaseTest {
       String restartUASServerCmd = "docker-compose -f /opt/docker-compose.yml restart ut-ramp-uas";
        // String restartUASServerCmd = "docker-compose restart ut-ramp-uas"; // for dev env
       sut.uasCliConnections().forEach(conn -> {
-        try {
-          sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
-              + Thread.currentThread().getName());
-          sut.write("********************************************************************");
-          CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
-              .error("Couldn't run query").withTimeout(7, TimeUnit.MINUTES);
-          zoneCacheExecution.execute();
-            CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
-                    .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
-            restartUASServer.execute();
-        } catch (IOException e) {
-          throw new UncheckedIOException(e);
-        }
+          int count = 0;
+          int maxTries = 2;
+          while(true){
+              try {
+              sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
+                  + Thread.currentThread().getName());
+              sut.write("********************************************************************");
+              CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
+                  .error("Couldn't run query").withTimeout(10, TimeUnit.MINUTES);
+              zoneCacheExecution.execute();
+                CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
+                        .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
+                restartUASServer.execute();
+                break;
+            } catch (IOException e) {
+                  sut.write("Couldn't run query trying again...num_try: "+count);
+                  if (++count == maxTries){
+                     throw new UncheckedIOException(e);
+                  }
+                  else
+                  {
+                      sleepFor(2);
+                  }
+            }
+          }
       });
     }
+  }
+
+  private static void sleepFor(Integer seconds)
+  {
+      try {
+          TimeUnit.SECONDS.sleep(seconds);
+      } catch (InterruptedException e) {
+          fail(e.getMessage());
+      }
   }
 }

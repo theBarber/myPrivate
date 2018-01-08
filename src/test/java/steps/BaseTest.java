@@ -3,6 +3,7 @@ package steps;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import cucumber.api.PendingException;
 import cucumber.api.java8.En;
+import infra.cli.process.CliCommandExecution;
 import infra.utils.MsgProcess;
 import infra.utils.RabbitMQConsumer;
 import infra.utils.RabbitMQPublisher;
@@ -15,6 +16,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import org.junit.Assert;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +35,7 @@ public class BaseTest implements En {
   protected final String[] PROGRAMMATIC = new String[] {"@programmatic"};
   protected final String[] DYNAMICTAG = new String[] {"@DinamicTag"};
   protected final String[] HEADERBIDDING = new String[] {"@HeaderBidding"};
+  protected final String[] HEADERBIDDINGSAHAR = new String[] {"@HeaderBiddingSahar"};
 
 
   //protected com.rabbitmq.client.Connection rabbitClientConnection;
@@ -127,6 +130,23 @@ public class BaseTest implements En {
 //      }
 //
 //    });
+
+  public void restartServerNamed(String serverName)
+  {
+    String restartServerCmd = "docker-compose -f /opt/docker-compose.yml restart "+ serverName;
+
+    sut.uasCliConnections().forEach(conn -> {
+      try {
+        sut.write("********************************************************************");
+        CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartServerCmd)
+                .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
+        restartUASServer.execute();
+      }
+      catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
+    });
+  }
 
   public void setupDB(){
 

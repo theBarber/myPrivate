@@ -6,6 +6,7 @@ Feature: UAS buy at most
 
 Scenario: buy at most testing - Single banner - positive test
 		Given I upload a new solver plan with the following slices
+#		need to set up 2 banners to the same zone - one banner has "KPI_SCORE": 1 with buy at most 500 and the other has "KPI_SCORE": 0 without but at most, verify the first 500 the first one is being selected and the other times the second one
 			| {"buying_strategy_id": -1, "slices": [{"zone_id":${workflow.zone(INT2434 - See Through - RAMP Lift Test 1)},"slice_id":"${guid}","banner_id":"${workflow.banner(75396-210722-278956-See Through-RampLift-1)}","weight":10,"start_time":1478044800,"end_time":1478131199,"predicates":{"AND":[{"==":["body.features.zone_id",${workflow.zone(INT2434 - See Through - RAMP Lift Test 1)}]}]},"KPI_SCORE": 1, "KPI_TYPE": "Pacing","buy_at_most":500}]}   |
 		And I sleep for 70 seconds
 		Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko with BuyAtMostTest} as user-agent string to send my requests to uas

@@ -21,9 +21,12 @@ public class DynamicTagTest extends BaseTest{
         Given("I update daily capping for publishers:",this::setupPublishers);
         Then("i send (\\d+) times Dynamic Tag synchronized ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagSynchronizedRequestsToUAS);
         Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
+        Then("i send (\\d+) times Dynamic Tag synchronized ad request with tag id (\\w+) to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagWithTagSynchronizedRequestsToUAS);
         Given("i remove all zones related to web_section id (\\d+)",this::removeAllZonesFrom);
+        Given("only tags \\{([^}]+)\\} are enabled and the rest are disabled for publisher (\\d+)",this::removeTagsFromPublisher);
         And("i remove all zones from publishers: \\{([^}]+)\\}, apart from zones:\\{([^}]+)\\}",this::removeAllZonesForPublisherApartFrom);
         Given("I add cookie (\\w+) with random value to my requests to uas", (String paramName) -> {
+            sut.getUASRquestModule().clearCookies();
             sut.getUASRquestModule().addCookie(paramName, String.valueOf(new Random().nextInt()));
         });
     }
@@ -44,13 +47,19 @@ public class DynamicTagTest extends BaseTest{
 
     public void sendDynamicTagSynchronizedRequestsToUAS(Integer times, String publisherId, String domain)
     {
-        sut.getUASRquestModule().sendMultipleDynamicTagSynchronizedRequests(times,publisherId, domain,true);
+        sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,null,publisherId, domain,null,false,false);
     }
 
     public void sendDynamicTagRequestsToUAS(Integer times, String publisherId, String domain)
     {
-        sut.getUASRquestModule().sendMultipleDynamicTagRequests(times,publisherId, domain,true);
+        sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,null,publisherId, domain,null,true,false);
     }
+
+    public void sendDynamicTagWithTagSynchronizedRequestsToUAS(Integer times,String tagID, String publisherId, String domain)
+    {
+        sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,tagID,publisherId, domain,null,false,false);
+    }
+
 
     public void removeAllZonesForPublisherApartFrom(String publishersID, String remainingZones)
     {
@@ -58,10 +67,17 @@ public class DynamicTagTest extends BaseTest{
                 "(select zoneid from (SELECT * FROM zones) as z join web_sections w_s on z.web_section_id = w_s.id \n" +
                 "\tjoin publishers_web_properties p_w_p on w_s.web_property_id = p_w_p.web_property_id \n" +
                 "\twhere p_w_p.publisher_id in ("+publishersID+") and z.status = 0 and z.zoneid not in ("+remainingZones+"));");
+
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`zones` SET `status`='0' WHERE `zoneid` in ("+remainingZones+");");
     }
 
     private void removeAllZonesFrom(Integer web_sectionID)
     {
         SqlWorkflowUtils.setColumnInWorkflow("zones", "web_section_id",String.valueOf(web_sectionID), "status", "1");
+    }
+
+    public void removeTagsFromPublisher(String tags, String publisherID)
+    {
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`tags` SET `status`='1' WHERE `publisher_id` = "+publisherID+" and `tagid` not in ("+tags+") ;");
     }
 }
