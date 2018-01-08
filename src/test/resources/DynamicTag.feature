@@ -62,9 +62,9 @@ Scenario:3. Basic DT logic with zone level filtering
     And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {DT-PGM-Test-2-campaign-high-priority-banner-1} 100% of the time
-
-#  ----------------------------------------------------------------------Dynamic Tag optimize flow----------------------------------------------------------------------
-
+#
+##  ----------------------------------------------------------------------Dynamic Tag optimize flow----------------------------------------------------------------------
+#
   Scenario: 2. optimize flow
     Given I set the activation status of experiment named {ramp-lift-control-flow} to {0}
     And I set the activation status of experiment named {ramp-lift-optimize-flow} to {1}
