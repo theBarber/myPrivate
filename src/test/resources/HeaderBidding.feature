@@ -130,18 +130,24 @@ Feature: Header Bidding flow support
     And The response contains script
     And all responses contains adId with id 1200025
 
+  Scenario: Send HBProg request with D first P selected
+    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3690} for publisher 3690 with domain {HBProrgrammatic.com} with extra params {&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all responses contains adId with id 1219268
 
-    Scenario: Send HBProg request with D first P selected
-    i send 1 headerBidding post request for scenario {Send HB request with no 1X1 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1}
-        Given i load scenario {Send HBProg request with D first P selected} input data
-        Then i send 1 times Header Bidding ad request to UAS for the scenario
 
-    Scenario: Send HBProg request with No D, No response from P
-        Given i load scenario {Send HBProg request with No D, No response from P} input data
-        Then i send 1 times Header Bidding ad request to UAS for the scenario
+  Scenario: Send HBProg request with No D, No response from P
+    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3690} for publisher 3690 with domain {HBProrgrammatic.com} with extra params {&unlimited=1}
+    And The response code is 200
+    And The responses are passback
 
-    Scenario: Send HBProg request D selected
-        Given i load scenario {Send HBProg request D selected} input data
-        Then i send 1 times Header Bidding ad request to UAS for the scenario
+  Scenario: Send HBProg request D selected
+    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3690} for publisher 3690 with domain {HBProrgrammatic.com} with extra params {&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all responses contains adId with id 1219276
+
+
 
 >>>>>>> Stashed changes

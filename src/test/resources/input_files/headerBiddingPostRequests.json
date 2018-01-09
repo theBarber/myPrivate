@@ -177,7 +177,7 @@
         "params": {"placementId" : "10433394",
           "publisherId" : 3673
         }
-      }]}
+      }]},
 
   "Send HBProg request with D first P selected publisher 3690":
   {"x-ut-hb-params":[
