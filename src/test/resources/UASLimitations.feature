@@ -6,6 +6,7 @@
 @campaign
 @hardcoded
 @stable
+@scheduled
 Feature: UAS limitations filtering
 
 #Background: 

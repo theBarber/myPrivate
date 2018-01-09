@@ -1,4 +1,4 @@
-@HeaderBidding
+@HeaderBiddingSahar
 Feature: Header Bidding flow support
 
   Scenario: 1. deactivate optimize flow
@@ -65,9 +65,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all responses contains adId with id 1200025
 
-    Scenario: send Ranker HB request without params
-        Given i load scenario {send Ranker HB request without params} input data
-        Then i send 1 times Header Bidding ad request to UAS for the scenario
+#----------------------------------------------------------------------Header bidding optimize flow----------------------------------------------------------------------
 
   Scenario: 1. activate optimize flow
     Given I set the activation status of experiment named {ramp-lift-control-flow} to {0}

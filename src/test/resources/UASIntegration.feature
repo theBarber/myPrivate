@@ -2,7 +2,8 @@
 	@Integration
 	@cli
 	@uas
-	@stable
+@scheduled
+@stable
 	Feature: UAS Ad request flows
 
 	@Sanity

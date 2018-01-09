@@ -12,7 +12,7 @@ import java.util.Random;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:DynamicTag.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/DynamicTag_$TIMESTAMP$.json"})
+        "infra.RotatingJSONFormatter:target/cucumber/DynamicTagOptimize_$TIMESTAMP$.json"},tags ={"@control"})
 public class DynamicTagTest extends BaseTest{
     public DynamicTagTest()
     {
