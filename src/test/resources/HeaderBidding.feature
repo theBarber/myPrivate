@@ -1,4 +1,4 @@
-@HeaderBiddingSahar
+@HeaderBidding
 Feature: Header Bidding flow support
 
   Scenario: 1. deactivate optimize flow
@@ -65,7 +65,9 @@ Feature: Header Bidding flow support
     And The response contains script
     And all responses contains adId with id 1200025
 
-#----------------------------------------------------------------------Header bidding optimize flow----------------------------------------------------------------------
+    Scenario: send Ranker HB request without params
+        Given i load scenario {send Ranker HB request without params} input data
+        Then i send 1 times Header Bidding ad request to UAS for the scenario
 
   Scenario: 1. activate optimize flow
     Given I set the activation status of experiment named {ramp-lift-control-flow} to {0}
@@ -129,3 +131,19 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains script
     And all responses contains adId with id 1200025
+
+
+    Scenario: Send HBProg request with D first P selected
+    i send 1 headerBidding post request for scenario {Send HB request with no 1X1 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1}
+        Given i load scenario {Send HBProg request with D first P selected} input data
+        Then i send 1 times Header Bidding ad request to UAS for the scenario
+
+    Scenario: Send HBProg request with No D, No response from P
+        Given i load scenario {Send HBProg request with No D, No response from P} input data
+        Then i send 1 times Header Bidding ad request to UAS for the scenario
+
+    Scenario: Send HBProg request D selected
+        Given i load scenario {Send HBProg request D selected} input data
+        Then i send 1 times Header Bidding ad request to UAS for the scenario
+
+>>>>>>> Stashed changes
