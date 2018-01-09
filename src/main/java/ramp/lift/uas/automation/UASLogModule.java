@@ -143,7 +143,7 @@ public class UASLogModule extends AbstractModuleImpl<Stream<List<String>>> {
 
 
     @SuppressWarnings("unchecked")
-    private Collection<List<String>> _actual() {
+    public Collection<List<String>> _actual() {
         return (Collection<List<String>>) actual;
     }
 }

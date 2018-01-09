@@ -1,4 +1,5 @@
 @HeaderBiddingSahar
+@scheduled
 Feature: Header Bidding flow support
 
   Scenario: 1. deactivate optimize flow
@@ -71,7 +72,7 @@ Feature: Header Bidding flow support
     Given I set the activation status of experiment named {ramp-lift-control-flow} to {0}
     And I set the activation status of experiment named {ramp-lift-optimize-flow} to {1}
     And I restart {ramp-lift-services}
-    And I sleep for 100 seconds
+    And I sleep for 120 seconds
 
   Scenario: send HB request without params
     Given i send 1 headerBidding post request for scenario {send HB request without params for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1}
