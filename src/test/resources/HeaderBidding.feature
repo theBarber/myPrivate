@@ -136,7 +136,6 @@ Feature: Header Bidding flow support
     And The response contains script
     And all responses contains adId with id 1219268
 
-
   Scenario: Send HBProg request with No D, No response from P
     Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3690} for publisher 3690 with domain {HBProrgrammatic.com} with extra params {&unlimited=1}
     And The response code is 200
@@ -150,4 +149,4 @@ Feature: Header Bidding flow support
 
 
 
->>>>>>> Stashed changes
+
