@@ -15,7 +15,7 @@ Feature: Header Bidding flow support
 
   Scenario: send HB request without publisherID configured
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1}
-    And The response code is 204
+    And The response code is 200
 
   Scenario: Send HB basic request
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1}
@@ -31,7 +31,7 @@ Feature: Header Bidding flow support
 
   Scenario: Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1}
-    And The response code is 204
+    And The response code is 200
 
   Scenario: Send HB request with Empty placementID
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty placementID for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1}
