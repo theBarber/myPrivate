@@ -101,7 +101,7 @@ public class CacheProcessTest extends BaseTest {
                 restartUASServer.execute();
                 break;
             } catch (IOException e) {
-                  sut.write("Couldn't run query trying again...num_try: "+count);
+                  System.out.println("Couldn't run query trying again...num_try: "+count);
                   if (++count == maxTries){
                      throw new UncheckedIOException(e);
                   }

@@ -4,12 +4,12 @@
     
 Feature: Dynamic Tag flow support
 
-  @control
-  Scenario: 1. control flow
-    Given I set the activation status of experiment named {ramp-lift-control-flow} to {1}
-    And I set the activation status of experiment named {ramp-lift-optimize-flow} to {0}
-    And I restart {ramp-lift-services}
-    And I sleep for 120 seconds
+#  @control
+#  Scenario: 1. control flow
+#    Given I set the activation status of experiment named {ramp-lift-control-flow} to {1}
+#    And I set the activation status of experiment named {ramp-lift-optimize-flow} to {0}
+#    And I restart {ramp-lift-services}
+#    And I sleep for 120 seconds
 
   @optimize
   Scenario: 2. optimize flow
@@ -34,8 +34,7 @@ Scenario: 1. Basic DT flow
     And The impressionUrl has bannerid field matching the id of the banner named {DT-PGC-Test-1-campaign-low-priority-banner-1} 100% of the time
     Then i send 1 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1}
     And The responses are passback
-    Then I read the latest req log file from uas
-    And The field ExperimentID in the 47 column of the req log is {10}
+
   @control
   @optimize
   Scenario:2. Basic DT logic with no product daily cap

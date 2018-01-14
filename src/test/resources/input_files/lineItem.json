@@ -35,7 +35,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1219332 ,
+							"bannerId": 1220891,
 							"creativeName": "Screen shift-DT-inline-3-banner"
 						}
 					],
@@ -64,7 +64,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1219331 ,
+							"bannerId": 1220893,
 							"creativeName": "Screen shift-DT-inline-2-banner"
 						}
 					],
@@ -93,7 +93,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1219330,
+							"bannerId": 1220889,
 							"creativeName": "Screen shift-DT-inline-1-banner"
 						}
 					],
@@ -947,7 +947,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1219328,
+							"bannerId": 1220887,
 							"creativeName": "See Through-DT-inline-1-banner"
 						}
 					],
@@ -976,7 +976,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1219329 ,
+							"bannerId": 1220888 ,
 							"creativeName": "See Through-DT-inline-2-banner"
 						}
 					],
@@ -1047,7 +1047,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1219333,
+							"bannerId": 1220892,
 							"creativeName": "Page Grabber-DT-inline-1-banner"
 						}
 					],
@@ -1076,7 +1076,7 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1219334,
+							"bannerId": 1220893,
 							"creativeName": "Page Grabber-DT-inline-2-banner"
 						}
 					],

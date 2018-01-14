@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNull;
 import org.junit.Assert;
+import org.junit.AssumptionViolatedException;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 
@@ -15,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
+        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"},tags ={"@control"})
 public class HeaderBiddingTest extends BaseTest {
     final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/headerBiddingPostRequests.json";
     private ObjectMapper mapper = new ObjectMapper();
@@ -33,8 +35,18 @@ public class HeaderBiddingTest extends BaseTest {
         });
 
         Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
-//        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\}",this::sendHeaderBiddingPostRequestWithoutExtraParams);
-        And("all responses contains (\\w+) with id (\\w+)",this::responsesContainEntityWithId);
+        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
+        And("all HB responses contains (\\w+) with id (\\w+)",this::responsesContainEntityWithId);
+    }
+
+    private void sendHeaderBiddingSecurePostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams) {
+        if(headerBiddingPostRequests == null)
+        {
+            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
+        }
+        JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
+        Assert.assertNotNull( "There is no suitable scenario for scenario: "+scenario, jsonNode);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,jsonNode.toString(),publisherID,domain, extraParams,true,true);
     }
 
     public void sendHeaderBiddingPostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams)

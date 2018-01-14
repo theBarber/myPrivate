@@ -6,6 +6,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:DynamicTag.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/DynamicTag_$TIMESTAMP$.json"},tags ={"@optimize"})
+        "infra.RotatingJSONFormatter:target/cucumber/DynamicTagOptimize_$TIMESTAMP$.json"},tags ={"@optimize"})
 public class DynamicTagTestOptimize {
 }
