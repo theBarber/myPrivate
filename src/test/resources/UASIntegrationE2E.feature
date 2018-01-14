@@ -30,6 +30,7 @@
         And The field zoneid in the 4 column of the req log is the same as in impression-url
         And The field bannerid in the 5 column of the req log is the same as in impression-url
         And The field campaignid in the 6 column of the req log is the same as in impression-url
+        And The field experimentID in the 47 column of the req log is {0}
         Then I read the latest imp log file from uas
         And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
         Given I Delete clk logs
