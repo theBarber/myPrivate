@@ -1,107 +1,79 @@
 package steps;
-
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import entities.RampAppCreateEntitiesManager;
-import entities.Zone;
-import entities.ZoneSet;
-import infra.utils.SqlWorkflowUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNull;
+import org.junit.Assert;
+import org.junit.AssumptionViolatedException;
 import org.junit.runner.RunWith;
+import ramp.lift.uas.automation.UASRequestModule;
 
-import java.io.*;
-import java.util.TreeSet;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import entities.RampAppCreateEntitiesManager;
-import entities.Zone;
-import entities.ZoneSet;
-import entities.ramp.app.api.CampaignsRequest;
-import entities.ramp.app.api.Zonesets;
-import infra.utils.SqlWorkflowUtils;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.util.EntityUtils;
-import org.junit.runner.RunWith;
-
-import java.util.*;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
-public class HeaderBiddingTest extends BaseTest{
+        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"},tags ={"@control"})
+public class HeaderBiddingTest extends BaseTest {
+    final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/headerBiddingPostRequests.json";
     private ObjectMapper mapper = new ObjectMapper();
-    private entities.RampAppCreateEntitiesManager RampAppCreateEntitiesManager;
-    private static final String HBInputFilePath = "input_files/HBInput.xlsx";
-    private String url = "";
-    private String HBrequestBody = "";
-    private String HBresponse= "";
-    private String testType = "";
-    private int statusCode = 0;
+    private JsonNode headerBiddingPostRequests;
+
     public HeaderBiddingTest()
     {
         super();
-
-        Before(HEADERBIDDING, (scenario) -> {
-            RampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();
+        Before(HEADERBIDDINGSAHAR, (scenario) -> {
+            try {
+                headerBiddingPostRequests = mapper.readTree(this.getClass().getResourceAsStream(HEADER_BIDDING_SOURCE_FILE_PATH));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
-        Given("i load scenario \\{([^}]+)\\} input data",this::readInputDataFromCSV);
-        Then("i send (\\d+) times Header Bidding ad request to UAS for the scenario",this::sendHeaderBiddingRequestsToUAS);
+        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
+        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
+        And("all HB responses contains (\\w+) with id (\\w+)",this::responsesContainEntityWithId);
     }
 
-    private void sendHeaderBiddingRequestsToUAS(Integer times)
-    {
-       try {
-           sut.getUASRquestModule().sendMultipleHeaderBiddingRequests(times,url,HBrequestBody,HBresponse,testType,statusCode,true);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-    }
-
-    private void readInputDataFromCSV(String scenario)
-    {
-        try {
-            ClassLoader loader = HeaderBiddingTest.class.getClassLoader();
-            FileInputStream excelFile = new FileInputStream(new File(loader.getResource(".").getPath(),HBInputFilePath));
-            Workbook workbook = new XSSFWorkbook(excelFile);
-            DataFormatter formatter = new DataFormatter();
-            Sheet datatypeSheet = workbook.getSheetAt(0);
-            Iterator<Row> iterator = datatypeSheet.iterator();
-
-            while (iterator.hasNext()) {
-                Row currentRow = iterator.next();
-                //getCellTypeEnum shown as deprecated for version 3.15
-                //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
-                String src = formatter.formatCellValue(currentRow.getCell(0)).trim();
-                String dest = scenario.trim();
-                if(src.contentEquals(dest)) {// we found the row for relevant scenario
-                    testType = formatter.formatCellValue(currentRow.getCell(7));
-                    if (testType.contentEquals("No")) {
-                        url = "http://" + formatter.formatCellValue(currentRow.getCell(1)) + "/hb?pid=" + formatter.formatCellValue(currentRow.getCell(2)) + "&domain=" + formatter.formatCellValue(currentRow.getCell(3)) + "&optimize=" + formatter.formatCellValue(currentRow.getCell(6)) + "&unlimited=1&ct=1";
-                        HBrequestBody = formatter.formatCellValue(currentRow.getCell(4));
-                        HBresponse = formatter.formatCellValue(currentRow.getCell(5));
-                        statusCode = Integer.parseInt(formatter.formatCellValue(currentRow.getCell(8)));
-                        break;
-                    }
-                    else //component testing
-                    {
-                        url = "http://" + formatter.formatCellValue(currentRow.getCell(1));
-                        HBrequestBody = formatter.formatCellValue(currentRow.getCell(4));
-                        HBresponse = formatter.formatCellValue(currentRow.getCell(5));
-                    }
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }catch (NullPointerException e) {
-            e.printStackTrace();
+    private void sendHeaderBiddingSecurePostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams) {
+        if(headerBiddingPostRequests == null)
+        {
+            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
         }
+        JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
+        Assert.assertNotNull( "There is no suitable scenario for scenario: "+scenario, jsonNode);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,jsonNode.toString(),publisherID,domain, extraParams,true,true);
+    }
+
+    public void sendHeaderBiddingPostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams)
+    {
+        JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
+        Assert.assertNotNull( "There is no suitable scenario for scenario: "+scenario, jsonNode);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,jsonNode.toString(),publisherID,domain, extraParams,true,false);
+    }
+
+    private void sendHeaderBiddingPostRequestWithoutExtraParams(Integer times, String scenario, Integer publisherID, String domain)
+    {
+        sendHeaderBiddingPostRequest(times,scenario,publisherID,domain,null);
+    }
+
+    public void responsesContainEntityWithId(String entity, String id) {
+
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
+                Assert.assertEquals(responseInJson.get(0).get(entity).toString(), id);
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
     }
 }

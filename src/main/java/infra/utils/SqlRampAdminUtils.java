@@ -155,4 +155,18 @@ public class SqlRampAdminUtils {
 		}
 	}
 
+	public static void unableAllExperimentGroupsExcept(Integer experimentID) {
+		try {
+			Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
+
+			String updateExperimentQuery = "UPDATE staging_ramp_admin.experiment_group set active=0 where id !=0 and id!="+experimentID+";";
+
+			if (stmt.executeUpdate(updateExperimentQuery) < 1) {
+				fail("set activation status failed");
+			}
+		} catch (SQLException e) {
+			fail(e.getMessage());
+		}
+
+	}
 }

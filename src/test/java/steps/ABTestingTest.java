@@ -42,7 +42,11 @@ public class ABTestingTest extends BaseTest {
 		Given("^Unable all experiment groups$", () -> {
               SqlRampAdminUtils.unableAllExperimentGroups();
             });
-		
+
+		Given("^Unable all experiment groups except experimentID (\\d+)", (Integer experimentID) -> {
+			SqlRampAdminUtils.unableAllExperimentGroupsExcept(experimentID);
+		});
+
 		Given("^I create new experiment groups with the following fields$", (DataTable experimentGroupsTable) -> {
 			List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
 			latestExperimentGroupIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment_group");

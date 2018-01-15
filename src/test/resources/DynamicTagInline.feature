@@ -1,0 +1,47 @@
+@cli
+@uas
+@HeaderBidding
+@scheduled
+Feature: Dynamic Tag inline flow support
+
+  Scenario: 1. Dynamic Tag inline Basic - including migrated tags
+    Given I add cookie UTID with random value to my requests to uas
+    Then i send 20 times Dynamic Tag ad request to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The impressionUrl has bannerid field matching the id of the banner named {Screen shift-DT-inline-1-banner} 100% of the time
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 130 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The impressionUrl has bannerid field matching the id of the banner named {Screen shift-DT-inline-1-banner} 100% of the time
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 135 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The impressionUrl has bannerid field matching the id of the banner named {See Through-DT-inline-1-banner} 100% of the time
+    And i send 1 times Dynamic Tag synchronized ad request with tag id 135 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    Then The responses are passback
+
+  Scenario: 2. Dynamic Tag inline - new tags (migrated false)
+    Given I add cookie UTID with random value to my requests to uas
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 136 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {Page Grabber-DT-inline-2-banner} 100% of the time
+    And i send 1 times Dynamic Tag synchronized ad request with tag id 136 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The responses are passback
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 135 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {See Through-DT-inline-1-banner} 100% of the time
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 135 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The responses are passback
+
+  Scenario:3.Dynamic Tag inline (multiple products in certain tag)
+    Given I add cookie UTID with random value to my requests to uas
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 137 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {Screen shift-DT-inline-1-banner} 100% of the time
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 137 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The impressionUrl has bannerid field matching the id of the banner named {Page Grabber-DT-inline-2-banner} 100% of the time
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 137 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The responses are passback
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 135 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {See Through-DT-inline-1-banner} 100% of the time
+
+  Scenario:5.Header bidding
+    Then i send 10 headerBidding post request for scenario {Send HB basic request for publisher 3690} for publisher 3690 with domain {DynamicTagInline.com} with extra params {&unlimited=1}
+    And The response contains script
+    And all HB responses contains adId with id 1220889

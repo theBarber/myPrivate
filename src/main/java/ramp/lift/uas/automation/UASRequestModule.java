@@ -1,5 +1,6 @@
 package ramp.lift.uas.automation;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.beans.IntrospectionException;
@@ -51,7 +52,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
-
+  public enum requestTypesEnum {
+    ZONE_REQUEST, DYNAMIC_TAG_REQUEST, HEADER_BIDDING_REQUEST
+  }
   private ExecutorService requestSubmitter;
   private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_]";
   protected static final Pattern impressionURLPattern = Pattern
@@ -63,6 +66,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
   protected static final Pattern clickURLPattern = Pattern
       .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/c\\?[^\'\\\"]*)[\'\\\"]");
+
+  private List<HttpResponse> synchronizedResponses;
 
   protected static final String getGroup1(Matcher from) {
     return from.group(1);
@@ -111,6 +116,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     context = HttpClientContext.create();
     CookieStore cookieStore = new BasicCookieStore();
        context.setCookieStore(cookieStore);
+    synchronizedResponses = new ArrayList<>();
   }
 
   public void zoneRequest(Integer forZone) {
@@ -127,11 +133,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     for (; times > 0; times--) {
       request(url, false);
     }
-  }
-
-  private String getURL(Integer forZone, String extraParameter)
-  {
-    return "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/af?zoneid=" + forZone + "&ct=1&stid=999" + extraParameter;
   }
 
   public void zoneRequestsWithParams(Integer forZone, int times, boolean toReset) {
@@ -235,7 +236,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   }
 
   public Stream<CompletableFuture<HttpResponse>> responses() {
-    return actual().stream();
+      return actual().stream();
+  }
+
+  public List<HttpResponse> getSynchronizedResponses() {
+    return synchronizedResponses;
   }
 
   @Override
@@ -245,6 +250,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   }
 
   protected final void reset() {
+    if(synchronizedResponses!=null)
+      synchronizedResponses.clear();
     this.actual().stream().parallel()
         .filter(((Predicate<Future<HttpResponse>>) Future::isDone).negate())
         .forEach(f -> f.cancel(true));
@@ -324,105 +331,113 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     context.getCookieStore().clear();
   }
 
-    public void sendMultipleDynamicTagRequests(Integer times, String publisherId, String domainParam,boolean toReset) {
-      if (toReset) {
-        reset();
-      }
+  public void sendMultipleDynamicTagGetRequests(Integer times, String tagID, String publisherId, String domainParam, String extraParams, boolean isAsync, boolean isSecure)
+  {
+    String params ="pid=" + publisherId+ "&domain="+domainParam+Optional.ofNullable(tagID).filter(s->!s.isEmpty()).map(s->"&tagid="+s).orElse("")+Optional.ofNullable(extraParams).orElse("");
+    String url = getURL(requestTypesEnum.DYNAMIC_TAG_REQUEST,params,isSecure);
+    if(isAsync)
+      sendGetRequestsAsync(times,url);
+    else
+      sendGetRequestsSync(times,url);
+  }
 
-      String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/dj?pid=" + publisherId+ "&domain="+domainParam;
+  public void sendMultipleHeaderBiddingPostRequests(Integer times, String body, Integer publisherID, String domainParam,String extraParams, boolean isAsync,boolean isSecure) {
+    String params = "pid=" + publisherID+ "&domain="+domainParam + Optional.ofNullable(extraParams).orElse("");
+    String url = getURL(requestTypesEnum.HEADER_BIDDING_REQUEST, params,isSecure);
+    if(isAsync)
+      sendPostRequestsAsync(times,url,body);
+    else
+      sendPostRequestSync(times,url,body);
+  }
+
+  private String getURL(requestTypesEnum RequestType,String params,boolean isSecure)
+  {
+    String request_type_in_string_format = null;
+    String http = isSecure? "https://":"http://";
+    switch (RequestType)
+    {
+      case ZONE_REQUEST: request_type_in_string_format = "/af";break;
+      case DYNAMIC_TAG_REQUEST: request_type_in_string_format = "/dj";break;
+      case HEADER_BIDDING_REQUEST:request_type_in_string_format = "/hb";break;
+    }
+    return http + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ request_type_in_string_format +Optional.ofNullable(params).filter(s->!s.isEmpty()).map(s->"?"+s).orElse("")+"&ct=1";
+  }
+
+  private void sendPostRequestsAsync(Integer times,String url, String body) {
+    reset();
+    for (; times > 0; times--) {
+        actual().add(CompletableFuture.supplyAsync(() -> {
+        return postRequest(url, body);
+      }, requestSubmitter));
+    }
+  }
+
+  private void sendGetRequestsAsync(Integer times,String url)
+  {
+    reset();
       for (; times > 0; times--) {
-        request(url, false);
-    }
-    }
-//temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary temporary
-  public void sendMultipleDynamicTagSynchronizedRequests(Integer times, String publisherId, String domainParam, boolean toReset) {
-    if (toReset) {
-      reset();
-    }
-
-    String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/dj?pid=" + publisherId+ "&domain="+domainParam;
-    for (; times > 0; times--) {
-      request(url, false);
-      try {
-        TimeUnit.SECONDS.sleep(1); //not good not good not good not good not good not good not good not good not good not good not good not good !
-      } catch (InterruptedException e) {
-        fail(e.getMessage());
-      }
+        actual().add(CompletableFuture.supplyAsync(() -> {
+        return getRequest(url);
+      }, requestSubmitter));
     }
   }
 
-  public void sendMultipleHeaderBiddingRequests(Integer times, String url, String requestBody, String response, String env,int statusCode, boolean toReset) throws IOException {
-    if (toReset) {
-      reset();
-    }
-    HttpResponse res;
-
+  private void sendPostRequestSync(Integer times,String url, String body) {
+   reset();
     for (; times > 0; times--) {
-      res = postRequest(url, requestBody,env,false);
-      Header location = res.getFirstHeader("Location");
-      int actualStatusCode = res.getStatusLine().getStatusCode();
-      res.getEntity().getContent();
-      String s = new BufferedReader(new InputStreamReader(res.getEntity().getContent())).lines().collect(Collectors.joining(""));
-      assertEquals(statusCode,actualStatusCode);
-      assertEquals(response.trim(),s.trim());
-      System.out.println(s);
+      synchronizedResponses.add(postRequest(url,body));
     }
   }
 
-  private HttpResponse postRequest(String url, String body, String env, boolean toReset) {
-    if (toReset) {
-      reset();
+  private void sendGetRequestsSync(Integer times,String url) {
+    reset();
+    for (; times > 0; times--) {
+      synchronizedResponses.add(getRequest(url));
     }
+  }
 
-
+  private HttpResponse getRequest(String url)
+  {
     try {
-      //List<Header> headers = new ArrayList<Header>(){{
-      //    add(new BasicHeader("content-type", "text/plain"));
-      //}};
-      //if (env == "No") {// E2E test
-        HttpPost post = new HttpPost(url);
-        addHttpHeader("Content-Type", "text/plain");
-        post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
-        StringEntity postingString = new StringEntity(body);
-        post.setEntity(postingString);
-        HttpResponse response = httpclient.execute(post, context);
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (response.getEntity() != null) {
-          response.setEntity(new BufferedHttpEntity(response.getEntity()));
+      HttpGet get = new HttpGet(url);
+      get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+      HttpResponse response = httpclient.execute(get, context);
+      response.setEntity(new BufferedHttpEntity(response.getEntity()));
+      try {
+        if (withSleepInMillis > 0){
+          Thread.sleep(withSleepInMillis);
         }
-        else
-        {
-          response.setEntity(new StringEntity(""));
+      } catch (InterruptedException e) {
+        withSleepInMillis=0;
+      }
+      return response;
+    } catch (IOException e) {
+      throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+    }
+  }
+
+  private HttpResponse postRequest(String url,String body)
+  {
+    try {
+      HttpPost post = new HttpPost(url);
+      post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+      post.setEntity(new StringEntity(body));
+      HttpResponse response = httpclient.execute(post, context);
+      if (response.getEntity() != null) {
+        response.setEntity(new BufferedHttpEntity(response.getEntity()));
+      }
+      else
+      {
+        response.setEntity(new StringEntity(""));
+      }
+      try {
+        if (withSleepInMillis > 0){
+          Thread.sleep(withSleepInMillis);
         }
-        try {
-          if (withSleepInMillis > 0) {
-            Thread.sleep(withSleepInMillis);
-          }
-        } catch (InterruptedException e) {
-          withSleepInMillis = 0;
-        }
-        return response;
-      //}
-/*          else  //component test
-          {
-              HttpPost post = new HttpPost(url);
-              addHttpHeader("Content-Type", "application/json");
-              addHttpHeader("Accept", "application/json");
-              post.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
-              StringEntity postingString = new StringEntity(body);
-              post.setEntity(postingString);
-              HttpResponse response = httpclient.execute(post, context);
-              int statusCode = response.getStatusLine().getStatusCode();
-              response.setEntity(new BufferedHttpEntity(response.getEntity()));
-              try {
-                  if (withSleepInMillis > 0) {
-                      Thread.sleep(withSleepInMillis);
-                  }
-              } catch (InterruptedException e) {
-                  withSleepInMillis = 0;
-              }
-              return response;
-          }*/
+      } catch (InterruptedException e) {
+        withSleepInMillis=0;
+      }
+      return response;
     } catch (IOException e) {
       throw new UncheckedIOException("failed to send request (" + url + ") ", e);
     }

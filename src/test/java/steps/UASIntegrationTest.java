@@ -18,13 +18,8 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.*;
 import java.util.AbstractMap.SimpleImmutableEntry;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -139,8 +134,8 @@ public class UASIntegrationTest extends BaseTest {
 
     });
     Then("The responses? has impression-urls?", () -> {
-        Stream<Optional<String>> impressionURLResponses = sut.getUASRquestModule().responses()
-                .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join);
+        Stream<Optional<String>> impressionURLResponses = Optional.ofNullable(sut.getUASRquestModule().responses()
+                .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)).orElse(sut.getUASRquestModule().getSynchronizedResponses().stream().map(UASRequestModule::getImpressionUrlFrom));
         assertThat(
           "all of the responses should have a url", impressionURLResponses,
           StreamMatchers.allMatch(is(not(OptionalMatchers.empty()))));
@@ -174,7 +169,7 @@ public class UASIntegrationTest extends BaseTest {
     //
     // });
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
-    When("^I read the latest (clk|imp|req) log file from uas$", (String logType) -> {
+    When("^I read the latest (clk|imp|req|hbl) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
       /*  sut.logFor(logType).readLogs().actual().forEach(m->{
             StringBuilder stringBuilder = new StringBuilder();
@@ -224,8 +219,10 @@ public class UASIntegrationTest extends BaseTest {
         });
       And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is \\{([^}]+)\\}",
               (String fieldName, Integer column, String logType, String value) -> {
+                  sut.logFor(logType).actual().forEach(m-> sut.write("value of experiment selected is: "+m.get(column)));
                   assertThat(sut.logFor(logType).actual(),
                           StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(value))));
+
               });
 
     When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
@@ -347,7 +344,7 @@ public class UASIntegrationTest extends BaseTest {
     return future.thenApply(UASRequestModule::getImpressionUrlFrom);
   }
 
-  private static Optional<String> parsableClickUrl(Optional<String> originalClickUrl) {
+   private static Optional<String> parsableClickUrl(Optional<String> originalClickUrl) {
     return originalClickUrl.map(s -> s.replaceAll("__", "&"));
   }
 
@@ -414,6 +411,44 @@ public class UASIntegrationTest extends BaseTest {
   }
     public void checkTheNumberOfSelectedEntity(String urlType, String fieldName, String entityType, String entityName, Double percent)
     {
+        if(sut.getUASRquestModule().getSynchronizedResponses().size()==0)
+            checkTheNumberOfSelectedEntityOfAsyncResponses(urlType,fieldName,entityType,entityName,percent);
+        else
+            checkTheNumberOfSelectedEntityOfSyncronizedResponses(urlType,fieldName,entityType,entityName,percent);
+    }
+
+    private void checkTheNumberOfSelectedEntityOfSyncronizedResponses(String urlType, String fieldName, String entityType, String entityName, Double percent) {
+        assertThat(entityType, isOneOf("campaign", "banner", "zone"));
+        assertThat(urlType, is("impression"));
+        Optional<? extends WithId<Integer>> expectedEntity = sut.getCampaignManager().getterFor(entityType)
+                .apply(entityName);
+        assertThat("Could not find " + entityType + " named " + entityName, expectedEntity,
+                is(not(OptionalMatchers.empty())));
+        Map<Integer, Long> theAmountOfTheOccurencesOfTheFieldValueById;
+        theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().getSynchronizedResponses().stream()
+                .map(UASRequestModule::getImpressionUrlFrom).map(UASIntegrationTest::toURL)
+                .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
+                .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
+                .flatMap(entry -> entry.getValue().stream())
+                .collect(Collectors.groupingBy(Integer::parseInt, Collectors.counting()));
+
+        assertThat(urlType + " urls grouped by " + fieldName,
+                theAmountOfTheOccurencesOfTheFieldValueById.keySet(), is(not(empty())));
+
+        long totalResponses = sut.getUASRquestModule().getSynchronizedResponses().stream().count();
+        assertThat("total responses", totalResponses, greaterThan(0L));
+
+        double actualRate = theAmountOfTheOccurencesOfTheFieldValueById
+                .getOrDefault(expectedEntity.get().getId(), 0L).doubleValue() / totalResponses;
+
+        //*sahar: printing the map
+        theAmountOfTheOccurencesOfTheFieldValueById.forEach((k,v)->sut.write("Item : " + k + " Count : " + v));
+        assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
+                actualRate * 100, 10d);
+
+    }
+
+    private void checkTheNumberOfSelectedEntityOfAsyncResponses(String urlType, String fieldName, String entityType, String entityName, Double percent) {
         Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
         if (urlType.equalsIgnoreCase("impression")) {
             urlExtractor = UASIntegrationTest::getImpressionUrl;
@@ -431,8 +466,8 @@ public class UASIntegrationTest extends BaseTest {
                 .apply(entityName);
         assertThat("Could not find " + entityType + " named " + entityName, expectedEntity,
                 is(not(OptionalMatchers.empty())));
-
-        Map<Integer, Long> theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
+        Map<Integer, Long> theAmountOfTheOccurencesOfTheFieldValueById;
+        theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
                 .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
                 .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
                 .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
