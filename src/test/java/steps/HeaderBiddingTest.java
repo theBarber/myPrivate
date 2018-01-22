@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"},tags ={"@control"})
+        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
 public class HeaderBiddingTest extends BaseTest {
     final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/headerBiddingPostRequests.json";
     private ObjectMapper mapper = new ObjectMapper();

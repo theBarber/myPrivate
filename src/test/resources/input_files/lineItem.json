@@ -15,6 +15,64 @@
 			"Campaigns":
 			[
 				{
+					"campaignId": 302583,
+					"campaignName": "UAS-by-at-most-1-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							67657
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1224809,
+							"creativeName": "UAS-by-at-most-1-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				},
+				{
+					"campaignId": 302584,
+					"campaignName": "UAS-by-at-most-2-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							67657
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1224810,
+							"creativeName": "UAS-by-at-most-2-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				},
+				{
 					"campaignId": 301515 ,
 					"campaignName": "Screen shift-DT-inline-3-campaign",
 					"goalType": "impressions",
@@ -926,6 +984,7 @@
 
 			"Campaigns":
 			[
+
 				{
 					"campaignId": 301511,
 					"campaignName": "See Through-DT-inline-1-campaign",
