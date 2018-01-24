@@ -123,6 +123,33 @@
 				"status": 0
 			}
 		]
+	},
+	{
+		"zonesetId": 67281,
+		"zonesetName": "ramp-lift-Billboard-AB-testing-zoneset-1",
+		"Zones": [
+			{
+				"zoneId": 176748,
+				"zoneName": "ramp-lift-Billboard-AB-testing-zone-1",
+				"adUnitId": 58,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
+	{
+		"zonesetId": 67657,
+		"zonesetName": "Uas-by-at-most-zoneset",
+		"Zones": [
+			{
+				"zoneId": 177378,
+				"zoneName": "Uas-by-at-most-zone-1",
+				"adUnitId": 83,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
 	}
-
 ]

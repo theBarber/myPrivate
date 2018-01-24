@@ -1,5 +1,6 @@
 package infra;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,8 @@ import java.util.function.Function;
 import java.util.function.LongBinaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.Clock;
+import java.time.LocalTime;
 
 public class ParameterPlaceholderParser<T> {
 	private static final String CLASS_DOT_FUNCTION = "([\\w]+)\\.([\\w]+)";
@@ -64,7 +67,11 @@ public class ParameterPlaceholderParser<T> {
 				case "uuid":
 					replaceWith = java.util.UUID.randomUUID().toString();
 					break;
+				case "UTC_Time":
+					replaceWith = LocalTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("HH"));
+					break;
 				}
+
 			} else {
 				String className = className(function).toLowerCase();
 				String params = null;

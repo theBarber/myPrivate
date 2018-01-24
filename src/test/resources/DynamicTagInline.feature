@@ -41,7 +41,7 @@ Feature: Dynamic Tag inline flow support
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {See Through-DT-inline-1-banner} 100% of the time
 
-  Scenario:5.Header bidding
+  Scenario:4.Header bidding
     Then i send 10 headerBidding post request for scenario {Send HB basic request for publisher 3690} for publisher 3690 with domain {DynamicTagInline.com} with extra params {&unlimited=1}
     And The response contains script
     And all HB responses contains adId with id 1220889

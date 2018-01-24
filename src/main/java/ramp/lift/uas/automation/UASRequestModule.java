@@ -392,7 +392,13 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   private void sendGetRequestsSync(Integer times,String url) {
     reset();
     for (; times > 0; times--) {
+
       synchronizedResponses.add(getRequest(url));
+      try {
+        TimeUnit.SECONDS.sleep(2);
+      } catch (InterruptedException e) {
+        fail(e.getMessage());
+      }
     }
   }
 
