@@ -45,7 +45,7 @@ public class UASIntegrationE2E extends BaseTest {
         rampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();                                       // can be in Before statement
         CloseableHttpResponse createCampaignResponse = rampAppCreateEntitiesManager.createCampaign(campaignName,lineItemId, creativeID, zonesetID,priority);
         setLastCreatedCampaignEntityFromResponse(createCampaignResponse);
-        addBannersToLastCreatedCampaignFromGetCampaignRequest(); //relevant only in integration, remove it!
+        //addBannersToLastCreatedCampaignFromGetCampaignRequest(); //relevant only in integration, remove it!
         addLastCreatedCampaignToLineItemList(lineItemId);
     }
 

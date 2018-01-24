@@ -8,7 +8,7 @@ Feature: UAS buy at most
 
 Scenario: buy at most testing - Single banner - positive test
 		Given I upload a new solver plan with the following slices
-			| {"buying_strategy_id": -1, "slices": [{"slice_id":"${guid}","banner_id":"${workflow.banner(UAS-by-at-most-1-banner)}","pub_acnt_id": 2434,"weight":10,"start_time":1478044800,"end_time":1478131199,"KPI_SCORE": 1, "KPI_TYPE": "Pacing","buy_at_most":250,"is_programmatic": false,"hour": -1, "country": "-1", "region": "-1"},{"slice_id":"${guid}","banner_id":"${workflow.banner(UAS-by-at-most-2-banner)}","pub_acnt_id": 2434,"weight":10,"start_time":1478044800,"end_time":1478131199,"KPI_SCORE": 0, "KPI_TYPE": "Pacing","buy_at_most":0,"is_programmatic": false,"hour": -1, "country": "-1", "region": "-1"}]}   |
+			| {"buying_strategy_id": -1, "slices":[{"slice_id":"${guid}","banner_id":"${workflow.banner(UAS-by-at-most-1-banner)}","pub_acnt_id": 26919,"weight":10,"KPI_SCORE": 1, "KPI_TYPE": "Pacing","buy_at_most":10,"is_programmatic": false,"hour": "${UTC_Time}", "country": "-1", "region": "-1"},{"slice_id":"${guid}","banner_id":"${workflow.banner(UAS-by-at-most-2-banner)}","pub_acnt_id": 26919,"weight":10,"KPI_SCORE": 0, "KPI_TYPE": "Pacing","buy_at_most":1000,"is_programmatic": false,"hour":"${UTC_Time}", "country": "-1", "region": "-1"},{"slice_id":"${guid}","banner_id":"${workflow.banner(UAS-by-at-most-1-banner)}","pub_acnt_id": -1,"weight":10,"KPI_SCORE": 1, "KPI_TYPE": "Pacing","buy_at_most":-1,"is_programmatic": false,"hour": -1, "country": "-1", "region": "-1"},{"slice_id":"${guid}","banner_id":"${workflow.banner(UAS-by-at-most-2-banner)}","pub_acnt_id": -1,"weight":10,"KPI_SCORE": 0, "KPI_TYPE": "Pacing","buy_at_most":-1,"is_programmatic": false,"hour":-1, "country": "-1", "region": "-1"}]}   |
 		And I sleep for 70 seconds
 		Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko with BuyAtMostTest} as user-agent string to send my requests to uas
 		And I Delete req logs
@@ -27,6 +27,6 @@ Scenario: buy at most testing - Single banner - positive test
 		Then The response code is 200
 		And The impressionUrl has bannerid field matching the id of the banner named {UAS-by-at-most-2-banner} 100% of the time
 
-	Scenario: restore original plan to S3
-		Then I restore the original plan
-		And I sleep for 70 seconds
+#	Scenario: restore original plan to S3
+#		Then I restore the original plan
+#		And I sleep for 70 seconds

@@ -5,6 +5,31 @@
 	"LI": 
 	[
 		{
+			"ioLineItemId": 223755,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 120,
+				"name": "Screen shift"
+			},
+			"Campaigns":
+			[
+			]
+		},
+		{
+			"ioLineItemId": 223757,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 120,
+				"name": "Screen shift"
+			},
+			"Campaigns":
+			[
+			]
+		},
+
+		{
 			"ioLineItemId": 197418,
 			"pricingConvention": "CPM",
 			"Product":

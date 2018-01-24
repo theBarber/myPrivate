@@ -46,7 +46,7 @@ staging.as.solver_plan.file_path=ramp-optimization-staging-us-east-1/solver/curr
 integration.as.solver_plan.file_path=ramp-optimization-staging-us-east-1/solver/current
 dev1.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
-*.as.solver_plan.file_name=solver_plan_v4.json
+*.as.solver_plan.file_name=solver_plan_v5.json
 
 integration.banner_cache.file_path =ramp-optimization-integration/entities_data/banners_meta_data.json
 
