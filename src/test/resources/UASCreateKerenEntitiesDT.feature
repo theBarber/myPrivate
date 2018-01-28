@@ -205,10 +205,27 @@ Feature: UAS create entities for DT unit test
     And I update last created campaign named {campaign-DT-Test-client-7-c} delivery_algorithm to be {2} in the DB
     And I update last created campaign named {campaign-DT-Test-client-7-c} goal_type to be {impressions} in the DB
 
-    And i create new zone named {zone-DT-Test-direct-7-b} with limitation {[[[1,"!~",2601]]]} with adUnitId 69 and web_section id 14486 with affiliateId 3695 with po_line_item_id 65746
+    And i create new zone named {zone-DT-Test-direct-7-b} with limitation {[[[1,"!~",2601]]]} with adUnitId 69 and web_section id 14488 with affiliateId 3695 with po_line_item_id 65746
     And i create new Campaign named {campaign-DT-Test-client-7-b} for LineItem 223755 associated to creative 6044 with zoneset named {zone-DT-Test-direct-7-b} with priority {5}
     And I get the banners of campaign named {campaign-DT-Test-client-7-b} and print it
     And I update last created campaign named {campaign-DT-Test-client-7-b} units to be {-1} in the DB
     And I update last created campaign named {campaign-DT-Test-client-7-b} delivery_algorithm to be {2} in the DB
     And I update last created campaign named {campaign-DT-Test-client-7-b} goal_type to be {impressions} in the DB
 
+
+  Scenario: 8 - create campaigns with specific line item, creative, zoneset
+    When i create new zone named {zone-DT-Test-direct-8-a} with limitation {[[[1,"!~",2601]]]} with adUnitId 69 and web_section id 14489 with affiliateId 3695 with po_line_item_id 65746
+    And i create new Campaign named {campaign-DT-Test-direct-8-a} for LineItem 197418 associated to creative 86 with zoneset named {zone-DT-Test-direct-8-a} with priority {-1}
+    And I get the banners of campaign named {campaign-DT-Test-direct-8-a} and print it
+    And I update last created campaign named {campaign-DT-Test-direct-8-a} units to be {-1} in the DB
+    And I update last created campaign named {campaign-DT-Test-direct-8-a} delivery_algorithm to be {2} in the DB
+    And I update last created campaign named {campaign-DT-Test-direct-8-a} goal_type to be {impressions} in the DB
+    And I update last created campaign named {campaign-DT-Test-direct-8-a} limitation to be {[[[5,"=~","us"]]]} in the DB
+
+    And i create new zone named {zone-DT-Test-direct-8-b} with limitation {[[[1,"!~",2601]]]} with adUnitId 69 and web_section id 14489 with affiliateId 3695 with po_line_item_id 65746
+    And i create new Campaign named {campaign-DT-Test-direct-8-b} for LineItem 197418 associated to creative 86 with zoneset named {zone-DT-Test-direct-8-b} with priority {-2}
+    And I get the banners of campaign named {campaign-DT-Test-direct-8-b} and print it
+    And I update last created campaign named {campaign-DT-Test-direct-8-b} units to be {-1} in the DB
+    And I update last created campaign named {campaign-DT-Test-direct-8-b} delivery_algorithm to be {2} in the DB
+    And I update last created campaign named {campaign-DT-Test-direct-8-b} goal_type to be {impressions} in the DB
+    And I update last created campaign named {campaign-DT-Test-direct-8-b} limitation to be {[[[5,"=~","il"]]]} in the DB
