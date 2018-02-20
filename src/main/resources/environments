@@ -1,16 +1,19 @@
 staging.workflow.db.jdbc.connection = jdbc:mysql://172.31.32.57/adserver
+integration.workflow.db.jdbc.connection = jdbc:mysql://10.6.7.129/adserver
 aws-staging.workflow.db.jdbc.connection = jdbc:mysql://10.12.5.227/adserver
+aws-integration.workflow.db.jdbc.connection = jdbc:mysql://10.12.5.79/adserver
 dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
 # dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.34.113/adserver
 dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
-integration.workflow.db.jdbc.connection = jdbc:mysql://10.6.7.129/adserver
+
 
 *.workflow.db.user = adserver
 *.workflow.db.password = adserver
 
 staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
-aws-staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
 integration.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services-us-east-1.cmovgkgbdusb.us-east-1.rds.amazonaws.com/integration_ramp_admin
+aws-staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services-us-east-1.cmovgkgbdusb.us-east-1.rds.amazonaws.com/staging_ramp_admin
+aws-integration.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services-us-east-1.cmovgkgbdusb.us-east-1.rds.amazonaws.com/staging_ramp_admin
 
 *.ramp.admin.db.user = dev_manager
 *.ramp.admin.db.password = dev123456
@@ -19,19 +22,24 @@ dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl
 dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/sharedev_ramp_admin
 
 staging.uas.cliconnection.hosts=[172.31.48.29,172.31.48.35]
-aws-staging.uas.cliconnection.hosts=[10.12.2.56]
 integration.uas.cliconnection.hosts=[172.31.48.19,172.31.48.20]
+aws-staging.uas.cliconnection.hosts=[10.12.1.248,10.12.2.56]
+aws-integration.uas.cliconnection.hosts=[10.12.1.204,10.12.2.30]
+
 # integration.uas.cliconnection.hosts=[172.31.48.20]
 dev1.uas.cliconnection.hosts=[192.168.56.101]
 dev2.uas.cliconnection.hosts=[127.0.0.1]
 staging.uas.cliconnection.user=root
-aws-staging.uas.cliconnection.user=centos
 integration.uas.cliconnection.user=root
+aws-staging.uas.cliconnection.user=centos
+aws-integration.uas.cliconnection.user=centos
+
 *.uas.cliconnection.password=
 
-aws-staging.uas.cliconnection.keyname=undertone_devops.pem
 staging.uas.cliconnection.keyname=ramplift-rackspace.pem
 integration.uas.cliconnection.keyname=ramplift-rackspace.pem
+aws-staging.uas.cliconnection.keyname=undertone_devops.pem
+aws-integration.uas.cliconnection.keyname=undertone_devops.pem
 
 
 dev1.uas.cliconnection.user=dev
@@ -41,8 +49,8 @@ dev1.uas.cliconnection.keyname=
 # staging.uas.domain=172.31.48.29
 # staging.uas.port=9000
 staging.uas.domain=stgads.undertone.com
-aws-staging.uas.domain=10.12.2.56
-aws-staging.uas.port=9000
+aws-staging.uas.domain=ads-s-us-east-1.undertone.com
+aws-integration.uas.domain=ads-i-us-east-1.undertone.com
 
 # add to your /etc/hosts a line with the ip of your uas to this domain
 dev1.uas.domain=dev1.undertone.com
@@ -51,6 +59,7 @@ dev2.uas.domain=dev2.undertone.com
 # integration.uas.domain=172.31.48.19
 integration.uas.port=9000
 integration.uas.domain=intads.undertone.com
+
 *.uas.port=
 
 
@@ -77,9 +86,12 @@ dev1.ramp.test.lineItemId=[210722]
 staging.user-info.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
 integration.user-info.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
 aws-staging.user-info.couchbase.nodes=[10.12.4.253]
+aws-integration.user-info.couchbase.nodes=[10.12.5.87]
+
 staging.user-history.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
 integration.user-history.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
 aws-staging.user-history.couchbase.nodes=[10.12.4.253]
+aws-integration.user-history.couchbase.nodes=[10.12.5.87]
 
 staging.programmatic.host = services-ramp-staging.ramp-ut.io
 staging.programmatic.port=3003
