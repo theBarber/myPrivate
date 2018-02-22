@@ -25,6 +25,12 @@ public class LineItem implements WithId<Integer> {
 		.append(DateTimeFormatter.ISO_LOCAL_TIME).toFormatter().withZone(ZoneOffset.UTC);
     }
 
+    public LineItem(){}
+
+    public LineItem(Integer id)
+    {
+        ioLineItemId = id;
+    }
     private ZonedDateTime startDate, endDate;
 
     @Override

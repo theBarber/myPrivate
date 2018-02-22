@@ -179,56 +179,57 @@
         }
       }]},
 
-  "Send HBProg request with D first P selected publisher 99999":
+  "Send HBProg request with D first P selected publisher 3697":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b33",
-      "domain": "HBProrgrammatic.com",
+      "domain": "hbprog.com",
       "placementId": "10433394",
-      "publisherId": 99999,
+      "publisherId": 3697,
       "sizes": [
-        [1,2]
+        [1,1]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "10433394",
-        "publisherId" : 99999
+        "publisherId" : 3697
       }
     }]},
 
-  "Send HBProg request with No D, No response from P publisher 99999":
+  "Send HBProg request with No D, No response from P publisher 3697":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b33",
-      "domain": "HBProrgrammatic.com",
+      "domain": "hbprog.com",
       "placementId": "10433394",
-      "publisherId": 99999,
+      "publisherId": 3697,
       "sizes": [
-        [300, 250]
+        [1, 2]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "10433394",
-        "publisherId" : 99999
+        "publisherId" : 3697
       }
     }]},
 
-  "Send HBProg request D selected publisher 99999":
+  "Send HBProg request D selected publisher 3697":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b33",
-      "domain": "HBProrgrammatic.com",
+      "domain": "hbprog.com",
       "placementId": "10433394",
-      "publisherId": 99999,
+      "publisherId": 3697,
       "sizes": [
-        [160, 600]
+        [1, 1]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "10433394",
-        "publisherId" : 99999
+        "publisherId" : 3697
       }
     }]},
+
   "Send HB basic request for publisher 3690":
   {"x-ut-hb-params":[
     {

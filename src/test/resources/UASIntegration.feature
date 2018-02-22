@@ -26,7 +26,7 @@ Scenario: Send an ad request to UAS and parse logs
         And The response has click-url
         When I send impression requests to UAS
         And I sleep for 1 seconds
-		Then I read the latest req log file from uas
+		 Then I read the latest req log file from uas
         Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
         And The field zoneid in the 4 column of the req log is the same as in impression-url
         And The field bannerid in the 5 column of the req log is the same as in impression-url

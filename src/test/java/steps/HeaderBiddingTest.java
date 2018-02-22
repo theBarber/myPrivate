@@ -3,6 +3,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import entities.Zone;
+import infra.module.WithId;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.Assert;
@@ -26,7 +28,7 @@ public class HeaderBiddingTest extends BaseTest {
     public HeaderBiddingTest()
     {
         super();
-        Before(HEADERBIDDINGSAHAR, (scenario) -> {
+        Before(HEADERBIDDING, (scenario) -> {
             try {
                 headerBiddingPostRequests = mapper.readTree(this.getClass().getResourceAsStream(HEADER_BIDDING_SOURCE_FILE_PATH));
             } catch (Exception e) {
@@ -36,7 +38,9 @@ public class HeaderBiddingTest extends BaseTest {
 
         Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
         Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
-        And("all HB responses contains (\\w+) with id (\\w+)",this::responsesContainEntityWithId);
+        And("all HB responses contains (\\w+) with id (\\d+)",this::responsesContainEntityWithId);
+        And("all HB responses contains (\\w+) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
+
     }
 
     private void sendHeaderBiddingSecurePostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams) {
@@ -61,7 +65,7 @@ public class HeaderBiddingTest extends BaseTest {
         sendHeaderBiddingPostRequest(times,scenario,publisherID,domain,null);
     }
 
-    public void responsesContainEntityWithId(String entity, String id) {
+    public void responsesContainEntityWithId(String entity, Integer id) {
 
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             JsonNode responseInJson = null;
@@ -69,11 +73,27 @@ public class HeaderBiddingTest extends BaseTest {
             {
                 responseInJson = mapper.readTree(content);
                 Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
-                Assert.assertEquals(responseInJson.get(0).get(entity).toString(), id);
+                Assert.assertEquals(id.intValue(),responseInJson.get(0).get(entity).intValue());
             }catch (Exception e)
             {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void responsesContainEntityWithName(String entity, String name)
+    {
+        String myEntity;
+        switch (entity) {
+            case "adId":
+                myEntity = "banner";break;
+            case "campaignID":
+                myEntity = "campaign";break;
+            default:
+                myEntity = null;
+        }
+
+        WithId<Integer> withId = sut.getCampaignManager().getterFor(myEntity).apply(name).orElseThrow(() -> new AssertionError("entity wasn't found"));
+        responsesContainEntityWithId(entity, withId.getId());
     }
 }

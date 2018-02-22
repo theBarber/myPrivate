@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import entities.ramp.app.api.*;
+import gherkin.lexer.De;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -27,6 +28,7 @@ import org.apache.http.util.EntityUtils;
 
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 /**
  * created by Sahar
@@ -38,12 +40,14 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private CloseableHttpClient httpclient;
-	private String host;
+	private String appHost;
+	private String serviceHost;
 	private String port;
 
 
-	public RampAppCreateEntitiesManager(String host, String port) {
-		this.host = host;
+	public RampAppCreateEntitiesManager(String serviceHost,String appHost, String port) {
+		this.serviceHost = serviceHost;
+		this.appHost = appHost;
 		this.port = port;
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		List<Header> defaultHeaders = new ArrayList<Header>(){{
@@ -53,11 +57,11 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 				.setDefaultHeaders(defaultHeaders).setDefaultCookieStore(new BasicCookieStore()).build();
 	}
 
-	public CloseableHttpResponse createCampaign(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID, String priority)
+	public CloseableHttpResponse createCampaignRequest(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID, Boolean isServerProgrammatic)
 	{
 		CloseableHttpResponse createCampaignResponse;
-		String url = getServiceAddress("/api/v1/io/campaigns");
-		CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(campaignName, String.valueOf(lineItemId), creativeID, zonesetID,priority);
+		String url = getServicesURL("/api/v1/io/campaigns");
+		CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(campaignName, String.valueOf(lineItemId), creativeID, zonesetID,isServerProgrammatic);
 		CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequest);
 		HttpPost httpPost = new HttpPost(url);
 		try {
@@ -74,6 +78,52 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return createCampaignResponse;
 	}
 
+	public Optional<Campaign> createCampaign(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID, Boolean isServerProgrammatic)
+	{
+		CloseableHttpResponse createCampaignResponse = createCampaignRequest(campaignName,lineItemId,creativeID,zonesetID, isServerProgrammatic);
+		return getCampaignFromResponse(createCampaignResponse,isServerProgrammatic);
+	}
+
+	private Optional<Campaign> getCampaignFromResponse(CloseableHttpResponse createCampaignResponse,Boolean isServerProgrammatic)
+	{
+		Campaign[] tmpCampaign = null;
+
+		try{
+			tmpCampaign  = mapper.readValue(EntityUtils.toString(createCampaignResponse.getEntity()), CampaignsRequest.class).getCampaignsArray();
+
+		}catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		if(tmpCampaign!=null){
+			//sut.write("campaign successfully created!\ncampaign name: "+tmpCampaign[0].getName() + "\ncampaign id: "+ tmpCampaign[0].getId());
+			if(isServerProgrammatic)
+				addBannersFromGetCampaign(tmpCampaign[0]);
+			return Optional.of(tmpCampaign[0]);
+		}
+		else{
+			//sut.write("Error! campaign is not created\n");
+			return Optional.empty();
+		}
+	}
+
+	private void addBannersFromGetCampaign(Campaign Campaign)
+	{
+		CloseableHttpResponse getCampaignResponse = getCampaignRequest(Campaign.getId());
+		Campaign[] tmpCampaign;
+		try{
+			tmpCampaign  = mapper.readValue(EntityUtils.toString(getCampaignResponse.getEntity()), Campaign[].class);
+			Campaign.setBannersFromSet(tmpCampaign[0].getBanners());
+		}catch (IOException IOE)
+		{
+			IOE.printStackTrace();
+		}catch (NullPointerException e)
+		{
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 	private String dateFromNow(Integer daysToAdd) {
 		final Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, daysToAdd);
@@ -81,21 +131,31 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return dateFormat.format(cal.getTime());
 	}
 
-	private String getServiceAddress(String service)
+	private String getServicesURL(String service)
 	{
-		return  "http://" + host + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("") + service;
+		return  "http://" + serviceHost + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("") + service;
 	}
 
-	private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName,String lineItemId, Integer creativeID, Integer zonesetID,String priority)
+	private String getAppURL(String service)
+	{
+		return  "http://" + appHost + service;
+	}
+
+	private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName,String lineItemId, Integer creativeID_Or_DealID, Integer zonesetID,Boolean isServerProgrammatic)
 	{
 		Zonesets zonesets = new Zonesets();
 		zonesets.setInclude(new ArrayList<Integer>(){{add(zonesetID);}});
-		return new CreateCampaignRequest(campaignName,lineItemId,
-				zonesets, new ArrayList<Integer>(){{add(creativeID);}},
-				dateFromNow(-1),dateFromNow(1),priority);
+		if(!isServerProgrammatic)
+			return new CreateCampaignRequest(campaignName,lineItemId,
+					zonesets, new ArrayList<Integer>(){{add(creativeID_Or_DealID);}},
+					dateFromNow(-1),dateFromNow(1));
+		else
+			return new CreateCampaignRequest(campaignName,lineItemId,
+					zonesets, creativeID_Or_DealID,
+					dateFromNow(-1),dateFromNow(1));
 	}
 
-	public void printEntityContent(HttpEntity entity)
+	private void printEntityContent(HttpEntity entity)
 	{
 		try {
 			BufferedReader reqLineReader = new BufferedReader(new InputStreamReader(entity.getContent()));
@@ -111,7 +171,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 	public CloseableHttpResponse getCampaignRequest(Integer campaignID)
 	{
 		CloseableHttpResponse getCampaignResponse;
-		String url = getServiceAddress("/api/v1/io/campaigns?campaignIds="+campaignID);
+		String url = getServicesURL("/api/v1/io/campaigns?campaignIds="+campaignID);
 		HttpGet httpGet = new HttpGet(url);
 		try {
 			getCampaignResponse = httpclient.execute(httpGet);
@@ -123,15 +183,15 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return getCampaignResponse;
 	}
 
-	public Zone createZone(String zoneName, String adUnitID, String limitation,String webSectionID, String affiliateId)
+	public Optional<Zone> createZone(String zoneName, String adUnitID, String limitation,String webSectionID, String affiliateId)
 	{
 		CloseableHttpResponse createZoneResponse = createZoneRequest(zoneName,adUnitID,limitation,webSectionID,affiliateId);
-		Zone zone = getCreatedZoneFromResponse(createZoneResponse);
-		zone.set(zoneName,adUnitID,limitation,webSectionID);
+		Optional<Zone> zone = getCreatedZoneFromResponse(createZoneResponse);
+		zone.ifPresent(zone1 -> zone.get().set(zoneName,adUnitID,limitation,webSectionID));
 		return zone;
 	}
 
-	private Zone getCreatedZoneFromResponse(CloseableHttpResponse createZoneResponse)
+	private Optional<Zone> getCreatedZoneFromResponse(CloseableHttpResponse createZoneResponse)
 	{
 		Zone zone = null;
 		try{
@@ -141,14 +201,17 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		{
 			e.printStackTrace();
 		}
-		System.out.println("zone created successfully! zone id is: "+ zone.getId());
-		return zone;
-	}
+		//System.out.println("zone created successfully! zone id is: "+ zone.getId());
+		if(zone!=null)
+			return Optional.of(zone);
+		else
+			return Optional.empty();
+}
 
 	private CloseableHttpResponse createZoneRequest(String zoneName, String adunit, String limitation,String webSectionID,String affiliateId)
 	{
 		CloseableHttpResponse createZoneResponse;
-		String url = getServiceAddress("/test/zones/zonesets/zones");
+		String url = getServicesURL("/test/zones/zonesets/zones");
 		CreateZoneRequest createZoneRequest = new CreateZoneRequest(zoneName,adunit,limitation,webSectionID,dateFromNow(0),"","12",affiliateId);
 
 		HttpPost httpPost = new HttpPost(url);
@@ -166,15 +229,15 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return createZoneResponse;
 	}
 
-	public ZoneSet createZoneset(String zonesetName, Set<Zone> zones,String agencyId, String zonesetType)
+	public Optional<ZoneSet> createZoneset(String zonesetName, Set<Zone> zones,String agencyId, String zonesetType)
 	{
 		CloseableHttpResponse createZonesetResponse = createZonesetRequest(zonesetName,zones,agencyId,zonesetType);
-		ZoneSet zoneSet = getCreatedZoneSetFromResponse(createZonesetResponse);
-		zoneSet.setName(zonesetName);
+		Optional<ZoneSet> zoneSet = getCreatedZoneSetFromResponse(createZonesetResponse);
+		zoneSet.ifPresent(zoneSet1 -> zoneSet1.setName(zonesetName));
 		return zoneSet;
 	}
 
-	private ZoneSet getCreatedZoneSetFromResponse(CloseableHttpResponse createZoneSetResponse) {
+	private Optional<ZoneSet> getCreatedZoneSetFromResponse(CloseableHttpResponse createZoneSetResponse) {
 		ZoneSet zoneSet = null;
 		try{
 			zoneSet  = mapper.readValue(EntityUtils.toString(createZoneSetResponse.getEntity()), ZoneSet.class);
@@ -183,13 +246,16 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		{
 			e.printStackTrace();
 		}
-		System.out.println("zoneset created successfully! zoneset id is: "+ zoneSet.getId());
-		return zoneSet;
+		if(zoneSet!=null)
+			return Optional.of(zoneSet);
+		else
+			return Optional.empty();
+		//System.out.println("zoneset created successfully! zoneset id is: "+ zoneSet.getId());
 	}
 	private CloseableHttpResponse createZonesetRequest(String zonesetName, Set<Zone> zones,String agencyId, String zonesetType)
 	{
 		CloseableHttpResponse createZonesetResponse;
-		String url = getServiceAddress("/test/zones/zonesets");
+		String url = getServicesURL("/test/zones/zonesets");
 		CreateZoneSetRequest createZoneSetRequest = new CreateZoneSetRequest(zonesetName, agencyId, zonesetType, zones);
 		HttpPost httpPost = new HttpPost(url);
 		try {
@@ -206,6 +272,85 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return createZonesetResponse;
 	}
 
+	private CloseableHttpResponse createDealRequest(String dealName,Integer dspID,Integer floorPrice,Integer dealType,List<Integer> adUnitId, Integer IO)
+	{
+		CloseableHttpResponse dealResponse;
+		String url = getAppURL("/io/"+IO+"/deal");
+		DealRequest dealRequest = new DealRequest(new Deal(0,dealName,dspID,floorPrice,dealType,adUnitId));
+		HttpPost httpPost = new HttpPost(url);
+		try {
+			HttpEntity entity = new StringEntity(mapper.writeValueAsString(dealRequest), ContentType.APPLICATION_JSON);
+			httpPost.setEntity(entity);
+			printEntityContent(entity);
+			dealResponse = httpclient.execute(httpPost);
+		}catch (IOException e)
+		{
+			e.printStackTrace();
+			throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+		}
+		assertThat("Status code of create campaign request", dealResponse.getStatusLine().getStatusCode(), is(200));
+		return dealResponse;
+	}
+
+
+	public Deal createDeal(String dealName,Integer dspID,Integer floorPrice,Integer dealType,List<Integer> adUnitId, Integer IO)
+	{
+		CloseableHttpResponse dealResponse = createDealRequest(dealName,dspID,floorPrice,dealType,adUnitId,IO);
+		return getDealFromResponse(dealResponse);
+	}
+
+	public Creative createCreative(String creativeName, Integer IO, Integer adUnitID, String htmlTemplate)
+	{
+		CloseableHttpResponse creativeResponse = createCreativeRequest(creativeName,IO,adUnitID,htmlTemplate);
+		return getCreativeFromREsponse(creativeResponse);
+	}
+
+	private Creative getCreativeFromREsponse(CloseableHttpResponse creativeResponse) {
+		Creative creative = null;
+		try{
+			creative  = mapper.readValue(EntityUtils.toString(creativeResponse.getEntity()), Creative.class);
+
+		}catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println("Creative created successfully! Creative id is: "+ creative.getId());
+		return creative;
+
+	}
+
+	private Deal getDealFromResponse(CloseableHttpResponse dealResponse) {
+		Deal deal = null;
+		try{
+			deal  = mapper.readValue(EntityUtils.toString(dealResponse.getEntity()), Deal.class);
+
+		}catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println("Deal created successfully! deal id is: "+ deal.getDealId());
+		return deal;
+	}
+
+	public CloseableHttpResponse createCreativeRequest(String creativeName, Integer IO, Integer adUnitID, String htmlTemplate) {
+		CloseableHttpResponse creativeResponse;
+		String url = getAppURL("/io/"+IO+"/creative");
+		CreativeRequest creativeRequest = new CreativeRequest(creativeName,adUnitID,htmlTemplate);
+		CreativeRequestWrapper creativeRequestWrapper = new CreativeRequestWrapper(creativeRequest);
+		HttpPost httpPost = new HttpPost(url);
+		try {
+			HttpEntity entity = new StringEntity(mapper.writeValueAsString(creativeRequestWrapper), ContentType.APPLICATION_JSON);
+			httpPost.setEntity(entity);
+			printEntityContent(entity);
+			creativeResponse = httpclient.execute(httpPost);
+		}catch (IOException e)
+		{
+			e.printStackTrace();
+			throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+		}
+		assertThat("Status code of create campaign request", creativeResponse.getStatusLine().getStatusCode(), is(200));
+		return creativeResponse;
+	}
 
 	@Override
 	public void close() throws Exception {

@@ -50,11 +50,13 @@ dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 
 integration.banner_cache.file_path =ramp-optimization-integration/entities_data/banners_meta_data.json
 
-staging.ramp.app.host=services-ramp-staging.ramp-ut.io
+staging.ramp.app.host1=services-ramp-staging.ramp-ut.io
+staging.ramp.app.host2=staging.ramp-ut.io
 staging.ramp.app.port=3003
 staging.ramp.test.lineItemId=210722
 
-integration.ramp.app.host=services-ramp-integration.ramp-ut.io
+integration.ramp.app.host1=services-ramp-integration.ramp-ut.io
+integration.ramp.app.host2=integration.ramp-ut.io
 integration.ramp.app.port=3003
 integration.ramp.test.lineItemId=[210722]
 

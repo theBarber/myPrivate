@@ -393,7 +393,7 @@ public class UASIntegrationTest extends BaseTest {
             impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
               url = (url.contains("stid=")) ? url.replaceAll("&stid=0", "&stid=999") : url.concat("&stid=999");
               try {
-                  sut.write("the impression url sent is: " + url);
+                  //sut.write("the impression url sent is: " + url);
                 HttpResponse response = httpclient.execute(new HttpGet(url),ctx);
                 int sc = response.getStatusLine().getStatusCode();
                 if (sc == 204) {
