@@ -13,11 +13,12 @@ public class CreateCampaignRequest {
     private String lineItemId;
     private Zonesets zonesets;
     private List<Integer> selectedCreativeIds;
+    private Integer selectedDealId;
     private String startDateTime;
     private String endDateTime;
-    private String priority;
 
-    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeIds, String startDateTime, String endDateTime,String priority)
+
+    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeIds, String startDateTime, String endDateTime)
     {
         this.campaignName = campaignName;
         this.lineItemId = lineItemId;
@@ -25,8 +26,28 @@ public class CreateCampaignRequest {
         this.selectedCreativeIds = selectedCreativeIds;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
-        this.priority = priority;
     }
+    //programmatic campaign
+    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, Integer selectedDealId, String startDateTime, String endDateTime)
+    {
+        this.campaignName = campaignName;
+        this.lineItemId = lineItemId;
+        this.zonesets = zonesets;
+        this.selectedDealId = selectedDealId;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+    }
+
+
+    @JsonProperty("selectedDealId")
+    public Integer getSelectedDealId() {
+        return selectedDealId;
+    }
+    @JsonProperty("selectedDealId")
+    public void setSelectedDealId(Integer selectedDealId) {
+        this.selectedDealId = selectedDealId;
+    }
+
     @JsonProperty("campaignName")
     public String getCampaignName() {
         return campaignName;
@@ -84,12 +105,4 @@ public class CreateCampaignRequest {
         this.endDateTime = endDateTime;
     }
 
-    @JsonProperty("priority")
-    public String getPriority() {
-        return priority;
-    }
-    @JsonProperty("priority")
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
 }

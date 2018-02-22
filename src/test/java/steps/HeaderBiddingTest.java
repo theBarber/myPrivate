@@ -26,7 +26,7 @@ public class HeaderBiddingTest extends BaseTest {
     public HeaderBiddingTest()
     {
         super();
-        Before(HEADERBIDDINGSAHAR, (scenario) -> {
+        Before(HEADERBIDDING, (scenario) -> {
             try {
                 headerBiddingPostRequests = mapper.readTree(this.getClass().getResourceAsStream(HEADER_BIDDING_SOURCE_FILE_PATH));
             } catch (Exception e) {
@@ -69,7 +69,7 @@ public class HeaderBiddingTest extends BaseTest {
             {
                 responseInJson = mapper.readTree(content);
                 Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
-                Assert.assertEquals(responseInJson.get(0).get(entity).toString(), id);
+                Assert.assertEquals(id,responseInJson.get(0).get(entity).toString());
             }catch (Exception e)
             {
                 e.printStackTrace();

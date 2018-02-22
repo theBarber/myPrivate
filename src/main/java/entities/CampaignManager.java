@@ -1,6 +1,7 @@
 package entities;
 
 import infra.ParameterProvider;
+import infra.assertion.Assert;
 import infra.module.Named;
 import infra.module.WithId;
 
@@ -34,6 +35,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	{
 		return io.stream().flatMap(x -> x.lineItems()).filter(WithId.idIs(LineItemID)).findFirst();
 	}
+
 	public Optional<Campaign> getCampaign(String byName) {
 
 	  return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().filter(Named.nameIs(byName))).findFirst();
@@ -59,6 +61,37 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	public Optional<ZoneSet> getZoneset(String byName) {
 		return zonesets.stream().filter(Named.nameIs(byName)).findFirst();
 	}
+
+	private Optional<IO> getIO(Integer byId)
+	{
+		return io.stream().filter(WithId.idIs(byId)).findFirst();
+	}
+
+
+	public void insertCampaignToIOMap(Campaign campaign, Integer lineItemID, Integer io_id) {
+		Optional<IO> io_O;
+    	Optional<LineItem> li_O;
+
+    	if(getCampaign(campaign.getName()).isPresent())
+    		throw new AssertionError("campaign is already exist!");
+    	else if((li_O = getLineItem(lineItemID)).isPresent())
+			li_O.get().addCampaign(campaign);
+    	else
+    	{
+    		LineItem li = new LineItem(lineItemID);
+    		li.addCampaign(campaign);
+			if((io_O = getIO(io_id)).isPresent())
+				io_O.get().addLineItem(li);
+			else{
+				IO io = new IO(io_id);
+				io.addLineItem(li);
+				this.io = new ArrayList<>(this.io);
+				this.io.add(io);
+			}
+		}
+	}
+
+
 
 
 	// this is not javadoc, comment out
@@ -191,4 +224,6 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	public String className() {
 		return "workflow";
 	}
+
+
 }

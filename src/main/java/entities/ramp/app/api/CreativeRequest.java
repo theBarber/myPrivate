@@ -2,9 +2,19 @@ package entities.ramp.app.api;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CreativeRequest {
+
+    public CreativeRequest(){}
+
+    public CreativeRequest(String creativeName, int adUnitId,String htmlTemplate) {
+        this.creativeName = creativeName;
+        this.htmlTemplate = htmlTemplate;
+        this.adUnitId = adUnitId;
+    }
+
     @JsonProperty("creativeName")
     public String creativeName;
 
@@ -33,7 +43,7 @@ public class CreativeRequest {
     public int htmlCache = 0;
 
     @JsonProperty("adUnitId")
-    public int adUnitId = 1;
+    public int adUnitId;
 
     @JsonProperty("appendCode")
     public String appendCode = "";

@@ -18,9 +18,11 @@ Scenario: 1. Basic DT flow
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {DT-SS-Test-1-campaign-high-priority-banner-1} 50% of the time
     And The impressionUrl has bannerid field matching the id of the banner named {DT-PGM-Test-1-campaign-high-priority-banner-1} 50% of the time
+    And I sleep for 5 seconds
     Then i send 1 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1}
     And The response contains script
     And The responses has impression-urls
+    And I sleep for 5 seconds
     And The impressionUrl has bannerid field matching the id of the banner named {DT-PGC-Test-1-campaign-low-priority-banner-1} 100% of the time
     Then i send 1 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1}
     And The responses are passback

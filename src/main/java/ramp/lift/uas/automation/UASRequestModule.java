@@ -395,7 +395,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
       synchronizedResponses.add(getRequest(url));
       try {
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(5);
       } catch (InterruptedException e) {
         fail(e.getMessage());
       }

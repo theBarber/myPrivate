@@ -1,0 +1,35 @@
+{
+    "see through non-programmatic": {
+      "see through": {
+        "io": 75396,
+        "io_lineItem": 210722,
+        "creative": 204,
+        "adUnit": 83,
+        "publisher": 2434,
+        "web_section_id": 4737,
+        "po_line_item": 17116
+      }
+    },
+    "see through server programmatic": {
+      "see through": {
+        "io": 407981,
+        "io_lineItem": 224533,
+        "dealID": 1003,
+        "adUnit": 83,
+        "publisher": 2434,
+        "web_section_id": 4737,
+        "po_line_item": 17116
+      }
+    },
+  "see through client programmatic": {
+    "see through": {
+      "io": 407981,
+      "io_lineItem": 224810,
+      "creative": 6497,
+      "adUnit": 83,
+      "publisher": 2434,
+      "web_section_id": 4737,
+      "po_line_item": 17116
+    }
+  }
+ }
