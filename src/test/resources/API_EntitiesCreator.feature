@@ -15,11 +15,16 @@ Feature: API entities creator - using ramp-app APIs and sql scripts
         |campaign-API-1-c   |75396         |210722     |false                  |204              |zone-zoneset-API-1-a        |[[[1,"!~",2601]]]    |83         |4737             |2434           |17116             |
 
     Scenario: update campaigns
-      Given i update campaigns data
-        |Campaign ID       |status      |Priority      |units      |
-        |304676            |1           |-1            |-1         |
+      Given i update campaigns data by id
+        |ID      |status      |Priority      |units      |
+        |304676  |1           |-1            |-1         |
 
-    Scenario: create deals
+  Scenario: update campaigns
+    Given i update campaigns data by name
+      |entity name/ID    |status      |Priority      |units      |
+      |campaign-API-1-a  |1           |-1            |-1         |
+
+  Scenario: create deals
         Given i create new Deals
           |Deal Name       |DSP ID       | FloorPrice     |Deal type      |Ad Unit ID     |IO           |
           |ramp-lift-test  |1            |-1              | 2             |58             |407981       |

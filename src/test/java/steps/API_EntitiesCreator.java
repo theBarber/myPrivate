@@ -31,15 +31,13 @@ public class API_EntitiesCreator extends BaseTest{
 
     private ObjectMapper mapper = new ObjectMapper();
 
-
-
     public API_EntitiesCreator()
     {
         super();
         Then("i create new zone named \\{([^}]+)\\} with limitation \\{([^}]+)\\} with adUnitId (\\w+) and web_section id (\\d+) with affiliateId (\\d+) with po_line_item_id (\\d+)",this::createNewZoneAndZoneset);
         And("i create new campaigns with existing zoneset",this::createMultipleCampaigns);
         And("i create new campaigns with new zoneset",this::createMultipleCampaignsWithNewZoneset);
-        And("i update campaigns data",this::updateCampaigns);
+        And("i update (campaigns|zones) data by (id|name)",this::updateEntityData);
         And("i create new Deals",this::createMultipleDeals);
         And("i create new creatives",this::createMultipleCreatives);
         And("i create campaigns from Template",this::createMultipleCampaignsFromTemplate);
@@ -176,7 +174,7 @@ public class API_EntitiesCreator extends BaseTest{
         sut.write("zone created successfully! zone id is:"+ zone.getId());
     }
 
-    private void updateCampaigns(DataTable campaigns)
+    private void updateCampaignsWithId(DataTable campaigns)
     {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
@@ -186,6 +184,23 @@ public class API_EntitiesCreator extends BaseTest{
             for(int j=1;j<campaign.size();j++)
             {
                 updateCampaign(Integer.valueOf(campaign.get(0)),campaignsList.get(0).get(j),campaign.get(j));
+            }
+        }
+    }
+
+    private void updateEntityData(String entity, String updateBy, DataTable entities)
+    {
+        List<List<String>> EntityList = entities.asLists(String.class);
+        List<String> entityData;
+
+        for(int i=1;i<EntityList .size();i++)
+        {
+            entityData = EntityList.get(i);
+            for(int j=1;j<entityData.size();j++)
+            {
+
+                // Integer campaignId = sut.getCampaignManager().getCampaign(campaign.get(0)).orElseThrow(()->new AssertionError("campaign name wasn't found")).getId();
+                //updateCampaign(campaignId,campaignsList.get(0).get(j),campaign.get(j));
             }
         }
     }
