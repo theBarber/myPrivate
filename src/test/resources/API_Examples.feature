@@ -14,14 +14,14 @@ Feature: API entities creator - using ramp-app APIs and sql scripts
         |Campaign Name      |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal    |Zoneset-zone Name           |limitation           |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-API-1-c   |75396         |210722     |false                  |204              |zone-zoneset-API-1-a        |[[[1,"!~",2601]]]    |83         |4737             |2434           |17116             |
 
-    Scenario: update campaigns
-      Given i update campaigns data by id
-        |ID      |status      |Priority      |units      |
-        |304676  |1           |-1            |-1         |
+    Scenario: update entity data
+      Given i update campaign data by name
+        |name                 |status      |
+        |campaign-API-1-a     |1           |
 
-  Scenario: update campaigns
-    Given i update campaigns data by name
-      |entity name/ID    |status      |Priority      |units      |
+   Scenario: update campaigns
+    Given i update campaign data by name
+      |entity name       |status      |Priority      |units      |
       |campaign-API-1-a  |1           |-1            |-1         |
 
   Scenario: create deals

@@ -64,6 +64,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(campaignName, String.valueOf(lineItemId), creativeID, zonesetID,isServerProgrammatic);
 		CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequest);
 		HttpPost httpPost = new HttpPost(url);
+		System.out.println("---------------------"+url);
 		try {
 			HttpEntity entity = new StringEntity(mapper.writeValueAsString(requestWrapper), ContentType.APPLICATION_JSON);
 			httpPost.setEntity(entity);
