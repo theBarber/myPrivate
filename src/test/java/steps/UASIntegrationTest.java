@@ -185,9 +185,9 @@ public class UASIntegrationTest extends BaseTest {
 
           String idFieldValue = splitQuery(impressionUrl).get("id").get(0);
             //---------------------checks-------------------------
-            Stream<List<String>> steamList = sut.logFor(logType).actual();
-            sut.write("The expected field value of the logType "+logType+" is: " +  idFieldValue);
-            steamList.forEach(m-> sut.write("The actual field value of the logType "+logType+" is: "+ m.get(column)));
+//            Stream<List<String>> steamList = sut.logFor(logType).actual();
+//            sut.write("The expected field value of the logType "+logType+" is: " +  idFieldValue);
+//            steamList.forEach(m-> sut.write("The actual field value of the logType "+logType+" is: "+ m.get(column)));
             //---------------------checks-------------------------
           sut.logFor(logType).filter(raw -> idFieldValue.equals(raw.get(column)));
           assertThat("the log " + logType + " should contain a line with " + idFieldValue + " at column "

@@ -13,12 +13,9 @@ import infra.utils.SqlWorkflowUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.junit.runner.RunWith;
-
-
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.*;
-
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.not;
