@@ -85,7 +85,7 @@ public class HeaderBiddingTest extends BaseTest {
     {
         String myEntity;
         switch (entity.toLowerCase()) {
-            case "adId":
+            case "adid":
                 myEntity = "banner";break;
             case "campaignid":
                 myEntity = "campaign";break;

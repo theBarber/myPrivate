@@ -386,6 +386,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
    reset();
     for (; times > 0; times--) {
       synchronizedResponses.add(postRequest(url,body));
+      try {
+        TimeUnit.SECONDS.sleep(5);
+      } catch (InterruptedException e) {
+        fail(e.getMessage());
+      }
     }
   }
 

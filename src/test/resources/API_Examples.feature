@@ -3,21 +3,41 @@
 @API
 Feature: API entities creator - using ramp-app APIs and sql scripts
 
+
     Scenario: create campaign with existing zoneset (and zone linked to it)
       Given i create new campaigns with existing zoneset
         |Campaign Name      |IO        |LineItem   |isServerProgrammatic?   |Creative\Deal   |Zoneset ID   |
-        |campaign-API-1-a   |407981    |224531     |true                    |10002           |68341        |
-        |campaign-API-1-b   |75396     |210722     |false                   |204             |68341        |
+        |campaign-API-1-a   |75396     |225323     |false                   |1068            |68626        |
+        |campaign-API-1-b   |75396     |211456     |false                   |1068            |68626        |
 
     Scenario: create campaign with new zoneset (and zone linked to it)
       Given i create new campaigns with new zoneset
         |Campaign Name      |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal    |Zoneset-zone Name           |limitation           |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-API-1-c   |75396         |210722     |false                  |204              |zone-zoneset-API-1-a        |[[[1,"!~",2601]]]    |83         |4737             |2434           |17116             |
 
-    Scenario: update entity data
+      And i create new campaigns with zoneset by name
+        |Campaign Name                            |IO        |LineItem   |isServerProgrammatic?   |Creative\Deal   |Zoneset Name                            |
+        |campaign-DT-Screen-Shift-2               |75396     |197418     |false                   |86              |zone-zoneset-DT-Screen-Shift            |
+        |campaign-DT-Smartphone-interstitial-2    |75396     |211456     |false                   |210             |zone-zoneset-DT-Smartphone-interstitial |
+
+  Scenario: update entity data
       Given i update campaign data by name
-        |name                 |status      |
-        |campaign-API-1-a     |1           |
+        |name                 |status      |units|
+        |campaign-API-1-a     |0           |-1   |
+        |campaign-API-1-b     |0           |-1   |
+
+
+  Scenario: update entity data
+    Given i update campaign data by id
+      |id                 |status      |units|
+      |305013             |1           |-1   |
+      |305014             |1           |-1   |
+
+
+  Scenario: update entity data
+    Given i update zone data by id
+      |name                 |status      |
+      |zone-API-1-a         |1           |
 
    Scenario: update campaigns
     Given i update campaign data by name

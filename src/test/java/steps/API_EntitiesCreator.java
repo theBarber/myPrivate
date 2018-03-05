@@ -12,7 +12,11 @@ import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
+import org.rundeck.api.RundeckClient;
+import org.rundeck.api.domain.RundeckJob;
+
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.*;
@@ -23,12 +27,11 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 @CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/API_EntitiesCreator_$TIMESTAMP$.json"})
+        "infra.RotatingJSONFormatter:target/cucumber/API_Examples_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
 public class API_EntitiesCreator extends BaseTest{
     final private String CREATIVES_SOURCE_FILE_PATH = "/input_files/creativesTemplates.json";
     final private String CAMPAIGN_PATTERN_SOURCE_FILE_PATH = "/input_files/Templates.json";
-
     private ObjectMapper mapper = new ObjectMapper();
 
     public API_EntitiesCreator()
@@ -36,6 +39,7 @@ public class API_EntitiesCreator extends BaseTest{
         super();
         Then("i create new zone named \\{([^}]+)\\} with limitation \\{([^}]+)\\} with adUnitId (\\w+) and web_section id (\\d+) with affiliateId (\\d+) with po_line_item_id (\\d+)",this::createNewZoneAndZoneset);
         And("i create new campaigns with existing zoneset",this::createMultipleCampaigns);
+        And("i create new campaigns with zoneset by name",this::createMultipleCampaignsWithZoneName);
         And("i create new campaigns with new zoneset",this::createMultipleCampaignsWithNewZoneset);
         And("i update (campaign|zone) data by (id|name)",this::updateEntityData);
         And("i create new Deals",this::createMultipleDeals);
@@ -48,6 +52,19 @@ public class API_EntitiesCreator extends BaseTest{
         And("I update last created campaign named \\{([^}]+)\\} (\\w+) to be \\{([^}]+)\\} in the DB", this::updateLastCreatedCampaignDB);
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
+    }
+
+    private void createMultipleCampaignsWithZoneName(DataTable campaigns)
+    {
+        List<List<String>> campaignsList = campaigns.asLists(String.class);
+        List<String> campaign;
+        Integer zonesetId;
+        for(int i=1;i<campaignsList.size();i++)
+        {
+            campaign = campaignsList.get(i);
+            zonesetId = sut.getCampaignManager().getZoneset(campaign.get(5)).orElseThrow(()->new AssertionError("zoneset were not found")).getId();
+            createCampaign(campaign.get(0),Integer.valueOf(campaign.get(1)),Integer.valueOf(campaign.get(2)),Boolean.valueOf(campaign.get(3)),Integer.valueOf(campaign.get(4)),zonesetId);
+        }
     }
 
     private void createMultipleCampaigns(DataTable campaigns)
@@ -204,8 +221,9 @@ public class API_EntitiesCreator extends BaseTest{
     private void createCampaign(String campaignName, Integer IO_id, Integer lineItemId,Boolean isServerProgrammatic, Integer creativeID_Or_DealID,Integer zonesetID) {
         Optional<Campaign> createdCampaign = sut.getRampAppCreateEntitiesManager().createCampaign(campaignName,lineItemId, creativeID_Or_DealID, zonesetID,isServerProgrammatic);
 
-        if(!createdCampaign.isPresent())
+        if(!createdCampaign.isPresent()){
             throw new AssertionError("Error: campaign wasn't created!");
+        }
         else
         {
             insertCampaignToIOMap(createdCampaign.get(),IO_id,lineItemId);

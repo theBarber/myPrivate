@@ -30,20 +30,15 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.sun.org.apache.xpath.internal.SourceTreeManager;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
 
 import co.unruly.matchers.OptionalMatchers;
@@ -58,7 +53,6 @@ import infra.support.StringUtils;
 import infra.utils.HttpContentTest;
 import ramp.lift.uas.automation.UASRequestModule;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 /**
  * Created by noam on 29/09/16.

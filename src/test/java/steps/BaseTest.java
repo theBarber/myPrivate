@@ -37,6 +37,7 @@ public class BaseTest implements En {
   protected final String[] HEADERBIDDING = new String[] {"@HeaderBidding"};
   protected final String[] API = new String[] {"@API"};
 
+
   //protected com.rabbitmq.client.Connection rabbitClientConnection;
   //protected ConnectionFactory connectionFactory = null;
 
@@ -49,6 +50,7 @@ public class BaseTest implements En {
 
   public BaseTest() {
     environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
+//    environmentName ="integration";
     String environmentNameConfigPrefix = environmentName + ".";
     String allEnvironmentsNameDefaultConfigPrefix = "*.";
     String allEnvironmentsNameOverrideConfigPrefix = "-.";
