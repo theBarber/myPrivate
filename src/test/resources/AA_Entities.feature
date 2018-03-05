@@ -22,6 +22,9 @@ Feature: Entities for tests
 #        |campaign-DT-SI-1-t-1    |75396    |211456     |false                  |210             |zone-zoneset-DT-SI-t-1   |[]            |61         |14509            |3701           |66125             |
 #        |campaign-DT-PGC-2-t-1   |75396    |222908     |false                  |1068            |zone-zoneset-DT-PGC-t-1  |[]            |75         |14509            |3701           |66126             |
         |campaign-DT-SS-1-t-2    |75396    |197418     |false                  |86              |zone-zoneset-DT-SS-t-2   |[]            |69         |14509            |3701           |66124             |
+        |campaign-DT-SI-2-t-2    |75396    |211456     |false                  |210             |zone-zoneset-DT-SI-t-2   |[]            |61         |14509            |3701           |66125             |
+        |campaign-DT-PGC-3-t-2   |75396    |222908     |false                  |1068            |zone-zoneset-DT-PGC-t-2  |[]            |75         |14509            |3701           |66126             |
+
 
       And i create new campaigns with zoneset by name
         |Campaign Name          |IO        |LineItem   |isServerProgrammatic?   |Creative\Deal   |Zoneset Name           |
@@ -30,11 +33,15 @@ Feature: Entities for tests
 
       And i update campaign data by name
         |Campaign Name         |status      |Priority      |units      |limitation|campaign_delivery_method|
-        |campaign-DT-SS-1-t-1  |0           |-2            |-1         |[]        |1                       |
-        |campaign-DT-SI-2-t-1  |0           |-1            |-1         |[]        |2                       |
-        |campaign-DT-SI-1-t-1  |0           |-2            |-1         |[]        |1                       |
-        |campaign-DT-SI-2-t-1  |0           |-1            |-1         |[]        |2                       |
-        |campaign-DT-PGC-2-t-1 |0           |-1            |-1         |[]        |2                       |
+#        |campaign-DT-SS-1-t-1  |0           |-2            |-1         |[]        |1                       |
+#        |campaign-DT-SI-2-t-1  |0           |-1            |-1         |[]        |2                       |
+#        |campaign-DT-SI-1-t-1  |0           |-2            |-1         |[]        |1                       |
+#        |campaign-DT-SI-2-t-1  |0           |-1            |-1         |[]        |2                       |
+#        |campaign-DT-PGC-2-t-1 |0           |-1            |-1         |[]        |2                       |
+        |campaign-DT-SS-1-t-2  |0           |-2            |-1         |[]        |1                       |
+        |campaign-DT-SI-2-t-2  |0           |-1            |-1         |[]        |2                       |
+        |campaign-DT-PGC-3-t-2 |0           |1             |-1         |[]        |1                       |
+
 
   Scenario: refresh cache
     And I refresh zone cache

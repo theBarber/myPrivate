@@ -78,11 +78,11 @@ Scenario:3. Basic DT logic with zone level filtering
 
   Scenario:3. Basic DT logic with zone level filtering
     Given I add cookie UTID with random value to my requests to uas
-    Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com}
+    Then i send 2 times Dynamic Tag synchronized ad request to UAS for publisher 3675 with domain {dynamic3.com}
     And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {DT-PGM-Test-2-campaign-low-priority-banner-1} 100% of the time
-    Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&unlimited=1}
+    Then i send 2 times Dynamic Tag synchronized ad request to UAS for publisher 3675 with domain {dynamic3.com&unlimited=1}
     And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {DT-PGM-Test-2-campaign-high-priority-banner-1} 100% of the time
