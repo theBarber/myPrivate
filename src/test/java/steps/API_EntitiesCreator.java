@@ -12,10 +12,8 @@ import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
-import org.rundeck.api.RundeckClient;
-import org.rundeck.api.domain.RundeckJob;
+
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
