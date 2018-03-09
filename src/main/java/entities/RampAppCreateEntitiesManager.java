@@ -56,15 +56,13 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		httpclient = HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(100000).build())
 				.setDefaultHeaders(defaultHeaders).setDefaultCookieStore(new BasicCookieStore()).build();
 	}
-
-	public CloseableHttpResponse createCampaignRequest(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID, Boolean isServerProgrammatic)
+// creating campaign with Required fields
+	private CloseableHttpResponse createCampaignRequest(CreateCampaignsRequestWrapper requestWrapper)
 	{
 		CloseableHttpResponse createCampaignResponse;
 		String url = getServicesURL("/api/v1/io/campaigns");
-		CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(campaignName, String.valueOf(lineItemId), creativeID, zonesetID,isServerProgrammatic);
-		CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequest);
 		HttpPost httpPost = new HttpPost(url);
-		System.out.println("---------------------"+url);
+		//System.out.println("---------------------"+url);
 		try {
 			HttpEntity entity = new StringEntity(mapper.writeValueAsString(requestWrapper), ContentType.APPLICATION_JSON);
 			httpPost.setEntity(entity);
@@ -79,9 +77,21 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return createCampaignResponse;
 	}
 
-	public Optional<Campaign> createCampaign(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID, Boolean isServerProgrammatic)
+	/*public Optional<Campaign> createCampaignWithDomains(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID, Boolean isServerProgrammatic,List<String>domain_include, List<String>domain_exclude)
 	{
-		CloseableHttpResponse createCampaignResponse = createCampaignRequest(campaignName,lineItemId,creativeID,zonesetID, isServerProgrammatic);
+		CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(campaignName, String.valueOf(lineItemId), creativeID, zonesetID,isServerProgrammatic);
+		SupplySources supplySources = new SupplySources(domain_include,domain_exclude);
+		createCampaignRequest.setSupplySources(supplySources);
+		CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequest);
+		CloseableHttpResponse createCampaignResponse = createCampaignRequest(requestWrapper);
+		return getCampaignFromResponse(createCampaignResponse,isServerProgrammatic);
+	}*/
+
+	public Optional<Campaign> createCampaign(CreateCampaignRequest createCampaignRequest,Boolean isServerProgrammatic)
+	{
+		//CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(campaignName, String.valueOf(lineItemId), creativeID, zonesetID,isServerProgrammatic);
+		CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequest);
+		CloseableHttpResponse createCampaignResponse = createCampaignRequest(requestWrapper);
 		return getCampaignFromResponse(createCampaignResponse,isServerProgrammatic);
 	}
 
@@ -140,20 +150,6 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 	private String getAppURL(String service)
 	{
 		return  "http://" + appHost + service;
-	}
-
-	private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName,String lineItemId, Integer creativeID_Or_DealID, Integer zonesetID,Boolean isServerProgrammatic)
-	{
-		Zonesets zonesets = new Zonesets();
-		zonesets.setInclude(new ArrayList<Integer>(){{add(zonesetID);}});
-		if(!isServerProgrammatic)
-			return new CreateCampaignRequest(campaignName,lineItemId,
-					zonesets, new ArrayList<Integer>(){{add(creativeID_Or_DealID);}},
-					dateFromNow(-1),dateFromNow(1));
-		else
-			return new CreateCampaignRequest(campaignName,lineItemId,
-					zonesets, creativeID_Or_DealID,
-					dateFromNow(-1),dateFromNow(1));
 	}
 
 	private void printEntityContent(HttpEntity entity)

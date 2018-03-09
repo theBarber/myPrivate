@@ -1,5 +1,5 @@
 @DinamicTag
-@test1
+
 Feature: Dynamic Tag flow support with API
 
   Scenario: 1. Basic DT flow

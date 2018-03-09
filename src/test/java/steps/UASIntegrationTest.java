@@ -277,6 +277,11 @@ public class UASIntegrationTest extends BaseTest {
       sut.getUASRquestModule().addHttpHeader("User-Agent", userAgentStr);
     });
 
+      Given("I use \\{([^}]+)\\} as referer string to send my requests to uas", (String referer) -> {
+          sut.getUASRquestModule().emptyHttpHeaders();
+          sut.getUASRquestModule().addHttpHeader("referer", referer);
+      });
+
     Given("I add (\\w+) query parameter with value \\{([^}]+)\\} to send my requests to uas",
         (String paramName, String paramValue) -> {
           sut.getUASRquestModule().addQueryParam(paramName, paramValue);

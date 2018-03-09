@@ -37,7 +37,7 @@ staging.uas.domain=stgads.undertone.com
 dev1.uas.domain=dev1.undertone.com
 
 dev2.uas.domain=dev2.undertone.com
-# integration.uas.domain=172.31.48.19
+# integration.uas.domain=172.31.48.20
 integration.uas.port=9000
 integration.uas.domain=intads.undertone.com
 *.uas.port=
