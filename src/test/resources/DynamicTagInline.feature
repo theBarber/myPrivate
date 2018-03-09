@@ -2,7 +2,7 @@
 @uas
 @HeaderBidding
 @scheduled
-@test1
+@stable
 Feature: Dynamic Tag inline flow support
 
   Scenario: 1. Dynamic Tag inline Basic - including migrated tags

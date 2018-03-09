@@ -1,7 +1,13 @@
-@test1
+@scheduled
+@stable
 Feature: Entities for tests
 
-   Scenario: create entities for HB tests
+  Scenario: create entities for AB testing
+    Given i create new campaigns with new zoneset
+      |Campaign Name                      |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zoneset-zone Name                      |limitation    |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-AB-Billboard-970x250     |75396    |198082     |false                  |64               |zone-zoneset-AB-Billboard-970x250      |[]            |58        |4737             |2434           |38734             |
+
+  Scenario: create entities for HB tests
       Given i remove all zones from publishers: {3673,3697}
       Given i create new campaigns with new zoneset
         |Campaign Name                      |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zoneset-zone Name                      |limitation    |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
@@ -69,7 +75,7 @@ Feature: Entities for tests
         |campaign-DT-Inline-SS-1  |-2            |1                       |
         |campaign-DT-Inline-SS-3  |1             |4                       |
         |campaign-DT-Inline-PGC-2 |-1            |2                       |
-#
+
 #  Scenario: create campaigns for Domain Targeting
 #    Given i create new campaigns, new zoneset with domains
 #      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal    |Zoneset-zone Name             |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude              |
@@ -81,4 +87,5 @@ Feature: Entities for tests
     And I refresh zone cache
       And I refresh banner cache
       And I restart {ramp-lift-services}
+#      And i flush bucket yad-server on couchbase
       And I sleep for 100 seconds
