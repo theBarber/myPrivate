@@ -1,4 +1,3 @@
-@UASe2eAdRequestFlows
 	@Integration
 	@cli
 	@uas

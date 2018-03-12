@@ -44,7 +44,8 @@ Feature: Header Bidding flow support
 
   Scenario: Send HB request with Empty sizes
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
+    And The response code is 200
+    And The responses are passback
 
   Scenario: Send HB request with Empty timeout
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty timeout for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
@@ -54,7 +55,8 @@ Feature: Header Bidding flow support
 
   Scenario: Send HB request with wrong values
     Given i send 1 headerBidding post request for scenario {Send HB request with wrong values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
+    And The response code is 200
+    And The responses are passback
 
   Scenario: Send HB request with one size
     Given i send 1 headerBidding post request for scenario {Send HB request with one size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
@@ -126,7 +128,8 @@ Feature: Header Bidding flow support
 
   Scenario: Send HB request with Empty sizes
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 204
+    And The response code is 200
+    And The responses are passback
 
   Scenario: Send HB request with Empty timeout
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty timeout for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -136,7 +139,8 @@ Feature: Header Bidding flow support
 
   Scenario: Send HB request with wrong values
     Given i send 1 headerBidding post request for scenario {Send HB request with wrong values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 204
+    And The response code is 200
+    And The responses are passback
 
   Scenario: Send HB request with one size
     Given i send 1 headerBidding post request for scenario {Send HB request with one size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -168,16 +172,16 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-SS-1X1-D-banner-1}
 
 
-  Scenario: disabled all HB campaigns
-    Given i update campaign data by name
-      |Campaign Name                        |status      |
-      |campaign-HB-Tablet-160x600           |1           |
-      |campaign-HB-See-Through-1X2          |1           |
-      |campaign-HB-See-Through-1X2          |1           |
-      |campaign-HB-Prog-PGC-1X1-1           |1           |
-      |campaign-HB-Prog-PGC-1X1-2           |1           |
-      |campaign-HB-Prog-See-Through-1X2-1   |1           |
-      |campaign-HB-Prog-See-Through-1X2-2   |1           |
-      |campaign-HB-Prog-See-Through-1X2-3   |1           |
-      |campaign-HB-Prog-SS-1X1-P            |1           |
-      |campaign-HB-Prog-SS-1X1-D            |1           |
+#  Scenario: disabled all HB campaigns
+#    Given i update campaign data by name
+#      |Campaign Name                        |status      |
+#      |campaign-HB-Tablet-160x600           |1           |
+#      |campaign-HB-See-Through-1X2          |1           |
+#      |campaign-HB-See-Through-1X2          |1           |
+#      |campaign-HB-Prog-PGC-1X1-1           |1           |
+#      |campaign-HB-Prog-PGC-1X1-2           |1           |
+#      |campaign-HB-Prog-See-Through-1X2-1   |1           |
+#      |campaign-HB-Prog-See-Through-1X2-2   |1           |
+#      |campaign-HB-Prog-See-Through-1X2-3   |1           |
+#      |campaign-HB-Prog-SS-1X1-P            |1           |
+#      |campaign-HB-Prog-SS-1X1-D            |1           |

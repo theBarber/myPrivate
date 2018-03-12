@@ -4,7 +4,7 @@ Feature: Entities for tests
   Scenario: create entities for AB testing
     Given i create new campaigns with new zoneset
       |Campaign Name                      |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation    |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-      |campaign-AB-Billboard-970x250     |75396    |198082     |false                  |64               |{zone-zoneset-AB-Billboard-970x250}      |[]            |58        |4737             |2434           |38734             |
+      |campaign-AB-Billboard-970x250      |75396    |198082     |false                  |64              |{zone-zoneset-AB-Billboard-970x250}     |[]            |58        |4737             |2434           |38734             |
 
   @HB
   Scenario: create entities for HB tests
@@ -84,7 +84,7 @@ Feature: Entities for tests
       |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14512             |3703           |66127             |{}                  |{sahar.cnn.com}                   |
       |campaign-DomainT-2   |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14512             |3703           |66129             |{}                  |{cnn.com}                         |
       |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14512             |3703           |66130             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
-      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |75         |11363             |3703           |66130             |{}                  |{cnn.com}                         |
+      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3703           |66131             |{}                  |{cnn.com}                         |
 
   @cacheRefresh
   @HB
