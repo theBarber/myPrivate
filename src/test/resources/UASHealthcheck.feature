@@ -3,6 +3,7 @@
 @Integration
 @uas
 @stable
+@scheduled
 Feature: UAS connectivity to other components
 
 

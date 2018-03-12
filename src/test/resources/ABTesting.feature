@@ -5,7 +5,6 @@
 @cli
 @uas
 @scheduled
-@stable
 Feature: A/B testing functionality
 
 
@@ -54,3 +53,13 @@ Scenario: 2. 2 identical groups scenario including activation/deactivation exper
 	And Experiment named {rampLift_2_identical_groups_scenario_test_1} was selected {20} percent of the time
 	And Experiment named {rampLift_2_identical_groups_scenario_control_1} was selected {20} percent of the time
 	And Default experiment was selected {60} percent of the time
+
+	Scenario: disabled all HB campaigns
+		Given i update campaign data by name
+			|Campaign Name                        |status      |
+			|campaign-AB-Billboard-970x250        |1           |
+
+	Scenario: disabled all HB campaigns
+		Given i update zone data by name
+			|Campaign Name                        |status      |
+			|zone-zoneset-AB-Billboard-970x250    |1           |

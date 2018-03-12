@@ -57,12 +57,12 @@ public class API_EntitiesCreator extends BaseTest{
     {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
-        Integer zonesetId;
+        List<Integer> zonesetsId;
         for(int i=1;i<campaignsList.size();i++)
         {
             campaign = campaignsList.get(i);
-            zonesetId = sut.getCampaignManager().getZoneset(campaign.get(5)).orElseThrow(()->new AssertionError("zoneset were not found")).getId();
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            zonesetsId = getZonesetsIds(campaign);
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
@@ -71,10 +71,12 @@ public class API_EntitiesCreator extends BaseTest{
     {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
+        List<Integer> zonesetsId;
         for(int i=1;i<campaignsList.size();i++)
         {
             campaign = campaignsList.get(i);
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),Integer.valueOf(campaign.get(5)), /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            zonesetsId = getZonesetsIds(campaign);
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
@@ -83,14 +85,12 @@ public class API_EntitiesCreator extends BaseTest{
     {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
-        Integer zonesetId;
+        List<Integer> zonesetsId;
         for(int i=1;i<campaignsList.size();i++)
         {
             campaign = campaignsList.get(i);
-            if(!(sut.getCampaignManager().getZoneset(campaign.get(5))).isPresent())
-                createNewZoneAndZoneset(/*zoneAndZonesetName*/campaign.get(5),/*limitation*/campaign.get(6), /*adUnitId*/campaign.get(7),/*web_section_id*/campaign.get(8),/*affiliateId*/campaign.get(9),/*po_lineItem_id*/campaign.get(10));
-            zonesetId = (sut.getCampaignManager().getZoneset(campaign.get(5))).orElseThrow(()->new AssertionError("zoneset were not found!")).getId();
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            zonesetsId = getZonesetsIds(campaign);
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
@@ -98,17 +98,41 @@ public class API_EntitiesCreator extends BaseTest{
     private void createMultipleCampaignsWithNewZonesetWithDomains(DataTable campaigns) {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
-        Integer zonesetId;
+        List<Integer> zonesetsId;
         for(int i=1;i<campaignsList.size();i++)
         {
             campaign = campaignsList.get(i);
-            if(!(sut.getCampaignManager().getZoneset(campaign.get(5))).isPresent())
-                createNewZoneAndZoneset(/*zoneAndZonesetName*/campaign.get(5),/*limitation*/campaign.get(6), /*adUnitId*/campaign.get(7),/*web_section_id*/campaign.get(8),/*affiliateId*/campaign.get(9),/*po_lineItem_id*/campaign.get(10));
-            zonesetId = (sut.getCampaignManager().getZoneset(campaign.get(5))).orElseThrow(()->new AssertionError("zoneset were not found!")).getId();
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            zonesetsId = getZonesetsIds(campaign);
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
             createCampaignRequest.setSupplySources(getSupplySources(campaign.get(11),campaign.get(12)));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
+    }
+
+    private List<Integer> getZonesetsIds(List<String> campaignDataTable) {
+        String zonesetsNameAsString = campaignDataTable.get(5);
+        List<String> zonesetNamesAsList;
+        List<Integer> zonesetsIdsList = new ArrayList<>();
+        Optional<ZoneSet> zoneSetObj;
+        Integer zonesetId;
+
+        if(zonesetsNameAsString.length()<3)
+            throw new AssertionError("zonesetList is invalid,should be larger then 2");
+
+        zonesetNamesAsList = Arrays.asList(zonesetsNameAsString.substring(1, zonesetsNameAsString.length()-1).split(","));
+        for(String zonset: zonesetNamesAsList)
+        {
+            try{
+                zonesetId = Integer.parseInt(zonset); /*check if it number -> then its an id*/
+            }catch (NumberFormatException e) //not a number -> then a name
+            {
+                if(!(sut.getCampaignManager().getZoneset(zonset)).isPresent())
+                        createNewZoneAndZoneset(/*zoneAndZonesetName*/zonset,/*limitation*/campaignDataTable.get(6), /*adUnitId*/campaignDataTable.get(7),/*web_section_id*/campaignDataTable.get(8),/*affiliateId*/campaignDataTable.get(9),/*po_lineItem_id*/campaignDataTable.get(10));
+                zonesetId = sut.getCampaignManager().getZoneset(zonset).orElseThrow(()->new AssertionError("zoneset were not found!")).getId();
+            }
+            zonesetsIdsList.add(zonesetId);
+        }
+        return zonesetsIdsList;
     }
 
     private SupplySources getSupplySources(String include, String exclude) {
@@ -271,10 +295,10 @@ public class API_EntitiesCreator extends BaseTest{
         updateCampaign(campaignid,"campaign_delivery_method","2");
     }
 
-    private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName, String lineItemId, Integer creativeID_Or_DealID, Integer zonesetID, Boolean isServerProgrammatic)
+    private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName, String lineItemId, Integer creativeID_Or_DealID, List<Integer> zonesetsIDs, Boolean isServerProgrammatic)
     {
         Zonesets zonesets = new Zonesets();
-        zonesets.setInclude(new ArrayList<Integer>(){{add(zonesetID);}});
+        zonesets.setInclude(zonesetsIDs);
         if(!isServerProgrammatic)
             return new CreateCampaignRequest(campaignName,lineItemId,
                     zonesets, new ArrayList<Integer>(){{add(creativeID_Or_DealID);}},

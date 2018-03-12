@@ -4,6 +4,7 @@ package steps;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import infra.cli.process.CliCommandExecution;
+import infra.utils.CouchBaseUtils;
 import infra.utils.JenkinsClient;
 import infra.utils.SqlWorkflowUtils;
 
@@ -38,7 +39,7 @@ public class CacheProcessTest extends BaseTest {
 
 
     And("I refresh (zone|campaign|banner) cache",this::refreshCache);
-
+    And("I flush bucket name \\{([^}]+)\\} on couchbase", this::flushBucket);
     Given("^limitations for zoneId (\\d+) is \\{([^}]+)\\} in Workflow DB$",
         (Integer zoneId, String expectedLimitation) -> {
           String currentLimitation = SqlWorkflowUtils.getLimitationForZone(zoneId);
@@ -82,6 +83,12 @@ public class CacheProcessTest extends BaseTest {
         });
 
   }
+
+    private void flushBucket(String bucketName) {
+          CouchBaseUtils couchBase = new CouchBaseUtils();
+          couchBase.flushBucker(bucketName);
+      //----need for s3 too?
+    }
 
     public static void refreshZoneCache(String action) {
     if (action.equals("http")) {

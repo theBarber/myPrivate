@@ -2,7 +2,7 @@
 @cli
 @uas
 @scheduled
-@stable
+@HB
 Feature: Header Bidding flow support
 
   Scenario: send HB request without params
@@ -169,6 +169,7 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-SS-1X1-D-banner-1}
+
 
   Scenario: disabled all HB campaigns
     Given i update campaign data by name
