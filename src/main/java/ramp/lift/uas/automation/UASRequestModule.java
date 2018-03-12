@@ -56,7 +56,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     ZONE_REQUEST, DYNAMIC_TAG_REQUEST, HEADER_BIDDING_REQUEST
   }
   private ExecutorService requestSubmitter;
-  private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_]";
+  private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_,%]";
   protected static final Pattern impressionURLPattern = Pattern
       .compile("(https?:\\/\\/([^:/?#]*(?::[0-9]+)?)\\/l[^?#]*\\?"
           + lettersDigitsAndHyphen

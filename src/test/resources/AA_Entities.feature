@@ -1,4 +1,4 @@
-@scheduled
+#@scheduled
 Feature: Entities for tests
   @AB
   Scenario: create entities for AB testing

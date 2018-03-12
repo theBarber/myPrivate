@@ -39,6 +39,7 @@ import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 
 import co.unruly.matchers.OptionalMatchers;
@@ -178,7 +179,11 @@ public class UASIntegrationTest extends BaseTest {
 
     Then("^I filter in the (clk|imp|req) log to the lines where id at column (\\d+) is the same as in impression-url$",
         (String logType, Integer column) -> {
-
+            // for checks only
+            sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+                sut.write(content);
+            });
+            // for checks only
           Optional<URL> impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
               .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
               .map(Optional::get).findFirst();
@@ -186,11 +191,11 @@ public class UASIntegrationTest extends BaseTest {
           if(impressionUrl.isPresent()){
             sut.write(impressionUrl.toString());
             String idFieldValue = splitQuery(impressionUrl.get()).get("id").get(0);
-                //---------------------checks-------------------------
+    //---------------------checks-------------------------------------------------------------------------------------------
     //            Stream<List<String>> steamList = sut.logFor(logType).actual();
     //            sut.write("The expected field value of the logType "+logType+" is: " +  idFieldValue);
     //            steamList.forEach(m-> sut.write("The actual field value of the logType "+logType+" is: "+ m.get(column)));
-                //---------------------checks-------------------------
+    //---------------------checks--------------------------------------------------------------------------------------------
               sut.logFor(logType).filter(raw -> idFieldValue.equals(raw.get(column)));
               assertThat("the log " + logType + " should contain a line with " + idFieldValue + " at column "
                   + column, sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
@@ -332,8 +337,10 @@ public class UASIntegrationTest extends BaseTest {
 
   public static Map<String, List<String>> splitQuery(URL url) {
     if (StringUtils.nullOrEmpty.test(url.getQuery())) {
+        System.out.println("query is null");
       return Collections.emptyMap();
     }
+      System.out.println("query is ok");
       return  Arrays.stream(url.getQuery().split("&")).map(UASIntegrationTest::splitQueryParameter).collect(
         groupingBy(SimpleImmutableEntry::getKey, LinkedHashMap::new, mapping(Map.Entry::getValue, toList())));
   }

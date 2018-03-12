@@ -21,12 +21,13 @@
 Scenario: Send an ad request to UAS and parse logs
         Given I Delete req logs
         Given I Delete imp logs
+        Given I clear all cookies from uas requests
         When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
         And The response has impression-url
         And The response has click-url
         When I send impression requests to UAS
         And I sleep for 1 seconds
-		 Then I read the latest req log file from uas
+		Then I read the latest req log file from uas
         Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
         And The field zoneid in the 4 column of the req log is the same as in impression-url
         And The field bannerid in the 5 column of the req log is the same as in impression-url
