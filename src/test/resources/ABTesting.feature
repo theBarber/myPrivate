@@ -5,6 +5,7 @@
 @cli
 @uas
 @scheduled
+@AB
 Feature: A/B testing functionality
 
 

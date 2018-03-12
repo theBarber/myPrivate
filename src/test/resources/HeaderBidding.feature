@@ -19,13 +19,11 @@ Feature: Header Bidding flow support
     And The responses are passback
 
   Scenario: Send HB basic request
-    Given I Delete req logs
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And I sleep for 5 seconds
-
 
   Scenario: Send HB request to optimizer
     Given i send 1 headerBidding post request for scenario {Send HB request to optimizer for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
@@ -103,7 +101,6 @@ Feature: Header Bidding flow support
     And The responses are passback
 
   Scenario: Send HB basic request
-    Given I Delete req logs
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script

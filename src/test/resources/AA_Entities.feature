@@ -1,6 +1,6 @@
 @scheduled
 Feature: Entities for tests
-
+  @AB
   Scenario: create entities for AB testing
     Given i create new campaigns with new zoneset
       |Campaign Name                      |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation    |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
@@ -31,7 +31,7 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3 |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-SS-1X1-P          |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-SS-1X1-D          |0           |-1            |-1         |[]        |2                       |
-
+  @DT
   Scenario: create entities for DT tests
       Given i remove all zones from publishers: {3674,3675,3666}
       Given i create new campaigns with new zoneset
@@ -46,7 +46,6 @@ Feature: Entities for tests
         |campaign-DT-PGC-3-t-2   |75396    |222908     |false                  |1068            |{zone-zoneset-DT-PGC-t-2}    |[]                  |75         |14402            |3666           |64402             |
         |campaign-DT-SI-1-t-3-L  |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3-L}   |[[[5,"=~","af"]]]   |61         |14403            |3675           |64403             |
         |campaign-DT-SI-2-t-3    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3}     |[]                  |61         |14403            |3675           |64403             |
-
       And i update campaign data by name
         |Campaign Name         |Priority      |campaign_delivery_method|
         |campaign-DT-SS-1-t-1  |-2            |1                       |
@@ -59,7 +58,7 @@ Feature: Entities for tests
         |campaign-DT-PGC-3-t-2 | 1            |4                       |
         |campaign-DT-SI-1-t-3-L|-2            |1                       |
         |campaign-DT-SI-2-t-3  |-1            |2                       |
-
+  @DT
     Scenario: create entities for DT inline tests
       Given i remove all zones from publishers: {3690}
       Given i create new campaigns with new zoneset
@@ -68,7 +67,6 @@ Feature: Entities for tests
         |campaign-DT-Inline-SS-1     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-SS-1}|[]                  |69         |14470            |3690           |65423             |
         |campaign-DT-Inline-SS-3     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-ST-3}|[]                  |69         |14470            |3690           |65423             |
         |campaign-DT-Inline-PGC-2    |75396    |222908     |false                  |1068            |{zone-zoneset-DT-inline-PGC} |[]                  |75         |14470            |3690           |65424             |
-
       And i update campaign data by name
         |Campaign Name            |Priority      |campaign_delivery_method|
         |campaign-DT-Inline-ST-1  |-2            |1                       |
@@ -76,20 +74,23 @@ Feature: Entities for tests
         |campaign-DT-Inline-SS-3  |1             |4                       |
         |campaign-DT-Inline-PGC-2 |-1            |2                       |
       And I flush bucket name {iad-adserver} on couchbase
+
   @DOT
   Scenario: create campaigns for Domain Targeting
     Given i remove all zones from publishers: {3703}
-    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 75 and web_section id 4336 with affiliateId 3703 with po_line_item_id 66130
+    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 75 and web_section id 4140 with affiliateId 3703 with po_line_item_id 66130
     Given i create new campaigns, new zoneset with domains
       |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal    |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
       |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14512             |3703           |66127             |{}                  |{sahar.cnn.com}                   |
       |campaign-DomainT-2   |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14512             |3703           |66129             |{}                  |{cnn.com}                         |
       |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14512             |3703           |66130             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
-      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |75         |15919             |3703           |66130             |{}                  |{cnn.com}                         |
+      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |75         |11363             |3703           |66130             |{}                  |{cnn.com}                         |
 
   @cacheRefresh
   @HB
   @DOT
+  @DT
+  @AB
   Scenario: refresh cache
     And I refresh zone cache
       And I refresh banner cache

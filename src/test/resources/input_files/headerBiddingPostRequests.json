@@ -245,5 +245,21 @@
       "params": {"placementId" : "10433394",
         "publisherId" : 3690
       }
+    }]},
+  "Send HB basic request for publisher 3703":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "sahar.cnn.com",
+      "placementId": "10433394",
+      "publisherId": 3703,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3703
+      }
     }]}
 }

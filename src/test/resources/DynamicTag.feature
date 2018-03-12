@@ -1,6 +1,7 @@
 @cli
 @uas
 @scheduled
+@DT
 Feature: Dynamic Tag flow support
 
 Scenario: 1. Basic DT flow

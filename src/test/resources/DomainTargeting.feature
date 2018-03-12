@@ -1,5 +1,6 @@
 @DOT
 @scheduled
+@HeaderBidding
 Feature: Domain Targeting tests
 
 
@@ -125,7 +126,21 @@ Feature: Domain Targeting tests
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 164 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
     And The responses are passback
 
-#  Scenario: 3. send HB requests
-##    if the logic is changing i need to change it too
-#    Then i send 1 times Dynamic Tag synchronized ad request with tag id 153 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
-#    And The response contains script
+  Scenario: 8. send HB requests
+    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3703} for publisher 3703 with domain {sahar.cnn.com} with extra params {&unlimited=1&optimize=0&tagid=161}
+    And The responses are passback
+    Given I use {http://cnn.com} as referer string to send my requests to uas
+    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3703} for publisher 3703 with domain {cnn.com} with extra params {&unlimited=1&optimize=0&tagid=161}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains adId with id of entity named {campaign-DomainT-1-banner-1}
+
+#
+#  Scenario: disabled all DT campaigns
+#    And i update campaign data by name
+#      |Campaign Name       |status       |
+#      |campaign-DomainT-1  |1            |
+#      |campaign-DomainT-2  |1            |
+#      |campaign-DomainT-3  |1            |
+#      |campaign-DomainT-4  |1            |
