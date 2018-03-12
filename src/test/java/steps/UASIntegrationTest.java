@@ -179,19 +179,25 @@ public class UASIntegrationTest extends BaseTest {
     Then("^I filter in the (clk|imp|req) log to the lines where id at column (\\d+) is the same as in impression-url$",
         (String logType, Integer column) -> {
 
-          URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
+          Optional<URL> impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
               .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
-              .map(Optional::get).findFirst().get();
+              .map(Optional::get).findFirst();
 
-          String idFieldValue = splitQuery(impressionUrl).get("id").get(0);
-            //---------------------checks-------------------------
-//            Stream<List<String>> steamList = sut.logFor(logType).actual();
-//            sut.write("The expected field value of the logType "+logType+" is: " +  idFieldValue);
-//            steamList.forEach(m-> sut.write("The actual field value of the logType "+logType+" is: "+ m.get(column)));
-            //---------------------checks-------------------------
-          sut.logFor(logType).filter(raw -> idFieldValue.equals(raw.get(column)));
-          assertThat("the log " + logType + " should contain a line with " + idFieldValue + " at column "
-              + column, sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
+          if(impressionUrl.isPresent()){
+            sut.write(impressionUrl.toString());
+            String idFieldValue = splitQuery(impressionUrl.get()).get("id").get(0);
+                //---------------------checks-------------------------
+    //            Stream<List<String>> steamList = sut.logFor(logType).actual();
+    //            sut.write("The expected field value of the logType "+logType+" is: " +  idFieldValue);
+    //            steamList.forEach(m-> sut.write("The actual field value of the logType "+logType+" is: "+ m.get(column)));
+                //---------------------checks-------------------------
+              sut.logFor(logType).filter(raw -> idFieldValue.equals(raw.get(column)));
+              assertThat("the log " + logType + " should contain a line with " + idFieldValue + " at column "
+                  + column, sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
+          }else
+          {
+              throw new AssertionError("impression url wasn't found");
+          }
         });
 
 

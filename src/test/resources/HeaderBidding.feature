@@ -3,6 +3,7 @@
 @uas
 @scheduled
 @HB
+@test1
 Feature: Header Bidding flow support
 
   Scenario: send HB request without params
@@ -88,7 +89,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-SS-1X1-D-banner-1}
 
 #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------
-#
+
   Scenario: send HB request without params
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
