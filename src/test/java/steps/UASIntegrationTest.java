@@ -180,16 +180,16 @@ public class UASIntegrationTest extends BaseTest {
     Then("^I filter in the (clk|imp|req) log to the lines where id at column (\\d+) is the same as in impression-url$",
         (String logType, Integer column) -> {
             // for checks only
-            sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            /*sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
                 sut.write(content);
-            });
+            });*/
             // for checks only
           Optional<URL> impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
               .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
               .map(Optional::get).findFirst();
 
           if(impressionUrl.isPresent()){
-            sut.write(impressionUrl.toString());
+            //sut.write(impressionUrl.toString());
             String idFieldValue = splitQuery(impressionUrl.get()).get("id").get(0);
     //---------------------checks-------------------------------------------------------------------------------------------
     //            Stream<List<String>> steamList = sut.logFor(logType).actual();
@@ -337,10 +337,10 @@ public class UASIntegrationTest extends BaseTest {
 
   public static Map<String, List<String>> splitQuery(URL url) {
     if (StringUtils.nullOrEmpty.test(url.getQuery())) {
-        System.out.println("query is null");
+        //System.out.println("query is null");
       return Collections.emptyMap();
     }
-      System.out.println("query is ok");
+     // System.out.println("query is ok");
       return  Arrays.stream(url.getQuery().split("&")).map(UASIntegrationTest::splitQueryParameter).collect(
         groupingBy(SimpleImmutableEntry::getKey, LinkedHashMap::new, mapping(Map.Entry::getValue, toList())));
   }
