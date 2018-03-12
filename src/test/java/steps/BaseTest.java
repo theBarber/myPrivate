@@ -49,8 +49,8 @@ public class BaseTest implements En {
   //protected final String[] CLITESTS = new String[] {"@cli"};
 
   public BaseTest() {
-    environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
-//    environmentName ="integration";
+//    environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
+    environmentName ="integration";
     String environmentNameConfigPrefix = environmentName + ".";
     String allEnvironmentsNameDefaultConfigPrefix = "*.";
     String allEnvironmentsNameOverrideConfigPrefix = "-.";

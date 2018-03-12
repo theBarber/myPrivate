@@ -4,7 +4,7 @@
 @ramp_admin_db 
 @cli
 @uas
-#@scheduled
+@scheduled
 @AB
 Feature: A/B testing functionality
 
