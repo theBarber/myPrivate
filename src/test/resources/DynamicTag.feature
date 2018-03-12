@@ -76,16 +76,16 @@ Scenario:3. Basic DT logic with zone level filtering
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-1-t-3-L-banner-1} 100% of the time
 
-  Scenario: disabled all DT campaigns
-    And i update campaign data by name
-        |Campaign Name         |status       |
-        |campaign-DT-SS-1-t-1  |1            |
-        |campaign-DT-SI-2-t-1  |1            |
-        |campaign-DT-SI-1-t-1  |1            |
-        |campaign-DT-SI-2-t-1  |1            |
-        |campaign-DT-PGC-2-t-1 |1            |
-        |campaign-DT-SS-1-t-2  |1            |
-        |campaign-DT-SI-2-t-2  |1            |
-        |campaign-DT-PGC-3-t-2 |1            |
-        |campaign-DT-SI-1-t-3-L|1            |
-        |campaign-DT-SI-2-t-3  |1            |
+#  Scenario: disabled all DT campaigns
+#    And i update campaign data by name
+#      |Campaign Name         |status       |
+#      |campaign-DT-SS-1-t-1  |1            |
+#      |campaign-DT-SI-2-t-1  |1            |
+#      |campaign-DT-SI-1-t-1  |1            |
+#      |campaign-DT-SI-2-t-1  |1            |
+#      |campaign-DT-PGC-2-t-1 |1            |
+#      |campaign-DT-SS-1-t-2  |1            |
+#      |campaign-DT-SI-2-t-2  |1            |
+#      |campaign-DT-PGC-3-t-2 |1            |
+#      |campaign-DT-SI-1-t-3-L|1            |
+#      |campaign-DT-SI-2-t-3  |1            |
