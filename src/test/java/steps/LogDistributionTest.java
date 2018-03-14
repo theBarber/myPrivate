@@ -93,7 +93,7 @@ public class LogDistributionTest extends BaseTest {
                         0.0 :
                         (Optional.ofNullable(dist.get(experimentIdColumnNumber).get(String.valueOf(experimentId))).orElse(0l) * 100) / numOfAppearances;
         Assert.assertEquals("Column value distribution not accurate for experiment=" + experimentId, percentage * 1.0,
-                        percent, 50.0);
+                        percent, 1.0);
 
     }
 

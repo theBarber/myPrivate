@@ -26,7 +26,7 @@ Feature: Entities for tests
         |campaign-HB-See-Through-1X2        |0           |-1            |-1         |[]        |2                       |
         |campaign-HB-Prog-PGC-1X1-1         |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-PGC-1X1-2         |0           |-1            |-1         |[]        |2                       |
-        |campaign-HB-Prog-See-Through-1X2-1 |0           |-2            |-1         |[]        |1                        |
+        |campaign-HB-Prog-See-Through-1X2-1 |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-See-Through-1X2-2 |0           |-1            |-1         |[]        |2                       |
         |campaign-HB-Prog-See-Through-1X2-3 |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-SS-1X1-P          |0           |1             |-1         |[]        |4                       |
@@ -78,7 +78,7 @@ Feature: Entities for tests
   @DOT
   Scenario: create campaigns for Domain Targeting
     Given i remove all zones from publishers: {3703}
-    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 75 and web_section id 4140 with affiliateId 3703 with po_line_item_id 66130
+    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3703 with po_line_item_id 66131
     Given i create new campaigns, new zoneset with domains
       |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal    |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
       |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14512             |3703           |66127             |{}                  |{sahar.cnn.com}                   |
