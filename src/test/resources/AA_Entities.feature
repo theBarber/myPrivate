@@ -92,7 +92,7 @@ Feature: Entities for tests
   @DT
   @AB
   Scenario: refresh cache
-    And I refresh zone cache
+#    And I refresh zone cache
       And I refresh banner cache
-      And I restart {ramp-lift-services}
-      And I sleep for 100 seconds
+#      And I restart {ramp-lift-services}
+#      And I sleep for 100 seconds
