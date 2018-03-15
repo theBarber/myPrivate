@@ -86,13 +86,15 @@ Feature: Entities for tests
       |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14512             |3703           |66130             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
       |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3703           |66131             |{}                  |{cnn.com}                         |
 
+
+
   @cacheRefresh
   @HB
   @DOT
   @DT
   @AB
   Scenario: refresh cache
-#    And I refresh zone cache
+    And I refresh zone cache
       And I refresh banner cache
-#      And I restart {ramp-lift-services}
-#      And I sleep for 100 seconds
+      And I restart {ramp-lift-services}
+      And I sleep for 100 seconds

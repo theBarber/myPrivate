@@ -312,7 +312,7 @@ public class API_EntitiesCreator extends BaseTest{
     private String dateFromNow(Integer daysToAdd) {
         final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, daysToAdd);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         return dateFormat.format(cal.getTime());
     }
 

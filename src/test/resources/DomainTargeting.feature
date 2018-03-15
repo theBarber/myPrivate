@@ -136,7 +136,7 @@ Feature: Domain Targeting tests
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-DomainT-1-banner-1}
 
-#
+
 #  Scenario: disabled all DT campaigns
 #    And i update campaign data by name
 #      |Campaign Name       |status       |
