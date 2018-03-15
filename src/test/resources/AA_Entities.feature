@@ -89,9 +89,11 @@ Feature: Entities for tests
 #    @appnexus
 #  Scenario: create entities for server programmatic tests
 #    Given i create new campaigns with new zoneset
-#      |Campaign Name            |IO            |LineItem   |isServerProgrammatic?  |Deal       |Zonesets-zones Name          |limitation   |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |
-#      |campaign-server-prog-1   |407981        |224531     |true                   |10002      |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
-#      |campaign-server-prog-1   |407981        |224531     |true                   |10003      |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
+#      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name          |limitation   |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |
+#      |campaign-server-prog-SS-1  |407981        |224531     |true                   |10002           |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
+#      |campaign-server-prog-SS-2  |407981        |224531     |true                   |10003           |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
+#      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
+#      |campaign-server-prog-PGC-1 |407981        |197418     |false                  |86              |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
 
 
   @cacheRefresh
