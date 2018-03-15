@@ -80,12 +80,18 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {3703}
     And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3703 with po_line_item_id 66131
     Given i create new campaigns, new zoneset with domains
-      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal    |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
+      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
       |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14512             |3703           |66127             |{}                  |{sahar.cnn.com}                   |
       |campaign-DomainT-2   |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14512             |3703           |66129             |{}                  |{cnn.com}                         |
       |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14512             |3703           |66130             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
       |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3703           |66131             |{}                  |{cnn.com}                         |
 
+#    @appnexus
+#  Scenario: create entities for server programmatic tests
+#    Given i create new campaigns with new zoneset
+#      |Campaign Name            |IO            |LineItem   |isServerProgrammatic?  |Deal       |Zonesets-zones Name          |limitation   |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |
+#      |campaign-server-prog-1   |407981        |224531     |true                   |10002      |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
+#      |campaign-server-prog-1   |407981        |224531     |true                   |10003      |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
 
 
   @cacheRefresh

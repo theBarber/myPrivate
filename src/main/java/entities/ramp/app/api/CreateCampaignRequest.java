@@ -39,10 +39,10 @@ public class CreateCampaignRequest {
         this.lineItemId = lineItemId;
         this.zonesets = zonesets;
         this.selectedCreativeIds = selectedCreativeIds;
-        this.startDateTime = "2018-03-06T19:06:44.809Z";
-        this.endDateTime = "2019-12-31T04:59:59.999Z";
-//        this.startDateTime = startDateTime;
-//        this.endDateTime = endDateTime;
+//        this.startDateTime = "2018-03-06T19:06:44.809Z";
+//        this.endDateTime = "2019-12-31T04:59:59.999Z";
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
     //programmatic campaign
     public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, Integer selectedDealId, String startDateTime, String endDateTime)
