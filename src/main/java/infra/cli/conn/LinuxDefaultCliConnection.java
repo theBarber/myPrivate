@@ -131,12 +131,12 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
 	return null;
     }
 	public Stream<String> deleteFiles(String file2Del) throws IOException {
-		CliCommandExecution execution = new CliCommandExecution(this, "rm -f "+file2Del);
+		CliCommandExecution execution = new CliCommandExecution(this, "sudo rm -f "+file2Del);
 		execution.withTitle("delete files: "+file2Del).error("No able delete such files").execute();
 		return Stream.of(execution.getResult().split("\r\n"));
 	}
     public Stream<String> fileList(String directory) throws IOException {
-	CliCommandExecution execution = new CliCommandExecution(this, "find '" + directory + "' -maxdepth 1 -type f");
+	CliCommandExecution execution = new CliCommandExecution(this, "sudo find '" + directory + "' -maxdepth 1 -type f");
 	execution.withTitle("list files in " + directory).error("No such file or directory").execute();
 	String[] files = execution.getResult().split("\r\n");
 	return Arrays.asList(files).stream();
@@ -155,7 +155,7 @@ public class LinuxDefaultCliConnection extends CliConnectionImpl {
     }
 
     public static String processInstancesCounterCommand(String cmd) {
-	return "ps -C '" + cmd + "' -o pid= |wc -l";
+	return "sudo ps -C '" + cmd + "' -o pid= |wc -l";
     }
 
     public Date getRemoteMachineDate() throws IOException {

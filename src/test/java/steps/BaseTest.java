@@ -51,6 +51,7 @@ public class BaseTest implements En {
   public BaseTest() {
     environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
 //    environmentName ="integration";
+
     String environmentNameConfigPrefix = environmentName + ".";
     String allEnvironmentsNameDefaultConfigPrefix = "*.";
     String allEnvironmentsNameOverrideConfigPrefix = "-.";
