@@ -77,9 +77,9 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
 
   Scenario: Send HBProg request with No D, No response from Pwai
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3690 with domain {hbprog.com} with extra params {&unlimited=1&tagid=149&takeratemodel=0&optimize=0}
+    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&tagid=149&takeratemodel=0&optimize=0}
     And The response code is 200
-    And The responses are passback
+    And all HB responses contains adId with id 0
 
   Scenario: Send HBProg request D selected
     Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0&tagid=155}
@@ -160,9 +160,9 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with one of: {campaign-HB-Prog-PGC-1X1-1-banner-1,campaign-HB-Prog-PGC-1X1-2-banner-1,campaign-HB-Prog-SS-1X1-D-banner-1}
 
   Scenario: Send HBProg request with No D, No response from Pwai
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3690 with domain {hbprog.com} with extra params {&unlimited=1&tagid=149&takeratemodel=0&optimize=1}
+    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&tagid=149&takeratemodel=0&optimize=1}
     And The response code is 200
-    And The responses are passback
+    And all HB responses contains adId with id 0
 
   Scenario: Send HBProg request D selected
     Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&tagid=155&takeratemodel=0&optimize=1}

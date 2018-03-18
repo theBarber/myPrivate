@@ -63,10 +63,10 @@ Feature: Entities for tests
       Given i remove all zones from publishers: {3690}
       Given i create new campaigns with new zoneset
         |Campaign Name               |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation          |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
-        |campaign-DT-Inline-ST-1     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}  |[]                  |83         |14470            |3690           |65422             |
-        |campaign-DT-Inline-SS-1     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-SS-1}|[]                  |69         |14470            |3690           |65423             |
-        |campaign-DT-Inline-SS-3     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-ST-3}|[]                  |69         |14470            |3690           |65423             |
-        |campaign-DT-Inline-PGC-2    |75396    |222908     |false                  |1068            |{zone-zoneset-DT-inline-PGC} |[]                  |75         |14470            |3690           |65424             |
+        |campaign-DT-Inline-ST-1     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}  |[]                   |83         |14470            |3690           |65422             |
+        |campaign-DT-Inline-SS-1     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-SS-1}|[]                   |69         |14470            |3690           |65423             |
+        |campaign-DT-Inline-SS-3     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-ST-3}|[]                   |69         |14470            |3690           |65423             |
+        |campaign-DT-Inline-PGC-2    |75396    |222908     |false                  |1068            |{zone-zoneset-DT-inline-PGC} |[]                   |75         |14470            |3690           |65424             |
       And i update campaign data by name
         |Campaign Name            |Priority      |campaign_delivery_method|
         |campaign-DT-Inline-ST-1  |-2            |1                       |
@@ -75,25 +75,33 @@ Feature: Entities for tests
         |campaign-DT-Inline-PGC-2 |-1            |2                       |
       And I flush bucket name {iad-adserver} on couchbase
 
-  @DOT
-  Scenario: create campaigns for Domain Targeting
-    Given i remove all zones from publishers: {3703}
-    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3703 with po_line_item_id 66131
-    Given i create new campaigns, new zoneset with domains
-      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
-      |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14512             |3703           |66127             |{}                  |{sahar.cnn.com}                   |
-      |campaign-DomainT-2   |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14512             |3703           |66129             |{}                  |{cnn.com}                         |
-      |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14512             |3703           |66130             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
-      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3703           |66131             |{}                  |{cnn.com}                         |
+#  @DOT
+#  Scenario: create campaigns for Domain Targeting
+#    Given i remove all zones from publishers: {3703}
+#    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3703 with po_line_item_id 66131
+#    Given i create new campaigns, new zoneset with domains
+#      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
+#      |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14512             |3703           |66127             |{}                  |{sahar.cnn.com}                   |
+#      |campaign-DomainT-2   |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14512             |3703           |66129             |{}                  |{cnn.com}                         |
+#      |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14512             |3703           |66130             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
+#      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3703           |66131             |{}                  |{cnn.com}                         |
 
-#    @appnexus
-#  Scenario: create entities for server programmatic tests
-#    Given i create new campaigns with new zoneset
-#      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name          |limitation   |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |
-#      |campaign-server-prog-SS-1  |407981        |224531     |true                   |10002           |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
-#      |campaign-server-prog-SS-2  |407981        |224531     |true                   |10003           |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
-#      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
-#      |campaign-server-prog-PGC-1 |407981        |197418     |false                  |86              |{zone-zoneset-server-prog-1} |[]           |69         |4737              |2434           |27397             |
+  @appnexus
+  Scenario: create entities for server programmatic tests
+#    Given i remove all zones from publishers: {3703}
+    Given i create new campaigns with new zoneset
+      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name          |limitation   |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-server-prog-SS-1  |407981        |224531     |true                   |10002           |{zone-zoneset-server-prog-SS} |[]           |69         |4737              |2434           |27397             |
+      |campaign-server-prog-SS-2  |407981        |224531     |true                   |10003           |{zone-zoneset-server-prog-SS} |[]           |69         |4737              |2434           |27397             |
+      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69         |4737              |2434           |27397             |
+      |campaign-server-prog-PGC-1 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75         |4737              |2434           |27397             |
+      |campaign-server-prog-PGC-2 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75         |4737              |2434           |27397             |
+      |campaign-server-prog-PGC-3 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75         |4737              |2434           |27397             |
+      |campaign-server-prog-PGC-4 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75         |4737              |2434           |27397             |
+      |campaign-server-prog-PGC-5 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75         |4737              |2434           |27397             |
+      |campaign-server-prog-PGC-6 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75         |4737              |2434           |27397             |
+      |campaign-server-prog-ST-1  |407981        |224810     |false                  |43              |{zone-zoneset-server-prog-ST} |[]           |83         |4737              |2434           |27397             |
+      |campaign-server-prog-ST-2  |407981        |224810     |true                   |4322            |{v } |[]           |83         |4737              |2434           |27397             |
 
 
   @cacheRefresh
@@ -103,6 +111,6 @@ Feature: Entities for tests
   @AB
   Scenario: refresh cache
     And I refresh zone cache
-      And I refresh banner cache
-      And I restart {ramp-lift-services}
-      And I sleep for 100 seconds
+    And I refresh banner cache
+    And I restart {ramp-lift-services}
+    And I sleep for 100 seconds

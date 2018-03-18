@@ -65,7 +65,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
           + "*=" + lettersDigitsAndHyphen          + "*)*)");
 
   protected static final Pattern clickURLPattern = Pattern
-      .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/c\\?[^\'\\\"]*)[\'\\\"]");
+          .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/c\\?[^\'\\\"]*)[\'\\\"]");
+
+  protected static final Pattern dspURLPattern = Pattern
+          .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/ttj\\?[^\'\\\"]*)[\'\\\"]");
 
   private List<HttpResponse> synchronizedResponses;
 
@@ -282,6 +285,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
   public static Optional<String> getClickUrlFrom(HttpResponse response) {
     return Optional.of(clickURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
         .map(UASRequestModule::getGroup1);
+  }
+
+  public static Optional<String> getdspUrlFrom(HttpResponse response) {
+    return Optional.of(dspURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+            .map(UASRequestModule::getGroup1);
   }
 
   private static String getContentOf(CompletableFuture<HttpResponse> future) {
