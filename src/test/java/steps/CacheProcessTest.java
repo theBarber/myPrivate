@@ -1,36 +1,45 @@
 package steps;
 
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import infra.cli.process.CliCommandExecution;
+import infra.utils.CouchBaseUtils;
+import infra.utils.JenkinsClient;
 import infra.utils.SqlWorkflowUtils;
 
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.sql.ResultSet;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
-
+import static org.hamcrest.Matchers.isOneOf;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-/**
- * Created by Itay.Pinhassi on 9/28/2016.
- */
+
 @CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",
     "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
 
 public class CacheProcessTest extends BaseTest {
-
-  ResultSet result = null;
+    private final String BANNER_CACHE_NAME = "banners_cache_refresh_";
 
   public CacheProcessTest() {
     super();
 
+
+    And("I refresh (zone|campaign|banner) cache",this::refreshCache);
+    And("I flush bucket name \\{([^}]+)\\} on couchbase", this::flushBucket);
     Given("^limitations for zoneId (\\d+) is \\{([^}]+)\\} in Workflow DB$",
         (Integer zoneId, String expectedLimitation) -> {
           String currentLimitation = SqlWorkflowUtils.getLimitationForZone(zoneId);
@@ -75,7 +84,13 @@ public class CacheProcessTest extends BaseTest {
 
   }
 
-  public static void refreshZoneCache(String action) {
+    private void flushBucket(String bucketName) {
+          CouchBaseUtils couchBase = new CouchBaseUtils();
+          couchBase.flushBucker(bucketName);
+      //----need for s3 too?
+    }
+
+    public static void refreshZoneCache(String action) {
     if (action.equals("http")) {
       sut.getUASRquestModule().zoneCacheRequest("refresh");
       // sut.getUASRquestModule().zoneCacheRequest("query_status");
@@ -86,8 +101,8 @@ public class CacheProcessTest extends BaseTest {
       String restartUASServerCmd = "docker-compose -f /opt/docker-compose.yml restart ut-ramp-uas";
        // String restartUASServerCmd = "docker-compose restart ut-ramp-uas"; // for dev env
       sut.uasCliConnections().forEach(conn -> {
-          int count = 0;
-          int maxTries = 2;
+          int count = 1;
+          int maxTries = 3;
           while(true){
               try {
               sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
@@ -97,17 +112,21 @@ public class CacheProcessTest extends BaseTest {
                   .error("Couldn't run query").withTimeout(10, TimeUnit.MINUTES);
               zoneCacheExecution.execute();
                 CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
-                        .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
+                        .error("Couldn't restart").withTimeout(3, TimeUnit.MINUTES);
                 restartUASServer.execute();
                 break;
-            } catch (IOException e) {
+            }catch (Exception e)
+            {
+                  throw new AssertionError(e);
+            }
+            catch (AssertionError e) {
                   System.out.println("Couldn't run query trying again...num_try: "+count);
                   if (++count == maxTries){
-                     throw new UncheckedIOException(e);
+                     throw new AssertionError(e);
                   }
                   else
                   {
-                      sleepFor(2);
+                      sleepFor(60);
                   }
             }
           }
@@ -123,4 +142,83 @@ public class CacheProcessTest extends BaseTest {
           fail(e.getMessage());
       }
   }
+
+    private void refreshCache(String typeOfCache) {
+      assertThat(typeOfCache, isOneOf("campaign", "banner", "zone"));
+
+      switch (typeOfCache.toLowerCase())
+      {
+          case "zone": refreshZoneCache("cmd");break;
+          case "campaign":refreshCampaignCache();break;
+          case "banner": refreshBannerCache();break;
+      }
+    }
+
+    private void refreshCampaignCache() {
+        throw new Error("refresh campaign cache is not implemented yet");
+    }
+
+    private void refreshBannerCache() {
+        String jobName = BANNER_CACHE_NAME + this.environmentName;
+        int count = 0;
+        int maxTries = 2;
+        while (true) {
+            try {
+                JenkinsClient jenkins = new JenkinsClient();
+                Assert.assertTrue("status: Failed:" + jobName, jenkins.executeJob(BANNER_CACHE_NAME + this.environmentName));
+                break;
+            } catch (Exception e) {
+                throw new Error("Error in jenkins client");
+            } catch (AssertionError e) {
+                System.out.println("banner cache failed trying again...num_try: " + count);
+                if (++count == maxTries) {
+                    throw new AssertionError(e);
+                } else {
+                    sleepFor(60);
+                }
+            }
+        }
+    }
+
+    private String getBannerCacheFromRampApp()
+    {
+        ClientConfig clientConfig = new ClientConfig();
+        Client client = ClientBuilder.newClient(clientConfig);
+        client.property(ClientProperties.CONNECT_TIMEOUT, 600000);
+        client.property(ClientProperties.READ_TIMEOUT,    600000);
+        WebTarget webTarget = client.target("http://services-ramp-staging.ramp-ut.io:3008"); //TODO: need to be generic
+
+        Response response = webTarget
+                .path("/api/v1/io/banners/extended")
+                .request(MediaType.APPLICATION_JSON).header("rampInternal","true")
+                .get();
+        Assert.assertNotNull(response);
+        String responseStr = response.readEntity(String.class);
+        Assert.assertEquals(200, response.getStatus());
+        Assert.assertNotNull(responseStr);
+        return responseStr;
+    }
+
 }
+
+
+//simple jenkins api request
+ /* String encoding = Base64.getEncoder().encodeToString(("saharn:1q2w3e4r5t%^").getBytes());
+        HttpPost httppost = new HttpPost("http://jenkins.ramp-ut.io/job/banners_cache_refresh/build");
+        httppost.setHeader("Authorization", "Basic " + encoding);
+        HttpClient httpClient = HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(600000).build())
+        .setDefaultCookieStore(new BasicCookieStore()).build();
+        System.out.println("executing request " + httppost.getRequestLine());
+        HttpResponse response = null;
+        try {
+            response = httpClient.execute(httppost);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Assert.assertNotNull(response);
+        Assert.assertEquals(response.getStatusLine().getStatusCode(),201);
+        try {
+            TimeUnit.SECONDS.sleep(100);
+        } catch (InterruptedException e) {
+            fail(e.getMessage());
+        }*/

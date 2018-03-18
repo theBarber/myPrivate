@@ -45,6 +45,7 @@ Scenario: limitations testing - 3 banners with limitations
 	Given I use {Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)} as user-agent string to send my requests to uas
 	When I send 100 additional ad requests for zone named {INT2434 - See Through - ramp-lift-auto-zone-limitations-test} to UAS
 	Then The response code is 200
+	And The responses has impression-urls
 	And The impressionUrl has bannerid field matching the id of the banner named {75396-208153-275578-See Through-RampLift-1} 33% of the time
 	And The impressionUrl has bannerid field matching the id of the banner named {75396-208153-275579-See Through-RampLift-1} 33% of the time
 	And The impressionUrl has bannerid field matching the id of the banner named {75396-208153-275580-See Through-RampLift-1} 33% of the time

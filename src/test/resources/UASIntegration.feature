@@ -1,15 +1,15 @@
-@UASe2eAdRequestFlows
 	@Integration
 	@cli
 	@uas
 @scheduled
 @stable
+    @test1
 	Feature: UAS Ad request flows
 
 	@Sanity
 	Scenario: Send an ad request to UAS and parse impression url
 #        Given I setup the db
-		When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
+        When I send 10 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 	 	And The response contains script
 		And The responses has impression-urls
 		And The impressionUrl has bannerid field matching the id of the banner named {75396-210722-278956-See Through-RampLift-1} 100% of the time
@@ -21,7 +21,8 @@
 Scenario: Send an ad request to UAS and parse logs
         Given I Delete req logs
         Given I Delete imp logs
-        When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
+        Given I clear all cookies from uas requests
+        When I send 10 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
         And The response has impression-url
         And The response has click-url
         When I send impression requests to UAS

@@ -13,20 +13,66 @@ public class CreateCampaignRequest {
     private String lineItemId;
     private Zonesets zonesets;
     private List<Integer> selectedCreativeIds;
+    private Integer selectedDealId;
     private String startDateTime;
     private String endDateTime;
-    private String priority;
+    private SupplySources supplySources;
 
-    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeIds, String startDateTime, String endDateTime,String priority)
+
+    @JsonProperty("optimizeReason")
+    String optimizeReason = "10";
+    @JsonProperty("campaignType")
+    String campaignType = "1";
+    @JsonProperty("pacing")
+    String pacing = "25";
+    @JsonProperty("deliveryMethod")
+    String deliveryMethod = "4";
+    @JsonProperty("isUnlimited")
+    Boolean isUnlimited = true;
+    @JsonProperty("limitation")
+    String limitation = "[]";
+
+
+    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeIds, String startDateTime, String endDateTime)
     {
         this.campaignName = campaignName;
         this.lineItemId = lineItemId;
         this.zonesets = zonesets;
         this.selectedCreativeIds = selectedCreativeIds;
+        this.startDateTime = "2018-03-06T19:06:44.809Z";
+        this.endDateTime = "2019-12-31T04:59:59.999Z";
+//        this.startDateTime = startDateTime;
+//        this.endDateTime = endDateTime;
+    }
+    //programmatic campaign
+    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, Integer selectedDealId, String startDateTime, String endDateTime)
+    {
+        this.campaignName = campaignName;
+        this.lineItemId = lineItemId;
+        this.zonesets = zonesets;
+        this.selectedDealId = selectedDealId;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
-        this.priority = priority;
     }
+    @JsonProperty("SupplySources")
+    public SupplySources getSupplySources() {
+        return supplySources;
+    }
+
+    @JsonProperty("SupplySources")
+    public void setSupplySources(SupplySources supplySources) {
+        this.supplySources = supplySources;
+    }
+
+    @JsonProperty("selectedDealId")
+    public Integer getSelectedDealId() {
+        return selectedDealId;
+    }
+    @JsonProperty("selectedDealId")
+    public void setSelectedDealId(Integer selectedDealId) {
+        this.selectedDealId = selectedDealId;
+    }
+
     @JsonProperty("campaignName")
     public String getCampaignName() {
         return campaignName;
@@ -84,12 +130,4 @@ public class CreateCampaignRequest {
         this.endDateTime = endDateTime;
     }
 
-    @JsonProperty("priority")
-    public String getPriority() {
-        return priority;
-    }
-    @JsonProperty("priority")
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
 }

@@ -143,7 +143,7 @@
 		"zonesetName": "Uas-by-at-most-zoneset",
 		"Zones": [
 			{
-				"zoneId": 177378,
+					"zoneId": 177378,
 				"zoneName": "Uas-by-at-most-zone-1",
 				"adUnitId": 83,
 				"isSync": true,

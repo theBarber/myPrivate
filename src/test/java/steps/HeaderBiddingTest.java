@@ -2,7 +2,10 @@ package steps;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
+import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
+import entities.Zone;
+import infra.module.WithId;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.Assert;
@@ -11,8 +14,14 @@ import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.Matchers.isIn;
+import static org.hamcrest.Matchers.isOneOf;
 
 
 @RunWith(Cucumber.class)
@@ -26,7 +35,7 @@ public class HeaderBiddingTest extends BaseTest {
     public HeaderBiddingTest()
     {
         super();
-        Before(HEADERBIDDINGSAHAR, (scenario) -> {
+        Before(HEADERBIDDING, (scenario) -> {
             try {
                 headerBiddingPostRequests = mapper.readTree(this.getClass().getResourceAsStream(HEADER_BIDDING_SOURCE_FILE_PATH));
             } catch (Exception e) {
@@ -34,9 +43,29 @@ public class HeaderBiddingTest extends BaseTest {
             }
         });
 
-        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
-        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
-        And("all HB responses contains (\\w+) with id (\\w+)",this::responsesContainEntityWithId);
+        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
+        And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
+        And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
+        And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
+
+    }
+
+    private void responsesContainOneOnOf(String entity, String banners_names) {
+        List<Integer> bannersIds = Arrays.stream(banners_names.split(",")).map(name -> getEntityId(entity, name)).collect(Collectors.toList());
+
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
+                Assert.assertThat(responseInJson.get(0).get(entity).intValue(),isIn(bannersIds));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     private void sendHeaderBiddingSecurePostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams) {
@@ -61,7 +90,7 @@ public class HeaderBiddingTest extends BaseTest {
         sendHeaderBiddingPostRequest(times,scenario,publisherID,domain,null);
     }
 
-    public void responsesContainEntityWithId(String entity, String id) {
+    public void responsesContainEntityWithId(String entity, Integer id) {
 
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             JsonNode responseInJson = null;
@@ -69,11 +98,30 @@ public class HeaderBiddingTest extends BaseTest {
             {
                 responseInJson = mapper.readTree(content);
                 Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
-                Assert.assertEquals(responseInJson.get(0).get(entity).toString(), id);
+                Assert.assertEquals(id.intValue(),responseInJson.get(0).get(entity).intValue());
             }catch (Exception e)
             {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void responsesContainEntityWithName(String entity, String name)
+    {
+       responsesContainEntityWithId(entity, getEntityId(entity,name));
+    }
+
+    private Integer getEntityId(String entity, String name)
+    {
+        String myEntity;
+        switch (entity.toLowerCase()) {
+            case "adid":
+                myEntity = "banner";break;
+            case "campaignid":
+                myEntity = "campaign";break;
+            default:
+                myEntity = null;
+        }
+        return sut.getCampaignManager().getterFor(myEntity).apply(name).orElseThrow(() -> new AssertionError(name+" wasn't found")).getId();
     }
 }

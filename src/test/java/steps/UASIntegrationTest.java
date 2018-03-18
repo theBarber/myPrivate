@@ -30,18 +30,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.sun.org.apache.xpath.internal.SourceTreeManager;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -58,7 +54,6 @@ import infra.support.StringUtils;
 import infra.utils.HttpContentTest;
 import ramp.lift.uas.automation.UASRequestModule;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 /**
  * Created by noam on 29/09/16.
@@ -149,6 +144,11 @@ public class UASIntegrationTest extends BaseTest {
           .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
     });
 
+  Then("The responses? has dsp-urls?", () -> {
+          assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
+                  .map(UASIntegrationTest::getDspUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
+      });
+
     Then("The responses? are passback?", () -> {
 
       Map<Boolean, Long> countUrls =
@@ -184,20 +184,30 @@ public class UASIntegrationTest extends BaseTest {
 
     Then("^I filter in the (clk|imp|req) log to the lines where id at column (\\d+) is the same as in impression-url$",
         (String logType, Integer column) -> {
-
-          URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
+            // for checks only
+            /*sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+                sut.write(content);
+            });*/
+            // for checks only
+          Optional<URL> impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
               .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
-              .map(Optional::get).findFirst().get();
+              .map(Optional::get).findFirst();
 
-          String idFieldValue = splitQuery(impressionUrl).get("id").get(0);
-            //---------------------checks-------------------------
-            Stream<List<String>> steamList = sut.logFor(logType).actual();
-            sut.write("The expected field value of the logType "+logType+" is: " +  idFieldValue);
-            steamList.forEach(m-> sut.write("The actual field value of the logType "+logType+" is: "+ m.get(column)));
-            //---------------------checks-------------------------
-          sut.logFor(logType).filter(raw -> idFieldValue.equals(raw.get(column)));
-          assertThat("the log " + logType + " should contain a line with " + idFieldValue + " at column "
-              + column, sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
+          if(impressionUrl.isPresent()){
+            //sut.write(impressionUrl.toString());
+            String idFieldValue = splitQuery(impressionUrl.get()).get("id").get(0);
+    //---------------------checks-------------------------------------------------------------------------------------------
+    //            Stream<List<String>> steamList = sut.logFor(logType).actual();
+    //            sut.write("The expected field value of the logType "+logType+" is: " +  idFieldValue);
+    //            steamList.forEach(m-> sut.write("The actual field value of the logType "+logType+" is: "+ m.get(column)));
+    //---------------------checks--------------------------------------------------------------------------------------------
+              sut.logFor(logType).filter(raw -> idFieldValue.equals(raw.get(column)));
+              assertThat("the log " + logType + " should contain a line with " + idFieldValue + " at column "
+                  + column, sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
+          }else
+          {
+              throw new AssertionError("impression url wasn't found");
+          }
         });
 
 
@@ -283,6 +293,11 @@ public class UASIntegrationTest extends BaseTest {
       sut.getUASRquestModule().addHttpHeader("User-Agent", userAgentStr);
     });
 
+      Given("I use \\{([^}]+)\\} as referer string to send my requests to uas", (String referer) -> {
+          sut.getUASRquestModule().emptyHttpHeaders();
+          sut.getUASRquestModule().addHttpHeader("referer", referer);
+      });
+
     Given("I add (\\w+) query parameter with value \\{([^}]+)\\} to send my requests to uas",
         (String paramName, String paramValue) -> {
           sut.getUASRquestModule().addQueryParam(paramName, paramValue);
@@ -327,8 +342,10 @@ public class UASIntegrationTest extends BaseTest {
 
   public static Map<String, List<String>> splitQuery(URL url) {
     if (StringUtils.nullOrEmpty.test(url.getQuery())) {
+        //System.out.println("query is null");
       return Collections.emptyMap();
     }
+     // System.out.println("query is ok");
       return  Arrays.stream(url.getQuery().split("&")).map(UASIntegrationTest::splitQueryParameter).collect(
         groupingBy(SimpleImmutableEntry::getKey, LinkedHashMap::new, mapping(Map.Entry::getValue, toList())));
   }
@@ -351,6 +368,10 @@ public class UASIntegrationTest extends BaseTest {
   private static CompletableFuture<Optional<String>> getClickUrl(CompletableFuture<HttpResponse> future) {
     return future.thenApply(UASRequestModule::getClickUrlFrom);
   }
+
+    private static CompletableFuture<Optional<String>> getDspUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getdspUrlFrom);
+    }
 
   private void sendMultipleAdRequests(Integer times, String zoneByName, boolean toReset) {
     Zone zone = sut.getCampaignManager().getZone(zoneByName)
@@ -393,7 +414,7 @@ public class UASIntegrationTest extends BaseTest {
             impurl.flatMap(sut.getUASRquestModule()::getImpressionUrl).ifPresent(url -> {
               url = (url.contains("stid=")) ? url.replaceAll("&stid=0", "&stid=999") : url.concat("&stid=999");
               try {
-                  sut.write("the impression url sent is: " + url);
+                  //sut.write("the impression url sent is: " + url);
                 HttpResponse response = httpclient.execute(new HttpGet(url),ctx);
                 int sc = response.getStatusLine().getStatusCode();
                 if (sc == 204) {

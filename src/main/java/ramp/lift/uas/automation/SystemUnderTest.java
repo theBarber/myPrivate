@@ -97,7 +97,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						break;
 		case "@RampAppCreateEntitiesManager":
 				if(rampAppCreateEntitiesManager == null)
-						rampAppCreateEntitiesManager = new RampAppCreateEntitiesManager(config.get("ramp.app.host"),
+						rampAppCreateEntitiesManager = new RampAppCreateEntitiesManager(config.get("ramp.app.host1"),config.get("ramp.app.host2"),
 										(config.get("ramp.app.port")));
 				break;
 	    case "@ramp_admin_db":
@@ -225,6 +225,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						AutoCloseable cm = (AutoCloseable) rampAppCreateEntitiesManager;
 						cm.close();
 						cm = null;
+						rampAppCreateEntitiesManager = null;
 					}
 					catch (Exception e) {
 						delegate(exception, e);
@@ -352,7 +353,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	public RampAppCreateEntitiesManager getRampAppCreateEntitiesManager() {
 		if(rampAppCreateEntitiesManager == null)
 		{
-			rampAppCreateEntitiesManager =  new RampAppCreateEntitiesManager(config.get("ramp.app.host"),
+			rampAppCreateEntitiesManager =  new RampAppCreateEntitiesManager(config.get("ramp.app.host1"),config.get("ramp.app.host2"),
 										(config.get("ramp.app.port")));
 		}
 		return rampAppCreateEntitiesManager;
