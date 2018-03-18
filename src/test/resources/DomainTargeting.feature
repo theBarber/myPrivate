@@ -1,5 +1,4 @@
 @DOT
-@scheduled
 @HeaderBidding
 Feature: Domain Targeting tests
 
