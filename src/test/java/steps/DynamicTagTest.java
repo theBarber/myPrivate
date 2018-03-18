@@ -7,8 +7,9 @@ import infra.utils.SqlWorkflowUtils;
 import org.junit.runner.RunWith;
 
 import java.util.List;
-import java.util.Map;
+
 import java.util.Random;
+
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:DynamicTag.feature", plugin = {"pretty",
@@ -25,6 +26,7 @@ public class DynamicTagTest extends BaseTest{
         Given("i remove all zones related to web_section id (\\d+)",this::removeAllZonesFrom);
         Given("only tags \\{([^}]+)\\} are enabled and the rest are disabled for publisher (\\d+)",this::removeTagsFromPublisher);
         And("i remove all zones from publishers: \\{([^}]+)\\}, apart from zones:\\{([^}]+)\\}",this::removeAllZonesForPublisherApartFrom);
+        And("i remove all zones from publishers: \\{([^}]+)\\}",this::removeAllZonesForPublisher);
         Given("I add cookie (\\w+) with random value to my requests to uas", (String paramName) -> {
             sut.getUASRquestModule().clearCookies();
             sut.getUASRquestModule().addCookie(paramName, String.valueOf(new Random().nextInt()));
@@ -69,6 +71,14 @@ public class DynamicTagTest extends BaseTest{
                 "\twhere p_w_p.publisher_id in ("+publishersID+") and z.status = 0 and z.zoneid not in ("+remainingZones+"));");
 
         SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`zones` SET `status`='0' WHERE `zoneid` in ("+remainingZones+");");
+    }
+
+    public void removeAllZonesForPublisher(String publishersID)
+    {
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`zones` as z_n SET `status`='1' WHERE z_n.zoneid in\n" +
+                "(select zoneid from (SELECT * FROM zones) as z join web_sections w_s on z.web_section_id = w_s.id \n" +
+                "\tjoin publishers_web_properties p_w_p on w_s.web_property_id = p_w_p.web_property_id \n" +
+                "\twhere p_w_p.publisher_id in ("+publishersID+") and z.status = 0);");
     }
 
     private void removeAllZonesFrom(Integer web_sectionID)

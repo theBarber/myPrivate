@@ -16,6 +16,21 @@ public class CreateCampaignRequest {
     private Integer selectedDealId;
     private String startDateTime;
     private String endDateTime;
+    private SupplySources supplySources;
+
+
+    @JsonProperty("optimizeReason")
+    String optimizeReason = "10";
+    @JsonProperty("campaignType")
+    String campaignType = "1";
+    @JsonProperty("pacing")
+    String pacing = "25";
+    @JsonProperty("deliveryMethod")
+    String deliveryMethod = "4";
+    @JsonProperty("isUnlimited")
+    Boolean isUnlimited = true;
+    @JsonProperty("limitation")
+    String limitation = "[]";
 
 
     public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeIds, String startDateTime, String endDateTime)
@@ -24,8 +39,10 @@ public class CreateCampaignRequest {
         this.lineItemId = lineItemId;
         this.zonesets = zonesets;
         this.selectedCreativeIds = selectedCreativeIds;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.startDateTime = "2018-03-06T19:06:44.809Z";
+        this.endDateTime = "2019-12-31T04:59:59.999Z";
+//        this.startDateTime = startDateTime;
+//        this.endDateTime = endDateTime;
     }
     //programmatic campaign
     public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, Integer selectedDealId, String startDateTime, String endDateTime)
@@ -37,7 +54,15 @@ public class CreateCampaignRequest {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
+    @JsonProperty("SupplySources")
+    public SupplySources getSupplySources() {
+        return supplySources;
+    }
 
+    @JsonProperty("SupplySources")
+    public void setSupplySources(SupplySources supplySources) {
+        this.supplySources = supplySources;
+    }
 
     @JsonProperty("selectedDealId")
     public Integer getSelectedDealId() {

@@ -8,7 +8,7 @@ integration.workflow.db.jdbc.connection = jdbc:mysql://10.6.7.129/adserver
 *.workflow.db.password = adserver
 
 staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
-integration.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services-us-east-1.cmovgkgbdusb.us-east-1.rds.amazonaws.com/integration_ramp_admin
+integration.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/integration_ramp_admin
 *.ramp.admin.db.user = dev_manager
 *.ramp.admin.db.password = dev123456
 
@@ -32,11 +32,12 @@ dev1.uas.cliconnection.keyname=
 # staging.uas.port=9000
 staging.uas.domain=stgads.undertone.com
 
+
 # add to your /etc/hosts a line with the ip of your uas to this domain
 dev1.uas.domain=dev1.undertone.com
 
 dev2.uas.domain=dev2.undertone.com
-# integration.uas.domain=172.31.48.19
+# integration.uas.domain=172.31.48.20
 integration.uas.port=9000
 integration.uas.domain=intads.undertone.com
 *.uas.port=

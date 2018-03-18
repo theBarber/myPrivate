@@ -2,6 +2,7 @@ package steps;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
+import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
 import entities.Zone;
 import infra.module.WithId;
@@ -13,8 +14,14 @@ import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.Matchers.isIn;
+import static org.hamcrest.Matchers.isOneOf;
 
 
 @RunWith(Cucumber.class)
@@ -36,10 +43,28 @@ public class HeaderBiddingTest extends BaseTest {
             }
         });
 
-        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
-        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
-        And("all HB responses contains (\\w+) with id (\\d+)",this::responsesContainEntityWithId);
-        And("all HB responses contains (\\w+) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
+        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
+        And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
+        And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
+        And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
+
+    }
+
+    private void responsesContainOneOnOf(String entity, String banners_names) {
+        List<Integer> bannersIds = Arrays.stream(banners_names.split(",")).map(name -> getEntityId(entity, name)).collect(Collectors.toList());
+
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
+                Assert.assertThat(responseInJson.get(0).get(entity).intValue(),isIn(bannersIds));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
 
     }
 
@@ -83,17 +108,20 @@ public class HeaderBiddingTest extends BaseTest {
 
     private void responsesContainEntityWithName(String entity, String name)
     {
+       responsesContainEntityWithId(entity, getEntityId(entity,name));
+    }
+
+    private Integer getEntityId(String entity, String name)
+    {
         String myEntity;
-        switch (entity) {
-            case "adId":
+        switch (entity.toLowerCase()) {
+            case "adid":
                 myEntity = "banner";break;
-            case "campaignID":
+            case "campaignid":
                 myEntity = "campaign";break;
             default:
                 myEntity = null;
         }
-
-        WithId<Integer> withId = sut.getCampaignManager().getterFor(myEntity).apply(name).orElseThrow(() -> new AssertionError("entity wasn't found"));
-        responsesContainEntityWithId(entity, withId.getId());
+        return sut.getCampaignManager().getterFor(myEntity).apply(name).orElseThrow(() -> new AssertionError(name+" wasn't found")).getId();
     }
 }

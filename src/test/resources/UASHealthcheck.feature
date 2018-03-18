@@ -3,6 +3,7 @@
 @Integration
 @uas
 @stable
+@scheduled
 Feature: UAS connectivity to other components
 
 
@@ -37,18 +38,18 @@ Scenario: 6. Uas is responsive to zone request
 	And The response has impression-url
 	And The response has click-url
 
-#@campaign
-#@hardcoded
-#@Sanity
-#@Stress
-#Scenario: 7. Uas is responsive to a lot of zone requests
-#    When I send 500 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
-#	And I send impression requests to UAS immediately!
-#	Then The response code is 200
-#	And The response contains script
-#	And The response has impression-url
-#	And The response has click-url
-#
-#
+@campaign
+@hardcoded
+@Sanity
+@Stress
+Scenario: 7. Uas is responsive to a lot of zone requests
+	When I send 500 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
+	And I send impression requests to UAS immediately!
+	Then The response code is 200
+	And The response contains script
+	And The response has impression-url
+	And The response has click-url
+
+
 
 
