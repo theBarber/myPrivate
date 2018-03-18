@@ -78,7 +78,7 @@ Feature: Entities for tests
   @DOT
   Scenario: create campaigns for Domain Targeting
     Given i remove all zones from publishers: {3703}
-    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3703 with po_line_item_id 66131
+    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
     Given i create new campaigns, new zoneset with domains
       |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
       |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |{}                  |{sahar.cnn.com}                   |
