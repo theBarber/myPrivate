@@ -1,7 +1,7 @@
 staging.workflow.db.jdbc.connection = jdbc:mysql://172.31.32.57/adserver
 integration.workflow.db.jdbc.connection = jdbc:mysql://10.6.7.129/adserver
-aws-staging.workflow.db.jdbc.connection = jdbc:mysql://10.12.5.227/adserver
-aws-integration.workflow.db.jdbc.connection = jdbc:mysql://10.12.5.79/adserver
+aws-staging.workflow.db.jdbc.connection = jdbc:mysql://workflowdb-s-us-east-1.undertone.com/adserver
+aws-integration.workflow.db.jdbc.connection = jdbc:mysql://workflowdb-i-us-east-1.undertone.com/adserver
 dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
 # dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.34.113/adserver
 dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
