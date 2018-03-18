@@ -43,87 +43,87 @@ Feature: Domain Targeting tests
 
   Scenario: 2. send Dynamic Tag requests for sub domain sahar.cnn.com, black list {sahar.cnn.com}
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 161 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 161 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://ynet.co.il} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 161 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
 
   Scenario: 3. send Dynamic Tag requests for domain cnn.com, black list {sahar.cnn.com}
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 161 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 161 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-1-banner-1} 100% of the time
     Given I use {http://ynet.co.il} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 161 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-1-banner-1} 100% of the time
 
   Scenario: 4. send Dynamic Tag requests for domain sahar.cnn.com, black list {cnn.com}
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://ynet.co.il} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
 
   Scenario: 5. send Dynamic Tag requests for domain cnn.com, black list {cnn.com}
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://ynet.co.il} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://sahar.cnn.com&unlimited=1}
     And The responses are passback
 
   Scenario: 5. send Dynamic Tag requests for domain ynet.co.il, black list {cnn.com}
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://ynet.co.il&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://ynet.co.il&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-2-banner-1} 100% of the time
     Given I use {http://cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://ynet.co.il&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://ynet.co.il&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-2-banner-1} 100% of the time
     Given I use {http://ynet.co.il} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 162 to UAS for publisher 3703 with domain {http://ynet.co.il&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 176 to UAS for publisher 3703 with domain {http://ynet.co.il&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-2-banner-1} 100% of the time
 
   Scenario: 6. send Dynamic Tag requests with black list {sahar.cnn.com,cnn.com,ynet.co.il}
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 163 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 175 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 163 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 175 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
     And The responses are passback
     Given I use {http://ynet.co.il} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 163 to UAS for publisher 3703 with domain {http://walla.co.il&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 175 to UAS for publisher 3703 with domain {http://walla.co.il&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-3-banner-1} 100% of the time
     Given I use {http://cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 163 to UAS for publisher 3703 with domain {http://cnn.co.il&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 175 to UAS for publisher 3703 with domain {http://cnn.co.il&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-3-banner-1} 100% of the time
 
   Scenario: 7. send Dynamic Tag requests with black list {cnn.com} (1 campaign with 2 zones)
     Given I use {http://ynet.co.il} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 164 to UAS for publisher 3703 with domain {http://ynet.co.il&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 177 to UAS for publisher 3703 with domain {http://ynet.co.il&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-4-banner-1} 100% of the time
     Given I use {http://cnn.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 164 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 177 to UAS for publisher 3703 with domain {http://cnn.com&unlimited=1}
     And The responses are passback
 
   Scenario: 8. send HB requests

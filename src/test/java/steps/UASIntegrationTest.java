@@ -144,6 +144,11 @@ public class UASIntegrationTest extends BaseTest {
           .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
     });
 
+  Then("The responses? has dsp-urls?", () -> {
+          assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
+                  .map(UASIntegrationTest::getDspUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
+      });
+
     Then("The responses? are passback?", () -> {
 
       Map<Boolean, Long> countUrls =
@@ -363,6 +368,10 @@ public class UASIntegrationTest extends BaseTest {
   private static CompletableFuture<Optional<String>> getClickUrl(CompletableFuture<HttpResponse> future) {
     return future.thenApply(UASRequestModule::getClickUrlFrom);
   }
+
+    private static CompletableFuture<Optional<String>> getDspUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getdspUrlFrom);
+    }
 
   private void sendMultipleAdRequests(Integer times, String zoneByName, boolean toReset) {
     Zone zone = sut.getCampaignManager().getZone(zoneByName)
