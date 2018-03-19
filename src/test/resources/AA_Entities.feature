@@ -75,20 +75,20 @@ Feature: Entities for tests
         |campaign-DT-Inline-PGC-2 |-1            |2                       |
       And I flush bucket name {iad-adserver} on couchbase
 
-#  @DOT
-#  Scenario: create campaigns for Domain Targeting
-#    Given i remove all zones from publishers: {3703}
-#    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
-#    Given i create new campaigns, new zoneset with domains
-#      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
-#      |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |{}                  |{sahar.cnn.com}                   |
-#      |campaign-DomainT-2   |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |{}                  |{cnn.com}                         |
-#      |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
-#      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |{}                  |{cnn.com}                         |
+  @DOT
+  Scenario: create campaigns for Domain Targeting
+    Given i remove all zones from publishers: {3708}
+    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
+      |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |{}                  |{sahar.cnn.com}                   |
+      |campaign-DomainT-2   |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |{}                  |{cnn.com}                         |
+      |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
+      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |{}                  |{cnn.com}                         |
 
 #  @appnexus
 #  Scenario: create entities for server programmatic tests
-##    Given i remove all zones from publishers: {3703}
+##    Given i remove all zones from publishers: {3708}
 #    Given i create new campaigns with new zoneset
 #      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name          |limitation   |adUnitId   |Web_Section id     |publisher ID   |po_line_item ID   |
 #      |campaign-server-prog-SS-1  |407981        |224531     |true                   |10002           |{zone-zoneset-server-prog-SS} |[]           |69         |4737              |2434           |27397             |
