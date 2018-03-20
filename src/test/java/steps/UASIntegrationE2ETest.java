@@ -23,12 +23,12 @@ import static org.junit.Assert.assertThat;
 @CucumberOptions(features = "classpath:UASIntegrationE2E.feature", plugin = { "pretty",
         "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
-public class UASIntegrationE2E extends BaseTest {
+public class UASIntegrationE2ETest extends BaseTest {
     private RampAppCreateEntitiesManager rampAppCreateEntitiesManager;
     private ObjectMapper mapper = new ObjectMapper();
     private Campaign lastCreatedCampaign;
 
-    public UASIntegrationE2E()
+    public UASIntegrationE2ETest()
     {
         super();
     }

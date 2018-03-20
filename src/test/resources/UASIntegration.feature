@@ -1,7 +1,7 @@
 	@Integration
 	@cli
 	@uas
-@scheduled
+
 @stable
     @test1
 	Feature: UAS Ad request flows

@@ -78,10 +78,21 @@ staging.ramp.app.host2=staging.ramp-ut.io
 staging.ramp.app.port=3003
 staging.ramp.test.lineItemId=210722
 
+aws-staging.ramp.app.host1=staging-us-east-1.ramp-ut.io
+aws-staging.ramp.app.host2=staging-us-east-1.ramp-ut.io
+aws-staging.ramp.app.port=3003
+aws-staging.ramp.test.lineItemId=210722
+
+aws-integration.ramp.app.host1=integration-us-east-1.ramp-ut.io
+aws-integration.ramp.app.host2=integration-us-east-1.ramp-ut.io
+aws-integration.ramp.app.port=3003
+aws-integration.ramp.test.lineItemId=[210722]
+
 integration.ramp.app.host1=services-ramp-integration.ramp-ut.io
 integration.ramp.app.host2=integration.ramp-ut.io
 integration.ramp.app.port=3003
 integration.ramp.test.lineItemId=[210722]
+
 
 dev1.ramp.app.host=[172.19.35.74]
 dev1.ramp.app.port=3003

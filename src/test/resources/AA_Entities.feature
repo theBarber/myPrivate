@@ -1,5 +1,12 @@
 @scheduled
 Feature: Entities for tests
+
+  @zoneTagSanity
+  Scenario: create entities for zone Tag Sanity test
+    Given i create new campaigns with new zoneset
+      |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-API-1-a-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |
+
   @AB
   Scenario: create entities for AB testing
     Given i create new campaigns with new zoneset
@@ -86,22 +93,22 @@ Feature: Entities for tests
       |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
       |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |{}                  |{cnn.com}                         |
 
-#  @appnexus
-#  Scenario: create entities for server programmatic tests
-#    Given i remove all zones from publishers: {3711}
-#    Given i create new campaigns with new zoneset
-#      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name          |limitation   |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |
-#      |campaign-server-prog-SS-1  |407981        |224531     |true                   |10002           |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-SS-2  |407981        |224531     |true                   |10003           |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-PGC-1 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-2 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-3 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-4 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-5 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-6 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-ST-1  |407981        |224810     |false                  |6498            |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-#      |campaign-server-prog-ST-2  |407981        |224810     |true                   |4322            |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+  @appnexus
+  Scenario: create entities for server programmatic tests
+    Given i remove all zones from publishers: {3711}
+    Given i create new campaigns with new zoneset
+      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name          |limitation   |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-server-prog-SS-1  |407981        |224531     |true                   |123             |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-2  |407981        |224531     |true                   |123             |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-PGC-1 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-2 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-3 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-4 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-5 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-6 |407981        |224812     |true                   |10004           |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-ST-1  |407981        |224810     |false                  |6498            |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-2  |407981        |224810     |true                   |4322            |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
 
   @appnexus
   @cacheRefresh
@@ -109,6 +116,7 @@ Feature: Entities for tests
   @DOT
   @DT
   @AB
+  @zoneTagSanity
   Scenario: refresh cache
     And I refresh zone cache
     And I refresh banner cache
