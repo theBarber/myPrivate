@@ -2,8 +2,8 @@
 	@cli
 	@uas
     @test1
+    @stable
 	Feature: UAS Ad request flows
-
 	@Sanity
 	Scenario: Send an ad request to UAS and parse impression url
 #        Given I setup the db

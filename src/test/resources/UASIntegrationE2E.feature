@@ -3,7 +3,7 @@
 @RampAppCreateCampaign
 @scheduled
 @zoneTagSanity
-@stable
+
     Feature: UAS E2E Ad request flow - with new entities
 
    Scenario: Send an ad request to UAS and parse impression url
