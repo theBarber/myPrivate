@@ -155,7 +155,7 @@ public class BaseTest implements En {
     // clean db
     //SqlRampAdminUtils.unableAllExperimentGroups();
     //SqlWorkflowUtils.setLimitationForZone(161482, "[]");
-    //SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`campaigns` SET `capping`='0', `session_capping`='0' WHERE `campaignid`='278956';");
     CacheProcessTest.refreshZoneCache("cmd");
     //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream());
 

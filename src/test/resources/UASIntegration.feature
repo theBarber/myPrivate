@@ -3,6 +3,7 @@
 	@uas
     @test1
     @stable
+    @scheduled
 	Feature: UAS Ad request flows
 	@Sanity
 	Scenario: Send an ad request to UAS and parse impression url
@@ -16,25 +17,25 @@
 		And The responses has click-urls
 		And The clickUrl has bannerid field matching the id of the banner named {75396-210722-278956-See Through-RampLift-1} 100% of the time
 
-Scenario: Send an ad request to UAS and parse logs
-        Given I Delete req logs
-        Given I Delete imp logs
-        Given I clear all cookies from uas requests
-        When I send 10 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
-        And The response has impression-url
-        And The response has click-url
-        When I send impression requests to UAS
-        And I sleep for 20 seconds
-		Then I read the latest req log file from uas
-        Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
-        And The field zoneid in the 4 column of the req log is the same as in impression-url
-        And The field bannerid in the 5 column of the req log is the same as in impression-url
-        And The field campaignid in the 6 column of the req log is the same as in impression-url
-        And I sleep for 20 seconds
-        Then I read the latest imp log file from uas
-        And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
-        Given I Delete clk logs
-        When I send click requests to UAS
-        And I sleep for 20 seconds
-        Then I read the latest clk log file from uas
-        And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
+#Scenario: Send an ad request to UAS and parse logs
+#        Given I Delete req logs
+#        Given I Delete imp logs
+#        Given I clear all cookies from uas requests
+#        When I send 10 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
+#        And The response has impression-url
+#        And The response has click-url
+#        When I send impression requests to UAS
+#        And I sleep for 5 seconds
+#		Then I read the latest req log file from uas
+#        Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
+#        And The field zoneid in the 4 column of the req log is the same as in impression-url
+#        And The field bannerid in the 5 column of the req log is the same as in impression-url
+#        And The field campaignid in the 6 column of the req log is the same as in impression-url
+#        And I sleep for 5 seconds
+#        Then I read the latest imp log file from uas
+#        And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
+#        Given I Delete clk logs
+#        When I send click requests to UAS
+#        And I sleep for 5 seconds
+#        Then I read the latest clk log file from uas
+#        And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
