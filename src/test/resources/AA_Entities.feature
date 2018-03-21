@@ -2,6 +2,7 @@
 Feature: Entities for tests
 
   @zoneTagSanity
+  @stable
   Scenario: create entities for zone Tag Sanity test
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
@@ -117,8 +118,16 @@ Feature: Entities for tests
   @DT
   @AB
   @zoneTagSanity
-  Scenario: refresh cache
+  @stable
+  Scenario: refresh zone cache
     And I refresh zone cache
+
+  @appnexus
+  @cacheRefresh
+  @HB
+  @DOT
+  @DT
+  Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I sleep for 100 seconds

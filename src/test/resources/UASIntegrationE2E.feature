@@ -3,10 +3,10 @@
 @RampAppCreateCampaign
 @scheduled
 @zoneTagSanity
+@stable
     Feature: UAS E2E Ad request flow - with new entities
 
    Scenario: Send an ad request to UAS and parse impression url
-#        Given I setup the db
         When I send 10 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-sanity-1-a} to UAS
 	 	And The response contains script
 		And The responses has impression-urls
