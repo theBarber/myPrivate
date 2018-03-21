@@ -50,7 +50,7 @@ public class BaseTest implements En {
 
   public BaseTest() {
     environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
-//    environmentName ="aws-integration";
+//    environmentName ="aws-staging";
 
     String environmentNameConfigPrefix = environmentName + ".";
     String allEnvironmentsNameDefaultConfigPrefix = "*.";
