@@ -77,19 +77,8 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return createCampaignResponse;
 	}
 
-	/*public Optional<Campaign> createCampaignWithDomains(String campaignName, Integer lineItemId, Integer creativeID, Integer zonesetID, Boolean isServerProgrammatic,List<String>domain_include, List<String>domain_exclude)
-	{
-		CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(campaignName, String.valueOf(lineItemId), creativeID, zonesetID,isServerProgrammatic);
-		SupplySources supplySources = new SupplySources(domain_include,domain_exclude);
-		createCampaignRequest.setSupplySources(supplySources);
-		CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequest);
-		CloseableHttpResponse createCampaignResponse = createCampaignRequest(requestWrapper);
-		return getCampaignFromResponse(createCampaignResponse,isServerProgrammatic);
-	}*/
-
 	public Optional<Campaign> createCampaign(CreateCampaignRequest createCampaignRequest,Boolean isServerProgrammatic)
 	{
-		//CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(campaignName, String.valueOf(lineItemId), creativeID, zonesetID,isServerProgrammatic);
 		CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequest);
 		CloseableHttpResponse createCampaignResponse = createCampaignRequest(requestWrapper);
 		return getCampaignFromResponse(createCampaignResponse,isServerProgrammatic);
@@ -269,11 +258,10 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return createZonesetResponse;
 	}
 
-	private CloseableHttpResponse createDealRequest(String dealName,Integer dspID,Integer floorPrice,Integer dealType,List<Integer> adUnitId, Integer IO)
+	private CloseableHttpResponse createDealRequest(DealRequest dealRequest, Integer IO)
 	{
 		CloseableHttpResponse dealResponse;
 		String url = getAppURL("/io/"+IO+"/deal");
-		DealRequest dealRequest = new DealRequest(new Deal(0,dealName,dspID,floorPrice,dealType,adUnitId));
 		HttpPost httpPost = new HttpPost(url);
 		try {
 			HttpEntity entity = new StringEntity(mapper.writeValueAsString(dealRequest), ContentType.APPLICATION_JSON);
@@ -290,9 +278,9 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 	}
 
 
-	public Deal createDeal(String dealName,Integer dspID,Integer floorPrice,Integer dealType,List<Integer> adUnitId, Integer IO)
+	public Deal createDeal(DealRequest dealRequest, Integer IO)
 	{
-		CloseableHttpResponse dealResponse = createDealRequest(dealName,dspID,floorPrice,dealType,adUnitId,IO);
+		CloseableHttpResponse dealResponse = createDealRequest(dealRequest,IO);
 		return getDealFromResponse(dealResponse);
 	}
 

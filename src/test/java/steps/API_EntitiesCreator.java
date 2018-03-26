@@ -108,12 +108,11 @@ public class API_EntitiesCreator extends BaseTest{
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
-
+    //creating zones and zoneset if needed (if not exist)
     private List<Integer> getZonesetsIds(List<String> campaignDataTable) {
         String zonesetsNameAsString = campaignDataTable.get(5);
         List<String> zonesetNamesAsList;
         List<Integer> zonesetsIdsList = new ArrayList<>();
-        Optional<ZoneSet> zoneSetObj;
         Integer zonesetId;
 
         if(zonesetsNameAsString.length()<3)
@@ -214,7 +213,8 @@ public class API_EntitiesCreator extends BaseTest{
     private void createDeal(String dealName,Integer dspID,Integer floorPrice,Integer dealType,Integer adUnitId, Integer IO)
     {
         List<Integer>adUnitsIds = new ArrayList<Integer>(){{add(adUnitId);}};
-        Deal deal = sut.getRampAppCreateEntitiesManager().createDeal(dealName,dspID,floorPrice,dealType,adUnitsIds,IO);
+        DealRequest dealRequest = new DealRequest(new Deal(0,dealName,dspID,floorPrice,dealType,adUnitsIds));
+        Deal deal = sut.getRampAppCreateEntitiesManager().createDeal(dealRequest,IO);
         //add it to some list
     }
 

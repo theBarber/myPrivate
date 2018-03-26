@@ -8,28 +8,25 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.AbstractMap.SimpleImmutableEntry;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.LongAdder;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import cucumber.api.PendingException;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
@@ -325,9 +322,28 @@ public class UASIntegrationTest extends BaseTest {
         fail(e.getMessage());
       }
     });
+      Then("^i simulate appnexus passback response from the responses and send them to the UAS$", () -> {
+          List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
+          response.stream().map(UASIntegrationTest::getDspUrl).map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
+                  .map(Optional::get).map(UASIntegrationTest::getAppnexusPassbackURL).forEach(url-> {
+                      sut.getUASRquestModule().sendGetRequestsAsync(1,url);
+                  }
+          );
+      });
   }
 
-  private static Predicate<CompletableFuture<?>> succeededFuture = c -> !c.isCompletedExceptionally();
+    private static String getAppnexusPassbackURL(URL dspURL) {
+        Map<String, List<String>> splitedQuery = splitQuery(dspURL);
+        return new StringBuilder().append("http://").append(sut.getUASRquestModule().getDomain())
+                .append(Optional.ofNullable(sut.getUASRquestModule().getPort()).filter(s->!s.isEmpty()).map(s->":"+s).orElse(""))
+                .append("/aj?").append("zoneid=").append(splitedQuery.get("pt5").get(0)).append("&pb_id=").append(splitedQuery.get("pt2").get(0))
+                .append("&pb_bannerid=").append(splitedQuery.get("pt3").get(0)).append("&pb_bk=").append(splitedQuery.get("pt4").get(0))
+                .append("&pb_campaignid=").append(splitedQuery.get("pt1").get(0)).append("&pb_ca=").append(splitedQuery.get("pt6").get(0))
+                .append("&pb_ctried=").append(splitedQuery.get("pt8").get(0)).append("&pb_stid=").append(splitedQuery.get("pt9").get(0)).append("&link=1&pg=1").toString();
+    }
+
+
+    private static Predicate<CompletableFuture<?>> succeededFuture = c -> !c.isCompletedExceptionally();
 
   private static Optional<URL> toURL(Optional<String> optionalurlstr) {
     if (optionalurlstr.isPresent()) {

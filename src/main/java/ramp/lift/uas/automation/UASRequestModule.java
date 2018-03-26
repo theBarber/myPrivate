@@ -10,10 +10,7 @@ import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
@@ -242,6 +239,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       return actual().stream();
   }
 
+  public List<CompletableFuture<HttpResponse>> responsesAsList() {
+    return actual();
+  }
+
   public List<HttpResponse> getSynchronizedResponses() {
     return synchronizedResponses;
   }
@@ -380,7 +381,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
   }
 
-  private void sendGetRequestsAsync(Integer times,String url)
+  public void sendGetRequestsAsync(Integer times,String url)
   {
     reset();
       for (; times > 0; times--) {
