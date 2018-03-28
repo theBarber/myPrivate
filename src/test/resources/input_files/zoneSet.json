@@ -13,6 +13,21 @@
 	]
 },
 	{
+		"zonesetId": 621853,
+		"zonesetName": "zonesefdst-auto-1-test-dnu",
+		"Zones": [
+			{
+				"zoneId": 180275,
+				"zoneName": "zone-zoneset-server-prog-SS-NOT-API",
+				"adUnitId": 10,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
+
+	{
 		"zonesetId": 64185,
 		"zonesetName": "test-lift-2-dnu",
 		"Zones": [

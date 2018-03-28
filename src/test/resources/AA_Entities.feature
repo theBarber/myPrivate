@@ -7,6 +7,15 @@ Feature: Entities for tests
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |
 
+  @limitationSanity
+  Scenario: create entities for zone Tag Sanity test
+    Given i create new campaigns with new zoneset
+      |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                 |limitation                                                  |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-API-limitations-test-F  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[[[5,"!~","af"],[12,"=~","firefox"]]]                         |83        |4737             |2434           |17116             |
+      |campaign-API-limitations-test-C  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[[[5,"!~","af"],[12,"=~","chrome"]]]                          |83        |4737             |2434           |17116             |
+      |campaign-API-limitations-test-W  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[[[5,"!~","af"],[12,"=~","msie","msie 7","msie 8","msie 9"]]] |83        |4737             |2434           |17116             |
+
+
   @AB
   Scenario: create entities for AB testing
     Given i create new campaigns with new zoneset
@@ -94,33 +103,35 @@ Feature: Entities for tests
       |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |{}                  |{cnn.com}                         |
 
 
-  @appnexus
-  Scenario: create entities for server programmatic tests
-    Given i remove all zones from publishers: {3711}
-    Given i create new campaigns with new zoneset
-      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-server-prog-SS-1  |407981        |224531     |true                   |1               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-SS-2  |407981        |224531     |true                   |2               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-SS-4  |407981        |224531     |true                   |3               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-PGC-1 |407981        |224530     |true                   |4               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-PGC-2 |407981        |224530     |true                   |5               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-PGC-3 |407981        |224530     |true                   |6               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-PGC-4 |407981        |224530     |true                   |7               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-ST-1  |407981        |224810     |false                  |6498            |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-2  |407981        |224533     |true                   |8               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-    And i update campaign data by name
-      |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
-      |campaign-server-prog-SS-1       |-2            |1                       |4                 |
-      |campaign-server-prog-SS-2       |-1            |2                       |3                 |
-      |campaign-server-prog-SS-3       | 1            |4                       |2                 |
-      |campaign-server-prog-SS-4       | 1            |4                       |1                 |
-      |campaign-server-prog-PGC-1      |-2            |1                       |4                 |
-      |campaign-server-prog-PGC-2      |-1            |2                       |3                 |
-      |campaign-server-prog-PGC-3      |-1            |2                       |3                 |
-      |campaign-server-prog-PGC-4      | 1            |4                       |2                 |
-      |campaign-server-prog-ST-1       |-2            |1                       |4                 |
-      |campaign-server-prog-ST-2       |-1            |2                       |3                 |
+#  @appnexus
+#  Scenario: create entities for server programmatic tests
+#    Given i remove all zones from publishers: {3711}
+#    Given i create new campaigns with new zoneset
+#      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+#      |campaign-server-prog-SS-1  |407981        |227414     |true                   |1               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+#      |campaign-server-prog-SS-2  |407981        |224531     |true                   |2               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+#      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+#      |campaign-server-prog-SS-4  |407981        |224531     |true                   |3               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+#      |campaign-server-prog-PGC-1 |407981        |224530     |true                   |4               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-PGC-2 |407981        |227413     |true                   |5               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-PGC-3 |407981        |224530     |true                   |6               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-PGC-4 |407981        |227413     |true                   |7               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-ST-1  |407981        |224810     |false                  |6498            |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+#      |campaign-server-prog-ST-2  |407981        |224533     |true                   |8               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+#    And i update campaign data by name
+#      |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
+#      |campaign-server-prog-SS-1       |-2            |1                       |4                 |
+#      |campaign-server-prog-SS-2       |-1            |2                       |3                 |
+#      |campaign-server-prog-SS-3       | 1            |4                       |2                 |
+#      |campaign-server-prog-SS-4       | 1            |4                       |1                 |
+#      |campaign-server-prog-PGC-1      |-2            |1                       |4                 |
+#      |campaign-server-prog-PGC-2      |-1            |2                       |3                 |
+#      |campaign-server-prog-PGC-3      |-1            |2                       |3                 |
+#      |campaign-server-prog-PGC-4      | 1            |4                       |2                 |
+#      |campaign-server-prog-ST-1       |-2            |1                       |4                 |
+#      |campaign-server-prog-ST-2       |-1            |2                       |3                 |
+
+
   @appnexus
   @cacheRefresh
   @HB

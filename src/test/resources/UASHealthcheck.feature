@@ -32,6 +32,7 @@ Scenario: 5. Uas is connected to Workflow
 @hardcoded
 @Sanity
 Scenario: 6. Uas is responsive to zone request
+	Given I setup the db
 	When I send 10 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 	Then The response code is 200
 	And The response contains script

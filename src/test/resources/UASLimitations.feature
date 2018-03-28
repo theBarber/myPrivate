@@ -5,8 +5,6 @@
 @uas
 @campaign
 @hardcoded
-@stable
-@scheduled
 Feature: UAS limitations filtering
 
 #Background: 
@@ -17,7 +15,7 @@ Feature: UAS limitations filtering
 
 Scenario: limitations testing - Single banner with limitation - positive test - FF
 	Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
-	When I send 100 times an ad request for zone named {INT2434 - See Through - ramp-lift-auto-zone-limitations-test} to UAS
+	When I send 10 times an ad request for zone named {INT2434 - See Through - ramp-lift-auto-zone-limitations-test} to UAS
 	Then The response code is 200
 	And The response contains script
 	And The responses has impression-urls
