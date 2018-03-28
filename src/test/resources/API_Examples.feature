@@ -66,3 +66,10 @@ Feature: API entities creator - using ramp-app APIs and sql scripts
           |campaign-API-1-a   |see through server programmatic   |see through        |zone-1        |
           |campaign-API-1-b   |see through client programmatic   |see through        |zone-2        |
           |campaign-API-1-b   |see through non-programmatic      |see through        |zone-3        |
+
+
+  @Keren
+  Scenario: create campaigns for Keren domain targeting
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                   |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                 |
+      |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1-Keren-test}   |[]                   |83         |4737              |2434           |17116             |{}                  |{ynet.co.il}                   |

@@ -33,6 +33,7 @@ public class CreateCampaignRequest {
     String limitation = "[]";
 
 
+
     public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeIds, String startDateTime, String endDateTime)
     {
         this.campaignName = campaignName;

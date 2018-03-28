@@ -93,6 +93,7 @@ Feature: Entities for tests
       |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
       |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |{}                  |{cnn.com}                         |
 
+
   @appnexus
   Scenario: create entities for server programmatic tests
     Given i remove all zones from publishers: {3711}
@@ -127,6 +128,7 @@ Feature: Entities for tests
   @DT
   @AB
   @zoneTagSanity
+  @Keren
   Scenario: refresh zone cache
     And I setup the db
 
@@ -135,6 +137,7 @@ Feature: Entities for tests
   @HB
   @DOT
   @DT
+  @Keren
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}

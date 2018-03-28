@@ -12,6 +12,9 @@ public class CreateZoneRequest {
     private String zoneTypeId;
     private String affiliateId;
 
+    @JsonProperty("is_secure")
+    String is_secure = "0";
+
     public CreateZoneRequest(@JsonProperty("zoneName")String zoneName, @JsonProperty("adUnitId")String adUnitId, @JsonProperty("limitation")String limitation,@JsonProperty("webSectionId")String webSectionId,
                              @JsonProperty("updatedAt")String updatedAt, @JsonProperty("passback")String passback,@JsonProperty("zoneTypeId")String zoneTypeId,@JsonProperty("affiliateId") String affiliateId)
     {
