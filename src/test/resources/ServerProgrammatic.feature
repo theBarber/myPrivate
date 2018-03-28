@@ -2,7 +2,7 @@
 
 Feature: Programmatic flow support
   Scenario: 1.basic Call to Programmatic GW - zone tag
-    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0} for zone named {zone-zoneset-server-prog-SS} to UAS
+    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-SS-NOT-API} to UAS
     Then The response code is 200
     And The response contains script
     And The response has impression-url
@@ -18,7 +18,7 @@ Feature: Programmatic flow support
     When I send impression requests to UAS
 
   Scenario: 3. Call Programmatic GW, GW doing auction, last ad selected - zone tag
-    When I send 1 times an ad request with parameter {requestid=systemTestB&optimize=0} for zone named {zone-zoneset-server-prog-PGC} to UAS
+    When I send 1 times an ad request with parameter {requestid=systemTestB&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-PGC} to UAS
     Then The response code is 200
     And The response contains script
     And The response has impression-url
@@ -39,7 +39,7 @@ Feature: Programmatic flow support
     And The response contains script
     And The responses has dsp-url
     Then i simulate appnexus passback response from the responses and send them to the UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-2} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-2-banner-1} 100% of the time
 
 #check
 #  Scenario: 5. Call AppNexus and then call to Programmatic GW
