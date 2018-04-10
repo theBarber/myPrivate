@@ -136,16 +136,18 @@ public class BaseTest implements En {
   public void restartServerNamed(String serverName)
   {
     String restartServerCmd = "docker-compose -f /opt/docker-compose.yml restart "+ serverName;
+    String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
 
-    sut.uasCliConnections().forEach(conn -> {
-      try {
-        sut.write("********************************************************************");
-        CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartServerCmd)
-                .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
-        restartUASServer.execute();
-      }
-      catch (IOException e) {
-        throw new UncheckedIOException(e);
+    sut.getUasCliConnections().forEach((host, conn) -> {
+      if (!host.equals(cron_ip)) {
+        try {
+          sut.write("********************************************************************");
+          CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartServerCmd)
+                  .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
+          restartUASServer.execute();
+        } catch (IOException e) {
+          throw new UncheckedIOException(e);
+        }
       }
     });
   }
@@ -155,7 +157,7 @@ public class BaseTest implements En {
     // clean db
     //SqlRampAdminUtils.unableAllExperimentGroups();
     //SqlWorkflowUtils.setLimitationForZone(161482, "[]");
-    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`campaigns` SET `capping`='0', `session_capping`='0' WHERE `campaignid`='278956';");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`campaigns` SET `capping`='0', `session_capping`='0', `units`='-1' WHERE `campaignid`='278956';");
     SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`tags` SET `is_migrated`='1' WHERE `tagid`='176';");
     CacheProcessTest.refreshZoneCache("cmd");
     //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream());

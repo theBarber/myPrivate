@@ -87,6 +87,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-SS-1X1-D-banner-1}
 
+
 #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Scenario: send HB request without params

@@ -88,6 +88,12 @@ public class UASIntegrationTest extends BaseTest {
           sendMultipleAdRequestsWithParams(times, zoneByName, true);
         });
 
+      When("I send (\\d+) times an ad request with query parameters for zone id \\{([^}]+)\\} to UAS",
+              (Integer times, Integer zoneId) -> {
+                  sut.getUASRquestModule().zoneRequestsWithParams(zoneId, times, true);
+              });
+
+
     And("i set new generic cookie",() ->
         sut.getUASRquestModule().setGenericCookie());
 
@@ -99,6 +105,7 @@ public class UASIntegrationTest extends BaseTest {
         (Integer times, Integer zoneId) -> {
           sendMultipleAdRequests(times, zoneId, true);
         });
+
     When("I send (\\d+) additional ad requests for zone named \\{([^}]+)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequests(times, zoneByName, false);

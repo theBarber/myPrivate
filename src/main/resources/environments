@@ -27,6 +27,9 @@ integration.uas.cliconnection.hosts=[172.31.48.19,172.31.48.20]
 aws-staging.uas.cliconnection.hosts=[10.12.1.248,10.12.2.56]
 aws-integration.uas.cliconnection.hosts=[10.12.1.204,10.12.2.30]
 
+aws-staging.uas.cliconnection.cron = 10.12.1.10
+aws-integration.uas.cliconnection.cron = 10.12.2.223
+
 # integration.uas.cliconnection.hosts=[172.31.48.20]
 dev1.uas.cliconnection.hosts=[192.168.56.101]
 dev2.uas.cliconnection.hosts=[127.0.0.1]

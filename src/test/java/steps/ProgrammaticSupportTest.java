@@ -39,8 +39,8 @@ import static org.hamcrest.core.Is.is;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:ProgrammaticSupport.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/ProgrammaticSupport_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:ProgrammaticSupp8ort.feature", plugin = {"pretty",
+        "infra.RotatingJSONFormatter:target/cucumber/ProgrammaticSuipport_$TIMESTAMP$.json"})
 public class ProgrammaticSupportTest extends BaseTest{
     private String host;
 

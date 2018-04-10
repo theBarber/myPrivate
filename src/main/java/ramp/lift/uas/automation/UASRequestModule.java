@@ -147,6 +147,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     for (; times > 0; times--) {
+      try {
+        TimeUnit.SECONDS.sleep(3);
+      } catch (InterruptedException e) {
+        fail(e.getMessage());
+      }
       request(url, false);
     }
   }
@@ -157,8 +162,13 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     String url = "http://" + domain + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+  "/af?zoneid=" + forZone + "&ct=1&stid=999"+"&"+parameter;
-
+    System.out.println(url);
     for (; times > 0; times--) {
+      try {
+        TimeUnit.SECONDS.sleep(3);
+      } catch (InterruptedException e) {
+        fail(e.getMessage());
+      }
       request(url, false);
     }
   }
@@ -217,6 +227,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
       try {
         HttpGet get = new HttpGet(url);
         get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+        System.out.println("sending get request to UAS with url: "+url);
         HttpResponse response = httpclient.execute(get, context);
         response.setEntity(new BufferedHttpEntity(response.getEntity()));
         try {

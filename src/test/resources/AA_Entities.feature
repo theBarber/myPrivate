@@ -10,17 +10,15 @@ Feature: Entities for tests
   @limitationSanity
   Scenario: create entities for zone Tag Sanity test
     Given i create new campaigns with new zoneset
-      |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                 |limitation                                                  |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-      |campaign-API-limitations-test-F  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[[[5,"!~","af"],[12,"=~","firefox"]]]                         |83        |4737             |2434           |17116             |
-      |campaign-API-limitations-test-C  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[[[5,"!~","af"],[12,"=~","chrome"]]]                          |83        |4737             |2434           |17116             |
-      |campaign-API-limitations-test-W  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[[[5,"!~","af"],[12,"=~","msie","msie 7","msie 8","msie 9"]]] |83        |4737             |2434           |17116             |
-
-
-  @AB
-  Scenario: create entities for AB testing
-    Given i create new campaigns with new zoneset
-      |Campaign Name                      |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation    |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-      |campaign-AB-Billboard-970x250      |75396    |198082     |false                  |64              |{zone-zoneset-AB-Billboard-970x250}     |[]            |58        |4737             |2434           |38734             |
+      |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name               |limitation   |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-API-limitations-test-F  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[]           |83        |4737             |2434           |17116             |
+      |campaign-API-limitations-test-C  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[]           |83        |4737             |2434           |17116             |
+      |campaign-API-limitations-test-W  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[]           |83        |4737             |2434           |17116             |
+    And i update banner data by name
+      |Campaign Name                               |limitation                                                     |
+      |campaign-API-limitations-test-F-banner-1    |[[[5,"!~","af"],[12,"=~","firefox"]]]                          |
+      |campaign-API-limitations-test-C-banner-1    |[[[5,"!~","af"],[12,"=~","chrome"]]]                           |
+      |campaign-API-limitations-test-W-banner-1    |[[[5,"!~","af"],[12,"=~","msie","msie 7","msie 8","msie 9"]]]  |
 
   @HB
   Scenario: create entities for HB tests
@@ -109,13 +107,16 @@ Feature: Entities for tests
 #    Given i create new campaigns with new zoneset
 #      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
 #      |campaign-server-prog-SS-1  |407981        |227414     |true                   |1               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+##      |campaign-server-prog-SS-1  |407981        |227713     |true                   |1               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
 #      |campaign-server-prog-SS-2  |407981        |224531     |true                   |2               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
 #      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
 #      |campaign-server-prog-SS-4  |407981        |224531     |true                   |3               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
 #      |campaign-server-prog-PGC-1 |407981        |224530     |true                   |4               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
 #      |campaign-server-prog-PGC-2 |407981        |227413     |true                   |5               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+##      |campaign-server-prog-PGC-2 |407981        |227712     |true                   |5               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
 #      |campaign-server-prog-PGC-3 |407981        |224530     |true                   |6               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
 #      |campaign-server-prog-PGC-4 |407981        |227413     |true                   |7               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+##      |campaign-server-prog-PGC-4 |407981        |227712     |true                   |7               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
 #      |campaign-server-prog-ST-1  |407981        |224810     |false                  |6498            |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
 #      |campaign-server-prog-ST-2  |407981        |224533     |true                   |8               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
 #    And i update campaign data by name
@@ -140,8 +141,10 @@ Feature: Entities for tests
   @AB
   @zoneTagSanity
   @Keren
+  @limitationSanity
   Scenario: refresh zone cache
     And I setup the db
+    And I sleep for 60 seconds
 
   @appnexus
   @cacheRefresh
@@ -152,4 +155,5 @@ Feature: Entities for tests
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
-    And I sleep for 100 seconds
+    And I restart {ut-programmatic-gw}
+    And I sleep for 200 seconds

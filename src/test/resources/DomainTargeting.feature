@@ -2,8 +2,6 @@
 @HeaderBidding
 @scheduled
 Feature: Domain Targeting tests
-
-
   Scenario: 1. send zone requests
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
     Given I add unlimited query parameter with value {1} to send my requests to uas
@@ -144,3 +142,69 @@ Feature: Domain Targeting tests
 #      |campaign-DomainT-2  |1            |
 #      |campaign-DomainT-3  |1            |
 #      |campaign-DomainT-4  |1            |
+
+
+
+
+#  -----------------------------------------------------DEBUG-----------------------------------------------------------
+
+#   Scenario: 1. send zone requests for debug
+#    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+#    Given I add unlimited query parameter with value {1} to send my requests to uas
+#     And I send 1 times an ad request with query parameters for zone id {180659} to UAS
+#    And The responses are passback
+#    Given I use {http://www.cnn.com} as referer string to send my requests to uas
+#    Given I add unlimited query parameter with value {1} to send my requests to uas
+#     And I send 1 times an ad request with query parameters for zone id {180659} to UAS
+#    And The response contains script
+#    And The response contains 1243423
+#    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+#    Given I add unlimited query parameter with value {1} to send my requests to uas
+#     And I send 1 times an ad request with query parameters for zone id {180660} to UAS
+#    And The responses are passback
+#    Given I use {http://cnn.com} as referer string to send my requests to uas
+#    Given I add unlimited query parameter with value {1} to send my requests to uas
+#     And I send 1 times an ad request with query parameters for zone id {180660} to UAS
+#    And The responses are passback
+#    Given I use {http://cnn.co.il} as referer string to send my requests to uas
+#    Given I add unlimited query parameter with value {1} to send my requests to uas
+#     And I send 1 times an ad request with query parameters for zone id {180660} to UAS
+#    And The response contains script
+#    And The response contains 1243424
+#    Given I use {http://cnn.co.il} as referer string to send my requests to uas
+#    Given I add unlimited query parameter with value {1} to send my requests to uas
+#     And I send 1 times an ad request with query parameters for zone id {180661} to UAS
+#    And The response contains script
+#    And The response contains 1243425
+#    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+#    Given I add unlimited query parameter with value {1} to send my requests to uas
+#    And I send 1 times an ad request with query parameters for zone id {180661} to UAS
+#    And The responses are passback
+#    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+#    Given I add unlimited query parameter with value {1} to send my requests to uas
+#    And I send 1 times an ad request with query parameters for zone id {180661} to UAS
+#    And The responses are passback
+#
+#  Scenario: 2. send Dynamic Tag requests for sub domain sahar.cnn.com, black list {sahar.cnn.com}
+#    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+#    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3708 with domain {http://sahar.cnn.com&unlimited=1}
+#    And The responses are passback
+#    Given I use {http://cnn.com} as referer string to send my requests to uas
+#    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3708 with domain {http://sahar.cnn.com&unlimited=1}
+#    And The responses are passback
+#    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+#    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3708 with domain {http://sahar.cnn.com&unlimited=1}
+#    And The responses are passback
+#
+#  Scenario: 3. send Dynamic Tag requests for domain cnn.com, black list {sahar.cnn.com}
+#    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+#    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3708 with domain {http://cnn.com&unlimited=1}
+#    And The responses are passback
+#    Given I use {http://cnn.com} as referer string to send my requests to uas
+#    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3708 with domain {http://cnn.com&unlimited=1}
+#    And The response contains script
+#    And The response contains 1243423
+#    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+#    Then i send 1 times Dynamic Tag synchronized ad request with tag id 170 to UAS for publisher 3708 with domain {http://cnn.com&unlimited=1}
+#    And The response contains script
+#    And The response contains 1243423

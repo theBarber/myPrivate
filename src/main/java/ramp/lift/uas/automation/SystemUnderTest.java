@@ -39,6 +39,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	final int _o;
 	private RampAppCreateEntitiesManager rampAppCreateEntitiesManager;
 	protected final Map<String, LinuxDefaultCliConnection> uasCliConnections = new HashMap<>();
+	protected final LinuxDefaultCliConnection cronCliConnection = new LinuxDefaultCliConnection();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
 	protected CampaignManager campaignManager;
@@ -49,6 +50,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
 	private Map<String, String> config;
+
+	public Map<String, String> getConfigFile() {
+		return config;
+	}
+
 	private ScenarioWriter scenarioWriter;
 	private AtomicReference<RuntimeException> exception;
 	
@@ -260,12 +266,23 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return this.uasCliConnections.values().stream();
 	}
 
+	public  Map<String, LinuxDefaultCliConnection> getUasCliConnections()
+	{
+		if (uasCliConnections.isEmpty()) {
+			setupCli(config, exception);
+		}
+		return this.uasCliConnections;
+	}
+
+
 	protected void setupCli(Map<String, String> config, AtomicReference<RuntimeException> exception) {
 		String uasCliConnectionUser = config.get("uas.cliconnection.user");
 		String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
 		String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
+		String cliWorkflowCronConnection = config.get("uas.cliconnection.cron");
 		String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
 		JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
+		hostsConfig.add(new JsonParser().parse(cliWorkflowCronConnection));
 		File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
 				.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename)).orElse(null);
 		// InputStream keyFile =
@@ -310,7 +327,6 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				delegate(exception, cause);
 			}
 		});
-
 	}
 
 	protected void teardownCli() {

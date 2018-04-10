@@ -3,6 +3,7 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.process.CliCommandExecution;
 import infra.utils.CouchBaseUtils;
 import infra.utils.JenkinsClient;
@@ -91,48 +92,86 @@ public class CacheProcessTest extends BaseTest {
     }
 
     public static void refreshZoneCache(String action) {
-    if (action.equals("http")) {
-      sut.getUASRquestModule().zoneCacheRequest("refresh");
-      // sut.getUASRquestModule().zoneCacheRequest("query_status");
-      //
-      // sut.getUASRquestModule().responses().filter(fh -> HttpContentTest.getContent(fh.join()).contains("ready"));
-    } else if (action.equals("cmd")) {
-      String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
-      String restartUASServerCmd = "docker-compose -f /opt/docker-compose.yml restart ut-ramp-uas";
-       // String restartUASServerCmd = "docker-compose restart ut-ramp-uas"; // for dev env
-      sut.uasCliConnections().forEach(conn -> {
-          int count = 1;
-          int maxTries = 3;
-          while(true){
-              try {
-              sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
-                  + Thread.currentThread().getName());
-              sut.write("********************************************************************");
-              CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
-                  .error("Couldn't run query").withTimeout(10, TimeUnit.MINUTES);
-              zoneCacheExecution.execute();
-                CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
-                        .error("Couldn't restart").withTimeout(3, TimeUnit.MINUTES);
-                restartUASServer.execute();
-                break;
-            }catch (Exception e)
-            {
-                  throw new AssertionError(e);
+        String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
+        LinuxDefaultCliConnection cronServerConnection = sut.getUasCliConnections().get(cron_ip);
+        String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
+        String pushCacheToS3Command = "sudo bash -c \"/var/www/adserver/pushCacheToS3\"";
+        if (action.equals("cmd")) {
+            int count = 1;
+            int maxTries = 3;
+
+            //push zone.tch to s3 from the machine
+            while (true) {
+                try {
+                    new CliCommandExecution(cronServerConnection, pushCacheToS3Command)
+                            .error("Couldn't run query").withTimeout(10, TimeUnit.MINUTES).execute();
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (AssertionError e) {
+                    System.out.println("Couldn't run query trying again...num_try: " + count);
+                    if (++count == maxTries) {
+                        throw new AssertionError(e);
+                    } else {
+                        sleepFor(60);
+                    }
+                }
             }
-            catch (AssertionError e) {
-                  System.out.println("Couldn't run query trying again...num_try: "+count);
-                  if (++count == maxTries){
-                     throw new AssertionError(e);
-                  }
-                  else
-                  {
-                      sleepFor(60);
-                  }
-            }
-          }
-      });
+            //download the zone.tch from s3 rto all machines, except cron
+            sut.getUasCliConnections().forEach((host, conn) -> {
+                if (!host.equals(cron_ip)) {
+                    System.out.println("pulling zone.tch "+host);
+                    try {
+                        CliCommandExecution restartUASServer = new CliCommandExecution(conn, pullZoneCacheCmd)
+                                .error("doesn't exist").withTimeout(3, TimeUnit.MINUTES);
+                        restartUASServer.execute();
+                    } catch (Exception e) {
+                        throw new AssertionError(e);
+                    }
+                }
+            });
+        }
     }
-  }
+
+    public static void refreshZoneCacheOld(String action) {
+        if (action.equals("http")) {
+            sut.getUASRquestModule().zoneCacheRequest("refresh");
+            // sut.getUASRquestModule().zoneCacheRequest("query_status");
+            //
+            // sut.getUASRquestModule().responses().filter(fh -> HttpContentTest.getContent(fh.join()).contains("ready"));
+        } else if (action.equals("cmd")) {
+            String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
+            String restartUASServerCmd = "docker-compose -f /opt/docker-compose.yml restart ut-ramp-uas";
+            // String restartUASServerCmd = "docker-compose restart ut-ramp-uas"; // for dev env
+            sut.uasCliConnections().forEach(conn -> {
+                int count = 1;
+                int maxTries = 3;
+                while (true) {
+                    try {
+                        sut.write("Executing " + cacheZonesCmd + " on " + conn.getName() + "["
+                                + Thread.currentThread().getName());
+                        sut.write("********************************************************************");
+                        CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
+                                .error("Couldn't run query").withTimeout(10, TimeUnit.MINUTES);
+                        zoneCacheExecution.execute();
+                        CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
+                                .error("Couldn't restart").withTimeout(3, TimeUnit.MINUTES);
+                        restartUASServer.execute();
+                        break;
+                    } catch (Exception e) {
+                        throw new AssertionError(e);
+                    } catch (AssertionError e) {
+                        System.out.println("Couldn't run query trying again...num_try: " + count);
+                        if (++count == maxTries) {
+                            throw new AssertionError(e);
+                        } else {
+                            sleepFor(60);
+                        }
+                    }
+                }
+            });
+        }
+    }
 
   private static void sleepFor(Integer seconds)
   {

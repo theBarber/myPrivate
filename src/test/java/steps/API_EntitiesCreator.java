@@ -40,7 +40,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with zoneset by name",this::createMultipleCampaignsWithZoneName);
         And("i create new campaigns with new zoneset",this::createMultipleCampaignsWithNewZoneset);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
-        And("i update (campaign|zone) data by (id|name)",this::updateEntityData);
+        And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityData);
         And("i create new Deals",this::createMultipleDeals);
         And("i create new creatives",this::createMultipleCreatives);
         And("i create campaigns from Template",this::createMultipleCampaignsFromTemplate);
