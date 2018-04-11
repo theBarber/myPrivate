@@ -279,10 +279,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		String uasCliConnectionUser = config.get("uas.cliconnection.user");
 		String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
 		String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
-		String cliWorkflowCronConnection = config.get("uas.cliconnection.cron");
 		String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
 		JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
-		hostsConfig.add(new JsonParser().parse(cliWorkflowCronConnection));
 		File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
 				.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename)).orElse(null);
 		// InputStream keyFile =
