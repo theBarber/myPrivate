@@ -49,7 +49,7 @@ public class BaseTest implements En {
   //protected final String[] CLITESTS = new String[] {"@cli"};
 
   public BaseTest() {
-    environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("aws-staging").toLowerCase();
+    environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
 //    environmentName ="aws-integration";
 
     String environmentNameConfigPrefix = environmentName + ".";
