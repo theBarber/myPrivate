@@ -24,8 +24,8 @@ dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl
 
 staging.uas.cliconnection.hosts=[172.31.48.29,172.31.48.35]
 integration.uas.cliconnection.hosts=[172.31.48.19,172.31.48.20]
-aws-staging.uas.cliconnection.hosts=[10.12.1.248,10.12.2.56]
-aws-integration.uas.cliconnection.hosts=[10.12.1.204,10.12.2.30]
+aws-staging.uas.cliconnection.hosts=[10.12.1.248,10.12.2.56,10.12.1.10]
+aws-integration.uas.cliconnection.hosts=[10.12.1.204,10.12.2.30,10.12.2.223]
 
 aws-staging.uas.cliconnection.cron = 10.12.1.10
 aws-integration.uas.cliconnection.cron = 10.12.2.223
