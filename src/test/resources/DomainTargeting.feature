@@ -126,10 +126,10 @@ Feature: Domain Targeting tests
 
   Scenario: 8. send HB requests
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
-    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {sahar.cnn.com} with extra params {&unlimited=1&optimize=0&tagid=170}
+    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {sahar.cnn.com} with extra params {&unlimited=1&optimize=0}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
-    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {cnn.com} with extra params {&unlimited=1&optimize=0&tagid=170}
+    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {cnn.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-DomainT-1-banner-1}

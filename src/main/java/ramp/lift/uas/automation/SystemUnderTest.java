@@ -39,7 +39,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	final int _o;
 	private RampAppCreateEntitiesManager rampAppCreateEntitiesManager;
 	protected final Map<String, LinuxDefaultCliConnection> uasCliConnections = new HashMap<>();
-	protected final LinuxDefaultCliConnection cronCliConnection = new LinuxDefaultCliConnection();
+	protected final Map<String, LinuxDefaultCliConnection> uasHostConnections = new HashMap<>();
+	protected final Map<String, LinuxDefaultCliConnection> cronCliConnection = new HashMap<>();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
 	protected CampaignManager campaignManager;
@@ -274,54 +275,49 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return this.uasCliConnections;
 	}
 
+	public  Map<String, LinuxDefaultCliConnection> getCronCliConnection()
+	{
+		if (cronCliConnection.isEmpty()) {
+			setupCli(config, exception);
+		}
+		return this.cronCliConnection;
+	}
+
+	public  Map<String, LinuxDefaultCliConnection> getHostsConnection()
+	{
+		if (uasHostConnections.isEmpty()) {
+			setupCli(config, exception);
+		}
+		return this.uasHostConnections;
+	}
+
+
 
 	protected void setupCli(Map<String, String> config, AtomicReference<RuntimeException> exception) {
-		String uasCliConnectionUser = config.get("uas.cliconnection.user");
-		String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
 		String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
 		String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
-
+		String cliconnectionCron = config.getOrDefault("uas.cliconnection.cron", "");
 
 		JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
+		JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
 		File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
 				.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename)).orElse(null);
 
-//		setupConnection(keyFile,uasCliConnectionUser,uasCliConnectionPassword)
-		// InputStream keyFile =
-		// ClassLoader.class.getResourceAsStream(cliconnectionKeyname);
-		// File keyFile = new
-		// File(ClassLoader.class.getResource(cliconnectionKeyname).toString());
-
 		hostsConfig.forEach(jsonElement -> {
 			String host = jsonElement.getAsString();
-			LinuxDefaultCliConnection conn;
-
-			if (uasCliConnectionUser.equals("root")) {
-				conn = new RootLinuxCliConnection();
-			} else {
-				conn = new LinuxDefaultCliConnection();
-			}
-
-			conn.setHost(host);
-			conn.setUser(uasCliConnectionUser);
-			conn.setPassword(uasCliConnectionPassword);
-			conn.setConnectOnInit(false);
-			conn.setUseThreads(true);
-
-			if (keyFile != null) {
-				Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
-						org.hamcrest.io.FileMatchers.anExistingFile());
-				Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
-						org.hamcrest.io.FileMatchers.aReadableFile());
-				conn.setPrivateKey(keyFile);
-				conn.setProtocol(EnumConnectionType.SSH_RSA.value());
-			} else {
-				Assume.assumeThat("connection to " + host + " password is not set", conn.getPassword(),
-						not(isEmptyOrNullString()));
-			}
-
+			LinuxDefaultCliConnection conn = getConnection(host,keyFile);
+			uasHostConnections.put(host, conn);
 			uasCliConnections.put(host, conn);
 		});
+
+		cronsConfig.forEach(jsonElement -> {
+			String host = jsonElement.getAsString();
+			LinuxDefaultCliConnection conn = getConnection(host,keyFile);
+			cronCliConnection.put(host, conn);
+			uasCliConnections.put(host, conn);
+		});
+
+		//for all connections
 		uasCliConnections.values().forEach(conn -> {
 			try {
 				conn.init();
@@ -329,6 +325,39 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				delegate(exception, cause);
 			}
 		});
+	}
+
+	private LinuxDefaultCliConnection getConnection(String host, File keyFile) {
+		String uasCliConnectionUser = config.get("uas.cliconnection.user");
+		String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
+		LinuxDefaultCliConnection conn;
+
+		if (uasCliConnectionUser.equals("root")) {
+			conn = new RootLinuxCliConnection();
+		} else {
+			conn = new LinuxDefaultCliConnection();
+		}
+
+		conn.setHost(host);
+		conn.setUser(uasCliConnectionUser);
+		conn.setPassword(uasCliConnectionPassword);
+		conn.setConnectOnInit(false);
+		conn.setUseThreads(true);
+
+		if (keyFile != null) {
+			Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
+					org.hamcrest.io.FileMatchers.anExistingFile());
+			Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
+					org.hamcrest.io.FileMatchers.aReadableFile());
+			conn.setPrivateKey(keyFile);
+			conn.setProtocol(EnumConnectionType.SSH_RSA.value());
+		} else {
+			Assume.assumeThat("connection to " + host + " password is not set", conn.getPassword(),
+					not(isEmptyOrNullString()));
+		}
+
+		return conn;
+
 	}
 
 	protected void teardownCli() {

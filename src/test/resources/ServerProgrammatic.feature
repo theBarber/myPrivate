@@ -21,14 +21,14 @@ Feature: Programmatic flow support
     Then The response code is 200
     And The response contains script
     And The response has impression-url
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
     When I send impression requests to UAS
 
   Scenario: 4. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 197 to UAS for publisher 3711 with domain {test.com&requestid=systemTestB&unlimited=1&optimize=0}
     Then The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
     When I send impression requests to UAS
 
   Scenario: 5. Call AppNexus and then call to Programmatic GW
@@ -38,17 +38,6 @@ Feature: Programmatic flow support
     And The responses has dsp-url
     Then i simulate appnexus passback response from the responses and send them to the UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-2-banner-1} 100% of the time
-
-#check
-#  Scenario: 5. Call AppNexus and then call to Programmatic GW
-#    When I send 1 times an ad request for zone id {179906} to UAS
-#    Then The response code is 200
-#    And The response contains script
-#    And The responses has dsp-url
-#    Then i simulate appnexus passback response from the responses and send them to the UAS
-#    Then The response code is 200
-#    And The response contains script
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-2} 100% of the time
 
 #    Scenario: disabled all HB campaigns
 #    Given i update campaign data by name
