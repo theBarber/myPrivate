@@ -138,7 +138,7 @@ public class BaseTest implements En {
     String restartServerCmd = "sudo docker-compose -f /opt/docker-compose.yml restart "+ serverName;
     String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
 
-    sut.getUasCliConnections().forEach((host, conn) -> {
+    sut.getHostsConnection().forEach((host, conn) -> {
       if (!host.equals(cron_ip)) {
         try {
           sut.write("********************************************************************");

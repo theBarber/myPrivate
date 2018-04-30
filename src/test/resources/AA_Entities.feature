@@ -150,7 +150,7 @@ Feature: Entities for tests
 
   @appnexus
   Scenario: restart programmatic GW
-#    And I restart {ut-programmatic-gw}
+    And I restart {ut-programmatic-gw}
 
   @appnexus
   @cacheRefresh
@@ -160,5 +160,5 @@ Feature: Entities for tests
   @Keren
   Scenario: refresh banner cache
     And I refresh banner cache
-#    And I restart {ramp-lift-services}
+    And I restart {ramp-lift-services}
     And I sleep for 300 seconds
