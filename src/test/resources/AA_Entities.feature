@@ -24,27 +24,30 @@ Feature: Entities for tests
   Scenario: create entities for HB tests
       Given i remove all zones from publishers: {3673,3697}
       Given i create new campaigns with new zoneset
-        |Campaign Name                      |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation    |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-        |campaign-HB-Tablet-160x600         |75396    |223539     |false                  |148             |{zone-zoneset-HB-Tablet-160x600}         |[]            |8         |14400            |3673           |65421             |
-        |campaign-HB-See-Through-1X2        |75396    |210722     |false                  |204             |{zone-zoneset-HB-See Through 1X2}        |[]            |83        |14400            |3673           |64396             |
-        |campaign-HB-Prog-PGC-1X1-1         |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
-        |campaign-HB-Prog-PGC-1X1-2         |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
-        |campaign-HB-Prog-See-Through-1X2-1 |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-        |campaign-HB-Prog-See-Through-1X2-2 |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-        |campaign-HB-Prog-See-Through-1X2-3 |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-        |campaign-HB-Prog-SS-1X1-P          |407981   |224813     |false                  |6503            |{zone-zoneset-HB-Prog-SS-1X1}            |[]            |69        |14507            |3697           |66003             |
-        |campaign-HB-Prog-SS-1X1-D          |407981   |224809     |false                  |6501            |{zone-zoneset-HB-Prog-SS-1X1}            |[]            |69        |14507            |3697           |66003             |
+        |Campaign Name                        |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation     |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+        |campaign-HB-Tablet-160x600           |75396    |223539     |false                  |148             |{zone-zoneset-HB-Tablet-160x600}         |[]            |8         |14400            |3673           |65421             |
+        |campaign-HB-See-Through-1X2          |75396    |210722     |false                  |204             |{zone-zoneset-HB-See Through 1X2}        |[]            |83        |14400            |3673           |64396             |
+        |campaign-HB-Prog-PGC-1X1-1           |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
+        |campaign-HB-Prog-PGC-1X1-2           |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
+        |campaign-HB-Prog-PGC-1X1-3           |75396    |222908     |false                  |86              |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
+        |campaign-HB-Prog-See-Through-1X2-1   |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
+        |campaign-HB-Prog-See-Through-1X2-2   |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
+        |campaign-HB-Prog-See-Through-1X2-3   |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
+        |campaign-HB-Prog-Billboard-970X250-D |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66673             |
+        |campaign-HB-Prog-Billboard-970X250-P |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66673             |
+
      And i update campaign data by name
-        |Campaign Name                      |status      |Priority      |units      |limitation|campaign_delivery_method|
-        |campaign-HB-Tablet-160x600         |0           |-2            |-1         |[]        |1                       |
-        |campaign-HB-See-Through-1X2        |0           |-1            |-1         |[]        |2                       |
-        |campaign-HB-Prog-PGC-1X1-1         |0           |-2            |-1         |[]        |1                       |
-        |campaign-HB-Prog-PGC-1X1-2         |0           |-1            |-1         |[]        |2                       |
-        |campaign-HB-Prog-See-Through-1X2-1 |0           |-2            |-1         |[]        |1                       |
-        |campaign-HB-Prog-See-Through-1X2-2 |0           |-1            |-1         |[]        |2                       |
-        |campaign-HB-Prog-See-Through-1X2-3 |0           |1             |-1         |[]        |4                       |
-        |campaign-HB-Prog-SS-1X1-P          |0           |1             |-1         |[]        |4                       |
-        |campaign-HB-Prog-SS-1X1-D          |0           |-1            |-1         |[]        |2                       |
+        |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
+        |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
+        |campaign-HB-See-Through-1X2          |0           |-1            |-1         |[]        |2                       |
+        |campaign-HB-Prog-PGC-1X1-1           |0           |-2            |-1         |[]        |1                       |
+        |campaign-HB-Prog-PGC-1X1-2           |0           |-1            |-1         |[]        |2                       |
+        |campaign-HB-Prog-PGC-1X1-3           |0           |1             |-1         |[]        |4                       |
+        |campaign-HB-Prog-See-Through-1X2-1   |0           |-2            |-1         |[]        |1                       |
+        |campaign-HB-Prog-See-Through-1X2-2   |0           |-1            |-1         |[]        |2                       |
+        |campaign-HB-Prog-See-Through-1X2-3   |0           |1             |-1         |[]        |4                       |
+        |campaign-HB-Prog-Billboard-970X250-D |0           |-2            |-1         |[]        |1                       |
+        |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
   @DT
   Scenario: create entities for DT tests
       Given i remove all zones from publishers: {3674,3675,3666}
@@ -106,19 +109,19 @@ Feature: Entities for tests
 #    Given i remove all zones from publishers: {3711}
 #    Given i create new campaigns with new zoneset
 #      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-#      |campaign-server-prog-SS-1  |407981        |227414     |true                   |1               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-##      |campaign-server-prog-SS-1  |407981        |227713     |true                   |1               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-SS-2  |407981        |224531     |true                   |2               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+#      |campaign-server-prog-SS-1  |407981        |228362     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+##      |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+#      |campaign-server-prog-SS-2  |407981        |224531     |true                   |18               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
 #      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-SS-4  |407981        |224531     |true                   |3               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-PGC-1 |407981        |224530     |true                   |4               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-2 |407981        |227413     |true                   |5               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-##      |campaign-server-prog-PGC-2 |407981        |227712     |true                   |5               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-3 |407981        |224530     |true                   |6               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-4 |407981        |227413     |true                   |7               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-##      |campaign-server-prog-PGC-4 |407981        |227712     |true                   |7               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-SS-4  |407981        |224531     |true                   |19               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+#      |campaign-server-prog-PGC-1 |407981        |224530     |true                   |20               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-PGC-2 |407981        |228363     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+##      |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-PGC-3 |407981        |224530     |true                   |22               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-PGC-4 |407981        |228363     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+##      |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
 #      |campaign-server-prog-ST-1  |407981        |224810     |false                  |6498            |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-#      |campaign-server-prog-ST-2  |407981        |224533     |true                   |8               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+#      |campaign-server-prog-ST-2  |407981        |224533     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
 #    And i update campaign data by name
 #      |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
 #      |campaign-server-prog-SS-1       |-2            |1                       |4                 |
@@ -131,7 +134,6 @@ Feature: Entities for tests
 #      |campaign-server-prog-PGC-4      | 1            |4                       |2                 |
 #      |campaign-server-prog-ST-1       |-2            |1                       |4                 |
 #      |campaign-server-prog-ST-2       |-1            |2                       |3                 |
-
 
   @appnexus
   @cacheRefresh
@@ -147,6 +149,10 @@ Feature: Entities for tests
     And I sleep for 60 seconds
 
   @appnexus
+  Scenario: restart programmatic GW
+    And I restart {ut-programmatic-gw}
+
+  @appnexus
   @cacheRefresh
   @HB
   @DOT
@@ -155,5 +161,4 @@ Feature: Entities for tests
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
-    And I restart {ut-programmatic-gw}
-    And I sleep for 200 seconds
+    And I sleep for 300 seconds

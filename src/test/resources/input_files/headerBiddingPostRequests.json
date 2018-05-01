@@ -221,7 +221,7 @@
       "placementId": "10433394",
       "publisherId": 3697,
       "sizes": [
-        [1, 1]
+        [970, 250]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",

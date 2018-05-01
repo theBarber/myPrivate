@@ -49,7 +49,7 @@ public class BaseTest implements En {
   //protected final String[] CLITESTS = new String[] {"@cli"};
 
   public BaseTest() {
-    environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
+    environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("aws-staging").toLowerCase();
 //    environmentName ="aws-integration";
 
     String environmentNameConfigPrefix = environmentName + ".";
@@ -135,10 +135,10 @@ public class BaseTest implements En {
 
   public void restartServerNamed(String serverName)
   {
-    String restartServerCmd = "docker-compose -f /opt/docker-compose.yml restart "+ serverName;
+    String restartServerCmd = "sudo docker-compose -f /opt/docker-compose.yml restart "+ serverName;
     String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
 
-    sut.getUasCliConnections().forEach((host, conn) -> {
+    sut.getHostsConnection().forEach((host, conn) -> {
       if (!host.equals(cron_ip)) {
         try {
           sut.write("********************************************************************");
@@ -157,12 +157,12 @@ public class BaseTest implements En {
     // clean db
     //SqlRampAdminUtils.unableAllExperimentGroups();
     //SqlWorkflowUtils.setLimitationForZone(161482, "[]");
-    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`campaigns` SET `capping`='0', `session_capping`='0', `units`='-1' WHERE `campaignid`='278956';");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`campaigns` SET `capping`='0', `session_capping`='0', `units`='-1', `status`='0' WHERE `campaignid`='278956';");
     SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`tags` SET `is_migrated`='1' WHERE `tagid`='176';");
     CacheProcessTest.refreshZoneCache("cmd");
     //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream());
 
-    try {
+      try {
       TimeUnit.SECONDS.sleep(35);
       sut.write("sleeping 10 seconds");
     } catch (InterruptedException e) {

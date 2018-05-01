@@ -21,6 +21,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 import static org.hamcrest.Matchers.isOneOf;
@@ -34,7 +35,7 @@ import static org.junit.Assert.fail;
 
 public class CacheProcessTest extends BaseTest {
     private final String BANNER_CACHE_NAME = "banners_cache_refresh_";
-
+    private final static Integer LASTING_TIME_CACHE = 7;
   public CacheProcessTest() {
     super();
 
@@ -97,34 +98,42 @@ public class CacheProcessTest extends BaseTest {
         String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
         String pushCacheToS3Command = "sudo bash -c \"/var/www/adserver/pushCacheToS3\"";
         if (action.equals("cmd")) {
-            int count = 1;
-            int maxTries = 3;
 
             //push zone.tch to s3 from the machine
-            while (true) {
-                try {
-                    new CliCommandExecution(cronServerConnection, pushCacheToS3Command)
-                            .error("Couldn't run query").withTimeout(10, TimeUnit.MINUTES).execute();
-                    break;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (AssertionError e) {
-                    System.out.println("Couldn't run query trying again...num_try: " + count);
-                    if (++count == maxTries) {
-                        throw new AssertionError(e);
-                    } else {
-                        sleepFor(60);
+            sut.getCronCliConnection().forEach((host, conn) -> {
+                while (true) {
+                    int count = 1;
+                    int maxTries = 3;
+                    try {
+                        new CliCommandExecution(conn, pushCacheToS3Command)
+                                .error("Couldn't sync").withTimeout(10, TimeUnit.MINUTES).execute();
+                        break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (AssertionError e) {
+                        System.out.println("Couldn't push cache trying again...num_try: " + count);
+                        if (++count == maxTries) {
+                            throw new AssertionError(e);
+                        } else {
+                            Calendar now = Calendar.getInstance();
+                            int minutes = now.get(Calendar.MINUTE);
+                            int timeToSleep = (LASTING_TIME_CACHE - minutes % 10) * 60;
+                            if (timeToSleep < 0)
+                                timeToSleep = 60;
+                            sleepFor(timeToSleep);
+                        }
                     }
                 }
-            }
+            });
+
             //download the zone.tch from s3 rto all machines, except cron
-            sut.getUasCliConnections().forEach((host, conn) -> {
+            sut.getHostsConnection().forEach((host, conn) -> {
                 if (!host.equals(cron_ip)) {
                     System.out.println("pulling zone.tch "+host);
                     try {
-                        CliCommandExecution restartUASServer = new CliCommandExecution(conn, pullZoneCacheCmd)
+                        CliCommandExecution pullCommand = new CliCommandExecution(conn, pullZoneCacheCmd)
                                 .error("doesn't exist").withTimeout(3, TimeUnit.MINUTES);
-                        restartUASServer.execute();
+                        pullCommand.execute();
                     } catch (Exception e) {
                         throw new AssertionError(e);
                     }
@@ -140,8 +149,8 @@ public class CacheProcessTest extends BaseTest {
             //
             // sut.getUASRquestModule().responses().filter(fh -> HttpContentTest.getContent(fh.join()).contains("ready"));
         } else if (action.equals("cmd")) {
-            String cacheZonesCmd = "docker exec ut-ramp-uas adserver --cache zones";
-            String restartUASServerCmd = "docker-compose -f /opt/docker-compose.yml restart ut-ramp-uas";
+            String cacheZonesCmd = "sudo docker exec ut-ramp-uas adserver --cache=zones";
+//            String restartUASServerCmd = "sudo docker-compose -f /opt/docker-compose.yml restart ut-ramp-uas";
             // String restartUASServerCmd = "docker-compose restart ut-ramp-uas"; // for dev env
             sut.uasCliConnections().forEach(conn -> {
                 int count = 1;
@@ -154,9 +163,9 @@ public class CacheProcessTest extends BaseTest {
                         CliCommandExecution zoneCacheExecution = new CliCommandExecution(conn, cacheZonesCmd)
                                 .error("Couldn't run query").withTimeout(10, TimeUnit.MINUTES);
                         zoneCacheExecution.execute();
-                        CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
-                                .error("Couldn't restart").withTimeout(3, TimeUnit.MINUTES);
-                        restartUASServer.execute();
+//                        CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartUASServerCmd)
+//                                .error("Couldn't restart").withTimeout(3, TimeUnit.MINUTES);
+//                        restartUASServer.execute();
                         break;
                     } catch (Exception e) {
                         throw new AssertionError(e);
@@ -177,6 +186,7 @@ public class CacheProcessTest extends BaseTest {
   {
       try {
           TimeUnit.SECONDS.sleep(seconds);
+          System.out.println("sleeping for "+ seconds +" sec");
       } catch (InterruptedException e) {
           fail(e.getMessage());
       }

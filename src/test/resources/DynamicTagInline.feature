@@ -41,8 +41,3 @@ Feature: Dynamic Tag inline flow support
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 152 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1}
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-Inline-ST-1-banner-1} 100% of the time
-
-  Scenario:4.Header bidding
-    Then i send 10 headerBidding post request for scenario {Send HB basic request for publisher 3690} for publisher 3690 with domain {DynamicTagInline.com} with extra params {&unlimited=1}
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-DT-Inline-SS-1-banner-1}
