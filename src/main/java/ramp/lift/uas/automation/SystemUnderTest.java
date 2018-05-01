@@ -383,7 +383,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public UASLogModule logFor(String logType) {
 		return uasLogModulesByLogType.computeIfAbsent(logType, logname -> {
-			UASLogModule logModule = new UASLogModule(uasCliConnections.values(), logname);
+			UASLogModule logModule = new UASLogModule(uasHostConnections.values(), logname);
 			logModule.init();
 			return logModule;
 		});
