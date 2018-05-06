@@ -121,8 +121,8 @@ public class CliCommandExecution {
 	    if (cliConnection instanceof AbstractModule) {
 		AbstractModule cliModule = (AbstractModule) cliConnection;
 		String result = cliModule.getActual(String.class);
-		String commandLine = cmd + this.cliConnection.getEnterStr();
-		result = StringUtils.getFirstSubStringSuffix(result, commandLine, true);
+		//String commandLine = cmd + this.cliConnection.getEnterStr();
+		result = StringUtils.getFirstSubStringSuffix(result, cmd, true);
 		if (result.contains(this.cliConnection.getEnterStr())) {
 		    result = StringUtils.getPrefix(result, this.cliConnection.getEnterStr());
 		}

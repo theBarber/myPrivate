@@ -95,7 +95,7 @@ public class CacheProcessTest extends BaseTest {
     public static void refreshZoneCache(String action) {
         String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
         LinuxDefaultCliConnection cronServerConnection = sut.getUasCliConnections().get(cron_ip);
-        String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
+        String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC";
         String pushCacheToS3Command = "sudo bash -c \"/var/www/adserver/pushCacheToS3\"";
         if (action.equals("cmd")) {
 
