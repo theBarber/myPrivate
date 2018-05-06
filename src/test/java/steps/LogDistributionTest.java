@@ -33,8 +33,6 @@ public class LogDistributionTest extends BaseTest {
         super();
         Given("^I calculate the values distribution from log (req|imp|clk) and column (\\d+).*$", (String logFile, Integer index) -> {
             dist.clear();
-            List<List<String>> collect = sut.logFor(logFile).readLogs()
-                .actual().filter(line -> line.size() >= index).collect(Collectors.toList());
 
             Map<String, Long> table = sut.logFor(logFile).readLogs()
                 .actual().filter(line -> line.size() >= index)
