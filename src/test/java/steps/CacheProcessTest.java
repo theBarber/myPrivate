@@ -87,23 +87,21 @@ public class CacheProcessTest extends BaseTest {
   }
 
     private void flushBucket(String bucketName) {
-          CouchBaseUtils couchBase = new CouchBaseUtils();
-          couchBase.flushBucker(bucketName);
-      //----need for s3 too?
+          sut.getCouchBaseUtils().flushBucket(bucketName);
     }
 
-    public static void refreshZoneCache(String action) {
+    public static void refreshZoneCacheNew(String action) {
         String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
         LinuxDefaultCliConnection cronServerConnection = sut.getUasCliConnections().get(cron_ip);
-        String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC";
+        String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
         String pushCacheToS3Command = "sudo bash -c \"/var/www/adserver/pushCacheToS3\"";
         if (action.equals("cmd")) {
 
             //push zone.tch to s3 from the machine
             sut.getCronCliConnection().forEach((host, conn) -> {
+                int count = 1;
+                int maxTries = 3;
                 while (true) {
-                    int count = 1;
-                    int maxTries = 3;
                     try {
                         new CliCommandExecution(conn, pushCacheToS3Command)
                                 .error("Couldn't sync").withTimeout(10, TimeUnit.MINUTES).execute();
@@ -117,7 +115,7 @@ public class CacheProcessTest extends BaseTest {
                         } else {
                             Calendar now = Calendar.getInstance();
                             int minutes = now.get(Calendar.MINUTE);
-                            int timeToSleep = (LASTING_TIME_CACHE - minutes % 10) * 60;
+                            int timeToSleep = (LASTING_TIME_CACHE - (minutes % 10)) * 60;
                             if (timeToSleep < 0)
                                 timeToSleep = 60;
                             sleepFor(timeToSleep);
@@ -128,7 +126,7 @@ public class CacheProcessTest extends BaseTest {
 
             //download the zone.tch from s3 rto all machines, except cron
             sut.getHostsConnection().forEach((host, conn) -> {
-                if (!host.equals(cron_ip)) {
+                if (!host.equals(cron_ip)) { //need to remove
                     System.out.println("pulling zone.tch "+host);
                     try {
                         CliCommandExecution pullCommand = new CliCommandExecution(conn, pullZoneCacheCmd)
@@ -142,7 +140,7 @@ public class CacheProcessTest extends BaseTest {
         }
     }
 
-    public static void refreshZoneCacheOld(String action) {
+    public static void refreshZoneCache(String action) {
         if (action.equals("http")) {
             sut.getUASRquestModule().zoneCacheRequest("refresh");
             // sut.getUASRquestModule().zoneCacheRequest("query_status");
@@ -151,8 +149,8 @@ public class CacheProcessTest extends BaseTest {
         } else if (action.equals("cmd")) {
             String cacheZonesCmd = "sudo docker exec ut-ramp-uas adserver --cache=zones";
 //            String restartUASServerCmd = "sudo docker-compose -f /opt/docker-compose.yml restart ut-ramp-uas";
-            // String restartUASServerCmd = "docker-compose restart ut-ramp-uas"; // for dev env
-            sut.uasCliConnections().forEach(conn -> {
+//             String restartUASServerCmd = "docker-compose restart ut-ramp-uas"; // for dev env
+            sut.getHostsConnection().forEach((host, conn) -> {
                 int count = 1;
                 int maxTries = 3;
                 while (true) {

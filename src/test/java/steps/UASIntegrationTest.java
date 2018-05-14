@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import cucumber.api.PendingException;
+import gherkin.lexer.Fa;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
@@ -37,6 +38,7 @@ import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.unruly.matchers.OptionalMatchers;
@@ -83,7 +85,22 @@ public class UASIntegrationTest extends BaseTest {
                   sendMultipleAdRequestsWithParameter(times,parameter, zoneByName, true);
               });
 
-    When("I send (\\d+) times an ad request with query parameters for zone named \\{([^}]+)\\} to UAS",
+      When("I send (\\d+) times an wel request with parameters \\{([^}]+)\\} to UAS",
+              (Integer times, String parameters) -> {
+                  sut.getUASRquestModule().sendMultipleWelRequestWithParameter(times, parameters, true);
+              });
+
+      When("I send (\\d+) times an profiles request with parameters \\{([^}]+)\\} to UAS",
+              (Integer times, String parameters) -> {
+                  sut.getUASRquestModule().sendMultiplePrfRequestWithParameter(times, parameters, true);
+              });
+
+      When("I send (\\d+) times an event log request with parameters \\{([^}]+)\\} to UAS",
+              (Integer times, String parameters) -> {
+                  sut.getUASRquestModule().sendMultipleEventRequestWithParameter(times, parameters, true);
+              });
+
+      When("I send (\\d+) times an ad request with query parameters for zone named \\{([^}]+)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequestsWithParams(times, zoneByName, true);
         });
@@ -231,11 +248,21 @@ public class UASIntegrationTest extends BaseTest {
           assertThat(sut.logFor(logType).actual(),
               StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(expectedFieldValue))));
         });
-      And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is \\{([^}]+)\\}",
-              (String fieldName, Integer column, String logType, String value) -> {
+      And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is \"([^\"]*)\"",
+            (String fieldName, Integer column, String logType, String value) -> {
+
                   sut.logFor(logType).actual().forEach(m-> sut.write("value of experiment selected is: "+m.get(column)));
                   assertThat(sut.logFor(logType).actual(),
                           StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(value))));
+
+              });
+
+      And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is not \"([^\"]*)\"",
+              (String fieldName, Integer column, String logType, String value) -> {
+
+                  sut.logFor(logType).actual().forEach(m-> sut.write("value of experiment selected is: "+m.get(column)));
+                  assertThat(sut.logFor(logType).actual(),
+                          StreamMatchers.allMatch(ListItemAt.theItemAt(column, not(value))));
 
               });
 
@@ -297,6 +324,10 @@ public class UASIntegrationTest extends BaseTest {
       sut.getUASRquestModule().addHttpHeader("User-Agent", userAgentStr);
     });
 
+      Given("I add header of \\{([^}]+)\\} with value \\{([^}]+)\\}", (String key, String value) -> {
+          sut.getUASRquestModule().addHttpHeader(key, value);
+      });
+
       Given("I use \\{([^}]+)\\} as referer string to send my requests to uas", (String referer) -> {
           sut.getUASRquestModule().emptyHttpHeaders();
           sut.getUASRquestModule().addHttpHeader("referer", referer);
@@ -333,7 +364,7 @@ public class UASIntegrationTest extends BaseTest {
           List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
           response.stream().map(UASIntegrationTest::getDspUrl).map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
                   .map(Optional::get).map(UASIntegrationTest::getAppnexusPassbackURL).forEach(url-> {
-                      sut.getUASRquestModule().sendGetRequestsAsync(1,url);
+                      sut.getUASRquestModule().sendGetRequestsAsync(1,url,false);
                   }
           );
       });

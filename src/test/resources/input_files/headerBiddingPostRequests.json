@@ -261,5 +261,37 @@
       "params": {"placementId" : "10433394",
         "publisherId" : 3708
       }
+    }]},
+  "Send HB request for publisher 3711 - 1X1":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "test.com",
+      "placementId": "10433394",
+      "publisherId": 3711,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3711
+      }
+    }]},
+  "Send HB request for publisher 3711 - 1X2":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "test.com",
+      "placementId": "10433394",
+      "publisherId": 3711,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3711
+      }
     }]}
 }

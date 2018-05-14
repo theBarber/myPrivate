@@ -1,3 +1,4 @@
+@couchBaseUtil
 @scheduled
 Feature: Entities for tests
 
@@ -5,7 +6,16 @@ Feature: Entities for tests
   Scenario: create entities for zone Tag Sanity test
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-      |campaign-API-1-a-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |
+      |campaign-API-1-a-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-1-a}   |[]                |83        |4737             |2434           |17116             |
+
+  @GDPR
+  Scenario: create entities for zone Tag Sanity test
+    Given i create new campaigns with new zoneset
+      |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204               |{zone-zoneset-GDPR-1-a}   |[]                |83        |4737             |2434           |17116             |
+    And i update banner data by name
+      |Campaign Name                     |limitation     |
+      |campaign-API-1-a-GDPR-banner-1    |[[[5,"=~","be"]]]|
 
   @limitationSanity
   Scenario: create entities for zone Tag Sanity test
@@ -80,17 +90,17 @@ Feature: Entities for tests
       Given i remove all zones from publishers: {3690}
       Given i create new campaigns with new zoneset
         |Campaign Name               |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation          |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
-        |campaign-DT-Inline-ST-1     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}  |[]                   |83         |14470            |3690           |65422             |
-        |campaign-DT-Inline-SS-1     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-SS-1}|[]                   |69         |14470            |3690           |65423             |
-        |campaign-DT-Inline-SS-3     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-ST-3}|[]                   |69         |14470            |3690           |65423             |
-        |campaign-DT-Inline-PGC-2    |75396    |222908     |false                  |1068            |{zone-zoneset-DT-inline-PGC} |[]                   |75         |14470            |3690           |65424             |
+        |campaign-DT-Inline-ST-1     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}   |[]                   |83         |14470            |3690           |65422             |
+        |campaign-DT-Inline-SS-1     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-SS-1} |[]                   |69         |14470            |3690           |65423             |
+        |campaign-DT-Inline-SS-3     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-ST-3} |[]                   |69         |14470            |3690           |65423             |
+        |campaign-DT-Inline-PGC-2    |75396    |222908     |false                  |1068            |{zone-zoneset-DT-inline-PGC}  |[]                   |75         |14470            |3690           |65424             |
       And i update campaign data by name
         |Campaign Name            |Priority      |campaign_delivery_method|
         |campaign-DT-Inline-ST-1  |-2            |1                       |
         |campaign-DT-Inline-SS-1  |-2            |1                       |
         |campaign-DT-Inline-SS-3  |1             |4                       |
         |campaign-DT-Inline-PGC-2 |-1            |2                       |
-      And I flush bucket name {iad-adserver} on couchbase
+#      And I flush bucket name {us-east-1-adserver} on couchbase
 
   @DOT
   Scenario: create campaigns for Domain Targeting
@@ -109,28 +119,47 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {3711}
     Given i create new campaigns with new zoneset
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-#      |campaign-server-prog-SS-1  |407981        |228362     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-##      |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-SS-2  |407981        |224531     |true                   |18               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-SS-4  |407981        |224531     |true                   |19               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-1  |407981        |228669     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+#      |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-2  |407981        |224531     |true                   |18               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-4  |407981        |224531     |true                   |19               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-PGC-1 |407981        |224530     |true                   |20               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-2 |407981        |228363     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-##      |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-3 |407981        |224530     |true                   |22               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-4 |407981        |228363     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-##      |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#    And i update campaign data by name
-#      |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
-#      |campaign-server-prog-SS-1       |-2            |1                       |4                 |
-#      |campaign-server-prog-SS-2       |-1            |2                       |3                 |
-#      |campaign-server-prog-SS-3       | 1            |4                       |2                 |
-#      |campaign-server-prog-SS-4       | 1            |4                       |1                 |
-#      |campaign-server-prog-PGC-1      |-2            |1                       |4                 |
-#      |campaign-server-prog-PGC-2      |-1            |2                       |3                 |
-#      |campaign-server-prog-PGC-3      |-1            |2                       |3                 |
-#      |campaign-server-prog-PGC-4      | 1            |4                       |2                 |
-#
+      |campaign-server-prog-PGC-2 |407981        |228670     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-3 |407981        |224530     |true                   |22               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-4 |407981        |228670     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+#      |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-ST-1  |407981        |228674     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+#      |campaign-server-prog-ST-1  |407981        |229737     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-2  |407981        |224533     |true                   |25               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-3  |407981        |228674     |true                   |26               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+#      |campaign-server-prog-ST-3  |407981       |229737     |true                   |26               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-4  |407981        |224533     |true                   |27               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+    And i update campaign data by name
+      |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
+      |campaign-server-prog-SS-1       |-2            |1                       |4                 |
+      |campaign-server-prog-SS-2       |-1            |2                       |3                 |
+      |campaign-server-prog-SS-3       | 1            |4                       |2                 |
+      |campaign-server-prog-SS-4       | 1            |4                       |1                 |
+      |campaign-server-prog-PGC-1      |-2            |1                       |4                 |
+      |campaign-server-prog-PGC-2      |-1            |2                       |3                 |
+      |campaign-server-prog-PGC-3      |1             |4                       |2                 |
+      |campaign-server-prog-PGC-4      | 1            |4                       |1                 |
+      |campaign-server-prog-ST-1       |-2            |1                       |4                 |
+      |campaign-server-prog-ST-2       |-1            |2                       |3                 |
+      |campaign-server-prog-ST-3       | 1            |4                       |2                 |
+      |campaign-server-prog-ST-4       | 1            |4                       |1                 |
+
+
+
+# Scenario: create entity for Niv
+#  Given i create new campaigns with new zoneset
+#    |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name               |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+#    |campaign-server-prog-SS-1  |407981        |228669     |true                   |17               |{zone-zoneset-server-prog-SS-Niv} |[]           |69        |2164              |3717           |66721             |
+##  need to update po_line_item
+
+  @GDPR
   @appnexus
   @cacheRefresh
   @HB
@@ -143,6 +172,7 @@ Feature: Entities for tests
   Scenario: refresh zone cache
     And I setup the db
     And I sleep for 60 seconds
+
 
   @appnexus
   @cacheRefresh

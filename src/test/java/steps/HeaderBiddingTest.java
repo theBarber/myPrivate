@@ -2,26 +2,18 @@ package steps;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
-import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
-import entities.Zone;
-import infra.module.WithId;
-import org.hamcrest.Matchers;
-import org.hamcrest.core.IsNull;
+import org.apache.http.HttpResponse;
 import org.junit.Assert;
 import org.junit.AssumptionViolatedException;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
-
 import static org.hamcrest.Matchers.isIn;
-import static org.hamcrest.Matchers.isOneOf;
 
 
 @RunWith(Cucumber.class)
@@ -29,6 +21,7 @@ import static org.hamcrest.Matchers.isOneOf;
         "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
 public class HeaderBiddingTest extends BaseTest {
     final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/headerBiddingPostRequests.json";
+    final private Integer NO_UT_INDEX = 3;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode headerBiddingPostRequests;
 
@@ -47,6 +40,7 @@ public class HeaderBiddingTest extends BaseTest {
         And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
         And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
         And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
+        And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBResponses);
 
     }
 
@@ -106,6 +100,33 @@ public class HeaderBiddingTest extends BaseTest {
         });
     }
 
+    public void sendZoneTagFromHBResponses() {
+        List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
+        sut.getUASRquestModule().reset();
+        response.stream().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                String htmlWithQuery = responseInJson.get(0).get("ad").asText();
+                String url = getUrlFromAd(htmlWithQuery);
+                sut.getUASRquestModule().sendGetRequestsAsync(1,url,false);
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private String getUrlFromAd(String htmlWithQuery) {
+        Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
+
+        return new StringBuilder().append(splitedQuery.get("ut_ju ").substring(2,splitedQuery.get("ut_ju ").length()-1)).append("?").append("&bidid=").append(splitedQuery.get("ut.bidid")).append("&bannerid=").
+                append(splitedQuery.get("ut.bannerid")).append("&zoneid=").append(splitedQuery.get("ut.zoneid")).
+                append("&hbprice=").append(splitedQuery.get("ut.hbprice")).toString();
+    }
+
+
     private void responsesContainEntityWithName(String entity, String name)
     {
        responsesContainEntityWithId(entity, getEntityId(entity,name));
@@ -123,5 +144,21 @@ public class HeaderBiddingTest extends BaseTest {
                 myEntity = null;
         }
         return sut.getCampaignManager().getterFor(myEntity).apply(name).orElseThrow(() -> new AssertionError(name+" wasn't found")).getId();
+    }
+
+    public Map<String, String> splitHBQuery(String query){
+
+        Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+        String[] pairs = query.split(";");
+        pairs[0] = pairs[0].substring(pairs[0].indexOf("ut_ju")).trim();
+        for (String pair : pairs) {
+            int idx = pair.indexOf("=");
+            try {
+                query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return query_pairs;
     }
 }

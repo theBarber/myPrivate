@@ -6,6 +6,8 @@
 @test1
 Feature: Header Bidding flow support
 
+
+
   Scenario: send HB request without params
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
@@ -13,6 +15,9 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And all HB responses contains cpm with id 1
+#    And for all HB responses i simulate winning, and send their zone tag
+#    And The response code is 200
+#    And The response contains script
 
   Scenario: send HB request without publisherID configured
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}

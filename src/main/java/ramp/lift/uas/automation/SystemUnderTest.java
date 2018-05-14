@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 import entities.RampAppCreateEntitiesManager;
+import infra.utils.CouchBaseUtils;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.junit.Assume;
 
@@ -48,6 +49,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected SqlConnectionModule workflowDbConnector;
 	protected CouchbaseBucketModule userInfoBucket;
 	protected CouchbaseBucketModule userHistoryBucket;
+	protected CouchBaseUtils couchBaseUtils;
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
 	private Map<String, String> config;
@@ -84,6 +86,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 					userHistoryBucket = createCouchbaseBucketModule("user-history", config);
 			}
 			break;
+				case "@couchBaseUtil":
+					if(couchBaseUtils == null)
+					{
+						couchBaseUtils = new CouchBaseUtils(config.get("couchbase.host"),config.get("couchbase.port"),config.get("couchbase.user"),config.get("couchbase.password"));
+					}
 	    case "@uas":
 				if (uas == null) {
 					try {
@@ -104,7 +111,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						break;
 		case "@RampAppCreateEntitiesManager":
 				if(rampAppCreateEntitiesManager == null)
-						rampAppCreateEntitiesManager = new RampAppCreateEntitiesManager(config.get("ramp.app.host1"),config.get("ramp.app.host2"),
+						rampAppCreateEntitiesManager = new RampAppCreateEntitiesManager(config.get("ramp.app.host"),
 										(config.get("ramp.app.port")));
 				break;
 	    case "@ramp_admin_db":
@@ -292,6 +299,15 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 
+	public CouchBaseUtils getCouchBaseUtils()
+	{
+		if(couchBaseUtils == null)
+		{
+			couchBaseUtils = new CouchBaseUtils(config.get("couchbase.host"),config.get("couchbase.port"),config.get("couchbase.user"),config.get("couchbase.password"));
+		}
+		return this.couchBaseUtils;
+	}
+
 
 	protected void setupCli(Map<String, String> config, AtomicReference<RuntimeException> exception) {
 		String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
@@ -400,7 +416,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	public RampAppCreateEntitiesManager getRampAppCreateEntitiesManager() {
 		if(rampAppCreateEntitiesManager == null)
 		{
-			rampAppCreateEntitiesManager =  new RampAppCreateEntitiesManager(config.get("ramp.app.host1"),config.get("ramp.app.host2"),
+			rampAppCreateEntitiesManager =  new RampAppCreateEntitiesManager(config.get("ramp.app.host"),
 										(config.get("ramp.app.port")));
 		}
 		return rampAppCreateEntitiesManager;

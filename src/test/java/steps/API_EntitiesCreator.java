@@ -39,6 +39,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with existing zoneset",this::createMultipleCampaigns);
         And("i create new campaigns with zoneset by name",this::createMultipleCampaignsWithZoneName);
         And("i create new campaigns with new zoneset",this::createMultipleCampaignsWithNewZoneset);
+        And("i create new priority campaigns with new zoneset",this::createMultipleCampaignsWithPriority);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
         And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityData);
         And("i create new Deals",this::createMultipleDeals);
@@ -51,6 +52,21 @@ public class API_EntitiesCreator extends BaseTest{
         And("I update last created campaign named \\{([^}]+)\\} (\\w+) to be \\{([^}]+)\\} in the DB", this::updateLastCreatedCampaignDB);
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
+    }
+
+    private void createMultipleCampaignsWithPriority(DataTable campaigns) {
+        List<List<String>> campaignsList = campaigns.asLists(String.class);
+        List<String> campaign;
+        List<Integer> zonesetsId;
+        for(int i=1;i<campaignsList.size();i++)
+        {
+            campaign = campaignsList.get(i);
+            zonesetsId = getZonesetsIds(campaign);
+            Integer creativeOrDealID = Boolean.valueOf(campaign.get(3))? getDealId(campaign.get(4)):getCreativeId(campaign.get(4));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/creativeOrDealID,zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            createCampaignRequest.setPriority(campaign.get(11));
+            createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+        }
     }
 
     private void createMultipleCampaignsWithZoneName(DataTable campaigns)
@@ -90,8 +106,40 @@ public class API_EntitiesCreator extends BaseTest{
         {
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            Integer creativeOrDealID = Boolean.valueOf(campaign.get(3))? getDealId(campaign.get(4)):getCreativeId(campaign.get(4));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/creativeOrDealID,zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+        }
+    }
+
+    private Integer getDealId(String deal)
+    {
+        if(tryParseInt(deal))
+        {
+            return Integer.parseInt(deal);
+        }else
+        {
+            return sut.getCampaignManager().getDeal(deal).orElseThrow(()->new AssertionError("deal: "+deal+" wasn't found!")).getDealId();
+        }
+    }
+
+    private Integer getCreativeId(String creative)
+    {
+        if(tryParseInt(creative))
+        {
+            return Integer.parseInt(creative);
+        }else
+        {
+            return sut.getCampaignManager().getCreative(creative).orElseThrow(()->new AssertionError("creative: "+creative+" wasn't found!")).getId();
+        }
+    }
+
+    private boolean tryParseInt(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
@@ -108,6 +156,8 @@ public class API_EntitiesCreator extends BaseTest{
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
+
+
     //creating zones and zoneset if needed (if not exist)
     private List<Integer> getZonesetsIds(List<String> campaignDataTable) {
         String zonesetsNameAsString = campaignDataTable.get(5);
@@ -207,7 +257,7 @@ public class API_EntitiesCreator extends BaseTest{
             throw new UncheckedIOException(e);
         }
         Creative creative = sut.getRampAppCreateEntitiesManager().createCreative(creativeName, IO, adUnitID, creativesTemplates.get(htmlTemplateType).toString());
-        //add it some list
+        sut.getCampaignManager().getIO(IO).orElseThrow(()->new AssertionError("IO: "+IO+ "doesn't exist")).creatives.add(creative);
     }
 
     private void createDeal(String dealName,Integer dspID,Integer floorPrice,Integer dealType,Integer adUnitId, Integer IO)
@@ -215,7 +265,7 @@ public class API_EntitiesCreator extends BaseTest{
         List<Integer>adUnitsIds = new ArrayList<Integer>(){{add(adUnitId);}};
         DealRequest dealRequest = new DealRequest(new Deal(0,dealName,dspID,floorPrice,dealType,adUnitsIds));
         Deal deal = sut.getRampAppCreateEntitiesManager().createDeal(dealRequest,IO);
-        //add it to some list
+        sut.getCampaignManager().getIO(IO).orElseThrow(()->new AssertionError("IO: "+IO+ "doesn't exist")).deals.add(deal);
     }
 
    private void createNewZoneAndZoneset(String zoneAndZonesetName, String limitation,String adUnitId, String web_section_id, String affiliateId, String po_lineItem_id)
@@ -297,15 +347,17 @@ public class API_EntitiesCreator extends BaseTest{
 
     private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName, String lineItemId, Integer creativeID_Or_DealID, List<Integer> zonesetsIDs, Boolean isServerProgrammatic)
     {
+        List<Integer> creatives = new ArrayList<>();
+        Integer dealID = null;
         Zonesets zonesets = new Zonesets();
         zonesets.setInclude(zonesetsIDs);
-        if(!isServerProgrammatic)
-            return new CreateCampaignRequest(campaignName,lineItemId,
-                    zonesets, new ArrayList<Integer>(){{add(creativeID_Or_DealID);}},
-                    dateFromNow(-1),dateFromNow(1));
+        if(isServerProgrammatic)
+            dealID = creativeID_Or_DealID;
         else
-            return new CreateCampaignRequest(campaignName,lineItemId,
-                    zonesets, creativeID_Or_DealID,
+            creatives.add(creativeID_Or_DealID);
+
+        return new CreateCampaignRequest(campaignName,lineItemId,
+                    zonesets,creatives ,dealID,
                     dateFromNow(-1),dateFromNow(1));
     }
 

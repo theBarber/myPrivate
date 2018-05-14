@@ -12,23 +12,33 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.util.Base64;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class CouchBaseUtils {
-    private static final String HOST = "http://172.31.48.30:8091/";
-    private static final String USER = "Administrator";
-    private static final String PASSWORD = "couchbase";
+    private String host;
+    private String port;
+    private String user;
+    private String password;
 
-    public void flushBucker(String bucketName)
+    public CouchBaseUtils(String host,String port, String user, String password)
     {
-        String encoding = Base64.getEncoder().encodeToString((USER+":"+PASSWORD).getBytes(Charset.forName("ISO-8859-1")));
+        this.host = host;
+        this.port = port;
+        this.user = user;
+        this.password = password;
+    }
+
+    public void flushBucket(String bucketName)
+    {
+        String encoding = Base64.getEncoder().encodeToString((user+":"+password).getBytes(Charset.forName("ISO-8859-1")));
         HttpClient httpClient = HttpClients.custom()
-                .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(10000).build())
+                .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(100000).build())
                 .build();
         HttpResponse response;
-        String url = HOST + "/pools/default/buckets/"+bucketName+"/controller/doFlush";
+        String url = "http://" +host + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("")+ "/pools/default/buckets/"+bucketName+"/controller/doFlush";
         try {
             HttpPost post = new HttpPost(url);
             post.setHeader("Authorization", "Basic " + encoding);
@@ -38,5 +48,4 @@ public class CouchBaseUtils {
         }
         assertThat("Status code of impression request", response.getStatusLine().getStatusCode(), is(200));
     }
-
 }

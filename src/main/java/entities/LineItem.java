@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import entities.ramp.app.api.Creative;
 import infra.module.WithId;
 
 public class LineItem implements WithId<Integer> {

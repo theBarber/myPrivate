@@ -1,5 +1,7 @@
 package entities;
 
+import entities.ramp.app.api.Creative;
+import gherkin.lexer.De;
 import infra.ParameterProvider;
 import infra.assertion.Assert;
 import infra.module.Named;
@@ -17,7 +19,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	List<IO> io;
 	List<ZoneSet> zonesets;
-	
+
 	CampaignManager() {
 
 	}
@@ -30,6 +32,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 			io.stream().filter(WithId.idIs(io_id)).findFirst().
 
 	}*/
+
 
     public Optional<LineItem> getLineItem(Integer LineItemID)
 	{
@@ -62,7 +65,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 		return zonesets.stream().filter(Named.nameIs(byName)).findFirst();
 	}
 
-	private Optional<IO> getIO(Integer byId)
+	public Optional<IO> getIO(Integer byId)
 	{
 		return io.stream().filter(WithId.idIs(byId)).findFirst();
 	}
@@ -226,4 +229,11 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	}
 
 
+    public Optional<Creative> getCreative(String byName) {
+		return io.stream().flatMap(x -> x.creatives.stream()).filter(Named.nameIs(byName)).findFirst();
+    }
+
+	public Optional<Deal> getDeal(String byName) {
+		return io.stream().flatMap(x -> x.deals.stream()).filter(Named.nameIs(byName)).findFirst();
+	}
 }

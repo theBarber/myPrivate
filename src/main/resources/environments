@@ -81,13 +81,11 @@ staging.ramp.app.host2=staging.ramp-ut.io
 staging.ramp.app.port=3003
 staging.ramp.test.lineItemId=210722
 
-aws-staging.ramp.app.host1=staging-us-east-1.ramp-ut.io
-aws-staging.ramp.app.host2=staging-us-east-1.ramp-ut.io
+aws-staging.ramp.app.host=staging-us-east-1.ramp-ut.io
 aws-staging.ramp.app.port=3003
 aws-staging.ramp.test.lineItemId=210722
 
-aws-integration.ramp.app.host1=integration-us-east-1.ramp-ut.io
-aws-integration.ramp.app.host2=integration-us-east-1.ramp-ut.io
+aws-integration.ramp.app.host=integration-us-east-1.ramp-ut.io
 aws-integration.ramp.app.port=3003
 aws-integration.ramp.test.lineItemId=[210722]
 
@@ -110,6 +108,12 @@ staging.user-history.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
 integration.user-history.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
 aws-staging.user-history.couchbase.nodes=[10.12.4.253]
 aws-integration.user-history.couchbase.nodes=[10.12.5.87]
+
+*.couchbase.host=10.12.4.253
+*.couchbase.port=8091
+*.couchbase.user=Administrator
+*.couchbase.password=couchbase
+
 
 staging.programmatic.host = services-ramp-staging.ramp-ut.io
 staging.programmatic.port=3003

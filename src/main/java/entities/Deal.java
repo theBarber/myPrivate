@@ -2,26 +2,37 @@ package entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import infra.module.Named;
+import infra.module.WithId;
 
 import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Deal {
+public class Deal  implements WithId<Integer>, Named {
     private Integer dealId;
     private String dealName;
     private Integer dspID;
     private Integer floorPrice;
     private Integer dealType;
     private List<Integer> adUnitId;
+    private String thirdPartyDealID;
 
     public Deal(){}
 
    public Deal(Integer id, String dealName, Integer dspID, Integer floorPrice, Integer dealType, List<Integer> adUnitId) {
-        this.dealId = 0;
+        this.dealId = id;
         this.dealName = dealName;
         this.dspID = dspID;
         this.floorPrice = floorPrice;
         this.dealType = dealType;
         this.adUnitId = adUnitId;
+    }
+
+    public String getThirdPartyDealID() {
+        return thirdPartyDealID;
+    }
+
+    public void setThirdPartyDealID(String thirdPartyDealID) {
+        this.thirdPartyDealID = thirdPartyDealID;
     }
 
     @JsonProperty("dealId")
@@ -80,5 +91,15 @@ public class Deal {
     @JsonProperty("adUnitId")
     public void setAdUnitId(List<Integer> adUnitId) {
         this.adUnitId = adUnitId;
+    }
+
+    @Override
+    public String getName() {
+        return this.dealName;
+    }
+
+    @Override
+    public Integer getId() {
+        return this.dealId;
     }
 }

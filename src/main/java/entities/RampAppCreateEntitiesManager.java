@@ -40,14 +40,12 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private CloseableHttpClient httpclient;
-	private String appHost;
-	private String serviceHost;
+	private String host;
 	private String port;
 
 
-	public RampAppCreateEntitiesManager(String serviceHost,String appHost, String port) {
-		this.serviceHost = serviceHost;
-		this.appHost = appHost;
+	public RampAppCreateEntitiesManager(String host, String port) {
+		this.host = host;
 		this.port = port;
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		List<Header> defaultHeaders = new ArrayList<Header>(){{
@@ -79,8 +77,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 
 	public Optional<Campaign> createCampaign(CreateCampaignRequest createCampaignRequest,Boolean isServerProgrammatic)
 	{
-		CreateCampaignsRequestWrapper requestWrapper = new CreateCampaignsRequestWrapper(createCampaignRequest);
-		CloseableHttpResponse createCampaignResponse = createCampaignRequest(requestWrapper);
+		CloseableHttpResponse createCampaignResponse = createCampaignRequest(new CreateCampaignsRequestWrapper(createCampaignRequest));
 		return getCampaignFromResponse(createCampaignResponse,isServerProgrammatic);
 	}
 
@@ -133,12 +130,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 
 	private String getServicesURL(String service)
 	{
-		return  "http://" + serviceHost + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("") + service;
-	}
-
-	private String getAppURL(String service)
-	{
-		return  "http://" + appHost + service;
+		return  "http://" + host + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("") + service;
 	}
 
 	private void printEntityContent(HttpEntity entity)
@@ -261,7 +253,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 	private CloseableHttpResponse createDealRequest(DealRequest dealRequest, Integer IO)
 	{
 		CloseableHttpResponse dealResponse;
-		String url = getAppURL("/io/"+IO+"/deal");
+		String url = getServicesURL("/io/"+IO+"/deal");
 		HttpPost httpPost = new HttpPost(url);
 		try {
 			HttpEntity entity = new StringEntity(mapper.writeValueAsString(dealRequest), ContentType.APPLICATION_JSON);
@@ -319,7 +311,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 
 	public CloseableHttpResponse createCreativeRequest(String creativeName, Integer IO, Integer adUnitID, String htmlTemplate) {
 		CloseableHttpResponse creativeResponse;
-		String url = getAppURL("/io/"+IO+"/creative");
+		String url = getServicesURL("/io/"+IO+"/creative");
 		CreativeRequest creativeRequest = new CreativeRequest(creativeName,adUnitID,htmlTemplate);
 		CreativeRequestWrapper creativeRequestWrapper = new CreativeRequestWrapper(creativeRequest);
 		HttpPost httpPost = new HttpPost(url);

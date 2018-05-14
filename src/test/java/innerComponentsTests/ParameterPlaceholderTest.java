@@ -3,9 +3,12 @@ package innerComponentsTests;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.text.MatchesPattern.matchesPattern;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
