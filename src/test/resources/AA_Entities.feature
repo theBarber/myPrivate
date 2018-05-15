@@ -184,4 +184,4 @@ Feature: Entities for tests
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 300 seconds
+    And I sleep for 200 seconds
