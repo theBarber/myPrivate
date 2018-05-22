@@ -251,7 +251,7 @@ public class UASIntegrationTest extends BaseTest {
       And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is \"([^\"]*)\"",
             (String fieldName, Integer column, String logType, String value) -> {
 
-                  sut.logFor(logType).actual().forEach(m-> sut.write("value of experiment selected is: "+m.get(column)));
+                  sut.logFor(logType).actual().forEach(m-> sut.write("value of "+fieldName+" selected is: "+m.get(column)));
                   assertThat(sut.logFor(logType).actual(),
                           StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(value))));
 

@@ -93,6 +93,11 @@
 					"Banners":
 					[
 						{
+							"bannerId": 1252714,
+							"creativeName": "campaign-API-1-a-GDPR-banner-1"
+						},
+
+						{
 							"bannerId": 1224810,
 							"creativeName": "UAS-by-at-most-2-banner"
 						}

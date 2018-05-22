@@ -15,7 +15,7 @@ Feature: Entities for tests
       |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204               |{zone-zoneset-GDPR-1-a}   |[]                |83        |4737             |2434           |17116             |
     And i update banner data by name
       |Campaign Name                     |limitation     |
-      |campaign-API-1-a-GDPR-banner-1    |[[[5,"=~","be"]]]|
+      |campaign-API-1-a-GDPR-banner-1    |[]             |
 
   @limitationSanity
   Scenario: create entities for zone Tag Sanity test
@@ -152,12 +152,6 @@ Feature: Entities for tests
       |campaign-server-prog-ST-4       | 1            |4                       |1                 |
 
 
-
-# Scenario: create entity for Niv
-#  Given i create new campaigns with new zoneset
-#    |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name               |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-#    |campaign-server-prog-SS-1  |407981        |228669     |true                   |17               |{zone-zoneset-server-prog-SS-Niv} |[]           |69        |2164              |3717           |66721             |
-##  need to update po_line_item
 
   @GDPR
   @appnexus

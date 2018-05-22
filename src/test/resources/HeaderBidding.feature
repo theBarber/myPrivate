@@ -18,6 +18,8 @@ Feature: Header Bidding flow support
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
+
 
   Scenario: send HB request without publisherID configured
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}

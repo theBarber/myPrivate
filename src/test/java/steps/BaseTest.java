@@ -156,7 +156,7 @@ public class BaseTest implements En {
 
     // clean db
     //SqlRampAdminUtils.unableAllExperimentGroups();
-    //SqlWorkflowUtils.setLimitationForZone(161482, "[]");
+    SqlWorkflowUtils.setLimitationForZone(161482, "[]");
     SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`campaigns` SET `capping`='0', `session_capping`='0', `units`='-1', `status`='0' WHERE `campaignid`='278956';");
     SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`tags` SET `is_migrated`='1' WHERE `tagid`='176';");
     CacheProcessTest.refreshZoneCache("cmd");

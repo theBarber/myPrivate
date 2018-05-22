@@ -23,6 +23,14 @@
 				"isSync": true,
 				"isSecure": false,
 				"status": 0
+			},
+			{
+				"zoneId": 181917,
+				"zoneName": "zone-zoneset-GDPR-1-a",
+				"adUnitId": 10,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
 			}
 		]
 	},
