@@ -131,8 +131,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         if (toReset) {
             reset();
         }
-
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
+//        System.out.println(url);
         for (; times > 0; times--) {
             request(url, false);
         }
@@ -282,6 +282,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         httpHeaders.add(new BasicHeader(name, value));
     }
 
+    public List<Header> getHttpHeaders()
+    {
+        return httpHeaders;
+    }
+
     public void emptyHttpHeaders() {
         httpHeaders.clear();
     }
@@ -419,7 +424,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 request_type_in_string_format = "/e";
                 break;
         }
-        return http + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + request_type_in_string_format + Optional.ofNullable(params).filter(s -> !s.isEmpty()).map(s -> "?" + s).orElse("") + "&ct=1";
+        return http + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + request_type_in_string_format + Optional.ofNullable(params).filter(s -> !s.isEmpty()).map(s -> "?" + s).orElse("");
     }
 
     private void sendPostRequestsAsync(Integer times, String url, String body) {

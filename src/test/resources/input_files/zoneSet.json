@@ -25,8 +25,16 @@
 				"status": 0
 			},
 			{
+				"zoneId": 182176,
+				"zoneName": "zone-server-prog-SS",
+				"adUnitId": 10,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			},
+			{
 				"zoneId": 181917,
-				"zoneName": "zone-zoneset-GDPR-1-a",
+				"zoneName": "zone-zoneset-GDPR-1-a-not-api",
 				"adUnitId": 10,
 				"isSync": true,
 				"isSecure": false,

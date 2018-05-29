@@ -40,6 +40,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with zoneset by name",this::createMultipleCampaignsWithZoneName);
         And("i create new campaigns with new zoneset",this::createMultipleCampaignsWithNewZoneset);
         And("i create new priority campaigns with new zoneset",this::createMultipleCampaignsWithPriority);
+        And("i create new campaigns with viewability", this::createCampaignsWithViewability);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
         And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityData);
         And("i create new Deals",this::createMultipleDeals);
@@ -140,6 +141,20 @@ public class API_EntitiesCreator extends BaseTest{
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    private void createCampaignsWithViewability(DataTable campaigns) {
+        List<List<String>> campaignsList = campaigns.asLists(String.class);
+        List<String> campaign;
+        List<Integer> zonesetsId;
+        for(int i=1;i<campaignsList.size();i++)
+        {
+            campaign = campaignsList.get(i);
+            zonesetsId = getZonesetsIds(campaign);
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            createCampaignRequest.setViewability(campaign.get(11),campaign.get(12),true);
+            createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
 

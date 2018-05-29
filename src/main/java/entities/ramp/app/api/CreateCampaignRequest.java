@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import entities.LineItem;
 
 public class CreateCampaignRequest {
@@ -18,6 +19,11 @@ public class CreateCampaignRequest {
     private String startDateTime;
     private String endDateTime;
     private SupplySources supplySources;
+    private String avThreshold;
+    private Boolean avEnabled;
+    private String avVendor;
+
+
 
     @JsonProperty("optimizeReason")
     String optimizeReason = "10";
@@ -67,7 +73,7 @@ public class CreateCampaignRequest {
         this.supplySources = supplySources;
     }
 
-    @JsonProperty("selectedDealId")
+   @JsonProperty("selectedDealId")
     public Integer getSelectedDealId() {
         return selectedDealId;
     }
@@ -133,4 +139,38 @@ public class CreateCampaignRequest {
         this.endDateTime = endDateTime;
     }
 
+
+    @JsonProperty("avThreshold")
+    public String getAvThreshold() {
+        return avThreshold;
+    }
+    @JsonProperty("avThreshold")
+    public void setAvThreshold(String avThreshold) {
+        this.avThreshold = avThreshold;
+    }
+    @JsonProperty("avEnabled")
+    public Boolean getAvEnabled() {
+        return avEnabled;
+    }
+    @JsonProperty("avEnabled")
+    public void setAvEnabled(Boolean avEnabled) {
+        this.avEnabled = avEnabled;
+    }
+
+    @JsonProperty("avVendor")
+    public String getAvVendor() {
+        return avVendor;
+    }
+
+    @JsonProperty("avVendor")
+    public void setAvVendor(String avVendor) {
+        this.avVendor = avVendor;
+    }
+
+
+    public void setViewability(String avThreshold, String avVendor, Boolean avEnabled ) {
+        this.avThreshold = avThreshold;
+        this.avVendor = avVendor;
+        this.avEnabled = avEnabled;
+    }
 }

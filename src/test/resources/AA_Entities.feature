@@ -12,7 +12,7 @@ Feature: Entities for tests
   Scenario: create entities for zone Tag Sanity test
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-      |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204               |{zone-zoneset-GDPR-1-a}   |[]                |83        |4737             |2434           |17116             |
+      |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}   |[]                |83        |4737             |2434           |17116             |
     And i update banner data by name
       |Campaign Name                     |limitation     |
       |campaign-API-1-a-GDPR-banner-1    |[]             |
@@ -30,6 +30,7 @@ Feature: Entities for tests
       |campaign-API-limitations-test-C-banner-1    |[[[5,"!~","af"],[12,"=~","chrome"]]]                           |
       |campaign-API-limitations-test-W-banner-1    |[[[5,"!~","af"],[12,"=~","msie","msie 7","msie 8","msie 9"]]]  |
 
+  @GDPR
   @HB
   Scenario: create entities for HB tests
       Given i remove all zones from publishers: {3673,3697}
@@ -62,7 +63,7 @@ Feature: Entities for tests
   Scenario: create entities for DT tests
       Given i remove all zones from publishers: {3674,3675,3666}
       Given i create new campaigns with new zoneset
-        |Campaign Name           |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation          |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
+        |Campaign Name           |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name           |limitation          |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-DT-SS-1-t-1    |75396    |197418     |false                  |86              |{zone-zoneset-DT-SS-t-1}     |[]                  |69         |14401            |3674           |64397             |
         |campaign-DT-SS-2-t-1    |75396    |197418     |false                  |86              |{zone-zoneset-DT-SS-t-1}     |[]                  |69         |14401            |3674           |64397             |
         |campaign-DT-SI-1-t-1    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-1}     |[]                  |61         |14401            |3674           |64398             |
@@ -85,6 +86,7 @@ Feature: Entities for tests
         |campaign-DT-PGC-3-t-2 | 1            |4                       |
         |campaign-DT-SI-1-t-3-L|-2            |1                       |
         |campaign-DT-SI-2-t-3  |-1            |2                       |
+  @GDPR
   @DT
     Scenario: create entities for DT inline tests
       Given i remove all zones from publishers: {3690}
@@ -107,13 +109,20 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {3708}
     And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
     Given i create new campaigns, new zoneset with domains
-      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
-      |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |{}                  |{sahar.cnn.com}                   |
-      |campaign-DomainT-2   |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |{}                  |{cnn.com}                         |
-      |campaign-DomainT-3   |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
-      |campaign-DomainT-4   |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |{}                  |{cnn.com}                         |
+      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                    |
+      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |{}                  |{sahar.cnn.com}                   |
+      |campaign-DomainT-2         |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |{}                  |{cnn.com}                         |
+      |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |{}                  |{sahar.cnn.com,cnn.com,ynet.co.il}|
+      |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |{}                  |{cnn.com}                         |
+      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66722             |{sahar.cnn.com}     |{}                                |
+      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66723             |{cnn.com}           |{}                                |
+#      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |{sahar.cnn.com}     |{}                                |
+#      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |{cnn.com}           |{}                                |
 
 
+
+
+  @GDPR
   @appnexus
   Scenario: create entities for server programmatic tests
     Given i remove all zones from publishers: {3711}
@@ -152,6 +161,16 @@ Feature: Entities for tests
       |campaign-server-prog-ST-4       | 1            |4                       |1                 |
 
 
+#    @viewability
+#    Scenario: create entities for viewability tests
+#      Given i create new campaigns with viewability
+#        |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name               |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |avThreshold|avVendor  |
+#        |campaign-API-1-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-1-a}   |[]                |83        |4737             |2434           |17116             |1          |ias       |
+#        |campaign-API-2-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-2-a}   |[]                |83        |4737             |2434           |17116             |99         |ias       |
+#      And i update banner data by name
+#        |Campaign Name                            |limitation     |
+#        |campaign-API-1-a-viewability-banner-1    |[]             |
+#        |campaign-API-2-a-viewability-banner-1    |[]             |
 
   @GDPR
   @appnexus

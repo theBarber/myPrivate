@@ -28,6 +28,7 @@ import java.util.stream.Stream;
 
 import cucumber.api.PendingException;
 import gherkin.lexer.Fa;
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
@@ -182,6 +183,17 @@ public class UASIntegrationTest extends BaseTest {
           Matchers.is(0l));
     });
 
+      Then("The synchronized responses? are passback?", () -> {
+
+          Map<Boolean, Long> countUrls =
+                  sut.getUASRquestModule().getSynchronizedResponses()
+                          .stream().map(UASRequestModule::getImpressionUrlFrom).collect(Collectors.groupingBy(Optional::isPresent, Collectors.counting()));
+
+          assertThat(
+                  "all of the synchronized responses should not have an impression url", countUrls.getOrDefault(true, 0l),
+                  Matchers.is(0l));
+      });
+
     //
     // When("I send a request to the first the imperssion urls", ()->{
     // uas.get().responses()
@@ -190,7 +202,7 @@ public class UASIntegrationTest extends BaseTest {
     //
     // });
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
-    When("^I read the latest (clk|imp|req|hbl) log file from uas$", (String logType) -> {
+    When("^I read the latest (clk|imp|req|hbl|wel|evt|prf) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
 //        sut.logFor(logType).readLogs().actual().forEach(m->{
 //            StringBuilder stringBuilder = new StringBuilder();
@@ -203,7 +215,7 @@ public class UASIntegrationTest extends BaseTest {
       assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
     });
 
-    Then("^I filter in the (clk|imp|req) log to the lines where id at column (\\d+) is the same as in impression-url$",
+    Then("^I filter in the (clk|imp|req|hbl|wel|evt|prf) log to the lines where id at column (\\d+) is the same as in impression-url$",
         (String logType, Integer column) -> {
             // for checks only
             /*sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
@@ -248,19 +260,20 @@ public class UASIntegrationTest extends BaseTest {
           assertThat(sut.logFor(logType).actual(),
               StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(expectedFieldValue))));
         });
-      And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is \"([^\"]*)\"",
-            (String fieldName, Integer column, String logType, String value) -> {
 
+      And("The field (\\w+) in the (\\d+) column of the (clk|imp|req|hbl|wel|evt|prf) log is: (.*)$",
+              (String fieldName, Integer column, String logType, String value) -> {
                   sut.logFor(logType).actual().forEach(m-> sut.write("value of "+fieldName+" selected is: "+m.get(column)));
                   assertThat(sut.logFor(logType).actual(),
                           StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(value))));
 
               });
 
-      And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is not \"([^\"]*)\"",
+
+      And("The field (\\w+) in the (\\d+) column of the (clk|imp|req|hbl|wel|evt|prf) log is not: (.*)$",
               (String fieldName, Integer column, String logType, String value) -> {
 
-                  sut.logFor(logType).actual().forEach(m-> sut.write("value of experiment selected is: "+m.get(column)));
+                  sut.logFor(logType).actual().forEach(m-> sut.write("value of "+fieldName+" selected is: "+m.get(column)));
                   assertThat(sut.logFor(logType).actual(),
                           StreamMatchers.allMatch(ListItemAt.theItemAt(column, not(value))));
 
@@ -277,13 +290,17 @@ public class UASIntegrationTest extends BaseTest {
     });
 
     When("^I send impression requests to UAS$", () -> {
-      HttpClient httpclient = HttpClients.custom()
+        final HttpClientContext ctx = sut.getContext();
+        HttpClient httpclient = HttpClients.custom()
           .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
       sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
           .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
           .map(impurl -> CompletableFuture.supplyAsync(() -> {
-            try {
-              HttpResponse response = httpclient.execute(new HttpGet(impurl.toString()));
+              try {
+                HttpGet httpGet = new HttpGet(impurl.toString());
+                List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
+                httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+                HttpResponse response = httpclient.execute(httpGet,ctx);
               if (response.getEntity() != null) {
                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
               }
@@ -298,14 +315,19 @@ public class UASIntegrationTest extends BaseTest {
           });
     });
 
-    When("^I send click requests to UAS$", () -> {
-      HttpClient httpclient = HttpClients.custom()
+      When("^I send click requests to UAS$", () -> {
+          final HttpClientContext ctx = sut.getContext();
+          HttpClient httpclient = HttpClients.custom()
           .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(60000).build()).build();
-      sut.getUASRquestModule().responses().map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join)
+        sut.getUASRquestModule().responses().map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join)
           .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
           .map(click -> CompletableFuture.supplyAsync(() -> {
-            try {
-              HttpResponse response = httpclient.execute(new HttpGet(click.toString()));
+              try {
+                System.out.println(click);
+                HttpGet httpGet = new HttpGet(click.toString());
+                List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
+                httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+              HttpResponse response = httpclient.execute(httpGet ,ctx);
               if (response.getEntity() != null) {
                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
               }
@@ -455,13 +477,14 @@ public class UASIntegrationTest extends BaseTest {
     sut.getUASRquestModule().zoneRequests(zoneId, times, toReset);
   }
 
-  public static LongAdder sendImpressionRequestsToUASImmediately() {
+    public static LongAdder sendImpressionRequestsToUASImmediately() {
     ExecutorService impExecutorService =
         Executors.newFixedThreadPool(5, new ThreadFactoryBuilder().setNameFormat("Impression Sender").build());
     HttpClient httpclient = HttpClients.custom()
         .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
     LongAdder impressionsSent = new LongAdder();
     final HttpClientContext ctx = sut.getContext();
+
     sut.getUASRquestModule().responses().parallel().map(UASIntegrationTest::getImpressionUrl)
         .forEach(cf -> cf.whenCompleteAsync((impurl, th) -> {
           if (th == null) {
@@ -469,7 +492,8 @@ public class UASIntegrationTest extends BaseTest {
               url = (url.contains("stid=")) ? url.replaceAll("&stid=0", "&stid=999") : url.concat("&stid=999");
               try {
                   //sut.write("the impression url sent is: " + url);
-                HttpResponse response = httpclient.execute(new HttpGet(url),ctx);
+                  HttpGet httpGet = new HttpGet(url);
+                  HttpResponse response = httpclient.execute(httpGet,ctx);
                 int sc = response.getStatusLine().getStatusCode();
                 if (sc == 204) {
                   impressionsSent.increment();
