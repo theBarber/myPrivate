@@ -61,6 +61,7 @@ Feature: Gdpr test
 
 
   Scenario: zone request from Non-European user with device id + tsid + hhid
+    Given I add cookie UTID with random value to my requests to uas
     Given I add header of {x-forwarded-for} with value {3.127.0.0}
     Given I add header of {referer} with value {sahar.com}
     Given I Delete req logs
@@ -163,8 +164,8 @@ Feature: Gdpr test
     And The field Contextual_language in the 14 column of the clk log is: \N
 
 
-
   Scenario: zone request from Non-European user without device id + tsid + hhid
+    Given I add cookie UTID with random value to my requests to uas
     Given I add header of {x-forwarded-for} with value {9.128.0.2}
     Given I add header of {referer} with value {sahar.com}
     Given I Delete req logs
@@ -339,6 +340,7 @@ Feature: Gdpr test
   Given I Delete req logs
     Given I Delete clk logs
     Given I Delete imp logs
+    Given I add cookie UTID with random value to my requests to uas
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {9.128.0.2}
     Then i send 5 times Dynamic Tag ad request to UAS for publisher 3690 with domain {DynamicTagInline.com&loc=http://ads.undertone.com&ct=1}
