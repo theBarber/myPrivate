@@ -38,6 +38,10 @@ Feature: Entities for tests
         |Campaign Name                        |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation     |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-HB-Tablet-160x600           |75396    |223539     |false                  |148             |{zone-zoneset-HB-Tablet-160x600}         |[]            |8         |14400            |3673           |65421             |
         |campaign-HB-See-Through-1X2          |75396    |210722     |false                  |204             |{zone-zoneset-HB-See Through 1X2}        |[]            |83        |14400            |3673           |64396             |
+        |campaign-HB-Billboard-970X250        |75396    |198082     |false                  |64              |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400            |3673           |66720             |
+#        |campaign-HB-Billboard-970X250        |75396    |198082     |false                  |64             |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400           |3673           |66813             |
+        |campaign-HB-Desktop-300X250          |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400            |3673           |66725             |
+#       |campaign-HB-Desktop-300X250          |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400            |3673           |66814             |
         |campaign-HB-Prog-PGC-1X1-1           |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-2           |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-3           |75396    |222908     |false                  |86              |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
@@ -51,6 +55,8 @@ Feature: Entities for tests
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-See-Through-1X2          |0           |-1            |-1         |[]        |2                       |
+        |campaign-HB-Desktop-300X250          |0           |-2            |-1         |[]        |1                       |
+        |campaign-HB-Billboard-970X250        |0           |-1            |-1         |[]        |2                       |
         |campaign-HB-Prog-PGC-1X1-1           |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-PGC-1X1-2           |0           |-1            |-1         |[]        |2                       |
         |campaign-HB-Prog-PGC-1X1-3           |0           |1             |-1         |[]        |4                       |
@@ -102,7 +108,7 @@ Feature: Entities for tests
         |campaign-DT-Inline-SS-1  |-2            |1                       |
         |campaign-DT-Inline-SS-3  |1             |4                       |
         |campaign-DT-Inline-PGC-2 |-1            |2                       |
-#      And I flush bucket name {us-east-1-adserver} on couchbase
+      And I flush bucket name {us-east-1-adserver} on couchbase
 
   @DOT
   Scenario: create campaigns for Domain Targeting
@@ -161,17 +167,18 @@ Feature: Entities for tests
       |campaign-server-prog-ST-4       | 1            |4                       |1                 |
 
 
-#    @viewability
-#    Scenario: create entities for viewability tests
-#      Given i create new campaigns with viewability
-#        |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name               |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |avThreshold|avVendor  |
-#        |campaign-API-1-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-1-a}   |[]                |83        |4737             |2434           |17116             |1          |ias       |
-#        |campaign-API-2-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-2-a}   |[]                |83        |4737             |2434           |17116             |99         |ias       |
-#      And i update banner data by name
-#        |Campaign Name                            |limitation     |
-#        |campaign-API-1-a-viewability-banner-1    |[]             |
-#        |campaign-API-2-a-viewability-banner-1    |[]             |
+    @viewability
+    Scenario: create entities for viewability tests
+      Given i create new campaigns with viewability
+        |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name               |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |avThreshold|avVendor  |
+        |campaign-API-1-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-1-a}   |[]                |83        |4737             |2434           |17116             |20          |ias       |
+        |campaign-API-2-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-2-a}   |[]                |83        |4737             |2434           |17116             |30         |ias       |
+      And i update banner data by name
+        |Campaign Name                            |limitation     |
+        |campaign-API-1-a-viewability-banner-1    |[]             |
+        |campaign-API-2-a-viewability-banner-1    |[]             |
 
+  @viewability
   @GDPR
   @appnexus
   @cacheRefresh
@@ -186,7 +193,10 @@ Feature: Entities for tests
     And I setup the db
     And I sleep for 60 seconds
 
+#  Scenario: kill replay
+#    Given i kill replay on the machine
 
+  @viewability
   @appnexus
   @cacheRefresh
   @HB

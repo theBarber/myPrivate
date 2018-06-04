@@ -38,10 +38,26 @@ public class HeaderBiddingTest extends BaseTest {
 
         Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
         And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
+        And("all HB responses contains (\\w+) with value \\{([^}]+)\\}",this::responsesContainEntityWithValue);
         And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
         And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBResponses);
 
+    }
+
+    private void responsesContainEntityWithValue(String entity, String value) {
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
+                Assert.assertEquals(value,responseInJson.get(0).get(entity).toString());
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void responsesContainOneOnOf(String entity, String banners_names) {
@@ -86,18 +102,7 @@ public class HeaderBiddingTest extends BaseTest {
 
     public void responsesContainEntityWithId(String entity, Integer id) {
 
-        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-            JsonNode responseInJson = null;
-            try
-            {
-                responseInJson = mapper.readTree(content);
-                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
-                Assert.assertEquals(id.intValue(),responseInJson.get(0).get(entity).intValue());
-            }catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        });
+        responsesContainEntityWithValue(entity,String.valueOf(id));
     }
 
     public void sendZoneTagFromHBResponses() {

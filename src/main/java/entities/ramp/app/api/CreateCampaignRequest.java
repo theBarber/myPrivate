@@ -37,7 +37,8 @@ public class CreateCampaignRequest {
     Boolean isUnlimited = true;
     @JsonProperty("limitation")
     String limitation = "[]";
-
+   /* @JsonProperty("SourceLists")
+    String SourceLists = "[]";*/
 
 
     public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeId,Integer selectedDealId, String startDateTime, String endDateTime)

@@ -50,6 +50,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		List<Header> defaultHeaders = new ArrayList<Header>(){{
 			add(new BasicHeader("rampInternal", "true"));
+			add(new BasicHeader("Content-Type", "application/json"));
 		}};
 		httpclient = HttpClients.custom().setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(100000).build())
 				.setDefaultHeaders(defaultHeaders).setDefaultCookieStore(new BasicCookieStore()).build();
@@ -203,7 +204,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 			e.printStackTrace();
 			throw new UncheckedIOException("failed to send request (" + url + ") ", e);
 		}
-		assertThat("Status code of create campaign request", createZoneResponse.getStatusLine().getStatusCode(), is(200));
+		assertThat("Status code of create zone request", createZoneResponse.getStatusLine().getStatusCode(), is(200));
 		return createZoneResponse;
 	}
 

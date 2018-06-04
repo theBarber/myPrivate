@@ -94,6 +94,42 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
 
+  Scenario: Send Price per platform request with 970X250
+    Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 970X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Billboard-970X250}
+    And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
+    And all HB responses contains cpm with value {1.2}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
+
+  Scenario: Send Price per platform request with 300X250
+    Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
+    And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
+    And all HB responses contains cpm with value {2.5}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
+
+  Scenario: Send Price per platform request with 970X250, 300X250
+    Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with [970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
+    And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
+    And all HB responses contains cpm with value {2.5}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
+
 
 #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -177,6 +213,43 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
+
+  Scenario: Send Price per platform request with 970X250
+    Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 970X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Billboard-970X250}
+    And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
+    And all HB responses contains cpm with value {1.2}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
+
+  Scenario: Send Price per platform request with 300X250
+    Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
+    And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
+    And all HB responses contains cpm with value {2.5}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
+
+  Scenario: Send Price per platform request with 970X250, 300X250
+    Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with [970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
+    And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
+    And all HB responses contains cpm with value {2.5}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
+
 
 
 #  Scenario: disabled all HB campaigns

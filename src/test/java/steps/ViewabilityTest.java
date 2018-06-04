@@ -5,8 +5,8 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:UASLimitations.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/UAS_Limitations_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:Viewability.feature", plugin = {"pretty",
+        "infra.RotatingJSONFormatter:target/cucumber/Viewability.feature_$TIMESTAMP$.json"})
 public class ViewabilityTest extends BaseTest{
     public ViewabilityTest()
     {
