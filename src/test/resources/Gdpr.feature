@@ -309,7 +309,7 @@ Feature: Gdpr test
       And I send impression requests to UAS
       And I send click requests to UAS
       And I sleep for 2 seconds
-    Then I read the latest req log file from uas
+      Then I read the latest req log file from uas
       Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
       And The field zoneid in the 4 column of the req log is the same as in impression-url
       And The field User_identifier in the 3 column of the req log is: 0
@@ -423,6 +423,7 @@ Feature: Gdpr test
     Given I Delete req logs
     Given I Delete clk logs
     Given I Delete imp logs
+    Given I add cookie UTID with random value to my requests to uas
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {9.128.0.2}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&optimize=0&loc=test.com}
@@ -496,6 +497,7 @@ Feature: Gdpr test
 
   Scenario: Web event logging (wel) request from Non-European user
     Given I Delete wel logs
+    Given I add cookie UTID with random value to my requests to uas
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {3.128.44.22}
     Given I send 5 times an wel request with parameters {trackerid=5499&cb=870589} to UAS
@@ -527,6 +529,7 @@ Feature: Gdpr test
     And The field Country_Code in the 7 column of the prf log is: \N
 
   Scenario: Profile requests (prf) request from Non-European user
+    Given I add cookie UTID with random value to my requests to uas
     Given I Delete prf logs
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {3.128.44.22}
