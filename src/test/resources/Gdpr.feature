@@ -17,6 +17,7 @@ Feature: Gdpr test
     And I send impression requests to UAS
     And I send click requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-API-1-a-GDPR-banner-1} 100% of the time
+    And I sleep for 2 seconds
     Then I read the latest req log file from uas
     Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
     And The field zoneid in the 4 column of the req log is the same as in impression-url
@@ -72,6 +73,7 @@ Feature: Gdpr test
     And I send impression requests to UAS
     And I send click requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-API-1-a-GDPR-banner-1} 100% of the time
+    And I sleep for 2 seconds
     Then I read the latest req log file from uas
     Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
     And The field zoneid in the 4 column of the req log is the same as in impression-url
@@ -118,6 +120,7 @@ Feature: Gdpr test
     And I send impression requests to UAS
     And I send click requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-API-1-a-GDPR-banner-1} 100% of the time
+    And I sleep for 2 seconds
     Then I read the latest req log file from uas
     Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
     And The field zoneid in the 4 column of the req log is the same as in impression-url
@@ -174,6 +177,7 @@ Feature: Gdpr test
     And I send impression requests to UAS
     And I send click requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-API-1-a-GDPR-banner-1} 100% of the time
+    And I sleep for 2 seconds
     Then I read the latest req log file from uas
     Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
     And The field zoneid in the 4 column of the req log is the same as in impression-url
@@ -233,7 +237,8 @@ Feature: Gdpr test
       And The response contains script
       And The responses has impression-urls
       And I send impression requests to UAS
-      Then I read the latest req log file from uas
+      And I sleep for 2 seconds
+    Then I read the latest req log file from uas
       Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
       And The field zoneid in the 4 column of the req log is the same as in impression-url
       And The field User_identifier in the 3 column of the req log is: 0
@@ -271,6 +276,7 @@ Feature: Gdpr test
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
+    And I sleep for 2 seconds
     Then I read the latest req log file from uas
     Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
     And The field zoneid in the 4 column of the req log is the same as in impression-url
@@ -302,7 +308,8 @@ Feature: Gdpr test
       And The responses has impression-urls
       And I send impression requests to UAS
       And I send click requests to UAS
-      Then I read the latest req log file from uas
+      And I sleep for 2 seconds
+    Then I read the latest req log file from uas
       Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
       And The field zoneid in the 4 column of the req log is the same as in impression-url
       And The field User_identifier in the 3 column of the req log is: 0
@@ -339,6 +346,7 @@ Feature: Gdpr test
     And The response contains script
     And The responses has impression-urls
     And I send impression requests to UAS
+    And I sleep for 2 seconds
     Then I read the latest req log file from uas
     Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
     And The field zoneid in the 4 column of the req log is the same as in impression-url
@@ -383,6 +391,7 @@ Feature: Gdpr test
     And The response code is 200
     And The response contains script
     And I send impression requests to UAS
+    And I sleep for 2 seconds
     Then I read the latest req log file from uas
     Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
     And The field zoneid in the 4 column of the req log is the same as in impression-url
@@ -423,6 +432,7 @@ Feature: Gdpr test
     And The response code is 200
     And The response contains script
     And I send impression requests to UAS
+    And I sleep for 2 seconds
     Then I read the latest req log file from uas
     Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
     And The field zoneid in the 4 column of the req log is the same as in impression-url
