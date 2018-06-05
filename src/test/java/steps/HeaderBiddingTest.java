@@ -24,6 +24,7 @@ public class HeaderBiddingTest extends BaseTest {
     final private Integer NO_UT_INDEX = 3;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode headerBiddingPostRequests;
+    private Map<JsonNode,Map<String,Integer>> responsesMapByBidID;
 
     public HeaderBiddingTest()
     {
@@ -40,9 +41,49 @@ public class HeaderBiddingTest extends BaseTest {
         And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
         And("all HB responses contains (\\w+) with value \\{([^}]+)\\}",this::responsesContainEntityWithValue);
         And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
+        And("i read all HB responses and map their bidId",this::mapResponsesByBidID);
+        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\}", this::responsesContainEntityByBidIdWithName);
+        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+)", this::responsesContainEntityByBidIdWithValue);
         And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBResponses);
 
+    }
+
+    private void mapResponsesByBidID() {
+        responsesMapByBidID = new HashMap<>();
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            try
+            {
+                JsonNode contentAsJsonNode= mapper.readTree(content);
+                responsesMapByBidID.put(contentAsJsonNode,getBidMapperFromResponse(contentAsJsonNode));// will look like:   response --> map: (bid-->index)
+            }catch (Exception e)
+            {
+                throw new AssertionError("error while parsing HB response");
+            }
+        });
+
+    }
+
+    private void responsesContainEntityByBidIdWithValue(String bidId, String entity, Integer value) {
+        Assert.assertNotNull("bid mapper is null, please to read it first from the responses.",responsesMapByBidID);
+        responsesMapByBidID.forEach((contentAsJson,bidMap)->{
+            Assert.assertNotNull("bidid: "+bidId+" doesn't exist",bidMap.get(bidId));
+            Assert.assertNotNull("response not contains entity named: " + entity, contentAsJson.get(bidMap.get(bidId)).get(entity));
+            Assert.assertEquals(value.toString(),contentAsJson.get(bidMap.get(bidId)).get(entity).toString());
+        });
+    }
+
+    private void responsesContainEntityByBidIdWithName(String bidId, String entity, String name) {
+        responsesContainEntityByBidIdWithValue(bidId,entity,getEntityId(entity,name));
+    }
+
+    private Map<String,Integer> getBidMapperFromResponse(JsonNode responseInJson) {
+        Map<String,Integer> bidIdMapper = new HashMap<>();
+        Integer index = 0;
+        for (JsonNode js:responseInJson) {
+            bidIdMapper.put(js.get("bidRequestId").textValue(),index++);
+        }
+        return bidIdMapper;
     }
 
     private void responsesContainEntityWithValue(String entity, String value) {

@@ -213,14 +213,14 @@ Feature: Gdpr test
 
   Scenario: zone request for server programmatic flow from both Non-European\European user
     Given I add header of {x-forwarded-for} with value {1.23.186.0}
-    When I send 5 times an ad request with parameter {requestid=systemTestA&optimize=0} for zone named {zone-zoneset-server-prog-SS} to UAS
+    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     Given I add header of {x-forwarded-for} with value {2.16.4.11}
-    When I send 5 times an ad request with parameter {requestid=systemTestA&optimize=0} for zone named {zone-zoneset-server-prog-SS} to UAS
+    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-3-banner-1} 100% of the time
 
@@ -231,7 +231,7 @@ Feature: Gdpr test
       Given I Delete req logs
       Given I Delete clk logs
       Given I Delete imp logs
-     Given I add header of {referer} with value {sahar.com}
+      Given I add header of {referer} with value {sahar.com}
       Given I add header of {x-forwarded-for} with value {2.16.108.43}
       Then i send 5 times Dynamic Tag ad request to UAS for publisher 3690 with domain {DynamicTagInline.com&deviceid=device_test1&tsid=ts_test1&hhid=hh_test1}
       Then The response code is 200
@@ -239,7 +239,7 @@ Feature: Gdpr test
       And The responses has impression-urls
       And I send impression requests to UAS
       And I sleep for 2 seconds
-    Then I read the latest req log file from uas
+      Then I read the latest req log file from uas
       Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
       And The field zoneid in the 4 column of the req log is the same as in impression-url
       And The field User_identifier in the 3 column of the req log is: 0

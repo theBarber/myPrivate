@@ -3,10 +3,9 @@
 @uas
 @scheduled
 @HB
+#@UN-6989
 @test1
 Feature: Header Bidding flow support
-
-
 
   Scenario: send HB request without params
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
@@ -19,7 +18,6 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
-
 
   Scenario: send HB request without publisherID configured
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
@@ -129,6 +127,16 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
+
+
+#    Scenario: header bidding multiple bids requests
+#      Given i send 1 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+#      And The response code is 200
+#      And The response contains script
+#      And i read all HB responses and map their bidId
+#      And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1}
+#      And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1}
+#      And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1}
 
 
 #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -250,7 +258,14 @@ Feature: Header Bidding flow support
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
 
-
+#  Scenario: header bidding multiple bids requests
+#    Given i send 1 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+#    And The response code is 200
+#    And The response contains script
+#    And i read all HB responses and map their bidId
+#    And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1}
+#    And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1}
+#    And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1}
 
 #  Scenario: disabled all HB campaigns
 #    Given i update campaign data by name
