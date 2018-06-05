@@ -66,7 +66,7 @@ Feature: Gdpr test
     Given I Delete req logs
     Given I Delete clk logs
     Given I Delete imp logs
-    When I send 5 times an ad request with parameter {deviceid=device_test1&tsid=ts_test1&hhid=hh_test1} for zone named {zone-zoneset-GDPR-1-a-not-api} to UAS
+    When I send 5 times an ad request with parameter {deviceid=device_test1&tsid=ts_test1&hhid=hh_test1} for zone named {zone-zoneset-GDPR-1-a} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
