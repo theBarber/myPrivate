@@ -291,12 +291,14 @@ public class UASIntegrationTest extends BaseTest {
 
     When("^I send impression requests to UAS$", () -> {
         final HttpClientContext ctx = sut.getContext();
+        System.out.println(ctx.getCookieStore());
         HttpClient httpclient = HttpClients.custom()
           .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
-      sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
+        sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
           .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
           .map(impurl -> CompletableFuture.supplyAsync(() -> {
               try {
+                System.out.println(impurl);
                 HttpGet httpGet = new HttpGet(impurl.toString());
                 List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                 httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));

@@ -61,16 +61,16 @@ Feature: Gdpr test
 
 
   Scenario: zone request from Non-European user with device id + tsid + hhid
-    Given I add cookie UTID with random value to my requests to uas
     Given I add header of {x-forwarded-for} with value {3.127.0.0}
     Given I add header of {referer} with value {sahar.com}
     Given I Delete req logs
     Given I Delete clk logs
     Given I Delete imp logs
-    When I send 5 times an ad request with parameter {deviceid=device_test1&tsid=ts_test1&hhid=hh_test1} for zone named {zone-zoneset-GDPR-1-a} to UAS
+    When I send 5 times an ad request with parameter {deviceid=device_test1&tsid=ts_test1&hhid=hh_test1} for zone named {zone-zoneset-GDPR-1-a-not-api} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
+    Given I add cookie UTID with value {8c09b6bc6fd7445ebff57d69687916b8} to my requests to uas
     And I send impression requests to UAS
     And I send click requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-API-1-a-GDPR-banner-1} 100% of the time
@@ -589,5 +589,5 @@ Feature: Gdpr test
     And The field Contextual_language in the 10 column of the evt log is not: \N
 
 
-##  ---------------------------------------------------------------------------------
-
+###  ---------------------------------------------------------------------------------
+#
