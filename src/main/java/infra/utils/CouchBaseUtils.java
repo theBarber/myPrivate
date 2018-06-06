@@ -46,6 +46,6 @@ public class CouchBaseUtils {
            } catch (IOException e) {
             throw new UncheckedIOException("failed to send request (" + url + ") ", e);
         }
-        assertThat("Status code of impression request", response.getStatusLine().getStatusCode(), is(200));
+        assertThat("Status code of flushing bucket request", response.getStatusLine().getStatusCode(), is(200));
     }
 }

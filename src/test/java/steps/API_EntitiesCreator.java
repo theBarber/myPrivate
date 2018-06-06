@@ -41,6 +41,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with new zoneset",this::createMultipleCampaignsWithNewZoneset);
         And("i create new priority campaigns with new zoneset",this::createMultipleCampaignsWithPriority);
         And("i create new campaigns with viewability", this::createCampaignsWithViewability);
+        And("i create new campaigns with Supply type", this::createCampaignsWithSupplyType);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
         And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityData);
         And("i create new Deals",this::createMultipleDeals);
@@ -54,6 +55,8 @@ public class API_EntitiesCreator extends BaseTest{
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
     }
+
+
 
     private void createMultipleCampaignsWithPriority(DataTable campaigns) {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
@@ -156,6 +159,32 @@ public class API_EntitiesCreator extends BaseTest{
             createCampaignRequest.setViewability(campaign.get(11),campaign.get(12),true);
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
+    }
+
+    private void createCampaignsWithSupplyType(DataTable campaigns) {
+        List<List<String>> campaignsList = campaigns.asLists(String.class);
+        List<String> campaign;
+        List<Integer> zonesetsId;
+        for(int i=1;i<campaignsList.size();i++)
+        {
+            campaign = campaignsList.get(i);
+            zonesetsId = getZonesetsIds(campaign);
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            createCampaignRequest.setSupplyType(getTypeCode(campaign.get(11)));
+            createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+        }
+
+    }
+
+    private Integer getTypeCode(String type) {
+        Integer typecode = 0;
+        switch (type.toLowerCase()){
+            case "all":typecode=0;break;
+            case "direct":typecode=1;break;
+            case "hb":typecode=2;break;
+            default: throw new AssertionError("no type: "+type+ " defined");
+        }
+        return typecode;
     }
 
     private void createMultipleCampaignsWithNewZonesetWithDomains(DataTable campaigns) {
