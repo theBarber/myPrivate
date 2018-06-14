@@ -3,8 +3,8 @@
 @uas
 @scheduled
 @HB
-#@UN-6989
 @test1
+
 Feature: Header Bidding flow support
 
   Scenario: send HB request without params
