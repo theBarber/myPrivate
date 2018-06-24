@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.apache.http.HttpResponse;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.AssumptionViolatedException;
 import org.junit.runner.RunWith;
@@ -12,8 +13,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isIn;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 
 @RunWith(Cucumber.class)
@@ -24,7 +31,10 @@ public class HeaderBiddingTest extends BaseTest {
     final private Integer NO_UT_INDEX = 3;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode headerBiddingPostRequests;
-    private Map<JsonNode,Map<String,Integer>> responsesMapByBidID;
+    private List<JsonNode> responses;
+    private Map<String,Map<Integer,AtomicInteger>> bidCounterMap;
+    String mapByEntity;
+
 
     public HeaderBiddingTest()
     {
@@ -37,44 +47,69 @@ public class HeaderBiddingTest extends BaseTest {
             }
         });
 
-        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
+        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
+        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
         And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
         And("all HB responses contains (\\w+) with value \\{([^}]+)\\}",this::responsesContainEntityWithValue);
         And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
-        And("i read all HB responses and map their bidId",this::mapResponsesByBidID);
-        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\}", this::responsesContainEntityByBidIdWithName);
-        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+)", this::responsesContainEntityByBidIdWithValue);
+        And("i read all HB responses and map their bidId by (campaignId|adId)",this::setBidMapByEntity);
+        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
+        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
         And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBResponses);
 
     }
 
-    private void mapResponsesByBidID() {
-        responsesMapByBidID = new HashMap<>();
+    private void setBidMapByEntity(String entity) {
+        mapByEntity = entity;
+        responses = new ArrayList<>();
+        bidCounterMap = new HashMap<>();
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             try
             {
                 JsonNode contentAsJsonNode= mapper.readTree(content);
-                responsesMapByBidID.put(contentAsJsonNode,getBidMapperFromResponse(contentAsJsonNode));// will look like:   response --> map: (bid-->index)
+                responses.add(contentAsJsonNode);
             }catch (Exception e)
             {
                 throw new AssertionError("error while parsing HB response");
             }
         });
+        responses.forEach(response->
+        {
+            response.forEach(jsonNode ->
+            {
+                String key = jsonNode.get("bidRequestId").textValue();
+                Integer key2 = jsonNode.get(mapByEntity).intValue();
+                Map<Integer,AtomicInteger> innerMap = bidCounterMap.computeIfAbsent(key, (k) -> new HashMap<>());
+                AtomicInteger counter = innerMap.computeIfAbsent(key2, (k) -> new AtomicInteger(0));
+                counter.incrementAndGet();
+            });
+        });
 
-    }
-
-    private void responsesContainEntityByBidIdWithValue(String bidId, String entity, Integer value) {
-        Assert.assertNotNull("bid mapper is null, please to read it first from the responses.",responsesMapByBidID);
-        responsesMapByBidID.forEach((contentAsJson,bidMap)->{
-            Assert.assertNotNull("bidid: "+bidId+" doesn't exist",bidMap.get(bidId));
-            Assert.assertNotNull("response not contains entity named: " + entity, contentAsJson.get(bidMap.get(bidId)).get(entity));
-            Assert.assertEquals(value.toString(),contentAsJson.get(bidMap.get(bidId)).get(entity).toString());
+        bidCounterMap.forEach((bid,map)->
+        {
+            sut.write("bid id: "+bid+ " has the values of:");
+            map.forEach((k,v)->
+            {
+                sut.write(mapByEntity+ ": "+ k.toString() +", count: "+ v.toString());
+            });
         });
     }
 
-    private void responsesContainEntityByBidIdWithName(String bidId, String entity, String name) {
-        responsesContainEntityByBidIdWithValue(bidId,entity,getEntityId(entity,name));
+    private void responsesContainEntityByBidIdWithValue(String bidId, String entity, Integer value, Double percent) {
+        Assert.assertNotNull("bid mapper doesn't exist",bidCounterMap);
+        Assert.assertEquals("inconsistent mapping..",mapByEntity,entity);
+        Assert.assertTrue("bid id "+ bidId+ " doesn't exist", bidCounterMap.containsKey(bidId));
+        Assert.assertTrue("entity with id: "+ value+ " doesn't exist in responses",bidCounterMap.get(bidId).containsKey(value));
+        Assert.assertNotEquals("responses size are 0",responses.size(),0);
+        double actualRate = bidCounterMap.get(bidId).get(value).doubleValue() / responses.size();
+        assertEquals("rate of " + entity + " in responses urls", percent,
+                actualRate * 100, 10d);
+    }
+
+
+    private void responsesContainEntityByBidIdWithName(String bidId, String entity, String name, Double percent) {
+        responsesContainEntityByBidIdWithValue(bidId,entity,getEntityId(entity,name),percent);
     }
 
     private Map<String,Integer> getBidMapperFromResponse(JsonNode responseInJson) {

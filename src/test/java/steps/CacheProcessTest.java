@@ -2,6 +2,7 @@ package steps;
 
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.process.CliCommandExecution;
@@ -83,6 +84,12 @@ public class CacheProcessTest extends BaseTest {
           Assert.assertThat("limitation result", actualLimitation,
               Matchers.containsString(expectedLimitation));
         });
+      Given("^i restart replay on the servers$", () -> {
+         cmd("sudo rm -f /var/www/adserver/replay_running","error");
+      });
+      Given("^i kill replay on the machines$", () -> {
+          cmd("sudo pkill -9 replay","error");
+      });
 
   }
 
@@ -90,7 +97,7 @@ public class CacheProcessTest extends BaseTest {
           sut.getCouchBaseUtils().flushBucket(bucketName);
     }
 
-    public static void refreshZoneCacheNew(String action) {
+    public static void refreshZoneCache(String action) {
         String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
         LinuxDefaultCliConnection cronServerConnection = sut.getUasCliConnections().get(cron_ip);
         String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
@@ -140,7 +147,7 @@ public class CacheProcessTest extends BaseTest {
         }
     }
 
-    public static void refreshZoneCache(String action) {
+    public static void refreshZoneCacheOld(String action) {
         if (action.equals("http")) {
             sut.getUASRquestModule().zoneCacheRequest("refresh");
             // sut.getUASRquestModule().zoneCacheRequest("query_status");

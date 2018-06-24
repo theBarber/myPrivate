@@ -170,7 +170,7 @@ public class API_EntitiesCreator extends BaseTest{
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
             CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)),zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
-            createCampaignRequest.setSupplyType(getTypeCode(campaign.get(11)));
+            createCampaignRequest.settrafficType(getTypeCode(campaign.get(11)));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
 
@@ -179,9 +179,9 @@ public class API_EntitiesCreator extends BaseTest{
     private Integer getTypeCode(String type) {
         Integer typecode = 0;
         switch (type.toLowerCase()){
-            case "all":typecode=0;break;
-            case "direct":typecode=1;break;
+            case "all":typecode=1;break;
             case "hb":typecode=2;break;
+            case "direct":typecode=3;break;
             default: throw new AssertionError("no type: "+type+ " defined");
         }
         return typecode;

@@ -22,7 +22,7 @@ public class CreateCampaignRequest {
     private String avThreshold;
     private Boolean avEnabled;
     private String avVendor;
-    private Integer supplyType;
+    private Integer trafficType;
 
 
     @JsonProperty("optimizeReason")
@@ -174,13 +174,13 @@ public class CreateCampaignRequest {
         this.avVendor = avVendor;
         this.avEnabled = avEnabled;
     }
-    @JsonProperty("supplyType")
-    public void setSupplyType(Integer type) {
-        supplyType = type;
+    @JsonProperty("trafficType")
+    public void settrafficType(Integer type) {
+        trafficType = type;
     }
-    @JsonProperty("supplyType")
-    public Integer getSupplyType()
+    @JsonProperty("trafficType")
+    public Integer gettrafficType()
     {
-        return supplyType;
+        return trafficType;
     }
 }

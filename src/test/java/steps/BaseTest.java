@@ -135,22 +135,24 @@ public class BaseTest implements En {
 
 
 
-  public void restartServerNamed(String serverName)
+  protected void restartServerNamed(String serverName)
   {
     String restartServerCmd = "sudo docker-compose -f /opt/docker-compose.yml restart "+ serverName;
-    String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
+    cmd(restartServerCmd,"Couldn't run query");
+  }
 
+  protected void cmd(String cmd, String error)
+  {
     sut.getHostsConnection().forEach((host, conn) -> {
-      if (!host.equals(cron_ip)) {
         try {
           sut.write("********************************************************************");
-          CliCommandExecution restartUASServer = new CliCommandExecution(conn, restartServerCmd)
-                  .error("Couldn't run query").withTimeout(3, TimeUnit.MINUTES);
-          restartUASServer.execute();
+          CliCommandExecution command = new CliCommandExecution(conn, cmd).error(error)
+                  .withTimeout(3, TimeUnit.MINUTES);
+          command.execute();
         } catch (IOException e) {
           throw new UncheckedIOException(e);
         }
-      }
+
     });
   }
 
