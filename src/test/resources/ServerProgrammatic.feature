@@ -12,8 +12,6 @@ Feature: Programmatic flow support
 
   Scenario: 2. basic Call to Programmatic GW - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 196 to UAS for publisher 3711 with domain {test.com&requestid=systemTestA&unlimited=1&optimize=0}
-    Then The response code is 200
-    And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
 

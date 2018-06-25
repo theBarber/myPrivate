@@ -183,24 +183,24 @@ Feature: Entities for tests
       Given i remove all zones from publishers: {3719}
       Given i create new campaigns with Supply type
         |Campaign Name                        |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                   |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |supplyType |
-        |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2164             |3719           |66726             |All        |
-#prod   |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2164             |3728           |66830             |All        |
-        |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2164             |3719           |66726             |Direct     |
-#prod   |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2164             |3728           |66830             |Direct     |
-        |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2164             |3719           |66726             |HB         |
-#prod   |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2164             |3728           |66830             |HB         |
-        |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2164             |3719           |66727             |All        |
-#prod   |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2164             |3728           |66831             |All        |
-        |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2164             |3719           |66727             |Direct     |
-#prod   |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2164             |3728           |66831             |Direct     |
-        |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2164             |3719           |66727             |HB         |
-#prod   |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2164             |3728           |66831             |HB         |
-        |campaign-SupplyType-Desktop-ALL      |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2164             |3719           |66729             |All        |
-#prod   |campaign-SupplyType-Desktop-ALL      |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2164             |3728           |66833             |All        |
-        |campaign-SupplyType-Desktop-Direct   |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2164             |3719           |66729             |Direct     |
-#prod   |campaign-SupplyType-Desktop-Direct   |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2164             |3728           |66833             |Direct     |
-        |campaign-SupplyType-Desktop-HB       |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2164             |3719           |66729             |HB         |
-#prod   |campaign-SupplyType-Desktop-HB       |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2164             |3728           |66833             |HB         |
+        |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2080             |3719           |66726             |All        |
+#prod   |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2080             |3728           |66830             |All        |
+        |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2080             |3719           |66726             |Direct     |
+#prod   |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2080             |3728           |66830             |Direct     |
+        |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2080             |3719           |66726             |HB         |
+#prod   |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2080             |3728           |66830             |HB         |
+        |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2080             |3719           |66727             |All        |
+#prod   |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2080             |3728           |66831             |All        |
+        |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2080             |3719           |66727             |Direct     |
+#prod   |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2080             |3728           |66831             |Direct     |
+        |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2080             |3719           |66727             |HB         |
+#prod   |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2080             |3728           |66831             |HB         |
+        |campaign-SupplyType-Desktop-ALL      |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2080             |3719           |66729             |All        |
+#prod   |campaign-SupplyType-Desktop-ALL      |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2080             |3728           |66833             |All        |
+        |campaign-SupplyType-Desktop-Direct   |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2080             |3719           |66729             |Direct     |
+#prod   |campaign-SupplyType-Desktop-Direct   |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2080             |3728           |66833             |Direct     |
+        |campaign-SupplyType-Desktop-HB       |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2080             |3719           |66729             |HB         |
+#prod   |campaign-SupplyType-Desktop-HB       |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2080             |3728           |66833             |HB         |
  And i update campaign data by name
       |Campaign Name                        |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-SupplyType-ST-HB            |-2            |1                       |4                 |
@@ -213,34 +213,34 @@ Feature: Entities for tests
       |campaign-SupplyType-Desktop-HB       |-1            |2                       |3                 |
       |campaign-SupplyType-Desktop-Direct   | 1            |4                       |2                 |
 
-  @SupplyType
-  @viewability
-  @GDPR
-  @appnexus
-  @cacheRefresh
-  @HB
-  @DOT
-  @DT
-  @AB
-  @zoneTagSanity
-  @Keren
-  @limitationSanity
-  Scenario: refresh zone cache
-    Given i kill replay on the machines
-    And I setup the db
-    And I sleep for 60 seconds
-
-
-  @SupplyType
-  @viewability
-  @appnexus
-  @cacheRefresh
-  @HB
-  @DOT
-  @DT
-  @Keren
-  Scenario: refresh banner cache
-    And I refresh banner cache
-    And I restart {ramp-lift-services}
-    And I restart {ut-programmatic-gw}
-    And I sleep for 300 seconds
+#  @SupplyType
+#  @viewability
+#  @GDPR
+#  @appnexus
+#  @cacheRefresh
+#  @HB
+#  @DOT
+#  @DT
+#  @AB
+#  @zoneTagSanity
+#  @Keren
+#  @limitationSanity
+#  Scenario: refresh zone cache
+#    Given i kill replay on the machines
+#    And I setup the db
+#    And I sleep for 60 seconds
+#
+#
+#  @SupplyType
+#  @viewability
+#  @appnexus
+#  @cacheRefresh
+#  @HB
+#  @DOT
+#  @DT
+#  @Keren
+#  Scenario: refresh banner cache
+#    And I refresh banner cache
+#    And I restart {ramp-lift-services}
+#    And I restart {ut-programmatic-gw}
+#    And I sleep for 300 seconds
