@@ -213,34 +213,34 @@ Feature: Entities for tests
       |campaign-SupplyType-Desktop-HB       |-1            |2                       |3                 |
       |campaign-SupplyType-Desktop-Direct   | 1            |4                       |2                 |
 
-#  @SupplyType
-#  @viewability
-#  @GDPR
-#  @appnexus
-#  @cacheRefresh
-#  @HB
-#  @DOT
-#  @DT
-#  @AB
-#  @zoneTagSanity
-#  @Keren
-#  @limitationSanity
-#  Scenario: refresh zone cache
-#    Given i kill replay on the machines
-#    And I setup the db
-#    And I sleep for 60 seconds
-#
-#
-#  @SupplyType
-#  @viewability
-#  @appnexus
-#  @cacheRefresh
-#  @HB
-#  @DOT
-#  @DT
-#  @Keren
-#  Scenario: refresh banner cache
-#    And I refresh banner cache
-#    And I restart {ramp-lift-services}
-#    And I restart {ut-programmatic-gw}
-#    And I sleep for 300 seconds
+  @SupplyType
+  @viewability
+  @GDPR
+  @appnexus
+  @cacheRefresh
+  @HB
+  @DOT
+  @DT
+  @AB
+  @zoneTagSanity
+  @Keren
+  @limitationSanity
+  Scenario: refresh zone cache
+    Given i kill replay on the machines
+    And I setup the db
+    And I sleep for 60 seconds
+
+
+  @SupplyType
+  @viewability
+  @appnexus
+  @cacheRefresh
+  @HB
+  @DOT
+  @DT
+  @Keren
+  Scenario: refresh banner cache
+    And I refresh banner cache
+    And I restart {ramp-lift-services}
+    And I restart {ut-programmatic-gw}
+    And I sleep for 300 seconds
