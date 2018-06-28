@@ -51,12 +51,14 @@ import static org.junit.Assert.fail;
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
 
+
+
     public enum requestTypesEnum {
         ZONE_REQUEST, DYNAMIC_TAG_REQUEST, HEADER_BIDDING_REQUEST, WEL_REQUEST, PRF_REQUEST, EVE_REQUEST
     }
 
     private ExecutorService requestSubmitter;
-    private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_,%]";
+    private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_,%/=]";
     protected static final Pattern impressionURLPattern = Pattern
             .compile("(https?:\\/\\/([^:/?#]*(?::[0-9]+)?)\\/l[^?#]*\\?"
                     + lettersDigitsAndHyphen
@@ -436,6 +438,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
     }
 
+
+
     public void sendGetRequestsAsync(Integer times, String url, Boolean toReset) {
         System.out.println(url);
         if(toReset)
@@ -472,7 +476,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
     }
 
-    private HttpResponse getRequest(String url) {
+    public HttpResponse getRequest(String url) {
         try {
             HttpGet get = new HttpGet(url);
             get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));

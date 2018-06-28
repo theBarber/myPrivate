@@ -51,7 +51,7 @@ public class LogDistributionTest extends BaseTest {
 //        });
         
         
-        Given("^I Delete (req|imp|clk|test_file|wel|evt|prf) logs$",(String file)->{
+        Given("^I Delete (req|imp|clk|test_file|wel|evt|prf|hbl) logs$",(String file)->{
             sut.logFor(file).deleteLogFiles(file,true).actual();
         });
         Then("^value \\{(\\d+)\\} from column \\{(\\d+)\\} appears \\{(\\d+)\\} percent of the time$", (String value, Integer column, Integer percentage) -> {

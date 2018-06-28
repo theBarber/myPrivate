@@ -2,6 +2,7 @@ package steps;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
+import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import org.apache.http.HttpResponse;
 import org.hamcrest.Matchers;
@@ -59,6 +60,10 @@ public class HeaderBiddingTest extends BaseTest {
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBResponses);
 
     }
+
+
+
+
 
     private void setBidMapByEntity(String entity) {
         mapByEntity = entity;
@@ -164,8 +169,13 @@ public class HeaderBiddingTest extends BaseTest {
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,jsonNode.toString(),publisherID,domain, extraParams,true,true);
     }
 
+
     public void sendHeaderBiddingPostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams)
     {
+        if(headerBiddingPostRequests == null)
+        {
+            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
+        }
         JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
         Assert.assertNotNull( "There is no suitable scenario for scenario: "+scenario, jsonNode);
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,jsonNode.toString(),publisherID,domain, extraParams,true,false);
@@ -180,6 +190,7 @@ public class HeaderBiddingTest extends BaseTest {
 
         responsesContainEntityWithValue(entity,String.valueOf(id));
     }
+
 
     public void sendZoneTagFromHBResponses() {
         List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
@@ -199,7 +210,8 @@ public class HeaderBiddingTest extends BaseTest {
         });
     }
 
-    private String getUrlFromAd(String htmlWithQuery) {
+
+        private String getUrlFromAd(String htmlWithQuery) {
         Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
 
         return new StringBuilder().append(splitedQuery.get("ut_ju ").substring(2,splitedQuery.get("ut_ju ").length()-1)).append("?").

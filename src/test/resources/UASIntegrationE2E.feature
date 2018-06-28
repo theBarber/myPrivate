@@ -30,6 +30,7 @@
 			Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
 			When I send 100 additional ad requests for zone named {zone-zoneset-limitations-test} to UAS
 			And The response contains script
+			Then The response code is 200
 			And  All requests are sent
 			And The impressionUrl has bannerid field matching the id of the banner named {campaign-API-limitations-test-C-banner-1} 50% of the time
 			And The impressionUrl has bannerid field matching the id of the banner named {campaign-API-limitations-test-W-banner-1} 50% of the time

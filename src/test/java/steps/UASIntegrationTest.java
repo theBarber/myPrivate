@@ -65,7 +65,8 @@ public class UASIntegrationTest extends BaseTest {
 
   public UASIntegrationTest() {
     super();
-    When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
+      final Integer BID_ID_COLUMN = 30;
+      When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
       Zone zone = sut.getCampaignManager().getZone(zoneByName)
           .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
       sut.getUASRquestModule().zoneRequest(zone.getId());
@@ -214,6 +215,16 @@ public class UASIntegrationTest extends BaseTest {
         //---------------------checks-------------------------
       assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
     });
+      When("For bidID (\\w+) The field (\\w+) in the (\\d+) column of the (hbl) log is: (.*)$", (String bidId,String fieldName,Integer column, String logType, String value) -> {
+          sut.logFor(logType).filter(raw -> bidId.equals(raw.get(BID_ID_COLUMN)));
+          //for debug
+          sut.logFor(logType).actual().filter(raw -> bidId.equals(raw.get(BID_ID_COLUMN))).forEach(m-> sut.write("value of "+fieldName+" selected is: "+m.get(column)));
+
+          assertThat("the log " + logType + " should contain a line with bidid" + bidId + " at column "
+                  + BID_ID_COLUMN, sut.logFor(logType).actual(), is(not(StreamMatchers.empty())));
+          assertThat(sut.logFor(logType).actual(),
+                  StreamMatchers.allMatch(ListItemAt.theItemAt(column, is(value))));
+      });
 
     Then("^I filter in the (clk|imp|req|hbl|wel|evt|prf) log to the lines where id at column (\\d+) is the same as in impression-url$",
         (String logType, Integer column) -> {
@@ -244,7 +255,7 @@ public class UASIntegrationTest extends BaseTest {
         });
 
 
-    And("The field (\\w+) in the (\\d+) column of the (clk|imp|req) log is the same as in impression-url",
+    And("The field (\\w+) in the (\\d+) column of the (clk|imp|req|hbl) log is the same as in impression-url",
         (String fieldName, Integer column, String logType) -> {
           URL impressionUrl = sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl)
               .map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
