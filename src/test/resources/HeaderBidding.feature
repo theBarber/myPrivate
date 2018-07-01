@@ -23,8 +23,8 @@ Feature: Header Bidding flow support
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
     And I read the latest hbl log file from uas
     And The field bannerid in the 12 column of the hbl log is the same as in impression-url
-    And The field campaignid in the 14 column of the hbl log is the same as in impression-url
-    And The field zoneid in the 15 column of the hbl log is the same as in impression-url
+    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
+    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
     And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
     And The field Bid_price in the 15 column of the hbl log is: 1.00
     And The field Publisher_id in the 4 column of the hbl log is: 3673
