@@ -78,12 +78,12 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				break;
 			case "@userinfo":
 				if (userInfoBucket == null) {
-					userInfoBucket = createCouchbaseBucketModule("user-info", config);
+					userInfoBucket = createCouchbaseBucketModule("us-east-1-user-info", config);
 				}
 				break;
 			case "@userhistory":
 				if (userHistoryBucket == null) {
-					userHistoryBucket = createCouchbaseBucketModule("user-history", config);
+					userHistoryBucket = createCouchbaseBucketModule("us-east-1-user-history", config);
 			}
 			break;
 				case "@couchBaseUtil":
@@ -452,14 +452,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public CouchbaseBucketModule getUserInfoBucket() {
 		if(userInfoBucket == null){
-			userInfoBucket =  createCouchbaseBucketModule("user-info", config);
+			userInfoBucket =  createCouchbaseBucketModule("us-east-1-user-info", config);
 		}
 		return userInfoBucket;
 	}
 
 	public CouchbaseBucketModule getUserHistoryBucket() {
 		if(userHistoryBucket == null){
-			userHistoryBucket =  createCouchbaseBucketModule("user-history", config);
+			userHistoryBucket =  createCouchbaseBucketModule("us-east-1-user-history", config);
 		}
 		return userHistoryBucket;
 	}

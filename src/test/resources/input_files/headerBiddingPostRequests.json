@@ -188,6 +188,7 @@
       "placementId": "10433394",
       "publisherId": 3673,
       "sizes": [
+        [1, 1],
         [1, 2]
       ],
       "timeout": 700,

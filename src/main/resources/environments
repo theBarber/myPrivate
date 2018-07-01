@@ -102,15 +102,15 @@ dev1.ramp.app.host=[172.19.35.74]
 dev1.ramp.app.port=3003
 dev1.ramp.test.lineItemId=[210722]
 
-staging.user-info.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
-integration.user-info.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
-aws-staging.user-info.couchbase.nodes=[10.12.4.253]
-aws-integration.user-info.couchbase.nodes=[10.12.5.87]
+staging.us-east-1-user-info.couchbase.nodes=[10.12.4.253,10.12.4.90]
+integration.us-east-1-user-info.couchbase.nodes=[10.12.5.87,10.12.5.220]
+aws-staging.us-east-1-user-info.couchbase.nodes=[10.12.4.253,10.12.4.90]
+aws-integration.us-east-1-user-info.couchbase.nodes=[10.12.5.87,10.12.5.220]
 
-staging.user-history.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
-integration.user-history.couchbase.nodes=[172.31.48.14,172.31.48.30,172.31.48.32]
-aws-staging.user-history.couchbase.nodes=[10.12.4.253]
-aws-integration.user-history.couchbase.nodes=[10.12.5.87]
+staging.us-east-1-user-history.couchbase.nodes=[10.12.4.253,10.12.4.90]
+integration.us-east-1-user-history.couchbase.nodes=[10.12.5.87,10.12.5.220]
+aws-staging.us-east-1-user-history.couchbase.nodes=[10.12.4.253,10.12.4.90]
+aws-integration.us-east-1-user-history.couchbase.nodes=[10.12.5.87,10.12.5.220]
 
 *.couchbase.host=10.12.4.253
 *.couchbase.port=8091

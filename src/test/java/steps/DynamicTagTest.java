@@ -6,9 +6,11 @@ import cucumber.api.junit.Cucumber;
 import infra.utils.SqlWorkflowUtils;
 import org.junit.runner.RunWith;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import java.util.Random;
+import java.util.UUID;
 
 
 @RunWith(Cucumber.class)
@@ -28,8 +30,9 @@ public class DynamicTagTest extends BaseTest{
         And("i remove all zones from publishers: \\{([^}]+)\\}, apart from zones:\\{([^}]+)\\}",this::removeAllZonesForPublisherApartFrom);
         And("i remove all zones from publishers: \\{([^}]+)\\}",this::removeAllZonesForPublisher);
         Given("I add cookie (\\w+) with random value to my requests to uas", (String paramName) -> {
-            sut.getUASRquestModule().clearCookies();
-            sut.getUASRquestModule().addCookie(paramName, String.valueOf(new Random().nextInt()));
+            Integer randomCookie = new Random().nextInt()& Integer.MAX_VALUE;;
+            System.out.println ("the cookie added "+randomCookie);
+            sut.getUASRquestModule().addCookie(paramName, String.valueOf(randomCookie ));
         });
     }
 
