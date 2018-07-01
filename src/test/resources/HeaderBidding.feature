@@ -53,12 +53,6 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
-  Scenario: Send HB request to optimizer
-    Given i send 1 headerBidding post request for scenario {Send HB request to optimizer for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
-
   Scenario: Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
