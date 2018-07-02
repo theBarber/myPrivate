@@ -27,8 +27,8 @@ Feature: Header Bidding flow support
     And The field zoneid in the 14 column of the hbl log is the same as in impression-url
     And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
     And The field Bid_price in the 15 column of the hbl log is: 1.00
-    And The field Publisher_id in the 4 column of the hbl log is: 3673
-    And The field Domain in the 6 column of the hbl log is: headerbiddingproptest.com
+    And The field Publisher_id in the 3 column of the hbl log is: 3673
+    And The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
 
   Scenario: send HB basic request with domain as array
     Given i send 1 headerBidding post request for scenario {Send HB basic request with domain as array for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
