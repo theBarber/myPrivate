@@ -248,9 +248,9 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with value {0}
 
   Scenario: header bidding frequency capping from mobile - user 2 after 5 minutes
+    Given I sleep for 460 seconds
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
-    Given I sleep for 460 seconds
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script

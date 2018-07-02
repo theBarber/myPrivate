@@ -263,7 +263,7 @@ Feature: Gdpr test
       And The field Context_API in the 58 column of the req log is: {}
       Then I read the latest imp log file from uas
       And The field User_identifier in the 3 column of the imp log is: 0
-      And The field hhid in the 8 column of the imp log is: {}
+      And The field hhid in the 8 column of the imp log is: {"source":"ts_test1","data":{"pid":3690}}
 
 
 
@@ -418,7 +418,7 @@ Feature: Gdpr test
     And The field Context_API in the 58 column of the req log is: {}
     Then I read the latest imp log file from uas
     And The field User_identifier in the 3 column of the imp log is: 0
-    And The field hhid in the 8 column of the imp log is: {}
+    And The field hhid in the 8 column of the imp log is: {"source":"ts_test1","data":{}}
 
 
   Scenario: HB request from Non-European user
