@@ -18,7 +18,7 @@ Scenario: 1. Basic DT flow
     And I sleep for 5 seconds
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-PGC-2-t-1-banner-1} 100% of the time
     Then i send 1 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=0}
-    And The responses are passback
+    And The synchronized responses are passback
 
   Scenario:2. Basic DT logic with no product daily cap
     Given I add cookie UTID with random value to my requests to uas
@@ -31,7 +31,6 @@ Scenario: 1. Basic DT flow
 Scenario:3. Basic DT logic with zone level filtering
     Given I add cookie UTID with random value to my requests to uas
     Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&optimize=0}
-    And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-2-t-3-banner-1} 100% of the time
     Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&unlimited=1&optimize=0}
