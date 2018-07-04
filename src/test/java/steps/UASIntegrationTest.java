@@ -403,6 +403,9 @@ public class UASIntegrationTest extends BaseTest {
                   }
           );
       });
+      Given("^i reset responses in the UAS$", () -> {
+         sut.getUASRquestModule().reset();
+      });
   }
 
     private static String getAppnexusPassbackURL(URL dspURL) {

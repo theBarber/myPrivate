@@ -9,6 +9,7 @@ import com.couchbase.client.java.env.CouchbaseEnvironment;
 import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
 import infra.module.AbstractModuleImpl;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by kereng on 5/22/2017.
@@ -31,7 +32,7 @@ public class CouchbaseBucketModule extends AbstractModuleImpl<Void>{
   public void init() throws Exception {
     CouchbaseEnvironment couchbaseEnvironment = DefaultCouchbaseEnvironment.builder().build();
     couchbase = CouchbaseCluster.create(couchbaseEnvironment, nodes);
-    bucket = couchbase.openBucket(name);
+    bucket = couchbase.openBucket(name,1, TimeUnit.MINUTES);
   }
 
   @Override

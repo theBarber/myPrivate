@@ -178,6 +178,7 @@ Feature: Header Bidding flow support
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc7bb} to my requests to uas
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
+#        And all HB responses contains adId with id 1259793
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
     And all HB responses contains cpm with value {3}
     And for all HB responses i simulate winning, and send their zone tag
@@ -188,8 +189,9 @@ Feature: Header Bidding flow support
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
-    And all HB responses contains cpm with value {1}
+#    And all HB responses contains adId with id 1259790
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+    And all HB responses contains cpm with value {1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains script
@@ -198,7 +200,7 @@ Feature: Header Bidding flow support
     And The response code is 200
     And all HB responses contains adId with value {0}
 
-     Scenario: header bidding frequency capping from mobile - user 2 (other user)
+   Scenario: header bidding frequency capping from mobile - user 2 (other user)
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I delete the history of crmqauo6r8fzyogl4rxao3h6j from user history
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
@@ -247,8 +249,11 @@ Feature: Header Bidding flow support
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And all HB responses contains adId with value {0}
 
+  Scenario: reset requests and sleep
+      Given i reset responses in the UAS
+      Given I sleep for 460 seconds
+
   Scenario: header bidding frequency capping from mobile - user 2 after 5 minutes
-    Given I sleep for 460 seconds
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
