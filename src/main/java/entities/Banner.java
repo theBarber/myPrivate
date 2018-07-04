@@ -29,7 +29,7 @@ public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 	 * @return the name of this banner
 	 */
 	@Override
-	@JsonProperty("creativeName")
+	@JsonProperty("bannerName")
 	public String getName() {
 		return name;
 	}
@@ -49,7 +49,7 @@ public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 	public String toString() {
 		return "Banner [name=" + getName() + "]";
 	}
-	@JsonProperty("creativeName")
+	@JsonProperty("bannerName")
 	public void setName(String name)
 	{
 		this.name = name;

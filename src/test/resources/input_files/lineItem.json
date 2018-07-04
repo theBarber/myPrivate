@@ -61,11 +61,11 @@
 					[
 						{
 							"bannerId": 1224809,
-							"creativeName": "UAS-by-at-most-1-banner"
+							"bannerName": "UAS-by-at-most-1-banner"
 						},
 						{
 							"bannerId": 1243360,
-							"creativeName":"campaign-server-prog-SS-1-banner-1-NOT-API"
+							"bannerName":"campaign-server-prog-SS-1-banner-1-NOT-API"
 						}
 					],
 
@@ -94,16 +94,16 @@
 					[
 						{
 							"bannerId": 1252714,
-							"creativeName": "campaign-API-1-a-GDPR-banner-1-not-api"
+							"bannerName": "campaign-API-1-a-GDPR-banner-1-not-api"
 						},
 
 						{
 							"bannerId": 1253028,
-							"creativeName": "server-prog-SS-1-banner-1"
+							"bannerName": "server-prog-SS-1-banner-1"
 						},
 						{
 							"bannerId": 1253028,
-							"creativeName": "UAS-by-at-most-2-banner"
+							"bannerName": "UAS-by-at-most-2-banner"
 						}
 					],
 
@@ -132,7 +132,7 @@
 					[
 						{
 							"bannerId": 1220891,
-							"creativeName": "Screen shift-DT-inline-3-banner"
+							"bannerName": "Screen shift-DT-inline-3-banner"
 						}
 					],
 
@@ -161,7 +161,7 @@
 					[
 						{
 							"bannerId": 1220893,
-							"creativeName": "Screen shift-DT-inline-2-banner"
+							"bannerName": "Screen shift-DT-inline-2-banner"
 						}
 					],
 
@@ -190,7 +190,7 @@
 					[
 						{
 							"bannerId": 1220889,
-							"creativeName": "Screen shift-DT-inline-1-banner"
+							"bannerName": "Screen shift-DT-inline-1-banner"
 						}
 					],
 
@@ -219,7 +219,7 @@
 					[
 						{
 							"bannerId": 1200036 ,
-							"creativeName": "DT-SS-Test-1-campaign-high-priority-banner-1"
+							"bannerName": "DT-SS-Test-1-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -248,7 +248,7 @@
 					[
 						{
 							"bannerId": 1157158,
-							"creativeName": "DT-SS-Test-1-campaign-low-priority-banner-1"
+							"bannerName": "DT-SS-Test-1-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -277,7 +277,7 @@
 				[
 					{
 						"bannerId": 1157197,
-						"creativeName": "DT-SS-Test-2-campaign-high-priority-banner-1"
+						"bannerName": "DT-SS-Test-2-campaign-high-priority-banner-1"
 					}
 				],
 
@@ -306,7 +306,7 @@
 					[
 						{
 							"bannerId": 1157198,
-							"creativeName": "DT-SS-Test-2-campaign-low-priority-banner-1"
+							"bannerName": "DT-SS-Test-2-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -335,7 +335,7 @@
 					[
 						{
 							"bannerId": 1200038,
-							"creativeName": "DT-SS-Test-3-campaign-first-priority-banner-1"
+							"bannerName": "DT-SS-Test-3-campaign-first-priority-banner-1"
 						}
 					],
 
@@ -376,7 +376,7 @@
 					[
 						{
 							"bannerId": 1200039,
-							"creativeName": "DT-PGM-Test-1-campaign-high-priority-banner-1"
+							"bannerName": "DT-PGM-Test-1-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -405,7 +405,7 @@
 					[
 						{
 							"bannerId": 1157160,
-							"creativeName": "DT-PGM-Test-1-campaign-low-priority-banner-1"
+							"bannerName": "DT-PGM-Test-1-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -434,7 +434,7 @@
 				[
 					{
 						"bannerId": 1157199,
-						"creativeName": "DT-PGM-Test-2-campaign-high-priority-banner-1-notActive"
+						"bannerName": "DT-PGM-Test-2-campaign-high-priority-banner-1-notActive"
 					}
 				],
 
@@ -463,7 +463,7 @@
 					[
 						{
 							"bannerId": 1200042,
-							"creativeName": "DT-PGM-Test-2-campaign-low-priority-banner-1"
+							"bannerName": "DT-PGM-Test-2-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -492,7 +492,7 @@
 					[
 						{
 							"bannerId": 1200041,
-							"creativeName": "DT-PGM-Test-3-campaign-second-priority-banner-1"
+							"bannerName": "DT-PGM-Test-3-campaign-second-priority-banner-1"
 						}
 					],
 
@@ -521,7 +521,7 @@
 					[
 						{
 							"bannerId": 1200043,
-							"creativeName": "DT-PGM-Test-2-campaign-high-priority-banner-1"
+							"bannerName": "DT-PGM-Test-2-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -562,7 +562,7 @@
 					[
 						{
 							"bannerId": 1157136,
-							"creativeName": "DT-PGC-Test-1-campaign-high-priority-banner-1"
+							"bannerName": "DT-PGC-Test-1-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -591,7 +591,7 @@
 					[
 						{
 							"bannerId": 1200045,
-							"creativeName": "DT-PGC-Test-1-campaign-low-priority-banner-1"
+							"bannerName": "DT-PGC-Test-1-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -620,7 +620,7 @@
 					[
 						{
 							"bannerId": 1157201,
-							"creativeName": "DT-PGC-Test-2-campaign-high-priority-banner-1"
+							"bannerName": "DT-PGC-Test-2-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -649,7 +649,7 @@
 					[
 						{
 							"bannerId": 1157201,
-							"creativeName": "DT-PGC-Test-2-campaign-low-priority-banner-1"
+							"bannerName": "DT-PGC-Test-2-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -678,7 +678,7 @@
 					[
 						{
 							"bannerId": 1157205,
-							"creativeName": "DT-PGC-Test-3-campaign-third-priority-banner-1"
+							"bannerName": "DT-PGC-Test-3-campaign-third-priority-banner-1"
 						}
 					],
 
@@ -721,7 +721,7 @@
 					[
 						{
 							"bannerId": 1219337 ,
-							"creativeName": "Desktop In-Page Blend-DT-Inline-2-banner"
+							"bannerName": "Desktop In-Page Blend-DT-Inline-2-banner"
 						}
 					],
 
@@ -750,7 +750,7 @@
 					[
 						{
 							"bannerId": 1038966,
-							"creativeName": "75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
+							"bannerName": "75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
 						}
 					],
 
@@ -780,12 +780,12 @@
 					[
 						{
 							"bannerId": 1040820,
-							"creativeName": "75396-197420-270914-Medium Rectangle 300x250-test"
+							"bannerName": "75396-197420-270914-Medium Rectangle 300x250-test"
 						},
 
 						{
 							"bannerId": 1040819,
-							"creativeName": "75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
+							"bannerName": "75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
 						}
 					],
 
@@ -827,7 +827,7 @@
 					[
 						{
 							"bannerId": 1079324,
-							"creativeName": "75396-209943-277924-See Through-RampLift-1"
+							"bannerName": "75396-209943-277924-See Through-RampLift-1"
 						}
 					],
 
@@ -869,7 +869,7 @@
 					[
 						{
 							"bannerId": 1079323,
-							"creativeName": "75396-209942-277923-See Through-RampLift-1"
+							"bannerName": "75396-209942-277923-See Through-RampLift-1"
 						}
 					],
 
@@ -911,7 +911,7 @@
 					[
 						{
 							"bannerId": 1067986,
-							"creativeName": "75396-208153-275578-See Through-RampLift-1"
+							"bannerName": "75396-208153-275578-See Through-RampLift-1"
 						}
 					],
 
@@ -942,7 +942,7 @@
 					[
 						{
 							"bannerId": 1067987,
-							"creativeName": "75396-208153-275579-See Through-RampLift-1"
+							"bannerName": "75396-208153-275579-See Through-RampLift-1"
 						}
 					],
 
@@ -973,7 +973,7 @@
 					[
 						{
 							"bannerId": 1067988,
-							"creativeName": "75396-208153-275580-See Through-RampLift-1"
+							"bannerName": "75396-208153-275580-See Through-RampLift-1"
 						}
 					],
 
@@ -1004,7 +1004,7 @@
 					[
 						{
 							"bannerId": 1067989,
-							"creativeName": "75396-208153-275581-See Through-RampLift-1"
+							"bannerName": "75396-208153-275581-See Through-RampLift-1"
 						}
 					],
 
@@ -1045,7 +1045,7 @@
 					[
 						{
 							"bannerId": 1220887,
-							"creativeName": "See Through-DT-inline-1-banner"
+							"bannerName": "See Through-DT-inline-1-banner"
 						}
 					],
 
@@ -1074,7 +1074,7 @@
 					[
 						{
 							"bannerId": 1220888 ,
-							"creativeName": "See Through-DT-inline-2-banner"
+							"bannerName": "See Through-DT-inline-2-banner"
 						}
 					],
 
@@ -1103,7 +1103,7 @@
 					[
 						{
 							"bannerId": 1090122,
-							"creativeName": "75396-210722-278956-See Through-RampLift-1"
+							"bannerName": "75396-210722-278956-See Through-RampLift-1"
 						}
 					],
 
@@ -1145,7 +1145,7 @@
 					[
 						{
 							"bannerId": 1220892,
-							"creativeName": "Page Grabber-DT-inline-1-banner"
+							"bannerName": "Page Grabber-DT-inline-1-banner"
 						}
 					],
 
@@ -1174,7 +1174,7 @@
 					[
 						{
 							"bannerId": 1220893,
-							"creativeName": "Page Grabber-DT-inline-2-banner"
+							"bannerName": "Page Grabber-DT-inline-2-banner"
 						}
 					],
 
@@ -1216,7 +1216,7 @@
 					[
 						{
 							"bannerId": 1219335,
-							"creativeName": "Billboard-DT-Inline-1-banner"
+							"bannerName": "Billboard-DT-Inline-1-banner"
 						}
 					],
 
@@ -1245,7 +1245,7 @@
 					[
 						{
 							"bannerId": 1219336 ,
-							"creativeName": "Billboard-DT-inline-2-banner"
+							"bannerName": "Billboard-DT-inline-2-banner"
 						}
 					],
 
@@ -1295,7 +1295,7 @@
 						[
 							{
 								"bannerId": 1157881,
-								"creativeName": "290505-10000-59-ramp-lift-programmatic-banner1-test"
+								"bannerName": "290505-10000-59-ramp-lift-programmatic-banner1-test"
 							}
 						],
 

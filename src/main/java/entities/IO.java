@@ -2,6 +2,7 @@ package entities;
 
 import static java.util.Objects.requireNonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import entities.ramp.app.api.Creative;
 import infra.module.WithId;
 
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 
 public class IO implements WithId<Integer>{
     public int ioId;
+    @JsonProperty("creatives")
     public List<Creative> creatives = new ArrayList<>();
     public List<Deal> deals = new ArrayList<>();
     @JsonProperty("LI")

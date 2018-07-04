@@ -51,7 +51,6 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3   |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-Billboard-970X250-D |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66673             |
         |campaign-HB-Prog-Billboard-970X250-P |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66673             |
-
      And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
@@ -102,15 +101,17 @@ Feature: Entities for tests
       Given i create new campaigns with new zoneset
         |Campaign Name               |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation          |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-DT-Inline-ST-1     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}   |[]                   |83         |14470            |3690           |65422             |
+        |campaign-DT-Inline-ST-2     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}   |[]                   |83         |14470            |3690           |65422             |
         |campaign-DT-Inline-SS-1     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-SS-1} |[]                   |69         |14470            |3690           |65423             |
-        |campaign-DT-Inline-SS-3     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-ST-3} |[]                   |69         |14470            |3690           |65423             |
+        |campaign-DT-Inline-SS-3     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-SS-3} |[]                   |69         |14470            |3690           |65423             |
         |campaign-DT-Inline-PGC-2    |75396    |222908     |false                  |1068            |{zone-zoneset-DT-inline-PGC}  |[]                   |75         |14470            |3690           |65424             |
       And i update campaign data by name
         |Campaign Name            |Priority      |campaign_delivery_method|
         |campaign-DT-Inline-ST-1  |-2            |1                       |
+        |campaign-DT-Inline-ST-2  |-1            |2                       |
         |campaign-DT-Inline-SS-1  |-2            |1                       |
-        |campaign-DT-Inline-SS-3  |1             |4                       |
         |campaign-DT-Inline-PGC-2 |-1            |2                       |
+        |campaign-DT-Inline-SS-3  |1             |4                       |
       And I flush bucket name {us-east-1-adserver} on couchbase
 
   @DOT
@@ -185,7 +186,7 @@ Feature: Entities for tests
       Scenario: create entities for Supply type
       Given i remove all zones from publishers: {3719}
       Given i create new campaigns with Supply type
-        |Campaign Name                        |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                   |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |supplyType |
+        |Campaign Name                        |IO            |LineItem   |Deal                   |Creative\Deal   |Zonesets-zone Name                   |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |supplyType |
         |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2080             |3719           |66726             |All        |
 #prod   |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2080             |3728           |66830             |All        |
         |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2080             |3719           |66726             |Direct     |
@@ -215,6 +216,14 @@ Feature: Entities for tests
       |campaign-SupplyType-Desktop-ALL      |-2            |1                       |4                 |
       |campaign-SupplyType-Desktop-HB       |-1            |2                       |3                 |
       |campaign-SupplyType-Desktop-Direct   | 1            |4                       |2                 |
+
+
+  @weightBanners
+  Scenario: create entities for Keren
+    Given i create new campaigns with multiple creatives
+      |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal      |Zonesets-zone Name             |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-weightBanners-A    |75396         |210722     |false                  |204,890            |{zone-zoneset-weightBanners-A} |[]                |83        |4737             |2434           |17116             |
+
 
   @SupplyType
   @viewability

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
@@ -54,7 +55,29 @@ public class API_EntitiesCreator extends BaseTest{
         And("I update last created campaign named \\{([^}]+)\\} (\\w+) to be \\{([^}]+)\\} in the DB", this::updateLastCreatedCampaignDB);
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
+        Given("^i create new campaigns with multiple creatives$", this::createCampaignsWithMultipleCreatives);
+
     }
+
+    private void createCampaignsWithMultipleCreatives(DataTable campaigns) {
+        List<List<String>> campaignsList = campaigns.asLists(String.class);
+        List<Integer> creativeAsInt = new ArrayList<>();
+        List<String> campaign;
+        List<Integer> zonesetsId;
+
+        for(int i=1;i<campaignsList.size();i++)
+        {
+            Zonesets zonesets = new Zonesets();
+            campaign = campaignsList.get(i);
+            zonesetsId = getZonesetsIds(campaign);
+            zonesets.setInclude(zonesetsId);
+            List<String> creatives = Arrays.asList(campaign.get(4).split(","));
+            for(String s : creatives) creativeAsInt.add(Integer.valueOf(s));
+            CreateCampaignRequest createCampaignRequest = new CreateCampaignRequest(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),zonesets,creativeAsInt,null,dateFromNow(-1),dateFromNow(1));
+            createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+        }
+    }
+
 
 
 
