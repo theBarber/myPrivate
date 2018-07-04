@@ -272,7 +272,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     public final void reset() {
         if (synchronizedResponses != null)
             synchronizedResponses.clear();
-        this.actual().stream().parallel()
+        this.actual().stream()
                 .filter(((Predicate<Future<HttpResponse>>) Future::isDone).negate())
                 .forEach(f -> f.cancel(true));
 
