@@ -3,7 +3,6 @@ package infra.k8s;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.Objects;
-import io.kubernetes.client.ApiException;
 import io.kubernetes.client.Exec;
 import io.kubernetes.client.models.V1Pod;
 
