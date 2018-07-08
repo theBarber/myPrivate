@@ -86,6 +86,11 @@ public class BaseTest implements En {
     });
 
     Before(scenario -> {
+
+
+      String k8s = config.get("uas.k8s.path.config");
+
+
       String userName = System.getProperty("user.name");
       boolean onlyForUser = Boolean.getBoolean("for.user");
       if (!"jenkins".equals(userName) && onlyForUser

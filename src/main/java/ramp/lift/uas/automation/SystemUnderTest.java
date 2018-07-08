@@ -35,6 +35,7 @@ import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.conn.RootLinuxCliConnection;
 import infra.module.AbstractModuleImpl;
 import infra.support.StringUtils;
+import ramp.lift.uas.automation.UAScontainer.Builder;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
 	final int _o;
@@ -44,6 +45,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected final Map<String, LinuxDefaultCliConnection> cronCliConnection = new HashMap<>();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
+	protected UAScontainer uasMachines;
 	protected CampaignManager campaignManager;
 	protected SqlConnectionModule rampAdminDbConnector;
 	protected SqlConnectionModule workflowDbConnector;
@@ -94,6 +96,9 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	    case "@uas":
 				if (uas == null) {
 					try {
+						UAScontainer.Builder builder = new Builder();
+						uasMachines = builder.setConfig(config.get("uas.k8s.path.config")).build();
+						uasMachines.runCommand("touch woowa");
 						uas = new UASRequestModule();
 						//uas.setDomain(config.get("uas.host"));
 						uas.setDomain(config.get("uas.domain"));
