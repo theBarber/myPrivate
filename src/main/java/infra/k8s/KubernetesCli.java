@@ -1,33 +1,23 @@
 package infra.k8s;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 import io.kubernetes.client.ApiClient;
 import io.kubernetes.client.ApiException;
 import io.kubernetes.client.Configuration;
-import io.kubernetes.client.Exec;
-import io.kubernetes.client.PodLogs;
-import io.kubernetes.client.ProtoClient;
 import io.kubernetes.client.apis.CoreV1Api;
 import io.kubernetes.client.models.V1Pod;
 import io.kubernetes.client.models.V1PodList;
 import io.kubernetes.client.util.Config;
-import com.google.common.io.ByteStreams;
 
 public class KubernetesCli {
 
   public static void main(String[] args) throws IOException, ApiException, InterruptedException {
 
 
-    InputStream is = ClassLoader.getSystemResourceAsStream("k8s_staging_password");
+    InputStream is = ClassLoader.getSystemResourceAsStream("k8s_integration_password");
     ApiClient client = Config.fromConfig(is);
     is.close();
 

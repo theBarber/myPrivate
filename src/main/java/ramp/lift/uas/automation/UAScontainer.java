@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.kubernetes.client.ApiClient;
 import io.kubernetes.client.ApiException;
@@ -42,6 +43,18 @@ public class UAScontainer {
 
   public void runCommand(String command) {
     kubernetesClients.forEach(cli -> cli.runCommand(command, UAS_CONTAINER));
+  }
+
+  public void close() {
+    if (Objects.nonNull(kubernetesClients) && kubernetesClients.size() > 0) {
+      kubernetesClients.forEach(cli -> {
+        try {
+          cli.close();
+        } catch (IOException e) {
+          System.out.println(e.getMessage());
+        }
+      });
+    }
   }
 
   public static class Builder {
