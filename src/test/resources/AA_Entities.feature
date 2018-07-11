@@ -126,8 +126,13 @@ Feature: Entities for tests
       |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |{}                  |{cnn.com}                         |
       |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66722             |{sahar.cnn.com}     |{}                                |
       |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66723             |{cnn.com}           |{}                                |
-#      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |{sahar.cnn.com}     |{}                                |
-#      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |{cnn.com}           |{}                                |
+      |campaign-DomainT-ZoneTag-1 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-1}                    |[]                   |83         |4737              |2434           |17116             |{sahar.cnn.com}     |{}                                |
+      |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |17116             |{}                  |{sahar.ynet.co.il}                |
+      |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |17116             |{cnn.com}           |{}                                |
+      |campaign-DomainT-ZoneTag-4 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-4}                    |[]                   |83         |4737              |2434           |17116             |{}                  |{ynet.co.il}                      |
+
+##      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |{sahar.cnn.com}     |{}                                |
+##      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |{cnn.com}           |{}                                |
 
 
 
@@ -225,6 +230,14 @@ Feature: Entities for tests
       |campaign-weightBanners-A    |75396         |210722     |false                  |204,890            |{zone-zoneset-weightBanners-A} |[]                |83        |4737             |2434           |17116             |
 
 
+  @PG1
+  Scenario: create entities for zone Tag Sanity test
+    Given i create new campaigns with new zoneset
+      |Campaign Name       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-PG1-1      |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-1}          |[]                |83        |4737             |2434           |17116             |
+      |campaign-PG1-2      |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-2}          |[]                |83        |14470            |3690           |65422             |
+
+  @PG1
   @SupplyType
   @viewability
   @GDPR
@@ -238,16 +251,17 @@ Feature: Entities for tests
   @Keren
   @limitationSanity
     @Zonerefresh
-  Scenario: refresh zone cache
+  Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
     And I sleep for 60 seconds
 
-
+  @PG1
   @SupplyType
   @viewability
   @appnexus
   @cacheRefresh
+  @bannerCache
   @HB
   @DOT
   @DT
@@ -257,3 +271,9 @@ Feature: Entities for tests
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
     And I sleep for 300 seconds
+
+  @Sahar
+  Scenario: refresh zone cache
+    And I refresh the zone Cache
+
+
