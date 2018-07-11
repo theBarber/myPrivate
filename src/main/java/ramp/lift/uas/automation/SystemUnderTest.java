@@ -35,6 +35,7 @@ import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.conn.RootLinuxCliConnection;
 import infra.module.AbstractModuleImpl;
 import infra.support.StringUtils;
+import ramp.lift.uas.automation.UAScontainer.Builder;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
 	final int _o;
@@ -44,6 +45,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected final Map<String, LinuxDefaultCliConnection> cronCliConnection = new HashMap<>();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
+	protected UAScontainer uasKubeMachines;
 	protected CampaignManager campaignManager;
 	protected SqlConnectionModule rampAdminDbConnector;
 	protected SqlConnectionModule workflowDbConnector;
@@ -94,6 +96,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	    case "@uas":
 				if (uas == null) {
 					try {
+						UAScontainer.Builder builder = new Builder();
+						uasKubeMachines = builder.setConfig(config.get("uas.k8s.path.config")).build();
 						uas = new UASRequestModule();
 						//uas.setDomain(config.get("uas.host"));
 						uas.setDomain(config.get("uas.domain"));
@@ -194,6 +198,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				if (uas != null) {
 					try {
 						uas.close();
+						uasKubeMachines.close();
 					} catch (Exception e) {
 						delegate(exception, e);
 					}
@@ -395,6 +400,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
         }
     }
 		return this.uas;
+	}
+
+	public UAScontainer getUasKubeMachines() {
+		return uasKubeMachines;
 	}
 
 	public UASLogModule logFor(String logType) {
