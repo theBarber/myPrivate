@@ -6,6 +6,12 @@
 @scheduled
 Feature: UAS connectivity to other components
 
+	@campaign
+	@hardcoded
+	@Sanity
+	Scenario: delay
+		When I sleep for 200 seconds
+
 
 @Sanity-basic
 Scenario: 1. UAS is up
@@ -27,12 +33,6 @@ Scenario: 4. Uas is connected to Redis
 Scenario: 5. Uas is connected to Workflow
 	When Sending a healthcheck request of Workflow to UAS
 	Then The response code is 200
-
-	@campaign
-	@hardcoded
-	@Sanity
-	Scenario: delay
-		When I sleep for 200 seconds
 
 
 @campaign
