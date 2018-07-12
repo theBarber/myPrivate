@@ -28,6 +28,13 @@ Scenario: 5. Uas is connected to Workflow
 	When Sending a healthcheck request of Workflow to UAS
 	Then The response code is 200
 
+	@campaign
+	@hardcoded
+	@Sanity
+	Scenario: delay
+		When I sleep for 100 seconds
+
+
 @campaign
 @hardcoded
 @Sanity

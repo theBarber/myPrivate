@@ -178,8 +178,8 @@ Feature: Header Bidding flow support
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc7bb} to my requests to uas
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
-#        And all HB responses contains adId with id 1259793
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
+        And all HB responses contains adId with id 1259793
+#    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
     And all HB responses contains cpm with value {3}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
@@ -189,8 +189,8 @@ Feature: Header Bidding flow support
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
-#    And all HB responses contains adId with id 1259790
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+    And all HB responses contains adId with id 1259790
+#    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
     And all HB responses contains cpm with value {1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
