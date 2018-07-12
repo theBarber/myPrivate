@@ -6,6 +6,12 @@
 @scheduled
 Feature: UAS connectivity to other components
 
+	@campaign
+	@hardcoded
+	@Sanity
+	Scenario: delay
+		When I sleep for 200 seconds
+
 
 @Sanity-basic
 Scenario: 1. UAS is up
@@ -32,7 +38,7 @@ Scenario: 5. Uas is connected to Workflow
 	@hardcoded
 	@Sanity
 	Scenario: delay
-		When I sleep for 60 seconds
+		When I sleep for 100 seconds
 
 
 @campaign
