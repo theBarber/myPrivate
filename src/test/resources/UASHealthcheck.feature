@@ -6,13 +6,6 @@
 @scheduled
 Feature: UAS connectivity to other components
 
-	@campaign
-	@hardcoded
-	@Sanity
-	Scenario: delay
-		When I sleep for 200 seconds
-
-
 @Sanity-basic
 Scenario: 1. UAS is up
 	When Sending a healthcheck request to UAS
