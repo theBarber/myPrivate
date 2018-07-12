@@ -32,7 +32,7 @@ Scenario: 5. Uas is connected to Workflow
 	@hardcoded
 	@Sanity
 	Scenario: delay
-		When I sleep for 100 seconds
+		When I sleep for 60 seconds
 
 
 @campaign

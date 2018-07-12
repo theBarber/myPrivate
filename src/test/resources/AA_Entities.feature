@@ -234,11 +234,11 @@ Feature: Entities for tests
   Scenario: create entities for zone Tag Sanity test
     Given i create new campaigns with new zoneset
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-      |campaign-PG1-1_limited     |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-1}          |[]                |83        |14470            |3690           |65422             |
+      |campaign-PG1-1_limited     |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-1}          |[]                |83        |14402            |3666           |66732             |
       |campaign-PG1-1             |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-1}          |[]                |83        |4737             |2434           |17116             |
-      |campaign-PG1-2_limited     |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-2}          |[]                |83        |14470            |3690           |65422             |
+      |campaign-PG1-2_limited     |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-2}          |[]                |83        |14402            |3666           |66732             |
       |campaign-PG1-2             |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-2}          |[]                |83        |4737             |2434           |17116             |
-      |campaign-PG1-3_limited     |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-3}          |[]                |83        |14470            |3690           |65422             |
+      |campaign-PG1-3_limited     |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-3}          |[]                |83        |14402            |3666           |66732             |
       |campaign-PG1-3             |75396         |210722     |false                  |10178           |{zone-zoneset-PG1-3}          |[]                |83        |4737             |2434           |17116             |
     And i update campaign data by name
       |Campaign Name                     |Priority      |campaign_delivery_method|delivery_algorithm|
@@ -248,8 +248,6 @@ Feature: Entities for tests
       |campaign-PG1-2                    |-1            |2                       |3                 |
       |campaign-PG1-3_limited            |-2            |1                       |4                 |
       |campaign-PG1-3                    |-1            |2                       |3                 |
-
-
 
 
   @PG1
@@ -265,7 +263,7 @@ Feature: Entities for tests
   @zoneTagSanity
   @Keren
   @limitationSanity
-    @Zonerefresh
+  @Zonerefresh
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
