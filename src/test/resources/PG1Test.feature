@@ -19,7 +19,7 @@ Feature: PG1 x - limitation support
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
-    Given I use {Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko} as user-agent string to send my requests to uas
     Given I send 1 times an ad request for zone named {zone-zoneset-PG1-2} to UAS
     Then The response code is 200
     And The response contains script
