@@ -39,23 +39,74 @@ Feature: Domain Targeting tests
     And I send 1 times an ad request with query parameters for zone named {zone-zoneset-DomainT-3} to UAS
     And The responses are passback
 
-  Scenario: 1.b send zone requests with domains in the requests
+  Scenario: 1.b send zone requests with domains in the requests - white list {sahar.cnn.com}
     When I send 1 times an ad request with parameter {unlimited=1&domain=sahar.cnn.com&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
-    And The response contains script
     Then The response code is 200
+    And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
     When I send 1 times an ad request with parameter {unlimited=1&domain=sahar.cnn.com&loc=cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
-    And The response contains script
     Then The response code is 200
+    And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
     When I send 1 times an ad request with parameter {unlimited=1&domain=cnn.com&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
-    And The response contains script
     Then The response code is 200
+    And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
     When I send 1 times an ad request with parameter {unlimited=1&domain=cnn.co.il&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
-    And The response contains script
     Then The response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
+    And The responses are passback
+
+
+  Scenario: 1.c send zone requests with domains in the requests - black list {sahar.cnn.com}
+    When I send 1 times an ad request with parameter {unlimited=1&domain=sahar.ynet.co.il&loc=sahar.ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&domain=sahar.ynet.co.il&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&domain=ynet.co.il&loc=sahar.ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&domain=ynet.co.il&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-2-banner-1} 100% of the time
+
+
+  Scenario: 1.d send zone requests with domains in the requests - white list {cnn.com}
+    When I send 1 times an ad request with parameter {unlimited=1&domain=cnn.com&loc=cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-3} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-3-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&domain=sahar.cnn.com&loc=cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-3} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-3-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&domain=cnn.com&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-3-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&domain=cnn.co.il&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
+    Then The response code is 200
+    And The responses are passback
+
+  Scenario: 1.e send zone requests with domains in the requests - black list {ynet.co.il}
+    When I send 1 times an ad request with parameter {unlimited=1&domain=ynet.co.il&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
+    Then The response code is 200
+    And The responses are passback
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-4-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&domain=sahar.ynet.co.il&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
+    Then The response code is 200
+    And The responses are passback
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-4-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&domain=ynet.co.il&loc=sahar.ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
+    Then The response code is 200
+    And The responses are passback
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-4-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&domain=cnn.co.il&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-4-banner-1} 100% of the time
 
   Scenario: 2. send Dynamic Tag requests for sub domain sahar.cnn.com, black list {sahar.cnn.com}
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
