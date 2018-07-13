@@ -242,11 +242,11 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
       |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |10218           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Desktop                |75396         |210722     |false                  |10218           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+      |campaign-PG1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
       |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |10219           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Smartphone             |75396         |210722     |false                  |10219           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
       |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |10220           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
-      |campaign-PG1-Tablet                 |75396         |210722     |false                  |10220           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+      |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
     And i update campaign data by name
       |Campaign Name                     |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-PG1-Desktop-limited      |-2            |1                       |4                 |

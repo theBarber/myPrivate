@@ -70,8 +70,6 @@ Feature: PG1 x - limitation support
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
 
-
-
   Scenario: PG1 on Mobile - zone request
     Given I use {Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19} as user-agent string to send my requests to uas
     Given I send 1 times an ad request for zone named {zone-zoneset-PG1-3-allowed} to UAS

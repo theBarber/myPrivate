@@ -536,6 +536,37 @@
       "params": {"placementId" : "10433394",
         "publisherId" : 3719
       }
+    }]},
+"Send HB request 1X2 size for publisher 3666":
+{"x-ut-hb-params":[
+  {
+    "bidRequestId": "21b46f04859b33",
+    "domain": "Dynamic2.com",
+    "placementId": "10433394",
+    "publisherId": 3666,
+    "sizes": [
+      [1,2]
+    ],
+    "timeout": 700,
+    "hbadaptor": "prebid",
+    "params": {"placementId" : "10433394",
+      "publisherId" : 3666
+    }
+  }]},
+  "Send HB request 1X2 size for publisher 3675":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f04859b33",
+      "domain": "Dynamic3.com",
+      "placementId": "10433394",
+      "publisherId": 3675,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3675
+      }
     }]}
-
 }
