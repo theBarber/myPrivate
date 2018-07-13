@@ -94,15 +94,12 @@ Feature: Domain Targeting tests
     When I send 1 times an ad request with parameter {unlimited=1&domain=ynet.co.il&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
     Then The response code is 200
     And The responses are passback
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-4-banner-1} 100% of the time
     When I send 1 times an ad request with parameter {unlimited=1&domain=sahar.ynet.co.il&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
     Then The response code is 200
     And The responses are passback
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-4-banner-1} 100% of the time
     When I send 1 times an ad request with parameter {unlimited=1&domain=ynet.co.il&loc=sahar.ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
     Then The response code is 200
     And The responses are passback
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-4-banner-1} 100% of the time
     When I send 1 times an ad request with parameter {unlimited=1&domain=cnn.co.il&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
     Then The response code is 200
     And The response contains script
