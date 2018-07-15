@@ -14,7 +14,7 @@ Feature: Entities for tests
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}   |[]                |83        |4737             |2434           |17116             |
     And i update banner data by name
-      |Campaign Name                     |limitation     |
+      |Banner Name                     |limitation     |
       |campaign-API-1-a-GDPR-banner-1    |[]             |
 
   @limitationSanity
@@ -25,7 +25,7 @@ Feature: Entities for tests
       |campaign-API-limitations-test-C  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[]           |83        |4737             |2434           |17116             |
       |campaign-API-limitations-test-W  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[]           |83        |4737             |2434           |17116             |
     And i update banner data by name
-      |Campaign Name                               |limitation                                                     |
+      |Banner Name                               |limitation                                                     |
       |campaign-API-limitations-test-F-banner-1    |[[[5,"!~","af"],[12,"=~","firefox"]]]                          |
       |campaign-API-limitations-test-C-banner-1    |[[[5,"!~","af"],[12,"=~","chrome"]]]                           |
       |campaign-API-limitations-test-W-banner-1    |[[[5,"!~","af"],[12,"=~","msie","msie 7","msie 8","msie 9"]]]  |
@@ -183,7 +183,7 @@ Feature: Entities for tests
         |campaign-API-1-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-1-a}   |[]                |83        |4737             |2434           |17116             |20         |ias       |
         |campaign-API-2-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-2-a}   |[]                |83        |4737             |2434           |17116             |30         |ias       |
       And i update banner data by name
-        |Campaign Name                            |limitation     |
+        |Banner Name                            |limitation     |
         |campaign-API-1-a-viewability-banner-1    |[]             |
         |campaign-API-2-a-viewability-banner-1    |[]             |
 
@@ -255,7 +255,11 @@ Feature: Entities for tests
       |campaign-PG1-Smartphone           |-1            |2                       |3                 |
       |campaign-PG1-Tablet-limited       |-2            |1                       |4                 |
       |campaign-PG1-Tablet               |-1            |2                       |3                 |
-
+    And i update banner data by name
+      |Banner Name                     |limitation       |
+      |campaign-PG1-Desktop-banner-1   |[[[50,"==",1]]]  |
+      |campaign-PG1-Smartphone-banner-1|[[[49,"==",1]]]  |
+      |campaign-PG1-Tablet-banner-1    |[[[33,"==",1]]]  |
 
   @PG1
   @SupplyType
