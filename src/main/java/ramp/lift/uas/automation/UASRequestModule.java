@@ -26,10 +26,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
@@ -37,17 +35,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicHeader;
-
 import infra.module.AbstractModuleImpl;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
 
@@ -134,7 +124,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             reset();
         }
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
-//        System.out.println(url);
+        System.out.println(url);
         for (; times > 0; times--) {
             request(url, false);
         }
