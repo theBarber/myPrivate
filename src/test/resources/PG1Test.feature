@@ -71,7 +71,7 @@ Feature: PG1 x - limitation support
     And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
 
   Scenario: PG1 on Mobile - zone request
-    Given I use {Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/603.1.23 (KHTML, like Gecko) Version/10.0 Mobile/14E5239e Safari/602.1} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19} as user-agent string to send my requests to uas
     Given I send 1 times an ad request for zone named {zone-zoneset-PG1-3-allowed} to UAS
     Then The response code is 200
     And The response contains script
@@ -80,12 +80,12 @@ Feature: PG1 x - limitation support
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Smartphone-banner-1} 100% of the time
-    Given I use {Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I send 1 times an ad request for zone named {zone-zoneset-PG1-3-allowed} to UAS
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Smartphone-limited-banner-1} 100% of the time
-    Given I use {Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; HTC; Windows Phone 8X by HTC)} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I send 1 times an ad request for zone named {zone-zoneset-PG1-4} to UAS
     Then The response code is 200
     And The response contains script
@@ -93,7 +93,7 @@ Feature: PG1 x - limitation support
 
 
   Scenario: PG1 on Tablet - zone request
-    Given I use {Mozilla/5.0 (Linux; <Android Version>; <Build Tag etc.>) AppleWebKit/<WebKit Rev>(KHTML, like Gecko) Chrome/<Chrome Rev> Safari/<WebKit Rev>} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
     Given I send 1 times an ad request for zone named {zone-zoneset-PG1-5-allowed} to UAS
     Then The response code is 200
     And The response contains script
@@ -102,12 +102,12 @@ Feature: PG1 x - limitation support
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Tablet-banner-1} 100% of the time
-    Given I use {Mozilla/5.0 (Android 4.4; Tablet; rv:41.0) Gecko/41.0 Firefox/41.0} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (iPad; CPU OS 9_3_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13F69 Safari/601.1} as user-agent string to send my requests to uas
     Given I send 1 times an ad request for zone named {zone-zoneset-PG1-5-allowed} to UAS
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Tablet-limited-banner-1} 100% of the time
-    Given I use {Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0; Touch; .NET4.0E; .NET4.0C; Tablet PC 2.0; WebView/1.0)} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (iPad; CPU OS 9_3_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13F69 Safari/601.1} as user-agent string to send my requests to uas
     Given I send 1 times an ad request for zone named {zone-zoneset-PG1-6} to UAS
     Then The response code is 200
     And The response contains script
