@@ -17,10 +17,11 @@
 		And The responses has click-urls
 		And The clickUrl has bannerid field matching the id of the banner named {75396-210722-278956-See Through-RampLift-1} 100% of the time
 
-Scenario: Send an ad request to UAS and parse logs
+	Scenario: Send an ad request to UAS and parse logs
 		Given I Delete req logs
 		Given I Delete imp logs
 		Given I clear all cookies from uas requests
+		Given I add cookie UTID with value {d7a8b8faf42446dcbba4248cef7dc7bb} to my requests to uas
 		When I send 11 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 		Then The response code is 200
 		And The response has impression-url
@@ -32,11 +33,14 @@ Scenario: Send an ad request to UAS and parse logs
 		And The field zoneid in the 4 column of the req log is the same as in impression-url
 		And The field bannerid in the 5 column of the req log is the same as in impression-url
 		And The field campaignid in the 6 column of the req log is the same as in impression-url
+	    And The field Base36UTID in the 3 column of the req log is: crmqauo6r8fzyognwjt45rem3
 		And I sleep for 5 seconds
 		Then I read the latest imp log file from uas
 		And I filter in the imp log to the lines where id at column 1 is the same as in impression-url
+		And The field Base36UTID in the 3 column of the imp log is: crmqauo6r8fzyognwjt45rem3
 		Given I Delete clk logs
 		When I send click requests to UAS
 		And I sleep for 5 seconds
 		Then I read the latest clk log file from uas
 		And I filter in the clk log to the lines where id at column 1 is the same as in impression-url
+		And The field Base36UTID in the 3 column of the clk log is: crmqauo6r8fzyognwjt45rem3

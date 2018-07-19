@@ -568,5 +568,65 @@
       "params": {"placementId" : "10433394",
         "publisherId" : 3675
       }
+    }]},
+  "Send HB Domain1 request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest1.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [160, 600],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB Domain2 request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest2.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [160, 600],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB Domain3 request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest3.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [160, 600],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB Domain4 request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest4.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [160, 600],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
     }]}
 }
