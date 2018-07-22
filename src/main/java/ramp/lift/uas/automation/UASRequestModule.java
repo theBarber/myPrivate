@@ -140,7 +140,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         for (NameValuePair nvp : queryParams) {
             url = url + "&" + nvp.toString();
         }
-
+        System.out.println(url);
         for (; times > 0; times--) {
             try {
                 TimeUnit.SECONDS.sleep(3);

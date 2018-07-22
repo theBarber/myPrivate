@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isIn;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
 @RunWith(Cucumber.class)
@@ -53,6 +54,8 @@ public class HeaderBiddingTest extends BaseTest {
         And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
         And("all HB responses contains (\\w+) with value \\{([^}]+)\\}",this::responsesContainEntityWithValue);
         And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
+        And("all HB responses contains ad impression with (campaignId|adId|zoneId) of entity named \\{([^}]+)\\}",this::responsesAdsContainEntityWithName);
+        And("all HB responses contains ad impression with (campaignId|adId|zoneId) with value \\{([^}]+)\\}",this::responsesAdsContainEntityWithId);
         And("i read all HB responses and map their bidId by (campaignId|adId)",this::setBidMapByEntity);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
@@ -60,9 +63,6 @@ public class HeaderBiddingTest extends BaseTest {
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBResponses);
 
     }
-
-
-
 
 
     private void setBidMapByEntity(String entity) {
@@ -230,6 +230,28 @@ public class HeaderBiddingTest extends BaseTest {
                 append("&ct=1").toString();
     }
 
+    public void responsesAdsContainEntityWithName(String entity, String name)
+    {
+        String value = String.valueOf(getEntityId(entity,name));
+        responsesAdsContainEntityWithId(entity, value);
+
+    }
+
+    public void responsesAdsContainEntityWithId(String entity, String value) {
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get("ad"));
+                assertTrue(responseInJson.get(0).get("ad").toString().contains("ut."+entity.toLowerCase()+"="+value));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
+    }
+
 
     private void responsesContainEntityWithName(String entity, String name)
     {
@@ -244,6 +266,8 @@ public class HeaderBiddingTest extends BaseTest {
                 myEntity = "banner";break;
             case "campaignid":
                 myEntity = "campaign";break;
+            case "zoneid":
+                myEntity = "zone";break;
             default:
                 myEntity = null;
         }

@@ -9,6 +9,14 @@
 			"isSync": true,
 			"isSecure": false,
 			"status": 0
+		},
+		{
+			"zoneId": 190224,
+			"zoneName": "zone-zoneset-DomainT-1-not-API",
+			"adUnitId": 10,
+			"isSync": true,
+			"isSecure": false,
+			"status": 0
 		}
 	]
 },

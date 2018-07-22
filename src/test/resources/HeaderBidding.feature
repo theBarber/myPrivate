@@ -255,7 +255,7 @@ Feature: Header Bidding flow support
       Given i reset responses in the UAS
       Given I sleep for 200 seconds
 
-  Scenario: header bidding frequency capping from mobile - user 2 after 5 minutes
+  Scenario: header bidding frequency capping from mobile - user 2 after 3 minutes
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
@@ -279,7 +279,7 @@ Feature: Header Bidding flow support
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And all HB responses contains adId with value {0}
 
-  Scenario: header bidding frequency capping from Desktop user 3 after 5 minutes
+  Scenario: header bidding frequency capping from Desktop user 3 after 3 minutes
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dd7bb} to my requests to uas
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
@@ -306,11 +306,13 @@ Feature: Header Bidding flow support
 
 
   Scenario: header bidding multiple domains - domain1
+    Given I add cookie UTID with value {d7a8b9faf42446dcbca3748eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-1-a-1}
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-1-a-1-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-1-a}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
@@ -321,11 +323,13 @@ Feature: Header Bidding flow support
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} 100% of the time
 
   Scenario: header bidding multiple domains - domain2
+    Given I add cookie UTID with value {d7a8b9faf42446dcbca3248kef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain2 request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {See-Through-1X2-D-2-a-1}
     And all HB responses contains adId with id of entity named {See-Through-1X2-D-2-a-1-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-See-Through-1X2-D-2-a}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
@@ -333,15 +337,17 @@ Feature: Header Bidding flow support
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {See-Through-1X2-D-2-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {See-Through-1X2-D-2-a-1} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} 100% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-See-Through-1X2-D-2-a} 100% of the time
 
 
   Scenario: header bidding multiple domains - domain3
+    Given I add cookie UTID with value {d7a8b9faf42446dlbca3248eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain3 request for publisher 3673} for publisher 3673 with domain {HBTest3.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-3-a-1}
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-3-a-1-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-3-a}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
@@ -352,12 +358,14 @@ Feature: Header Bidding flow support
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} 100% of the time
 
 
-  Scenario: header bidding multiple domains - domain1
+  Scenario: header bidding multiple domains - domain4
+    Given I add cookie UTID with value {d7a8b9caf42446dcbca3248eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain4 request for publisher 3673} for publisher 3673 with domain {HBTest4.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {See-Through-1X2-D-4-a-1}
     And all HB responses contains adId with id of entity named {See-Through-1X2-D-4-a-1-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-See-Through-1X2-D-4-a}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
@@ -365,7 +373,7 @@ Feature: Header Bidding flow support
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {See-Through-1X2-D-4-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {See-Through-1X2-D-4-a-1} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} 100% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} 100% of the time
 
 
 #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------
