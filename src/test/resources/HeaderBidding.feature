@@ -15,6 +15,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
