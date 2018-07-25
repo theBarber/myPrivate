@@ -73,6 +73,10 @@ public class CrossDeviceCappingTest extends BaseTest{
     Given("I clear all cookies from uas requests", () -> {
       sut.getUASRquestModule().clearCookies();
     });
+
+    Given("I clear all headers from uas requests", () -> {
+      sut.getUASRquestModule().emptyHttpHeaders();
+    });
     Then("^I refresh staging delivery engine data cache$", () -> {
       JsonArray hostsArray = new JsonParser().parse(config.get("uas.cliconnection.hosts")).getAsJsonArray();
       CountDownLatch latch = new CountDownLatch(hostsArray.size());
