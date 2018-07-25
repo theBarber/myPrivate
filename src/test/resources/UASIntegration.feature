@@ -52,7 +52,7 @@
 		Scenario: device id is written to the logs
           Given I Delete req logs
           Given I Delete imp logs
-          Given I clear all cookies from uas requests
+		  Given I add cookie UTID with value {d7a8y8ftf42446dcbba4248cef7dc7bb} to my requests to uas
           When I send 11 times an ad request with parameter {unlimited=1&deviceid=SaharTest} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
           Then The response code is 200
           And The response has impression-url
