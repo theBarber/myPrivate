@@ -43,6 +43,8 @@ Feature: Entities for tests
         |campaign-HB-Desktop-300X250           |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400            |3673           |66725             |
 #       |campaign-HB-Desktop-300X250           |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400            |3673           |66814             |
         |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400            |3673           |66730             |
+        |campaign-HB-SS-1X1-D-1                |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1-D-1}            |[]           |69         |14677            |3673           |66730             |
+        |campaign-HB-SS-1X1-D-2                |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1-D-2}            |[]           |69         |14678            |3673           |66730             |
         |campaign-HB-Prog-PGC-1X1-1           |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-2           |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-3           |75396    |222908     |false                  |86              |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
@@ -58,6 +60,8 @@ Feature: Entities for tests
         |campaign-HB-Desktop-300X250          |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Billboard-970X250        |0           |-1            |-1         |[]        |2                       |
         |campaign-HB-SS-1X1                   |0           |-2            |-1         |[]        |1                       |
+        |campaign-HB-SS-1X1-D-1               |0           |-2            |-1         |[]        |1                       |
+        |campaign-HB-SS-1X1-D-2               |0           |-1            |-1         |[]        |2                       |
         |campaign-HB-Prog-PGC-1X1-1           |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-PGC-1X1-2           |0           |-1            |-1         |[]        |2                       |
         |campaign-HB-Prog-PGC-1X1-3           |0           |1             |-1         |[]        |4                       |
@@ -66,6 +70,9 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3   |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-Billboard-970X250-D |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
+    And i update banner data by name
+      |Banner Name                        |limitation  |
+      |campaign-HB-SS-1X1-D-1-banner-1    |[]          |
 
     @HB
     Scenario: create entities for HB tests with multiple domains

@@ -85,6 +85,10 @@ Feature: Header Bidding flow support
     Given i send 1 headerBidding post request for scenario {Send HB request with sizes as string for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 204
 
+  Scenario: Send HB request with wrong values - sizes as string array
+    Given i send 1 headerBidding post request for scenario {Send HB request with string array sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 204
+
   Scenario: Send HB request with wrong values - everything is empty in parmeters
     Given i send 1 headerBidding post request for scenario {Send HB request with empty values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 204
