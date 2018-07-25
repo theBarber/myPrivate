@@ -25,7 +25,7 @@
 		Then The response code is 200
 		And The response has impression-url
 		And The response has click-url
-		And i print the responses
+#		And i print the responses
 		When I send impression requests to UAS
 		And I sleep for 5 seconds
 		Then I read the latest req log file from uas
