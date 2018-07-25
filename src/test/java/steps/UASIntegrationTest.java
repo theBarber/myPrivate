@@ -406,6 +406,11 @@ public class UASIntegrationTest extends BaseTest {
       Given("^i reset responses in the UAS$", () -> {
          sut.getUASRquestModule().reset();
       });
+      And("^i print the responses$", () -> {
+          sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+              System.out.println(content);
+          });
+      });
   }
 
     private static String getAppnexusPassbackURL(URL dspURL) {
