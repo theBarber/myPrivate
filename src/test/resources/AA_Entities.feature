@@ -386,8 +386,8 @@ Feature: Entities for tests
     And I restart {ut-programmatic-gw}
     And I sleep for 300 seconds
 
-  @refreshZoneCache
-  Scenario: refresh zone cache
-    And I refresh the zone Cache
+#  @refreshZoneCache
+#  Scenario: refresh zone cache
+#    And I refresh the zone Cache
 
 

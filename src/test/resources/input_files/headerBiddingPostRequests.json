@@ -162,7 +162,59 @@
           "publisherId" : 0
         }
       }]},
+  "Send HB request with sizes as string for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 0,
+      "sizes": "[1,1]",
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 0
+      }
+    }]},
+  "Send HB request with empty values for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "",
+      "domain": "",
+      "placementId": "",
+      "publisherId": 0,
+      "sizes": "",
+      "timeout": 0,
+      "hbadaptor": "",
+      "params": {"placementId" : "",
+        "publisherId" : 0
+      }
+    }]},
+  "Send HB request with partial data for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "timeout": 0,
+      "hbadaptor": ""
+    }]},
+  "Send HB request with empty for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+    }]},
 
+  "Send HB request with wrong format for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": 543543,
+      "domain": 5,
+      "placementId":4,
+      "publisherId": "gfdgfd",
+      "sizes": "[]",
+      "timeout": "700",
+      "hbadaptor": 5,
+      "params": {"placementId" : 0,
+        "publisherId" : "pp"
+      }
+    }]},
     "Send HB request with one size for publisher 3673":
     {"x-ut-hb-params":[
       {
