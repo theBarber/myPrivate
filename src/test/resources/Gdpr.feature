@@ -479,7 +479,7 @@ Feature: Gdpr test
     Given I Delete wel logs
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {2.15.255.212}
-    Given I send 5 times an wel request with parameters {trackerid=5499&cb=870589} to UAS
+    Given I send 5 times a wel request with parameters {trackerid=5499&cb=870589} to UAS
     Given I sleep for 2 seconds
     And I read the latest wel log file from uas
     And The field User_identifier in the 2 column of the wel log is: 0
@@ -502,7 +502,7 @@ Feature: Gdpr test
     Given I add cookie UTID with random value to my requests to uas
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {3.128.44.22}
-    Given I send 5 times an wel request with parameters {trackerid=5499&cb=870589} to UAS
+    Given I send 5 times a wel request with parameters {trackerid=5499&cb=870589} to UAS
     Given I sleep for 2 seconds
     And I read the latest wel log file from uas
     And The field User_identifier in the 2 column of the wel log is not: 0
@@ -523,7 +523,7 @@ Feature: Gdpr test
     Given I Delete prf logs
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {2.15.255.212}
-    Given I send 5 times an profiles request with parameters {pid=51310&cb=8XU48n} to UAS
+    Given I send 5 times a prfLog request with parameters {pid=51310&cb=8XU48n} to UAS
     And I sleep for 5 seconds
     And I read the latest prf log file from uas
     And The field User_identifier in the 2 column of the prf log is: 0
@@ -535,7 +535,7 @@ Feature: Gdpr test
     Given I Delete prf logs
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {3.128.44.22}
-    Given I send 5 times an profiles request with parameters {pid=51310&cb=8XU48n} to UAS
+    Given I send 5 times a prfLog request with parameters {pid=51310&cb=8XU48n} to UAS
     And I sleep for 5 seconds
     And I read the latest prf log file from uas
     And The field User_identifier in the 2 column of the prf log is not: 0
@@ -546,7 +546,7 @@ Feature: Gdpr test
     Given I Delete evt logs
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {2.15.255.212}
-    Given I send 5 times an event log request with parameters {bannerid=1213419&campaignid=300008&zoneid=178707&clang=en&ccat=2261,3802,5198,5248,5252,7432,7435,7496,7510,7526,7528,7529,7531,7541,7545,7546,7548,7549,7553,7554,9448,10288,12393,12752,12940,13475,15963,16621,16951,17114,17183,17186,17191,17433,17764,17845,17869,18161,18208,18853,19047,20812,20838,21314,21316,21318,21319,24146,24184,25086,32793,32851,33128&cb=323bc19ef9784d82b8b1c905d7bb0243&bk=p6r9eb&id=2fnr92i6abl9yws97kypzwot3&stid=109&uasv=v22&st=https%3A%2F%2Fwww.blackpoolgazette.co.uk%2Fnews%2Fcrime%2Fresort-police-surround-house-after-man-stabbed-1-9101170&e=MOAT.full-measurable&ord=1523004007976&replay=1} to UAS
+    Given I send 5 times a eve request with parameters {bannerid=1213419&campaignid=300008&zoneid=178707&clang=en&ccat=2261,3802,5198,5248,5252,7432,7435,7496,7510,7526,7528,7529,7531,7541,7545,7546,7548,7549,7553,7554,9448,10288,12393,12752,12940,13475,15963,16621,16951,17114,17183,17186,17191,17433,17764,17845,17869,18161,18208,18853,19047,20812,20838,21314,21316,21318,21319,24146,24184,25086,32793,32851,33128&cb=323bc19ef9784d82b8b1c905d7bb0243&bk=p6r9eb&id=2fnr92i6abl9yws97kypzwot3&stid=109&uasv=v22&st=https%3A%2F%2Fwww.blackpoolgazette.co.uk%2Fnews%2Fcrime%2Fresort-police-surround-house-after-man-stabbed-1-9101170&e=MOAT.full-measurable&ord=1523004007976&replay=1} to UAS
     And I sleep for 2 seconds
     Then I read the latest evt log file from uas
     And The field User_identifier in the 7 column of the evt log is: 0
@@ -571,7 +571,7 @@ Feature: Gdpr test
     Given I Delete evt logs
     Given I add header of {referer} with value {sahar.com}
     Given I add header of {x-forwarded-for} with value {3.128.44.22}
-    Given I send 5 times an event log request with parameters {bannerid=1213419&campaignid=300008&zoneid=178707&clang=en&ccat=2261,3802,5198,5248,5252,7432,7435,7496,7510,7526,7528,7529,7531,7541,7545,7546,7548,7549,7553,7554,9448,10288,12393,12752,12940,13475,15963,16621,16951,17114,17183,17186,17191,17433,17764,17845,17869,18161,18208,18853,19047,20812,20838,21314,21316,21318,21319,24146,24184,25086,32793,32851,33128&cb=323bc19ef9784d82b8b1c905d7bb0243&bk=p6r9eb&id=2fnr92i6abl9yws97kypzwot3&stid=109&uasv=v22&st=https%3A%2F%2Fwww.blackpoolgazette.co.uk%2Fnews%2Fcrime%2Fresort-police-surround-house-after-man-stabbed-1-9101170&e=MOAT.full-measurable&ord=1523004007976&replay=1} to UAS
+    Given I send 5 times a eve request with parameters {bannerid=1213419&campaignid=300008&zoneid=178707&clang=en&ccat=2261,3802,5198,5248,5252,7432,7435,7496,7510,7526,7528,7529,7531,7541,7545,7546,7548,7549,7553,7554,9448,10288,12393,12752,12940,13475,15963,16621,16951,17114,17183,17186,17191,17433,17764,17845,17869,18161,18208,18853,19047,20812,20838,21314,21316,21318,21319,24146,24184,25086,32793,32851,33128&cb=323bc19ef9784d82b8b1c905d7bb0243&bk=p6r9eb&id=2fnr92i6abl9yws97kypzwot3&stid=109&uasv=v22&st=https%3A%2F%2Fwww.blackpoolgazette.co.uk%2Fnews%2Fcrime%2Fresort-police-surround-house-after-man-stabbed-1-9101170&e=MOAT.full-measurable&ord=1523004007976&replay=1} to UAS
     And I sleep for 2 seconds
     Then I read the latest evt log file from uas
     And The field IP in the 5 column of the evt log is not: 0.0.0.0

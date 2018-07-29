@@ -382,7 +382,6 @@ Feature: Header Bidding flow support
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-3-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} 100% of the time
 
-
   Scenario: header bidding multiple domains - domain4
     Given I add cookie UTID with value {d7a8b9caf42446dcbca3248eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain4 request for publisher 3673} for publisher 3673 with domain {HBTest4.com} with extra params {&unlimited=1&optimize=0}
@@ -399,6 +398,27 @@ Feature: Header Bidding flow support
     And The impressionUrl has bannerid field matching the id of the banner named {See-Through-1X2-D-4-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {See-Through-1X2-D-4-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} 100% of the time
+
+#  Scenario: Header bidding - profile targeting
+#    Given I clear all cookies from uas requests
+#    Then I add cookie UTID with value {5454} to my requests to uas
+#    Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&unlimited=1&optimize=0}
+#    And The response code is 200
+#    And The response contains script
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-1-banner-1}
+#    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
+#    And all HB responses contains cpm with id 1
+#
+##   insert to the couchbase
+#    And The response code is 200
+#    Given i send 1 headerBidding post request for scenario {Send HB Domain2 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&unlimited=1&optimize=0}
+#    And The response code is 200
+#    And The response contains script
+#    And all HB responses contains campaignId with id of entity named {zone-zoneset-HB-SS-1X1-D-1}
+#    And all HB responses contains adId with id of entity named {See-Through-1X2-D-4-a-1-banner-1}
+#    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-See-Through-1X2-D-4-a}
+#    And all HB responses contains cpm with id 1
 
 
 #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------

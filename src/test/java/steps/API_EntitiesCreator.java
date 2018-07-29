@@ -44,7 +44,8 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with viewability", this::createCampaignsWithViewability);
         And("i create new campaigns with Supply type", this::createCampaignsWithSupplyType);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
-        And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityData);
+        And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityDataByID);
+        And("i disable campaigns by name on db",this::removeAllCampaignsByName);
         And("i create new Deals",this::createMultipleDeals);
         And("i create new creatives",this::createMultipleCreatives);
         And("i create campaigns from Template",this::createMultipleCampaignsFromTemplate);
@@ -363,7 +364,7 @@ public class API_EntitiesCreator extends BaseTest{
         sut.write("zone created successfully! zone id is:"+ zone.getId());
     }
 
-    private void updateEntityData(String entity, String updateBy, DataTable entities)
+    private void updateEntityDataByID(String entity, String updateBy, DataTable entities)
     {
         List<List<String>> EntityList = entities.asLists(String.class);
         List<String> entityData;
@@ -377,6 +378,18 @@ public class API_EntitiesCreator extends BaseTest{
             {
                 SqlWorkflowUtils.setColumnInWorkflow(entity+"s", entity + "id",entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
             }
+        }
+    }
+
+    private void removeAllCampaignsByName(DataTable entities)
+    {
+        List<List<String>> EntityList = entities.asLists(String.class);
+        List<String> entityData;
+
+        for(int i=1;i<EntityList .size();i++)
+        {
+            entityData = EntityList.get(i);
+            SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname",entityData.get(0), "status", "0");
         }
     }
 

@@ -86,20 +86,14 @@ public class UASIntegrationTest extends BaseTest {
               (Integer times,String parameter, String zoneByName) -> {
                   sendMultipleAdRequestsWithParameter(times,parameter, zoneByName, true);
               });
-
-      When("I send (\\d+) times an wel request with parameters \\{([^}]+)\\} to UAS",
-              (Integer times, String parameters) -> {
-                  sut.getUASRquestModule().sendMultipleWelRequestWithParameter(times, parameters, true);
+      When("I send (\\d+) times a (zone|wel|prfLog|eve) request with parameters \\{([^}]+)\\} to UAS",
+              (Integer times,String requestType, String parameters) -> {
+                  sut.getUASRquestModule().sendMultipleTypeGetRequestWithParameter(requestType,times, parameters, true,false);
               });
 
-      When("I send (\\d+) times an profiles request with parameters \\{([^}]+)\\} to UAS",
-              (Integer times, String parameters) -> {
-                  sut.getUASRquestModule().sendMultiplePrfRequestWithParameter(times, parameters, true);
-              });
-
-      When("I send (\\d+) times an event log request with parameters \\{([^}]+)\\} to UAS",
-              (Integer times, String parameters) -> {
-                  sut.getUASRquestModule().sendMultipleEventRequestWithParameter(times, parameters, true);
+      When("I send (\\d+) times a (profile) post request with parameters \\{([^}]+)\\} to UAS with body: (.*)$",
+              (Integer times,String requestType, String parameters, String body) -> {
+                  sut.getUASRquestModule().sendMultipleTypePostRequestWithParameter(requestType,body,times, parameters, true,false);
               });
 
       When("I send (\\d+) times an ad request with query parameters for zone named \\{([^}]+)\\} to UAS",

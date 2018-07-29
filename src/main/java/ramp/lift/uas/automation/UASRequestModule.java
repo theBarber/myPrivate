@@ -37,6 +37,8 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicHeader;
 import infra.module.AbstractModuleImpl;
 import org.apache.http.message.BasicNameValuePair;
+
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
@@ -44,7 +46,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
 
     public enum requestTypesEnum {
-        ZONE_REQUEST, DYNAMIC_TAG_REQUEST, HEADER_BIDDING_REQUEST, WEL_REQUEST, PRF_REQUEST, EVE_REQUEST
+        ZONE, DYNAMIC_TAG, HEADER_BIDDING, WEL, PRF, EVE
     }
 
     private ExecutorService requestSubmitter;
@@ -367,56 +369,55 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             sendPostRequestSync(times, url, body);
     }
 
-    public void sendMultipleEventRequestWithParameter(Integer times, String parameters, boolean isAsync) {
-        String url = getURL(requestTypesEnum.EVE_REQUEST, parameters, false);
+    public void sendMultipleTypeGetRequestWithParameter(String requestTypes, Integer times, String parameters, boolean isAsync, boolean isSecure) {
+        String url = getURL(requestTypes, parameters, isSecure);
         sendMultipleGetRequestsToUAS(times, url, isAsync);
     }
 
-    public void sendMultiplePrfRequestWithParameter(Integer times, String parameters, boolean isAsync) {
-        String url = getURL(requestTypesEnum.PRF_REQUEST, parameters, false);
-        sendMultipleGetRequestsToUAS(times, url, isAsync);
-    }
-
-    public void sendMultipleWelRequestWithParameter(Integer times, String parameters, boolean isAsync) {
-        String url = getURL(requestTypesEnum.WEL_REQUEST, parameters, false);
-        sendMultipleGetRequestsToUAS(times, url, isAsync);
+    public void sendMultipleTypePostRequestWithParameter(String requestTypes,String body, Integer times, String parameters, boolean isAsync, boolean isSecure) {
+        String url = getURL(requestTypes, parameters, false);
+        sendMultiplePostRequestsToUAS(times, url, body, isAsync);
     }
 
     public void sendMultipleDynamicTagGetRequests(Integer times, String tagID, String publisherId, String domainParam, String extraParams, boolean isAsync, boolean isSecure) {
         String params = "pid=" + publisherId + "&domain=" + domainParam + Optional.ofNullable(tagID).filter(s -> !s.isEmpty()).map(s -> "&tagid=" + s).orElse("") + Optional.ofNullable(extraParams).orElse("");
-        String url = getURL(requestTypesEnum.DYNAMIC_TAG_REQUEST, params, isSecure);
+        String url = getURL("dynamicTag", params, isSecure);
         sendMultipleGetRequestsToUAS(times, url, isAsync);
     }
 
     public void sendMultipleHeaderBiddingPostRequests(Integer times, String body, Integer publisherID, String domainParam, String extraParams, boolean isAsync, boolean isSecure) {
         String params = "pid=" + publisherID + "&domain=" + domainParam + Optional.ofNullable(extraParams).orElse("");
-        String url = getURL(requestTypesEnum.HEADER_BIDDING_REQUEST, params, isSecure);
+        String url = getURL("headerBidding", params, isSecure);
         sendMultiplePostRequestsToUAS(times, url, body, isAsync);
     }
 
-    private String getURL(requestTypesEnum RequestType, String params, boolean isSecure) {
+    private String getURL(String RequestType, String params, boolean isSecure) {
         String request_type_in_string_format = null;
         String http = isSecure ? "https://" : "http://";
         switch (RequestType) {
-            case ZONE_REQUEST:
+            case "zone":
                 request_type_in_string_format = "/af";
                 break;
-            case DYNAMIC_TAG_REQUEST:
+            case "dynamicTag":
                 request_type_in_string_format = "/dj";
                 break;
-            case HEADER_BIDDING_REQUEST:
+            case "headerBidding":
                 request_type_in_string_format = "/hb";
                 break;
-            case WEL_REQUEST:
+            case "wel":
                 request_type_in_string_format = "/t";
                 break;
-            case PRF_REQUEST:
+            case "prfLog":
                 request_type_in_string_format = "/f";
                 break;
-            case EVE_REQUEST:
+            case "eve":
                 request_type_in_string_format = "/e";
                 break;
+            case "profile":
+                request_type_in_string_format = "/p";
+                break;
         }
+        assertNotNull("request type "+RequestType+" wasn't found",request_type_in_string_format);
         return http + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + request_type_in_string_format + Optional.ofNullable(params).filter(s -> !s.isEmpty()).map(s -> "?" + s).orElse("");
     }
 
