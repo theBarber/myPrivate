@@ -77,10 +77,8 @@ dev1.ramp.app.port=3003
 dev1.ramp.test.lineItemId=[210722]
 
 #integration.us-east-1-user-info.couchbase.nodes=[10.12.5.87,10.12.5.220]
-*.us-east-1-user-info.couchbase.nodes=[10.12.5.208,10.12.5.201]
+*.couchbase.nodes=[10.12.5.208,10.12.5.201]
 
-
-*.us-east-1-user-history.couchbase.nodes=[10.12.5.208,10.12.5.201]
 
 
 *.couchbase.host=10.12.5.201

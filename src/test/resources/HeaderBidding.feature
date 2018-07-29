@@ -399,24 +399,27 @@ Feature: Header Bidding flow support
     And The impressionUrl has campaignid field matching the id of the campaign named {See-Through-1X2-D-4-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} 100% of the time
 
-  Scenario: Header bidding - profile targeting
-    Given I clear all cookies from uas requests
-    Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-2}
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
-    And all HB responses contains cpm with id 1
-    And i inject profile id 1 to user {crmqc31wb5vfkxdocrtwfw057} on adserver bucket
-    Then I add cookie UTID with value {d7a8b9caf43446d4bca3f48eef7d47bb} to my requests to uas
-    Given i send 1 headerBidding post request for scenario {Send HB Domain2 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-1}
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-1-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
-    And all HB responses contains cpm with id 1
+#  Scenario: Header bidding - profile targeting
+#    Given I clear all cookies from uas requests
+#    Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&optimize=0}
+#    And The response code is 200
+#    And The response contains script
+##    And all HB responses contains campaignId with id 325720
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-2}
+#    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
+#    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
+#    And all HB responses contains cpm with id 1
+#    And i inject profile id 1 to user {crmqc31wb5vfkxdocrtwfw057} on adserver bucket
+#    Then I add cookie UTID with value {d7a8b9caf43446d4bca3f48eef7d47bb} to my requests to uas
+#    Given i send 1 headerBidding post request for scenario {Send HB Domain2 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&optimize=0}
+#    And The response code is 200
+#    And The response contains script
+##    And all HB responses contains campaignId with id 325719
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-1-banner-1}
+#    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
+#    And all HB responses contains cpm with id 1
+
 
 
 #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------

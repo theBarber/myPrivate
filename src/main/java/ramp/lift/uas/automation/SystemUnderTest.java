@@ -151,7 +151,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 	private CouchbaseBucketModule createCouchbaseBucketModule(String name, Map<String, String> config) {
-		String nodesParam = config.get(name + ".couchbase.nodes");
+		String nodesParam = config.get("couchbase.nodes");
 		JsonArray nodesConfig = new JsonParser().parse(nodesParam).getAsJsonArray();
 
 		List<String> nodes = new ArrayList<>(nodesConfig.size());
