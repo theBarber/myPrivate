@@ -466,6 +466,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return userInfoBucket;
 	}
 
+	public CouchbaseBucketModule getBucket(String bucketName) {
+		return createCouchbaseBucketModule(bucketName, config);
+	}
+
+
 	public CouchbaseBucketModule getUserHistoryBucket() {
 		if(userHistoryBucket == null){
 			userHistoryBucket =  createCouchbaseBucketModule("us-east-1-user-history", config);

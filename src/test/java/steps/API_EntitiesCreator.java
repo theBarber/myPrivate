@@ -390,7 +390,7 @@ public class API_EntitiesCreator extends BaseTest{
         for(int i=1;i<EntityList .size();i++)
         {
             entityData = EntityList.get(i);
-            SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname",entityData.get(0), "status", "0");
+            SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname",entityData.get(0), "status", "1");
         }
     }
 

@@ -93,7 +93,6 @@ Feature: Entities for tests
         |campaign-HB-Prog-Billboard-970X250-D |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
 
-
   @HB
     Scenario: create entities for HB tests with multiple domains
     Given i disable campaigns by name on db
