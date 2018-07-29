@@ -239,6 +239,7 @@ public class API_EntitiesCreator extends BaseTest{
         zonesetNamesAsList = Arrays.asList(zonesetsNameAsString.substring(1, zonesetsNameAsString.length()-1).split(","));
         for(String zonset: zonesetNamesAsList)
         {
+            zonset = zonset.trim();
             try{
                 zonesetId = Integer.parseInt(zonset); /*check if it number -> then its an id*/
             }catch (NumberFormatException e) //not a number -> then a name
