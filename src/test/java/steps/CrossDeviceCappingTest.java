@@ -53,11 +53,13 @@ public class CrossDeviceCappingTest extends BaseTest{
     });
 
     Then("i inject profile id (\\d+) to user \\{([^}]+)\\} on adserver bucket", (Integer profileId, String userID) -> {
+      CouchbaseBucketModule adserverBucket = sut.getAdserverBucket();
       try{
-        CouchbaseBucketModule adserverBucket = sut.getBucket("us-east-1-adserver");
         adserverBucket.deleteDocument(userID);
+      } catch (DocumentDoesNotExistException e) {
+        System.out.println(e.getMessage());
+      }
         Integer epocDays = getEpocDays();
-
         String jsonDoc = "{\n" +
                 "  \"profiles\": [\n" +
                 "    [\n" +
@@ -70,10 +72,6 @@ public class CrossDeviceCappingTest extends BaseTest{
                 "  ]\n" +
                 "}\n";
         adserverBucket.insertDocument(userID,jsonDoc);
-      } catch (DocumentDoesNotExistException e) {
-        System.out.println(e.getMessage());
-      }
-
     });
 
 

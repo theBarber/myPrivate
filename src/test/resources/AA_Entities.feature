@@ -185,7 +185,7 @@ Feature: Entities for tests
         |See-Through-1X2-D-4-b-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-4-b}       |
         |campaign-HB-SS-1X1-D-1           |75396         |197418     |false                  |86                   |{zone-zoneset-HB-SS-1X1-D-1,zone-zoneset-HB-SS-1X1-D-2}|
         |campaign-HB-SS-1X1-D-2           |75396         |197418     |false                  |86                   |{zone-zoneset-HB-SS-1X1-D-1,zone-zoneset-HB-SS-1X1-D-2}|
-      And i update campaign data by name
+    And i update campaign data by name
         |Campaign Name                    |Priority      |campaign_delivery_method|delivery_algorithm|
         |HB-Tablet-160x600-D-1-a-1        |-2            |1                       |4                 |
         |HB-Tablet-160x600-D-1-a-2        |-1            |2                       |3                 |

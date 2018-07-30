@@ -51,6 +51,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected SqlConnectionModule workflowDbConnector;
 	protected CouchbaseBucketModule userInfoBucket;
 	protected CouchbaseBucketModule userHistoryBucket;
+	protected CouchbaseBucketModule adserverBucket;
 	protected CouchBaseUtils couchBaseUtils;
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
@@ -88,6 +89,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 					userHistoryBucket = createCouchbaseBucketModule("us-east-1-user-history", config);
 			}
 			break;
+				case "@adserverBucket":
+					if (adserverBucket == null) {
+						adserverBucket = createCouchbaseBucketModule("us-east-1-adserver", config);
+					}
+					break;
 				case "@couchBaseUtil":
 					if(couchBaseUtils == null)
 					{
@@ -466,16 +472,19 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return userInfoBucket;
 	}
 
-	public CouchbaseBucketModule getBucket(String bucketName) {
-		return createCouchbaseBucketModule(bucketName, config);
-	}
-
 
 	public CouchbaseBucketModule getUserHistoryBucket() {
 		if(userHistoryBucket == null){
 			userHistoryBucket =  createCouchbaseBucketModule("us-east-1-user-history", config);
 		}
 		return userHistoryBucket;
+	}
+
+	public CouchbaseBucketModule getAdserverBucket() {
+		if(adserverBucket == null){
+			adserverBucket = createCouchbaseBucketModule("us-east-1-adserver", config);
+		}
+		return adserverBucket;
 	}
 
 	@Override
