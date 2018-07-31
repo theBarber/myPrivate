@@ -406,7 +406,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-2}
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
     And all HB responses contains cpm with id 3
     And i inject profile id 1 to user {User:crmqc31wdld7y233cq5xaxrjv} on adserver bucket
     Then I add cookie UTID with value {d7a8b9caf43446d4bca3f48eef7d47bb} to my requests to uas
@@ -415,7 +415,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-1}
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-1-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
     And all HB responses contains cpm with id 3
 
 
