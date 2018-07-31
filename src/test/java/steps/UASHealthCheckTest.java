@@ -23,6 +23,8 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import ramp.lift.uas.automation.UASRequestModule;
 
+import static org.hamcrest.Matchers.not;
+
 @CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",
 		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
@@ -37,12 +39,22 @@ public class UASHealthCheckTest extends BaseTest {
 		Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains (.*)$", this::healthCheckResponseContains);
+		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
+
+	}
+
+	private void healthCheckResponseNotContains(String something) {
+		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+			//System.out.println(content); // for checks only
+			Assert.assertThat(content, not(Matchers.containsString(something)));
+		});
 	}
 
 	public void healthCheckResponseContains(String something) {
 		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-			//System.out.println(content); // for checks only
+			//System.out.println(content);
 			Assert.assertThat(content, Matchers.containsString(something));
+
 		});
 	}
 

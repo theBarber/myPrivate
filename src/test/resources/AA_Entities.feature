@@ -77,7 +77,7 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66673             |
         |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66673             |
-     And i update campaign data by name
+    And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-See-Through-1X2          |0           |-1            |-1         |[]        |2                       |
@@ -455,7 +455,7 @@ Feature: Entities for tests
 
 
   @PG1
-  Scenario: create entities for zone Tag Sanity test
+  Scenario: create entities for PG1 tests
 #    Given i remove all zones from publishers: {3675,3666}
       Given i disable campaigns by name on db
         |Campaign Name                     |
@@ -494,6 +494,18 @@ Feature: Entities for tests
       |campaign-PG1-Tablet-banner-1    |[[[33,"==",1]]]  |
 
 
+  @PGX
+  Scenario: create entities for PGX tests
+    Given i disable campaigns by name on db
+      |Campaign Name            |
+      |campaign-PGX-PG-1-a      |
+      |campaign-PGX-ST-1-a      |
+    Given i remove all zones from publishers: {3717}
+    Given i create new campaigns with new zoneset
+      |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-PGX-PG-1-a       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14681             |3717           |66740             |
+      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14681             |3717           |66741             |
+      |campaign-PGX-PG-1-b       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67021             |
 
 
   @PG1

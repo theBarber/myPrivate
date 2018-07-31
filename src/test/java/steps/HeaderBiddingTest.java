@@ -244,7 +244,8 @@ public class HeaderBiddingTest extends BaseTest {
             {
                 responseInJson = mapper.readTree(content);
                 Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get("ad"));
-                assertTrue(responseInJson.get(0).get("ad").toString().contains("ut."+entity.toLowerCase()+"="+value));
+                assertTrue("responses not contains "+entity+" with value: "+ value+", response has ad: "+responseInJson.get(0).get("ad").toString() ,
+                        responseInJson.get(0).get("ad").toString().contains("ut."+entity.toLowerCase()+"="+value));
             }catch (Exception e)
             {
                 e.printStackTrace();
