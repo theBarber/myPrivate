@@ -26,6 +26,7 @@ Feature: PGX - triggering ads tests
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PGX-PG-1-a-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-PG-1-a-banner-1} 100% of the time
     And The response contains window.ut_renderTriggers=[1,2,3]
 
@@ -62,10 +63,10 @@ Feature: PGX - triggering ads tests
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-PG-1-a-banner-1} 100% of the time
     And The response contains window.ut_renderTriggers=[1]
 
-  Scenario: PGX triggering ads - 2 triggers are enabled (True, Exit) - PG zone tag default
+  Scenario: PGX triggering ads - 2 triggers are enabled (Exit, Back) - PG zone tag default
     Given I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-PGX-PG-1-c} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-PG-1-c} 100% of the time
-    And The response contains window.ut_renderTriggers=[1,2]
+    And The response contains window.ut_renderTriggers=[1,3]
