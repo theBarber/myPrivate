@@ -452,7 +452,12 @@ Feature: Entities for tests
 #    Given i create new campaigns with multiple creatives
 #      |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal      |Zonesets-zone Name             |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
 #      |campaign-weightBanners-A    |75396         |210722     |false                  |204,890            |{zone-zoneset-weightBanners-A} |[]                |83        |4737             |2434           |17116             |
-
+#
+#  @kerenInapp
+#  Scenario: create entity for keren
+#    Given i create new campaigns with new zoneset
+#      |Campaign Name       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name     |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+#      |campaign-Inapp      |75396         |210722     |false                  |204             |{zone-zoneset-Inapp}   |[]                |83        |4737             |2434           |17116             |
 
   @PG1
   Scenario: create entities for PG1 tests
@@ -513,6 +518,7 @@ Feature: Entities for tests
       |Campaign Name            |Priority      |campaign_delivery_method|
       |campaign-PGX-PG-1-b      |1             |4                       |
       |campaign-PGX-PG-1-c      |1             |4                       |
+
 
 
   @PGX

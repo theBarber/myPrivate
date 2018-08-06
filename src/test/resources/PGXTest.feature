@@ -46,7 +46,7 @@ Feature: PGX - triggering ads tests
     And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-PG-1-a-banner-1} 100% of the time
-    And The response contains window.ut_renderTriggers=[1,2,3]
+    And The response contains window.ut_renderTriggers=[3,2,1]
 
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through dynamic Tag
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3717 with domain {PGXTriggering.com&tagid=239&unlimited=1&optimize=0}
