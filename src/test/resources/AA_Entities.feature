@@ -500,6 +500,8 @@ Feature: Entities for tests
       |Campaign Name            |
       |campaign-PGX-PG-1-a      |
       |campaign-PGX-ST-1-a      |
+      |campaign-PGX-PG-1-b      |
+      |campaign-PGX-PG-1-c      |
     Given i remove all zones from publishers: {3717}
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
@@ -507,6 +509,10 @@ Feature: Entities for tests
       |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14681             |3717           |66741             |
       |campaign-PGX-PG-1-b       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |66743             |
       |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080             |3719           |66746             |
+    And i update campaign data by name
+      |Campaign Name            |Priority      |campaign_delivery_method|
+      |campaign-PGX-PG-1-b      |1             |4                       |
+      |campaign-PGX-PG-1-c      |1             |4                       |
 
 
   @PGX
@@ -528,7 +534,6 @@ Feature: Entities for tests
     Given i kill replay on the machines
     And I setup the db
     And I sleep for 60 seconds
-  @PGX
   @PG1
   @SupplyType
   @viewability
