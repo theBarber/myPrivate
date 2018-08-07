@@ -21,7 +21,7 @@ Feature: Entities for tests
       |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}   |[]                |83        |4737             |2434           |17116             |
     And i update banner data by name
       |Banner Name                     |limitation     |
-      |campaign-API-1-a-GDPR-banner-1    |[]             |
+      |campaign-API-1-a-GDPR-banner-1  |[]             |
 
   @limitationSanity
   Scenario: create entities for zone Tag Sanity test
