@@ -1,4 +1,3 @@
-@scheduled
 @GDPR
 Feature: restart replay
 
