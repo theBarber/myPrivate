@@ -6,7 +6,8 @@
 		@zoneTagSanity
    Scenario: Send an ad request to UAS and parse impression url
         When I send 10 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-sanity-1-a} to UAS
-	 	And The response contains script
+		Then The response code is 200
+		And The response contains script
 		And The responses has impression-urls
 		And The impressionUrl has bannerid field matching the id of the banner named {campaign-API-1-a-sanity-banner-1} 100% of the time
 		And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-sanity-1-a} 100% of the time

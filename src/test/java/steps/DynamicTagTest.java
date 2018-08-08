@@ -24,6 +24,7 @@ public class DynamicTagTest extends BaseTest{
         Given("I update daily capping for publishers:",this::setupPublishers);
         Then("i send (\\d+) times Dynamic Tag synchronized ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagSynchronizedRequestsToUAS);
         Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
+        Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with extra params \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
         Then("i send (\\d+) times Dynamic Tag synchronized ad request with tag id (\\w+) to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagWithTagSynchronizedRequestsToUAS);
         Given("i remove all zones related to web_section id (\\d+)",this::removeAllZonesFrom);
         Given("only tags \\{([^}]+)\\} are enabled and the rest are disabled for publisher (\\d+)",this::removeTagsFromPublisher);

@@ -519,6 +519,27 @@ Feature: Entities for tests
       |campaign-PGX-PG-1-b      |1             |4                       |
       |campaign-PGX-PG-1-c      |1             |4                       |
 
+  @Inapp
+  Scenario: create entities for Inapp tests
+    Given i disable campaigns by name on db
+      |Campaign Name         |
+      |campaign-Inapp-SI-1   |
+      |campaign-Inapp-SI-2   |
+      |campaign-Inapp-SI-3   |
+      |campaign-Inapp-SI-4   |
+    Given i remove all zones from publishers: {2546}
+    Given i create new campaigns with new zoneset
+      |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name            |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-Inapp-SI-1       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |66750             |
+      |campaign-Inapp-SI-2       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |66750             |
+      |campaign-Inapp-SI-3       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |66750             |
+      |campaign-Inapp-SI-4       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |66750             |
+    And i update campaign data by name
+      |Campaign Name             |Priority      |campaign_delivery_method|delivery_algorithm|
+      |campaign-Inapp-SI-1       |-2            |1                       |4                 |
+      |campaign-Inapp-SI-2       |-1            |2                       |3                 |
+      |campaign-Inapp-SI-3       | 1            |4                       |2                 |
+      |campaign-Inapp-SI-4       | 1            |4                       |1                 |
 
 
   @PGX
