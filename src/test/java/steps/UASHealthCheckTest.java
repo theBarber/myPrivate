@@ -37,6 +37,7 @@ public class UASHealthCheckTest extends BaseTest {
 				this::healthCheckRequestSkip);
 		When("^Sending a healthcheck request to UAS$", this::healthCheckRequest);
 		Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
+		Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains (.*)$", this::healthCheckResponseContains);
 		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
@@ -70,6 +71,11 @@ public class UASHealthCheckTest extends BaseTest {
 		sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
 				.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
 				.forEach(CompletableFuture::join);
+	}
+
+	public void allSynchronizedResponsesHaveCode(Integer expectedResponseCode) {
+		sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
+				.map(StatusLine::getStatusCode).forEach(statusCode->Assert.assertThat(statusCode, Matchers.is(expectedResponseCode)));
 	}
 
 	public void allResponsesFinished() {
