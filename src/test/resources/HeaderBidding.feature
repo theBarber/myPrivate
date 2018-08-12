@@ -176,6 +176,7 @@ Feature: Header Bidding flow support
       And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
       And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
       And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
+      And I sleep for 5 seconds
       Given I read the latest hbl log file from uas
       And For bidID bid1 The field bid_request_id in the 30 column of the hbl log is: bid1
       And For bidID bid1 The field Selected_Ad_Size in the 6 column of the hbl log is: [[1,2],[160,600]]
