@@ -12,6 +12,7 @@ Feature: Programmatic flow support
 
   Scenario: 2. basic Call to Programmatic GW - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 196 to UAS for publisher 3711 with domain {test.com&requestid=systemTestA&unlimited=1&optimize=0}
+    And The synchronized response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
 
@@ -35,6 +36,7 @@ Feature: Programmatic flow support
 
   Scenario: 5. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 197 to UAS for publisher 3711 with domain {test.com&requestid=systemTestB&unlimited=1&optimize=0}
+    And The synchronized response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
     When I send impression requests to UAS
 
@@ -48,6 +50,7 @@ Feature: Programmatic flow support
 
   Scenario: 7. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 198 to UAS for publisher 3711 with domain {test.com&requestid=systemTestC&unlimited=1&optimize=0}
+    And The synchronized response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-4-banner-1} 100% of the time
     When I send impression requests to UAS
 

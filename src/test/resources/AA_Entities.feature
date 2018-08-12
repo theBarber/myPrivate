@@ -321,6 +321,7 @@ Feature: Entities for tests
       |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |17116             |{}                  |{sahar.ynet.co.il}                |
       |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |17116             |{cnn.com}           |{}                                |
       |campaign-DomainT-ZoneTag-4 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-4}                    |[]                   |83         |4737              |2434           |17116             |{}                  |{ynet.co.il}                      |
+#      |campaign-DomainT-ZoneTag-5 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-5}                    |[]                   |83         |4737              |2434           |17116             |{ynet.co.il}        |{sahar.ynet.co.il}                |
 
 ##      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |{sahar.cnn.com}     |{}                                |
 ##      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |{cnn.com}           |{}                                |
@@ -527,21 +528,35 @@ Feature: Entities for tests
       |campaign-Inapp-SI-2   |
       |campaign-Inapp-SI-3   |
       |campaign-Inapp-SI-4   |
-    Given i remove all zones from publishers: {2546}
+      |campaign-Inapp-SI-5   |
+      |campaign-Inapp-SI-6   |
+    Given i remove all zones from publishers: {2546,3585}
     Given i create new campaigns with new zoneset
-      |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name            |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+      |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-Inapp-SI-1       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |66750             |
-      |campaign-Inapp-SI-2       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |66750             |
-      |campaign-Inapp-SI-3       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |66750             |
-      |campaign-Inapp-SI-4       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |66750             |
+      |campaign-Inapp-SI-2       |75396         |222908     |false                  |10775             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |66750             |
+      |campaign-Inapp-SI-3       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |66750             |
+      |campaign-Inapp-SI-4       |75396         |222908     |false                  |10778             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |66750             |
+      |campaign-Inapp-SI-5       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |66751             |
+      |campaign-Inapp-SI-6       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |66752             |
     And i update campaign data by name
       |Campaign Name             |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-Inapp-SI-1       |-2            |1                       |4                 |
       |campaign-Inapp-SI-2       |-1            |2                       |3                 |
-      |campaign-Inapp-SI-3       | 1            |4                       |2                 |
-      |campaign-Inapp-SI-4       | 1            |4                       |1                 |
+      |campaign-Inapp-SI-3       |-1            |2                       |3                 |
+      |campaign-Inapp-SI-4       |-1            |2                       |3                 |
+      |campaign-Inapp-SI-5       |-1            |2                       |3                 |
+      |campaign-Inapp-SI-6       |-1            |2                       |3                 |
+    And i update zone data by name
+      |Zone Name                 |is_mraid     |
+      |zone-zoneset-Inapp-SI-1   |1            |
+      |zone-zoneset-Inapp-SI-2   |1            |
+      |zone-zoneset-Inapp-SI-3   |1            |
+      |zone-zoneset-Inapp-SI-4   |1            |
+      |zone-zoneset-Inapp-SI-5   |1            |
+      |zone-zoneset-Inapp-SI-6   |1            |
 
-
+  @Inapp
   @PGX
   @PG1
   @SupplyType
@@ -560,7 +575,7 @@ Feature: Entities for tests
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
-    And I sleep for 60 seconds
+    And I sleep for 200 seconds
   @PG1
   @SupplyType
   @viewability
@@ -575,7 +590,7 @@ Feature: Entities for tests
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 300 seconds
+    And I sleep for 260 seconds
 
 #  @refreshZoneCache
 #  Scenario: refresh zone cache

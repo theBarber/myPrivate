@@ -354,7 +354,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     private void sendMultipleGetRequestsToUAS(Integer times, String url, boolean isAsync) {
-        System.out.println(url);
+        //System.out.println(url);
         if (isAsync)
             sendGetRequestsAsync(times, url,true);
         else

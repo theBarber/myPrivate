@@ -303,3 +303,6 @@ Feature: Domain Targeting tests
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-DomainT-Desktop-6-banner-1}
+
+
+    #  -----------------------------------------------------both-----------------------------------------------------------

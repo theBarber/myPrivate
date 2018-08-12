@@ -17,6 +17,14 @@
 			"isSync": true,
 			"isSecure": false,
 			"status": 0
+		},
+		{
+			"zoneId": 195518,
+			"zoneName": "zone-zoneset-Inapp-SI-1-not-API",
+			"adUnitId": 10,
+			"isSync": true,
+			"isSecure": false,
+			"status": 0
 		}
 	]
 },
