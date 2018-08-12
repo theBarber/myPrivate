@@ -11,6 +11,9 @@ Feature: InApp testing
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
     And The response contains var ut_pixels
+    And The response contains ut_clickurl
+    And The response contains ut_udms
+    And The response contains sf_tag
     And The response contains {type:'image', url:'https://www.example.com/1'}
     And The response contains {type:'iframe', url:' https://www.example.com/3'}
     And The response contains var ut_pixel_event = 'viewableChange';
