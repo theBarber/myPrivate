@@ -530,7 +530,7 @@ Feature: Entities for tests
       |campaign-Inapp-SI-4   |
       |campaign-Inapp-SI-5   |
       |campaign-Inapp-SI-6   |
-    Given i remove all zones from publishers: {2546,3585}
+    Given i remove all zones from publishers: {2546,3585,3586}
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-Inapp-SI-1       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |66750             |
@@ -575,7 +575,7 @@ Feature: Entities for tests
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
-    And I sleep for 200 seconds
+    And I sleep for 60 seconds
   @PG1
   @SupplyType
   @viewability
@@ -590,7 +590,7 @@ Feature: Entities for tests
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 260 seconds
+    And I sleep for 300 seconds
 
 #  @refreshZoneCache
 #  Scenario: refresh zone cache
