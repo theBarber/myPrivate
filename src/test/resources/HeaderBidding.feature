@@ -775,7 +775,7 @@ Feature: Header Bidding flow support
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-2-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-2-a-1} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-2-a-1} 100% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} 100% of the time
 
   @optimize
   Scenario: header bidding multiple domains - domain3
@@ -802,7 +802,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-4-a-1}
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-4-a-1-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-4-a-1-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-4-a}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
