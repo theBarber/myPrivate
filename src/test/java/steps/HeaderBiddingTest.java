@@ -60,7 +60,9 @@ public class HeaderBiddingTest extends BaseTest {
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
         And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
-        And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBResponses);
+        And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBWithoutParam);
+        And("for all HB responses i simulate winning, and send their zone tag with extra param \\{([^}]+)\\}",this::sendZoneTagFromHBWithParam);
+
 
     }
 
@@ -192,7 +194,12 @@ public class HeaderBiddingTest extends BaseTest {
     }
 
 
-    public void sendZoneTagFromHBResponses() {
+    public void sendZoneTagFromHBWithoutParam()
+    {
+        sendZoneTagFromHBWithParam(null);
+    }
+
+    public void sendZoneTagFromHBWithParam(String extraParam) {
         List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
         sut.getUASRquestModule().reset();
         response.stream().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
@@ -201,7 +208,7 @@ public class HeaderBiddingTest extends BaseTest {
             {
                 responseInJson = mapper.readTree(content);
                 String htmlWithQuery = responseInJson.get(0).get("ad").asText();
-                String url = getUrlFromAd(htmlWithQuery);
+                String url = getUrlFromAd(htmlWithQuery) + Optional.ofNullable(extraParam).orElse("");
                 sut.getUASRquestModule().sendGetRequestsAsync(1,url,false);
             }catch (Exception e)
             {

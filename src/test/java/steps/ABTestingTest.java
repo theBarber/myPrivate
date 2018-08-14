@@ -38,13 +38,18 @@ public class ABTestingTest extends BaseTest {
               SqlRampAdminUtils.setActivationStatusHierarchy(experimentGroupName, status);
 
             });
-		
+
+
 		Given("^Unable all experiment groups$", () -> {
               SqlRampAdminUtils.unableAllExperimentGroups();
             });
 
 		Given("^Unable all experiment groups except experimentID (\\d+)", (Integer experimentID) -> {
 			SqlRampAdminUtils.unableAllExperimentGroupsExcept(experimentID);
+		});
+
+		Given("^i disable all tests Groups except (\\d+)$", (Integer Id) -> {
+			SqlRampAdminUtils.disableAllStrategyGroupsExcept(Id);
 		});
 
 		Given("^I create new experiment groups with the following fields$", (DataTable experimentGroupsTable) -> {
@@ -66,7 +71,10 @@ public class ABTestingTest extends BaseTest {
 				(String experimentName, Integer activationStatus) -> {
 					SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "experiment");
 				});
-		
+
+		And("^I set test id of test_strategy named \\{([^}]+)\\} to \\{(\\d+)\\}$",
+				SqlRampAdminUtils::setTestStrategyToTestIdGroup);
+
 		And("^I update the s3 experiment data$", () -> {
 		  RampAppRequestModule appReqModule = new RampAppRequestModule();
 		  appReqModule.requestToRampApp("http://services-ramp-staging.ramp-ut.io:3002/api/v1/experiments?active=true");

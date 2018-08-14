@@ -1,4 +1,5 @@
 @GDPR
+@optimize
 Feature: restart replay
 
   Scenario: restart replay
