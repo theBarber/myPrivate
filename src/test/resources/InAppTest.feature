@@ -26,7 +26,7 @@ Feature: InApp testing
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-Inapp-SI-1}
     And all HB responses contains adId with id of entity named {campaign-Inapp-SI-1-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And for all HB responses i simulate winning, with extra param {&deviceid=sahar}
     And The response code is 200
     And The response contains script
     And I send impression requests to UAS
@@ -38,7 +38,7 @@ Feature: InApp testing
     And The response contains sf_tag
     And The response contains https://www.example.com/1
     And The response contains https://www.example.com/3
-#    And The response contains var ut_pixel_event = \'viewableChange\'
+    And The response contains var ut_pixel_event = \'viewableChange\'
     And The response contains script src=\"https://sparkflow-a.akamaihd.net/spk/inapp/ut_pixels.min.js\
 
 
@@ -148,7 +148,7 @@ Feature: InApp testing
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-Inapp-SI-1}
     And all HB responses contains adId with id of entity named {campaign-Inapp-SI-1-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And for all HB responses i simulate winning, with extra param {&deviceid=sahar}
     And The response code is 200
     And The response contains script
     And I send impression requests to UAS
@@ -160,7 +160,7 @@ Feature: InApp testing
     And The response contains sf_tag
     And The response contains https://www.example.com/1
     And The response contains https://www.example.com/3
-#    And The response contains var ut_pixel_event = \'viewableChange\'
+    And The response contains var ut_pixel_event = \'viewableChange\'
     And The response contains script src=\"https://sparkflow-a.akamaihd.net/spk/inapp/ut_pixels.min.js\
 
   @optimize

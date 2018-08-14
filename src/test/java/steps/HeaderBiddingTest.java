@@ -61,7 +61,7 @@ public class HeaderBiddingTest extends BaseTest {
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
         And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBWithoutParam);
-        And("for all HB responses i simulate winning, and send their zone tag with extra param \\{([^}]+)\\}",this::sendZoneTagFromHBWithParam);
+        And("for all HB responses i simulate winning, with extra param \\{([^}]+)\\}",this::sendZoneTagFromHBWithParam);
 
 
     }
