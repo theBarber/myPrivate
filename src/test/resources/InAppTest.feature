@@ -38,7 +38,7 @@ Feature: InApp testing
     And The response contains sf_tag
     And The response contains https://www.example.com/1
     And The response contains https://www.example.com/3
-    And The response contains var ut_pixel_event = \'viewableChange\'
+#    And The response contains var ut_pixel_event = \'viewableChange\'
     And The response contains script src=\"https://sparkflow-a.akamaihd.net/spk/inapp/ut_pixels.min.js\
 
 
@@ -160,7 +160,7 @@ Feature: InApp testing
     And The response contains sf_tag
     And The response contains https://www.example.com/1
     And The response contains https://www.example.com/3
-    And The response contains var ut_pixel_event = \'viewableChange\'
+#    And The response contains var ut_pixel_event = \'viewableChange\'
     And The response contains script src=\"https://sparkflow-a.akamaihd.net/spk/inapp/ut_pixels.min.js\
 
   @optimize
