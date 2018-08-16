@@ -10,9 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 
 import com.google.common.io.Files;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.hamcrest.Matchers;
@@ -23,6 +25,8 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import ramp.lift.uas.automation.UASRequestModule;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isIn;
 import static org.hamcrest.Matchers.not;
 
 @CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",
@@ -40,6 +44,7 @@ public class UASHealthCheckTest extends BaseTest {
 		Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains (.*)$", this::healthCheckResponseContains);
+
 		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
 
 	}
@@ -58,6 +63,8 @@ public class UASHealthCheckTest extends BaseTest {
 
 		});
 	}
+
+
 
 	public void healthCheckRequestSkip(String servicenameToSkip) {
 		sut.getUASRquestModule().healthCheckRequestSkip(servicenameToSkip);

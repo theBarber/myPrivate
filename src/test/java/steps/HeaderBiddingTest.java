@@ -59,7 +59,7 @@ public class HeaderBiddingTest extends BaseTest {
         And("i read all HB responses and map their bidId by (campaignId|adId)",this::setBidMapByEntity);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
-        And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::responsesContainOneOnOf);
+        And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::HBResponsesContainOneOnOf);
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBWithoutParam);
         And("for all HB responses i simulate winning, with extra param \\{([^}]+)\\}",this::sendZoneTagFromHBWithParam);
 
@@ -143,7 +143,7 @@ public class HeaderBiddingTest extends BaseTest {
         });
     }
 
-    private void responsesContainOneOnOf(String entity, String banners_names) {
+    private void HBResponsesContainOneOnOf(String entity, String banners_names) {
         List<Integer> bannersIds = Arrays.stream(banners_names.split(",")).map(name -> getEntityId(entity, name)).collect(Collectors.toList());
 
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
