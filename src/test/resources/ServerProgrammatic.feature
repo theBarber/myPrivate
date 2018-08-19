@@ -2,6 +2,10 @@
 @scheduled
 @HeaderBidding
 Feature: Programmatic flow support
+
+  Scenario: wait more for banner cache to be updated in memory
+    Given I sleep for 100 seconds
+
   Scenario: 1. basic Call to Programmatic GW - zone tag
     When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200

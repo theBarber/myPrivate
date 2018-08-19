@@ -6,33 +6,33 @@ import java.util.List;
 
 public class SupplySources {
 
-    List<String> include, exclude;
+    List<SupplySource> include, exclude;
 
     public SupplySources(){}
 
-    public SupplySources(List<String>include,List<String>exclude )
+    public SupplySources(List<SupplySource>include,List<SupplySource>exclude )
     {
         this.include = include;
         this.exclude = exclude;
     }
 
     @JsonProperty("include")
-    public List<String> getInclude() {
+    public List<SupplySource> getInclude() {
         return include;
     }
 
     @JsonProperty("include")
-    public void setInclude(List<String> include) {
+    public void setInclude(List<SupplySource> include) {
         this.include = include;
     }
 
     @JsonProperty("exclude")
-    public List<String> getExclude() {
+    public List<SupplySource> getExclude() {
         return exclude;
     }
 
     @JsonProperty("exclude")
-    public void setExclude(List<String> exclude) {
+    public void setExclude(List<SupplySource> exclude) {
         this.exclude = exclude;
     }
 

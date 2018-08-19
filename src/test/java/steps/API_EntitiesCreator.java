@@ -254,14 +254,29 @@ public class API_EntitiesCreator extends BaseTest{
     }
 
     private SupplySources getSupplySources(String include, String exclude) {
-        List<String> includeList =null,excludeList=null;
+        List<SupplySource> includeList = null,excludeList=null;
+        if((isParenthesisMatch(include))&&(isParenthesisMatch(exclude))){
+            includeList  = parseSupplyList(include);
+            excludeList = parseSupplyList(exclude);
+        }
+          return new SupplySources(includeList,excludeList);
+    }
 
-        if(include.length()>2)
-            includeList = Arrays.asList((include.substring(1, include.length()-1)).split(","));
-        if(exclude.length()>2)
-            excludeList = Arrays.asList(((exclude.substring(1, exclude.length()-1)).split(",")));
+    private List<SupplySource> parseSupplyList(String supply) {
+        if(supply.length()<=2)
+            return null;
 
-        return new SupplySources(includeList,excludeList);
+        List<SupplySource> supplySources = new ArrayList<>();
+        List<String> objects = Arrays.asList((supply.substring(1, supply.length()-1)).split(";"));//{app1,2};{domain,1}
+
+        for(String object: objects)
+        {
+            //data[0] = app1, data[1] = 2
+            List<String> data = Arrays.asList((object.substring(1, object.length()-1)).split(","));
+            assert data.size() == 2;
+            supplySources.add(new SupplySource(data.get(0),Integer.parseInt(data.get(1))));
+        }
+        return supplySources;
     }
 
     private void createMultipleDeals(DataTable deals)
@@ -553,6 +568,38 @@ public class API_EntitiesCreator extends BaseTest{
             e.printStackTrace();
             throw e;
         }
+    }
+
+    private static boolean isParenthesisMatch(String str) {
+        if (str.charAt(0) == '{')
+            return false;
+
+        Stack<Character> stack = new Stack<Character>();
+
+        char c;
+        for(int i=0; i < str.length(); i++) {
+            c = str.charAt(i);
+
+            if(c == '(')
+                stack.push(c);
+            else if(c == '{')
+                stack.push(c);
+            else if(c == ')')
+                if(stack.empty())
+                    return false;
+                else if(stack.peek() == '(')
+                    stack.pop();
+                else
+                    return false;
+            else if(c == '}')
+                if(stack.empty())
+                    return false;
+                else if(stack.peek() == '{')
+                    stack.pop();
+                else
+                    return false;
+        }
+        return stack.empty();
     }
 
 
