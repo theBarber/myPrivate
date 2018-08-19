@@ -557,17 +557,17 @@ Feature: Entities for tests
       |zone-zoneset-Inapp-SI-5   |1            |
       |zone-zoneset-Inapp-SI-6   |1            |
 
-  @OpenX
-  Scenario: create entities for open x
-    Given i disable campaigns by name on db
-      |Campaign Name              |
-      |campaign-open-x            |
-    Given i create new campaigns with new zoneset
-      |Campaign Name    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name        |limitation   |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-      |campaign-open-x  |407981        |228669     |true                   |44              |{zone-zoneset-SSP-Open-x} |[]           |69        |2164             |3711           |66556             |
-    And i update campaign data by name
-      |Campaign Name        |Priority      |campaign_delivery_method|delivery_algorithm|
-      |campaign-open-x      |-2            |1                       |4                 |
+#  @OpenX
+#  Scenario: create entities for open x
+#    Given i disable campaigns by name on db
+#      |Campaign Name              |
+#      |campaign-open-x            |
+#    Given i create new campaigns with new zoneset
+#      |Campaign Name    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name        |limitation   |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+#      |campaign-open-x  |407981        |228669     |true                   |44              |{zone-zoneset-SSP-Open-x} |[]           |69        |2164             |3711           |66556             |
+#    And i update campaign data by name
+#      |Campaign Name        |Priority      |campaign_delivery_method|delivery_algorithm|
+#      |campaign-open-x      |-2            |1                       |4                 |
 
   @OpenX
   @Inapp

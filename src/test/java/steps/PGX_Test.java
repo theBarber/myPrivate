@@ -2,6 +2,7 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -24,7 +25,6 @@ public class PGX_Test extends BaseTest{
         super();
         Then("response value \\{([^}]+)\\} is one of (.*)$", this::responseContainsOneOf);
         Then("response value \\{([^}]+)\\} has the values of (.*)$", this::responseHasValuesOf);
-        Then("response value \\{([^}]+)\\} does not have the values of (.*)$", this::responseNotHaveValuesOf);
 
     }
 
@@ -49,19 +49,6 @@ public class PGX_Test extends BaseTest{
                     Assert.assertThat(val,Matchers.containsString(v))
             );
         });
-
-    }
-
-    public void responseNotHaveValuesOf(String key,String value)
-    {
-        final String myKey = key + "=";
-        List<String> valueAsStringArray = Arrays.asList(value.split(","));
-        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-            String val = getKey(content,myKey);
-            valueAsStringArray.forEach(v->
-                    Assert.assertThat(val,not(Matchers.containsString(v)))
-            );
-        });
     }
 
     private String getKey(String content,String key) {
@@ -69,7 +56,5 @@ public class PGX_Test extends BaseTest{
         String str = content.substring(content.indexOf(key));
         return content.substring(content.indexOf(key)+key.length(),content.indexOf(key) + str.indexOf(';'));
     }
-
-
 
 }
