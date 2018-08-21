@@ -70,14 +70,17 @@ Feature: Entities for tests
         |campaign-HB-Billboard-970X250         |75396    |198082     |false                  |64              |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400            |3673           |66720             |
 #        |campaign-HB-Billboard-970X250        |75396    |198082     |false                  |64             |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400           |3673           |66813             |
         |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400            |3673           |66730             |
+#        |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400            |3673           |66733             |
         |campaign-HB-Prog-PGC-1X1-1            |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-2            |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-3            |75396    |222908     |false                  |86              |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-See-Through-1X2-1    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-See-Through-1X2-2    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-See-Through-1X2-3    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-        |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66673             |
-        |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66673             |
+        |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66755             |
+#       |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
+        |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66755             |
+#        |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
@@ -133,23 +136,41 @@ Feature: Entities for tests
       |campaign-HB-SS-1X1-D-1           |
       |campaign-HB-SS-1X1-D-2           |
       Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} with limitation {[]} with adUnitId 8 and web_section id 14677 with affiliateId 3673 with po_line_item_id 65421
+#     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} with limitation {[]} with adUnitId 8 and web_section id 14818 with affiliateId 3673 with po_line_item_id 65421
       And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-b} with limitation {[]} with adUnitId 8 and web_section id 14677 with affiliateId 3673 with po_line_item_id 65421
+#     And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-b} with limitation {[]} with adUnitId 8 and web_section id 14818 with affiliateId 3673 with po_line_item_id 65421
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-a} with limitation {[]} with adUnitId 83 and web_section id 14677 with affiliateId 3673 with po_line_item_id 64396
+#     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-a} with limitation {[]} with adUnitId 83 and web_section id 14818 with affiliateId 3673 with po_line_item_id 64396
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-b} with limitation {[]} with adUnitId 83 and web_section id 14677 with affiliateId 3673 with po_line_item_id 64396
+#     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-b} with limitation {[]} with adUnitId 83 and web_section id 14818 with affiliateId 3673 with po_line_item_id 64396
       Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} with limitation {[]} with adUnitId 8 and web_section id 14678 with affiliateId 3673 with po_line_item_id 65421
+#     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} with limitation {[]} with adUnitId 8 and web_section id 14819 with affiliateId 3673 with po_line_item_id 65421
       And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-b} with limitation {[]} with adUnitId 8 and web_section id 14678 with affiliateId 3673 with po_line_item_id 65421
+#      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-b} with limitation {[]} with adUnitId 8 and web_section id 14819 with affiliateId 3673 with po_line_item_id 65421
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-a} with limitation {[]} with adUnitId 83 and web_section id 14678 with affiliateId 3673 with po_line_item_id 64396
+#      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-a} with limitation {[]} with adUnitId 83 and web_section id 14819 with affiliateId 3673 with po_line_item_id 64396
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-b} with limitation {[]} with adUnitId 83 and web_section id 14678 with affiliateId 3673 with po_line_item_id 64396
+#      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-b} with limitation {[]} with adUnitId 83 and web_section id 14819 with affiliateId 3673 with po_line_item_id 64396
       Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} with limitation {[]} with adUnitId 8 and web_section id 14679 with affiliateId 3673 with po_line_item_id 65421
+#      Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} with limitation {[]} with adUnitId 8 and web_section id 14820 with affiliateId 3673 with po_line_item_id 65421
       And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-b} with limitation {[]} with adUnitId 8 and web_section id 14679 with affiliateId 3673 with po_line_item_id 65421
+#      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-b} with limitation {[]} with adUnitId 8 and web_section id 14820 with affiliateId 3673 with po_line_item_id 65421
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-a} with limitation {[]} with adUnitId 83 and web_section id 14679 with affiliateId 3673 with po_line_item_id 64396
+#     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-a} with limitation {[]} with adUnitId 83 and web_section id 14820 with affiliateId 3673 with po_line_item_id 64396
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-b} with limitation {[]} with adUnitId 83 and web_section id 14679 with affiliateId 3673 with po_line_item_id 64396
+#      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-b} with limitation {[]} with adUnitId 83 and web_section id 14820 with affiliateId 3673 with po_line_item_id 64396
       Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} with limitation {[]} with adUnitId 8 and web_section id 14680 with affiliateId 3673 with po_line_item_id 65421
+#     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} with limitation {[]} with adUnitId 8 and web_section id 14851 with affiliateId 3673 with po_line_item_id 65421
       And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-b} with limitation {[]} with adUnitId 8 and web_section id 14680 with affiliateId 3673 with po_line_item_id 65421
+#     And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-b} with limitation {[]} with adUnitId 8 and web_section id 14851 with affiliateId 3673 with po_line_item_id 65421
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} with limitation {[]} with adUnitId 83 and web_section id 14680 with affiliateId 3673 with po_line_item_id 64396
+#     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-b} with limitation {[]} with adUnitId 83 and web_section id 14680 with affiliateId 3673 with po_line_item_id 64396
+#      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-b} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
       And i create new zone named {zone-zoneset-HB-SS-1X1-D-1} with limitation {[]} with adUnitId 69 and web_section id 14677 with affiliateId 3673 with po_line_item_id 66730
+#      And i create new zone named {zone-zoneset-HB-SS-1X1-D-1} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
       And i create new zone named {zone-zoneset-HB-SS-1X1-D-2} with limitation {[]} with adUnitId 69 and web_section id 14678 with affiliateId 3673 with po_line_item_id 66730
+#      And i create new zone named {zone-zoneset-HB-SS-1X1-D-2} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
     And i create new campaigns with new zoneset
         |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal        |Zonesets-zone Name                            |
         |HB-Tablet-160x600-D-1-a-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-1-a}        |
@@ -279,7 +300,7 @@ Feature: Entities for tests
       |campaign-DT-Inline-SS-3  |
       Given i remove all zones from publishers: {3690}
       Given i create new campaigns with new zoneset
-        |Campaign Name               |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation          |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
+        |Campaign Name               |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation          |adUnitId   |Web_Section id   |publisher ID    |po_line_item ID   |
         |campaign-DT-Inline-ST-1     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}   |[]                   |83         |14470            |3690           |65422             |
         |campaign-DT-Inline-ST-2     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}   |[]                   |83         |14470            |3690           |65422             |
         |campaign-DT-Inline-SS-1     |75396    |197418     |false                  |86              |{zone-zoneset-DT-inline-SS-1} |[]                   |69         |14470            |3690           |65423             |
@@ -317,17 +338,13 @@ Feature: Entities for tests
       |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |[]                  |[{sahar.cnn.com,1};{cnn.com,1};{ynet.co.il,1}]|
       |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |[]                  |[{cnn.com,1}]                                 |
       |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66722             |[{sahar.cnn.com,1}] |[]                                            |
+#      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |[{sahar.cnn.com,1}] |[]                                            |
       |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66723             |[{cnn.com,1}]       |[]                                            |
-      |campaign-DomainT-ZoneTag-1 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-1}                    |[]                   |83         |4737              |2434           |17116             |[{sahar.cnn.com,1}] |[]                                            |
-      |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |17116             |[]                  |[{sahar.ynet.co.il,1}]                        |
-      |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |17116             |[{cnn.com,1}]       |[]                                            |
-      |campaign-DomainT-ZoneTag-4 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-4}                    |[]                   |83         |4737              |2434           |17116             |[]                  |[{ynet.co.il,1}]                              |
-#      |campaign-DomainT-ZoneTag-5 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-5}                    |[]                   |83         |4737              |2434           |17116             |{ynet.co.il}        |{sahar.ynet.co.il}                |
-
-##      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |{sahar.cnn.com}     |{}                                |
-##      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |{cnn.com}           |{}                                |
-
-
+#      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |[{cnn.com,1}]       |[]                                            |
+      |campaign-DomainT-ZoneTag-1 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-1}                    |[]                   |83         |4737              |2434           |62229             |[{sahar.cnn.com,1}] |[]                                            |
+      |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{sahar.ynet.co.il,1}]                        |
+      |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |62229             |[{cnn.com,1}]       |[]                                            |
+      |campaign-DomainT-ZoneTag-4 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-4}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{ynet.co.il,1}]                              |
 
 
   @GDPR
@@ -389,11 +406,10 @@ Feature: Entities for tests
         |Campaign Name                   |
         |campaign-API-1-a-viewability       |
         |campaign-API-2-a-viewability       |
-
       Given i create new campaigns with viewability
         |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name               |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |avThreshold|avVendor  |
-        |campaign-API-1-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-1-a}   |[]                |83        |4737             |2434           |17116             |20         |ias       |
-        |campaign-API-2-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-2-a}   |[]                |83        |4737             |2434           |17116             |30         |ias       |
+        |campaign-API-1-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-1-a}   |[]                |83        |4737             |2434           |17116             |30         |ias       |
+        |campaign-API-2-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-2-a}   |[]                |83        |4737             |2434           |17116             |50         |ias       |
       And i update banner data by name
         |Banner Name                            |limitation     |
         |campaign-API-1-a-viewability-banner-1    |[]             |
@@ -411,7 +427,6 @@ Feature: Entities for tests
         |campaign-SupplyType-Desktop-ALL      |
         |campaign-SupplyType-Desktop-HB       |
         |campaign-SupplyType-Desktop-Direct   |
-
       Given i remove all zones from publishers: {3719}
       Given i create new campaigns with Supply type
         |Campaign Name                        |IO            |LineItem   |Deal                   |Creative\Deal   |Zonesets-zone Name                   |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |supplyType |
@@ -473,11 +488,17 @@ Feature: Entities for tests
         |campaign-PG1-Tablet-limited       |
         |campaign-PG1-Tablet               |
     Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66732
+#    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
     And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 66733
+#    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
     Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66732
+#    Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
     And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 66733
+#    And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
     Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66732
+#    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
     And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 66733
+#    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
     Given i create new campaigns with new zoneset
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
       |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |10218           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
@@ -500,7 +521,7 @@ Feature: Entities for tests
       |campaign-PG1-Smartphone-banner-1|[[[49,"==",1]]]  |
       |campaign-PG1-Tablet-banner-1    |[[[33,"==",1]]]  |
 
-
+#3739
   @PGX
   Scenario: create entities for PGX tests
     Given i disable campaigns by name on db
