@@ -72,7 +72,6 @@ Feature: Domain Targeting tests
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-2-banner-1} 100% of the time
 
-
   Scenario: 1.d send zone requests with domains in the requests - white list {cnn.com}
     When I send 1 times an ad request with parameter {unlimited=1&domain=cnn.com&loc=cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-3} to UAS
     Then The response code is 200

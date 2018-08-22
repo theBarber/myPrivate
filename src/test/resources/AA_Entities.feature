@@ -521,7 +521,7 @@ Feature: Entities for tests
       |campaign-PG1-Smartphone-banner-1|[[[49,"==",1]]]  |
       |campaign-PG1-Tablet-banner-1    |[[[33,"==",1]]]  |
 
-#3739
+
   @PGX
   Scenario: create entities for PGX tests
     Given i disable campaigns by name on db
@@ -531,16 +531,23 @@ Feature: Entities for tests
       |campaign-PGX-PG-1-b      |
       |campaign-PGX-PG-1-c      |
     Given i remove all zones from publishers: {3717}
+#    Given i remove all zones from publishers: {3739}
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-PGX-PG-1-a       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14681             |3717           |66740             |
+#      |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
       |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14681             |3717           |66741             |
+#      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
       |campaign-PGX-PG-1-b       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |66743             |
-      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080             |3719           |66746             |
+#     |campaign-PGX-PG-1-b       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
+      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3719           |66746             |
+#      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3719           |67166             |
     And i update campaign data by name
       |Campaign Name            |Priority      |campaign_delivery_method|
       |campaign-PGX-PG-1-b      |1             |4                       |
       |campaign-PGX-PG-1-c      |1             |4                       |
+
+
 
   @Inapp
   Scenario: create entities for Inapp tests
@@ -556,11 +563,17 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-Inapp-SI-1       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |66750             |
+#      |campaign-Inapp-SI-1       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |?             |
       |campaign-Inapp-SI-2       |75396         |222908     |false                  |10775             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |66750             |
+#      |campaign-Inapp-SI-2       |75396         |222908     |false                  |10775             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |?             |
       |campaign-Inapp-SI-3       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |66750             |
+#      |campaign-Inapp-SI-3       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |?             |
       |campaign-Inapp-SI-4       |75396         |222908     |false                  |10778             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |66750             |
+#      |campaign-Inapp-SI-4       |75396         |222908     |false                  |10778             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |?             |
       |campaign-Inapp-SI-5       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |66751             |
+#      |campaign-Inapp-SI-5       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |?             |
       |campaign-Inapp-SI-6       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |66752             |
+#      |campaign-Inapp-SI-6       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |?             |
     And i update campaign data by name
       |Campaign Name             |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-Inapp-SI-1       |-2            |1                       |4                 |
@@ -632,8 +645,7 @@ Feature: Entities for tests
 #  Scenario: refresh zone cache
 #    And I refresh the zone Cache
 
-
-  @optimize
-  Scenario: update test strategy
-    Given i disable all tests Groups except 53
-    And I set test id of test_strategy named {ScoringNew} to {53}
+#  @optimize
+#  Scenario: update test strategy
+#    Given i disable all tests Groups except 53
+#    And I set test id of test_strategy named {ScoringNew} to {53}

@@ -43,7 +43,7 @@ Feature: InApp testing
 
 
   Scenario: Image and iframe - DT request (viewableChange)
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 2546 with extra params {Tradewindsnews.com&unlimited=1&optimize=0&tagid=241&deviceid=sahar}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 2546 with extra params {Tradewindsnews.com&unlimited=1&optimize=0&tagid=284&deviceid=sahar}
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
