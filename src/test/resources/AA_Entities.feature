@@ -250,8 +250,8 @@ Feature: Entities for tests
         |campaign-DT-SS-1-t-2    |75396    |197418     |false                  |86              |{zone-zoneset-DT-SS-t-2}     |[]                  |69         |14402            |3666           |64400             |
         |campaign-DT-SI-2-t-2    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-2}     |[]                  |61         |14402            |3666           |64401             |
         |campaign-DT-PGC-3-t-2   |75396    |222908     |false                  |1068            |{zone-zoneset-DT-PGC-t-2}    |[]                  |75         |14402            |3666           |64402             |
-        |campaign-DT-SI-1-t-3-L  |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3-L}   |[[[5,"=~","af"]]]   |61         |14403            |3675           |66739             |
-        |campaign-DT-SI-2-t-3    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3}     |[]                  |61         |14403            |3675           |66739             |
+        |campaign-DT-SI-1-t-3-L  |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3-L}   |[[[5,"=~","af"]]]   |61         |14403            |3675           |64403             |
+        |campaign-DT-SI-2-t-3    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3}     |[]                  |61         |14403            |3675           |64403             |
       And i update campaign data by name
         |Campaign Name         |Priority      |campaign_delivery_method|
         |campaign-DT-SS-1-t-1  |-2            |1                       |
@@ -456,11 +456,14 @@ Feature: Entities for tests
     And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
     Given i create new campaigns with new zoneset
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
-      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14609           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14501           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+#      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14609           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
       |campaign-PG1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14502           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+#      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
       |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14503           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+#      campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
       |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
     And i update campaign data by name
       |Campaign Name                     |Priority      |campaign_delivery_method|delivery_algorithm|
@@ -512,18 +515,18 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {2546,3585,3586}
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-Inapp-SI-1       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |67180             |
-#      |campaign-Inapp-SI-1       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |?             |
-      |campaign-Inapp-SI-2       |75396         |222908     |false                  |10775             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |67180             |
-#      |campaign-Inapp-SI-2       |75396         |222908     |false                  |10775             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |?             |
-      |campaign-Inapp-SI-3       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |67180             |
-#      |campaign-Inapp-SI-3       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |?             |
-      |campaign-Inapp-SI-4       |75396         |222908     |false                  |10778             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |67180             |
-#      |campaign-Inapp-SI-4       |75396         |222908     |false                  |10778             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |?             |
-      |campaign-Inapp-SI-5       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |63841             |
-#      |campaign-Inapp-SI-5       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |?             |
-      |campaign-Inapp-SI-6       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |62509             |
-#      |campaign-Inapp-SI-6       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |?             |
+      |campaign-Inapp-SI-1       |75396         |222908     |false                  |14527             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |67180             |
+#      |campaign-Inapp-SI-1       |75396         |222908     |false                  |?             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-2       |75396         |222908     |false                  |14528             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |67180             |
+#      |campaign-Inapp-SI-2       |75396         |222908     |false                  |?             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-3       |75396         |222908     |false                  |14529             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |67180             |
+#      |campaign-Inapp-SI-3       |75396         |222908     |false                  |?             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-4       |75396         |222908     |false                  |14451             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |67180             |
+#      |campaign-Inapp-SI-4       |75396         |222908     |false                  |?             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-5       |75396         |222908     |false                  |14529             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |63841             |
+#      |campaign-Inapp-SI-5       |75396         |222908     |false                  |?             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |?             |
+      |campaign-Inapp-SI-6       |75396         |222908     |false                  |14529             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |62509             |
+#      |campaign-Inapp-SI-6       |75396         |222908     |false                  |?             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |?             |
     And i update campaign data by name
       |Campaign Name             |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-Inapp-SI-1       |-2            |1                       |4                 |
