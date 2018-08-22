@@ -97,7 +97,7 @@ public class CacheProcessTest extends BaseTest {
           sut.getCouchBaseUtils().flushBucket(bucketName);
     }
 
-    public static void refreshZoneCache(String action) {
+    public static void refreshZoneCacheOld(String action) {
         String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
         LinuxDefaultCliConnection cronServerConnection = sut.getUasCliConnections().get(cron_ip);
         String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
@@ -111,7 +111,7 @@ public class CacheProcessTest extends BaseTest {
                 while (true) {
                     try {
                         new CliCommandExecution(conn, pushCacheToS3Command)
-                                .error("Couldn't sync").withTimeout(10, TimeUnit.MINUTES).execute();
+                                .error("Couldn't sync").error("trace").withTimeout(10, TimeUnit.MINUTES).execute();
                         break;
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -147,7 +147,7 @@ public class CacheProcessTest extends BaseTest {
         }
     }
 
-    public static void refreshZoneCacheOld(String action) {
+    public static void refreshZoneCache(String action) {
         if (action.equals("http")) {
             sut.getUASRquestModule().zoneCacheRequest("refresh");
             // sut.getUASRquestModule().zoneCacheRequest("query_status");
