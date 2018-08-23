@@ -65,22 +65,17 @@ Feature: Entities for tests
         |Campaign Name                         |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation     |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-HB-Tablet-160x600            |75396    |223539     |false                  |148             |{zone-zoneset-HB-Tablet-160x600}         |[]            |8         |14400            |3673           |65421             |
         |campaign-HB-See-Through-1X2           |75396    |210722     |false                  |204             |{zone-zoneset-HB-See Through 1X2}        |[]            |83        |14400            |3673           |64396             |
-        |campaign-HB-Desktop-300X250           |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400            |3673           |66725             |
-#       |campaign-HB-Desktop-300X250           |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400            |3673           |66814             |
-        |campaign-HB-Billboard-970X250         |75396    |198082     |false                  |64              |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400            |3673           |66720             |
-#        |campaign-HB-Billboard-970X250        |75396    |198082     |false                  |64             |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400           |3673           |66813             |
-        |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400            |3673           |66730             |
-#        |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400            |3673           |66733             |
+       |campaign-HB-Desktop-300X250           |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400            |3673           |66814             |
+        |campaign-HB-Billboard-970X250        |75396    |198082     |false                  |64             |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400             |3673           |66813             |
+        |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400           |3673           |66933             |
         |campaign-HB-Prog-PGC-1X1-1            |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-2            |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-3            |75396    |222908     |false                  |86              |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-See-Through-1X2-1    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-See-Through-1X2-2    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-See-Through-1X2-3    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-        |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66755             |
-#       |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
-        |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66755             |
-#        |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
+       |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507             |3697           |66736             |
+        |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
@@ -135,42 +130,24 @@ Feature: Entities for tests
       |See-Through-1X2-D-4-b-2          |
       |campaign-HB-SS-1X1-D-1           |
       |campaign-HB-SS-1X1-D-2           |
-      Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} with limitation {[]} with adUnitId 8 and web_section id 14677 with affiliateId 3673 with po_line_item_id 65421
-#     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} with limitation {[]} with adUnitId 8 and web_section id 14818 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-b} with limitation {[]} with adUnitId 8 and web_section id 14677 with affiliateId 3673 with po_line_item_id 65421
-#     And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-b} with limitation {[]} with adUnitId 8 and web_section id 14818 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-a} with limitation {[]} with adUnitId 83 and web_section id 14677 with affiliateId 3673 with po_line_item_id 64396
-#     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-a} with limitation {[]} with adUnitId 83 and web_section id 14818 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-b} with limitation {[]} with adUnitId 83 and web_section id 14677 with affiliateId 3673 with po_line_item_id 64396
-#     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-b} with limitation {[]} with adUnitId 83 and web_section id 14818 with affiliateId 3673 with po_line_item_id 64396
-      Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} with limitation {[]} with adUnitId 8 and web_section id 14678 with affiliateId 3673 with po_line_item_id 65421
-#     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} with limitation {[]} with adUnitId 8 and web_section id 14819 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-b} with limitation {[]} with adUnitId 8 and web_section id 14678 with affiliateId 3673 with po_line_item_id 65421
-#      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-b} with limitation {[]} with adUnitId 8 and web_section id 14819 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-a} with limitation {[]} with adUnitId 83 and web_section id 14678 with affiliateId 3673 with po_line_item_id 64396
-#      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-a} with limitation {[]} with adUnitId 83 and web_section id 14819 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-b} with limitation {[]} with adUnitId 83 and web_section id 14678 with affiliateId 3673 with po_line_item_id 64396
-#      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-b} with limitation {[]} with adUnitId 83 and web_section id 14819 with affiliateId 3673 with po_line_item_id 64396
-      Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} with limitation {[]} with adUnitId 8 and web_section id 14679 with affiliateId 3673 with po_line_item_id 65421
-#      Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} with limitation {[]} with adUnitId 8 and web_section id 14820 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-b} with limitation {[]} with adUnitId 8 and web_section id 14679 with affiliateId 3673 with po_line_item_id 65421
-#      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-b} with limitation {[]} with adUnitId 8 and web_section id 14820 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-a} with limitation {[]} with adUnitId 83 and web_section id 14679 with affiliateId 3673 with po_line_item_id 64396
-#     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-a} with limitation {[]} with adUnitId 83 and web_section id 14820 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-b} with limitation {[]} with adUnitId 83 and web_section id 14679 with affiliateId 3673 with po_line_item_id 64396
-#      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-b} with limitation {[]} with adUnitId 83 and web_section id 14820 with affiliateId 3673 with po_line_item_id 64396
-      Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} with limitation {[]} with adUnitId 8 and web_section id 14680 with affiliateId 3673 with po_line_item_id 65421
-#     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} with limitation {[]} with adUnitId 8 and web_section id 14851 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-b} with limitation {[]} with adUnitId 8 and web_section id 14680 with affiliateId 3673 with po_line_item_id 65421
-#     And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-b} with limitation {[]} with adUnitId 8 and web_section id 14851 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} with limitation {[]} with adUnitId 83 and web_section id 14680 with affiliateId 3673 with po_line_item_id 64396
-#     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-b} with limitation {[]} with adUnitId 83 and web_section id 14680 with affiliateId 3673 with po_line_item_id 64396
-#      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-b} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-SS-1X1-D-1} with limitation {[]} with adUnitId 69 and web_section id 14677 with affiliateId 3673 with po_line_item_id 66730
-#      And i create new zone named {zone-zoneset-HB-SS-1X1-D-1} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
-      And i create new zone named {zone-zoneset-HB-SS-1X1-D-2} with limitation {[]} with adUnitId 69 and web_section id 14678 with affiliateId 3673 with po_line_item_id 66730
-#      And i create new zone named {zone-zoneset-HB-SS-1X1-D-2} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
+     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} with limitation {[]} with adUnitId 8 and web_section id 14818 with affiliateId 3673 with po_line_item_id 65421
+     And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-b} with limitation {[]} with adUnitId 8 and web_section id 14818 with affiliateId 3673 with po_line_item_id 65421
+     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-a} with limitation {[]} with adUnitId 83 and web_section id 14818 with affiliateId 3673 with po_line_item_id 64396
+     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-b} with limitation {[]} with adUnitId 83 and web_section id 14818 with affiliateId 3673 with po_line_item_id 64396
+     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} with limitation {[]} with adUnitId 8 and web_section id 14819 with affiliateId 3673 with po_line_item_id 65421
+      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-b} with limitation {[]} with adUnitId 8 and web_section id 14819 with affiliateId 3673 with po_line_item_id 65421
+      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-a} with limitation {[]} with adUnitId 83 and web_section id 14819 with affiliateId 3673 with po_line_item_id 64396
+      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-b} with limitation {[]} with adUnitId 83 and web_section id 14819 with affiliateId 3673 with po_line_item_id 64396
+      Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} with limitation {[]} with adUnitId 8 and web_section id 14820 with affiliateId 3673 with po_line_item_id 65421
+      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-b} with limitation {[]} with adUnitId 8 and web_section id 14820 with affiliateId 3673 with po_line_item_id 65421
+     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-a} with limitation {[]} with adUnitId 83 and web_section id 14820 with affiliateId 3673 with po_line_item_id 64396
+      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-b} with limitation {[]} with adUnitId 83 and web_section id 14820 with affiliateId 3673 with po_line_item_id 64396
+     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} with limitation {[]} with adUnitId 8 and web_section id 14851 with affiliateId 3673 with po_line_item_id 65421
+     And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-b} with limitation {[]} with adUnitId 8 and web_section id 14851 with affiliateId 3673 with po_line_item_id 65421
+     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
+      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-b} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
+      And i create new zone named {zone-zoneset-HB-SS-1X1-D-1} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
+      And i create new zone named {zone-zoneset-HB-SS-1X1-D-2} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
     And i create new campaigns with new zoneset
         |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal        |Zonesets-zone Name                            |
         |HB-Tablet-160x600-D-1-a-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-1-a}        |
@@ -273,8 +250,8 @@ Feature: Entities for tests
         |campaign-DT-SS-1-t-2    |75396    |197418     |false                  |86              |{zone-zoneset-DT-SS-t-2}     |[]                  |69         |14402            |3666           |64400             |
         |campaign-DT-SI-2-t-2    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-2}     |[]                  |61         |14402            |3666           |64401             |
         |campaign-DT-PGC-3-t-2   |75396    |222908     |false                  |1068            |{zone-zoneset-DT-PGC-t-2}    |[]                  |75         |14402            |3666           |64402             |
-        |campaign-DT-SI-1-t-3-L  |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3-L}   |[[[5,"=~","af"]]]   |61         |14403            |3675           |66739             |
-        |campaign-DT-SI-2-t-3    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3}     |[]                  |61         |14403            |3675           |66739             |
+        |campaign-DT-SI-1-t-3-L  |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3-L}   |[[[5,"=~","af"]]]   |61         |14403            |3675           |64403             |
+        |campaign-DT-SI-2-t-3    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3}     |[]                  |61         |14403            |3675           |64403             |
       And i update campaign data by name
         |Campaign Name         |Priority      |campaign_delivery_method|
         |campaign-DT-SS-1-t-1  |-2            |1                       |
@@ -337,10 +314,8 @@ Feature: Entities for tests
       |campaign-DomainT-2         |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |[]                  |[{cnn.com,1}]                                 |
       |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |[]                  |[{sahar.cnn.com,1};{cnn.com,1};{ynet.co.il,1}]|
       |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |[]                  |[{cnn.com,1}]                                 |
-      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66722             |[{sahar.cnn.com,1}] |[]                                            |
-#      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |[{sahar.cnn.com,1}] |[]                                            |
-      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66723             |[{cnn.com,1}]       |[]                                            |
-#      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |[{cnn.com,1}]       |[]                                            |
+      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |[{sahar.cnn.com,1}] |[]                                            |
+      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |[{cnn.com,1}]       |[]                                            |
       |campaign-DomainT-ZoneTag-1 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-1}                    |[]                   |83         |4737              |2434           |62229             |[{sahar.cnn.com,1}] |[]                                            |
       |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{sahar.ynet.co.il,1}]                        |
       |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |62229             |[{cnn.com,1}]       |[]                                            |
@@ -366,23 +341,18 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {3711}
     Given i create new campaigns with new zoneset
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-server-prog-SS-1  |407981        |228669     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-#      |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-SS-2  |407981        |224531     |true                   |18               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-SS-4  |407981        |224531     |true                   |19               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-PGC-1 |407981        |224530     |true                   |20               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-PGC-2 |407981        |228670     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-3 |407981        |224530     |true                   |22               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-PGC-4 |407981        |228670     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-#      |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-ST-1  |407981        |228674     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-#      |campaign-server-prog-ST-1  |407981        |229737     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-2  |407981        |224533     |true                   |25               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-3  |407981        |228674     |true                   |26               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-#      |campaign-server-prog-ST-3  |407981       |229737     |true                   |26               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-4  |407981        |224533     |true                   |27               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-ST-1  |407981        |229737     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-2  |407981        |224533     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555           /  |
+      |campaign-server-prog-ST-3  |407981       |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-4  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
     And i update campaign data by name
       |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-server-prog-SS-1       |-2            |1                       |4                 |
@@ -425,27 +395,18 @@ Feature: Entities for tests
         |campaign-SupplyType-Desktop-ALL      |
         |campaign-SupplyType-Desktop-HB       |
         |campaign-SupplyType-Desktop-Direct   |
-      Given i remove all zones from publishers: {3719}
+      Given i remove all zones from publishers: {3728}
       Given i create new campaigns with Supply type
-        |Campaign Name                        |IO            |LineItem   |Deal                   |Creative\Deal   |Zonesets-zone Name                   |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |supplyType |
-        |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2080             |3719           |66726             |HB         |
-#prod   |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2080             |3728           |66830             |HB         |
-        |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2080             |3719           |66726             |Direct     |
-#prod   |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2080             |3728           |66830             |Direct     |
-        |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2080             |3719           |66726             |All        |
-#prod   |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2080             |3728           |66830             |All        |
-        |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2080             |3719           |66727             |Direct     |
-#prod   |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2080             |3728           |66831             |Direct     |
-        |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2080             |3719           |66727             |HB         |
-#prod   |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2080             |3728           |66831             |HB         |
-        |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2080             |3719           |66727             |All        |
-#prod   |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2080             |3728           |66831             |All        |
-        |campaign-SupplyType-Desktop-ALL      |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2080             |3719           |66729             |All        |
-#prod   |campaign-SupplyType-Desktop-ALL      |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2080             |3728           |66833             |All        |
-        |campaign-SupplyType-Desktop-HB       |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2080             |3719           |66729             |HB         |
-#prod   |campaign-SupplyType-Desktop-HB       |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2080             |3728           |66833             |HB         |
-        |campaign-SupplyType-Desktop-Direct   |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2080             |3719           |66729             |Direct     |
-#prod   |campaign-SupplyType-Desktop-Direct   |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2080             |3728           |66833             |Direct     |
+      |Campaign Name                        |IO            |LineItem   |Deal                   |Creative\Deal   |Zonesets-zone Name                   |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |supplyType |
+      |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2080             |3728           |66830             |HB         |
+      |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2080             |3728           |66830             |Direct     |
+      |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2080             |3728           |66830             |All        |
+      |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2080             |3728           |66831             |Direct     |
+      |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2080             |3728           |66831             |HB         |
+      |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2080             |3728           |66831             |All        |
+      |campaign-SupplyType-Desktop-ALL      |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2080             |3728           |66833             |All        |
+      |campaign-SupplyType-Desktop-HB       |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2080             |3728           |66833             |HB         |
+      |campaign-SupplyType-Desktop-Direct   |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2080             |3728           |66833             |Direct     |
  And i update campaign data by name
       |Campaign Name                        |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-SupplyType-ST-HB            |-2            |1                       |4                 |
@@ -485,25 +446,22 @@ Feature: Entities for tests
         |campaign-PG1-Smartphone           |
         |campaign-PG1-Tablet-limited       |
         |campaign-PG1-Tablet               |
-    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66732
-#    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 66733
-#    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66732
-#    Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 66733
-#    And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66732
-#    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 66733
-#    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
+    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+    Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
+    And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
+    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
     Given i create new campaigns with new zoneset
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
-      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |10218           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14501           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+#      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14609           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
       |campaign-PG1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |10219           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14502           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+#      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
       |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |10220           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14503           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+#      campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
       |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
     And i update campaign data by name
       |Campaign Name                     |Priority      |campaign_delivery_method|delivery_algorithm|
@@ -528,17 +486,19 @@ Feature: Entities for tests
       |campaign-PGX-ST-1-a      |
       |campaign-PGX-PG-1-b      |
       |campaign-PGX-PG-1-c      |
-    Given i remove all zones from publishers: {3717}
+    Given i remove all zones from publishers: {3739}
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-PGX-PG-1-a       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14681             |3717           |66740             |
-      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14681             |3717           |66741             |
-      |campaign-PGX-PG-1-b       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |66743             |
-      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080             |3719           |66746             |
+      |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
+      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
+     |campaign-PGX-PG-1-b       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
+      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
     And i update campaign data by name
       |Campaign Name            |Priority      |campaign_delivery_method|
       |campaign-PGX-PG-1-b      |1             |4                       |
       |campaign-PGX-PG-1-c      |1             |4                       |
+
+
 
   @Inapp
   Scenario: create entities for Inapp tests
@@ -553,12 +513,18 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {2546,3585,3586}
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-Inapp-SI-1       |75396         |222908     |false                  |10105             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |66750             |
-      |campaign-Inapp-SI-2       |75396         |222908     |false                  |10775             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |66750             |
-      |campaign-Inapp-SI-3       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |66750             |
-      |campaign-Inapp-SI-4       |75396         |222908     |false                  |10778             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |66750             |
-      |campaign-Inapp-SI-5       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |66751             |
-      |campaign-Inapp-SI-6       |75396         |222908     |false                  |10776             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |66752             |
+      |campaign-Inapp-SI-1       |75396         |222908     |false                  |14527             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |67180             |
+#      |campaign-Inapp-SI-1       |75396         |222908     |false                  |14619             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-2       |75396         |222908     |false                  |14528             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |67180             |
+#      |campaign-Inapp-SI-2       |75396         |222908     |false                  |14620             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-3       |75396         |222908     |false                  |14529             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |67180             |
+#      |campaign-Inapp-SI-3       |75396         |222908     |false                  |14621             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-4       |75396         |222908     |false                  |14451             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |67180             |
+#      |campaign-Inapp-SI-4       |75396         |222908     |false                  |14451             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-5       |75396         |222908     |false                  |14529             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |63841             |
+#      |campaign-Inapp-SI-5       |75396         |222908     |false                  |14621             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |?             |
+      |campaign-Inapp-SI-6       |75396         |222908     |false                  |14529             |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |62509             |
+#      |campaign-Inapp-SI-6       |75396         |222908     |false                  |14621            |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |?             |
     And i update campaign data by name
       |Campaign Name             |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-Inapp-SI-1       |-2            |1                       |4                 |
@@ -653,13 +619,10 @@ Feature: Entities for tests
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 350 seconds
+    And I sleep for 400 seconds
 
-#  @refreshZoneCache
-#  Scenario: refresh zone cache
-#    And I refresh the zone Cache
+#  @optimize
+#  Scenario: update test strategy
+#    Given i disable all tests Groups except 53
+#    And I set test id of test_strategy named {ScoringNew} to {53}
 
-  @optimize
-  Scenario: update test strategy
-    Given i disable all tests Groups except 53
-    And I set test id of test_strategy named {ScoringNew} to {53}

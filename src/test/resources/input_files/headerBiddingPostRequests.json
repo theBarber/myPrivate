@@ -538,45 +538,45 @@
       }
     }
   ]},
-  "Send HB basic request for publisher 3719 size [1,2]":
+  "Send HB basic request for publisher 3728 size [1,2]":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b33",
       "domain": "testing.com",
       "placementId": "10433394",
-      "publisherId": 3719,
+      "publisherId": 3728,
       "sizes": [
         [1,2]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "10433394",
-        "publisherId" : 3719
+        "publisherId" : 3728
       }
     }]},
-  "Send HB basic request for publisher 3719 size [1,1]":
+  "Send HB basic request for publisher 3728 size [1,1]":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b33",
       "domain": "testing.com",
       "placementId": "10433394",
-      "publisherId": 3719,
+      "publisherId": 3728,
       "sizes": [
         [1,1]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "10433394",
-        "publisherId" : 3719
+        "publisherId" : 3728
       }
     }]},
-  "Send HB basic request for publisher 3719 size [1,1],[1,2]":
+  "Send HB basic request for publisher 3728 size [1,1],[1,2]":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "bid1",
       "domain": "testing.com",
       "placementId": "10433394",
-      "publisherId": 3719,
+      "publisherId": 3728,
       "sizes": [
         [1,1],
         [1,2]
@@ -584,23 +584,23 @@
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "10433394",
-        "publisherId" : 3719
+        "publisherId" : 3728
       }
     }]},
-  "Send HB basic request for publisher 3719 size [300,250]":
+  "Send HB basic request for publisher 3728 size [300,250]":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b33",
       "domain": "testing.com",
       "placementId": "10433394",
-      "publisherId": 3719,
+      "publisherId": 3728,
       "sizes": [
         [300,250]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "10433394",
-        "publisherId" : 3719
+        "publisherId" : 3728
       }
     }]},
 "Send HB request 1X2 size for publisher 3666":
@@ -723,13 +723,13 @@
       "hbadaptor": "prebid",
       "params": {}
     }]},
-  "Send HB 1X1 size request for publisher 3717":
+  "Send HB 1X1 size request for publisher 3739":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b33",
       "domain": "PGXTriggering.com",
       "placementId": "10433394",
-      "publisherId": 3717,
+      "publisherId": 3739,
       "sizes": [
         [1,1]
       ],
@@ -737,13 +737,13 @@
       "hbadaptor": "prebid",
       "params": {}
     }]},
-  "Send HB 1X2 size request for publisher 3717":
+  "Send HB 1X2 size request for publisher 3739":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b33",
       "domain": "PGXTriggering.com",
       "placementId": "10433394",
-      "publisherId": 3717,
+      "publisherId": 3739,
       "sizes": [
         [1,2]
       ],
