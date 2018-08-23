@@ -20,7 +20,15 @@
 		},
 		{
 			"zoneId": 195518,
-			"zoneName": "zone-zoneset-Inapp-SI-1-not-API",
+			"zoneName": "zone-zoneset-Inapp-SI-3-not-API",
+			"adUnitId": 10,
+			"isSync": true,
+			"isSecure": false,
+			"status": 0
+		},
+		{
+			"zoneId": 187517,
+			"zoneName": "zone-zoneset-InappBlackWhiteList-SI-7-not-api",
 			"adUnitId": 10,
 			"isSync": true,
 			"isSecure": false,
