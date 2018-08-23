@@ -478,8 +478,8 @@ Feature: Entities for tests
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
       |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
-     |campaign-PGX-PG-1-b       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
-      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
+     |campaign-PGX-PG-1-b       |75396         |222908     |false                   |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
+      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
     And i update campaign data by name
       |Campaign Name            |Priority      |campaign_delivery_method|
       |campaign-PGX-PG-1-b      |1             |4                       |
