@@ -111,7 +111,7 @@ public class CacheProcessTest extends BaseTest {
                 while (true) {
                     try {
                         new CliCommandExecution(conn, pushCacheToS3Command)
-                                .error("Couldn't sync").withTimeout(10, TimeUnit.MINUTES).execute();
+                                .error("Couldn't sync").error("trace").withTimeout(10, TimeUnit.MINUTES).execute();
                         break;
                     } catch (IOException e) {
                         e.printStackTrace();

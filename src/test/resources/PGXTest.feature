@@ -22,7 +22,7 @@ Feature: PGX - triggering ads tests
     And The response not contains window.ut_renderTriggers=[3,2,1]
 
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG Header Bidding
-    Given i send 1 headerBidding post request for scenario {Send HB 1X1 size request for publisher 3717} for publisher 3717 with domain {PGXTriggering.com} with extra params {&optimize=0&unlimited=1}
+    Given i send 1 headerBidding post request for scenario {Send HB 1X1 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=0&unlimited=1}
     Then The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PGX-PG-1-a-banner-1}
@@ -33,7 +33,7 @@ Feature: PGX - triggering ads tests
     And response value {window.ut_renderTriggers} has the values of 1,2,3
     
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through Header Bidding
-    Given i send 1 headerBidding post request for scenario {Send HB 1X2 size request for publisher 3717} for publisher 3717 with domain {PGXTriggering.com} with extra params {&optimize=0&unlimited=1}
+    Given i send 1 headerBidding post request for scenario {Send HB 1X2 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=0&unlimited=1}
     Then The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PGX-ST-1-a-banner-1}
@@ -42,7 +42,7 @@ Feature: PGX - triggering ads tests
     And The response not contains window.ut_renderTriggers=[3,2,1]
 
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG dynamic Tag
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3717 with domain {PGXTriggering.com&tagid=238&unlimited=1&optimize=0}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with domain {PGXTriggering.com&tagid=282&unlimited=1&optimize=0}
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
@@ -50,7 +50,7 @@ Feature: PGX - triggering ads tests
     And response value {window.ut_renderTriggers} has the values of 1,2,3
 
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through dynamic Tag
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3717 with domain {PGXTriggering.com&tagid=239&unlimited=1&optimize=0}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with domain {PGXTriggering.com&tagid=283&unlimited=1&optimize=0}
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
@@ -98,7 +98,7 @@ Feature: PGX - triggering ads tests
 
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG Header Bidding
-    Given i send 1 headerBidding post request for scenario {Send HB 1X1 size request for publisher 3717} for publisher 3717 with domain {PGXTriggering.com} with extra params {&optimize=1&unlimited=1}
+    Given i send 1 headerBidding post request for scenario {Send HB 1X1 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=1&unlimited=1}
     Then The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PGX-PG-1-a-banner-1}
@@ -110,7 +110,7 @@ Feature: PGX - triggering ads tests
 
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through Header Bidding
-    Given i send 1 headerBidding post request for scenario {Send HB 1X2 size request for publisher 3717} for publisher 3717 with domain {PGXTriggering.com} with extra params {&optimize=1&unlimited=1}
+    Given i send 1 headerBidding post request for scenario {Send HB 1X2 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=1&unlimited=1}
     Then The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PGX-ST-1-a-banner-1}
@@ -120,7 +120,7 @@ Feature: PGX - triggering ads tests
 
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG dynamic Tag
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3717 with domain {PGXTriggering.com&tagid=238&unlimited=1&optimize=1}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with domain {PGXTriggering.com&tagid=282&unlimited=1&optimize=1}
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
@@ -129,7 +129,7 @@ Feature: PGX - triggering ads tests
 
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through dynamic Tag
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3717 with domain {PGXTriggering.com&tagid=239&unlimited=1&optimize=1}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with domain {PGXTriggering.com&tagid=283&unlimited=1&optimize=1}
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
