@@ -66,15 +66,15 @@ Feature: Entities for tests
         |campaign-HB-Tablet-160x600            |75396    |223539     |false                  |148             |{zone-zoneset-HB-Tablet-160x600}         |[]            |8         |14400            |3673           |65421             |
         |campaign-HB-See-Through-1X2           |75396    |210722     |false                  |204             |{zone-zoneset-HB-See Through 1X2}        |[]            |83        |14400            |3673           |64396             |
        |campaign-HB-Desktop-300X250           |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400            |3673           |66814             |
-        |campaign-HB-Billboard-970X250        |75396    |198082     |false                  |64             |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400           |3673           |66813             |
-        |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400            |3673           |66733             |
+        |campaign-HB-Billboard-970X250        |75396    |198082     |false                  |64             |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400             |3673           |66813             |
+        |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400           |3673           |66933             |
         |campaign-HB-Prog-PGC-1X1-1            |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-2            |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-PGC-1X1-3            |75396    |222908     |false                  |86              |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
         |campaign-HB-Prog-See-Through-1X2-1    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-See-Through-1X2-2    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-See-Through-1X2-3    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-       |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
+       |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507             |3697           |66736             |
         |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
@@ -594,9 +594,9 @@ Feature: Entities for tests
     And I restart {ut-programmatic-gw}
     And I sleep for 400 seconds
 
-#  @refreshZoneCache
-#  Scenario: refresh zone cache
-#    And I refresh the zone Cache
+  @refreshZoneCache
+  Scenario: refresh zone cache
+    And I refresh the zone Cache
 
 #  @optimize
 #  Scenario: update test strategy
