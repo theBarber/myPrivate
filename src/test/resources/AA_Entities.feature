@@ -592,7 +592,7 @@ Feature: Entities for tests
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 350 seconds
+    And I sleep for 400 seconds
 
 #  @refreshZoneCache
 #  Scenario: refresh zone cache
