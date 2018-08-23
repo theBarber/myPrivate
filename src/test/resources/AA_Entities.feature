@@ -529,6 +529,40 @@ Feature: Entities for tests
       |zone-zoneset-Inapp-SI-5   |1            |
       |zone-zoneset-Inapp-SI-6   |1            |
 
+  @InAppBlackWhiteList
+  Scenario: create entities for Black and white app list
+    Given i disable campaigns by name on db
+      |Campaign Name         |
+      |campaign-InappBlackWhiteList-SI-1   |
+      |campaign-InappBlackWhiteList-SI-2   |
+      |campaign-InappBlackWhiteList-SI-3   |
+      |campaign-InappBlackWhiteList-SI-4   |
+      |campaign-InappBlackWhiteList-SI-5   |
+      |campaign-InappBlackWhiteList-SI-6   |
+      |campaign-InappBlackWhiteList-SI-7   |
+    Given i remove all zones from publishers: {1111}
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                             |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                          |limitation           |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |app_include                     |app_exclude|
+      |campaign-InappBlackWhiteList-SI-1         |75396         |222908       |false                  |14534             |{zone-zoneset-InappBlackWhiteList-SI-1}      |[]                   |80        |451               |1111           |14703             |[{app1,2}]                      |[{app2,2}] |
+      |campaign-InappBlackWhiteList-SI-2         |75396         |222908       |false                  |14534             |{zone-zoneset-InappBlackWhiteList-SI-2}      |[]                   |80        |451               |1111           |14703             |[]                              |[{app2,2}] |
+      |campaign-InappBlackWhiteList-SI-3         |75396         |222908       |false                  |14534             |{zone-zoneset-InappBlackWhiteList-SI-3}      |[]                   |80        |451               |1111           |14703             |[{app1,2}]                      |[]         |
+      |campaign-InappBlackWhiteList-SI-4         |75396         |222908       |false                  |14534             |{zone-zoneset-InappBlackWhiteList-SI-4}      |[]                   |80        |451               |1111           |14703             |[{app1,2}]                      |[{app1,2}] |
+      |campaign-InappBlackWhiteList-SI-5         |75396         |222908       |false                  |14534             |{zone-zoneset-InappBlackWhiteList-SI-5}      |[]                   |80        |451               |1111           |14703             |[]                              |[]         |
+      |campaign-InappBlackWhiteList-SI-6         |75396         |222908       |false                  |14534             |{zone-zoneset-InappBlackWhiteList-SI-6}      |[]                   |80        |451               |1111           |14703             |[]                              |[{app1,2};{app2,2};{app3,2}]|
+      |campaign-InappBlackWhiteList-SI-7         |75396         |222908       |false                  |14534             |{zone-zoneset-InappBlackWhiteList-SI-7}      |[]                   |80        |451               |1111           |14703             |[{app1,2};{app2,2};{app3,2}]    |[]                          |
+    And i update zone data by name
+      |Zone Name                                 |is_mraid     |
+      |zone-zoneset-InappBlackWhiteList-SI-1     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-2     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-3     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-4     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-5     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-6     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
+
+
+
+
   @DynamicPricing
   Scenario: create entities for dynamic pricing
     Given i disable campaigns by name on db
