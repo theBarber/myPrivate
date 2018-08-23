@@ -561,8 +561,6 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
 
-
-
   @DynamicPricing
   Scenario: create entities for dynamic pricing
     Given i disable campaigns by name on db
@@ -575,7 +573,7 @@ Feature: Entities for tests
 
 
 
-
+  @InAppBlackWhiteList
   @OpenX
   @Inapp
   @PGX
@@ -597,6 +595,7 @@ Feature: Entities for tests
     Given i kill replay on the machines
     And I setup the db
     And I sleep for 60 seconds
+  @InAppBlackWhiteList
   @PG1
   @SupplyType
   @viewability
@@ -613,9 +612,9 @@ Feature: Entities for tests
     And I restart {ut-programmatic-gw}
     And I sleep for 400 seconds
 
-  @refreshZoneCache
-  Scenario: refresh zone cache
-    And I refresh the zone Cache
+#  @refreshZoneCache
+#  Scenario: refresh zone cache
+#    And I refresh the zone Cache
 
 #  @optimize
 #  Scenario: update test strategy
