@@ -73,9 +73,37 @@ Feature: API entities creator - using ramp-app APIs and sql scripts
           |campaign-API-1-b   |see through client programmatic   |see through        |zone-2        |
           |campaign-API-1-b   |see through non-programmatic      |see through        |zone-3        |
 
-#
-#  @Keren
-#  Scenario: create campaigns for Keren domain targeting
-#    Given i create new campaigns, new zoneset with domains
-#      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                   |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                 |
-#      |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1-Keren-test}   |[]                   |83         |4737              |2434           |17116             |{}                  |{ynet.co.il}                   |
+
+  @Keren
+  Scenario: create campaigns for Keren domain targeting
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name        |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                   |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                 |
+      |campaign-DomainT-1   |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1-Keren-test}   |[]                   |83         |4737              |2434           |17116             |{}                  |{ynet.co.il}                   |
+
+  @OpenX
+  Scenario: create entities for open x
+    Given i disable campaigns by name on db
+      |Campaign Name              |
+      |campaign-open-x            |
+    Given i create new campaigns with new zoneset
+      |Campaign Name    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name        |limitation   |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-open-x  |407981        |228669     |true                   |44              |{zone-zoneset-SSP-Open-x} |[]           |69        |2164             |3711           |66556             |
+    And i update campaign data by name
+      |Campaign Name        |Priority      |campaign_delivery_method|delivery_algorithm|
+      |campaign-open-x      |-2            |1                       |4                 |
+
+
+  @weightBanners
+  Scenario: create entities for Keren
+    Given i disable campaigns by name on db
+      |Campaign Name                        |
+      |campaign-weightBanners-A             |
+    Given i create new campaigns with multiple creatives
+      |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal      |Zonesets-zone Name             |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-weightBanners-A    |75396         |210722     |false                  |204,890            |{zone-zoneset-weightBanners-A} |[]                |83        |4737             |2434           |17116             |
+
+  @kerenInapp
+  Scenario: create entity for keren
+    Given i create new campaigns with new zoneset
+      |Campaign Name       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name     |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+      |campaign-Inapp      |75396         |210722     |false                  |204             |{zone-zoneset-Inapp}   |[]                |83        |4737             |2434           |17116             |

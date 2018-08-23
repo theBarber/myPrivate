@@ -422,21 +422,6 @@ Feature: Entities for tests
       |campaign-SupplyType-Desktop-Direct   | 1            |4                       |2                 |
 
 
-#  @weightBanners
-#  Scenario: create entities for Keren
-#    Given i disable campaigns by name on db
-#      |Campaign Name                        |
-#      |campaign-weightBanners-A             |
-#    Given i create new campaigns with multiple creatives
-#      |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal      |Zonesets-zone Name             |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-#      |campaign-weightBanners-A    |75396         |210722     |false                  |204,890            |{zone-zoneset-weightBanners-A} |[]                |83        |4737             |2434           |17116             |
-#
-#  @kerenInapp
-#  Scenario: create entity for keren
-#    Given i create new campaigns with new zoneset
-#      |Campaign Name       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name     |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-#      |campaign-Inapp      |75396         |210722     |false                  |204             |{zone-zoneset-Inapp}   |[]                |83        |4737             |2434           |17116             |
-
   @PG1
   Scenario: create entities for PG1 tests
 #    Given i remove all zones from publishers: {3675,3666}
@@ -544,17 +529,17 @@ Feature: Entities for tests
       |zone-zoneset-Inapp-SI-5   |1            |
       |zone-zoneset-Inapp-SI-6   |1            |
 
-#  @OpenX
-#  Scenario: create entities for open x
-#    Given i disable campaigns by name on db
-#      |Campaign Name              |
-#      |campaign-open-x            |
-#    Given i create new campaigns with new zoneset
-#      |Campaign Name    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name        |limitation   |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-#      |campaign-open-x  |407981        |228669     |true                   |44              |{zone-zoneset-SSP-Open-x} |[]           |69        |2164             |3711           |66556             |
-#    And i update campaign data by name
-#      |Campaign Name        |Priority      |campaign_delivery_method|delivery_algorithm|
-#      |campaign-open-x      |-2            |1                       |4                 |
+  @DynamicPricing
+  Scenario: create entities for dynamic pricing
+    Given i disable campaigns by name on db
+      |Campaign Name                |
+      |campaign-DynamicPricing-SSSS |
+#    Given i remove all zones from publishers: {3673}
+    Given i create new campaigns with new zoneset
+      |Campaign Name                 |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID  |
+      |campaign-DynamicPricing-SI-1  |75396         |222908     |false                  |14527             |{zone-zoneset-DynamicPricing-SI-1} |[]           |80        |5164              |2546           |67180            |
+
+
 
 
   @OpenX
