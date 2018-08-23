@@ -15,7 +15,7 @@ Feature: InApp testing
     And The response contains ut_udms
     And The response contains sf_tag
     And The response contains {type:'image', url:'https://www.example.com/1'}
-    And The response contains {type:'iframe', url:' https://www.example.com/3'}
+    And The response contains {type:'iframe', url:'https://www.example.com/3'}
     And The response contains var ut_pixel_event = 'viewableChange';
     And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
@@ -137,7 +137,7 @@ Feature: InApp testing
     And The response contains ut_udms
     And The response contains sf_tag
     And The response contains {type:'image', url:'https://www.example.com/1'}
-    And The response contains {type:'iframe', url:' https://www.example.com/3'}
+    And The response contains {type:'iframe', url:'https://www.example.com/3'}
     And The response contains var ut_pixel_event = 'viewableChange';
     And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
