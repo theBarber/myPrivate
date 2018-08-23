@@ -350,10 +350,10 @@ Feature: Entities for tests
       |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-3 |407981        |224530     |true                   |22               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-ST-1  |407981        |229737     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-2  |407981        |224533     |true                   |25               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555           /  |
-      |campaign-server-prog-ST-3  |407981       |229737     |true                   |26               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-4  |407981        |224533     |true                   |27               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-1  |407981        |229737     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-2  |407981        |224533     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555           /  |
+      |campaign-server-prog-ST-3  |407981       |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-4  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
     And i update campaign data by name
       |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-server-prog-SS-1       |-2            |1                       |4                 |
@@ -494,7 +494,7 @@ Feature: Entities for tests
       |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
       |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
      |campaign-PGX-PG-1-b       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
-      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3719           |67166             |
+      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
     And i update campaign data by name
       |Campaign Name            |Priority      |campaign_delivery_method|
       |campaign-PGX-PG-1-b      |1             |4                       |
