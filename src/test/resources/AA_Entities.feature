@@ -561,15 +561,15 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
 
-  @DynamicPricing
-  Scenario: create entities for dynamic pricing
-    Given i disable campaigns by name on db
-      |Campaign Name                |
-      |campaign-DynamicPricing-SSSS |
-#    Given i remove all zones from publishers: {3673}
-    Given i create new campaigns with new zoneset
-      |Campaign Name                 |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID  |
-      |campaign-DynamicPricing-SI-1  |75396         |222908     |false                  |14527             |{zone-zoneset-DynamicPricing-SI-1} |[]           |80        |5164              |2546           |67180            |
+#  @DynamicPricing
+#  Scenario: create entities for dynamic pricing
+#    Given i disable campaigns by name on db
+#      |Campaign Name                |
+#      |campaign-DynamicPricing-SSSS |
+##    Given i remove all zones from publishers: {3673}
+#    Given i create new campaigns with new zoneset
+#      |Campaign Name                 |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID  |
+#      |campaign-DynamicPricing-SI-1  |75396         |222908     |false                  |14527             |{zone-zoneset-DynamicPricing-SI-1} |[]           |80        |5164              |2546           |67180            |
 
 
 
@@ -616,7 +616,7 @@ Feature: Entities for tests
 #  Scenario: refresh zone cache
 #    And I refresh the zone Cache
 
-#  @optimize
-#  Scenario: update test strategy
-#    Given i disable all tests Groups except 53
-#    And I set test id of test_strategy named {ScoringNew} to {53}
+  @optimize
+  Scenario: update test strategy
+    Given i disable all tests Groups except 53
+    And I set test id of test_strategy named {ScoringNew} to {53}

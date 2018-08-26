@@ -74,9 +74,6 @@ Feature: PGX - triggering ads tests
     And response value {window.ut_renderTriggers} has the values of 1,3
 
 
-
-
-
 #  -----------------------------------------------------Optimize-------------------------------------------------------------------
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG zone tag
