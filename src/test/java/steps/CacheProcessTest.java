@@ -36,7 +36,7 @@ import static org.junit.Assert.fail;
 
 public class CacheProcessTest extends BaseTest {
     private final String BANNER_CACHE_NAME = "banners_cache_refresh_";
-    private final static Integer LASTING_TIME_CACHE = 7;
+    private final static Integer LASTING_TIME_CACHE = 8;
   public CacheProcessTest() {
     super();
 
