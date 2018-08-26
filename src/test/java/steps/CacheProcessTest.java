@@ -106,7 +106,7 @@ public class CacheProcessTest extends BaseTest {
 
             //push zone.tch to s3 from the machine
             sut.getCronCliConnection().forEach((host, conn) -> {
-                int count = 1;
+                int count = 0;
                 int maxTries = 3;
                 while (true) {
                     try {
