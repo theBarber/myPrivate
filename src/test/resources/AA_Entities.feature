@@ -344,14 +344,14 @@ Feature: Entities for tests
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-SS-2  |407981        |224531     |true                   |18               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-SS-4  |407981        |224531     |true                   |19               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-PGC-1 |407981        |224530     |true                   |20               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-3 |407981        |224530     |true                   |22               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-ST-1  |407981        |229737     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-2  |407981        |224533     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555           /  |
+      |campaign-server-prog-ST-2  |407981        |224533     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       |campaign-server-prog-ST-3  |407981        |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       |campaign-server-prog-ST-4  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
     And i update campaign data by name
@@ -561,15 +561,16 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
 
-#  @DynamicPricing
-#  Scenario: create entities for dynamic pricing
-#    Given i disable campaigns by name on db
-#      |Campaign Name                |
-#      |campaign-DynamicPricing-SSSS |
-##    Given i remove all zones from publishers: {3673}
-#    Given i create new campaigns with new zoneset
-#      |Campaign Name                 |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID  |
-#      |campaign-DynamicPricing-SI-1  |75396         |222908     |false                  |14527             |{zone-zoneset-DynamicPricing-SI-1} |[]           |80        |5164              |2546           |67180            |
+  @DynamicPricing
+  Scenario: create entities for dynamic pricing
+    Given i disable campaigns by name on db
+      |Campaign Name                        |
+      |campaign-DynamicPricing-MR-300X250-1 |
+#    Given i remove all zones from publishers: {3673}
+    Given i create new campaigns with new zoneset
+      |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                |limitation   |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
+      |campaign-DynamicPricing-300X250-1  |75396         |222908     |false                  |14527             |{zone-zoneset-DynamicPricing-SI-1} |[]           |80        |14862              |3673           |67180            |
+      |campaign-DynamicPricing-300X250-2  |75396         |222908     |false                  |14527             |{zone-zoneset-DynamicPricing-SI-1} |[]           |80        |14862              |3673           |67180            |
 
 
 
