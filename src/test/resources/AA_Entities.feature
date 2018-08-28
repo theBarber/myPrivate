@@ -325,6 +325,7 @@ Feature: Entities for tests
   @GDPR
   @appnexus
   Scenario: create entities for server programmatic tests
+    Given i remove all zones from publishers: {3728}
     Given i disable campaigns by name on db
       |Campaign Name                   |
       |campaign-server-prog-SS-1       |
@@ -370,7 +371,7 @@ Feature: Entities for tests
       |campaign-server-prog-ST-4       | 1            |4                       |1                 |
 
 
-    @viewability
+   @viewability
     Scenario: create entities for viewability tests
       Given i disable campaigns by name on db
         |Campaign Name                   |
@@ -384,7 +385,8 @@ Feature: Entities for tests
         |Banner Name                            |limitation     |
         |campaign-API-1-a-viewability-banner-1    |[]             |
         |campaign-API-2-a-viewability-banner-1    |[]             |
-    @SupplyType
+
+  @SupplyType
       Scenario: create entities for Supply type
       Given i disable campaigns by name on db
         |Campaign Name                        |
@@ -420,7 +422,6 @@ Feature: Entities for tests
       |campaign-SupplyType-Desktop-ALL      |-2            |1                       |4                 |
       |campaign-SupplyType-Desktop-HB       |-1            |2                       |3                 |
       |campaign-SupplyType-Desktop-Direct   | 1            |4                       |2                 |
-
 
   @PG1
   Scenario: create entities for PG1 tests
@@ -561,19 +562,53 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
 
+#  @DynamicPricing
+#  Scenario: create entities for dynamic pricing
+#    Given i disable campaigns by name on db
+#      |Campaign Name                       |
+#      |campaign-DP-Direct-300X250-2        |
+#      |campaign-DP-Direct-300X250-1        |
+#      |campaign-DP-ProgG-SS-1X1-2          |
+#      |campaign-DP-ProgG-SS-1X1-1          |
+#      |campaign-DP-ProgNG-ST-1X2-2         |
+#      |campaign-DP-ProgNG-ST-1X2-1         |
+#      |campaign-DP-ClientProg-970X250-P-2  |
+#      |campaign-DP-ClientProg-970X250-P-1  |
+#      |campaign-DP-ClientProg-970X250-D    |
+##When running alone run this step ->
+#    # Given i remove all zones from publishers: {3728}
+#    Given i create new campaigns with new zoneset
+#      |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                       |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
+#      |campaign-DP-Direct-300X250-1       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14862              |3728           |66833            |
+##PROD |campaign-DP-Direct-300X250-1       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14877              |3728           |66833            |
+#      |campaign-DP-Direct-300X250-2       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14862              |3728           |66833            |
+##PROD |campaign-DP-Direct-300X250-2       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14877              |3728           |66833            |
+#      |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14862              |3728           |66831            |
+##PROD  |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14877              |3728           |66831            |
+#      |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14862              |3728           |66831            |
+##PROD  |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14877              |3728           |66831            |
+#      |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14862              |3728           |66830            |
+##PROD  |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14877              |3728           |66830            |
+#      |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14862              |3728           |66830            |
+##PROD  |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14877              |3728           |66830            |
+#      |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14862              |3728           |67182            |
+##PROD |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14877              |3728           |67231            |
+#      |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14862              |3728           |67182            |
+##PROD |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14877              |3728           |67231            |
+#      |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14862              |3728           |67182            |
+##PROD |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14877              |3728           |67231            |
+# And i update campaign data by name
+#      |Campaign Name                       |Priority      |campaign_delivery_method|delivery_algorithm|
+#      |campaign-DP-Direct-300X250-2        |-2            |1                       |4                 |
+#      |campaign-DP-Direct-300X250-1        |-1            |2                       |3                 |
+#      |campaign-DP-ProgG-SS-1X1-2          |-2            |1                       |4                 |
+#      |campaign-DP-ProgG-SS-1X1-1          |-1            |2                       |3                 |
+#      |campaign-DP-ProgNG-ST-1X2-2         |-2            |1                       |4                 |
+#      |campaign-DP-ProgNG-ST-1X2-1         |-1            |2                       |3                 |
+#      |campaign-DP-ClientProg-970X250-P-2  |-2            |1                       |4                 |
+#      |campaign-DP-ClientProg-970X250-P-1  |-1            |2                       |3                 |
+#      |campaign-DP-ClientProg-970X250-D    | 1            |4                       |2                 |
   @DynamicPricing
-  Scenario: create entities for dynamic pricing
-    Given i disable campaigns by name on db
-      |Campaign Name                        |
-      |campaign-DynamicPricing-MR-300X250-1 |
-#    Given i remove all zones from publishers: {3673}
-    Given i create new campaigns with new zoneset
-      |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                |limitation   |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
-      |campaign-DynamicPricing-300X250-1  |75396         |222908     |false                  |14527             |{zone-zoneset-DynamicPricing-SI-1} |[]           |80        |14862              |3673           |67180            |
-      |campaign-DynamicPricing-300X250-2  |75396         |222908     |false                  |14527             |{zone-zoneset-DynamicPricing-SI-1} |[]           |80        |14862              |3673           |67180            |
-
-
-
   @InAppBlackWhiteList
   @OpenX
   @Inapp
@@ -596,6 +631,7 @@ Feature: Entities for tests
     Given i kill replay on the machines
     And I setup the db
     And I sleep for 60 seconds
+  @DynamicPricing
   @InAppBlackWhiteList
   @PG1
   @SupplyType

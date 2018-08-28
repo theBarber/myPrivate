@@ -117,15 +117,14 @@ public class CacheProcessTest extends BaseTest {
                         e.printStackTrace();
                     } catch (AssertionError e) {
                         System.out.println("Couldn't push cache trying again...num_try: " + count);
+                        Calendar now = Calendar.getInstance();
+                        int minutes = now.get(Calendar.MINUTE);
+                        int timeToSleep = (LASTING_TIME_CACHE - (minutes % 10)) * 60;
+                        if (timeToSleep < 60)
+                            timeToSleep = 60;
+                        sleepFor(timeToSleep);
                         if (++count == maxTries) {
                             throw new AssertionError(e);
-                        } else {
-                            Calendar now = Calendar.getInstance();
-                            int minutes = now.get(Calendar.MINUTE);
-                            int timeToSleep = (LASTING_TIME_CACHE - (minutes % 10)) * 60;
-                            if (timeToSleep < 0)
-                                timeToSleep = 60;
-                            sleepFor(timeToSleep);
                         }
                     }
                 }
