@@ -34,16 +34,16 @@ Scenario: 5. Uas is connected to Workflow
 		When I sleep for 100 seconds
 
 
-@campaign
-@hardcoded
-@Sanity
-Scenario: 6. Uas is responsive to zone request
-	When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
-	Then The response code is 200
-	And The response contains script
-	And The response has impression-url
-	And I send impression requests to UAS immediately!
-	And The response has click-url
+#@campaign
+#@hardcoded
+#@Sanity
+#Scenario: 6. Uas is responsive to zone request
+#	When I send 10 times an ad request for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
+#	Then The response code is 200
+#	And The response contains script
+#	And The response has impression-url
+#	And I send impression requests to UAS immediately!
+#	And The response has click-url
 
 #@campaign
 #@hardcoded
