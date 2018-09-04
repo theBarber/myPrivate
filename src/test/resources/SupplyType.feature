@@ -40,7 +40,7 @@ Feature: Supply type flow support
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-SupplyType-Desktop-ALL-banner-1}
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 231 to UAS for publisher 3728 with domain {testing.com&unlimited=1&optimize=0}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 239 to UAS for publisher 3728 with domain {testing.com&unlimited=1&optimize=0}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SupplyType-Desktop-ALL-banner-1} 100% of the time
     Then I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-SupplyType-Desktop-ALL} to UAS
     And The response code is 200
@@ -87,7 +87,7 @@ Feature: Supply type flow support
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-SupplyType-Desktop-ALL-banner-1}
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 231 to UAS for publisher 3728 with domain {testing.com&unlimited=1&optimize=1}
+    Then i send 1 times Dynamic Tag synchronized ad request with tag id 239 to UAS for publisher 3728 with domain {testing.com&unlimited=1&optimize=1}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SupplyType-Desktop-ALL-banner-1} 100% of the time
     Then I send 1 times an ad request with parameter {unlimited=1&optimize=1} for zone named {zone-zoneset-SupplyType-Desktop-ALL} to UAS
     And The response code is 200

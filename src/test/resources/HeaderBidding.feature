@@ -169,7 +169,7 @@ Feature: Header Bidding flow support
 #   header bidding multiple bids tests
   Scenario: header bidding multiple bids requests
       Given I Delete hbl logs
-      Given i send 3 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+      Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
       And The response code is 200
       And The response contains script
       And i read all HB responses and map their bidId by adId

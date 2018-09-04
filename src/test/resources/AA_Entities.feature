@@ -147,7 +147,7 @@ Feature: Entities for tests
      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
       And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-b} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
       And i create new zone named {zone-zoneset-HB-SS-1X1-D-1} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
-      And i create new zone named {zone-zoneset-HB-SS-1X1-D-2} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
+      And i create new zone named {zone-zoneset-HB-SS-1X1-D-2} with limitation {[]} with adUnitId 69 and web_section id 14819 with affiliateId 3673 with po_line_item_id 66933
     And i create new campaigns with new zoneset
         |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal        |Zonesets-zone Name                            |
         |HB-Tablet-160x600-D-1-a-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-1-a}        |
@@ -324,6 +324,7 @@ Feature: Entities for tests
   @GDPR
   @appnexus
   Scenario: create entities for server programmatic tests
+    Given i remove all zones from publishers: {3728}
     Given i disable campaigns by name on db
       |Campaign Name                   |
       |campaign-server-prog-SS-1       |
@@ -343,15 +344,15 @@ Feature: Entities for tests
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-SS-2  |407981        |224531     |true                   |18               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86              |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-SS-4  |407981        |224531     |true                   |19               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
       |campaign-server-prog-PGC-1 |407981        |224530     |true                   |20               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-3 |407981        |224530     |true                   |22               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
       |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-ST-1  |407981        |229737     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-2  |407981        |224533     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555           /  |
-      |campaign-server-prog-ST-3  |407981       |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-1  |407981        |229737     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-2  |407981        |224533     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-3  |407981        |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       |campaign-server-prog-ST-4  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
     And i update campaign data by name
       |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
@@ -368,7 +369,8 @@ Feature: Entities for tests
       |campaign-server-prog-ST-3       | 1            |4                       |2                 |
       |campaign-server-prog-ST-4       | 1            |4                       |1                 |
 
-    @viewability
+
+   @viewability
     Scenario: create entities for viewability tests
       Given i disable campaigns by name on db
         |Campaign Name                   |
@@ -382,7 +384,8 @@ Feature: Entities for tests
         |Banner Name                            |limitation     |
         |campaign-API-1-a-viewability-banner-1    |[]             |
         |campaign-API-2-a-viewability-banner-1    |[]             |
-    @SupplyType
+
+  @SupplyType
       Scenario: create entities for Supply type
       Given i disable campaigns by name on db
         |Campaign Name                        |
@@ -418,22 +421,6 @@ Feature: Entities for tests
       |campaign-SupplyType-Desktop-ALL      |-2            |1                       |4                 |
       |campaign-SupplyType-Desktop-HB       |-1            |2                       |3                 |
       |campaign-SupplyType-Desktop-Direct   | 1            |4                       |2                 |
-
-
-#  @weightBanners
-#  Scenario: create entities for Keren
-#    Given i disable campaigns by name on db
-#      |Campaign Name                        |
-#      |campaign-weightBanners-A             |
-#    Given i create new campaigns with multiple creatives
-#      |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal      |Zonesets-zone Name             |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-#      |campaign-weightBanners-A    |75396         |210722     |false                  |204,890            |{zone-zoneset-weightBanners-A} |[]                |83        |4737             |2434           |17116             |
-#
-#  @kerenInapp
-#  Scenario: create entity for keren
-#    Given i create new campaigns with new zoneset
-#      |Campaign Name       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name     |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-#      |campaign-Inapp      |75396         |210722     |false                  |204             |{zone-zoneset-Inapp}   |[]                |83        |4737             |2434           |17116             |
 
   @PG1
   Scenario: create entities for PG1 tests
@@ -491,8 +478,8 @@ Feature: Entities for tests
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
       |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
-     |campaign-PGX-PG-1-b       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
-      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |9981             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
+     |campaign-PGX-PG-1-b       |75396         |222908     |false                   |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
+      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
     And i update campaign data by name
       |Campaign Name            |Priority      |campaign_delivery_method|
       |campaign-PGX-PG-1-b      |1             |4                       |
@@ -541,7 +528,8 @@ Feature: Entities for tests
       |zone-zoneset-Inapp-SI-4   |1            |
       |zone-zoneset-Inapp-SI-5   |1            |
       |zone-zoneset-Inapp-SI-6   |1            |
-@InAppBlackWhiteList
+
+  @InAppBlackWhiteList
   Scenario: create entities for Black and white app list
     Given i disable campaigns by name on db
       |Campaign Name         |
@@ -571,17 +559,55 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-5     |1            |
       |zone-zoneset-InappBlackWhiteList-SI-6     |1            |
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
-# @OpenX
-#  Scenario: create entities for open x
+
+
+#  @DynamicPricing
+#  Scenario: create entities for dynamic pricing
 #    Given i disable campaigns by name on db
-#      |Campaign Name              |
-#      |campaign-open-x            |
+#      |Campaign Name                       |
+#      |campaign-DP-Direct-300X250-2        |
+#      |campaign-DP-Direct-300X250-1        |
+#      |campaign-DP-ProgG-SS-1X1-2          |
+#      |campaign-DP-ProgG-SS-1X1-1          |
+#      |campaign-DP-ProgNG-ST-1X2-2         |
+#      |campaign-DP-ProgNG-ST-1X2-1         |
+#      |campaign-DP-ClientProg-970X250-P-2  |
+#      |campaign-DP-ClientProg-970X250-P-1  |
+#      |campaign-DP-ClientProg-970X250-D    |
+##When running alone run this step ->
+#    # Given i remove all zones from publishers: {3728}
 #    Given i create new campaigns with new zoneset
-#      |Campaign Name    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name        |limitation   |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-#      |campaign-open-x  |407981        |228669     |true                   |44              |{zone-zoneset-SSP-Open-x} |[]           |69        |2164             |3711           |66556             |
-#    And i update campaign data by name
-#      |Campaign Name        |Priority      |campaign_delivery_method|delivery_algorithm|
-#      |campaign-open-x      |-2            |1                       |4                 |
+#      |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                       |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
+#      |campaign-DP-Direct-300X250-1       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14862              |3728           |66833            |
+##PROD |campaign-DP-Direct-300X250-1       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14877              |3728           |66833            |
+#      |campaign-DP-Direct-300X250-2       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14862              |3728           |66833            |
+##PROD |campaign-DP-Direct-300X250-2       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14877              |3728           |66833            |
+#      |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14862              |3728           |66831            |
+##PROD  |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14877              |3728           |66831            |
+#      |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14862              |3728           |66831            |
+##PROD  |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14877              |3728           |66831            |
+#      |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14862              |3728           |66830            |
+##PROD  |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14877              |3728           |66830            |
+#      |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14862              |3728           |66830            |
+##PROD  |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14877              |3728           |66830            |
+#      |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14862              |3728           |67182            |
+##PROD |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14877              |3728           |67231            |
+#      |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14862              |3728           |67182            |
+##PROD |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14877              |3728           |67231            |
+#      |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14862              |3728           |67182            |
+##PROD |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14877              |3728           |67231            |
+# And i update campaign data by name
+#      |Campaign Name                       |Priority      |campaign_delivery_method|delivery_algorithm|
+#      |campaign-DP-Direct-300X250-2        |-2            |1                       |4                 |
+#      |campaign-DP-Direct-300X250-1        |-1            |2                       |3                 |
+#      |campaign-DP-ProgG-SS-1X1-2          |-2            |1                       |4                 |
+#      |campaign-DP-ProgG-SS-1X1-1          |-1            |2                       |3                 |
+#      |campaign-DP-ProgNG-ST-1X2-2         |-2            |1                       |4                 |
+#      |campaign-DP-ProgNG-ST-1X2-1         |-1            |2                       |3                 |
+#      |campaign-DP-ClientProg-970X250-P-2  |-2            |1                       |4                 |
+#      |campaign-DP-ClientProg-970X250-P-1  |-1            |2                       |3                 |
+#      |campaign-DP-ClientProg-970X250-D    | 1            |4                       |2                 |
+  @DynamicPricing
   @InAppBlackWhiteList
   @OpenX
   @Inapp
@@ -604,6 +630,7 @@ Feature: Entities for tests
     Given i kill replay on the machines
     And I setup the db
     And I sleep for 60 seconds
+  @DynamicPricing
   @InAppBlackWhiteList
   @PG1
   @SupplyType
@@ -619,10 +646,14 @@ Feature: Entities for tests
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 400 seconds
+    And I sleep for 450 seconds
 
-#  @optimize
-#  Scenario: update test strategy
-#    Given i disable all tests Groups except 53
-#    And I set test id of test_strategy named {ScoringNew} to {53}
+#  @refreshZoneCache
+#  Scenario: refresh zone cache
+#    And I refresh the zone Cache
+
+  @optimize
+  Scenario: update test strategy
+    Given i disable all tests Groups except 53
+    And I set test id of test_strategy named {ScoringNew} to {53}
 

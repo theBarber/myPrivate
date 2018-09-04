@@ -106,7 +106,7 @@ public class CacheProcessTest extends BaseTest {
 
             //push zone.tch to s3 from the machine
             sut.getCronCliConnection().forEach((host, conn) -> {
-                int count = 1;
+                int count = 0;
                 int maxTries = 3;
                 while (true) {
                     try {
@@ -117,15 +117,15 @@ public class CacheProcessTest extends BaseTest {
                         e.printStackTrace();
                     } catch (AssertionError e) {
                         System.out.println("Couldn't push cache trying again...num_try: " + count);
+                        Calendar now = Calendar.getInstance();
+                        int minutes = now.get(Calendar.MINUTE);
+                        int timeToSleep = (LASTING_TIME_CACHE - (minutes % 10)) * 60;
+                        if (timeToSleep < 60)
+                            timeToSleep = 60;
+                        sleepFor(timeToSleep);
                         if (++count == maxTries) {
-                            throw new AssertionError(e);
-                        } else {
-                            Calendar now = Calendar.getInstance();
-                            int minutes = now.get(Calendar.MINUTE);
-                            int timeToSleep = (LASTING_TIME_CACHE - (minutes % 10)) * 60;
-                            if (timeToSleep < 0)
-                                timeToSleep = 60;
-                            sleepFor(timeToSleep);
+                            System.out.println("Couldn't refresh zone cache, assuming cache is already updated. if its not the case check upgrade.lock");
+                            break;
                         }
                     }
                 }
