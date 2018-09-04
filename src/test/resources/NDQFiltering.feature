@@ -15,8 +15,7 @@ Feature: NDQ filtering validation
 		Given I set the activation status of experiment group named {rampLift_NDQ_scenario} and his experiments to {active}
 		And I restart {ramp-lift-services}
 		And I sleep for 120 seconds
-		Given I set the {units} of campaign name {ramp-lift-auto-campaign1-test} to {3000}
-		Given I set the {impressions} in {campaign_lifetime_stats} of campaign name {ramp-lift-auto-campaign1-test} to {0}
+		Given I set the {impressions} in {campaign_lifetime_stats} of campaign name {ramp-lift-auto-campaign1-test} to {12345678910}
 		Given I set the {impressions} in {campaign_today_stats} of campaign name {ramp-lift-auto-campaign1-test} to {0}
 		And I refresh the zone Cache
 		Given I compute the NDQ of campaign name {ramp-lift-auto-campaign1-test}
