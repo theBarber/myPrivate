@@ -363,7 +363,7 @@ Feature: Header Bidding flow support
 
   Scenario: header bidding multiple domains - domain3
     Given I add cookie UTID with value {d7a8b9faf42446dlbca3248eef7d47bb} to my requests to uas
-    Given i send 1 headerBidding post request for scenario {Send HB Domain3 request for publisher 3673} for publisher 3673 with domain {HBTest3.com} with extra params {&unlimited=1&optimize=0}
+    Given i send 2 headerBidding post request for scenario {Send HB Domain3 request for publisher 3673} for publisher 3673 with domain {HBTest3.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-3-a-1}
