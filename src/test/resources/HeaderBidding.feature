@@ -136,7 +136,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-Billboard-970X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
-    And all HB responses contains cpm with value {1.2}
+    And all HB responses contains cpm with value {0.5}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains script
@@ -185,7 +185,7 @@ Feature: Header Bidding flow support
       And For bidID bid1 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
       And For bidID bid2 The field bid_request_id in the 30 column of the hbl log is: bid2
       And For bidID bid2 The field Selected_Ad_Size in the 6 column of the hbl log is: [[970,250]]
-      And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 1.20
+      And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 0.50
       And For bidID bid2 The field Publisher_id in the 3 column of the hbl log is: 3673
       And For bidID bid2 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
       And For bidID bid3 The field bid_request_id in the 30 column of the hbl log is: bid3
@@ -548,7 +548,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-Billboard-970X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
-    And all HB responses contains cpm with value {1.2}
+    And all HB responses contains cpm with value {0.5}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains script
@@ -598,7 +598,7 @@ Feature: Header Bidding flow support
     And For bidID bid1 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
     And For bidID bid2 The field bid_request_id in the 30 column of the hbl log is: bid2
     And For bidID bid2 The field Selected_Ad_Size in the 6 column of the hbl log is: [[970,250]]
-    And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 1.20
+    And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 0.50
     And For bidID bid2 The field Publisher_id in the 3 column of the hbl log is: 3673
     And For bidID bid2 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
     And For bidID bid3 The field bid_request_id in the 30 column of the hbl log is: bid3
