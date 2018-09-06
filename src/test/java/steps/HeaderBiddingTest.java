@@ -209,6 +209,7 @@ public class HeaderBiddingTest extends BaseTest {
                 responseInJson = mapper.readTree(content);
                 String htmlWithQuery = responseInJson.get(0).get("ad").asText();
                 String url = getUrlFromAd(htmlWithQuery) + Optional.ofNullable(extraParam).orElse("");
+                System.out.println(url);
                 sut.getUASRquestModule().sendGetRequestsAsync(1,url,false);
             }catch (Exception e)
             {

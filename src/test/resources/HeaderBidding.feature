@@ -614,7 +614,7 @@ Feature: Header Bidding flow support
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I delete the history of 5uklue8wl0eep3j7i9xf4fi5o from user history
     Given I add cookie UTID with value {62ccf301864347f79306f97bcc7079ac} to my requests to uas
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
     And all HB responses contains cpm with value {1}
@@ -623,7 +623,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given I sleep for 3 seconds
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
@@ -640,7 +640,7 @@ Feature: Header Bidding flow support
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I delete the history of 1nk2c6va5dabtzkkmngz6n9r7 from user history
     Given I add cookie UTID with value {1bf1beaa1ffd463e8a58ad3be01d8323} to my requests to uas
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
     And all HB responses contains cpm with value {1}
@@ -649,7 +649,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given I sleep for 3 seconds
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
@@ -666,7 +666,7 @@ Feature: Header Bidding flow support
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given I delete the history of a4jmh0yqej7x7w9ijrm10eywg from user history
     Given I add cookie UTID with value {ab0b69ca3ee34ef88ee2d055666c6c30} to my requests to uas
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
     And all HB responses contains cpm with value {1}
@@ -675,7 +675,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given I sleep for 3 seconds
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
     And all HB responses contains cpm with value {3}
@@ -693,7 +693,7 @@ Feature: Header Bidding flow support
   Scenario: header bidding frequency capping from mobile - user 2 after 3 minutes
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {1bf1beaa1ffd463e8a58ad3be01d8323} to my requests to uas
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
@@ -703,7 +703,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given I sleep for 3 seconds
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
@@ -718,7 +718,7 @@ Feature: Header Bidding flow support
   Scenario: header bidding frequency capping from Desktop user 3 after 3 minutes
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {ab0b69ca3ee34ef88ee2d055666c6c30} to my requests to uas
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
@@ -728,7 +728,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given I sleep for 3 seconds
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
@@ -741,7 +741,7 @@ Feature: Header Bidding flow support
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And all HB responses contains adId with value {0}
 
-#   header bidding multiple domains tests
+   header bidding multiple domains tests
   @optimize
   Scenario: header bidding multiple domains - domain1
     Given I add cookie UTID with value {d7a8b9faf42446dcbca3748eef7d47bb} to my requests to uas
