@@ -47,13 +47,13 @@ public class ABTestingTest extends BaseTest {
 		Given("^Unable all experiment groups except experimentID (\\d+)", (Integer experimentID) -> {
 			SqlRampAdminUtils.unableAllExperimentGroupsExcept(experimentID);
 		});
-
-		Given("^i disable all tests Groups except (\\d+)$", (Integer Id) -> {
-			SqlRampAdminUtils.disableAllStrategyGroupsExcept(Id);
+		//TESTS
+		Given("^i disable all tests except (\\d+)$", (Integer Id) -> {
+			SqlRampAdminUtils.disableAllTestsExcept(Id);
 		});
 
-		Given("^i set test Group (\\d+) status to (\\d+)$", (Integer Id, Integer status) -> {
-			SqlRampAdminUtils.setStrategyGroupStatus(Id, status);
+		Given("^i set test (\\d+) status to (\\d+)$", (Integer Id, Integer status) -> {
+			SqlRampAdminUtils.setTestStatus(Id, status);
 		});
 
 //tests - (experiment groups)

@@ -561,6 +561,64 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
 
+  @NdqFilteringCL
+  Scenario: create entities for NDQ filtering2 Campaign Level
+#    test level
+    Given i disable all tests except 53
+    Given i set test 53 status to 1
+#    strategy level
+    And I set test id of test_strategy named {ScoringNew} to {53}
+    Given i disable campaigns by name on db
+      |Campaign Name                       |
+      |campaign-NDQfiltering2CL-ST-1   |
+      |campaign-NDQfiltering2CL-ST-2   |
+      |campaign-NDQfiltering2CL-ST-3   |
+      |campaign-NDQfiltering2CL-ST-4   |
+      |campaign-NDQfiltering2CL-ST-5   |
+      |campaign-NDQfiltering2CL-ST-6   |
+      |campaign-NDQfiltering2CL-ST-7   |
+#    Given i remove all zones from publishers: {3708}
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                         |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                    |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
+      |campaign-NDQfiltering2CL-ST-1         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2CL-ST-1}      |[]                   |83        |14864               |3708           |27765             |
+      |campaign-NDQfiltering2CL-ST-2         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2CL-ST-2}      |[]                   |83        |14864               |3708           |27765             |
+      |campaign-NDQfiltering2CL-ST-3         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2CL-ST-3}      |[]                   |83        |14864               |3708           |27765             |
+      |campaign-NDQfiltering2CL-ST-4         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2CL-ST-4}      |[]                   |83        |14864               |3708           |27765             |
+      |campaign-NDQfiltering2CL-ST-5         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2CL-ST-5}      |[]                   |83        |14864               |3708           |27765             |
+      |campaign-NDQfiltering2CL-ST-6         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2CL-ST-6}      |[]                   |83        |14864               |3708           |27765             |
+    And i update campaign data by name
+      |Campaign Name                    |skip_daily_goal       |daily_units             |units     |
+      |campaign-NDQfiltering2CL-ST-1    |false                 |100                     |100       |
+      |campaign-NDQfiltering2CL-ST-2    |false                 |100                     |100       |
+      |campaign-NDQfiltering2CL-ST-3    |false                 |100                     |100       |
+      |campaign-NDQfiltering2CL-ST-4    |true                  |100                     |-1        |
+      |campaign-NDQfiltering2CL-ST-5    |true                  |100                     |-1        |
+      |campaign-NDQfiltering2CL-ST-6    |true                  |100                     |-1        |
+
+  @NdqFilteringSL
+  Scenario: create entities for NDQ filtering Strategy Level
+    Given i disable all tests except 1992
+    Given i set test 1992 status to 1
+    And I set test id of test_strategy named {daniellaAutoTest1} to {1992}
+    And I set test id of test_strategy named {daniellaAutoTest2} to {1992}
+    Given i disable campaigns by name on db
+      |Campaign Name                   |
+      |campaign-NDQfiltering2SL-ST-1   |
+      |campaign-NDQfiltering2SL-ST-2   |
+      |campaign-NDQfiltering2SL-ST-3   |
+#    Given i remove all zones from publishers: {3708}
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                         |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                    |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
+      |campaign-NDQfiltering2SL-ST-1         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2SL-ST-1}      |[]                   |83        |14864               |3708           |27765             |
+      |campaign-NDQfiltering2SL-ST-2         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2SL-ST-2}      |[]                   |83        |14864               |3708           |27765
+      |campaign-NDQfiltering2SL-ST-3         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfiltering2SL-ST-3}      |[]                   |83        |14864               |3708           |27765             |
+    And i update campaign data by name
+      |Campaign Name                    |skip_daily_goal       |daily_units             |units     |
+      |campaign-NDQfiltering2SL-ST-1    |false                 |100                     |100       |
+      |campaign-NDQfiltering2SL-ST-2    |false                 |100                     |100       |
+      |campaign-NDQfiltering2SL-ST-3    |false                 |100                     |100       |
+
+
 #  @DynamicPricing
 #  Scenario: create entities for dynamic pricing
 #    Given i disable campaigns by name on db
@@ -654,6 +712,6 @@ Feature: Entities for tests
 
   @optimize
   Scenario: update test strategy
-    Given i disable all tests Groups except 53
+    Given i disable all tests except 53
     And I set test id of test_strategy named {ScoringNew} to {53}
 

@@ -1,11 +1,9 @@
-@NdqFiltering2
+@NdqFilteringCL
 @scheduled
 @uas
 
-Feature: NDQ Filtering 2
+Feature: NDQ Filtering Campaign Level
   Scenario 1: Campaign level, zone request, verify NDQ filtering obeys to skip daily goal flag when flag = false
-    Given i disable all tests Groups except 56
-    Given i set test Group 56 status to 1
     And I send 100 times an ad request with query parameters for zone named {zone-zoneset-NDQfiltering2-ST-1} to UAS
     And The response code is 200
     And The responses has impression-urls
@@ -36,7 +34,6 @@ Feature: NDQ Filtering 2
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
 
-
   Scenario 4: Campaign level, zone request, verify NDQ filtering obeys to skip daily goal flag when flag = true
     Given i disable all tests Groups except 56
     Given i set test Group 56 status to 1
@@ -61,4 +58,5 @@ Feature: NDQ Filtering 2
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-DomainT-1-banner-1}
 
+  Scenario 7: Strategy level, zone request, verify NDQ filtering navigates requests according to strategy traffic portion
 
