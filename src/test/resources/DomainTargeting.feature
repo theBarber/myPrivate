@@ -57,7 +57,7 @@ Feature: Domain Targeting tests
     And The responses are passback
 
 
-  Scenario: 1.c send zone requests with domains in the requests - black list {sahar.cnn.com}
+  Scenario: 1.c send zone requests with domains in the requests - black list {sahar.ynet.co.il}
     When I send 1 times an ad request with parameter {unlimited=1&domain=sahar.ynet.co.il&loc=sahar.ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
     Then The response code is 200
     And The responses are passback
@@ -194,7 +194,138 @@ Feature: Domain Targeting tests
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-DomainT-1-banner-1}
 
+#    Scenarios for enc_url:
+  Scenario: 1.b send zone requests with domains in the requests - white list {sahar.cnn.com}
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&loc=cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
+    Then The response code is 200
+    And The responses are passback
 
+  Scenario: 1.c send zone requests with domains in the requests - black list {sahar.ynet.co.il}
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fsahar.ynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=sahar.ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fsahar.ynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=sahar.ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-2} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-2-banner-1} 100% of the time
+
+  Scenario: 1.d send zone requests with domains in the requests - white list {cnn.com}
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-3} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-3-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-3} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-3-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-3} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-3-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fcnn.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-3} to UAS
+    Then The response code is 200
+    And The responses are passback
+
+  Scenario: 1.e send zone requests with domains in the requests - black list {ynet.co.il}
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fsahar.ynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=sahar.ynet.co.il} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
+    Then The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fcnn.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-4} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-4-banner-1} 100% of the time
+
+  Scenario: 2. send Dynamic Tag requests for sub domain sahar.cnn.com, black list {sahar.cnn.com}
+    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=170}
+    And The synchronized responses are passback
+    Given I use {http://cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=170}
+    And The synchronized responses are passback
+    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=170}
+    And The synchronized responses are passback
+
+  Scenario: 3. send Dynamic Tag requests for domain cnn.com, black list {sahar.cnn.com}
+    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=170}
+    And The synchronized responses are passback
+    Given I use {http://cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=170}
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-1-banner-1} 100% of the time
+    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=170}
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-1-banner-1} 100% of the time
+
+  Scenario: 4. send Dynamic Tag requests for domain sahar.cnn.com, black list {cnn.com}
+    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The synchronized responses are passback
+    Given I use {http://cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The synchronized responses are passback
+    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The synchronized responses are passback
+
+  Scenario: 5. send Dynamic Tag requests for domain cnn.com, black list {cnn.com}
+    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The synchronized responses are passback
+    Given I use {http://cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The synchronized responses are passback
+    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fsahar.cnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The synchronized responses are passback
+
+  Scenario: 5. send Dynamic Tag requests for domain ynet.co.il, black list {cnn.com}
+    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-2-banner-1} 100% of the time
+    Given I use {http://cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-2-banner-1} 100% of the time
+    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fynet.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=176}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-2-banner-1} 100% of the time
+
+  Scenario: 6. send Dynamic Tag requests with black list {sahar.cnn.com,cnn.com,ynet.co.il}
+    Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=175}
+    And The synchronized responses are passback
+    Given I use {http://ynet.co.il} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fwalla.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=175}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-3-banner-1} 100% of the time
+    Given I use {http://cnn.com} as referer string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {url_enc=https%3A%2F%2Fcnn.co.il%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&tagid=175}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-3-banner-1} 100% of the time
 #  -----------------------------------------------------Include-----------------------------------------------------------
 
   Scenario: 1. send zone requests
