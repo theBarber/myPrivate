@@ -48,7 +48,7 @@ public class DynamicTagTest extends BaseTest{
 
     public void updateProductDailyCappingForPublisher(String publisherId,String productID, String value)
     {
-        SqlWorkflowUtils.WorkflowQuery("UPDATE adserver.publishers_products SET daily_cap_per_user="+value+" WHERE publisher_id = "+publisherId+" and product_id ="+productID);
+        SqlWorkflowUtils.WorkflowQuery("UPDATE undertoner.publishers_products SET daily_cap_per_user="+value+" WHERE publisher_id = "+publisherId+" and product_id ="+productID);
     }
 
     public void sendDynamicTagSynchronizedRequestsToUAS(Integer times, String publisherId, String domain)
@@ -69,17 +69,17 @@ public class DynamicTagTest extends BaseTest{
 
     public void removeAllZonesForPublisherApartFrom(String publishersID, String remainingZones)
     {
-        SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`zones` as z_n SET `status`='1' WHERE z_n.zoneid in\n" +
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertoner`.`zones` as z_n SET `status`='1' WHERE z_n.zoneid in\n" +
                 "(select zoneid from (SELECT * FROM zones) as z join web_sections w_s on z.web_section_id = w_s.id \n" +
                 "\tjoin publishers_web_properties p_w_p on w_s.web_property_id = p_w_p.web_property_id \n" +
                 "\twhere p_w_p.publisher_id in ("+publishersID+") and z.status = 0 and z.zoneid not in ("+remainingZones+"));");
 
-        SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`zones` SET `status`='0' WHERE `zoneid` in ("+remainingZones+");");
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertoner`.`zones` SET `status`='0' WHERE `zoneid` in ("+remainingZones+");");
     }
 
     public void removeAllZonesForPublisher(String publishersID)
     {
-        SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`zones` as z_n SET `status`='1' WHERE z_n.zoneid in\n" +
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertoner`.`zones` as z_n SET `status`='1' WHERE z_n.zoneid in\n" +
                 "(select zoneid from (SELECT * FROM zones) as z join web_sections w_s on z.web_section_id = w_s.id \n" +
                 "\tjoin publishers_web_properties p_w_p on w_s.web_property_id = p_w_p.web_property_id \n" +
                 "\twhere p_w_p.publisher_id in ("+publishersID+") and z.status = 0);");
@@ -92,6 +92,6 @@ public class DynamicTagTest extends BaseTest{
 
     public void removeTagsFromPublisher(String tags, String publisherID)
     {
-        SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`tags` SET `status`='1' WHERE `publisher_id` = "+publisherID+" and `tagid` not in ("+tags+") ;");
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertoner`.`tags` SET `status`='1' WHERE `publisher_id` = "+publisherID+" and `tagid` not in ("+tags+") ;");
     }
 }
