@@ -411,7 +411,7 @@ public class API_EntitiesCreator extends BaseTest{
 
     private void update_po_line_item_zones_InDB(Integer zoneId, String po_line_item_ID)
     {
-        SqlWorkflowUtils.WorkflowQuery("INSERT INTO `adserver`.`po_line_items_zones` (`po_line_item_id`, `zone_id`, `created_by`, `updated_by`) VALUES ('"+po_line_item_ID+"', '"+zoneId+"', '974', '974');");
+        SqlWorkflowUtils.WorkflowQuery("INSERT INTO `undertone`.`po_line_items_zones` (`po_line_item_id`, `zone_id`, `created_by`, `updated_by`) VALUES ('"+po_line_item_ID+"', '"+zoneId+"', '974', '974');");
     }
 
     private void addCreatedZonesetToCampaignManager(ZoneSet zoneSet)
