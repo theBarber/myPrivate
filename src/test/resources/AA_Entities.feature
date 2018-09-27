@@ -558,6 +558,15 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-6     |1            |
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
+  @B-urlInApp
+  Scenario: create entities for B-url InApp Test
+    Given i disable campaigns by name on db
+      |Campaign Name         |
+      |campaign-B-urlInApp-SI-1   |
+    Given i create new campaigns with new zoneset
+      |Campaign Name                   |IO             |LineItem   |isServerProgrammatic?  |Deal\Creative  |Zonesets-zones Name          |limitation   |adUnitId  |Web_Section id    |publisher ID  |po_line_item ID   |
+      |campaign-B-urlInApp-SI-1        |407981         |222908     |true                   |66             |{zone-zoneset-Inapp-SI-1}    |[]           |69        |5164              |3708          |27776             |
+
 
 #  @DynamicPricing
 #  Scenario: create entities for dynamic pricing
