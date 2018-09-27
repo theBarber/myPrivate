@@ -1,8 +1,8 @@
-staging.workflow.db.jdbc.connection = jdbc:mysql://workflowdb-s-us-east-1.undertone.com/adserver
-integration.workflow.db.jdbc.connection = jdbc:mysql://workflowdb-i-us-east-1.undertone.com/adserver
-dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
-# dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.34.113/adserver
-dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/adserver
+staging.workflow.db.jdbc.connection = jdbc:mysql://workflowdb-s-us-east-1.undertone.com/undertone
+integration.workflow.db.jdbc.connection = jdbc:mysql://workflowdb-i-us-east-1.undertone.com/undertone
+dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/undertone
+# dev1.workflow.db.jdbc.connection = jdbc:mysql://172.19.34.113/undertone
+dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/undertone
 
 
 *.workflow.db.user = adserver
