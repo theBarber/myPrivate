@@ -20,42 +20,42 @@ Feature: InApp testing
     And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
 
-  Scenario: Image and iframe - HB request (viewableChange)
-    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 2546} for publisher 2546 with domain {Tradewindsnews.com} with extra params {&unlimited=1&optimize=0&deviceid=sahar}
-    Then The response code is 200
-    And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-Inapp-SI-1}
-    And all HB responses contains adId with id of entity named {campaign-Inapp-SI-1-banner-1}
-    And for all HB responses i simulate winning, with extra param {&deviceid=sahar}
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-Inapp-SI-1} 100% of the time
-    And The response contains var ut_pixels
-    And The response contains ut_clickurl
-    And The response contains ut_udms
-    And The response contains sf_tag
-    And The response contains https://www.example.com/1
-    And The response contains https://www.example.com/3
-    And The response contains var ut_pixel_event = \'viewableChange\'
-    And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
+#  Scenario: Image and iframe - HB request (viewableChange)
+#    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 2546} for publisher 2546 with domain {Tradewindsnews.com} with extra params {&unlimited=1&optimize=0&deviceid=sahar}
+#    Then The response code is 200
+#    And The response contains script
+#    And all HB responses contains campaignId with id of entity named {campaign-Inapp-SI-1}
+#    And all HB responses contains adId with id of entity named {campaign-Inapp-SI-1-banner-1}
+#    And for all HB responses i simulate winning, with extra param {&deviceid=sahar}
+#    And The response code is 200
+#    And The response contains script
+#    And I send impression requests to UAS
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+#    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-Inapp-SI-1} 100% of the time
+#    And The response contains var ut_pixels
+#    And The response contains ut_clickurl
+#    And The response contains ut_udms
+#   And The response contains sf_tag
+#   And The response contains https://www.example.com/1
+#    And The response contains https://www.example.com/3
+#    And The response contains var ut_pixel_event = \'viewableChange\'
+#    And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
 
-  Scenario: Image and iframe - DT request (viewableChange)
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 2546 with extra params {Tradewindsnews.com&unlimited=1&optimize=0&tagid=297&deviceid=sahar}
-    Then The response code is 200
-    And The response contains script
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
-    And The response contains var ut_pixels
-    And The response contains ut_clickurl
-    And The response contains ut_udms
-    And The response contains sf_tag
-    And The response contains https://www.example.com/1
-    And The response contains https://www.example.com/3
-    And The response contains var ut_pixel_event = \'viewableChange\'
-    And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
+ # Scenario: Image and iframe - DT request (viewableChange)
+ #   Then i send 1 times Dynamic Tag ad request to UAS for publisher 2546 with extra params {Tradewindsnews.com&unlimited=1&optimize=0&tagid=297&deviceid=sahar}
+ #   Then The response code is 200
+ #   And The response contains script
+ #   And The responses has impression-urls
+ #   And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+ #   And The response contains var ut_pixels
+ #   And The response contains ut_clickurl
+ #   And The response contains ut_udms
+ #   And The response contains sf_tag
+ #   And The response contains https://www.example.com/1
+ #   And The response contains https://www.example.com/3
+ #   And The response contains var ut_pixel_event = \'viewableChange\'
+ #   And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
 
   Scenario: just event tracker enabled - Zone request (viewableChange)
@@ -138,43 +138,43 @@ Feature: InApp testing
     And The response contains var ut_pixel_event = 'viewableChange';
     And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
-  @optimize
-  Scenario: Image and iframe - HB request (viewableChange)
-    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 2546} for publisher 2546 with domain {Tradewindsnews.com} with extra params {&unlimited=1&optimize=1&deviceid=sahar}
-    Then The response code is 200
-    And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-Inapp-SI-1}
-    And all HB responses contains adId with id of entity named {campaign-Inapp-SI-1-banner-1}
-    And for all HB responses i simulate winning, with extra param {&deviceid=sahar}
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-Inapp-SI-1} 100% of the time
-    And The response contains var ut_pixels
-    And The response contains ut_clickurl
-    And The response contains ut_udms
-    And The response contains sf_tag
-    And The response contains https://www.example.com/1
-    And The response contains https://www.example.com/3
-    And The response contains var ut_pixel_event = \'viewableChange\'
-    And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
+ # @optimize
+ # Scenario: Image and iframe - HB request (viewableChange)
+ #   Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 2546} for publisher 2546 with domain {Tradewindsnews.com} with extra params {&unlimited=1&optimize=1&deviceid=sahar}
+ #   Then The response code is 200
+ #   And The response contains script
+ #   And all HB responses contains campaignId with id of entity named {campaign-Inapp-SI-1}
+ #   And all HB responses contains adId with id of entity named {campaign-Inapp-SI-1-banner-1}
+ #   And for all HB responses i simulate winning, with extra param {&deviceid=sahar}
+ #   And The response code is 200
+ #   And The response contains script
+ #   And I send impression requests to UAS
+ #   And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+ #   And The impressionUrl has campaignid field matching the id of the campaign named {campaign-Inapp-SI-1} 100% of the time
+ #   And The response contains var ut_pixels
+ #   And The response contains ut_clickurl
+ #   And The response contains ut_udms
+ #   And The response contains sf_tag
+ #   And The response contains https://www.example.com/1
+ #   And The response contains https://www.example.com/3
+ #   And The response contains var ut_pixel_event = \'viewableChange\'
+ #   And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
-  @optimize
-  Scenario: Image and iframe - DT request (viewableChange)
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 2546 with extra params {Tradewindsnews.com&unlimited=1&optimize=1&tagid=297&deviceid=sahar}
-    Then The response code is 200
-    And The response contains script
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
-    And The response contains var ut_pixels
-    And The response contains ut_clickurl
-    And The response contains ut_udms
-    And The response contains sf_tag
-    And The response contains https://www.example.com/1
-    And The response contains https://www.example.com/3
-    And The response contains var ut_pixel_event = \'viewableChange\'
-    And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
+ # @optimize
+ # Scenario: Image and iframe - DT request (viewableChange)
+ #  Then i send 1 times Dynamic Tag ad request to UAS for publisher 2546 with extra params {Tradewindsnews.com&unlimited=1&optimize=1&tagid=297&deviceid=sahar}
+ #   Then The response code is 200
+ #   And The response contains script
+ #   And The responses has impression-urls
+ #   And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+ #   And The response contains var ut_pixels
+ #   And The response contains ut_clickurl
+ #  And The response contains ut_udms
+ #  And The response contains sf_tag
+ #   And The response contains https://www.example.com/1
+ #   And The response contains https://www.example.com/3
+ #   And The response contains var ut_pixel_event = \'viewableChange\'
+ #   And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
   @optimize
   Scenario: just event tracker enabled - Zone request (viewableChange)
