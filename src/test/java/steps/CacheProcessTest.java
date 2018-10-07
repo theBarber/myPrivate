@@ -28,6 +28,7 @@ import java.util.stream.Stream;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static sun.swing.MenuItemLayoutHelper.max;
 
 
 @CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",
@@ -115,17 +116,15 @@ public class CacheProcessTest extends BaseTest {
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (AssertionError e) {
-                        System.out.println("Couldn't push cache trying again...num_try: " + count);
-                        Calendar now = Calendar.getInstance();
-                        int minutes = now.get(Calendar.MINUTE);
-                        int timeToSleep = (LASTING_TIME_CACHE - (minutes % 10)) * 60;
-                        if (timeToSleep < 60)
-                            timeToSleep = 60;
-                        sleepFor(timeToSleep);
-                        if (++count == maxTries) {
+                        if (count++ == maxTries) {
                             System.out.println("Couldn't refresh zone cache, assuming cache is already updated. if its not the case check upgrade.lock");
                             break;
                         }
+                        System.out.println("Couldn't push cache trying again...num_try: " + count);
+                        Calendar now = Calendar.getInstance();
+                        int minutes = now.get(Calendar.MINUTE);
+                        int timeToSleep = max((LASTING_TIME_CACHE - (minutes % 10)) * 60,60);
+                        sleepFor(timeToSleep);
                     }
                 }
             });

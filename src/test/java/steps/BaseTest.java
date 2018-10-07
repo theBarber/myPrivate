@@ -160,10 +160,10 @@ public class BaseTest implements En {
   public void setupDB(){
 
     SqlWorkflowUtils.setLimitationForZone(161482, "[]");
-    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`zones` SET `status`='0' WHERE `zoneid`='161482'");
-    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`campaigns` SET `capping`='0', `session_capping`='0', `units`='-1', `status`='0' WHERE `campaignid`='278956';");
-    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`tags` SET `is_migrated`='1' WHERE `tagid`='176';");
-    SqlWorkflowUtils.WorkflowQuery("UPDATE `adserver`.`publishers` SET `publisher_status_cd`='ACTIVE' WHERE `id` in (3674,3666,3675,3690,3697,2546);");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`zones` SET `status`='0' WHERE `zoneid`='161482'");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `capping`='0', `session_capping`='0', `units`='-1', `status`='0' WHERE `campaignid`='278956';");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`tags` SET `is_migrated`='1' WHERE `tagid`='176';");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`publishers` SET `publisher_status_cd`='ACTIVE' WHERE `id` in (3674,3666,3675,3690,3697,2546);");
     CacheProcessTest.refreshZoneCache("cmd");
       try {
       TimeUnit.SECONDS.sleep(35);

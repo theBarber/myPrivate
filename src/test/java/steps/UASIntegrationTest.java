@@ -393,6 +393,7 @@ public class UASIntegrationTest extends BaseTest {
           List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
           response.stream().map(UASIntegrationTest::getDspUrl).map(CompletableFuture::join).map(UASIntegrationTest::toURL).filter(Optional::isPresent)
                   .map(Optional::get).map(UASIntegrationTest::getAppnexusPassbackURL).forEach(url-> {
+                      System.out.println(url);
                       sut.getUASRquestModule().sendGetRequestsAsync(1,url,false);
                   }
           );

@@ -16,7 +16,7 @@ public class SqlWorkflowUtils {
 		String limitation = "";
 		try {
 			Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
-			String sqlQuery = "SELECT limitation FROM adserver.zones where zoneid =" + zoneId;
+			String sqlQuery = "SELECT limitation FROM undertone.zones where zoneid =" + zoneId;
 			ResultSet rs = stmt.executeQuery(sqlQuery);
 			rs.next();
 			sut.write(rs.getString(1));
@@ -32,7 +32,7 @@ public class SqlWorkflowUtils {
 	public static void setLimitationForZone(Integer zoneId, String newLimitation) {
 		try {
 			Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
-			String query = "UPDATE adserver.zones SET limitation ='" + newLimitation + "' WHERE zoneid='"
+			String query = "UPDATE undertone.zones SET limitation ='" + newLimitation + "' WHERE zoneid='"
 					+ zoneId + "';";
 			sut.write(query);
 			if (stmt.executeUpdate(query) != 1) {
@@ -47,7 +47,7 @@ public class SqlWorkflowUtils {
 	public static void setColumnInWorkflow(String tableName, String columnName, String columnValue, String columnNameToChange, String columnValueToChange) {
       try {
           Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
-          String query = "UPDATE adserver." + tableName + " SET " + columnNameToChange + " ='" + columnValueToChange + "' WHERE " + columnName + "='"
+          String query = "UPDATE undertone." + tableName + " SET " + columnNameToChange + " ='" + columnValueToChange + "' WHERE " + columnName + "='"
                   + columnValue + "';";
           sut.write(query);
           if (stmt.executeUpdate(query) == 1) {
@@ -76,7 +76,7 @@ public class SqlWorkflowUtils {
 	  ResultSet rs = null;
 	  try {
         Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
-        String sqlQuery = "SELECT * FROM adserver." + tableName + " where " + columnName + " = '" + columnValue + "';";
+        String sqlQuery = "SELECT * FROM undertone." + tableName + " where " + columnName + " = '" + columnValue + "';";
         rs = stmt.executeQuery(sqlQuery);
           rs.next();
         } catch (SQLException e) {
