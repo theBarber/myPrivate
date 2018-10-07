@@ -577,7 +577,7 @@ Feature: Entities for tests
       |campaign-NDQfilteringCL-ST-7   |
 #    Given i remove all zones from publishers: {3708}
     Given i create new campaigns, new zoneset with domains
-      |Campaign Name                         |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                      |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
+      |Campaign Name                         |IO            |LineItem     |isServerProgrammatic? |Deal\Creative   |Zonesets-zones Name                      |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
       |campaign-NDQfilteringCL-ST-1         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringCL-ST-1}      |[]                   |83        |14887               |3708           |27772             |
       |campaign-NDQfilteringCL-ST-2         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringCL-ST-2}      |[]                   |83        |14887               |3708           |27772             |
       |campaign-NDQfilteringCL-ST-3         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringCL-ST-3}      |[]                   |83        |14887               |3708           |27772             |
@@ -597,8 +597,8 @@ Feature: Entities for tests
   Scenario: create entities for NDQ filtering Strategy Level
     Given i disable all tests except 1992
     Given i set test 1992 status to 1
-    And I set test id of test_strategy named {daniellaAutoTest1} to {1992}
-    And I set test id of test_strategy named {daniellaAutoTest2} to {1992}
+    And I set test id of test_strategy named {height} to {1992}
+    And I set test id of test_strategy named {low} to {1992}
     Given i disable campaigns by name on db
       |Campaign Name                   |
       |campaign-NDQfilteringSL-ST-1   |
@@ -606,23 +606,23 @@ Feature: Entities for tests
       |campaign-NDQfilteringSL-ST-3   |
 #    Given i remove all zones from publishers: {3708}
     Given i create new campaigns, new zoneset with domains
-      |Campaign Name                         |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                      |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
+      |Campaign Name                        |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                      |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
       |campaign-NDQfilteringSL-ST-1         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringSL-ST-1}      |[]                   |83        |14888               |3708           |27773             |
       |campaign-NDQfilteringSL-ST-2         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringSL-ST-2}      |[]                   |83        |14888               |3708           |27773             |
       |campaign-NDQfilteringSL-ST-3         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringSL-ST-3}      |[]                   |83        |14888               |3708           |27773             |
     And i update campaign data by name
-      |Campaign Name                    |skip_daily_goal       |daily_units             |units     |
+      |Campaign Name                    |skip_daily_goal      |daily_units             |units     |
       |campaign-NDQfilteringSL-ST-1    |false                 |100                     |100       |
       |campaign-NDQfilteringSL-ST-2    |false                 |100                     |100       |
       |campaign-NDQfilteringSL-ST-3    |false                 |100                     |100       |
 
   @NdqFilteringTL
   Scenario: create entities for NDQ filtering Test Level
-    Given i disable all tests except 1992
-    Given i set test 1992 status to 1
+    Given i disable all tests except 1993
     Given i set test 1993 status to 1
-    And I set test id of test_strategy named {daniellaAutoTest1} to {1992}
-    And I set test id of test_strategy named {daniellaAutoTest2} to {1993}
+    Given i set test 1994 status to 1
+    And I set test id of test_strategy named {height} to {1994}
+    And I set test id of test_strategy named {low} to {1993}
     Given i disable campaigns by name on db
       |Campaign Name                   |
       |campaign-NDQfilteringTL-ST-1   |
@@ -630,7 +630,7 @@ Feature: Entities for tests
       |campaign-NDQfilteringTL-ST-3   |
 #    Given i remove all zones from publishers: {3708}
     Given i create new campaigns, new zoneset with domains
-      |Campaign Name                         |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                     |limitation         |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
+      |Campaign Name                        |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                     |limitation         |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
       |campaign-NDQfilteringTL-ST-1         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringTL-ST-1}      |[]                   |83        |14889               |3708           |27774             |
       |campaign-NDQfilteringTL-ST-2         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringTL-ST-2}      |[]                   |83        |14889               |3708           |27774             |
       |campaign-NDQfilteringTL-ST-3         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringTL-ST-3}      |[]                   |83        |14889               |3708           |27774             |
@@ -640,17 +640,7 @@ Feature: Entities for tests
       |campaign-NDQfilteringTL-ST-2    |false                 |100                     |100       |
       |campaign-NDQfilteringTL-ST-3    |false                 |100                     |100       |
 
-  @B-urlInApp
-  Scenario: create entities for B-url InApp Test
-    Given i disable campaigns by name on db
-      |Campaign Name         |
-      |campaign-B-urlInApp-SI-1   |
-      |campaign-B-urlInApp-SI-2   |
-      |campaign-B-urlInApp-SI-3   |
-    Given i create new campaigns with new zoneset
-      |Campaign Name                   |IO             |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-B-urlInApp-SI-1        |407981         |222908     |true                   |66                |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |67180             |
-
+ 
 #  @DynamicPricing
 #  Scenario: create entities for dynamic pricing
 #    Given i disable campaigns by name on db
