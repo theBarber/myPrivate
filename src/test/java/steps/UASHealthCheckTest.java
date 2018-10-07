@@ -44,7 +44,6 @@ public class UASHealthCheckTest extends BaseTest {
 		Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains (.*)$", this::healthCheckResponseContains);
-
 		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
 
 	}

@@ -47,31 +47,36 @@ public class ABTestingTest extends BaseTest {
 		Given("^Unable all experiment groups except experimentID (\\d+)", (Integer experimentID) -> {
 			SqlRampAdminUtils.unableAllExperimentGroupsExcept(experimentID);
 		});
-
-		Given("^i disable all tests Groups except (\\d+)$", (Integer Id) -> {
-			SqlRampAdminUtils.disableAllStrategyGroupsExcept(Id);
+		//TESTS
+		Given("^i disable all tests except (\\d+)$", (Integer Id) -> {
+			SqlRampAdminUtils.disableAllTestsExcept(Id);
 		});
 
-		Given("^I create new experiment groups with the following fields$", (DataTable experimentGroupsTable) -> {
+		Given("^i set test (\\d+) status to (\\d+)$", (Integer Id, Integer status) -> {
+			SqlRampAdminUtils.setTestStatus(Id, status);
+		});
+
+//tests - (experiment groups)
+		Given("^I create new test with the following fields$", (DataTable experimentGroupsTable) -> {
 			List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
 			latestExperimentGroupIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment_group");
 			SqlRampAdminUtils.createNewExperimentGroup(experimentGroupsList);
 		});
 
-		And("^I create new experiments for group named \\{([^}]+)\\} with the following fields$",
+		And("^I create new test named \\{([^}]+)\\} with the following fields$",
 				(String experimentGroupName, DataTable experimentsTable) -> {
 					List<Experiment> experiments = experimentsTable.asList(Experiment.class);
 					latestExperimentIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment");
 					int experimentGroupId = SqlRampAdminUtils.getIdFromTableByName(experimentGroupName,
-							"experiment_group");
+							"test");
 					SqlRampAdminUtils.createNewExperimentForGroupId(experimentGroupId, experiments);
 				});
 
-		And("^I set the activation status of experiment named \\{([^}]+)\\} to \\{(\\d+)\\}$",
+		And("^I set the activation status of tests named \\{([^}]+)\\} to \\{(\\d+)\\}$",
 				(String experimentName, Integer activationStatus) -> {
-					SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "experiment");
+					SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "test");
 				});
-
+//srategy
 		And("^I set test id of test_strategy named \\{([^}]+)\\} to \\{(\\d+)\\}$",
 				SqlRampAdminUtils::setTestStrategyToTestIdGroup);
 

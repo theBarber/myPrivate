@@ -104,7 +104,7 @@ public class SqlRampAdminUtils {
 			fail(e.getMessage());
 		}
 	}
-
+//UPDATED
 	public static void setTestStrategyToTestIdGroup(String TestStrategyName, Integer testId) {
 		try {
 			Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
@@ -185,8 +185,8 @@ public class SqlRampAdminUtils {
 		}
 
 	}
-
-	public static void disableAllStrategyGroupsExcept(Integer testID) {
+//UPDET TEST
+	public static void disableAllTestsExcept(Integer testID) {
 		try {
 			Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
 
@@ -198,7 +198,21 @@ public class SqlRampAdminUtils {
 		} catch (SQLException e) {
 			fail(e.getMessage());
 		}
+
 	}
 
+	public static void setTestStatus(Integer testID, Integer status) {
+		try {
+			Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
+
+			String updateExperimentQuery = "UPDATE staging_ramp_admin.test set active="+status+" where id="+testID+";";
+
+			if (stmt.executeUpdate(updateExperimentQuery) < 1) {
+				fail("set TestStatus failed");
+			}
+		} catch (SQLException e) {
+			fail(e.getMessage());
+		}
+	}
 
 }
