@@ -12,6 +12,6 @@ import org.junit.runner.RunWith;
 
 public class NdqFilteringCLTest extends BaseTest{
     public NdqFilteringCLTest(){
-        super();
+           super();
     }
 }
