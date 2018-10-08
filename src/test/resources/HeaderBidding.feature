@@ -741,7 +741,6 @@ Feature: Header Bidding flow support
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And all HB responses contains adId with value {0}
 
-   header bidding multiple domains tests
   @optimize
   Scenario: header bidding multiple domains - domain1
     Given I add cookie UTID with value {d7a8b9faf42446dcbca3748eef7d47bb} to my requests to uas
