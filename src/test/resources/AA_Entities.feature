@@ -687,6 +687,9 @@ Feature: Entities for tests
 #      |campaign-DP-ClientProg-970X250-D    | 1            |4                       |2                 |
   @DynamicPricing
   @InAppBlackWhiteList
+  @NdqFilteringCL
+  @NdqFilteringSL
+  @NdqFilteringTL
   @OpenX
   @Inapp
   @PGX
@@ -710,6 +713,9 @@ Feature: Entities for tests
     And I sleep for 60 seconds
   @DynamicPricing
   @InAppBlackWhiteList
+  @NdqFilteringCL
+  @NdqFilteringSL
+  @NdqFilteringTL
   @PG1
   @SupplyType
   @viewability
