@@ -44,8 +44,24 @@ Scenario:3. Basic DT logic with zone level filtering
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-1-t-3-L-banner-1} 100% of the time
 
-
-
+  Scenario: 4.a Basic DT flow with url_enc instead of domain
+    Given I add cookie UTID with random value to my requests to uas
+    Then i send 2 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with url_enc {url_enc=https%3A%2F%2Fdynamic1.com%2Fbills%2Fnews%2Fbills-wideouts-are-the-nfl-s-worst-by-a-wide-margin-pCN0y4oPaESRX6SabNoGmA%2F&unlimited=1&optimize=0}
+    And The synchronized response code is 200
+    And The response contains script
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SS-1-t-1-banner-1} 50% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-1-t-1-banner-1} 50% of the time
+    And I sleep for 5 seconds
+    Then i send 1 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=0}
+    And The synchronized response code is 200
+    And The response contains script
+    And The responses has impression-urls
+    And I sleep for 5 seconds
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-PGC-2-t-1-banner-1} 100% of the time
+    Then i send 1 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=0}
+    And The synchronized response code is 200
+    And The synchronized responses are passback
 
 #  -----------------------------------------------------Optimize-------------------------------------------------------------------
   @optimize

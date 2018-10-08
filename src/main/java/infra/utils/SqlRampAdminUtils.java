@@ -104,7 +104,7 @@ public class SqlRampAdminUtils {
 			fail(e.getMessage());
 		}
 	}
-
+//UPDATED
 	public static void setTestStrategyToTestIdGroup(String TestStrategyName, Integer testId) {
 		try {
 			Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
@@ -185,8 +185,8 @@ public class SqlRampAdminUtils {
 		}
 
 	}
-
-	public static void disableAllStrategyGroupsExcept(Integer testID) {
+//UPDET TEST
+	public static void disableAllTestsExcept(Integer testID) {
 		try {
 			Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
 

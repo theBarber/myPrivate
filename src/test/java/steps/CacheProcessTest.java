@@ -100,9 +100,8 @@ public class CacheProcessTest extends BaseTest {
 
     public static void refreshZoneCache(String action) {
         String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
-        LinuxDefaultCliConnection cronServerConnection = sut.getUasCliConnections().get(cron_ip);
-        String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
         String pushCacheToS3Command = "sudo bash -c \"/var/www/adserver/pushCacheToS3\"";
+        String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
         if (action.equals("cmd")) {
 
             //push zone.tch to s3 from the machine
@@ -129,6 +128,44 @@ public class CacheProcessTest extends BaseTest {
                     }
                 }
             });
+
+//
+//            public static void refreshZoneCacheNEW(String action) {
+//                String cron_ip = sut.getConfigFile().get("uas.cliconnection.cron");
+//                String pushCacheToS3Command = "sudo bash -c \"/var/www/adserver/pushCacheToS3\"";
+//                String pullZoneCacheCmd = "sudo docker exec ut-ramp-uas /var/www/adserver/scripts/aws_cache_sync.sh AWS_CACHE_SYNC PULL_LATEST";
+//                if (action.equals("cmd")) {
+//
+//                    //push zone.tch to s3 from the machine
+//                    sut.getCronCliConnection().forEach((host, conn) -> {
+//                            try {
+//                                new CliCommandExecution(conn, pushCacheToS3Command)
+//                                        .error("Couldn't sync").error("trace").withTimeout(10, TimeUnit.MINUTES).execute();
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            } catch (AssertionError e) {
+//                                while (true){
+
+//                                    try {
+//                                        new CliCommandExecution(conn, pushCacheToS3Command)
+//                                                .error("Couldn't sync").error("trace").withTimeout(10, TimeUnit.MINUTES).execute();
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    } catch (AssertionError e) {
+//                                        System.out.println("Still refreshing..waiting for the process to finish");
+//                                        continue;
+//                                    }
+//
+//                                }
+//
+//                            }
+//
+//
+//
+//
+//            }
+//
+
 
             //download the zone.tch from s3 rto all machines, except cron
             sut.getHostsConnection().forEach((host, conn) -> {
