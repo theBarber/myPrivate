@@ -1,6 +1,5 @@
 @NdqFilteringCL
 @scheduled
-@HeaderBidding
 @uas
 
 Feature: NDQ Filtering Campaign Level
