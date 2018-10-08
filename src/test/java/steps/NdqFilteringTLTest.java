@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:InAppBlackWhiteList.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/InAppBlackWhiteList_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:NdqFilteringTL.feature", plugin = {"pretty",
+        "infra.RotatingJSONFormatter:target/cucumber/NdqFilteringTL_$TIMESTAMP$.json"})
 
 public class NdqFilteringTLTest extends BaseTest{
     public NdqFilteringTLTest(){
