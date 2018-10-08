@@ -52,6 +52,15 @@ public class ABTestingTest extends BaseTest {
 			SqlRampAdminUtils.disableAllStrategyGroupsExcept(Id);
 		});
 
+//		Given("^i disable all tests except (\\d+)$", (Integer Id) -> {
+//			SqlRampAdminUtils.disableAllTestsExcept(Id);
+//		});
+
+		Given("^i set test (\\d+) status to (\\d+)$", (Integer Id, Integer status) -> {
+			SqlRampAdminUtils.setTestStatus(Id, status);
+		});
+
+
 		Given("^I create new experiment groups with the following fields$", (DataTable experimentGroupsTable) -> {
 			List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
 			latestExperimentGroupIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment_group");

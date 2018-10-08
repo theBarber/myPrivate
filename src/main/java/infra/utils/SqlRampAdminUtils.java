@@ -200,5 +200,20 @@ public class SqlRampAdminUtils {
 		}
 	}
 
+	public static void setTestStatus(Integer testID, Integer status) {
+		try {
+			Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
+
+			String updateExperimentQuery = "UPDATE staging_ramp_admin.test set active="+status+" where id="+testID+";";
+
+			if (stmt.executeUpdate(updateExperimentQuery) < 1) {
+				fail("set TestStatus failed");
+			}
+		} catch (SQLException e) {
+			fail(e.getMessage());
+		}
+	}
+
+
 
 }
