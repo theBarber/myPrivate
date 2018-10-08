@@ -582,13 +582,13 @@ Feature: Entities for tests
       |campaign-NDQfilteringCL-ST-5         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringCL-ST-5}      |[]                   |83        |14887               |3708           |27772             |
       |campaign-NDQfilteringCL-ST-6         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringCL-ST-6}      |[]                   |83        |14887               |3708           |27772             |
     And i update campaign data by name
-      |Campaign Name                    |skip_daily_goal       |daily_units             |units     |
-      |campaign-NDQfilteringCL-ST-1    |false                 |100                     |100       |
-      |campaign-NDQfilteringCL-ST-2    |false                 |100                     |100       |
-      |campaign-NDQfilteringCL-ST-3    |false                 |100                     |100       |
-      |campaign-NDQfilteringCL-ST-4    |true                  |100                     |-1        |
-      |campaign-NDQfilteringCL-ST-5    |true                  |100                     |-1        |
-      |campaign-NDQfilteringCL-ST-6    |true                  |100                     |-1        |
+      |Campaign Name                   |skip_daily_goal   |daily_units             |units     |
+      |campaign-NDQfilteringCL-ST-1    |0                 |100                     |100       |
+      |campaign-NDQfilteringCL-ST-2    |0                 |100                     |100       |
+      |campaign-NDQfilteringCL-ST-3    |0                 |100                     |100       |
+      |campaign-NDQfilteringCL-ST-4    |1                 |100                     |-1        |
+      |campaign-NDQfilteringCL-ST-5    |1                 |100                     |-1        |
+      |campaign-NDQfilteringCL-ST-6    |1                 |100                     |-1        |
 
 
   @NdqFilteringSL
@@ -610,9 +610,9 @@ Feature: Entities for tests
       |campaign-NDQfilteringSL-ST-3         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringSL-ST-3}      |[]                   |83        |14888               |3708           |27773             |
     And i update campaign data by name
       |Campaign Name                    |skip_daily_goal      |daily_units             |units     |
-      |campaign-NDQfilteringSL-ST-1    |false                 |100                     |100       |
-      |campaign-NDQfilteringSL-ST-2    |false                 |100                     |100       |
-      |campaign-NDQfilteringSL-ST-3    |false                 |100                     |100       |
+      |campaign-NDQfilteringSL-ST-1    |0                 |100                     |100       |
+      |campaign-NDQfilteringSL-ST-2    |0                 |100                     |100       |
+      |campaign-NDQfilteringSL-ST-3    |0                 |100                     |100       |
 
   @NdqFilteringTL
   Scenario: create entities for NDQ filtering Test Level
@@ -634,9 +634,9 @@ Feature: Entities for tests
       |campaign-NDQfilteringTL-ST-3         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringTL-ST-3}      |[]                   |83        |14889               |3708           |27774             |
     And i update campaign data by name
       |Campaign Name                   |skip_daily_goal      |daily_units               |units     |
-      |campaign-NDQfilteringTL-ST-1    |false                 |100                     |100       |
-      |campaign-NDQfilteringTL-ST-2    |false                 |100                     |100       |
-      |campaign-NDQfilteringTL-ST-3    |false                 |100                     |100       |
+      |campaign-NDQfilteringTL-ST-1    |0                 |100                     |100       |
+      |campaign-NDQfilteringTL-ST-2    |0                 |100                     |100       |
+      |campaign-NDQfilteringTL-ST-3    |0                 |100                     |100       |
 
  
 #  @DynamicPricing
