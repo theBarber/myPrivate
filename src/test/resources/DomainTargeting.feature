@@ -211,7 +211,8 @@ Feature: Domain Targeting tests
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
     When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fcnn.com%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
     Then The response code is 200
-    And The responses are passback
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DomainT-ZoneTag-1-banner-1} 100% of the time
 
   Scenario: 9b. send zone requests with url_enc in the requests - white list {sahar.cnn.com}
     When I send 1 times an ad request with parameter {unlimited=1&url_enc=https%3A%2F%2Fdaniella7634yey%2Fbills%2Fnews%2FbilpCN0y4oPaESRX6SabNoGmA%2Fm&unlimited=1&loc=sahar.cnn.com} for zone named {zone-zoneset-DomainT-ZoneTag-1} to UAS
