@@ -339,6 +339,8 @@ Feature: Entities for tests
       |campaign-server-prog-ST-2       |
       |campaign-server-prog-ST-3       |
       |campaign-server-prog-ST-4       |
+#     InApp Burl
+      |campaign-server-prog-inApp-ST-1 |
     Given i remove all zones from publishers: {3711}
     Given i create new campaigns with new zoneset
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
@@ -354,6 +356,8 @@ Feature: Entities for tests
       |campaign-server-prog-ST-2  |407981        |224533     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       |campaign-server-prog-ST-3  |407981        |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       |campaign-server-prog-ST-4  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      #     InApp Burl
+      |campaign-server-prog-inApp-ST-1  |407981        |224533     |true                   |33               |{zone-zoneset-prog-inApp-ST} |[]           |83        |2164              |3711           |66555             |
     And i update campaign data by name
       |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-server-prog-SS-1       |-2            |1                       |4                 |
@@ -368,6 +372,8 @@ Feature: Entities for tests
       |campaign-server-prog-ST-2       |-1            |2                       |3                 |
       |campaign-server-prog-ST-3       | 1            |4                       |2                 |
       |campaign-server-prog-ST-4       | 1            |4                       |1                 |
+      #     InApp Burl
+      |campaign-server-prog-inApp-ST-1       | 1            |4                       |1                 |
 
 
    @viewability
@@ -593,10 +599,6 @@ Feature: Entities for tests
 
   @NdqFilteringSL
   Scenario: create entities for NDQ filtering Strategy Level
-    Given i disable all tests except 1992
-    Given i set test 1992 status to 1
-    And I set test id of test_strategy named {height} to {1992}
-    And I set test id of test_strategy named {low} to {1992}
     Given i disable campaigns by name on db
       |Campaign Name                   |
       |campaign-NDQfilteringSL-ST-1   |
@@ -616,11 +618,6 @@ Feature: Entities for tests
 
   @NdqFilteringTL
   Scenario: create entities for NDQ filtering Test Level
-    Given i disable all tests except 1993
-    Given i set test 1993 status to 1
-    Given i set test 1994 status to 1
-    And I set test id of test_strategy named {height} to {1994}
-    And I set test id of test_strategy named {low} to {1993}
     Given i disable campaigns by name on db
       |Campaign Name                   |
       |campaign-NDQfilteringTL-ST-1   |
