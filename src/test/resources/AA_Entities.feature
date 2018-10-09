@@ -578,7 +578,6 @@ Feature: Entities for tests
       |campaign-NDQfilteringCL-ST-5   |
       |campaign-NDQfilteringCL-ST-6   |
       |campaign-NDQfilteringCL-ST-7   |
-    Given i remove all zones from publishers: {3708}
     Given i create new campaigns with new zoneset
       |Campaign Name                         |IO            |LineItem     |isServerProgrammatic? |Deal\Creative   |Zonesets-zones Name                      |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
       |campaign-NDQfilteringCL-ST-1         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringCL-ST-1}      |[]                   |83        |14887               |3708           |27772             |
@@ -604,7 +603,6 @@ Feature: Entities for tests
       |campaign-NDQfilteringSL-ST-1   |
       |campaign-NDQfilteringSL-ST-2   |
       |campaign-NDQfilteringSL-ST-3   |
-    Given i remove all zones from publishers: {3708}
     Given i create new campaigns with new zoneset
       |Campaign Name                        |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                      |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
       |campaign-NDQfilteringSL-ST-1         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringSL-ST-1}      |[]                   |83        |14888               |3708           |27773             |
@@ -623,7 +621,6 @@ Feature: Entities for tests
       |campaign-NDQfilteringTL-ST-1   |
       |campaign-NDQfilteringTL-ST-2   |
       |campaign-NDQfilteringTL-ST-3   |
-    Given i remove all zones from publishers: {3708}
     Given i create new campaigns with new zoneset
       |Campaign Name                        |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name                     |limitation         |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |
       |campaign-NDQfilteringTL-ST-1         |75396         |210722       |false                  |204             |{zone-zoneset-NDQfilteringTL-ST-1}      |[]                   |83        |14889               |3708           |27774             |
