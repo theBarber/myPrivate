@@ -10,7 +10,6 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The response contains script
-    And The response contains http://ads-s-us-east-1.undertone.com/l?burl=1
     And The response has impression-url
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
@@ -31,7 +30,6 @@ Feature: Programmatic flow support
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains script
-    And The response contains http://ads-s-us-east-1.undertone.com/l?burl=1
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
 
   Scenario: 4. Call Programmatic GW, GW doing auction, last ad selected - zone tag
@@ -76,13 +74,24 @@ Feature: Programmatic flow support
     And The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-4-banner-1} 100% of the time
-#inApp Burl
-  Scenario: 9. basic Call to Programmatic GW InApp, zone request, make sure b-url is sent
+
+    #web Burl
+  Scenario: 9b. basic Call to Programmatic GW web, zone request, make sure b-url is sent
+    When I send 1 times an ad request with parameter {requestid=BurlTest&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The response contains <script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com"</script><script type="text/javascript">
+    And The response has impression-url
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
+    When I send impression requests to UAS
+
+    #inApp Burl
+  Scenario: 9b. basic Call to Programmatic GW InApp, zone request, make sure b-url is sent
     Then I sleep for 1 seconds
     When I send 1 times an ad request with parameter {requestid=BurlTest&unlimited=1&bundleid=app1} for zone named {zone-zoneset-prog-inApp-ST} to UAS
     And The response code is 200
     And The response contains script
-    And The response contains http://ads-s-us-east-1.undertone.com/l?burl=1
+    And The response contains <script type="text/javascript">ut_pixels.push({type:'image', url:'https://ads-s-us-east-1.undertone.com'});</script>
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-inApp-ST-1} 100% of the time
 
@@ -93,7 +102,6 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=1&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The response contains script
-    And The response contains http://ads-s-us-east-1.undertone.com/l?burl=1
     And The response has impression-url
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
@@ -110,7 +118,6 @@ Feature: Programmatic flow support
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=1&requestid=systemTestA}
     And The response code is 200
     And The response contains script
-    And The response contains http://ads-s-us-east-1.undertone.com/l?burl=1
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200

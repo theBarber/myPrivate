@@ -62,7 +62,6 @@ public class DynamicTagTest extends BaseTest{
         sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,null,publisherId, url_enc,null,false,false);
     }
 
-
     public void sendDynamicTagRequestsToUAS(Integer times, String publisherId, String domain)
     {
         sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,null,publisherId, domain,null,true,false);
