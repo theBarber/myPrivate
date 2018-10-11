@@ -27,7 +27,6 @@ public class DynamicTagTest extends BaseTest{
         Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
         Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with extra params \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
         Then("i send (\\d+) times Dynamic Tag synchronized ad request with tag id (\\w+) to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagWithTagSynchronizedRequestsToUAS);
-        Then("i send (\\d+) times Dynamic Tag synchronized ad request with tag id (\\w+) to UAS for publisher (\\w+) with url_enc \\{([^}]+)\\}",this::sendDynamicTagWithTagSynchronizedRequestsWithUrlEncToUAS);
         Given("i remove all zones related to web_section id (\\d+)",this::removeAllZonesFrom);
         Given("only tags \\{([^}]+)\\} are enabled and the rest are disabled for publisher (\\d+)",this::removeTagsFromPublisher);
         And("i remove all zones from publishers: \\{([^}]+)\\}, apart from zones:\\{([^}]+)\\}",this::removeAllZonesForPublisherApartFrom);
@@ -75,11 +74,6 @@ public class DynamicTagTest extends BaseTest{
     public void sendDynamicTagWithTagSynchronizedRequestsToUAS(Integer times,String tagID, String publisherId, String domain)
     {
         sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,tagID,publisherId, domain,null,false,false);
-    }
-
-    public void sendDynamicTagWithTagSynchronizedRequestsWithUrlEncToUAS(Integer times,String tagID, String publisherId, String url_enc)
-    {
-        sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,tagID,publisherId, url_enc,null,false,false);
     }
 
     public void removeAllZonesForPublisherApartFrom(String publishersID, String remainingZones)
