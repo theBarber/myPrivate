@@ -387,7 +387,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     public void sendMultipleDynamicTagGetRequests(Integer times, String tagID, String publisherId, String domainParam, String extraParams, boolean isAsync, boolean isSecure) {
-        String params = "pid=" + publisherId +  Optional.ofNullable(domain).map(s -> "&domain=" + s).orElse("")+ Optional.ofNullable(tagID).filter(s -> !s.isEmpty()).map(s -> "&tagid=" + s).orElse("") + Optional.ofNullable(extraParams).orElse("");
+        String params = "pid=" + publisherId +  Optional.ofNullable(domainParam).map(s -> "&domain=" + s).orElse("")+ Optional.ofNullable(tagID).filter(s -> !s.isEmpty()).map(s -> "&tagid=" + s).orElse("") + Optional.ofNullable(extraParams).orElse("");
         String url = getURL("dynamicTag", params, isSecure);
         sendMultipleGetRequestsToUAS(times, url, isAsync);
     }
