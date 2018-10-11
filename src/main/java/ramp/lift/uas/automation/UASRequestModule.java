@@ -393,7 +393,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     public void sendMultipleHeaderBiddingPostRequests(Integer times, String body, Integer publisherID, String domainParam, String extraParams, boolean isAsync, boolean isSecure) {
-        String params = "pid=" + publisherID + "&domain=" + domainParam + Optional.ofNullable(extraParams).orElse("");
+        String params = "pid=" + publisherID + Optional.ofNullable(domainParam).map(s -> "&domain=" + s).orElse("") + Optional.ofNullable(extraParams).orElse("");
         String url = getURL("headerBidding", params, isSecure);
         sendMultiplePostRequestsToUAS(times, url, body, isAsync);
     }
