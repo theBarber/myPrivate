@@ -61,16 +61,20 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		CloseableHttpResponse createCampaignResponse;
 		String url = getServicesURL("/api/v1/io/campaigns");
 		HttpPost httpPost = new HttpPost(url);
+		int times = 0;
 		//System.out.println("---------------------"+url);
 		try {
-			HttpEntity entity = new StringEntity(mapper.writeValueAsString(requestWrapper), ContentType.APPLICATION_JSON);
-			httpPost.setEntity(entity);
-			printEntityContent(entity);
-			createCampaignResponse = httpclient.execute(httpPost);
+			do {
+				HttpEntity entity = new StringEntity(mapper.writeValueAsString(requestWrapper), ContentType.APPLICATION_JSON);
+				httpPost.setEntity(entity);
+				printEntityContent(entity);
+				createCampaignResponse = httpclient.execute(httpPost);
+				times++;
+			}while(times < 3 || createCampaignResponse.getStatusLine().getStatusCode() != 200);
 		}catch (IOException e)
 		{
 			e.printStackTrace();
-			throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+			throw new UncheckedIOException("failed to send request 3 times (" + url + ") ", e);
 		}
 		assertThat("Status code of create campaign request", createCampaignResponse.getStatusLine().getStatusCode(), is(200));
 		return createCampaignResponse;
