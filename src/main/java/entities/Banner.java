@@ -7,12 +7,14 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import entities.ramp.app.api.Creative;
 import infra.module.Named;
 import infra.module.WithId;
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Banner implements Named, WithId<Integer>, Comparable<Banner> {
 
 	private String name;
