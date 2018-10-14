@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import entities.ramp.app.api.Creative;
 import infra.module.WithId;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LineItem implements WithId<Integer> {
 	
     public IO Io;

@@ -1,12 +1,14 @@
 package entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import infra.module.Named;
 import infra.module.WithId;
 
 import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Deal  implements WithId<Integer>, Named {
     private Integer dealId;
     private String dealName;

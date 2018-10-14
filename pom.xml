@@ -14,6 +14,19 @@
 			<name>bintray</name>
 			<url>http://jcenter.bintray.com</url>
 		</repository>
+		<repository>
+			<id>nexus-releases</id>
+			<name>ramp-ut-io-release</name>
+			<url>http://nexus-ext.ramp-ut.io:8081/repository/maven-releases</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
 	</repositories>
 	<build>
 		<plugins>
@@ -99,7 +112,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-s3</artifactId>
-			<version>1.11.37</version>
+			<version>1.11.349</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -120,7 +133,7 @@
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.2</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -217,6 +230,22 @@
             <artifactId>cucumber-java8</artifactId>
             <version>1.2.2</version>
         </dependency>-->
-		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>ramp.lift.common</groupId>
+			<artifactId>common-util</artifactId>
+			<version>1.0.115.0</version>
+			<exclusions>
+				<exclusion>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>

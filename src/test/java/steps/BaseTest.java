@@ -36,6 +36,7 @@ public class BaseTest implements En {
   protected final String[] DYNAMICTAG = new String[] {"@DinamicTag"};
   protected final String[] HEADERBIDDING = new String[] {"@HeaderBidding"};
   protected final String[] API = new String[] {"@API"};
+  protected final String[] CI = new String[] {"@CI"};
 
 
   //protected com.rabbitmq.client.Connection rabbitClientConnection;
