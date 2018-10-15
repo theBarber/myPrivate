@@ -13,8 +13,29 @@
 			<id>central</id>
 			<name>bintray</name>
 			<url>http://jcenter.bintray.com</url>
-		</repository>		
+		</repository>
+		<repository>
+			<id>nexus-releases</id>
+			<name>ramp-ut-io-release</name>
+			<url>http://nexus-ext.ramp-ut.io:8081/repository/maven-releases</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
 	</repositories>
+	<distributionManagement>
+        	<repository>
+            		<id>nexus-releases</id>
+            		<name>ramp-ut-io-release</name>
+			<url>http://nexus.ramp-ut.io:8081/repository/maven-releases</url>
+
+        	</repository>
+    	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -221,6 +242,18 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5.5</version>
-		</dependency>		
+		</dependency>
+		<dependency>
+			<groupId>ramp.lift.common</groupId>
+			<artifactId>common-util</artifactId>
+			<version>1.0.115.0</version>
+			<exclusions>
+				<exclusion>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>
