@@ -70,7 +70,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 				printEntityContent(entity);
 				createCampaignResponse = httpclient.execute(httpPost);
 				times++;
-			}while(times < 3 || createCampaignResponse.getStatusLine().getStatusCode() != 200);
+			}while(times < 3 && createCampaignResponse.getStatusLine().getStatusCode() != 200);
 		}catch (IOException e)
 		{
 			e.printStackTrace();
