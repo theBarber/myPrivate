@@ -2,6 +2,7 @@
 @Inapp
 @HeaderBidding
 @uas
+@parallel
 Feature: InApp testing
 
   Scenario: Image and iframe - Zone request (viewableChange)
@@ -70,7 +71,7 @@ Feature: InApp testing
 
 
   Scenario: image, markup and iframe - Zone request (viewableChange)
-    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar} for zone named {zone-zoneset-Inapp-SI-3} to UAS
+    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&cb=test} for zone named {zone-zoneset-Inapp-SI-3} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
@@ -93,7 +94,7 @@ Feature: InApp testing
 
 
   Scenario: image, markup and iframe - Zone request (render)
-    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar} for zone named {zone-zoneset-Inapp-SI-5} to UAS
+    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&cb=test} for zone named {zone-zoneset-Inapp-SI-5} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
@@ -107,7 +108,7 @@ Feature: InApp testing
 
 
   Scenario: image, markup and iframe - Zone request (ready)
-    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar} for zone named {zone-zoneset-Inapp-SI-6} to UAS
+    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&cb=test} for zone named {zone-zoneset-Inapp-SI-6} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
@@ -189,7 +190,7 @@ Feature: InApp testing
 
   @optimize
   Scenario: image, markup and iframe - Zone request (viewableChange)
-    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&optimize=1} for zone named {zone-zoneset-Inapp-SI-3} to UAS
+    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&optimize=1&cb=test} for zone named {zone-zoneset-Inapp-SI-3} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
@@ -212,7 +213,7 @@ Feature: InApp testing
 
   @optimize
   Scenario: image, markup and iframe - Zone request (render)
-    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&optimize=1} for zone named {zone-zoneset-Inapp-SI-5} to UAS
+    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&optimize=1&cb=test} for zone named {zone-zoneset-Inapp-SI-5} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
@@ -226,7 +227,7 @@ Feature: InApp testing
 
   @optimize
   Scenario: image, markup and iframe - Zone request (ready)
-    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&optimize=1} for zone named {zone-zoneset-Inapp-SI-6} to UAS
+    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&optimize=1&cb=test} for zone named {zone-zoneset-Inapp-SI-6} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
