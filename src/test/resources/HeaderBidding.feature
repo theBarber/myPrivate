@@ -118,7 +118,7 @@ Feature: Header Bidding flow support
     And The response contains script
      And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
      And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
-     And all HB responses contains cpm with value {1.0}
+     And all HB responses contains cpm with value {1}
      And for all HB responses i simulate winning, and send their zone tag
      And The response code is 200
      And The response contains script
@@ -135,7 +135,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-Billboard-970X250-D}
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains script
