@@ -78,9 +78,8 @@ Feature: Programmatic flow support
 
     #web Burl
   Scenario: 9b. basic Call to Programmatic GW web, zone request, make sure b-url is sent
-    When I send 1 times an ad request with parameter {requestid=BurlTest&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
+    When I send 1 times an ad request with parameter {requestid=BUrlTestInApp&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
-    And The response contains script
     And The response contains <script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com"</script><script type="text/javascript">
     And The response has impression-url
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
@@ -89,7 +88,7 @@ Feature: Programmatic flow support
     #inApp Burl
   Scenario: 9b. basic Call to Programmatic GW InApp, zone request, make sure b-url is sent
     Then I sleep for 1 seconds
-    When I send 1 times an ad request with parameter {requestid=BurlTest&unlimited=1&bundleid=app1} for zone named {zone-zoneset-prog-inApp-ST} to UAS
+    When I send 1 times an ad request with parameter {requestid=BUrlTestInApp&unlimited=1&bundleid=app1} for zone named {zone-zoneset-server-prog-inApp-ST} to UAS
     And The response code is 200
     And The response contains script
     And The response contains <script type="text/javascript">ut_pixels.push({type:'image', url:'https://ads-s-us-east-1.undertone.com'});</script>
