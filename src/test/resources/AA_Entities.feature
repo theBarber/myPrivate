@@ -357,7 +357,7 @@ Feature: Entities for tests
       |campaign-server-prog-ST-3  |407981        |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       |campaign-server-prog-ST-4  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       #     InApp Burl
-      |campaign-server-prog-inApp-ST-1  |407981        |224533     |true                   |17               |{zone-zoneset-server-prog-inApp-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-inApp-ST-1  |407981        |224533     |true                   |33               |{zone-zoneset-prog-inApp-ST} |[]           |83        |2164              |3711           |66555             |
     And i update campaign data by name
       |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-server-prog-SS-1       |-2            |1                       |4                 |
