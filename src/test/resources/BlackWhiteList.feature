@@ -3,20 +3,19 @@
 @uas
 
 Feature: Black and White testing
-  Scenario: 1.a Advertiser has a black and a white list. send zone requests from an app in the white list
+
+  Scenario: 1.a Advertiser has a black and a white list. send zone requests from an app in the black list
+    When I send 1 times an ad request with parameter {unlimited=1&bundleid=app2} for zone named {zone-zoneset-InappBlackWhiteList-SI-1} to UAS
+    And The response code is 200
+    And The responses are passback
+
+  Scenario: 1.b Advertiser has a black and a white list. send zone requests from an app in the white list
     Given I sleep for 120 seconds
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app1} for zone named {zone-zoneset-InappBlackWhiteList-SI-1} to UAS
     And The response code is 200
     And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-InappBlackWhiteList-SI-1-banner-1} 100% of the time
-
-
-  Scenario: 1.b Advertiser has a black and a white list. send zone requests from an app in the black list
-    When I send 1 times an ad request with parameter {unlimited=1&bundleid=app2} for zone named {zone-zoneset-InappBlackWhiteList-SI-1} to UAS
-    And The response code is 200
-    And The responses are passback
-
 
   Scenario: 1.c Advertiser has a black and a white list. send zone requests from an app not in the black or the white list
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app3} for zone named {zone-zoneset-InappBlackWhiteList-SI-1} to UAS

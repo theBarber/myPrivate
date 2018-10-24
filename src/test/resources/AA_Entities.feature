@@ -357,7 +357,7 @@ Feature: Entities for tests
       |campaign-server-prog-ST-3  |407981        |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       |campaign-server-prog-ST-4  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
       #     InApp Burl
-      |campaign-server-prog-inApp-ST-1  |407981        |224533     |true                   |33               |{zone-zoneset-prog-inApp-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-inApp-ST-1  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-inApp-ST} |[]           |83        |2164              |3711           |66555             |
     And i update campaign data by name
       |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-server-prog-SS-1       |-2            |1                       |4                 |
@@ -562,7 +562,21 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-6     |1            |
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
- 
+  Scenario: create entities for profile targeting via UDMP
+    Given i disable campaigns by name on db
+  Campaign Name         |
+  |campaign-ProfileTargetingUDMP-ST-1   |
+  |campaign-ProfileTargetingUDMP-ST-2   |
+    Given i create new campaigns, new zoneset with domains
+        #profile targeting
+      |Campaign Name                              |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                           |limitation                   |adUnitId    |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-ProfileTargetingUDMP-ST-1         |75396         |197418       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMP-ST-1}      |[4,"==",1,1,1992]            |83          |451               |3708           |67261             |
+      |campaign-ProfileTargetingUDMP-ST-2         |75396         |197418       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMP-ST-2}      |[4,"==",1,1,1989]            |83          |451               |3708           |67261             |
+      #seq profile targeting
+      |campaign-SeqProfileTargetingUDMP-ST-1      |75396         |197418       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMP-ST-1}   |[4,"==",1,1,17]              |83          |451               |3708           |67261             |
+      |campaign-SeqProfileTargetingUDMP-ST-2      |75396         |197418       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMP-ST-2}   |[4,"==",1,1,16]              |83          |451               |3708           |67261             |
+
+
 #  @DynamicPricing
 #  Scenario: create entities for dynamic pricing
 #    Given i disable campaigns by name on db
