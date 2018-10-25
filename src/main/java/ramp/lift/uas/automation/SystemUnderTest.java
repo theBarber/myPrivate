@@ -48,7 +48,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected final Map<String, LinuxDefaultCliConnection> cronCliConnection = new HashMap<>();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
-	protected CIRequestModule ci;
+	//protected CIRequestModule ci;
 	protected UAScontainer uasKubeMachines;
 	protected CampaignManager campaignManager;
 	protected ExecutorCampaignManager executorCampaignManager;
@@ -427,20 +427,20 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return uasKubeMachines;
 	}
 
-	public CIRequestModule getCIRquestModule() {
-		if (ci == null) {
-			try {
-				ci = new CIRequestModule();
-				ci.setDomain(config.get("ci.domain"));
-				ci.setWfdomain(config.get("ci.wfdomain"));
-				ci.setPort(config.get("ci.port"));
-				ci.init();
-			} catch (Exception e) {
-				delegate(exception, e);
-			}
-		}
-		return this.ci;
-	}
+	//public CIRequestModule getCIRquestModule() {
+	//	if (ci == null) {
+	//		try {
+	//			ci = new CIRequestModule();
+	//			ci.setDomain(config.get("ci.domain"));
+	//			ci.setWfdomain(config.get("ci.wfdomain"));
+	//			ci.setPort(config.get("ci.port"));
+	//			ci.init();
+	//		} catch (Exception e) {
+	//			delegate(exception, e);
+	//		}
+	//	}
+	//	return this.ci;
+	//}
 
 	public UASLogModule logFor(String logType) {
 		return uasLogModulesByLogType.computeIfAbsent(logType, logname -> {
