@@ -17,6 +17,7 @@ import org.junit.Assert;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.file.FileSystems;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -24,6 +25,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
+
 
 @CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/API_Examples_$TIMESTAMP$.json"})
@@ -49,6 +51,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new Deals",this::createMultipleDeals);
         And("i create new creatives",this::createMultipleCreatives);
         And("i create campaigns from Template",this::createMultipleCampaignsFromTemplate);
+        And("save all entities to json file",this::saveEntities);
         Given("I disable all campaigns named \\{([^}]+)\\} in DB", this::disableAllCampaignsNamed);
         When("I create new Campaign named \\{([^}]+)\\} using ramp-app api's for LineItem (\\d+) associated to creative (\\d+) with zoneset (\\d+) with priority \\{([^}]+)\\}", this::createCampaign);
         And("I update the created campaign \\{([^}]+)\\} banners name to \\{([^}]+)\\} chained with the serial number",this::updateBannersName);
@@ -80,6 +83,13 @@ public class API_EntitiesCreator extends BaseTest{
     }
 
 
+    private void saveEntities()
+    {
+        if(sut.getCampaignManager() == null)
+            throw new AssertionError("io list and zonesets list are empty");
+        sut.getCampaignManager().writeZoneSets();
+        sut.getCampaignManager().writeLineItem();
+    }
 
 
     private void createMultipleCampaignsWithPriority(DataTable campaigns) {
@@ -495,8 +505,10 @@ public class API_EntitiesCreator extends BaseTest{
    /* private void setLastCreatedCampaignEntityFromResponse(CloseableHttpResponse createCampaignResponse)
     {
         Campaign[] tmpCampaign = null;
+
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(createCampaignResponse.getEntity()), CampaignsRequest.class).getCampaignsArray();
+
         }catch (IOException e)
         {
             e.printStackTrace();

@@ -3,6 +3,7 @@
 	@uas
     @stable
     @scheduled
+	@parallel
 	Feature: UAS Ad request flows
 	@Sanity
 	Scenario: Send an ad request to UAS and parse impression url

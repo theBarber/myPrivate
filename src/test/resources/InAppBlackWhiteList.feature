@@ -1,7 +1,7 @@
 @InAppBlackWhiteList
 @scheduled
 @uas
-
+@parallel
 Feature: Black and White testing
   Scenario: 1.a Advertiser has a black and a white list. send zone requests from an app in the white list
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app1} for zone named {zone-zoneset-InappBlackWhiteList-SI-1} to UAS

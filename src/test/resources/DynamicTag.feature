@@ -2,6 +2,8 @@
 @uas
 @scheduled
 @DT
+@parallel
+
 Feature: Dynamic Tag flow support
 
 Scenario: 1. Basic DT flow

@@ -3,6 +3,8 @@
 @Integration
 @uas
 @scheduled
+@parallel
+
 Feature: UAS connectivity to other components
 @stable
 @Sanity-basic

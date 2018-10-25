@@ -1,7 +1,59 @@
 @couchBaseUtil
 @scheduled
+@preconditions
 @optimize
 Feature: Entities for tests
+
+#  @zoneTagSanity
+#  Scenario: create entities for zone Tag Sanity test
+#    Given i create new priority campaigns with new zoneset
+#      |Campaign Name                           |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |campaign priority|
+#      |campaign-API-performance-1-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-2-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-3-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-4-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-5-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-6-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-7-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-8-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-9-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-10-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-11-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-12-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-13-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-14-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-15-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-16-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-17-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-18-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-19-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-20-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-21-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-22-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-23-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-24-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-25-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-26-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-27-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-28-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-29-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-30-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-31-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-32-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-33-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-34-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-35-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-36-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-37-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-38-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-39-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#      |campaign-API-performance-40-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+#    And i update banner data by name
+#      |Campaign Name                                    |limitation                                                     |
+#      |campaign-API-performance-39-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","firefox"]]]                          |
+#      |campaign-API-performance-40-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","chrome"]]]                           |
+#
+#
 
   @zoneTagSanity
   Scenario: create entities for zone Tag Sanity test
@@ -11,6 +63,9 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-1-a}   |[]                |83        |4737             |2434           |17116             |
+    And i update zone data by name
+      |Zone Name                 |is_secure     |
+      |zone-zoneset-sanity-1-a   |1            |
 
   @GDPR
   Scenario: create entities for zone Tag Sanity test
@@ -19,10 +74,13 @@ Feature: Entities for tests
       |campaign-API-1-a-GDPR                |
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-      |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}   |[]                |83        |4737             |2434           |17116             |
+      |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}     |[]                |83        |4737             |2434           |17116             |
     And i update banner data by name
       |Banner Name                     |limitation     |
       |campaign-API-1-a-GDPR-banner-1  |[]             |
+    And i update zone data by name
+      |Zone Name               |is_secure    |
+      |zone-zoneset-GDPR-1-a   |1            |
 
   @limitationSanity
   Scenario: create entities for zone Tag Sanity test
@@ -41,6 +99,9 @@ Feature: Entities for tests
       |campaign-API-limitations-test-F-banner-1    |[[[5,"!~","af"],[12,"=~","firefox"]]]                          |
       |campaign-API-limitations-test-C-banner-1    |[[[5,"!~","af"],[12,"=~","chrome"]]]                           |
       |campaign-API-limitations-test-W-banner-1    |[[[5,"!~","af"],[12,"=~","msie","msie 7","msie 8","msie 9"]]]  |
+    And i update zone data by name
+      |Zone Name                        |is_secure    |
+      |zone-zoneset-limitations-test    |1            |
 
   @GDPR
   @HB
@@ -91,6 +152,17 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3   |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-Billboard-970X250-D |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
+    And i update zone data by name
+      |Zone Name                                  |is_secure    |
+      |zone-zoneset-HB-Tablet-160x600             |1            |
+      |zone-zoneset-HB-See Through 1X2            |1            |
+      |zone-zoneset-Desktop-300X250               |1            |
+      |zone-zoneset-HB-Billboard-970X250          |1            |
+      |zone-zoneset-HB-SS-1X1                     |1            |
+      |zone-zoneset-HB-Prog-PGC-1X1               |1            |
+      |zone-zoneset-HB-Prog-See-Through-1X2       |1            |
+      |zone-zoneset-HB-Prog-Billboard-970X250     |1            |
+
 
   @HB
     Scenario: create entities for HB tests with multiple domains
@@ -224,6 +296,28 @@ Feature: Entities for tests
       |Banner Name                        |limitation             |
       |campaign-HB-SS-1X1-D-1-banner-1    |[[[4,\"=~\",30,1,1]]]  |
       |campaign-HB-SS-1X1-D-2-banner-1    |[]                     |
+    And i update zone data by name
+      |Zone Name                                  |is_secure    |
+      |zone-zoneset-HB-Tablet-160x600-D-1-a       |1            |
+      |zone-zoneset-HB-Tablet-160x600-D-1-b       |1            |
+      |zone-zoneset-HB-See-Through-1X2-D-1-a      |1            |
+      |zone-zoneset-HB-See-Through-1X2-D-1-b      |1            |
+      |zone-zoneset-HB-Tablet-160x600-D-2-a       |1            |
+      |zone-zoneset-HB-Tablet-160x600-D-2-b       |1            |
+      |zone-zoneset-HB-See-Through-1X2-D-2-a      |1            |
+      |zone-zoneset-HB-See-Through-1X2-D-2-b      |1            |
+      |zone-zoneset-HB-Tablet-160x600-D-3-a       |1            |
+      |zone-zoneset-HB-Tablet-160x600-D-3-b       |1            |
+      |zone-zoneset-HB-See-Through-1X2-D-3-a      |1            |
+      |zone-zoneset-HB-See-Through-1X2-D-3-b      |1            |
+      |zone-zoneset-HB-Tablet-160x600-D-4-a       |1            |
+      |zone-zoneset-HB-Tablet-160x600-D-4-b       |1            |
+      |zone-zoneset-HB-See-Through-1X2-D-4-a      |1            |
+      |zone-zoneset-HB-See-Through-1X2-D-4-b      |1            |
+      |zone-zoneset-HB-SS-1X1-D-1                 |1            |
+      |zone-zoneset-HB-SS-1X1-D-2                 |1            |
+
+
 
   @DT
   Scenario: create entities for DT tests
@@ -264,6 +358,17 @@ Feature: Entities for tests
         |campaign-DT-PGC-3-t-2 | 1            |4                       |
         |campaign-DT-SI-1-t-3-L|-2            |1                       |
         |campaign-DT-SI-2-t-3  |-1            |2                       |
+     And i update zone data by name
+        |Zone Name                 |is_secure    |
+        |zone-zoneset-DT-SS-t-1    |1            |
+        |zone-zoneset-DT-SI-t-1    |1            |
+        |zone-zoneset-DT-PGC-t-1   |1            |
+        |zone-zoneset-DT-SS-t-2    |1            |
+        |zone-zoneset-DT-SI-t-2    |1            |
+        |zone-zoneset-DT-PGC-t-2   |1            |
+        |zone-zoneset-DT-SI-t-3-L  |1            |
+        |zone-zoneset-DT-SI-t-3    |1            |
+
   @GDPR
   @DT
     Scenario: create entities for DT inline tests
@@ -290,6 +395,12 @@ Feature: Entities for tests
         |campaign-DT-Inline-SS-1  |-2            |1                       |
         |campaign-DT-Inline-PGC-2 |-1            |2                       |
         |campaign-DT-Inline-SS-3  |1             |4                       |
+      And i update zone data by name
+        |Zone Name                    |is_secure    |
+        |zone-zoneset-DT-inline-ST    |1            |
+        |zone-zoneset-DT-inline-SS-1  |1            |
+        |zone-zoneset-DT-inline-SS-3  |1            |
+        |zone-zoneset-DT-inline-PGC   |1            |
       And I flush bucket name {us-east-1-adserver} on couchbase
 
   @DOT
@@ -320,6 +431,20 @@ Feature: Entities for tests
       |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{sahar.ynet.co.il,1}]                        |
       |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |62229             |[{cnn.com,1}]       |[]                                            |
       |campaign-DomainT-ZoneTag-4 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-4}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{ynet.co.il,1}]                              |
+    And i update zone data by name
+      |Zone Name                        |is_secure    |
+      |zone-zoneset-DomainT-1           |1            |
+      |zone-zoneset-DomainT-2           |1            |
+      |zone-zoneset-DomainT-3           |1            |
+      |zone-zoneset-DomainT-4-a         |1            |
+      |zone-zoneset-DomainT-4-b         |1            |
+      |zone-zoneset-DomainT-5-BB        |1            |
+      |zone-zoneset-DomainT-6-Desktop   |1            |
+      |zone-zoneset-DomainT-ZoneTag-1   |1            |
+      |zone-zoneset-DomainT-ZoneTag-2   |1            |
+      |zone-zoneset-DomainT-ZoneTag-3   |1            |
+      |zone-zoneset-DomainT-ZoneTag-4   |1            |
+
 
   @GDPR
   @appnexus
@@ -374,7 +499,11 @@ Feature: Entities for tests
       |campaign-server-prog-ST-4       | 1            |4                       |1                 |
       #     InApp Burl
       |campaign-server-prog-inApp-ST-1       | 1            |4                       |1                 |
-
+    And i update zone data by name
+      |Zone Name                        |is_secure    |
+      |zone-zoneset-server-prog-SS      |1            |
+      |zone-zoneset-server-prog-PGC     |1            |
+      |zone-zoneset-server-prog-ST      |1            |
 
    @viewability
     Scenario: create entities for viewability tests
@@ -390,6 +519,10 @@ Feature: Entities for tests
         |Banner Name                            |limitation     |
         |campaign-API-1-a-viewability-banner-1    |[]             |
         |campaign-API-2-a-viewability-banner-1    |[]             |
+     And i update zone data by name
+       |Zone Name                        |is_secure    |
+       |zone-zoneset-viewability-1-a     |1            |
+       |zone-zoneset-viewability-2-a     |1            |
 
   @SupplyType
       Scenario: create entities for Supply type
@@ -427,6 +560,17 @@ Feature: Entities for tests
       |campaign-SupplyType-Desktop-ALL      |-2            |1                       |4                 |
       |campaign-SupplyType-Desktop-HB       |-1            |2                       |3                 |
       |campaign-SupplyType-Desktop-Direct   | 1            |4                       |2                 |
+    And i update zone data by name
+      |Zone Name                              |is_secure    |
+      |zone-zoneset-SupplyType-ST-HB          |1            |
+      |zone-zoneset-SupplyType-ST-Direct      |1            |
+      |zone-zoneset-SupplyType-ST-ALL         |1            |
+      |zone-zoneset-SupplyType-SS-Direct      |1            |
+      |zone-zoneset-SupplyType-SS-HB          |1            |
+      |zone-zoneset-SupplyType-SS-ALL         |1            |
+      |zone-zoneset-SupplyType-Desktop-ALL    |1            |
+      |zone-zoneset-SupplyType-Desktop-HB     |1            |
+      |zone-zoneset-SupplyType-Desktop-Direct |1            |
 
   @PG1
   Scenario: create entities for PG1 tests
@@ -466,6 +610,14 @@ Feature: Entities for tests
       |campaign-PG1-Desktop-banner-1   |[[[50,"==",1]]]  |
       |campaign-PG1-Smartphone-banner-1|[[[49,"==",1]]]  |
       |campaign-PG1-Tablet-banner-1    |[[[33,"==",1]]]  |
+    And i update zone data by name
+      |Zone Name                    |is_secure    |
+      |zone-zoneset-PG1-1-allowed   |1            |
+      |zone-zoneset-PG1-2           |1            |
+      |zone-zoneset-PG1-3-allowed   |1            |
+      |zone-zoneset-PG1-4           |1            |
+      |zone-zoneset-PG1-5-allowed   |1            |
+      |zone-zoneset-PG1-6           |1            |
 
 
   @PGX
@@ -480,14 +632,21 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
-      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204              |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
+      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204                |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
      |campaign-PGX-PG-1-b       |75396         |222908     |false                   |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
       |campaign-PGX-PG-1-c       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
     And i update campaign data by name
       |Campaign Name            |Priority      |campaign_delivery_method|
       |campaign-PGX-PG-1-b      |1             |4                       |
       |campaign-PGX-PG-1-c      |1             |4                       |
-
+    And i update zone data by name
+      |Zone Name                    |is_secure    |
+      |zone-zoneset-PGX-PG-1-a      |1            |
+      |zone-zoneset-PGX-ST-1-a      |1            |
+      |zone-zoneset-PGX-PG-1-b      |1            |
+      |zone-zoneset-PGX-PG-1-c      |1            |
+      |zone-zoneset-PG1-5-allowed   |1            |
+      |zone-zoneset-PG1-6           |1            |
 
   @Inapp
   Scenario: create entities for Inapp tests
@@ -530,6 +689,14 @@ Feature: Entities for tests
       |zone-zoneset-Inapp-SI-4   |1            |
       |zone-zoneset-Inapp-SI-5   |1            |
       |zone-zoneset-Inapp-SI-6   |1            |
+    And i update zone data by name
+      |Zone Name                 |is_secure    |
+      |zone-zoneset-Inapp-SI-1   |1            |
+      |zone-zoneset-Inapp-SI-2   |1            |
+      |zone-zoneset-Inapp-SI-3   |1            |
+      |zone-zoneset-Inapp-SI-4   |1            |
+      |zone-zoneset-Inapp-SI-5   |1            |
+      |zone-zoneset-Inapp-SI-6   |1            |
 
   @InAppBlackWhiteList
   Scenario: create entities for Black and white app list
@@ -554,6 +721,15 @@ Feature: Entities for tests
       |campaign-InappBlackWhiteList-SI-7         |75396         |222908       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-7}      |[]                   |80        |451               |1111           |67261             |[{app1,2};{app2,2};{app3,2}]    |[]                          |
     And i update zone data by name
       |Zone Name                                 |is_mraid     |
+      |zone-zoneset-InappBlackWhiteList-SI-1     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-2     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-3     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-4     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-5     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-6     |1            |
+      |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
+    And i update zone data by name
+      |Zone Name                                 |is_secure    |
       |zone-zoneset-InappBlackWhiteList-SI-1     |1            |
       |zone-zoneset-InappBlackWhiteList-SI-2     |1            |
       |zone-zoneset-InappBlackWhiteList-SI-3     |1            |
@@ -679,3 +855,6 @@ Feature: Entities for tests
     Given i disable all tests except 53
     And I set test id of test_strategy named {ScoringNew} to {53}
 
+  @optimize
+  Scenario: save entities to file
+      And save all entities to json file

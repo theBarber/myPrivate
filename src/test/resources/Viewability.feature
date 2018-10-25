@@ -1,5 +1,7 @@
 @viewability
-  @scheduled
+@scheduled
+@parallel
+
   Feature: Viewability
 
   Scenario:

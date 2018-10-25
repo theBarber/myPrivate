@@ -1,6 +1,8 @@
 @appnexus
 @scheduled
 @HeaderBidding
+@parallel
+
 Feature: Programmatic flow support
 
   Scenario: wait more for banner cache to be updated in memory

@@ -8,6 +8,7 @@ dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/undertone
 *.workflow.db.user = adserver
 *.workflow.db.password = adserver
 
+staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
 
 staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services-us-east-1.cmovgkgbdusb.us-east-1.rds.amazonaws.com/staging_ramp_admin
 integration.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services-us-east-1.cmovgkgbdusb.us-east-1.rds.amazonaws.com/staging_ramp_admin
@@ -128,3 +129,13 @@ dev1.ramp.test.lineItemId=[210722]
 #integration.programmatic.host = services-ramp-integration.ramp-ut.io
 #integration.programmatic.port=3003
 #integration.us-east-1-user-history.couchbase.nodes=[10.12.5.87,10.12.5.220]
+
+
+
+#-------------------- CI parameters ----------------------------------------------------------------
+
+aws-staging.ci.domain=Api.ci-ut.ai
+aws-staging.ci.wfdomain=staging-us-east-1.ramp-ut.io
+aws-integration.ci.domain=10.12.1.27
+aws-integration.ci.port=3021
+aws-integration.ci.wfdomain=integration-us-east-1.ramp-ut.io
