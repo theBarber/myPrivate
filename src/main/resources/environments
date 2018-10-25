@@ -8,8 +8,6 @@ dev2.workflow.db.jdbc.connection = jdbc:mysql://172.19.35.74/undertone
 *.workflow.db.user = adserver
 *.workflow.db.password = adserver
 
-staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/staging_ramp_admin
-
 staging.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services-us-east-1.cmovgkgbdusb.us-east-1.rds.amazonaws.com/staging_ramp_admin
 integration.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services-us-east-1.cmovgkgbdusb.us-east-1.rds.amazonaws.com/staging_ramp_admin
 
