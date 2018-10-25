@@ -564,7 +564,7 @@ Feature: Entities for tests
 
   Scenario: create entities for profile targeting via UDMP
     Given i disable campaigns by name on db
-  Campaign Name         |
+  |Campaign Name                        |
   |campaign-ProfileTargetingUDMP-ST-1   |
   |campaign-ProfileTargetingUDMP-ST-2   |
     Given i create new campaigns, new zoneset with domains
