@@ -51,7 +51,7 @@ public class AdSelectorBaseTest extends BaseTest  {
         });
         When("^I send (\\d+) times an ad request for zone named \\{([^}]+)\\} and zone limitation (.*) to UAS",
                 (Integer times, String zoneByName, String param) -> {
-                    Zone zone = sut.getCampaignManager().getZone(zoneByName)
+                    Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
                             .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
                     sut.getUASRquestModule().zoneRequestsWithGeo(zone.getId(), times, param);
                 });

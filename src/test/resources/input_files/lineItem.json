@@ -5,6 +5,31 @@
 	"LI": 
 	[
 		{
+			"ioLineItemId": 223755,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 120,
+				"name": "Screen shift"
+			},
+			"Campaigns":
+			[
+			]
+		},
+		{
+			"ioLineItemId": 223757,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 120,
+				"name": "Screen shift"
+			},
+			"Campaigns":
+			[
+			]
+		},
+
+		{
 			"ioLineItemId": 197418,
 			"pricingConvention": "CPM",
 			"Product":
@@ -14,6 +39,168 @@
 			},
 			"Campaigns":
 			[
+				{
+					"campaignId": 302583,
+					"campaignName": "UAS-by-at-most-1-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							67657
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1224809,
+							"bannerName": "UAS-by-at-most-1-banner"
+						},
+						{
+							"bannerId": 1243360,
+							"bannerName":"campaign-server-prog-SS-1-banner-1-NOT-API"
+						},
+						{
+							"bannerId": 1298061,
+							"bannerName":"campaign-InappBlackWhiteList-SI-7-banner-1-NOT-API"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				},
+				{
+					"campaignId": 302584,
+					"campaignName": "UAS-by-at-most-2-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							67657
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1252714,
+							"bannerName": "campaign-API-1-a-GDPR-banner-1-not-api"
+						},
+
+						{
+							"bannerId": 1253028,
+							"bannerName": "server-prog-SS-1-banner-1"
+						},
+						{
+							"bannerId": 1253028,
+							"bannerName": "UAS-by-at-most-2-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				},
+				{
+					"campaignId": 301515 ,
+					"campaignName": "Screen shift-DT-inline-3-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67603
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1220891,
+							"bannerName": "Screen shift-DT-inline-3-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
+				{
+					"campaignId": 301514 ,
+					"campaignName": "Screen shift-DT-inline-2-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67603
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1220893,
+							"bannerName": "Screen shift-DT-inline-2-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
+				{
+					"campaignId": 301513,
+					"campaignName": "Screen shift-DT-inline-1-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							67603
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1220889,
+							"bannerName": "Screen shift-DT-inline-1-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 1
+				},
 				{
 					"campaignId": 291514,
 					"campaignName": "DT-SS-Test-1-campaign-high-priority",
@@ -35,8 +222,8 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197504 ,
-							"creativeName": "DT-SS-Test-1-campaign-high-priority-banner-1"
+							"bannerId": 1200036 ,
+							"bannerName": "DT-SS-Test-1-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -65,7 +252,7 @@
 					[
 						{
 							"bannerId": 1157158,
-							"creativeName": "DT-SS-Test-1-campaign-low-priority-banner-1"
+							"bannerName": "DT-SS-Test-1-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -94,7 +281,7 @@
 				[
 					{
 						"bannerId": 1157197,
-						"creativeName": "DT-SS-Test-2-campaign-high-priority-banner-1"
+						"bannerName": "DT-SS-Test-2-campaign-high-priority-banner-1"
 					}
 				],
 
@@ -123,7 +310,7 @@
 					[
 						{
 							"bannerId": 1157198,
-							"creativeName": "DT-SS-Test-2-campaign-low-priority-banner-1"
+							"bannerName": "DT-SS-Test-2-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -151,8 +338,8 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197513,
-							"creativeName": "DT-SS-Test-3-campaign-first-priority-banner-1"
+							"bannerId": 1200038,
+							"bannerName": "DT-SS-Test-3-campaign-first-priority-banner-1"
 						}
 					],
 
@@ -192,8 +379,8 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197506,
-							"creativeName": "DT-PGM-Test-1-campaign-high-priority-banner-1"
+							"bannerId": 1200039,
+							"bannerName": "DT-PGM-Test-1-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -222,7 +409,7 @@
 					[
 						{
 							"bannerId": 1157160,
-							"creativeName": "DT-PGM-Test-1-campaign-low-priority-banner-1"
+							"bannerName": "DT-PGM-Test-1-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -251,7 +438,7 @@
 				[
 					{
 						"bannerId": 1157199,
-						"creativeName": "DT-PGM-Test-2-campaign-high-priority-banner-1-notActive"
+						"bannerName": "DT-PGM-Test-2-campaign-high-priority-banner-1-notActive"
 					}
 				],
 
@@ -279,8 +466,8 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197510,
-							"creativeName": "DT-PGM-Test-2-campaign-low-priority-banner-1"
+							"bannerId": 1200042,
+							"bannerName": "DT-PGM-Test-2-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -308,8 +495,8 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197514,
-							"creativeName": "DT-PGM-Test-3-campaign-second-priority-banner-1"
+							"bannerId": 1200041,
+							"bannerName": "DT-PGM-Test-3-campaign-second-priority-banner-1"
 						}
 					],
 
@@ -337,8 +524,8 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197512,
-							"creativeName": "DT-PGM-Test-2-campaign-high-priority-banner-1"
+							"bannerId": 1200043,
+							"bannerName": "DT-PGM-Test-2-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -379,7 +566,7 @@
 					[
 						{
 							"bannerId": 1157136,
-							"creativeName": "DT-PGC-Test-1-campaign-high-priority-banner-1"
+							"bannerName": "DT-PGC-Test-1-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -407,8 +594,8 @@
 					"Banners":
 					[
 						{
-							"bannerId": 1197509,
-							"creativeName": "DT-PGC-Test-1-campaign-low-priority-banner-1"
+							"bannerId": 1200045,
+							"bannerName": "DT-PGC-Test-1-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -437,7 +624,7 @@
 					[
 						{
 							"bannerId": 1157201,
-							"creativeName": "DT-PGC-Test-2-campaign-high-priority-banner-1"
+							"bannerName": "DT-PGC-Test-2-campaign-high-priority-banner-1"
 						}
 					],
 
@@ -466,7 +653,7 @@
 					[
 						{
 							"bannerId": 1157201,
-							"creativeName": "DT-PGC-Test-2-campaign-low-priority-banner-1"
+							"bannerName": "DT-PGC-Test-2-campaign-low-priority-banner-1"
 						}
 					],
 
@@ -495,7 +682,7 @@
 					[
 						{
 							"bannerId": 1157205,
-							"creativeName": "DT-PGC-Test-3-campaign-third-priority-banner-1"
+							"bannerName": "DT-PGC-Test-3-campaign-third-priority-banner-1"
 						}
 					],
 
@@ -516,6 +703,35 @@
 
 			"Campaigns":
 			[
+				{
+					"campaignId": 301520,
+					"campaignName": "Desktop In-Page Blend-DT-Inline-2-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 4,
+					"Zonesets":
+					{
+						"include":
+						[
+							62185
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1219337 ,
+							"bannerName": "Desktop In-Page Blend-DT-Inline-2-banner"
+						}
+					],
+
+					"isUnlimited": false,
+					"CDM": 4
+				},
 				{
 					"campaignId": 270477,
 					"campaignName": "ramp-lift-auto-campaign1-test",
@@ -538,7 +754,7 @@
 					[
 						{
 							"bannerId": 1038966,
-							"creativeName": "75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
+							"bannerName": "75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
 						}
 					],
 
@@ -568,12 +784,12 @@
 					[
 						{
 							"bannerId": 1040820,
-							"creativeName": "75396-197420-270914-Medium Rectangle 300x250-test"
+							"bannerName": "75396-197420-270914-Medium Rectangle 300x250-test"
 						},
 
 						{
 							"bannerId": 1040819,
-							"creativeName": "75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
+							"bannerName": "75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
 						}
 					],
 
@@ -615,7 +831,7 @@
 					[
 						{
 							"bannerId": 1079324,
-							"creativeName": "75396-209943-277924-See Through-RampLift-1"
+							"bannerName": "75396-209943-277924-See Through-RampLift-1"
 						}
 					],
 
@@ -657,7 +873,7 @@
 					[
 						{
 							"bannerId": 1079323,
-							"creativeName": "75396-209942-277923-See Through-RampLift-1"
+							"bannerName": "75396-209942-277923-See Through-RampLift-1"
 						}
 					],
 
@@ -699,7 +915,7 @@
 					[
 						{
 							"bannerId": 1067986,
-							"creativeName": "75396-208153-275578-See Through-RampLift-1"
+							"bannerName": "75396-208153-275578-See Through-RampLift-1"
 						}
 					],
 
@@ -730,7 +946,7 @@
 					[
 						{
 							"bannerId": 1067987,
-							"creativeName": "75396-208153-275579-See Through-RampLift-1"
+							"bannerName": "75396-208153-275579-See Through-RampLift-1"
 						}
 					],
 
@@ -761,7 +977,7 @@
 					[
 						{
 							"bannerId": 1067988,
-							"creativeName": "75396-208153-275580-See Through-RampLift-1"
+							"bannerName": "75396-208153-275580-See Through-RampLift-1"
 						}
 					],
 
@@ -792,7 +1008,7 @@
 					[
 						{
 							"bannerId": 1067989,
-							"creativeName": "75396-208153-275581-See Through-RampLift-1"
+							"bannerName": "75396-208153-275581-See Through-RampLift-1"
 						}
 					],
 
@@ -810,6 +1026,65 @@
 
 			"Campaigns":
 			[
+
+				{
+					"campaignId": 301511,
+					"campaignName": "See Through-DT-inline-1-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							63709
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1220887,
+							"bannerName": "See Through-DT-inline-1-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				},
+				{
+					"campaignId": 301512,
+					"campaignName": "See Through-DT-inline-2-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							63709
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1220888 ,
+							"bannerName": "See Through-DT-inline-2-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				},
 				{
 					"campaignId": 278956,
 					"campaignName": "75396-210722-ramp-lift-Test 1",
@@ -832,7 +1107,149 @@
 					[
 						{
 							"bannerId": 1090122,
-							"creativeName": "75396-210722-278956-See Through-RampLift-1"
+							"bannerName": "75396-210722-278956-See Through-RampLift-1"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				}
+			]
+		},
+		{
+			"ioLineItemId": 220833,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 151,
+				"name": "Page Grabber"
+			},
+
+			"Campaigns":
+			[
+				{
+					"campaignId": 301516,
+					"campaignName": "Page Grabber-DT-inline-1-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							63225
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1220892,
+							"bannerName": "Page Grabber-DT-inline-1-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				},
+				{
+					"campaignId": 301517,
+					"campaignName": "Page Grabber-DT-inline-2-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							63225
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1220893,
+							"bannerName": "Page Grabber-DT-inline-2-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				}
+			]
+		},
+		{
+			"ioLineItemId": 198082,
+			"pricingConvention": "CPM",
+			"Product":
+			{
+				"productId": 98,
+				"name": "Billboard"
+			},
+
+			"Campaigns":
+			[
+				{
+					"campaignId": 301518,
+					"campaignName": "Billboard-DT-Inline-1-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							63225
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1219335,
+							"bannerName": "Billboard-DT-Inline-1-banner"
+						}
+					],
+
+					"isUnlimited": true,
+					"CDM": 3
+				},
+				{
+					"campaignId": 301519,
+					"campaignName": "Billboard-DT-inline-2-campaign",
+					"goalType": "impressions",
+					"deliveryMethod": 3,
+					"Zonesets":
+					{
+						"include":
+						[
+							63225
+						],
+
+						"exclude":
+						[
+
+						]
+					},
+
+					"Banners":
+					[
+						{
+							"bannerId": 1219336 ,
+							"bannerName": "Billboard-DT-inline-2-banner"
 						}
 					],
 
@@ -882,7 +1299,7 @@
 						[
 							{
 								"bannerId": 1157881,
-								"creativeName": "290505-10000-59-ramp-lift-programmatic-banner1-test"
+								"bannerName": "290505-10000-59-ramp-lift-programmatic-banner1-test"
 							}
 						],
 

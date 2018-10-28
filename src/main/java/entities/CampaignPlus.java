@@ -6,16 +6,13 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.IntStream;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import entities.ramp.app.api.Zonesets;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 @JsonTypeName("Campaign")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CampaignPlus extends Campaign {
 
     private String limitation = "";

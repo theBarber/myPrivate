@@ -9,9 +9,64 @@
 			"isSync": true,
 			"isSecure": false,
 			"status": 0
+		},
+		{
+			"zoneId": 190224,
+			"zoneName": "zone-zoneset-DomainT-1-not-API",
+			"adUnitId": 10,
+			"isSync": true,
+			"isSecure": false,
+			"status": 0
+		},
+		{
+			"zoneId": 195518,
+			"zoneName": "zone-zoneset-Inapp-SI-3-not-API",
+			"adUnitId": 10,
+			"isSync": true,
+			"isSecure": false,
+			"status": 0
+		},
+		{
+			"zoneId": 187517,
+			"zoneName": "zone-zoneset-InappBlackWhiteList-SI-7-not-api",
+			"adUnitId": 10,
+			"isSync": true,
+			"isSecure": false,
+			"status": 0
 		}
 	]
 },
+	{
+		"zonesetId": 621853,
+		"zonesetName": "zonesefdst-auto-1-test-dnu",
+		"Zones": [
+			{
+				"zoneId": 180675,
+				"zoneName": "zone-zoneset-server-prog-SS-NOT-API",
+				"adUnitId": 10,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			},
+			{
+				"zoneId": 182176,
+				"zoneName": "zone-server-prog-SS",
+				"adUnitId": 10,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			},
+			{
+				"zoneId": 197249,
+				"zoneName": "zone-zoneset-PGX-PG-1-a-not-api",
+				"adUnitId": 10,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
+
 	{
 		"zonesetId": 64185,
 		"zonesetName": "test-lift-2-dnu",
@@ -123,6 +178,33 @@
 				"status": 0
 			}
 		]
+	},
+	{
+		"zonesetId": 67281,
+		"zonesetName": "ramp-lift-Billboard-AB-testing-zoneset-1",
+		"Zones": [
+			{
+				"zoneId": 176748,
+				"zoneName": "ramp-lift-Billboard-AB-testing-zone-1",
+				"adUnitId": 58,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
+	{
+		"zonesetId": 67657,
+		"zonesetName": "Uas-by-at-most-zoneset",
+		"Zones": [
+			{
+					"zoneId": 177378,
+				"zoneName": "Uas-by-at-most-zone-1",
+				"adUnitId": 83,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
 	}
-
 ]

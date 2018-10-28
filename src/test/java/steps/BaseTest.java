@@ -3,6 +3,7 @@ package steps;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import cucumber.api.PendingException;
 import cucumber.api.java8.En;
+import infra.cli.process.CliCommandExecution;
 import infra.utils.MsgProcess;
 import infra.utils.RabbitMQConsumer;
 import infra.utils.RabbitMQPublisher;
@@ -15,6 +16,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import org.junit.Assert;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +35,8 @@ public class BaseTest implements En {
   protected final String[] PROGRAMMATIC = new String[] {"@programmatic"};
   protected final String[] DYNAMICTAG = new String[] {"@DinamicTag"};
   protected final String[] HEADERBIDDING = new String[] {"@HeaderBidding"};
+  protected final String[] API = new String[] {"@API"};
+  protected final String[] CI = new String[] {"@CI"};
 
 
   //protected com.rabbitmq.client.Connection rabbitClientConnection;
@@ -47,6 +51,8 @@ public class BaseTest implements En {
 
   public BaseTest() {
     environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
+//    environmentName ="aws-integration";
+
     String environmentNameConfigPrefix = environmentName + ".";
     String allEnvironmentsNameDefaultConfigPrefix = "*.";
     String allEnvironmentsNameOverrideConfigPrefix = "-.";
@@ -81,6 +87,7 @@ public class BaseTest implements En {
     });
 
     Before(scenario -> {
+
       String userName = System.getProperty("user.name");
       boolean onlyForUser = Boolean.getBoolean("for.user");
       if (!"jenkins".equals(userName) && onlyForUser
@@ -128,17 +135,39 @@ public class BaseTest implements En {
 //
 //    });
 
+
+
+  protected void restartServerNamed(String serverName)
+  {
+    String restartServerCmd = "sudo docker-compose -f /opt/docker-compose.yml restart "+ serverName;
+    cmd(restartServerCmd,"Couldn't run query");
+  }
+
+  protected void cmd(String cmd, String error)
+  {
+    sut.getHostsConnection().forEach((host, conn) -> {
+        try {
+          sut.write("********************************************************************");
+          CliCommandExecution command = new CliCommandExecution(conn, cmd).error(error)
+                  .withTimeout(3, TimeUnit.MINUTES);
+          command.execute();
+        } catch (IOException e) {
+          throw new UncheckedIOException(e);
+        }
+
+    });
+  }
+
   public void setupDB(){
 
-    // clean db
-    //SqlRampAdminUtils.unableAllExperimentGroups();
-    //SqlWorkflowUtils.setLimitationForZone(161482, "[]");
-    //SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", "ramp-lift-auto-campaign1-test", "units", "-1");
+    SqlWorkflowUtils.setLimitationForZone(161482, "[]");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`zones` SET `status`='0' WHERE `zoneid`='161482'");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `capping`='0', `session_capping`='0', `units`='-1', `status`='0' WHERE `campaignid`='278956';");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`tags` SET `is_migrated`='1' WHERE `tagid`='176';");
+    SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`publishers` SET `publisher_status_cd`='ACTIVE' WHERE `id` in (3674,3666,3675,3690,3697,2546);");
     CacheProcessTest.refreshZoneCache("cmd");
-    //SqlWorkflowUtils.setDefaultStatusToBanners(sut.getCampaignManager().getTestBannersStream());
-
-    try {
-      TimeUnit.SECONDS.sleep(10);
+      try {
+      TimeUnit.SECONDS.sleep(35);
       sut.write("sleeping 10 seconds");
     } catch (InterruptedException e) {
       // TODO Auto-generated catch block

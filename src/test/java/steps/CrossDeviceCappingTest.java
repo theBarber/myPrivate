@@ -3,6 +3,7 @@ package steps;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.time.Instant;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
@@ -25,9 +26,13 @@ import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.MutableDateTime;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import com.couchbase.client.java.error.DocumentDoesNotExistException;
+import ramp.lift.uas.automation.CouchbaseBucketModule;
 
 /**
  * Created by kereng on 5/23/2017.
@@ -46,6 +51,29 @@ public class CrossDeviceCappingTest extends BaseTest{
     Given("I add device ([a-zA-Z0-9]*) with record <([^>]*)> to user info", (String paramName, String paramValue) -> {
       sut.getUserInfoBucket().insertDocument(paramName, paramValue);
     });
+
+    Then("i inject profile id (\\d+) to user \\{([^}]+)\\} on adserver bucket", (Integer profileId, String userID) -> {
+      CouchbaseBucketModule adserverBucket = sut.getAdserverBucket();
+      try{
+        adserverBucket.deleteDocument(userID);
+      } catch (DocumentDoesNotExistException e) {
+        System.out.println(e.getMessage());
+      }
+        Integer epocDays = getEpocDays();
+        String jsonDoc = "{\n" +
+                "  \"profiles\": [\n" +
+                "    [\n" +
+                "      "+profileId+",\n" +
+                "      [\n" +
+                "        "+epocDays+",\n" +
+                "        1\n" +
+                "      ]\n" +
+                "    ]\n" +
+                "  ]\n" +
+                "}\n";
+        adserverBucket.insertDocument(userID,jsonDoc);
+    });
+
 
     Then("I delete the history of ([a-zA-Z0-9]*) from user history", (String paramName) -> {
       try{
@@ -72,6 +100,10 @@ public class CrossDeviceCappingTest extends BaseTest{
 
     Given("I clear all cookies from uas requests", () -> {
       sut.getUASRquestModule().clearCookies();
+    });
+
+    Given("I clear all headers from uas requests", () -> {
+      sut.getUASRquestModule().emptyHttpHeaders();
     });
     Then("^I refresh staging delivery engine data cache$", () -> {
       JsonArray hostsArray = new JsonParser().parse(config.get("uas.cliconnection.hosts")).getAsJsonArray();
@@ -129,6 +161,15 @@ public class CrossDeviceCappingTest extends BaseTest{
         "cap_across_devices", crossCapping);
 
     });
+  }
+
+  private Integer getEpocDays() {
+    MutableDateTime epoch = new MutableDateTime();
+    epoch.setDate(0); //Set to Epoch time
+    DateTime now = new DateTime();
+
+    Days days = Days.daysBetween(epoch, now);
+    return days.getDays();
   }
 
 }

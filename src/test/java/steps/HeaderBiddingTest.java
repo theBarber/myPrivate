@@ -1,107 +1,301 @@
 package steps;
-
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
+import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
-import entities.RampAppCreateEntitiesManager;
-import entities.Zone;
-import entities.ZoneSet;
-import infra.utils.SqlWorkflowUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.http.HttpResponse;
+import org.hamcrest.Matchers;
+import org.junit.Assert;
+import org.junit.AssumptionViolatedException;
 import org.junit.runner.RunWith;
-
-import java.io.*;
-import java.util.TreeSet;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import entities.RampAppCreateEntitiesManager;
-import entities.Zone;
-import entities.ZoneSet;
-import entities.ramp.app.api.CampaignsRequest;
-import entities.ramp.app.api.Zonesets;
-import infra.utils.SqlWorkflowUtils;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.util.EntityUtils;
-import org.junit.runner.RunWith;
-
+import ramp.lift.uas.automation.UASRequestModule;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isIn;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
-public class HeaderBiddingTest extends BaseTest{
+public class HeaderBiddingTest extends BaseTest {
+    final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/headerBiddingPostRequests.json";
+    final private Integer NO_UT_INDEX = 3;
     private ObjectMapper mapper = new ObjectMapper();
-    private entities.RampAppCreateEntitiesManager RampAppCreateEntitiesManager;
-    private static final String HBInputFilePath = "input_files/HBInput.xlsx";
-    private String url = "";
-    private String HBrequestBody = "";
-    private String HBresponse= "";
-    private String testType = "";
-    private int statusCode = 0;
+    private JsonNode headerBiddingPostRequests;
+    private List<JsonNode> responses;
+    private Map<String,Map<Integer,AtomicInteger>> bidCounterMap;
+    String mapByEntity;
+
+
     public HeaderBiddingTest()
     {
         super();
-
         Before(HEADERBIDDING, (scenario) -> {
-            RampAppCreateEntitiesManager = sut.getRampAppCreateEntitiesManager();
+            try {
+                headerBiddingPostRequests = mapper.readTree(this.getClass().getResourceAsStream(HEADER_BIDDING_SOURCE_FILE_PATH));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
-        Given("i load scenario \\{([^}]+)\\} input data",this::readInputDataFromCSV);
-        Then("i send (\\d+) times Header Bidding ad request to UAS for the scenario",this::sendHeaderBiddingRequestsToUAS);
+        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
+        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
+        And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
+        And("all HB responses contains (\\w+) with value \\{([^}]+)\\}",this::responsesContainEntityWithValue);
+        And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
+        And("all HB responses contains ad impression with (campaignId|adId|zoneId) of entity named \\{([^}]+)\\}",this::responsesAdsContainEntityWithName);
+        And("all HB responses contains ad impression with (campaignId|adId|zoneId) with value \\{([^}]+)\\}",this::responsesAdsContainEntityWithId);
+        And("i read all HB responses and map their bidId by (campaignId|adId)",this::setBidMapByEntity);
+        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
+        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
+        And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::HBResponsesContainOneOnOf);
+        And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBWithoutParam);
+        And("for all HB responses i simulate winning, with extra param \\{([^}]+)\\}",this::sendZoneTagFromHBWithParam);
+
+
     }
 
-    private void sendHeaderBiddingRequestsToUAS(Integer times)
-    {
-       try {
-           sut.getUASRquestModule().sendMultipleHeaderBiddingRequests(times,url,HBrequestBody,HBresponse,testType,statusCode,true);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-    }
 
-    private void readInputDataFromCSV(String scenario)
-    {
-        try {
-            ClassLoader loader = HeaderBiddingTest.class.getClassLoader();
-            FileInputStream excelFile = new FileInputStream(new File(loader.getResource(".").getPath(),HBInputFilePath));
-            Workbook workbook = new XSSFWorkbook(excelFile);
-            DataFormatter formatter = new DataFormatter();
-            Sheet datatypeSheet = workbook.getSheetAt(0);
-            Iterator<Row> iterator = datatypeSheet.iterator();
-
-            while (iterator.hasNext()) {
-                Row currentRow = iterator.next();
-                //getCellTypeEnum shown as deprecated for version 3.15
-                //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
-                String src = formatter.formatCellValue(currentRow.getCell(0)).trim();
-                String dest = scenario.trim();
-                if(src.contentEquals(dest)) {// we found the row for relevant scenario
-                    testType = formatter.formatCellValue(currentRow.getCell(7));
-                    if (testType.contentEquals("No")) {
-                        url = "http://" + formatter.formatCellValue(currentRow.getCell(1)) + "/hb?pid=" + formatter.formatCellValue(currentRow.getCell(2)) + "&domain=" + formatter.formatCellValue(currentRow.getCell(3)) + "&optimize=" + formatter.formatCellValue(currentRow.getCell(6)) + "&unlimited=1&ct=1";
-                        HBrequestBody = formatter.formatCellValue(currentRow.getCell(4));
-                        HBresponse = formatter.formatCellValue(currentRow.getCell(5));
-                        statusCode = Integer.parseInt(formatter.formatCellValue(currentRow.getCell(8)));
-                        break;
-                    }
-                    else //component testing
-                    {
-                        url = "http://" + formatter.formatCellValue(currentRow.getCell(1));
-                        HBrequestBody = formatter.formatCellValue(currentRow.getCell(4));
-                        HBresponse = formatter.formatCellValue(currentRow.getCell(5));
-                    }
-                }
+    private void setBidMapByEntity(String entity) {
+        mapByEntity = entity;
+        responses = new ArrayList<>();
+        bidCounterMap = new HashMap<>();
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            try
+            {
+                JsonNode contentAsJsonNode= mapper.readTree(content);
+                responses.add(contentAsJsonNode);
+            }catch (Exception e)
+            {
+                throw new AssertionError("error while parsing HB response");
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }catch (NullPointerException e) {
-            e.printStackTrace();
+        });
+        responses.forEach(response->
+        {
+            response.forEach(jsonNode ->
+            {
+                String key = jsonNode.get("bidRequestId").textValue();
+                Integer key2 = jsonNode.get(mapByEntity).intValue();
+                Map<Integer,AtomicInteger> innerMap = bidCounterMap.computeIfAbsent(key, (k) -> new HashMap<>());
+                AtomicInteger counter = innerMap.computeIfAbsent(key2, (k) -> new AtomicInteger(0));
+                counter.incrementAndGet();
+            });
+        });
+
+        bidCounterMap.forEach((bid,map)->
+        {
+            sut.write("bid id: "+bid+ " has the values of:");
+            map.forEach((k,v)->
+            {
+                sut.write(mapByEntity+ ": "+ k.toString() +", count: "+ v.toString());
+            });
+        });
+    }
+
+    private void responsesContainEntityByBidIdWithValue(String bidId, String entity, Integer value, Double percent) {
+        Assert.assertNotNull("bid mapper doesn't exist",bidCounterMap);
+        Assert.assertEquals("inconsistent mapping..",mapByEntity,entity);
+        Assert.assertTrue("bid id "+ bidId+ " doesn't exist", bidCounterMap.containsKey(bidId));
+        Assert.assertTrue("entity with id: "+ value+ " doesn't exist in responses",bidCounterMap.get(bidId).containsKey(value));
+        Assert.assertNotEquals("responses size are 0",responses.size(),0);
+        double actualRate = bidCounterMap.get(bidId).get(value).doubleValue() / responses.size();
+        assertEquals("rate of " + entity + " in responses urls", percent,
+                actualRate * 100, 10d);
+    }
+
+
+    private void responsesContainEntityByBidIdWithName(String bidId, String entity, String name, Double percent) {
+        responsesContainEntityByBidIdWithValue(bidId,entity,getEntityId(entity,name),percent);
+    }
+
+    private Map<String,Integer> getBidMapperFromResponse(JsonNode responseInJson) {
+        Map<String,Integer> bidIdMapper = new HashMap<>();
+        Integer index = 0;
+        for (JsonNode js:responseInJson) {
+            bidIdMapper.put(js.get("bidRequestId").textValue(),index++);
         }
+        return bidIdMapper;
+    }
+
+    private void responsesContainEntityWithValue(String entity, String value) {
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
+                Assert.assertEquals(value,responseInJson.get(0).get(entity).toString());
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void HBResponsesContainOneOnOf(String entity, String banners_names) {
+        List<Integer> bannersIds = Arrays.stream(banners_names.split(",")).map(name -> getEntityId(entity, name)).collect(Collectors.toList());
+
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get(entity));
+                Assert.assertThat(responseInJson.get(0).get(entity).intValue(),isIn(bannersIds));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
+
+    }
+
+    private void sendHeaderBiddingSecurePostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams) {
+        if(headerBiddingPostRequests == null)
+        {
+            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
+        }
+        JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
+        Assert.assertNotNull( "There is no suitable scenario for scenario: "+scenario, jsonNode);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,jsonNode.toString(),publisherID,domain, extraParams,true,true);
+    }
+
+
+    public void sendHeaderBiddingPostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams)
+    {
+        if(headerBiddingPostRequests == null)
+        {
+            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
+        }
+        JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
+        Assert.assertNotNull( "There is no suitable scenario for scenario: "+scenario, jsonNode);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,jsonNode.toString(),publisherID,domain, extraParams,true,false);
+    }
+
+    private void sendHeaderBiddingPostRequestWithoutExtraParams(Integer times, String scenario, Integer publisherID, String domain)
+    {
+        sendHeaderBiddingPostRequest(times,scenario,publisherID,domain,null);
+    }
+
+    public void responsesContainEntityWithId(String entity, Integer id) {
+
+        responsesContainEntityWithValue(entity,String.valueOf(id));
+    }
+
+
+    public void sendZoneTagFromHBWithoutParam()
+    {
+        sendZoneTagFromHBWithParam(null);
+    }
+
+    public void sendZoneTagFromHBWithParam(String extraParam) {
+        List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
+        sut.getUASRquestModule().reset();
+        response.stream().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                String htmlWithQuery = responseInJson.get(0).get("ad").asText();
+                String url = getUrlFromAd(htmlWithQuery) + Optional.ofNullable(extraParam).orElse("");
+                System.out.println(url);
+                sut.getUASRquestModule().sendGetRequestsAsync(1,url,false);
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
+        private String getUrlFromAd(String htmlWithQuery) {
+        Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
+
+        return new StringBuilder().append(splitedQuery.get("ut_ju ").substring(2,splitedQuery.get("ut_ju ").length()-1)).append("?").
+                append("&bidid=").append(splitedQuery.get("ut.bidid").substring(1,splitedQuery.get("ut.bidid").length()-1)).
+                append("&bannerid=").append(splitedQuery.get("ut.bannerid")).
+                append("&zoneid=").append(splitedQuery.get("ut.zoneid")).
+                append("&hbprice=").append(splitedQuery.get("ut.hbprice")).
+                append("&fallbackbannerid=").append(splitedQuery.get("ut.fallbackbannerid")).
+                append("&fallbackzoneid=").append(splitedQuery.get("ut.fallbackzoneid")).
+                append("&width=").append(splitedQuery.get("ut.width")).
+                append("&height=").append(splitedQuery.get("ut.height")).
+                append("&adaptor=").append(splitedQuery.get("ut.adaptor")).
+                append("&pid=").append(splitedQuery.get("ut.pid")).
+                append("&extpid=").append(splitedQuery.get("ut.extpid")).
+                append("&domain=").append(splitedQuery.get("ut.domain")).
+                append("&ct=1").toString();
+    }
+
+    public void responsesAdsContainEntityWithName(String entity, String name)
+    {
+        String value = String.valueOf(getEntityId(entity,name));
+        responsesAdsContainEntityWithId(entity, value);
+
+    }
+
+    public void responsesAdsContainEntityWithId(String entity, String value) {
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            JsonNode responseInJson = null;
+            try
+            {
+                responseInJson = mapper.readTree(content);
+                Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get("ad"));
+                assertTrue("responses not contains "+entity+" with value: "+ value+", response has ad: "+responseInJson.get(0).get("ad").toString() ,
+                        responseInJson.get(0).get("ad").toString().contains("ut."+entity.toLowerCase()+"="+value));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
+    private void responsesContainEntityWithName(String entity, String name)
+    {
+       responsesContainEntityWithId(entity, getEntityId(entity,name));
+    }
+
+    private Integer getEntityId(String entity, String name)
+    {
+        String myEntity;
+        switch (entity.toLowerCase()) {
+            case "adid":
+                myEntity = "banner";break;
+            case "campaignid":
+                myEntity = "campaign";break;
+            case "zoneid":
+                myEntity = "zone";break;
+            default:
+                myEntity = null;
+        }
+        return sut.getExecutorCampaignManager().getterFor(myEntity).apply(name).orElseThrow(() -> new AssertionError(name+" wasn't found")).getId();
+    }
+
+    public Map<String, String> splitHBQuery(String query){
+
+        Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+        String[] pairs = query.split(";");
+        pairs[0] = pairs[0].substring(pairs[0].indexOf("ut_ju")).trim();
+        for (String pair : pairs) {
+            int idx = pair.indexOf("=");
+            try {
+                query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return query_pairs;
     }
 }

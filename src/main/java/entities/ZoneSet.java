@@ -8,11 +8,13 @@ import java.util.TreeSet;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import infra.module.Named;
 import infra.module.WithId;
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ZoneSet implements Named, WithId<Integer>, Comparable<ZoneSet> {
 
 	private String name;

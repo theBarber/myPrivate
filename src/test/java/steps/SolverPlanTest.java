@@ -39,9 +39,10 @@ public class SolverPlanTest extends BaseTest {
       uploadNew(slicesAsList);
     });
     Then("^I delete the test solver plan$", this::deleteTestSolverPlanFromS3);
+    Then("^I restore the original plan$", this::restoreOriginal);
   }
 
-  private void uploadNew(List<String> slices) {
+  private void uploadNew_Version2(List<String> slices) {
     try {
       S3Client s3Client = new S3Client();
 
@@ -62,29 +63,29 @@ public class SolverPlanTest extends BaseTest {
     }
   }
 
-  private void uploadNew_old(List<String> slices) {
+  private void uploadNew(List<String> slices) {
     try {
       S3Client s3Client = new S3Client();
       /* Download existing plan */
       String planFileName = config.get("as.solver_plan.file_name");
       String s3PlanPath = config.get("as.solver_plan.file_path") + "/" + planFileName;
       sut.write("downloading file " + s3PlanPath);
-      s3Client.downloadFile(s3PlanPath, planFileName);
+      s3Client.downloadFile(s3PlanPath, planFileName+".tmp"); //solver_plan_v4.json.tmp
       /* Backup existing plan */
-      Path planLocalPath = Paths.get(planFileName);
-      Path origPlanLocalPath = Paths.get(planFileName + ".tmp");
+      Path planLocalPath = Paths.get(planFileName); //solver_plan_v4.json
+      //Path origPlanLocalPath = Paths.get(planFileName + ".tmp");  //solver_plan_v4.json.tmp
 
-      Files.copy(planLocalPath, origPlanLocalPath);
+      //Files.copy(planLocalPath, origPlanLocalPath); //copy from solver_plan_v4.json to solver_plan_v4.json.tmp
 
       /* Add input slices to the plan */
-      Files.write(planLocalPath, slices, StandardOpenOption.APPEND);
+      Files.write(planLocalPath, slices, Charset.forName("UTF-8")); //add slices to solver_plan_v4.json
       /* Delete original file from S3 */
       s3Client.deleteFile(s3PlanPath);
       /* Upload the new plan to S3 */
-      String s3NewPlanPath = config.get("as.solver_plan.file_path") + "/"
-          + planFileName.substring(0, planFileName.lastIndexOf('.')) + "_int_test.json";
-      sut.write("uploading file " + s3NewPlanPath);
-      s3Client.uploadFile(planFileName, s3NewPlanPath);
+     // String s3NewPlanPath = config.get("as.solver_plan.file_path") + "/"
+         // + planFileName.substring(0, planFileName.lastIndexOf('.')) + "_int_test.json";
+      sut.write("uploading file " + s3PlanPath);
+      s3Client.uploadFile(planFileName, s3PlanPath);
       /* Delete the new plan from the disk */
       Files.delete(planLocalPath);
     } catch (IOException e) {
@@ -103,7 +104,7 @@ public class SolverPlanTest extends BaseTest {
     s3Client.deleteFile(s3NewPlanPath);
   }
 
-  private void RestoreOriginal() {
+  private void restoreOriginal() {
     try {
       S3Client s3Client = new S3Client();
       /* Delete the new plan from S3 */

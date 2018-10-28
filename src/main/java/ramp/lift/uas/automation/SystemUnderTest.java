@@ -17,13 +17,17 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
+import cucumber.api.Scenario;
+import entities.ExecutorCampaignManager;
 import entities.RampAppCreateEntitiesManager;
+import gherkin.deps.com.google.gson.JsonArray;
+import gherkin.deps.com.google.gson.JsonParser;
+import infra.utils.CouchBaseUtils;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.junit.Assume;
 
 import cucumber.api.Scenario;
 import entities.CampaignManager;
-import entities.HardCodedCampaignManager;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
 import infra.assertion.Assert;
@@ -34,21 +38,34 @@ import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.conn.RootLinuxCliConnection;
 import infra.module.AbstractModuleImpl;
 import infra.support.StringUtils;
+import ramp.lift.uas.automation.UAScontainer.Builder;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
 	final int _o;
 	private RampAppCreateEntitiesManager rampAppCreateEntitiesManager;
 	protected final Map<String, LinuxDefaultCliConnection> uasCliConnections = new HashMap<>();
+	protected final Map<String, LinuxDefaultCliConnection> uasHostConnections = new HashMap<>();
+	protected final Map<String, LinuxDefaultCliConnection> cronCliConnection = new HashMap<>();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
+	//protected CIRequestModule ci;
+	protected UAScontainer uasKubeMachines;
 	protected CampaignManager campaignManager;
+	protected ExecutorCampaignManager executorCampaignManager;
 	protected SqlConnectionModule rampAdminDbConnector;
 	protected SqlConnectionModule workflowDbConnector;
 	protected CouchbaseBucketModule userInfoBucket;
 	protected CouchbaseBucketModule userHistoryBucket;
+	protected CouchbaseBucketModule adserverBucket;
+	protected CouchBaseUtils couchBaseUtils;
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
 	private Map<String, String> config;
+
+	public Map<String, String> getConfigFile() {
+		return config;
+	}
+
 	private ScenarioWriter scenarioWriter;
 	private AtomicReference<RuntimeException> exception;
 	
@@ -69,17 +86,29 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				break;
 			case "@userinfo":
 				if (userInfoBucket == null) {
-					userInfoBucket = createCouchbaseBucketModule("user-info", config);
+					userInfoBucket = createCouchbaseBucketModule("us-east-1-user-info", config);
 				}
 				break;
 			case "@userhistory":
 				if (userHistoryBucket == null) {
-					userHistoryBucket = createCouchbaseBucketModule("user-history", config);
+					userHistoryBucket = createCouchbaseBucketModule("us-east-1-user-history", config);
 			}
 			break;
+				case "@adserverBucket":
+					if (adserverBucket == null) {
+						adserverBucket = createCouchbaseBucketModule("us-east-1-adserver", config);
+					}
+					break;
+				case "@couchBaseUtil":
+					if(couchBaseUtils == null)
+					{
+						couchBaseUtils = new CouchBaseUtils(config.get("couchbase.host"),config.get("couchbase.port"),config.get("couchbase.user"),config.get("couchbase.password"));
+					}
 	    case "@uas":
 				if (uas == null) {
 					try {
+						UAScontainer.Builder builder = new Builder();
+						uasKubeMachines = builder.setConfig(config.get("uas.k8s.path.config")).build();
 						uas = new UASRequestModule();
 						//uas.setDomain(config.get("uas.host"));
 						uas.setDomain(config.get("uas.domain"));
@@ -93,7 +122,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	    case "@campaign":
 				if (campaignManager == null)
-						campaignManager = new HardCodedCampaignManager();
+						campaignManager = new CampaignManager();
 						break;
 		case "@RampAppCreateEntitiesManager":
 				if(rampAppCreateEntitiesManager == null)
@@ -133,7 +162,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 	private CouchbaseBucketModule createCouchbaseBucketModule(String name, Map<String, String> config) {
-		String nodesParam = config.get(name + ".couchbase.nodes");
+		String nodesParam = config.get("couchbase.nodes");
 		JsonArray nodesConfig = new JsonParser().parse(nodesParam).getAsJsonArray();
 
 		List<String> nodes = new ArrayList<>(nodesConfig.size());
@@ -180,6 +209,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				if (uas != null) {
 					try {
 						uas.close();
+						//uasKubeMachines.close();
 					} catch (Exception e) {
 						delegate(exception, e);
 					}
@@ -198,7 +228,17 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 					}
 				}
 //				break;
-
+				if (executorCampaignManager != null) {
+					try {
+						if (executorCampaignManager instanceof Closeable) {
+							Closeable ecm = (Closeable) executorCampaignManager;
+							ecm.close();
+							ecm = null;
+						}
+					} catch (IOException e) {
+						delegate(exception, e);
+					}
+				}
 //	    case "@ramp_admin_db":
 				if (rampAdminDbConnector != null) {
 					try {
@@ -225,6 +265,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						AutoCloseable cm = (AutoCloseable) rampAppCreateEntitiesManager;
 						cm.close();
 						cm = null;
+						rampAppCreateEntitiesManager = null;
 					}
 					catch (Exception e) {
 						delegate(exception, e);
@@ -259,49 +300,66 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return this.uasCliConnections.values().stream();
 	}
 
+	public  Map<String, LinuxDefaultCliConnection> getUasCliConnections()
+	{
+		if (uasCliConnections.isEmpty()) {
+			setupCli(config, exception);
+		}
+		return this.uasCliConnections;
+	}
+
+	public  Map<String, LinuxDefaultCliConnection> getCronCliConnection()
+	{
+		if (cronCliConnection.isEmpty()) {
+			setupCli(config, exception);
+		}
+		return this.cronCliConnection;
+	}
+
+	public  Map<String, LinuxDefaultCliConnection> getHostsConnection()
+	{
+		if (uasHostConnections.isEmpty()) {
+			setupCli(config, exception);
+		}
+		return this.uasHostConnections;
+	}
+
+
+	public CouchBaseUtils getCouchBaseUtils()
+	{
+		if(couchBaseUtils == null)
+		{
+			couchBaseUtils = new CouchBaseUtils(config.get("couchbase.host"),config.get("couchbase.port"),config.get("couchbase.user"),config.get("couchbase.password"));
+		}
+		return this.couchBaseUtils;
+	}
+
+
 	protected void setupCli(Map<String, String> config, AtomicReference<RuntimeException> exception) {
-		String uasCliConnectionUser = config.get("uas.cliconnection.user");
-		String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
 		String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
 		String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
+		String cliconnectionCron = config.getOrDefault("uas.cliconnection.cron", "");
+
 		JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
+		JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
 		File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
 				.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename)).orElse(null);
-		// InputStream keyFile =
-		// ClassLoader.class.getResourceAsStream(cliconnectionKeyname);
-		// File keyFile = new
-		// File(ClassLoader.class.getResource(cliconnectionKeyname).toString());
 
 		hostsConfig.forEach(jsonElement -> {
 			String host = jsonElement.getAsString();
-			LinuxDefaultCliConnection conn;
-
-			if (uasCliConnectionUser.equals("root")) {
-				conn = new RootLinuxCliConnection();
-			} else {
-				conn = new LinuxDefaultCliConnection();
-			}
-
-			conn.setHost(host);
-			conn.setUser(uasCliConnectionUser);
-			conn.setPassword(uasCliConnectionPassword);
-			conn.setConnectOnInit(false);
-			conn.setUseThreads(true);
-
-			if (keyFile != null) {
-				Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
-						org.hamcrest.io.FileMatchers.anExistingFile());
-				Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
-						org.hamcrest.io.FileMatchers.aReadableFile());
-				conn.setPrivateKey(keyFile);
-				conn.setProtocol(EnumConnectionType.SSH_RSA.value());
-			} else {
-				Assume.assumeThat("connection to " + host + " password is not set", conn.getPassword(),
-						not(isEmptyOrNullString()));
-			}
-
+			LinuxDefaultCliConnection conn = getConnection(host,keyFile);
+			uasHostConnections.put(host, conn);
 			uasCliConnections.put(host, conn);
 		});
+
+		cronsConfig.forEach(jsonElement -> {
+			String host = jsonElement.getAsString();
+			LinuxDefaultCliConnection conn = getConnection(host,keyFile);
+			cronCliConnection.put(host, conn);
+			uasCliConnections.put(host, conn);
+		});
+
+		//for all connections
 		uasCliConnections.values().forEach(conn -> {
 			try {
 				conn.init();
@@ -309,6 +367,38 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				delegate(exception, cause);
 			}
 		});
+	}
+
+	private LinuxDefaultCliConnection getConnection(String host, File keyFile) {
+		String uasCliConnectionUser = config.get("uas.cliconnection.user");
+		String uasCliConnectionPassword = config.getOrDefault("uas.cliconnection.password", null);
+		LinuxDefaultCliConnection conn;
+
+		if (uasCliConnectionUser.equals("root")) {
+			conn = new RootLinuxCliConnection();
+		} else {
+			conn = new LinuxDefaultCliConnection();
+		}
+
+		conn.setHost(host);
+		conn.setUser(uasCliConnectionUser);
+		conn.setPassword(uasCliConnectionPassword);
+		conn.setConnectOnInit(false);
+		conn.setUseThreads(true);
+
+		if (keyFile != null) {
+			Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
+					org.hamcrest.io.FileMatchers.anExistingFile());
+			Assert.assertThat("the file " + keyFile.getAbsolutePath(), keyFile,
+					org.hamcrest.io.FileMatchers.aReadableFile());
+			conn.setPrivateKey(keyFile);
+			conn.setProtocol(EnumConnectionType.SSH_RSA.value());
+		} else {
+			Assume.assumeThat("connection to " + host + " password is not set", conn.getPassword(),
+					not(isEmptyOrNullString()));
+		}
+
+		return conn;
 
 	}
 
@@ -333,9 +423,28 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return this.uas;
 	}
 
+	public UAScontainer getUasKubeMachines() {
+		return uasKubeMachines;
+	}
+
+	//public CIRequestModule getCIRquestModule() {
+	//	if (ci == null) {
+	//		try {
+	//			ci = new CIRequestModule();
+	//			ci.setDomain(config.get("ci.domain"));
+	//			ci.setWfdomain(config.get("ci.wfdomain"));
+	//			ci.setPort(config.get("ci.port"));
+	//			ci.init();
+	//		} catch (Exception e) {
+	//			delegate(exception, e);
+	//		}
+	//	}
+	//	return this.ci;
+	//}
+
 	public UASLogModule logFor(String logType) {
 		return uasLogModulesByLogType.computeIfAbsent(logType, logname -> {
-			UASLogModule logModule = new UASLogModule(uasCliConnections.values(), logname);
+			UASLogModule logModule = new UASLogModule(uasHostConnections.values(), logname);
 			logModule.init();
 			return logModule;
 		});
@@ -344,9 +453,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public CampaignManager getCampaignManager() {
 	  if (campaignManager == null) {
-                    campaignManager = new HardCodedCampaignManager();
+                    campaignManager = new CampaignManager();
 	  }
 		return campaignManager;
+	}
+
+	public ExecutorCampaignManager getExecutorCampaignManager() {
+		if (executorCampaignManager == null) {
+			executorCampaignManager = new ExecutorCampaignManager();
+		}
+		return executorCampaignManager;
 	}
 
 	public RampAppCreateEntitiesManager getRampAppCreateEntitiesManager() {
@@ -388,16 +504,24 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public CouchbaseBucketModule getUserInfoBucket() {
 		if(userInfoBucket == null){
-			userInfoBucket =  createCouchbaseBucketModule("user-info", config);
+			userInfoBucket =  createCouchbaseBucketModule("us-east-1-user-info", config);
 		}
 		return userInfoBucket;
 	}
 
+
 	public CouchbaseBucketModule getUserHistoryBucket() {
 		if(userHistoryBucket == null){
-			userHistoryBucket =  createCouchbaseBucketModule("user-history", config);
+			userHistoryBucket =  createCouchbaseBucketModule("us-east-1-user-history", config);
 		}
 		return userHistoryBucket;
+	}
+
+	public CouchbaseBucketModule getAdserverBucket() {
+		if(adserverBucket == null){
+			adserverBucket = createCouchbaseBucketModule("us-east-1-adserver", config);
+		}
+		return adserverBucket;
 	}
 
 	@Override

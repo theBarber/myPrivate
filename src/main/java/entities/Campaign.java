@@ -21,6 +21,7 @@ import infra.module.WithId;
 @JsonTypeName("Campaign")
 @JsonTypeInfo(use = Id.CLASS, defaultImpl = CampaignPlus.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Campaign implements Named, WithId<Integer>, Comparable<Campaign> {
 
 	private String campaignName;

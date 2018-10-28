@@ -1,0 +1,825 @@
+{
+    "send HB request without params for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b33",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [
+          [1,2],
+          [160, 600]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {}
+      }]},
+
+    "send HB request without publisherID configured for publisher 3673":
+    {
+      "x-ut-hb-params":[
+        {
+          "bidRequestId": "21b46f0d859b33",
+          "domain": "headerbiddingproptest.com",
+          "placementId": "10433394",
+          "sizes": [
+            [1,2],
+            [160, 600]
+          ],
+          "timeout": 700,
+          "hbadaptor": "prebid",
+          "params": {}
+        }]},
+
+    "Send HB basic request for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46gfd59b33",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [
+          [1,2],
+          [160, 600]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 3673
+        }
+      }]},
+  "Send HB basic request with domain as array for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": ["headerbiddingproptest.com"],
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [1,2],
+        [160, 600]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3673
+      }
+    }]},
+
+    "Send HB request to optimizer for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b99",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [
+          [1,2],
+          [160, 600]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 3673
+        }
+      }]},
+    "Send HB request with Empty domain for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b33",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [
+          [1,2],
+          [160, 600]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 3673
+        }
+      }]},
+
+    "Send HB request with Empty placementID for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b33",
+        "domain": "headerbiddingproptest.com",
+        "publisherId":3673,
+        "sizes": [
+          [1,2],
+          [160, 600]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {"publisherId" : 3673
+        }
+      }]},
+
+    "Send HB request with Empty sizes for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b33",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 3673
+        }
+      }]},
+
+    "Send HB request with Empty timeout for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b33",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [
+          [1,2],
+          [160, 600]
+        ],
+        "hbadaptor": "prebid",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 3673
+        }
+      }]},
+
+    "Send HB request with wrong values for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b33",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 0,
+        "sizes": [],
+        "timeout": 700,
+        "hbadaptor": "prebida",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 0
+        }
+      }]},
+  "Send HB request with sizes as string for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 0,
+      "sizes": "[1,1]",
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 0
+      }
+    }]},
+  "Send HB request with string array sizes for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 0,
+      "sizes":[ "[1,1]"],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 0
+      }
+    }]},
+  "Send HB request with empty values for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "",
+      "domain": "",
+      "placementId": "",
+      "publisherId": 0,
+      "sizes": "",
+      "timeout": 0,
+      "hbadaptor": "",
+      "params": {"placementId" : "",
+        "publisherId" : 0
+      }
+    }]},
+  "Send HB request with partial data for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "timeout": 0,
+      "hbadaptor": ""
+    }]},
+  "Send HB request with empty for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+    }]},
+
+  "Send HB request with wrong format for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": 543543,
+      "domain": 5,
+      "placementId":4,
+      "publisherId": "gfdgfd",
+      "sizes": "[]",
+      "timeout": "700",
+      "hbadaptor": 5,
+      "params": {"placementId" : 0,
+        "publisherId" : "pp"
+      }
+    }]},
+    "Send HB request with one size for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b47",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [
+          [1, 2]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 3673
+        }
+      }]},
+
+  "Send HB request with 1X1,1X2 size for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b47",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [1, 1],
+        [1, 2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3673
+      }
+    }]},
+
+    "Send HB request with no 1X1 size for publisher 3673":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d859b47",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [
+          [160, 600]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 3673
+        }
+      }]},
+
+  "Send HBProg request with D first P selected publisher 3697":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "hbprog.com",
+      "placementId": "10433394",
+      "publisherId": 3697,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3697
+      }
+    }]},
+
+  "Send HBProg request with No D, No response from P publisher 3697":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "hbprog.com",
+      "placementId": "10433394",
+      "publisherId": 3697,
+      "sizes": [
+        [1, 2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3697
+      }
+    }]},
+
+  "Send HBProg request D selected publisher 3697":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "hbprog.com",
+      "placementId": "10433394",
+      "publisherId": 3697,
+      "sizes": [
+        [970, 250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3697
+      }
+    }]},
+
+  "Send HB basic request for publisher 3690":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "DynamicTagInline.com",
+      "placementId": "10433394",
+      "publisherId": 3690,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3690
+      }
+    }]},
+
+  "Send HB server programmatic request for publisher 3711":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "test.com",
+      "placementId": "10433394",
+      "publisherId": 3711,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3711
+      }
+    }]},
+
+  "Send HB basic request for publisher 3708":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "sahar.cnn.com",
+      "placementId": "10433394",
+      "publisherId": 3708,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3708
+      }
+    }]},
+  "Send HB 300x250 request for publisher 3708":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "sahar.cnn.com",
+      "placementId": "10433394",
+      "publisherId": 3708,
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3708
+      }
+    }]},
+  "Send HB request for publisher 3711 - 1X1":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "test.com",
+      "placementId": "10433394",
+      "publisherId": 3711,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3711
+      }
+    }]},
+  "Send HB request for publisher 3711 - 1X2":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "test.com",
+      "placementId": "10433394",
+      "publisherId": 3711,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3711
+      }
+    }]},
+  "Send HB PPP request for publisher 3673 with 970X250":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d8459b33",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3673
+      }
+    }]},
+  "Send HB PPP request for publisher 3673 with 300X250":
+    {"x-ut-hb-params":[
+      {
+        "bidRequestId": "21b46f0d8459b33",
+        "domain": "headerbiddingproptest.com",
+        "placementId": "10433394",
+        "publisherId": 3673,
+        "sizes": [
+          [300,250]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {"placementId" : "10433394",
+          "publisherId" : 3673
+        }
+      }]},
+  "Send HB PPP request for publisher 3673 with [970:250],[300:250]":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d8459b33",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [300,250],
+        [970,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3673
+      }
+    }]},
+  "Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "bid1",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [1,2],[160, 600]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "432",
+        "publisherId" : 3673
+      }
+    },
+    {
+      "bidRequestId": "bid2",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "432",
+        "publisherId" : 3673
+      }
+    },
+    {
+      "bidRequestId": "bid3",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "432",
+        "publisherId" : 3673
+      }
+    },
+    {
+      "bidRequestId": "bid4",
+      "domain": "headerbiddingproptest.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [23,24]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "432",
+        "publisherId" : 3673
+      }
+    }
+  ]},
+  "Send HB basic request for publisher 3728 size [1,2]":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "testing.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3728
+      }
+    }]},
+  "Send HB basic request for publisher 3728 size [1,1]":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "testing.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3728
+      }
+    }]},
+  "Send HB basic request for publisher 3728 size [1,1],[1,2]":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "bid1",
+      "domain": "testing.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [1,1],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3728
+      }
+    }]},
+  "Send HB basic request for publisher 3728 size [300,250]":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "testing.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3728
+      }
+    }]},
+"Send HB request 1X2 size for publisher 3666":
+{"x-ut-hb-params":[
+  {
+    "bidRequestId": "21b46f04859b33",
+    "domain": "Dynamic2.com",
+    "placementId": "10433394",
+    "publisherId": 3666,
+    "sizes": [
+      [1,2]
+    ],
+    "timeout": 700,
+    "hbadaptor": "prebid",
+    "params": {"placementId" : "10433394",
+      "publisherId" : 3666
+    }
+  }]},
+  "Send HB request 1X2 size for publisher 3675":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f04859b33",
+      "domain": "Dynamic3.com",
+      "placementId": "10433394",
+      "publisherId": 3675,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3675
+      }
+    }]},
+  "Send HB Domain1 request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest1.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [160, 600],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB Domain2 request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest2.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [160, 600],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB Domain3 request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest3.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [160, 600],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB Domain4 request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest4.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [160, 600],
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB Domain1 with 1X1 size request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest1.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB Domain2 with 1X1 size request for publisher 3673":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "HBTest2.com",
+      "placementId": "10433394",
+      "publisherId": 3673,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB 1X1 size request for publisher 3739":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "PGXTriggering.com",
+      "placementId": "10433394",
+      "publisherId": 3739,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB 1X2 size request for publisher 3739":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "PGXTriggering.com",
+      "placementId": "10433394",
+      "publisherId": 3739,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB basic request for publisher 2546":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "Tradewindsnews.com",
+      "placementId": "10433394",
+      "publisherId": 2546,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB request with 300X250 size (DT) for publisher 3728":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "DynamicPricingTest.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB request with 1X1 size (DT) for publisher 3728":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "DynamicPricingTest.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [1,1]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB request with 1X2 size (DT) for publisher 3728":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "DynamicPricingTest.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [1,2]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]},
+  "Send HB request with 970X250 size (DT) for publisher 3728":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "DynamicPricingTest.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {}
+    }]}
+
+}

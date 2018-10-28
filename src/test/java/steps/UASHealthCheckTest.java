@@ -10,9 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 
 import com.google.common.io.Files;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.hamcrest.Matchers;
@@ -22,6 +24,10 @@ import org.junit.runner.RunWith;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import ramp.lift.uas.automation.UASRequestModule;
+
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isIn;
+import static org.hamcrest.Matchers.not;
 
 @CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",
 		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
@@ -35,16 +41,29 @@ public class UASHealthCheckTest extends BaseTest {
 				this::healthCheckRequestSkip);
 		When("^Sending a healthcheck request to UAS$", this::healthCheckRequest);
 		Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
+		Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains (.*)$", this::healthCheckResponseContains);
+		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
+
+	}
+
+	private void healthCheckResponseNotContains(String something) {
+		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+			//System.out.println(content); // for checks only
+			Assert.assertThat(content, not(Matchers.containsString(something)));
+		});
 	}
 
 	public void healthCheckResponseContains(String something) {
 		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-//			System.out.println(content); // for checks only
+			//System.out.println(content);
 			Assert.assertThat(content, Matchers.containsString(something));
+
 		});
 	}
+
+
 
 	public void healthCheckRequestSkip(String servicenameToSkip) {
 		sut.getUASRquestModule().healthCheckRequestSkip(servicenameToSkip);
@@ -58,6 +77,11 @@ public class UASHealthCheckTest extends BaseTest {
 		sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
 				.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
 				.forEach(CompletableFuture::join);
+	}
+
+	public void allSynchronizedResponsesHaveCode(Integer expectedResponseCode) {
+		sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
+				.map(StatusLine::getStatusCode).forEach(statusCode->Assert.assertThat(statusCode, Matchers.is(expectedResponseCode)));
 	}
 
 	public void allResponsesFinished() {
