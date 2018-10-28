@@ -17,14 +17,17 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
+import cucumber.api.Scenario;
+import entities.ExecutorCampaignManager;
 import entities.RampAppCreateEntitiesManager;
+import gherkin.deps.com.google.gson.JsonArray;
+import gherkin.deps.com.google.gson.JsonParser;
 import infra.utils.CouchBaseUtils;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.junit.Assume;
 
 import cucumber.api.Scenario;
 import entities.CampaignManager;
-import entities.HardCodedCampaignManager;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
 import infra.assertion.Assert;
@@ -45,8 +48,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected final Map<String, LinuxDefaultCliConnection> cronCliConnection = new HashMap<>();
 	protected final Map<String, UASLogModule> uasLogModulesByLogType = new HashMap<>();
 	protected UASRequestModule uas;
+	//protected CIRequestModule ci;
 	protected UAScontainer uasKubeMachines;
 	protected CampaignManager campaignManager;
+	protected ExecutorCampaignManager executorCampaignManager;
 	protected SqlConnectionModule rampAdminDbConnector;
 	protected SqlConnectionModule workflowDbConnector;
 	protected CouchbaseBucketModule userInfoBucket;
@@ -117,7 +122,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	    case "@campaign":
 				if (campaignManager == null)
-						campaignManager = new HardCodedCampaignManager();
+						campaignManager = new CampaignManager();
 						break;
 		case "@RampAppCreateEntitiesManager":
 				if(rampAppCreateEntitiesManager == null)
@@ -204,7 +209,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				if (uas != null) {
 					try {
 						uas.close();
-						uasKubeMachines.close();
+						//uasKubeMachines.close();
 					} catch (Exception e) {
 						delegate(exception, e);
 					}
@@ -223,7 +228,17 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 					}
 				}
 //				break;
-
+				if (executorCampaignManager != null) {
+					try {
+						if (executorCampaignManager instanceof Closeable) {
+							Closeable ecm = (Closeable) executorCampaignManager;
+							ecm.close();
+							ecm = null;
+						}
+					} catch (IOException e) {
+						delegate(exception, e);
+					}
+				}
 //	    case "@ramp_admin_db":
 				if (rampAdminDbConnector != null) {
 					try {
@@ -412,6 +427,21 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return uasKubeMachines;
 	}
 
+	//public CIRequestModule getCIRquestModule() {
+	//	if (ci == null) {
+	//		try {
+	//			ci = new CIRequestModule();
+	//			ci.setDomain(config.get("ci.domain"));
+	//			ci.setWfdomain(config.get("ci.wfdomain"));
+	//			ci.setPort(config.get("ci.port"));
+	//			ci.init();
+	//		} catch (Exception e) {
+	//			delegate(exception, e);
+	//		}
+	//	}
+	//	return this.ci;
+	//}
+
 	public UASLogModule logFor(String logType) {
 		return uasLogModulesByLogType.computeIfAbsent(logType, logname -> {
 			UASLogModule logModule = new UASLogModule(uasHostConnections.values(), logname);
@@ -423,9 +453,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public CampaignManager getCampaignManager() {
 	  if (campaignManager == null) {
-                    campaignManager = new HardCodedCampaignManager();
+                    campaignManager = new CampaignManager();
 	  }
 		return campaignManager;
+	}
+
+	public ExecutorCampaignManager getExecutorCampaignManager() {
+		if (executorCampaignManager == null) {
+			executorCampaignManager = new ExecutorCampaignManager();
+		}
+		return executorCampaignManager;
 	}
 
 	public RampAppCreateEntitiesManager getRampAppCreateEntitiesManager() {

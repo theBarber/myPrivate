@@ -1,8 +1,8 @@
-@scheduled
 @HeaderBidding
 @scheduled
 @uas
 @PGX
+@parallel
 Feature: PGX - triggering ads tests
 
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG zone tag

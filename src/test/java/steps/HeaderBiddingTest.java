@@ -280,7 +280,7 @@ public class HeaderBiddingTest extends BaseTest {
             default:
                 myEntity = null;
         }
-        return sut.getCampaignManager().getterFor(myEntity).apply(name).orElseThrow(() -> new AssertionError(name+" wasn't found")).getId();
+        return sut.getExecutorCampaignManager().getterFor(myEntity).apply(name).orElseThrow(() -> new AssertionError(name+" wasn't found")).getId();
     }
 
     public Map<String, String> splitHBQuery(String query){

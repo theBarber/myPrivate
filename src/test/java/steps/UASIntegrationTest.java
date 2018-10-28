@@ -67,7 +67,7 @@ public class UASIntegrationTest extends BaseTest {
     super();
       final Integer BID_ID_COLUMN = 30;
       When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
-      Zone zone = sut.getCampaignManager().getZone(zoneByName)
+      Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
           .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
       sut.getUASRquestModule().zoneRequest(zone.getId());
     });
@@ -466,13 +466,13 @@ public class UASIntegrationTest extends BaseTest {
     }
 
   private void sendMultipleAdRequests(Integer times, String zoneByName, boolean toReset) {
-    Zone zone = sut.getCampaignManager().getZone(zoneByName)
+    Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
         .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
     sut.getUASRquestModule().zoneRequests(zone.getId(), times, toReset);
   }
 
     private void sendMultipleAdRequestsWithParameter(Integer times,String parameter, String zoneByName, boolean toReset) {
-        Zone zone = sut.getCampaignManager().getZone(zoneByName)
+        Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
                 .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
         sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(),parameter, times, toReset);
     }
@@ -484,7 +484,7 @@ public class UASIntegrationTest extends BaseTest {
 
 
   private void sendMultipleAdRequestsWithParams(Integer times, String zoneByName, boolean toReset) {
-    Zone zone = sut.getCampaignManager().getZone(zoneByName)
+    Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
         .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
     sut.getUASRquestModule().zoneRequestsWithParams(zone.getId(), times, toReset);
   }
@@ -536,7 +536,7 @@ public class UASIntegrationTest extends BaseTest {
     private void checkTheNumberOfSelectedEntityOfSyncronizedResponses(String urlType, String fieldName, String entityType, String entityName, Double percent) {
         assertThat(entityType, isOneOf("campaign", "banner", "zone"));
         assertThat(urlType, is("impression"));
-        Optional<? extends WithId<Integer>> expectedEntity = sut.getCampaignManager().getterFor(entityType)
+        Optional<? extends WithId<Integer>> expectedEntity = sut.getExecutorCampaignManager().getterFor(entityType)
                 .apply(entityName);
         assertThat("Could not find " + entityType + " named " + entityName, expectedEntity,
                 is(not(OptionalMatchers.empty())));
@@ -578,7 +578,7 @@ public class UASIntegrationTest extends BaseTest {
         }
 
         assertThat(entityType, isOneOf("campaign", "banner", "zone"));
-        Optional<? extends WithId<Integer>> expectedEntity = sut.getCampaignManager().getterFor(entityType)
+        Optional<? extends WithId<Integer>> expectedEntity = sut.getExecutorCampaignManager().getterFor(entityType)
                 .apply(entityName);
         assertThat("Could not find " + entityType + " named " + entityName, expectedEntity,
                 is(not(OptionalMatchers.empty())));

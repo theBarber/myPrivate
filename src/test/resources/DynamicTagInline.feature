@@ -3,6 +3,8 @@
 @HeaderBidding
 @scheduled
 @DT
+@parallel
+
 Feature: Dynamic Tag inline flow support
 
   Scenario: 1. Dynamic Tag inline Basic - including migrated tags

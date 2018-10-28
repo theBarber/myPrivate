@@ -42,9 +42,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
-
-
-
     public enum requestTypesEnum {
         ZONE, DYNAMIC_TAG, HEADER_BIDDING, WEL, PRF, EVE
     }

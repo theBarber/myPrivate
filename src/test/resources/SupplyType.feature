@@ -1,8 +1,12 @@
 @scheduled
 @HeaderBidding
 @SupplyType
+@scheduled
+@parallel
+
 Feature: Supply type flow support
 
+  @SupplyType
   Scenario: verify when HB first
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [1,2]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
@@ -22,6 +26,7 @@ Feature: Supply type flow support
     And The response code is 200
     And The responses are passback
 
+  @SupplyType
   Scenario: verify when Direct first
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [1,1]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
@@ -34,7 +39,7 @@ Feature: Supply type flow support
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SupplyType-SS-Direct-banner-1} 100% of the time
 
-
+  @SupplyType
   Scenario: verify when All first
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [300,250]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
