@@ -289,7 +289,7 @@ Feature: Header Bidding flow support
 
   Scenario: reset requests and sleep
       Given i reset responses in the UAS
-      Given I sleep for 200 seconds
+      Given I sleep for 350 seconds
 
   Scenario: header bidding frequency capping from mobile - user 2 after 3 minutes
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas

@@ -738,19 +738,35 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-6     |1            |
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
+
+#        profile targeting
+
   Scenario: create entities for profile targeting via UDMP
     Given i disable campaigns by name on db
-  |Campaign Name                        |
+  |Campaign Name         |
   |campaign-ProfileTargetingUDMP-ST-1   |
-  |campaign-ProfileTargetingUDMP-ST-2   |
+  |campaign-SeqProfileTargetingUDMP-ST-1|
+  |campaign-SeqProfileTargetingUDMP-ST-2|
+  |campaign-CrossDeviceCappingUDMP-ST-1|
+  |campaign-CrossDeviceCappingUDMP-ST-2|
     Given i create new campaigns, new zoneset with domains
-        #profile targeting
-      |Campaign Name                              |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                           |limitation                   |adUnitId    |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-ProfileTargetingUDMP-ST-1         |75396         |197418       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMP-ST-1}      |[4,"==",1,1,1992]            |83          |451               |3708           |67261             |
-      |campaign-ProfileTargetingUDMP-ST-2         |75396         |197418       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMP-ST-2}      |[4,"==",1,1,1989]            |83          |451               |3708           |67261             |
+            #profile targeting
+      |Campaign Name                              |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                           |limitation               |adUnitId    |Web_Section id        |publisher ID   |po_line_item ID    |
+    |campaign-ProfileTargetingUDMP-ST-1           |75396         |210722       |false                  |14619              |{zone-zoneset-ProfileTargetingUDMP-ST-1}     |[[[4,"==",1,1,1992]]]    |83          |14892                 |3708           |27807                       |
       #seq profile targeting
-      |campaign-SeqProfileTargetingUDMP-ST-1      |75396         |197418       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMP-ST-1}   |[4,"==",1,1,17]              |83          |451               |3708           |67261             |
-      |campaign-SeqProfileTargetingUDMP-ST-2      |75396         |197418       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMP-ST-2}   |[4,"==",1,1,16]              |83          |451               |3708           |67261             |
+      |campaign-SeqProfileTargetingUDMP-ST-1      |75396         |210722       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMP-ST-1}   |[[[4,"==",1,1,17]]]      |83          |14893                 |3708           |27808              |
+     #cross device capping, capping via campaign
+      |campaign-CrossDeviceCappingUDMP-ST-1       |75396         |210722       |false                  |14619             |{zone-zoneset-CrossDeviceCappingUDMP-ST-1}    |[]                       |83          |14894                 |3708           |27809             |
+      |campaign-CrossDeviceCappingUDMP-ST-2       |75396         |210722       |false                  |14619             |{zone-zoneset-CrossDeviceCappingUDMP-ST-2}    |[]                       |83          |14894                 |3708           |27809             |
+         #cross device capping, capping across line item
+      |campaign-CrossDeviceCappingUDMP-ST-3       |75396         |236344       |false                  |14619             |{zone-zoneset-CrossDeviceCappingUDMP-ST-1}    |[]                       |83          |14894                 |3708           |27809             |
+      |campaign-CrossDeviceCappingUDMP-ST-4       |75396         |236346       |false                  |14619             |{zone-zoneset-CrossDeviceCappingUDMP-ST-2}    |[]                       |83          |14894                 |3708           |27809             |
+    And i update campaign data by name
+      |Campaign Name                         |capping       |session_capping         |
+      |campaign-CrossDeviceCappingUDMP-ST-1  |2             |2                       |
+
+
+
 
 
 #  @DynamicPricing
