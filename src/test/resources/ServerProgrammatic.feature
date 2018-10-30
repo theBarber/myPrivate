@@ -82,7 +82,7 @@ Feature: Programmatic flow support
   Scenario: 9b. basic Call to Programmatic GW web, zone request, make sure b-url is sent
     When I send 1 times an ad request with parameter {requestid=BUrlTestInApp&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
-    And The response contains <script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com"</script><script type="text/javascript">
+    And The response contains <script type="text/javascript">new Image().src="https://ads-s-us-east-1.undertone.com"</script><script type="text/javascript">
     And The response has impression-url
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
