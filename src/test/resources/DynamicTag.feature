@@ -8,7 +8,7 @@ Feature: Dynamic Tag flow support
 
 Scenario: 1. Basic DT flow
     Given I add cookie UTID with random value to my requests to uas
-    Then i send 2 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=0}
+      Then i send 2 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=0}
     And The synchronized response code is 200
     And The response contains script
     And The responses has impression-urls

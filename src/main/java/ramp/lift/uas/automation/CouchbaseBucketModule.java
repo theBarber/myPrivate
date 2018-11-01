@@ -21,6 +21,7 @@ public class CouchbaseBucketModule extends AbstractModuleImpl<Void>{
   Cluster couchbase;
   private Bucket bucket;
   private String ADSERVER_PASS = "adserver";
+  private String USERS_PASS = "users";
 
   public CouchbaseBucketModule(String name, List<String> nodes) {
     this.name = name;
@@ -35,12 +36,16 @@ public class CouchbaseBucketModule extends AbstractModuleImpl<Void>{
     openBucket(name);
   }
 
-  private void openBucket(String name)
-  {
-    if(name.contains("adserver"))
-      bucket = couchbase.openBucket(name,ADSERVER_PASS,1, TimeUnit.MINUTES);
-    else
-      bucket = couchbase.openBucket(name,1, TimeUnit.MINUTES);
+  private void openBucket(String name) {
+    if (name.contains("adserver")) {
+      bucket = couchbase.openBucket(name, ADSERVER_PASS, 1, TimeUnit.MINUTES);
+    }
+    if (name.contains("users")) {
+      bucket = couchbase.openBucket(name, USERS_PASS, 1, TimeUnit.MINUTES);
+    }
+    else {
+      bucket = couchbase.openBucket(name, 1, TimeUnit.MINUTES);
+    }
   }
 
   @Override
