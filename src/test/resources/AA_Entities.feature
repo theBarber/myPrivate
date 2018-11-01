@@ -741,7 +741,7 @@ Feature: Entities for tests
   @UDMP
   Scenario: create entities for profile targeting via UDMP
     Given i disable campaigns by name on db
-  Campaign Name         |
+  |Campaign Name         |
   |campaign-ProfileTargetingUDMP-ST-1   |
   |campaign-SeqProfileTargetingUDMP-ST-1|
   |campaign-SeqProfileTargetingUDMP-ST-2|
