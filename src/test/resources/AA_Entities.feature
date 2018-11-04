@@ -123,7 +123,7 @@ Feature: Entities for tests
     And i update zone data by name
       |Zone Name                                         |is_mraid     |
       |zone-zoneset-ProfileTargetingUDMPforApp-ST-1      |1            |
-      |{zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} |1            |
+      |zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1   |1            |
     Given i update campaign data by name
       |Campaign Name                                     |capping | session_capping|
       |campaign-CrossDeviceCappingUDMP-ST-1              |2       |2               |
