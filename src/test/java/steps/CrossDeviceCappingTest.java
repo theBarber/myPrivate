@@ -83,7 +83,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      } catch (DocumentDoesNotExistException e) {
 //        System.out.println(e.getMessage());
 //      }
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + "\"platform\"" + ",\n" +
               "\"imp\":[]" + ",\n" +
@@ -120,7 +120,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      } catch (DocumentDoesNotExistException e) {
 //        System.out.println(e.getMessage());
 //      }
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + platform + ",\n" +
               "\"imp\":[]" + "\n" +
@@ -145,7 +145,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      } catch (DocumentDoesNotExistException e) {
 //        System.out.println(e.getMessage());
 //      }
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + platform + ",\n" +
               "\"imp\":[]" + "\n" +
@@ -166,7 +166,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      } catch (DocumentDoesNotExistException e) {
 //        System.out.println(e.getMessage());
 //      }
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + platform + ",\n" +
               "\"imp\":[]" + "\n" +
@@ -183,7 +183,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 // for multiple profiles, start, optional profile type
     Then("i start injecting new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp", (String udId,String platform,String profileType, Integer profileNum, Integer daysToReduceFromProfile)-> {
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       jsonDocForMultipleProfiles = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + platform + ",\n" +
               "\"imp\":[]" + "\n" +
@@ -197,7 +197,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 // for multiple profiles, adding profile
 
       Then("i add profile number (\\d+) to user on users bucket, where profile = (\\d+) ,and reduce (\\d+) days from epoc time stamp",(Integer profileNum, Integer daysToReduceFromProfile)-> {
-        Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
         jsonDocForMultipleProfiles+= ",{" + "\"p\": " + "\"" + profileNum + "\"" + ", " + "\"e\": " + (epocTimeInDays-daysToReduceFromProfile) + "}";
       });
 
@@ -224,7 +224,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      } catch (DocumentDoesNotExistException e) {
 //        System.out.println(e.getMessage());
 //      }
-      Integer epocTimeInDays = getEpocTimeInDays();
+      long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + platform + ",\n" +
               "\"imp\":[]" + "\n" +
@@ -327,11 +327,15 @@ public class CrossDeviceCappingTest extends BaseTest{
     });
   }
 
-  public Integer getEpocTimeInDays(){
+  public long getEpocTimeInDays(){
    long epochInMilli = Instant.now().toEpochMilli();
-    Integer epochInDays = (int)epochInMilli/86400000;
-   return epochInDays ;
+ //  System.out.println("in mili = " + epochInMilli);
+    long epochInDays = epochInMilli/86400000;
+  //  System.out.println("in days = " + epochInDays);
+      return epochInDays ;
   }
+
+  long a = getEpocTimeInDays();
 
   private Integer getEpocDays() {
     MutableDateTime epoch = new MutableDateTime();
