@@ -127,12 +127,12 @@ Feature: Entities for tests
       |Zone Name                                         |is_mraid     |
       |zone-zoneset-ProfileTargetingUDMPforApp-ST-1      |1            |
       |zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1   |1            |
-    Given i update campaign data by name
-      |Campaign Name                                     |limitation               |
-      |campaign-ProfileTargetingUDMPforApp-ST-1          |[[[4,"==",1,1,1992]]]    |
-      |campaign-ProfileTargetingUDMPforWeb-ST-1          |[[[4,"==",1,1,1992]]]    |
-      |campaign-SeqProfileTargetingUDMPforApp-ST-1       |[[[4,"==",1,1,17]]]      |
-      |campaign-SeqProfileTargetingUDMPforWeb-ST-1       |[[[4,"==",1,1,17]]]      |
+    Given i update banner data by name
+      |Banner Name                                                |limitation               |
+      |campaign-ProfileTargetingUDMPforApp-ST-1-banner-1          |[[[4,"==",1,1,1992]]]    |
+      |campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1          |[[[4,"==",1,1,1992]]]    |
+      |campaign-SeqProfileTargetingUDMPforApp-ST-1-banner-1       |[[[4,"==",1,1,17]]]      |
+      |campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1       |[[[4,"==",1,1,17]]]      |
     Given i update campaign data by name                 |capping | session_capping|
       |campaign-CrossDeviceCappingUDMP-ST-1              |2       |2               |
 
