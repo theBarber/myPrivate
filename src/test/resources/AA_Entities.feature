@@ -2,6 +2,7 @@
 @scheduled
 @preconditions
 @optimize
+@UDMP
 
 Feature: Entities for tests
 
