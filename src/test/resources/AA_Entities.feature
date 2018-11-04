@@ -108,10 +108,11 @@ Feature: Entities for tests
   Scenario: create entities for profile targeting via UDMP
     Given i disable campaigns by name on db
       |Campaign Name         |
-      |campaign-ProfileTargetingUDMP-ST-1   |
-      |campaign-SeqProfileTargetingUDMP-ST-1|
-      |campaign-SeqProfileTargetingUDMP-ST-2|
-      |campaign-CrossDeviceCappingUDMP-ST-1|
+      |campaign-ProfileTargetingUDMPforApp-ST-1   |
+      |campaign-ProfileTargetingUDMPforWeb-ST-1   |
+      |campaign-SeqProfileTargetingUDMPforApp-ST-2|
+      |campaign-SeqProfileTargetingUDMPforWeb-ST-1|
+      |campaign-CrossDeviceCappingUDMP-ST-1       |
     Given i remove all zones from publishers: {3708}
     Given i create new campaigns with new zoneset
       |Campaign Name                                    |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                                   |limitation               |adUnitId    |Web_Section id        |publisher ID   |po_line_item ID   |
