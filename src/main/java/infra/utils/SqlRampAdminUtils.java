@@ -110,7 +110,7 @@ public class SqlRampAdminUtils {
 			Statement stmt = sut.getRampAdminDbConnector().actual().createStatement();
 
 			String updateExperimentQuery = "UPDATE staging_ramp_admin.test_strategy set test_id=" + testId
-					+ " where description= '" + TestStrategyName + "'";
+						+ " where description= '" + TestStrategyName + "'";
 
 			if (stmt.executeUpdate(updateExperimentQuery) < 1) {
 				fail("set test_strategy failed");

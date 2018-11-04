@@ -34,28 +34,28 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {www.daniella.com&deviceid=60000006-6006-6006-6006-600000000000&tagid=297&unlimeted=0}
     Then The response code is 200
     And The responses are passback
-#
-##  UTID=a7b8c8faf42446dcbba3248cef7dc7bb is coded to 9xgoi0i741z1bc7fldhmngq7v
-##  UTID=a1b2c8faf42446dcbba3248cef7dc7bb is coded to 9kmivgho2hd1koqz149uxr16j
-##  UTID=a1b2c8faf42446dcbba3248cef1dc2bb is coded to 9kmivgho2hd1koqz149uu05ob
-#  Scenario: profile targeting for udmp, zone req, from desktop
-#    Then i create new profile doc with udId {1.9xgoi0i741z1bc7fldhmngq7v} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1992, and reduce 3 days from epoc time stamp
-#    Given I add cookie UTID with value {a7b8c8faf42446dcbba3248cef7dc7bb} to my requests to uas
-#    When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMP-ST-1} to UAS
-#    Then The response code is 200
-#    And The responses are passback
-#    Then i create new profile doc with udId {1.9kmivgho2hd1koqz149uxr16j} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp
-#    Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef7dc7bb} to my requests to uas
-#    When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMP-ST-1} to UAS
-#    Then The response code is 200
-#    And The response contains script
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMP-SI-1-banner-1} 100% of the time
-#    Then i create new profile doc with udId {1.9kmivgho2hd1koqz149uu05ob} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1989, and reduce 0 days from epoc time stamp
-#    Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef1dc2bb} to my requests to uas
-#    When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMP-ST-1} to UAS
-#    Then The response code is 200
-#    And The responses are passback
-#
+
+#  UTID=a7b8c8faf42446dcbba3248cef7dc7bb is coded to 9xgoi0i741z1bc7fldhmngq7v
+#  UTID=a1b2c8faf42446dcbba3248cef7dc7bb is coded to 9kmivgho2hd1koqz149uxr16j
+#  UTID=a1b2c8faf42446dcbba3248cef1dc2bb is coded to 9kmivgho2hd1koqz149uu05ob
+  Scenario: profile targeting for udmp, zone req, from desktop
+    Then i create new profile doc with udId {1.9xgoi0i741z1bc7fldhmngq7v} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1992, and reduce 3 days from epoc time stamp
+    Given I add cookie UTID with value {a7b8c8faf42446dcbba3248cef7dc7bb} to my requests to uas
+    When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMP-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
+    Then i create new profile doc with udId {1.9kmivgho2hd1koqz149uxr16j} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp
+    Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef7dc7bb} to my requests to uas
+    When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMP-ST-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMP-SI-1-banner-1} 100% of the time
+    Then i create new profile doc with udId {1.9kmivgho2hd1koqz149uu05ob} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1989, and reduce 0 days from epoc time stamp
+    Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef1dc2bb} to my requests to uas
+    When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMP-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
+
 ##UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
 ##  UTID=a9b8c7faf65436dcbba3248cef1dc2bb is encoded to=a1q4r5t1dt2193lzjjoz7kmnv
 ##  UTID=a9b1c7faf25436dcbba3248cef1dc2bb is encoded to=a1o1866gg3j3ulsj9omeyfhyz

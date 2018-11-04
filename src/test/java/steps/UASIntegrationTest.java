@@ -85,6 +85,7 @@ public class UASIntegrationTest extends BaseTest {
       When("I send (\\d+) times an ad request with parameter \\{([^}]+)\\} for zone named \\{([^}]+)\\} to UAS",
               (Integer times,String parameter, String zoneByName) -> {
                   sendMultipleAdRequestsWithParameter(times,parameter, zoneByName, true);
+                  System.out.println("sent req d");
               });
       When("I send (\\d+) times a (wel|prfLog|eve) request with parameters \\{([^}]+)\\} to UAS",
               (Integer times,String requestType, String parameters) -> {
