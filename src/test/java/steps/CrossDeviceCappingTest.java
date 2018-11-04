@@ -85,7 +85,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      }
         long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + "\"platform\"" + ",\n" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
               "\"imp\":[]" + ",\n" +
               "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + (epocTimeInDays-daysToReduce) + "}]," +
               "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
