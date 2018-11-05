@@ -93,6 +93,34 @@ public class CrossDeviceCappingTest extends BaseTest{
       System.out.println("doc injected!!");
     });
 
+
+    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp and extra devices string = (.*)$", (String udId, String platform,String profileType,Integer profileNum ,Integer daysToReduce, String otherDevices) -> {
+      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+//      try{
+//        usersBucket.deleteDocument(udId);
+//      } catch (DocumentDoesNotExistException e) {
+//        System.out.println(e.getMessage());
+//      }
+      long epocTimeInDays = getEpocTimeInDays();
+      String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+              "\"imp\":[]" + ",\n" +
+              "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + epocTimeInDays + "}]," +
+              "\"user-graph\": [" + otherDevices + "]}";
+      System.out.println("/n/n jason Doc : /n/n" +jsonDoc);
+      if (platform.equals("desktop")) {
+        usersBucket.insertDocument("1.a" + (String) udId, jsonDoc);
+      } else {
+        usersBucket.insertDocument("2.a" + (String) udId, jsonDoc);
+      }
+    });
+
+
+
+
+
+
+
 //    //for both profile types. udmp profile with optional time. sqmsg with auto current time stamp
 //    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, udmp_p profile with time stamp  = \\{([^}]+)\\}, sqmsg_p profile with auto time stamp = \\{([^}]+)\\}",  (String udId,String platform ,String udmp_pFull,String sqmsg_p) -> {
 //      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
@@ -213,28 +241,6 @@ public class CrossDeviceCappingTest extends BaseTest{
       jsonDocForMultipleProfiles += "],\n" +
       "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
         usersBucket.insertDocument(udId, jsonDocForMultipleProfiles);
-    });
-
-
-
-      Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp and extra devices string = (.*)$", (String udId, String platform,String profileType,Integer profileNum ,Integer daysToReduce, String otherDevices) -> {
-      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
-//      try{
-//        usersBucket.deleteDocument(udId);
-//      } catch (DocumentDoesNotExistException e) {
-//        System.out.println(e.getMessage());
-//      }
-      long epocTimeInDays = getEpocTimeInDays();
-      String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
-              "\"" + profileType + "\": [{\"p\":\"" + profileNum + "\", \"e:\" " + epocTimeInDays + "}]" +
-              "\"user-graph\":" + otherDevices + "\n}";
-        if (platform.equals("desktop")) {
-          usersBucket.insertDocument("1.a" + (String) udId, jsonDoc);
-        } else {
-          usersBucket.insertDocument("2.a" + (String) udId, jsonDoc);
-        }
     });
 
 
