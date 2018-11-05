@@ -111,7 +111,7 @@ Feature: Entities for tests
       |Campaign Name         |
       |campaign-ProfileTargetingUDMPforApp-ST-1   |
       |campaign-ProfileTargetingUDMPforWeb-ST-1   |
-      |campaign-ProfileTargetingUDMPforAppZoneLimtation-ST-1   |
+      |campaign-ProfileTargetingUDMPCrossDevice-ST-1   |
       |campaign-SeqProfileTargetingUDMPforApp-ST-2|
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1|
       |campaign-CrossDeviceCappingUDMP-ST-1       |
@@ -120,6 +120,7 @@ Feature: Entities for tests
       |Campaign Name                                    |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                                   |limitation               |adUnitId    |Web_Section id        |publisher ID   |po_line_item ID   |
       |campaign-ProfileTargetingUDMPforApp-ST-1         |75396         |222908       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMPforApp-ST-1}        |[]                       |80          |14892                 |3708           |27807             |
       |campaign-ProfileTargetingUDMPforWeb-ST-1         |75396         |210722       |false                  |204               |{zone-zoneset-ProfileTargetingUDMPforWeb-ST-1}        |[]                       |83          |14892                 |3708           |27807             |
+      |campaign-ProfileTargetingUDMPCrossDevice-ST-1    |75396         |210722       |false                  |204               |{zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1}   |[]                       |83          |14892                 |3708           |27807             |
       |campaign-SeqProfileTargetingUDMPforApp-ST-1      |75396         |222908       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1}     |[]                       |80          |14893                 |3708           |27808             |
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1      |75396         |210722       |false                  |204               |{zone-zoneset-SeqProfileTargetingUDMPforWeb-ST-1}     |[]                       |83          |14893                 |3708           |27808             |
       |campaign-CrossDeviceCappingUDMP-ST-1             |75396         |210722       |false                  |204               |{zone-zoneset-CrossDeviceCappingUDMP-ST-1}            |[]                       |83          |14894                 |3708           |27809             |
@@ -128,11 +129,12 @@ Feature: Entities for tests
       |zone-zoneset-ProfileTargetingUDMPforApp-ST-1      |1            |
       |zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1   |1            |
     Given i update banner data by name
-      |Banner Name                                                |limitation               |
-      |campaign-ProfileTargetingUDMPforApp-ST-1-banner-1          |[[[4,"==",1,1,1992]]]    |
-      |campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1          |[[[4,"==",1,1,1992]]]    |
-      |campaign-SeqProfileTargetingUDMPforApp-ST-1-banner-1       |[[[4,"==",1,1,17]]]      |
-      |campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1       |[[[4,"==",1,1,17]]]      |
+      |Banner Name                                                |limitation                           |
+      |campaign-ProfileTargetingUDMPforApp-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
+      |campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
+      |campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1     |[[[4,"==",1,1,456],[[4,"==",1,1,123]]|
+      |campaign-SeqProfileTargetingUDMPforApp-ST-1-banner-1       |[[[4,"==",1,1,17]]]                  |
+      |campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1       |[[[4,"==",1,1,17]]]                  |
     Given i update campaign data by name                 |capping | session_capping|
       |campaign-CrossDeviceCappingUDMP-ST-1              |2       |2               |
 
