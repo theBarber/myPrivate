@@ -30,14 +30,14 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1} to UAS
     Then The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPforWeb-SI-1-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
     Then i create new profile doc with udId {1.9kmivgho2hd1koqz149uu05ob} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1989, and reduce 0 days from epoc time stamp
     Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef1dc2bb} to my requests to uas
     When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
-  Scenario: profile seq targeting for udmp, DT req, from app
+  Scenario: Seq-targeting for udmp, DT req, from app
     Then i create new profile doc with udId {2.01000000-0100-0100-0100-010000000000} on users bucket, where platform = {app}, profile type = {sqmsg_p}, profile num = 17, and reduce 0 days from epoc time stamp
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {www.daniella.com&deviceid=01000000-0100-0100-0100-010000000000&tagid=297&unlimeted=0}
     Then The response code is 200
@@ -70,7 +70,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMP-ST-1} to UAS
     Then The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMP-SI-1-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMP-ST-1-banner-1} 100% of the time
     Then i create new profile doc with udId {1.9kmivgho2hd1koqz149uu05ob} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1989, and reduce 0 days from epoc time stamp
     Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef1dc2bb} to my requests to uas
     When I send 1 times an ad request with parameter {unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMP-ST-1} to UAS
@@ -124,10 +124,9 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #
 
 
-
   Scenario:cross device PT for udmp, zone req. 1 users - 2 devices - one app one web.
-    Then i inject new profile doc with udId {21000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "21000000-0000-0000-0000-000000000000"},{"udid": "22000000-0000-0000-0000-000000000000"},{"udid": "23000000-0000-0000-0000-000000000000"}]}}}
-    Then i inject new profile doc with udId {22000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "21000000-0000-0000-0000-000000000000"},{"udid": "22000000-0000-0000-0000-000000000000"},{"udid": "23000000-0000-0000-0000-000000000000"}]}}}
+    Then i inject new profile doc with udId {2.21000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "2.21000000-0000-0000-0000-000000000000"},{"udid": "22000000-0000-0000-0000-000000000000"},{"udid": "23000000-0000-0000-0000-000000000000"}]}}}
+    Then i inject new profile doc with udId {2.22000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "21000000-0000-0000-0000-000000000000"},{"udid": "22000000-0000-0000-0000-000000000000"},{"udid": "23000000-0000-0000-0000-000000000000"}]}}}
     Then i send 2 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {??????} with extra params {deviceid=21000000-0000-0000-0000-000000000000}
     And The response code is 200
     And The response contains script
