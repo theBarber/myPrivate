@@ -46,15 +46,15 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {ampaign-SeqProfileTargetingUDMPforApp-ST-1} 100% of the time
     Then i inject new profile doc with udId {2.00000006-0006-0006-0006-000000000006} on users bucket, where platform = {app}, empty profile type = {sqmsg_p}, non-empty profile type = {udmp_p}
-    When I send 1 times an ad request with parameter {deviceid=00000006-0006-0006-0006-000000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=00000006-0006-0006-0006-000000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
     Then i inject new profile doc with udId {2.60000006-6006-6006-6006-600000000006} on users bucket, where platform = {app}, with one udmp_p profile = {199} with 3 days reduce and one sqmsg_p profile = {20} with 0 days reduce
-    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
     Then i inject new profile doc with udId {2.60000006-6006-6006-6006-600000000000} on users bucket, where platform = {app}, with one udmp_p profile = {1992} with 0 days reduce and one sqmsg_p profile = {17} with 5 days reduce
-    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
