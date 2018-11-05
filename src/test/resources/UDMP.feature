@@ -41,7 +41,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
   Scenario: Seq-targeting for udmp, zone req, from app
     Then i create new profile doc with udId {2.01000000-0100-0100-0100-010000000000} on users bucket, where platform = {app}, profile type = {sqmsg_p}, profile num = 17, and reduce 0 days from epoc time stamp
-    When I send 1 times an ad request with parameter {deviceid=01000000-0100-0100-0100-010000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=01000000-0100-0100-0100-010000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {ampaign-SeqProfileTargetingUDMPforApp-ST-1} 100% of the time
