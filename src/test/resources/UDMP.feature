@@ -1,4 +1,5 @@
 @UDMP
+@UDMPWOAA
 Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #WORKS!!!!
 #  Scenario: profile targeting for udmp, zone req, from app
@@ -38,19 +39,24 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #    And The responses are passback
 #
 
-##UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
-  Scenario:cross device PT for udmp, zone req. 1 users - 2 devices - one app one web.
-    Then i inject new profile doc with udId {2.12340000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 123, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}]}}}
-    Then i inject new profile doc with udId {1.9mrjt7trg1a57yd4pv1i3ltbv} on users bucket, where platform = {desktop}, profile type = {udpm_p}, profile num = 456, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}]}}}
-    When I send 1 times an ad request with parameter {deviceid=12340000-0000-0000-0000-000000000000&unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
+  Scenario: Seq-targeting for udmp, zone req, from app
+    Then i create new profile doc with udId {2.01000000-0100-0100-0100-010000000000} on users bucket, where platform = {app}, profile type = {sqmsg_p}, profile num = 17, and reduce 0 days from epoc time stamp
+    When I send 1 times an ad request with parameter {deviceid=01000000-0100-0100-0100-010000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1-ST-1} to UAS
     Then The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
-    Given I add cookie UTID with value {a2b3c8faf45446dcbba3248cef1dc2bb} to my requests to uas
-    When I send 1 times an ad request with parameter {unlimited=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {ampaign-SeqProfileTargetingUDMPforApp-ST-1} 100% of the time
+    Then i inject new profile doc with udId {2.00000006-0006-0006-0006-000000000006} on users bucket, where platform = {app}, empty profile type = {sqmsg_p}, non-empty profile type = {udmp_p}
+    When I send 1 times an ad request with parameter {deviceid=00000006-0006-0006-0006-000000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1-ST-1} to UAS
     Then The response code is 200
-    And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
+    And The responses are passback
+    Then i inject new profile doc with udId {2.60000006-6006-6006-6006-600000000006} on users bucket, where platform = {app}, with one udmp_p profile = {199} with 3 days reduce and one sqmsg_p profile = {20} with 0 days reduce
+    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
+    Then i inject new profile doc with udId {2.60000006-6006-6006-6006-600000000000} on users bucket, where platform = {app}, with one udmp_p profile = {1992} with 0 days reduce and one sqmsg_p profile = {17} with 5 days reduce
+    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
 
   Scenario: Seq-targeting for udmp, DT req, from app
     Then i create new profile doc with udId {2.01000000-0100-0100-0100-010000000000} on users bucket, where platform = {app}, profile type = {sqmsg_p}, profile num = 17, and reduce 0 days from epoc time stamp
@@ -145,3 +151,19 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 ##    Then i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {??????} with extra params {deviceid=22000000-0000-0000-0000-000000000000}
 ##    And The response code is 200
 ##    And The responses are passback
+#
+#
+#
+###UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
+#  Scenario:cross device PT for udmp, zone req. 1 users - 2 devices - one app one web.
+#    Then i inject new profile doc with udId {2.12340000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 123, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}]}}}
+#    Then i inject new profile doc with udId {1.9mrjt7trg1a57yd4pv1i3ltbv} on users bucket, where platform = {desktop}, profile type = {udpm_p}, profile num = 456, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}]}}}
+#    When I send 1 times an ad request with parameter {deviceid=12340000-0000-0000-0000-000000000000&unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
+#    Then The response code is 200
+#    And The response contains script
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
+#    Given I add cookie UTID with value {a2b3c8faf45446dcbba3248cef1dc2bb} to my requests to uas
+#    When I send 1 times an ad request with parameter {unlimited=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
+#    Then The response code is 200
+#    And The response contains script
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
