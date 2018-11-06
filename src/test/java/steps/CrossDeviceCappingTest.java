@@ -90,7 +90,7 @@ public class CrossDeviceCappingTest extends BaseTest{
               "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + (epocTimeInDays-daysToReduce) + "}]," +
               "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
         usersBucket.insertDocument(udId, jsonDoc);
-      System.out.println("doc injected!!");
+      System.out.println("doc injected to users bucket");
     });
 
 
@@ -116,7 +116,24 @@ public class CrossDeviceCappingTest extends BaseTest{
     });
 
 
-
+      //one user with one empty optional profile type filed
+      Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, empty profile type = \\{([^}]+)\\}, non-empty profile type = \\{([^}]+)\\}", (String udId, String platform, String emptyProfileType, String nonEmptyProfileType) -> {
+          CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+//      try{
+//        usersBucket.deleteDocument(udId);
+//      } catch (DocumentDoesNotExistException e) {
+//        System.out.println(e.getMessage());
+//      }
+          long epocTimeInDays = getEpocTimeInDays();
+          String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
+                  "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+                  "\"imp\":[]" + ",\n" +
+                  "\"" + emptyProfileType+ "\": []," +
+                  "\"" + nonEmptyProfileType + "\": [{\"p\":\"123\", \"e\": " + epocTimeInDays + "}]," +
+                  "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
+          usersBucket.insertDocument(udId, jsonDoc);
+        System.out.println("doc injected to users bucket");
+      });
 
 
 
@@ -140,23 +157,6 @@ public class CrossDeviceCappingTest extends BaseTest{
 //    });
 
 
-      //one user with one empty optional profile type filed
-    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, empty profile type = \\{([^}]+)\\}, non-empty profile type = \\{([^}]+)\\}", (String udId, String platform, String emptyProfileType, String nonEmptyProfileType) -> {
-      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
-//      try{
-//        usersBucket.deleteDocument(udId);
-//      } catch (DocumentDoesNotExistException e) {
-//        System.out.println(e.getMessage());
-//      }
-        long epocTimeInDays = getEpocTimeInDays();
-      String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
-              "\"" + emptyProfileType+ "\": []," +
-              "\"" + nonEmptyProfileType + "\": [{\"p\":\"123\", \"e:\" " + epocTimeInDays + "}]" +
-              "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
-        usersBucket.insertDocument(udId, jsonDoc);
-    });
 
 
 
@@ -181,6 +181,7 @@ public class CrossDeviceCappingTest extends BaseTest{
               "\"sqmp_p\":" + sqmsg_pString +  "\"e:\" " + (epocTimeInDays-daysToReduceFromSqmg) + "}]" +
               "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
         usersBucket.insertDocument( udId, jsonDoc);
+      System.out.println("doc injected to users bucket");
     });
 
 
