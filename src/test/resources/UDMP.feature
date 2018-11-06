@@ -19,7 +19,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=01000000-0100-0100-0100-010000000000&tagid=177}
     Then The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforApp-ST-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforApp-ST-1-banner-1} 100% of the time
 
 #UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
 #  UTID=a9b8c7faf65436dcbba3248cef1dc2bb is encoded to=a1q4r5t1dt2193lzjjoz7kmnv
@@ -31,7 +31,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
     Then The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMP-ST-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMP-ST-1-banner-1} 100% of the time
     Then i inject new profile doc with udId {1.a1q4r5t1dt2193lzjjoz7kmnv} on users bucket, where platform = {desktop}, empty profile type = {sqmsg_p}, non-empty profile type = {udmp_p}
     Given I add cookie UTID with value {a9b8c7faf65436dcbba3248cef1dc2bb} to my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=00000006-0006-0006-0006-000000000006&tagid=170}
@@ -150,21 +150,21 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #    And The responses are passback
 #
 #latter
-#  Scenario: Seq-targeting for udmp, zone req, from app
-#    Then i create new profile doc with udId {2.01000000-0100-0100-0100-010000000000} on users bucket, where platform = {app}, profile type = {sqmsg_p}, profile num = 17, and reduce 0 days from epoc time stamp
-#    When I send 1 times an ad request with parameter {deviceid=01000000-0100-0100-0100-010000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
-#    Then The response code is 200
-#    And The response contains script
-#    And The impressionUrl has bannerid field matching the id of the banner named {ampaign-SeqProfileTargetingUDMPforApp-ST-1} 100% of the time
-#    Then i inject new profile doc with udId {2.00000006-0006-0006-0006-000000000006} on users bucket, where platform = {app}, empty profile type = {sqmsg_p}, non-empty profile type = {udmp_p}
-#    When I send 1 times an ad request with parameter {deviceid=00000006-0006-0006-0006-000000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
-#    Then The response code is 200
-#    And The responses are passback
-#    Then i inject new profile doc with udId {2.60000006-6006-6006-6006-600000000006} on users bucket, where platform = {app}, with one udmp_p profile = {199} with 3 days reduce and one sqmsg_p profile = {20} with 0 days reduce
-#    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
-#    Then The response code is 200
-#    And The responses are passback
-#    Then i inject new profile doc with udId {2.60000006-6006-6006-6006-600000000000} on users bucket, where platform = {app}, with one udmp_p profile = {1992} with 0 days reduce and one sqmsg_p profile = {17} with 5 days reduce
-#    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
-#    Then The response code is 200
-#    And The responses are passback
+  Scenario: -Seq PT- for udmp, -zone req-, from app
+    Then i create new profile doc with udId {2.01000000-0100-0100-0100-010000000000} on users bucket, where platform = {app}, profile type = {sqmsg_p}, profile num = 17, and reduce 0 days from epoc time stamp
+    When I send 1 times an ad request with parameter {deviceid=01000000-0100-0100-0100-010000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {ampaign-SeqProfileTargetingUDMPforApp-ST-1} 100% of the time
+    Then i inject new profile doc with udId {2.00000006-0006-0006-0006-000000000006} on users bucket, where platform = {app}, empty profile type = {sqmsg_p}, non-empty profile type = {udmp_p}
+    When I send 1 times an ad request with parameter {deviceid=00000006-0006-0006-0006-000000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
+    Then i inject new profile doc with udId {2.60000006-6006-6006-6006-600000000006} on users bucket, where platform = {app}, with one udmp_p profile = {199} with 3 days reduce and one sqmsg_p profile = {20} with 0 days reduce
+    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000006&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
+    Then i inject new profile doc with udId {2.60000006-6006-6006-6006-600000000000} on users bucket, where platform = {app}, with one udmp_p profile = {1992} with 0 days reduce and one sqmsg_p profile = {17} with 5 days reduce
+    When I send 1 times an ad request with parameter {deviceid=60000006-6006-6006-6006-600000000000&unlimeted=0} for zone named {zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
