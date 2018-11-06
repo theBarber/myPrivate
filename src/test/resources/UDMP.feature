@@ -136,21 +136,22 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #    And The response contains script
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforApp-ST-1-banner-1} 100% of the time
 #WORKS!!!
-####UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
-#  Scenario: cross device PT for udmp, PERSONA LEVEL, zone req. 1 users - 2 devices - one app one web.
-#    Then i inject new profile doc with udId {2.12340000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 123, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}
-#    Then i inject new profile doc with udId {1.9mrjt7trg1a57yd4pv1i3ltbv} on users bucket, where platform = {desktop}, profile type = {udpm_p}, profile num = 456, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}
-#    When I send 1 times an ad request with parameter {deviceid=12340000-0000-0000-0000-000000000000&unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
-#    Then The response code is 200
-#    And The response contains script
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
-#    Given I add cookie UTID with value {a2b3c8faf45446dcbba3248cef1dc2bb} to my requests to uas
-#    When I send 1 times an ad request with parameter {unlimited=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
-#    Then The response code is 200
-#    And The response contains script
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
-##
-#
+##UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
+  Scenario: cross device PT for udmp, PERSONA LEVEL, zone req. 1 users - 2 devices - one app one web.
+    Then i inject new profile doc with udId {2.12340000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 123, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}
+    Then i inject new profile doc with udId {1.9mrjt7trg1a57yd4pv1i3ltbv} on users bucket, where platform = {desktop}, profile type = {udpm_p}, profile num = 456, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}
+    When I send 1 times an ad request with parameter {deviceid=12340000-0000-0000-0000-000000000000&unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
+    Given I add cookie UTID with value {a2b3c8faf45446dcbba3248cef1dc2bb} to my requests to uas
+    When I send 1 times an ad request with parameter {unlimited=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {deviceid=06060000-0060-0000-0000-000000006000&unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
 
 
 
