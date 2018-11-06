@@ -106,9 +106,9 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
 #
 #  Scenario: cross device capping for udmp,zone req when capping = 2, cross device capping = true
-#    Then i inject new profile doc with udId {11000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "11000000-0000-0000-0000-000000000000"},{"udid": "12000000-0000-0000-0000-000000000000"},{"udid": "13000000-0000-0000-0000-000000000000"}]}}}
-#    Then i inject new profile doc with udId {12000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "11000000-0000-0000-0000-000000000000"},{"udid": "12000000-0000-0000-0000-000000000000"},{"udid": "13000000-0000-0000-0000-000000000000"}]}}}
-#    Then i inject new profile doc with udId {13000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "11000000-0000-0000-0000-000000000000"},{"udid": "12000000-0000-0000-0000-000000000000"},{"udid": "13000000-0000-0000-0000-000000000000"}]}}}
+#    Then i inject new profile doc with udId {11000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "11000000-0000-0000-0000-000000000000"},{"udid": "12000000-0000-0000-0000-000000000000"},{"udid": "13000000-0000-0000-0000-000000000000"}
+#    Then i inject new profile doc with udId {12000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "11000000-0000-0000-0000-000000000000"},{"udid": "12000000-0000-0000-0000-000000000000"},{"udid": "13000000-0000-0000-0000-000000000000"}
+#    Then i inject new profile doc with udId {13000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "11000000-0000-0000-0000-000000000000"},{"udid": "12000000-0000-0000-0000-000000000000"},{"udid": "13000000-0000-0000-0000-000000000000"}
 #    When I send 1 times an ad request with parameter {deviceid=11000000-0000-0000-0000-000000000000&unlimited=1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
 #    And The response code is 200
 #    And The response contains script
@@ -122,8 +122,8 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #    And The responses are passback
 
 ##  Scenario: cross device capping for udmp, HB req when capping = 2, cross device capping = false
-##    Then i inject new profile doc with udId {21000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "21000000-0000-0000-0000-000000000000"},{"udid": "22000000-0000-0000-0000-000000000000"},{"udid": "23000000-0000-0000-0000-000000000000"}]}}}
-##    Then i inject new profile doc with udId {22000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "21000000-0000-0000-0000-000000000000"},{"udid": "22000000-0000-0000-0000-000000000000"},{"udid": "23000000-0000-0000-0000-000000000000"}]}}}
+##    Then i inject new profile doc with udId {21000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "21000000-0000-0000-0000-000000000000"},{"udid": "22000000-0000-0000-0000-000000000000"},{"udid": "23000000-0000-0000-0000-000000000000"}
+##    Then i inject new profile doc with udId {22000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "21000000-0000-0000-0000-000000000000"},{"udid": "22000000-0000-0000-0000-000000000000"},{"udid": "23000000-0000-0000-0000-000000000000"}
 ##    Then i send 2 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {??????} with extra params {deviceid=21000000-0000-0000-0000-000000000000}
 ##    And The response code is 200
 ##    And The response contains script
@@ -155,8 +155,8 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #
 ###UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
   Scenario:cross device PT for udmp, zone req. 1 users - 2 devices - one app one web.
-    Then i inject new profile doc with udId {2.12340000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 123, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}]}}}
-    Then i inject new profile doc with udId {1.9mrjt7trg1a57yd4pv1i3ltbv} on users bucket, where platform = {desktop}, profile type = {udpm_p}, profile num = 456, and reduce 0 days from epoc time stamp and extra devices string = :{[{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}]}}}
+    Then i inject new profile doc with udId {2.12340000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udpm_p}, profile num = 123, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}
+    Then i inject new profile doc with udId {1.9mrjt7trg1a57yd4pv1i3ltbv} on users bucket, where platform = {desktop}, profile type = {udpm_p}, profile num = 456, and reduce 0 days from epoc time stamp and extra devices string = {"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}
     When I send 1 times an ad request with parameter {deviceid=12340000-0000-0000-0000-000000000000&unlimeted=0} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
     Then The response code is 200
     And The response contains script
