@@ -107,7 +107,7 @@ public class CrossDeviceCappingTest extends BaseTest{
               "\"imp\":[]" + ",\n" +
               "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + epocTimeInDays + "}]," +
               "\"user-graph\": [" + otherDevices + "]}";
-      System.out.println("/n/n jason Doc : /n/n" +jsonDoc);
+      System.out.println(" \n jason Doc : !!!!!! \n \n" +jsonDoc);
       if (platform.equals("desktop")) {
         usersBucket.insertDocument("1.a" + (String) udId, jsonDoc);
       } else {
