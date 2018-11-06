@@ -12,7 +12,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
     Then The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMP-ST-1-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
     Then i inject new profile doc with udId {1.a1q4r5t1dt2193lzjjoz7kmnv} on users bucket, where platform = {desktop}, empty profile type = {sqmsg_p}, non-empty profile type = {udmp_p}
     Given I add cookie UTID with value {a9b8c7faf65436dcbba3248cef1dc2bb} to my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=00000006-0006-0006-0006-000000000006&tagid=170}
