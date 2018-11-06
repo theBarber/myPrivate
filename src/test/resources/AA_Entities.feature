@@ -138,7 +138,7 @@ Feature: Entities for tests
       |Banner Name                                                |limitation                           |
       |campaign-ProfileTargetingUDMPforApp-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
       |campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
-      |campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1     |[[[4,"==",1,1,456],[[4,"==",1,1,123]]|
+      |campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1     |[[[4,"==",1,1,456],[4,"==",1,1,123]]]|
       |campaign-SeqProfileTargetingUDMPforApp-ST-1-banner-1       |[[[4,"==",1,1,17]]]                  |
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1       |[[[4,"==",1,1,17]]]                  |
     Given i update campaign data by name
