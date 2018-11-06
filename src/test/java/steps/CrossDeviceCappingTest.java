@@ -107,7 +107,7 @@ public class CrossDeviceCappingTest extends BaseTest{
               "\"imp\":[]" + ",\n" +
               "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + epocTimeInDays + "}]," +
               "\"user-graph\": [" + otherDevices + "]}";
-      System.out.println(" \n jason Doc : !!!!!! \n \n" +jsonDoc);
+      System.out.println(" \n jason Doc ex: !!!!!! \n \n" +jsonDoc);
       if (platform.equals("desktop")) {
         usersBucket.insertDocument("1.a" + (String) udId, jsonDoc);
       } else {
@@ -175,8 +175,8 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      }
         long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+              "\"imp\":[]," + "\n" +
               "\"udmp_p\":" + udmp_pString + "\"e:\" " + (epocTimeInDays-daysToReduceFromUdmp) + "}]" +
               "\"sqmp_p\":" + sqmsg_pString +  "\"e:\" " + (epocTimeInDays-daysToReduceFromSqmg) + "}]" +
               "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
@@ -197,11 +197,12 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      }
         long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
-              "\"udmp_p\":" + udmp_pString + "\"e:\" " + (epocTimeInDays-daysToReduceFromUdmp) + "}]" +
-              "\"sqmp_p\":" + sqmsg_pString +  "\"e:\" " + (epocTimeInDays-daysToReduceFromSqmg) + "}]" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+              "\"imp\":[]," + "\n" +
+              "\"udmp_p\": [{\"p\": " + "\"" + udmp_pString + "\"," + "\"e\": " + (epocTimeInDays-daysToReduceFromUdmp) + "}]," +
+              "\"sqmp_p\": [{\"p\": " + "\"" + sqmsg_pString + "\"," + "\"e\": " + (epocTimeInDays-daysToReduceFromSqmg) + "}]," +
               "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
+      System.out.print("\n \n json to check: \n " + jsonDoc);
         usersBucket.insertDocument(udId, jsonDoc);
     });
 
@@ -215,7 +216,7 @@ public class CrossDeviceCappingTest extends BaseTest{
         long epocTimeInDays = getEpocTimeInDays();
       jsonDocForMultipleProfiles = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
+              "\"imp\":[]," + "\n" +
          "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + (epocTimeInDays-daysToReduceFromProfile) + "}";
     });
 
