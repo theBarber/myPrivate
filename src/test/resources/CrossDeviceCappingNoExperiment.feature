@@ -19,7 +19,6 @@ Feature: Cross Device Capping No Experiment
 #UTID 22222222222222222222222222222222 to deviceId 20qxblv735tk3q7yq7nzy8mjm
 #UTID 33333333333333333333333333333333 to deviceId 314dzessmqqc5lby3bhzxcxtf
   Scenario: verify campaign capping enforced when sending zone requests from same user (different cookies) - in time frame
-    Given I sleep for 140 seconds
     Given I add device 20qxblv735tk3q7yq7nzy8mjm with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"314dzessmqqc5lby3bhzxcxtf"}]}> to user info
     Given I add device 314dzessmqqc5lby3bhzxcxtf with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"314dzessmqqc5lby3bhzxcxtf"}]}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas

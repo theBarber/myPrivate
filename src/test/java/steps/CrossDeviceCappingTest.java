@@ -83,15 +83,60 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      } catch (DocumentDoesNotExistException e) {
 //        System.out.println(e.getMessage());
 //      }
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + "\"platform\"" + ",\n" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
               "\"imp\":[]" + ",\n" +
               "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + (epocTimeInDays-daysToReduce) + "}]," +
               "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
         usersBucket.insertDocument(udId, jsonDoc);
-      System.out.println("doc injected!!");
+      System.out.println("doc injected to users bucket");
     });
+
+
+    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp and extra devices string = (.*)$", (String udId, String platform,String profileType,Integer profileNum ,Integer daysToReduce, String otherDevices) -> {
+      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+//      try{
+//        usersBucket.deleteDocument(udId);
+//      } catch (DocumentDoesNotExistException e) {
+//        System.out.println(e.getMessage());
+//      }
+      long epocTimeInDays = getEpocTimeInDays();
+      String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+              "\"imp\":[]" + ",\n" +
+              "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + epocTimeInDays + "}]," +
+              "\"user-graph\": [" + otherDevices + "]}";
+      System.out.println(" \n jason Doc ex: !!!!!! \n \n" +jsonDoc);
+      if (platform.equals("desktop")) {
+        usersBucket.insertDocument("1.a" + (String) udId, jsonDoc);
+      } else {
+        usersBucket.insertDocument("2.a" + (String) udId, jsonDoc);
+      }
+    });
+
+
+      //one user with one empty optional profile type filed
+      Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, empty profile type = \\{([^}]+)\\}, non-empty profile type = \\{([^}]+)\\}", (String udId, String platform, String emptyProfileType, String nonEmptyProfileType) -> {
+          CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+//      try{
+//        usersBucket.deleteDocument(udId);
+//      } catch (DocumentDoesNotExistException e) {
+//        System.out.println(e.getMessage());
+//      }
+          long epocTimeInDays = getEpocTimeInDays();
+          String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
+                  "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+                  "\"imp\":[]" + ",\n" +
+                  "\"" + emptyProfileType+ "\": []," +
+                  "\"" + nonEmptyProfileType + "\": [{\"p\":\"123\", \"e\": " + epocTimeInDays + "}]," +
+                  "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
+          usersBucket.insertDocument(udId, jsonDoc);
+        System.out.println("doc injected to users bucket");
+      });
+
+
+
 
 //    //for both profile types. udmp profile with optional time. sqmsg with auto current time stamp
 //    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, udmp_p profile with time stamp  = \\{([^}]+)\\}, sqmsg_p profile with auto time stamp = \\{([^}]+)\\}",  (String udId,String platform ,String udmp_pFull,String sqmsg_p) -> {
@@ -112,23 +157,6 @@ public class CrossDeviceCappingTest extends BaseTest{
 //    });
 
 
-      //one user with one empty optional profile type filed
-    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, empty profile type = \\{([^}]+)\\}, non-empty profile type = \\{([^}]+)\\}", (String udId, String platform, String emptyProfileType, String nonEmptyProfileType) -> {
-      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
-//      try{
-//        usersBucket.deleteDocument(udId);
-//      } catch (DocumentDoesNotExistException e) {
-//        System.out.println(e.getMessage());
-//      }
-      Integer epocTimeInDays = getEpocTimeInDays();
-      String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
-              "\"" + emptyProfileType+ "\": []," +
-              "\"" + nonEmptyProfileType + "\": [{\"p\":\"123\", \"e:\" " + epocTimeInDays + "}]" +
-              "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
-        usersBucket.insertDocument(udId, jsonDoc);
-    });
 
 
 
@@ -145,14 +173,15 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      } catch (DocumentDoesNotExistException e) {
 //        System.out.println(e.getMessage());
 //      }
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+              "\"imp\":[]," + "\n" +
               "\"udmp_p\":" + udmp_pString + "\"e:\" " + (epocTimeInDays-daysToReduceFromUdmp) + "}]" +
               "\"sqmp_p\":" + sqmsg_pString +  "\"e:\" " + (epocTimeInDays-daysToReduceFromSqmg) + "}]" +
               "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
         usersBucket.insertDocument( udId, jsonDoc);
+      System.out.println("doc injected to users bucket");
     });
 
 
@@ -166,13 +195,14 @@ public class CrossDeviceCappingTest extends BaseTest{
 //      } catch (DocumentDoesNotExistException e) {
 //        System.out.println(e.getMessage());
 //      }
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
-              "\"udmp_p\":" + udmp_pString + "\"e:\" " + (epocTimeInDays-daysToReduceFromUdmp) + "}]" +
-              "\"sqmp_p\":" + sqmsg_pString +  "\"e:\" " + (epocTimeInDays-daysToReduceFromSqmg) + "}]" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+              "\"imp\":[]," + "\n" +
+              "\"udmp_p\": [{\"p\": " + "\"" + udmp_pString + "\"," + "\"e\": " + (epocTimeInDays-daysToReduceFromUdmp) + "}]," +
+              "\"sqmp_p\": [{\"p\": " + "\"" + sqmsg_pString + "\"," + "\"e\": " + (epocTimeInDays-daysToReduceFromSqmg) + "}]," +
               "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
+      System.out.print("\n \n json to check: \n " + jsonDoc);
         usersBucket.insertDocument(udId, jsonDoc);
     });
 
@@ -183,10 +213,10 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 // for multiple profiles, start, optional profile type
     Then("i start injecting new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp", (String udId,String platform,String profileType, Integer profileNum, Integer daysToReduceFromProfile)-> {
-      Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
       jsonDocForMultipleProfiles = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
+              "\"imp\":[]," + "\n" +
          "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + (epocTimeInDays-daysToReduceFromProfile) + "}";
     });
 
@@ -197,7 +227,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 // for multiple profiles, adding profile
 
       Then("i add profile number (\\d+) to user on users bucket, where profile = (\\d+) ,and reduce (\\d+) days from epoc time stamp",(Integer profileNum, Integer daysToReduceFromProfile)-> {
-        Integer epocTimeInDays = getEpocTimeInDays();
+        long epocTimeInDays = getEpocTimeInDays();
         jsonDocForMultipleProfiles+= ",{" + "\"p\": " + "\"" + profileNum + "\"" + ", " + "\"e\": " + (epocTimeInDays-daysToReduceFromProfile) + "}";
       });
 
@@ -213,28 +243,6 @@ public class CrossDeviceCappingTest extends BaseTest{
       jsonDocForMultipleProfiles += "],\n" +
       "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
         usersBucket.insertDocument(udId, jsonDocForMultipleProfiles);
-    });
-
-
-
-      Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp and extra devices string = (.*)$", (String udId, String platform,String profileType,Integer profileNum ,Integer daysToReduce, String otherDevices) -> {
-      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
-//      try{
-//        usersBucket.deleteDocument(udId);
-//      } catch (DocumentDoesNotExistException e) {
-//        System.out.println(e.getMessage());
-//      }
-      Integer epocTimeInDays = getEpocTimeInDays();
-      String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-              "\"platform\": " + platform + ",\n" +
-              "\"imp\":[]" + "\n" +
-              "\"" + profileType + "\": [{\"p\":\"" + profileNum + "\", \"e:\" " + epocTimeInDays + "}]" +
-              "\"user-graph\":" + otherDevices + "\n}";
-        if (platform.equals("desktop")) {
-          usersBucket.insertDocument("1.a" + (String) udId, jsonDoc);
-        } else {
-          usersBucket.insertDocument("2.a" + (String) udId, jsonDoc);
-        }
     });
 
 
@@ -327,11 +335,15 @@ public class CrossDeviceCappingTest extends BaseTest{
     });
   }
 
-  public Integer getEpocTimeInDays(){
+  public long getEpocTimeInDays(){
    long epochInMilli = Instant.now().toEpochMilli();
-    Integer epochInDays = (int)epochInMilli/86400000;
-   return epochInDays ;
+ //  System.out.println("in mili = " + epochInMilli);
+    long epochInDays = epochInMilli/86400000;
+  //  System.out.println("in days = " + epochInDays);
+      return epochInDays ;
   }
+
+  long a = getEpocTimeInDays();
 
   private Integer getEpocDays() {
     MutableDateTime epoch = new MutableDateTime();

@@ -48,6 +48,7 @@ public class API_EntitiesCreator extends BaseTest{
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
         And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityDataByID);
         And("i disable campaigns by name on db",this::removeAllCampaignsByName);
+        And("i set campaigns capping on db",this::setCampaignCapping);
         And("i create new Deals",this::createMultipleDeals);
         And("i create new creatives",this::createMultipleCreatives);
         And("i create campaigns from Template",this::createMultipleCampaignsFromTemplate);
@@ -416,6 +417,18 @@ public class API_EntitiesCreator extends BaseTest{
         {
             entityData = EntityList.get(i);
             SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname",entityData.get(0), "status", "1");
+        }
+    }
+
+    private void setCampaignCapping(DataTable entities)
+    {
+        List<List<String>> EntityList = entities.asLists(String.class);
+        List<String> entityData;
+
+        for(int i=1;i<EntityList .size();i++)
+        {
+            entityData = EntityList.get(i);
+            SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname",entityData.get(0), "capping", entityData.get(1));
         }
     }
 

@@ -2,58 +2,60 @@
 @scheduled
 @preconditions
 @optimize
+@UDMP
+
 Feature: Entities for tests
 
-#  @zoneTagSanity
-#  Scenario: create entities for zone Tag Sanity test
-#    Given i create new priority campaigns with new zoneset
-#      |Campaign Name                           |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |campaign priority|
-#      |campaign-API-performance-1-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-2-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-3-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-4-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-5-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-6-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-7-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-8-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-9-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-10-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-11-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-12-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-13-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-14-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-15-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-16-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-17-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-18-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-19-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-20-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-21-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-22-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-23-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-24-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-25-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-26-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-27-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-28-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-29-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-30-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-31-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-32-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-33-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-34-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-35-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-36-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-37-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-38-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-39-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-40-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#    And i update banner data by name
-#      |Campaign Name                                    |limitation                                                     |
-#      |campaign-API-performance-39-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","firefox"]]]                          |
-#      |campaign-API-performance-40-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","chrome"]]]                           |
-#
-#
+  @zoneTagSanity
+  Scenario: create entities for zone Tag Sanity test
+    Given i create new priority campaigns with new zoneset
+      |Campaign Name                           |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |campaign priority|
+      |campaign-API-performance-1-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-2-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-3-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-4-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-5-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-6-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-7-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-8-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-9-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-10-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-11-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-12-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-13-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-14-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-15-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-16-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-17-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-18-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-19-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-20-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-21-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-22-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-23-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-24-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-25-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-26-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-27-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-28-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-29-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-30-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+      |campaign-API-performance-31-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-32-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-33-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-34-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-35-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-36-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-37-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-38-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-39-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+      |campaign-API-performance-40-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
+    And i update banner data by name
+      |Campaign Name                                    |limitation                                                     |
+      |campaign-API-performance-39-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","firefox"]]]                          |
+      |campaign-API-performance-40-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","chrome"]]]                           |
+
+
 
   @zoneTagSanity
   Scenario: create entities for zone Tag Sanity test
@@ -107,17 +109,42 @@ Feature: Entities for tests
   Scenario: create entities for profile targeting via UDMP
     Given i disable campaigns by name on db
       |Campaign Name         |
-      |campaign-ProfileTargetingUDMP-ST-1   |
-      |campaign-SeqProfileTargetingUDMP-ST-1|
-      |campaign-SeqProfileTargetingUDMP-ST-2|
-      |campaign-CrossDeviceCappingUDMP-ST-1|
-      |campaign-CrossDeviceCappingUDMP-ST-2|
+      |campaign-ProfileTargetingUDMPforApp-ST-1   |
+      |campaign-ProfileTargetingUDMPforWeb-ST-1   |
+      |campaign-ProfileTargetingUDMPCrossDevice-ST-1   |
+      |campaign-SeqProfileTargetingUDMPforApp-ST-1|
+      |campaign-SeqProfileTargetingUDMPforWeb-ST-1|
+      |campaign-CrossDeviceCappingUDMP-ST-1       |
+      |campaign-PTzoneLimitation-ST-1             |
+      |campaign-SeqPTzoneLimitation-ST-1          |
     Given i remove all zones from publishers: {3708}
-    Given i create new campaigns, new zoneset with domains
-      |Campaign Name                              |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                           |limitation               |adUnitId    |Web_Section id        |publisher ID   |po_line_item ID   |capping   |session_capping|
-      |campaign-ProfileTargetingUDMP-ST-1         |75396         |210722       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMP-ST-1}      |[[[4,"==",1,1,1992]]]    |83          |14892                 |3708           |27807             |0         |0        |
-      |campaign-SeqProfileTargetingUDMP-ST-1      |75396         |210722       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMP-ST-1}   |[[[4,"==",1,1,17]]]      |83          |14893                 |3708           |27808             |0         |0        |
-      |campaign-CrossDeviceCappingUDMP-ST-1       |75396         |210722       |false                  |14619             |{zone-zoneset-CrossDeviceCappingUDMP-ST-1}    |[]                       |83          |14894                 |3708           |27809             |2         |2        |
+    Given i create new campaigns with new zoneset
+      |Campaign Name                                    |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                                   |limitation               |adUnitId    |Web_Section id        |publisher ID   |po_line_item ID   |
+      |campaign-SeqPTzoneLimitationForApp-ST-1                |75396         |222908       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMPforApp-ST-1}        |[]                       |80          |14892                 |3708           |27807             |
+      |campaign-ProfileTargetingUDMPforApp-ST-1         |75396         |222908       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMPforApp-ST-1}        |[]                       |80          |14892                 |3708           |27807             |
+      |campaign-ProfileTargetingUDMPforWeb-ST-1         |75396         |210722       |false                  |204               |{zone-zoneset-ProfileTargetingUDMPforWeb-ST-1}        |[]                       |83          |14892                 |3708           |27807             |
+      |campaign-ProfileTargetingUDMPCrossDevice-ST-1    |75396         |210722       |false                  |204               |{zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1}   |[]                       |83          |14892                 |3708           |27807             |
+
+      |campaign-SeqProfileTargetingUDMPforApp-ST-1      |75396         |223537       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1}     |[]                       |80          |14893                 |3708           |66488             |
+      |campaign-SeqProfileTargetingUDMPforWeb-ST-1      |75396         |210722       |false                  |204               |{zone-zoneset-SeqProfileTargetingUDMPforWeb-ST-1}     |[]                       |83          |14893                 |3708           |66418             |
+
+      |campaign-CrossDeviceCappingUDMP-ST-1             |75396         |210722       |false                  |204               |{zone-zoneset-CrossDeviceCappingUDMP-ST-1}            |[]                       |83          |14894                 |3708           |27809             |
+      |campaign-PTzoneLimitation-ST-1                   |75396         |222908       |false                  |204               |{zone-zoneset-PTzoneLimitation-ST-1}                  |[]                       |83          |14895                 |3708           |27807             |
+    And i update zone data by name
+      |Zone Name                                         |is_mraid     |
+      |zone-zoneset-ProfileTargetingUDMPforApp-ST-1      |1            |
+      |zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1   |1            |
+    Given i update banner data by name
+      |Banner Name                                                |limitation                           |
+      |campaign-ProfileTargetingUDMPforApp-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
+      |campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
+      |campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1     |[[[4,"==",1,1,456],[4,"==",1,1,123]]]|
+      |campaign-SeqProfileTargetingUDMPforApp-ST-1-banner-1       |[[[4,"==",1,1,17]]]                  |
+      |campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1       |[[[4,"==",1,1,17]]]                  |
+    Given i update campaign data by name
+      |Campaign Name                                     |capping | session_capping|
+      |campaign-CrossDeviceCappingUDMP-ST-1              |2       |2               |
+
 
   @GDPR
   @HB
@@ -755,52 +782,52 @@ Feature: Entities for tests
       |zone-zoneset-InappBlackWhiteList-SI-7     |1            |
 
 
-#  @DynamicPricing
-#  Scenario: create entities for dynamic pricing
-#    Given i disable campaigns by name on db
-#      |Campaign Name                       |
-#      |campaign-DP-Direct-300X250-2        |
-#      |campaign-DP-Direct-300X250-1        |
-#      |campaign-DP-ProgG-SS-1X1-2          |
-#      |campaign-DP-ProgG-SS-1X1-1          |
-#      |campaign-DP-ProgNG-ST-1X2-2         |
-#      |campaign-DP-ProgNG-ST-1X2-1         |
-#      |campaign-DP-ClientProg-970X250-P-2  |
-#      |campaign-DP-ClientProg-970X250-P-1  |
-#      |campaign-DP-ClientProg-970X250-D    |
-##When running alone run this step ->
-#    # Given i remove all zones from publishers: {3728}
-#    Given i create new campaigns with new zoneset
-#      |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                       |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
-#      |campaign-DP-Direct-300X250-1       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14862              |3728           |66833            |
-##PROD |campaign-DP-Direct-300X250-1       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14877              |3728           |66833            |
-#      |campaign-DP-Direct-300X250-2       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14862              |3728           |66833            |
-##PROD |campaign-DP-Direct-300X250-2       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14877              |3728           |66833            |
-#      |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14862              |3728           |66831            |
-##PROD  |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14877              |3728           |66831            |
-#      |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14862              |3728           |66831            |
-##PROD  |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14877              |3728           |66831            |
-#      |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14862              |3728           |66830            |
-##PROD  |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14877              |3728           |66830            |
-#      |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14862              |3728           |66830            |
-##PROD  |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14877              |3728           |66830            |
-#      |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14862              |3728           |67182            |
-##PROD |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14877              |3728           |67231            |
-#      |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14862              |3728           |67182            |
-##PROD |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14877              |3728           |67231            |
-#      |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14862              |3728           |67182            |
-##PROD |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14877              |3728           |67231            |
-# And i update campaign data by name
-#      |Campaign Name                       |Priority      |campaign_delivery_method|delivery_algorithm|
-#      |campaign-DP-Direct-300X250-2        |-2            |1                       |4                 |
-#      |campaign-DP-Direct-300X250-1        |-1            |2                       |3                 |
-#      |campaign-DP-ProgG-SS-1X1-2          |-2            |1                       |4                 |
-#      |campaign-DP-ProgG-SS-1X1-1          |-1            |2                       |3                 |
-#      |campaign-DP-ProgNG-ST-1X2-2         |-2            |1                       |4                 |
-#      |campaign-DP-ProgNG-ST-1X2-1         |-1            |2                       |3                 |
-#      |campaign-DP-ClientProg-970X250-P-2  |-2            |1                       |4                 |
-#      |campaign-DP-ClientProg-970X250-P-1  |-1            |2                       |3                 |
-#      |campaign-DP-ClientProg-970X250-D    | 1            |4                       |2                 |
+  @DynamicPricing
+  Scenario: create entities for dynamic pricing
+    Given i disable campaigns by name on db
+      |Campaign Name                       |
+      |campaign-DP-Direct-300X250-2        |
+      |campaign-DP-Direct-300X250-1        |
+      |campaign-DP-ProgG-SS-1X1-2          |
+      |campaign-DP-ProgG-SS-1X1-1          |
+      |campaign-DP-ProgNG-ST-1X2-2         |
+      |campaign-DP-ProgNG-ST-1X2-1         |
+      |campaign-DP-ClientProg-970X250-P-2  |
+      |campaign-DP-ClientProg-970X250-P-1  |
+      |campaign-DP-ClientProg-970X250-D    |
+#When running alone run this step ->
+    # Given i remove all zones from publishers: {3728}
+    Given i create new campaigns with new zoneset
+      |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                       |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
+      |campaign-DP-Direct-300X250-1       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14862              |3728           |66833            |
+#PROD |campaign-DP-Direct-300X250-1       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14877              |3728           |66833            |
+      |campaign-DP-Direct-300X250-2       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14862              |3728           |66833            |
+#PROD |campaign-DP-Direct-300X250-2       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14877              |3728           |66833            |
+      |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14862              |3728           |66831            |
+#PROD  |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14877              |3728           |66831            |
+      |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14862              |3728           |66831            |
+#PROD  |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14877              |3728           |66831            |
+      |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14862              |3728           |66830            |
+#PROD  |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14877              |3728           |66830            |
+      |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14862              |3728           |66830            |
+#PROD  |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14877              |3728           |66830            |
+      |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14862              |3728           |67182            |
+#PROD |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14877              |3728           |67231            |
+      |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14862              |3728           |67182            |
+#PROD |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14877              |3728           |67231            |
+      |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14862              |3728           |67182            |
+#PROD |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14877              |3728           |67231            |
+ And i update campaign data by name
+      |Campaign Name                       |Priority      |campaign_delivery_method|delivery_algorithm|
+      |campaign-DP-Direct-300X250-2        |-2            |1                       |4                 |
+      |campaign-DP-Direct-300X250-1        |-1            |2                       |3                 |
+      |campaign-DP-ProgG-SS-1X1-2          |-2            |1                       |4                 |
+      |campaign-DP-ProgG-SS-1X1-1          |-1            |2                       |3                 |
+      |campaign-DP-ProgNG-ST-1X2-2         |-2            |1                       |4                 |
+      |campaign-DP-ProgNG-ST-1X2-1         |-1            |2                       |3                 |
+      |campaign-DP-ClientProg-970X250-P-2  |-2            |1                       |4                 |
+      |campaign-DP-ClientProg-970X250-P-1  |-1            |2                       |3                 |
+      |campaign-DP-ClientProg-970X250-D    | 1            |4                       |2                 |
   @DynamicPricing
   @InAppBlackWhiteList
   @OpenX
