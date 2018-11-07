@@ -57,6 +57,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected CouchbaseBucketModule userInfoBucket;
 	protected CouchbaseBucketModule userHistoryBucket;
 	protected CouchbaseBucketModule adserverBucket;
+	protected CouchbaseBucketModule usersBucket;
 	protected CouchBaseUtils couchBaseUtils;
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
@@ -104,6 +105,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 					{
 						couchBaseUtils = new CouchBaseUtils(config.get("couchbase.host"),config.get("couchbase.port"),config.get("couchbase.user"),config.get("couchbase.password"));
 					}
+				case "@usersBucket":
+					if (usersBucket == null) {
+						usersBucket = createCouchbaseBucketModule("us-east-1-users", config);
+					}
+					break;
 	    case "@uas":
 				if (uas == null) {
 					try {
@@ -524,6 +530,12 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return adserverBucket;
 	}
 
+	public CouchbaseBucketModule getUsersBucket() {
+		if(usersBucket == null){
+			usersBucket = createCouchbaseBucketModule("us-east-1-users", config);
+		}
+		return usersBucket;
+	}
 	@Override
 	public void init() throws Exception {
 		super.init();
