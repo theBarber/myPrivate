@@ -114,7 +114,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     public void zoneRequest(Integer forZone) {
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
+        String url = "https://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
         request(url, true);
     }
 
@@ -122,7 +122,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         if (toReset) {
             reset();
         }
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
+        String url = "https://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
         System.out.println(url);
         for (; times > 0; times--) {
             try {
@@ -139,7 +139,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             reset();
         }
 
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
+        String url = "https://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
 
         for (NameValuePair nvp : queryParams) {
             url = url + "&" + nvp.toString();
@@ -160,7 +160,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             reset();
         }
 
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&" + parameter;
+        String url = "https://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&" + parameter;
         System.out.println(url);
         for (; times > 0; times--) {
             try {
@@ -176,7 +176,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
     public void zoneRequestsWithGeo(Integer forZone, int times, String params) {
         reset();
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&sim_geo=1&" + params;
+        String url = "https://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&sim_geo=1&" + params;
 
         for (; times > 0; times--) {
             request(url, false);
@@ -190,7 +190,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
     public void healthCheckRequest() {
 
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/health?stid=999";
+        String url = "https://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/health?stid=999";
         request(url, true);
     }
 
