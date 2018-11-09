@@ -46,11 +46,11 @@
 				<configuration>
 					<runOrder>alphabetical</runOrder>
 					<disableXmlReport>true</disableXmlReport>
-                    			<forkCount>10</forkCount>
+                    			<!--<forkCount>10</forkCount>
                     			<reuseForks>true</reuseForks>
                     			<includes>
                         			<include>**/*.class</include>
-                    			</includes>
+                    			</includes>-->
 				</configuration>
 			</plugin>
             <plugin>
