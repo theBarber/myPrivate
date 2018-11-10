@@ -134,6 +134,8 @@ Feature: Entities for tests
       |Zone Name                                         |is_mraid     |is_secure |
       |zone-zoneset-ProfileTargetingUDMPforApp-ST-1      |1            |1         |
       |zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1   |1            |1         |
+      |zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1 |0            |1         |
+      |zone-zoneset-PTzoneLimitation-ST-1                |0            |1         |
     Given i update banner data by name
       |Banner Name                                                |limitation                           |
       |campaign-ProfileTargetingUDMPforApp-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
