@@ -1,5 +1,6 @@
 @UDMP
 @UDMPWOAA
+@scheduled
 
 Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
