@@ -96,11 +96,11 @@ public class CrossDeviceCappingTest extends BaseTest{
 
     Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp and extra devices string = (.*)$", (String udId, String platform,String profileType,Integer profileNum ,Integer daysToReduce, String otherDevices) -> {
       CouchbaseBucketModule usersBucket = sut.getUsersBucket();
-//      try{
-//        usersBucket.deleteDocument(udId);
-//      } catch (DocumentDoesNotExistException e) {
-//        System.out.println(e.getMessage());
-//      }
+      try{
+        usersBucket.deleteDocument(udId);
+      } catch (DocumentDoesNotExistException e) {
+        System.out.println(e.getMessage());
+      }
       long epocTimeInDays = getEpocTimeInDays();
       String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + "\"" +platform + "\"" + ",\n" +
@@ -109,11 +109,11 @@ public class CrossDeviceCappingTest extends BaseTest{
               "\"user-graph\": {" + otherDevices + "}}";
       System.out.println("\n jason Doc to inject!! \n " + jsonDoc);
       if (platform.equals("desktop")) {
-        usersBucket.insertDocument("1.a" + (String) udId, jsonDoc);
-        System.out.println("\n jason Doc injected successfully! \n " + jsonDoc);
+        usersBucket.insertDocument("1." + (String) udId, jsonDoc);
+        System.out.println("\n jason Doc injected successfully as web! \n " + jsonDoc);
       } else {
-        usersBucket.insertDocument("2.a" + (String) udId, jsonDoc);
-        System.out.println("\n jason Doc injected successfully! \n " + jsonDoc);
+        usersBucket.insertDocument("2." + (String) udId, jsonDoc);
+        System.out.println("\n jason Doc injected successfully as app! \n " + jsonDoc);
       }
     });
 
