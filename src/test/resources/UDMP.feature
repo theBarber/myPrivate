@@ -6,6 +6,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
 ##UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
   Scenario: cross device PT for udmp, PERSONA LEVEL, zone req. 1 users - 2 devices - one app one web.
+    Given I clear all cookies from uas requests
     Then i inject new profile doc with udId {2.12340000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 123, and reduce 0 days from epoc time stamp and extra devices string = "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23", "devices": [{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}]
     Then i inject new profile doc with udId {1.9mrjt7trg1a57yd4pv1i3ltbv} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 456, and reduce 0 days from epoc time stamp and extra devices string = "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23", "devices": [{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1i3ltbv"}]
     When I send 1 times an ad request with parameter {deviceid=12340000-0000-0000-0000-000000000000} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
@@ -23,6 +24,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
 
   Scenario: cross device capping for udmp,zone req when capping = 2, cross device capping = true
+    Given I clear all cookies from uas requests
     Then i inject new profile doc with udId {2.11000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.11000000-0000-0000-0000-000000000000"},{"udid": "2.12000000-0000-0000-0000-000000000000"},{"udid": "2.13000000-0000-0000-0000-000000000000"}]
     Then i inject new profile doc with udId {2.12000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.11000000-0000-0000-0000-000000000000"},{"udid": "2.12000000-0000-0000-0000-000000000000"},{"udid": "2.13000000-0000-0000-0000-000000000000"}]
     Then i inject new profile doc with udId {2.13000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.11000000-0000-0000-0000-000000000000"},{"udid": "2.12000000-0000-0000-0000-000000000000"},{"udid": "2.13000000-0000-0000-0000-000000000000"}]
@@ -40,6 +42,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
 #    works from here
   Scenario: profile targeting for udmp, zone req, from app
+    Given I clear all cookies from uas requests
     Then i create new profile doc with udId {2.66600000-6660-6660-6660-666000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 3 days from epoc time stamp
     When I send 1 times an ad request with parameter {deviceid=66600000-6660-6660-6660-666000000000} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
@@ -58,6 +61,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #  UTID=a1b2c8faf42446dcbba3248cef7dc7bb is coded to 9kmivgho2hd1koqz149uxr16j
 #  UTID=a1b2c8faf42446dcbba3248cef1dc2bb is coded to 9kmivgho2hd1koqz149uu05ob
   Scenario: profile targeting for udmp, zone req, from desktop
+    Given I clear all cookies from uas requests
     Then i create new profile doc with udId {1.9xgoi0i741z1bc7fldhmngq7v} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1992, and reduce 3 days from epoc time stamp
     Given I add cookie UTID with value {a7b8c8faf42446dcbba3248cef7dc7bb} to my requests to uas
     When I send 1 times an ad request for zone named {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1} to UAS
@@ -77,6 +81,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
 
   Scenario: Seq-targeting for udmp, DT req, from app
+    Given I clear all cookies from uas requests
     Then i inject new profile doc with udId {2.00000006-0006-0006-0006-000000000006} on users bucket, where platform = {app}, empty profile type = {sqmsg_p}, non-empty profile type = {udmp_p}
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=00000006-0006-0006-0006-000000000006&tagid=177}
     Then The response code is 200
@@ -100,6 +105,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #  UTID=a9b1c7faf25436dcbba3248cef1dc2bb is encoded to=a1o1866gg3j3ulsj9omeyfhyz
 #  UTID=a9b1c8faf27436dcbba3248cef1dc2bb is encoded to =a1o19osvf0w6rfwepq3avxy9n
   Scenario: profile seq targeting for udmp, DT req, from desktop
+    Given I clear all cookies from uas requests
     Then i create new profile doc with udId {1.9mrjt7trg1a57yd4pv1i3ltbv} on users bucket, where platform = {desktop}, profile type = {sqmsg_p}, profile num = 17, and reduce 0 days from epoc time stamp
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248cef1dc2bb} to my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
@@ -124,6 +130,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
 
   Scenario: PTzoneLimitation
+    Given I clear all cookies from uas requests
     Then i create new profile doc with udId {2.17100000-1710-1710-1710-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 666, and reduce 3 days from epoc time stamp
     When I send 1 times an ad request with parameter {deviceid=17100000-1710-1710-1710-000000000000} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
     Then The response code is 200
