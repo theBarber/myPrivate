@@ -22,6 +22,10 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     When I send 1 times an ad request with parameter {deviceid=06060000-0060-0000-0000-000000006000} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
+    When I send 1 times an ad request with parameter {deviceid=06060000-0060-0000-0000-000000006000&unlimited=1} for zone named {zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPCrossDevice-ST-1-banner-1} 100% of the time
 
 
 #  Scenario: cross device capping for udmp,zone req when capping = 2, cross device capping = true
