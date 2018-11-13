@@ -40,9 +40,9 @@ dev1.uas.cliconnection.password=secret
 dev1.uas.cliconnection.keyname=
 
 
-staging.uas.domain=ads-s-us-east-1.undertone.com
-# staging.uas.domain=10.12.1.188
-# staging.uas.port=9000
+# staging.uas.domain=ads-s-us-east-1.undertone.com
+ staging.uas.domain=10.12.2.245
+ staging.uas.port=9000
 
 integration.uas.domain=ads-i-us-east-1.undertone.com
 
