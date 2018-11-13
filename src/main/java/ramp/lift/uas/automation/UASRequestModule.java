@@ -160,7 +160,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             reset();
         }
 
-        String url = "https://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&" + parameter;
+        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&" + parameter;
         System.out.println(url);
         for (; times > 0; times--) {
             try {
