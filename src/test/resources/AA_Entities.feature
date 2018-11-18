@@ -116,7 +116,6 @@ Feature: Entities for tests
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1|
       |campaign-CrossDeviceCappingUDMP-ST-1       |
       |campaign-PTzoneLimitation-ST-1             |
-      |campaign-SeqPTzoneLimitation-ST-1          |
     Given i remove all zones from publishers: {3708}
     Given i create new campaigns with new zoneset
       |Campaign Name                                    |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                                   |limitation               |adUnitId    |Web_Section id        |publisher ID   |po_line_item ID   |
@@ -127,13 +126,12 @@ Feature: Entities for tests
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1      |75396         |210722       |false                  |204               |{zone-zoneset-SeqProfileTargetingUDMPforWeb-ST-1}     |[]                       |83          |14893                 |3708           |66418             |
       |campaign-CrossDeviceCappingUDMP-ST-1             |75396         |210722       |false                  |204               |{zone-zoneset-CrossDeviceCappingUDMP-ST-1}            |[]                       |83          |14894                 |3708           |27809             |
       |campaign-PTzoneLimitation-ST-1                   |75396         |222908       |false                  |204               |{zone-zoneset-PTzoneLimitation-ST-1}                  |[[[4,"==",1,1,666]]]     |83          |14895                 |3708           |27807             |
-      |campaign-SeqPTzoneLimitationForApp-ST-1          |75396         |222908       |false                  |14619             |{zone-zoneset-SeqPTzoneLimitationForApp-ST-1}         |[]                       |80          |14892                 |3708           |27807             |
     And i update zone data by name
       |Zone Name                                         |is_mraid     |is_secure |
       |zone-zoneset-ProfileTargetingUDMPforApp-ST-1      |1            |1         |
       |zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1   |1            |1         |
       |zone-zoneset-ProfileTargetingUDMPCrossDevice-ST-1 |0            |1         |
-      |zone-zoneset-PTzoneLimitation-ST-1                |0            |1         |
+      |zone-zoneset-PTzoneLimitation-ST-1                |1            |1         |
     Given i update banner data by name
       |Banner Name                                                |limitation                           |
       |campaign-ProfileTargetingUDMPforApp-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
