@@ -123,7 +123,6 @@ Feature: Header Bidding flow support
      And for all HB responses i simulate winning, and send their zone tag
      And The response code is 200
      And The response contains script
-     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Prog-PGC-1X1-1-banner-1} 100% of the time
 
   Scenario: Send HBProg request with No D, No response from Pwai
     Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
