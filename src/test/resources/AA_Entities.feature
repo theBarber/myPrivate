@@ -2,7 +2,7 @@
 @scheduled
 @preconditions
 @optimize
-
+@AA
 
 Feature: Entities for tests
 #
