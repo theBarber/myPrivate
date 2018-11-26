@@ -4,7 +4,7 @@
 @scheduled
 @HB
 @test1
-@userhistory
+@usersBucket
 @parallel
 
 Feature: Header Bidding flow support
@@ -213,7 +213,7 @@ Feature: Header Bidding flow support
 
   Scenario: header bidding frequency capping from mobile - user 1
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of crmqauo6r8fzyogl4rxao3gsb from user history
+    Given I delete the history of {crmqauo6r8fzyogl4rxao3gsb} from users bucket with prefix = {2.}
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc7bb} to my requests to uas
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
@@ -239,7 +239,7 @@ Feature: Header Bidding flow support
 
    Scenario: header bidding frequency capping from mobile - user 2 (other user)
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of crmqauo6r8fzyogl4rxao3h6j from user history
+    Given I delete the history of {crmqauo6r8fzyogl4rxao3h6j} from users bucket with prefix = {2.}
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
@@ -265,7 +265,7 @@ Feature: Header Bidding flow support
 
   Scenario: header bidding frequency capping from Desktop user 3
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given I delete the history of crmqauo6r8fzyogl4rxao3jy3 from user history
+    Given I delete the history of {crmqauo6r8fzyogl4rxao3jy3} from users bucket with prefix = {1.}
     Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dd7bb} to my requests to uas
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
@@ -288,7 +288,7 @@ Feature: Header Bidding flow support
 
   Scenario: reset requests and sleep
       Given i reset responses in the UAS
-      Given I sleep for 350 seconds
+      Given I sleep for 300 seconds
 
   Scenario: header bidding frequency capping from mobile - user 2 after 3 minutes
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
@@ -419,7 +419,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
     And all HB responses contains cpm with id 3
-    And i inject profile id 1 to user {User:crmqc31wdld7y233cq5xaxrjv} on adserver bucket
+    Then i create new profile doc with udId {1.crmqc31wdld7y233cq5xaxrjv} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 1, and reduce 0 days from epoc time stamp
     Then I add cookie UTID with value {d7a8b9caf43446d4bca3f48eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain2 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&optimize=0}
     And The response code is 200
@@ -626,7 +626,7 @@ Feature: Header Bidding flow support
   @optimize
   Scenario: header bidding frequency capping from mobile - user 1
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of 5uklue8wl0eep3j7i9xf4fi5o from user history
+    Given I delete the history of {5uklue8wl0eep3j7i9xf4fi5o} from users bucket with prefix = {2.}
     Given I add cookie UTID with value {62ccf301864347f79306f97bcc7079ac} to my requests to uas
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
@@ -652,7 +652,7 @@ Feature: Header Bidding flow support
   @optimize
   Scenario: header bidding frequency capping from mobile - user 2 (other user)
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of 1nk2c6va5dabtzkkmngz6n9r7 from user history
+    Given I delete the history of {1nk2c6va5dabtzkkmngz6n9r7} from users bucket with prefix = {2.}
     Given I add cookie UTID with value {1bf1beaa1ffd463e8a58ad3be01d8323} to my requests to uas
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
@@ -678,7 +678,7 @@ Feature: Header Bidding flow support
   @optimize
   Scenario: header bidding frequency capping from Desktop user 3
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given I delete the history of a4jmh0yqej7x7w9ijrm10eywg from user history
+    Given I delete the history of a4jmh0yqej7x7w9ijrm10eywg from users bucket
     Given I add cookie UTID with value {ab0b69ca3ee34ef88ee2d055666c6c30} to my requests to uas
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
