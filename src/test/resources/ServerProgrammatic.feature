@@ -2,6 +2,7 @@
 @scheduled
 @HeaderBidding
 @parallel
+@noAA
 
 Feature: Programmatic flow support
 

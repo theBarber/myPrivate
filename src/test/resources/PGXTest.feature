@@ -3,6 +3,9 @@
 @uas
 @PGX
 @parallel
+@noAA
+
+
 Feature: PGX - triggering ads tests
 
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG zone tag

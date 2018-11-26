@@ -3,6 +3,7 @@
 @cli
 @scheduled
 @parallel
+@noAA
 
 Feature: Gdpr test
 

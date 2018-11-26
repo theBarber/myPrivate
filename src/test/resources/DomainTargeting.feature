@@ -2,6 +2,8 @@
 @HeaderBidding
 @scheduled
 @parallel
+@noAA
+
 Feature: Domain Targeting tests
 
   @id:14

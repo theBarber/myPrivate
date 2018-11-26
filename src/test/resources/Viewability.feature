@@ -1,6 +1,7 @@
 @viewability
 @scheduled
 @parallel
+@noAA
 
   Feature: Viewability
 

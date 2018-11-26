@@ -6,6 +6,7 @@
 @test1
 @usersBucket
 @parallel
+@noAA
 
 Feature: Header Bidding flow support
 

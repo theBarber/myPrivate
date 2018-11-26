@@ -3,6 +3,7 @@
 @SupplyType
 @scheduled
 @parallel
+@noAA
 
 Feature: Supply type flow support
 

@@ -1,7 +1,7 @@
 @UDMP
-@UDMPWOAA
 @parallel
 @scheduled
+@noAA
 
 
 

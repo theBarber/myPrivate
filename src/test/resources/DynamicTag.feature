@@ -3,6 +3,7 @@
 @scheduled
 @DT
 @parallel
+@noAA
 
 Feature: Dynamic Tag flow support
 

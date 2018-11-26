@@ -2,6 +2,7 @@
 @scheduled
 @uas
 @parallel
+@noAA
 
 Feature: Black and White testing
 

@@ -3,6 +3,9 @@
 @HeaderBidding
 @uas
 @parallel
+@noAA
+
+
 Feature: InApp testing
 
   Scenario: Image and iframe - Zone request (viewableChange)

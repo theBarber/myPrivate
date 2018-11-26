@@ -4,6 +4,7 @@
 @uas
 @scheduled
 @parallel
+@noAA
 
 Feature: UAS connectivity to other components
 @stable

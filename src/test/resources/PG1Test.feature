@@ -2,6 +2,8 @@
 @SupplyType
 @scheduled
 @parallel
+@noAA
+
 Feature: PG1 x - limitation support
 
   Scenario: PG1 on Desktop - zone request
