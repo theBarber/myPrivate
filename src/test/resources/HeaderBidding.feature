@@ -829,6 +829,8 @@ Feature: Header Bidding flow support
 #   header bidding profile targeting tests
   @optimize
   Scenario: Header bidding - profile targeting
+    Then i create new profile doc with udId {1.crmqc31wdld7y233cq5xaxrjv} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1, and reduce 0 days from epoc time stamp
+    And I sleep for 4 seconds
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&optimize=1}
     And The response code is 200
@@ -837,7 +839,6 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
     And all HB responses contains cpm with id 3
-    And i inject profile id 1 to user {User:crmqc31wdld7y233cq5xaxrjv} on adserver bucket
     Then I add cookie UTID with value {d7a8b9caf43446d4bca3f48eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain2 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&optimize=1}
     And The response code is 200
