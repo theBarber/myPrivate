@@ -3,7 +3,7 @@
 @scheduled
 @parallel
 @noAA
-@DANIELLA
+
 Feature: Domain Targeting tests
 
   @id:14
