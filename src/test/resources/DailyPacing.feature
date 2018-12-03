@@ -1,4 +1,5 @@
-Feature: Daily Pasing, over 24 hours
+@DailyPaicing
+Feature: Daily Pacing, over 24 hours
 
   Scenario: 1.a cdm 1, ASAP, hour num 1
     When I send 800 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through 2.0 - DailyPacing-CDM-1-DNU} to UAS
