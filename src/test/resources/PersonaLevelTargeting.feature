@@ -1,4 +1,6 @@
 @PLT
+@parallel
+@noAA
 
 Feature: Persona level targeting
 
