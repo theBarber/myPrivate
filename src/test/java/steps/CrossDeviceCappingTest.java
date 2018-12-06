@@ -205,6 +205,23 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
 
+//one profile for each profile type. optional days reduce from epoch time for both profiles types.
+    Then("i inject new profile doc with two udmp_p profiles with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}. First p = (\\d+) with (\\d+) days reduce. Second profile = (\\d+) with (\\d+) days reduce", (String udId, String platform, Integer profile1, Integer daysToReduceFromProfile1 ,Integer profile2, Integer daysToReduceFromProfile2) -> {
+      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+      try{
+        usersBucket.deleteDocument(udId);
+      } catch (DocumentDoesNotExistException e) {
+        System.out.println(e.getMessage());
+      }
+      long epocTimeInDays = getEpocTimeInDays();
+      String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
+              "\"platform\": " + "\"" +platform + "\"" + ",\n" +
+              "\"udmp_p\": [{\"p\": " + "\"" + profile1 + "\"," + "\"e\": " + (epocTimeInDays-daysToReduceFromProfile1) + "}," +
+                             "{\"p\": " + "\"" + profile2 + "\"," + "\"e\": " + (epocTimeInDays-daysToReduceFromProfile2) + "}]," +
+              "\"user-graph\": {\"upid\": \"\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
+      System.out.print("\n \n json to check if correct: \n " + jsonDoc);
+      usersBucket.insertDocument(udId, jsonDoc);
+    });
 
 
 
