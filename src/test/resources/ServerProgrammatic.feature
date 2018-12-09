@@ -93,10 +93,9 @@ Feature: Programmatic flow support
     Then I sleep for 1 seconds
     When I send 1 times an ad request with parameter {requestid=BUrlTestInApp&unlimited=1&bundleid=app1} for zone named {zone-zoneset-server-prog-inApp-ST} to UAS
     And The response code is 200
-    And The response contains script
     And The response contains <script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com/burl"</script>
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-inApp-ST-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-inApp-ST-1-banner-1} 100% of the time
 
 #  -----------------------------------------------------Optimize-------------------------------------------------------------------
   @optimize
