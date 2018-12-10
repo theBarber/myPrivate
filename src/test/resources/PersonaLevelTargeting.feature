@@ -12,7 +12,7 @@ Feature: Persona level targeting
 #UTID=a2b3c8faf45446dcbba3248ce123c2bb is encoded to=9mrjt7trg1a57yd4pv1e7zxdn
 
   Scenario: sleeping
-    And I sleep for 120 seconds
+    And I sleep for 100 seconds
 
   Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
     Given I clear all cookies from uas requests
