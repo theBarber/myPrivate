@@ -11,8 +11,10 @@ Feature: Persona level targeting
 
 #UTID=a2b3c8faf45446dcbba3248ce123c2bb is encoded to=9mrjt7trg1a57yd4pv1e7zxdn
 
-  Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
+  Scenario: sleeping
     And I sleep for 120 seconds
+
+  Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=12300000-0000-0000-0000-000000000123} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
     Then The response code is 200
