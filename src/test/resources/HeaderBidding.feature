@@ -7,6 +7,7 @@
 @usersBucket
 @parallel
 @noAA
+@Daniella
 
 Feature: Header Bidding flow support
 
@@ -623,7 +624,7 @@ Feature: Header Bidding flow support
     And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
     And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
 
-##---frequency capping
+###---frequency capping
   @optimize
   Scenario: header bidding frequency capping from mobile - user 1
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
@@ -752,7 +753,6 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains script
     And I send impression requests to UAS
-    Given I sleep for 3 seconds
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And all HB responses contains adId with value {0}
 
@@ -827,7 +827,7 @@ Feature: Header Bidding flow support
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-4-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} 100% of the time
 
-#   header bidding profile targeting tests
+##   header bidding profile targeting tests
   @optimize
   Scenario: Header bidding - profile targeting
     Then i create new profile doc with udId {1.crmqc31wdld7y233cq5xaxrjv} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1, and reduce 0 days from epoc time stamp
