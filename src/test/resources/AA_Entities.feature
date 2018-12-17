@@ -832,6 +832,10 @@ Feature: Entities for tests
         |Campaign Name                        |
         |campaign-PLT-NotPersonaL-ST-1        |
         |campaign-PLT-YesPersonaL-ST-1        |
+      And i update zone data by name
+        |Zone Name                               |status    |
+        |zone-zoneset-PLT-NotPersonaL-ST-1       |1         |
+        |zone-zoneset-PLT-YesPersonaL-ST-1       |1         |
       Given i create new campaigns with new zoneset
         |Campaign Name                         |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative      |Zonesets-zones Name                        |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
         |campaign-PLT-NotPersonaL-ST-1         |75396         |210722     |false                  |204                |{zone-zoneset-PLT-NotPersonaL-ST-1}        |[]          |83        |15107              |3708           |27807            |
