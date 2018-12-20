@@ -91,19 +91,19 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
   Scenario: Seq-targeting for udmp, DT req, from app
     Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=00000006-0006-0006-0006-000000000006&tagid=177}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=00000006-0006-0006-0006-000000000006&tagid=170}
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=60000006-6006-6006-6006-600000000006&tagid=177}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=60000006-6006-6006-6006-600000000006&tagid=170}
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=60000006-6006-6006-6006-600000000000&tagid=177}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=60000006-6006-6006-6006-600000000000&tagid=170}
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=01000000-0100-0100-0100-010000000000&tagid=177}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforApp-ST-1-banner-1} 100% of the time
