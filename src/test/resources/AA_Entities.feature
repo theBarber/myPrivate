@@ -124,7 +124,7 @@ Feature: Entities for tests
 #      |campaign-SeqProfileTargetingUDMPforApp-ST-1      |75396         |210722       |false                  |14619             |{zone-zoneset-SeqProfileTargetingUDMPforApp-ST-1}      |[]                       |93          |15119                 |3708           |67638             |
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1      |75396         |210722       |false                  |8158               |{zone-zoneset-SeqProfileTargetingUDMPforWeb-ST-1}    |[]                       |93          |15123                 |3708           |67638             |
       |campaign-CrossDeviceCappingUDMP-ST-1             |75396         |210722       |false                  |204               |{zone-zoneset-CrossDeviceCappingUDMP-ST-1}            |[]                       |83          |14894                 |3708           |27809             |
-      |campaign-PTzoneLimitation-ST-1                   |75396         |210722       |false                  |204               |{zone-zoneset-PTzoneLimitation-ST-1}                  |[[[4,"==",1,1,666]]]     |83          |14895                 |3708           |27807             |
+      |campaign-PTzoneLimitation-ST-1                   |75396         |210722       |false                  |8158               |{zone-zoneset-PTzoneLimitation-ST-1}                  |[[[4,"==",1,1,666]]]     |93          |15124                 |3708           |27807             |
     And i update zone data by name
       |Zone Name                                         |is_mraid     |is_secure |
       |zone-zoneset-ProfileTargetingUDMPforApp-ST-1      |1            |1         |
