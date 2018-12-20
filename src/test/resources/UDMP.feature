@@ -39,12 +39,14 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And The response contains script
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCappingUDMP-ST-1-banner-1} 100% of the time
+    And I sleep for 2 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=12000000-0000-0000-0000-000000000000&unlimited=1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
     And The response contains script
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCappingUDMP-ST-1-banner-1} 100% of the time
+    And I sleep for 2 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=13000000-0000-0000-0000-000000000000&unlimited=1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
@@ -134,20 +136,20 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And The responses are passback
 
 
-#  Scenario: PTzoneLimitation
-##    Given I clear all cookies from uas requests
-##    When I send 1 times an ad request with parameter {deviceid=17100000-1710-1710-1710-000000000000} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
-##    Then The response code is 200
-##    And The responses are passback
-##    Given I clear all cookies from uas requests
-##    When I send 1 times an ad request with parameter {deviceid=00000000-0000-0000-0000-000000005678} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
-##    Then The response code is 200
-##    And The response contains script
-##    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPforApp-ST-1-banner-1} 100% of the time
-##    Given I clear all cookies from uas requests
-##    When I send 1 times an ad request with parameter {deviceid=73000000-6300-6100-6100-810000009000} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
-##    Then The response code is 200
-##    And The responses are passback
+  Scenario: PTzoneLimitation
+    Given I clear all cookies from uas requests
+    When I send 1 times an ad request with parameter {deviceid=17100000-1710-1710-1710-000000000000} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
+    Given I clear all cookies from uas requests
+    When I send 1 times an ad request with parameter {deviceid=00000000-0000-0000-0000-000000005678} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
+    Then The response code is 200
+    And The response contains script
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PTzoneLimitation-ST-1} 100% of the time
+    Given I clear all cookies from uas requests
+    When I send 1 times an ad request with parameter {deviceid=73000000-6300-6100-6100-810000009000} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
+    Then The response code is 200
+    And The responses are passback
 
 ###  Scenario: -Seq PT- for udmp, -zone req-, from app
 ###    Then i create new profile doc with udId {2.01000000-0100-0100-0100-010000000000} on users bucket, where platform = {app}, profile type = {sqmsg_p}, profile num = 17, and reduce 0 days from epoc time stamp
