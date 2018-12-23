@@ -827,9 +827,9 @@ Feature: Entities for tests
         |campaign-PLT-NotPersonaL-ST-1        |
         |campaign-PLT-YesPersonaL-ST-1        |
       Given i create new campaigns with new zoneset
-        |Campaign Name                         |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative      |Zonesets-zones Name                        |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
-        |campaign-PLT-NotPersonaL-ST-1         |75396         |210722     |false                  |204                |{zone-zoneset-PLT-NotPersonaL-ST-1}        |[]          |83        |15107              |3708           |27807            |
-        |campaign-PLT-YesPersonaL-ST-1         |75396         |210722     |false                  |204                |{zone-zoneset-PLT-YesPersonaL-ST-1}        |[]          |83        |15107              |3708           |27807            |
+        |Campaign Name                         |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative       |Zonesets-zones Name                        |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
+        |campaign-PLT-NotPersonaL-ST-1         |75396         |210722     |false                  |8158                |{zone-zoneset-PLT-NotPersonaL-ST-1}        |[]          |93        |15132              |3708           |67638            |
+        |campaign-PLT-YesPersonaL-ST-1         |75396         |210722     |false                  |8158                |{zone-zoneset-PLT-YesPersonaL-ST-1}        |[]          |93        |15131              |3708           |67638            |
       And i update campaign data by name
         |Campaign Name                       |is_persona_targeting |
         |campaign-PLT-NotPersonaL-ST-1       |0                    |
