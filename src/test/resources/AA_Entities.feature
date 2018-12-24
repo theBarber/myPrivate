@@ -141,8 +141,9 @@ Feature: Entities for tests
   @GDPR
   @HB
   Scenario: create entities for HB tests
-      Given i remove all zones from publishers: {3673,3697}
-      And i disable campaigns by name on db
+      Given i remove all zones from publishers: {3673}
+    Given i remove all zones from publishers: {3697}
+    And i disable campaigns by name on db
         |Campaign Name                        |
         |campaign-HB-Tablet-160x600           |
         |campaign-HB-See-Through-1X2          |
@@ -377,8 +378,10 @@ Feature: Entities for tests
       |campaign-DT-PGC-3-t-2 |
       |campaign-DT-SI-1-t-3-L|
       |campaign-DT-SI-2-t-3  |
-      Given i remove all zones from publishers: {3674,3675,3666}
-      Given i create new campaigns with new zoneset
+    Given i remove all zones from publishers: {3674}
+    Given i remove all zones from publishers: {3675}
+    Given i remove all zones from publishers: {3666}
+    Given i create new campaigns with new zoneset
         |Campaign Name           |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name           |limitation          |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-DT-SS-1-t-1    |75396    |197418     |false                  |86              |{zone-zoneset-DT-SS-t-1}     |[]                  |69         |14401            |3674           |64397             |
         |campaign-DT-SS-2-t-1    |75396    |197418     |false                  |86              |{zone-zoneset-DT-SS-t-1}     |[]                  |69         |14401            |3674           |64397             |
@@ -702,7 +705,9 @@ Feature: Entities for tests
       |campaign-Inapp-SI-4   |
       |campaign-Inapp-SI-5   |
       |campaign-Inapp-SI-6   |
-    Given i remove all zones from publishers: {2546,3585,3586}
+    Given i remove all zones from publishers: {2546}
+    Given i remove all zones from publishers: {3585}
+    Given i remove all zones from publishers: {3586}
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-Inapp-SI-1       |75396         |222908     |false                  |14619             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |67259             |
