@@ -86,13 +86,23 @@ public class DynamicTagTest extends BaseTest{
         SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`zones` SET `status`='0' WHERE `zoneid` in ("+remainingZones+");");
     }
 
+//    public void removeAllZonesForPublisher(String publishersID)
+//    {
+//        String s = "UPDATE `undertone`.`zones` as z_n SET `status`='1' WHERE z_n.zoneid in\n" +
+//                "(select zoneid from (SELECT * FROM zones) as z join web_sections w_s on z.web_section_id = w_s.id \n" +
+//                "\tjoin publishers_web_properties p_w_p on w_s.web_property_id = p_w_p.web_property_id \n" +
+//                "\twhere p_w_p.publisher_id in ("+publishersID+") and z.status = 0);";
+//        System.out.println("string query is = " + s);
+//        SqlWorkflowUtils.WorkflowQuery(s);
+//    }
+
     public void removeAllZonesForPublisher(String publishersID)
     {
-        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`zones` as z_n SET `status`='1' WHERE z_n.zoneid in\n" +
-                "(select zoneid from (SELECT * FROM zones) as z join web_sections w_s on z.web_section_id = w_s.id \n" +
-                "\tjoin publishers_web_properties p_w_p on w_s.web_property_id = p_w_p.web_property_id \n" +
-                "\twhere p_w_p.publisher_id in ("+publishersID+") and z.status = 0);");
+        String s = "UPDATE `undertone`.`zones` SET `status`='1' WHERE `affiliateid`='" + publishersID + "'";
+//        System.out.println("string query is = " + s);
+        SqlWorkflowUtils.WorkflowQuery(s);
     }
+
 
     private void removeAllZonesFrom(Integer web_sectionID)
     {
