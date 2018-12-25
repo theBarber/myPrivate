@@ -16,10 +16,12 @@ Feature: Persona level targeting
 
   Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
     Given I clear all cookies from uas requests
+    And I sleep for 2 seconds
     When I send 1 times an ad request with parameter {deviceid=12300000-0000-0000-0000-000000000123} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
+    And I sleep for 2 seconds
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb} to my requests to uas
     When I send 1 times an ad request for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
@@ -28,6 +30,7 @@ Feature: Persona level targeting
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
 
   Scenario: 2. PLPT is active, zone req. 1 users, 1 device that has both profiles
+    And I sleep for 2 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=12345600-0000-0000-0000-000000000123} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
     Then The response code is 200
@@ -35,10 +38,12 @@ Feature: Persona level targeting
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
 
   Scenario: 3. PLPT is not active, zone req. 1 users - 2 devices - one app one web.
+    And I sleep for 2 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=12300000-0000-0000-0000-000000000123} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
+    And I sleep for 2 seconds
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb} to my requests to uas
     When I send 1 times an ad request for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
@@ -46,6 +51,7 @@ Feature: Persona level targeting
     And The responses are passback
 
   Scenario: 4. PLPT is not active, zone req. 1 users, 1 device that has both profiles
+    And I sleep for 2 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=12345600-0000-0000-0000-000000000123} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
