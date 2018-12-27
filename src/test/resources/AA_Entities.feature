@@ -179,9 +179,10 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
         |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
-        |campaign-HB-DynamicPrice-1            |75396    |210722     |false                  |204             |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |93        |14507            |3697           |66002             |
-        |campaign-HB-DynamicPrice-2            |75396    |210722     |false                  |204             |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |93        |14507            |3697           |66736             |
-        |campaign-HB-DynamicPrice-3            |75396    |210722     |false                  |204             |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |93        |14507            |3697           |66736             |
+
+        |campaign-HB-DynamicPrice-1            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}         |[]            |93        |14507            |3697           |66002             |
+        |campaign-HB-DynamicPrice-2            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}         |[]            |93        |14507            |3697           |66736             |
+        |campaign-HB-DynamicPrice-3            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}         |[]            |93        |14507            |3697           |66736             |
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
