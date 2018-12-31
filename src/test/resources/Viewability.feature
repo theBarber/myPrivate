@@ -1,10 +1,8 @@
 @viewability
 @scheduled
-#@parallel
 @noAA
-#@expected viewability 0.40437552
 
-  Feature: Viewability
+Feature: Viewability
 
   Scenario:
     When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-viewability-1-a} to UAS
