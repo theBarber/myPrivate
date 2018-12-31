@@ -1,8 +1,8 @@
-#expected viewability 0.40437552
 @viewability
 @scheduled
 #@parallel
 @noAA
+#@expected viewability 0.40437552
 
   Feature: Viewability
 
