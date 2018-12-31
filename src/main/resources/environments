@@ -62,11 +62,11 @@ dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 
 
 staging.ramp.app.host=rampapp-s-ramp-webapp-us-east-1-k8s-internal.ramp-ut.io
-staging.ramp.app.port=3003
+#staging.ramp.app.port=3003
 staging.ramp.test.lineItemId=210722
 
 integration.ramp.app.host=rampapp-i-ramp-webapp-us-east-1-k8s-internal.ramp-ut.io
-integration.ramp.app.port=3003
+#integration.ramp.app.port=3003
 integration.ramp.test.lineItemId=[210722]
 
 
