@@ -62,10 +62,16 @@ dev2.as.solver_plan.file_path=ramp-optimization-dev/runtime/hourly/solver
 
 
 staging.ramp.app.host=rampapp-s-ramp-webapp-us-east-1-k8s-internal.ramp-ut.io
+staging.ramp.performance.host=rampapp-s-ramp-io-performance-service-us-east-1-k8s-internal.ramp-ut.io
+staging.ramp.io.host=rampapp-s-ramp-io-service-us-east-1-k8s-internal.ramp-ut.io
+staging.ramp.admin.host=rampapp-s-ramp-admin-service-us-east-1-k8s-internal.ramp-ut.io
 #staging.ramp.app.port=3003
 staging.ramp.test.lineItemId=210722
 
 integration.ramp.app.host=rampapp-i-ramp-webapp-us-east-1-k8s-internal.ramp-ut.io
+integration.ramp.performance.host=rampapp-i-ramp-io-performance-service-us-east-1-k8s-internal.ramp-ut.io
+integration.ramp.io.host=rampapp-i-ramp-io-service-us-east-1-k8s-internal.ramp-ut.io
+integration.ramp.admin.host=rampapp-i-ramp-admin-service-us-east-1-k8s-internal.ramp-ut.io
 #integration.ramp.app.port=3003
 integration.ramp.test.lineItemId=[210722]
 
