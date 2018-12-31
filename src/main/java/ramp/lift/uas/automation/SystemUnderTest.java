@@ -132,8 +132,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 						break;
 		case "@RampAppCreateEntitiesManager":
 				if(rampAppCreateEntitiesManager == null)
-						rampAppCreateEntitiesManager = new RampAppCreateEntitiesManager(config.get("ramp.app.host"),
-										(config.get("ramp.app.port")));
+						rampAppCreateEntitiesManager = new RampAppCreateEntitiesManager(config.get("ramp.io.host"),
+										(config.get("ramp.io.port")));
 				break;
 	    case "@ramp_admin_db":
 				if (rampAdminDbConnector == null) {
@@ -163,7 +163,19 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				break;
 			}
 		});
+		//Properties prop = new Properties();
+		//try {
+		//	BufferedReader in = new BufferedReader(new FileReader(PROP_PATH));
+		//	prop.load(in);
+		//	in.close();
+		//} catch (IOException e) {
+		//	org.junit.Assert.fail(e.getMessage());
+		//}
+		//AWSCredentials s3Credential = new BasicAWSCredentials(prop.getProperty("s3_access_key"),
+		//		prop.getProperty("s3_secret_key"));
 
+		//AWSCredentialsProvider credentialsProvider = new AWSStaticCredentialsProvider(s3Credential);
+		//ec2 = AmazonEC2ClientBuilder.standard().withRegion(prop.getProperty("s3_region")).withCredentials(credentialsProvider).build();
 		throwIfNeeded(exception);
 	}
 
@@ -342,6 +354,11 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 
 	protected void setupCli(Map<String, String> config, AtomicReference<RuntimeException> exception) {
+//		String cliConnectionsHostsParam = null;
+//		DescribeAddressesResult response = ec2.describeAddresses(new DescribeAddressesRequest().withFilters((new Filter("App").withValues("uas")),(new Filter("Environment").withValues("staging"))));
+//		for (Address address : response.getAddresses()){
+//			cliConnectionsHostsParam += address.getPrivateIpAddress();
+//		}
 		String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
 		String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
 		String cliconnectionCron = config.getOrDefault("uas.cliconnection.cron", "");
@@ -474,8 +491,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	public RampAppCreateEntitiesManager getRampAppCreateEntitiesManager() {
 		if(rampAppCreateEntitiesManager == null)
 		{
-			rampAppCreateEntitiesManager =  new RampAppCreateEntitiesManager(config.get("ramp.app.host"),
-										(config.get("ramp.app.port")));
+			rampAppCreateEntitiesManager =  new RampAppCreateEntitiesManager(config.get("ramp.io.host"),
+										(config.get("ramp.io.port")));
 		}
 		return rampAppCreateEntitiesManager;
 	}
