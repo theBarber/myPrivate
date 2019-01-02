@@ -915,7 +915,7 @@ Feature: Entities for tests
   @optimize
   Scenario: update test strategy
     Given i disable all tests except 53
-    And I set test id of test_strategy named {ScoringNew} to {53}
+    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
   Scenario: save entities to file
