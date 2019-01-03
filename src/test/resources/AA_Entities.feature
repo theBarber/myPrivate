@@ -159,12 +159,14 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3   |
         |campaign-HB-Prog-Billboard-970X250-D |
         |campaign-HB-Prog-Billboard-970X250-P |
-#        dynamic price with po sp > camp sp
+#        fixed price with po sp < camp sp
         |campaign-HB-DynamicPrice-1   |
-#        dynamic price with po sp < camp sp
+#        dynamic price with po sp > camp sp
         |campaign-HB-DynamicPrice-2   |
-#        dynamic price with campaign mobile sp < po sales price < campaign desktop
+#        dynamic price with po sp < camp sp
         |campaign-HB-DynamicPrice-3   |
+#        dynamic price with campaign mobile sp < po sales price < campaign desktop
+        |campaign-HB-DynamicPrice-4   |
     Given i create new campaigns with new zoneset
         |Campaign Name                         |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation     |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-HB-Tablet-160x600            |75396    |223539     |false                  |148             |{zone-zoneset-HB-Tablet-160x600}         |[]            |8         |14400            |3673           |65421             |
@@ -180,10 +182,14 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
         |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
+#       sales price for polineitem 65991 = 6
 
-        |campaign-HB-DynamicPrice-1            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}         |[]            |93        |14507            |3697           |66002             |
-        |campaign-HB-DynamicPrice-2            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}         |[]            |93        |14507            |3697           |66736             |
-        |campaign-HB-DynamicPrice-3            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}         |[]            |93        |14507            |3697           |66736             |
+#    AFTER COPYING FROM PROD REMOVE THE COMMENTS!!!!!!!!
+#        |campaign-HB-DynamicPrice-1            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}         |[]            |93        |14507            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-2            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}         |[]            |93        |14507            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-3            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}         |[]            |93        |14507            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-4            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}         |[]            |93        |14507            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-5            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}         |[]            |93        |14507            |3708           |65991             |
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
@@ -199,6 +205,14 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3   |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-Billboard-970X250-D |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
+#remove from comments after copying from Production!!!!!!
+  #    And i update campaign data by name
+#      |Campaign Name                        |hb_desktop_bid_price_percentage      |hb_mobile_bid_price_percentage |
+#      |campaign-HB-DynamicPrice-1           |7                                    |7                              |
+#      |campaign-HB-DynamicPrice-2           |5                                    |5                              |
+#      |campaign-HB-DynamicPrice-3           |7                                    |7                              |
+#      |campaign-HB-DynamicPrice-4           |5                                    |8                              |
+
     And i update zone data by name
       |Zone Name                                  |is_secure    |
       |zone-zoneset-HB-Tablet-160x600             |1            |
