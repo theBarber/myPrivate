@@ -1,6 +1,7 @@
 package entities.ramp.app.api;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ public class CreateCampaignRequest {
     private Boolean avEnabled;
     private String avVendor;
     private Integer trafficType;
+    private List<Integer> CampaignPassBacks;
 
 
     @JsonProperty("optimizeReason")
@@ -37,8 +39,6 @@ public class CreateCampaignRequest {
     Boolean isUnlimited = true;
     @JsonProperty("limitation")
     String limitation = "[]";
-   /* @JsonProperty("SourceLists")
-    String SourceLists = "[]";*/
 
 
     public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeId,Integer selectedDealId, String startDateTime, String endDateTime)
@@ -50,6 +50,7 @@ public class CreateCampaignRequest {
         this.selectedDealId = selectedDealId;
         this.startDateTime = "2018-03-06T19:06:44.809Z";
         this.endDateTime = "2020-12-31T04:59:59.999Z";
+        this.CampaignPassBacks = new ArrayList<>();
 //        this.startDateTime = startDateTime;
 //        this.endDateTime = endDateTime;
     }
@@ -117,9 +118,19 @@ public class CreateCampaignRequest {
         return selectedCreativeId;
     }
 
+    @JsonProperty("CampaignPassBacks")
+    public List<Integer> getCampaignPassBacks() {
+        return CampaignPassBacks;
+    }
+
     @JsonProperty("selectedCreativeIds")
     public void setSelectedCreativeIds(List<Integer> selectedCreativeIds) {
         this.selectedCreativeId = selectedCreativeIds;
+    }
+
+    @JsonProperty("CampaignPassBacks")
+    public void setCampaignPassBacks(List<Integer> campaignPassBacks) {
+        this.selectedCreativeId = campaignPassBacks;
     }
 
     @JsonProperty("startDateTime")

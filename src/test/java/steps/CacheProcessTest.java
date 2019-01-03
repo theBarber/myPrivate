@@ -31,6 +31,7 @@ import static org.junit.Assert.fail;
 import static sun.swing.MenuItemLayoutHelper.max;
 
 
+
 @CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",
     "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
@@ -276,7 +277,7 @@ public class CacheProcessTest extends BaseTest {
         Client client = ClientBuilder.newClient(clientConfig);
         client.property(ClientProperties.CONNECT_TIMEOUT, 600000);
         client.property(ClientProperties.READ_TIMEOUT,    600000);
-        WebTarget webTarget = client.target("http://services-ramp-staging.ramp-ut.io:3008"); //TODO: need to be generic
+        WebTarget webTarget = client.target("https://" + config.get("ramp.performance.host")); //TODO: need to be generic
 
         Response response = webTarget
                 .path("/api/v1/io/banners/extended")

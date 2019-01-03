@@ -1,9 +1,8 @@
 @viewability
 @scheduled
-#@parallel
 @noAA
 
-  Feature: Viewability
+Feature: Viewability
 
   Scenario:
     When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-viewability-1-a} to UAS
@@ -13,4 +12,3 @@
     When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-viewability-2-a} to UAS
     Then The response code is 200
     And The responses are passback
-# expected viewability 0.40437552

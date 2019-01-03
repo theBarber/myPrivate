@@ -82,7 +82,7 @@ public class ABTestingTest extends BaseTest {
 
 		And("^I update the s3 experiment data$", () -> {
 		  RampAppRequestModule appReqModule = new RampAppRequestModule();
-		  appReqModule.requestToRampApp("http://services-ramp-staging.ramp-ut.io:3002/api/v1/experiments?active=true");
+		  appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/experiments?active=true");
 		});
 
 //		After(1,scenario -> {
