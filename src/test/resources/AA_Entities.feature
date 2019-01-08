@@ -159,37 +159,44 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3   |
         |campaign-HB-Prog-Billboard-970X250-D |
         |campaign-HB-Prog-Billboard-970X250-P |
-#        fixed price with po sp < camp sp
+#        fixed price, po sp is less
         |campaign-HB-DynamicPrice-1   |
-#        dynamic price with po sp > camp sp
+#       dynamic price, camp sp is less
         |campaign-HB-DynamicPrice-2   |
 #        dynamic price with po sp < camp sp
         |campaign-HB-DynamicPrice-3   |
 #        dynamic price with campaign mobile sp < po sales price < campaign desktop
         |campaign-HB-DynamicPrice-4   |
+#        2 ad units senario
+        |campaign-HB-DynamicPrice-ST-1x2-5a   |
+        |campaign-HB-DynamicPrice-Desktop-300X250-5b   |
+
     Given i create new campaigns with new zoneset
-        |Campaign Name                         |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation     |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
-        |campaign-HB-Tablet-160x600            |75396    |223539     |false                  |148             |{zone-zoneset-HB-Tablet-160x600}         |[]            |8         |14400            |3673           |65421             |
-        |campaign-HB-See-Through-1X2           |75396    |210722     |false                  |204             |{zone-zoneset-HB-See Through 1X2}        |[]            |83        |14400            |3673           |64396             |
-        |campaign-HB-Desktop-300X250           |75396    |197420     |false                  |85              |{zone-zoneset-Desktop-300X250}            |[]            |10        |14400           |3673           |66814             |
-        |campaign-HB-Billboard-970X250         |75396    |198082     |false                  |64              |{zone-zoneset-HB-Billboard-970X250}       |[]            |58        |14400           |3673           |66813             |
-        |campaign-HB-SS-1X1                    |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                  |[]           |69         |14400           |3673           |66933             |
-        |campaign-HB-Prog-PGC-1X1-1            |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
-        |campaign-HB-Prog-PGC-1X1-2            |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
-        |campaign-HB-Prog-PGC-1X1-3            |75396    |222908     |false                  |86              |{zone-zoneset-HB-Prog-PGC-1X1}           |[]            |69        |14507            |3697           |66004             |
-        |campaign-HB-Prog-See-Through-1X2-1    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-        |campaign-HB-Prog-See-Through-1X2-2    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-        |campaign-HB-Prog-See-Through-1X2-3    |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}   |[]            |83        |14507            |3697           |66002             |
-        |campaign-HB-Prog-Billboard-970X250-D  |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
-        |campaign-HB-Prog-Billboard-970X250-P  |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250} |[]            |58        |14507            |3697           |66736             |
+        |Campaign Name                                 |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                            |limitation    |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
+        |campaign-HB-Tablet-160x600                    |75396    |223539     |false                  |148             |{zone-zoneset-HB-Tablet-160x600}              |[]            |8         |14400            |3673           |65421             |
+        |campaign-HB-See-Through-1X2                   |75396    |210722     |false                  |204             |{zone-zoneset-HB-See Through 1X2}             |[]            |83        |14400            |3673           |64396             |
+        |campaign-HB-Desktop-300X250                   |75396    |240827     |false                  |85              |{zone-zoneset-Desktop-300X250}                |[]            |10        |14400            |3673           |66814             |
+        |campaign-HB-Billboard-970X250                 |75396    |198082     |false                  |64              |{zone-zoneset-HB-Billboard-970X250}           |[]            |58        |14400            |3673           |66813             |
+        |campaign-HB-SS-1X1                            |75396    |197418     |false                  |86              |{zone-zoneset-HB-SS-1X1}                      |[]            |69         |14400           |3673           |66933             |
+        |campaign-HB-Prog-PGC-1X1-1                    |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}                |[]            |69        |14507            |3697           |66004             |
+        |campaign-HB-Prog-PGC-1X1-2                    |407981   |224812     |false                  |6499            |{zone-zoneset-HB-Prog-PGC-1X1}                |[]            |69        |14507            |3697           |66004             |
+        |campaign-HB-Prog-PGC-1X1-3                    |75396    |222908     |false                  |86              |{zone-zoneset-HB-Prog-PGC-1X1}                |[]            |69        |14507            |3697           |66004             |
+        |campaign-HB-Prog-See-Through-1X2-1            |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}        |[]            |83        |14507            |3697           |66002             |
+        |campaign-HB-Prog-See-Through-1X2-2            |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}        |[]            |83        |14507            |3697           |66002             |
+        |campaign-HB-Prog-See-Through-1X2-3            |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}        |[]            |83        |14507            |3697           |66002             |
+        |campaign-HB-Prog-Billboard-970X250-D          |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250}      |[]            |58        |14507            |3697           |66736             |
+        |campaign-HB-Prog-Billboard-970X250-P          |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250}      |[]            |58        |14507            |3697           |66736             |
 #       sales price for polineitem 65991 = 6
 
 #    AFTER COPYING FROM PROD REMOVE THE COMMENTS!!!!!!!!
-#        |campaign-HB-DynamicPrice-1            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}         |[]            |93        |14507            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-2            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}         |[]            |93        |14507            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-3            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}         |[]            |93        |14507            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-4            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}         |[]            |93        |14507            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-5            |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}         |[]            |93        |14507            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-1                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}            |[]            |93        |15133            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-2                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}            |[]            |93        |15143            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-3                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}            |[]            |93        |15134            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-4                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}            |[]            |93        |15144            |3708           |65991             |
+
+#        |campaign-HB-DynamicPrice-ST-1x2-5a           |75396    |240828     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-ST-1x2-5a}     |[]            |93        |15145            |3708           |65991             |
+#        |campaign-HB-DynamicPrice-Desktop-300X250-5b  |75396    |240829      |false                  |85               |{zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b}  |[]      |10        |15145            |3708           |65991             |
+
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
@@ -207,12 +214,13 @@ Feature: Entities for tests
         |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
 #remove from comments after copying from Production!!!!!!
   #    And i update campaign data by name
-#      |Campaign Name                        |hb_desktop_bid_price_percentage      |hb_mobile_bid_price_percentage |
-#      |campaign-HB-DynamicPrice-1           |7                                    |7                              |
-#      |campaign-HB-DynamicPrice-2           |5                                    |5                              |
-#      |campaign-HB-DynamicPrice-3           |7                                    |7                              |
-#      |campaign-HB-DynamicPrice-4           |5                                    |8                              |
-
+#      |Campaign Name                                 |hb_desktop_bid_price_percentage      |hb_mobile_bid_price_percentage |
+#      |campaign-HB-DynamicPrice-1                    |7             ?                       |7               ?               |
+#      |campaign-HB-DynamicPrice-2                    |5          ?                          |5              ?                |
+#      |campaign-HB-DynamicPrice-3                    |7           ?                         |7             ?                 |
+#      |campaign-HB-DynamicPrice-4                    |5            ?                        |8            ?                  |
+#      |campaign-HB-DynamicPrice-ST-1x2-5a            |     ??                                |         ??                      |
+#      |campaign-HB-DynamicPrice-Desktop-300X250-5b   |       ??                              |       ??                        |
     And i update zone data by name
       |Zone Name                                  |is_secure    |
       |zone-zoneset-HB-Tablet-160x600             |1            |
@@ -489,7 +497,7 @@ Feature: Entities for tests
       |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |[]                  |[{sahar.cnn.com,1};{cnn.com,1};{ynet.co.il,1}]|
       |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |[]                  |[{cnn.com,1}]                                 |
       |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |[{sahar.cnn.com,1}] |[]                                            |
-      |campaign-DomainT-Desktop-6 |75396         |197420     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |[{cnn.com,1}]       |[]                                            |
+      |campaign-DomainT-Desktop-6 |75396         |240827     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |[{cnn.com,1}]       |[]                                            |
       |campaign-DomainT-ZoneTag-1 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-1}                    |[]                   |83         |4737              |2434           |62229             |[{sahar.cnn.com,1}] |[]                                            |
       |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{sahar.ynet.co.il,1}]                        |
       |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |62229             |[{cnn.com,1}]       |[]                                            |
@@ -609,9 +617,9 @@ Feature: Entities for tests
       |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2080             |3728           |66831             |Direct     |
       |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2080             |3728           |66831             |HB         |
       |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2080             |3728           |66831             |All        |
-      |campaign-SupplyType-Desktop-ALL      |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2080             |3728           |66833             |All        |
-      |campaign-SupplyType-Desktop-HB       |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2080             |3728           |66833             |HB         |
-      |campaign-SupplyType-Desktop-Direct   |75396         |197420     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2080             |3728           |66833             |Direct     |
+      |campaign-SupplyType-Desktop-ALL      |75396         |240827     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2080             |3728           |66833             |All        |
+      |campaign-SupplyType-Desktop-HB       |75396         |240827     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2080             |3728           |66833             |HB         |
+      |campaign-SupplyType-Desktop-Direct   |75396         |240827     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2080             |3728           |66833             |Direct     |
  And i update campaign data by name
       |Campaign Name                        |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-SupplyType-ST-HB            |-2            |1                       |4                 |
