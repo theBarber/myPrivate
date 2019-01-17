@@ -196,7 +196,7 @@ Feature: Entities for tests
 
 #        |campaign-HB-DynamicPrice-ST-1x2-5a           |75396    |240828     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-ST-1x2-5a}     |[]            |93        |15145            |3708           |65991             |
 #        |campaign-HB-DynamicPrice-Desktop-300X250-5b  |75396    |240829      |false                  |85               |{zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b}  |[]      |10        |15145            |3708           |65991             |
-
+kjhkh
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
