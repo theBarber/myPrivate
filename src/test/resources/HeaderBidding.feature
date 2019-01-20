@@ -50,13 +50,13 @@ Feature: Header Bidding flow support
 
   Scenario: send HB request without publisherID configured
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The responses are passback
+    And The response code is 204
+    #And The responses are passback
 
   Scenario: Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The responses are passback
+    And The response code is 204
+    #And The responses are passback
 
   Scenario: Send HB request with Empty placementID
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty placementID for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
@@ -128,8 +128,8 @@ Feature: Header Bidding flow support
 
   Scenario: Send HBProg request with No D, No response from Pwai
     Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id 0
+    And The response code is 204
+    #And all HB responses contains adId with id 0
 
   Scenario: Send HBProg request D selected
     Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
@@ -236,8 +236,8 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 
    Scenario: header bidding frequency capping from mobile - user 2 (other user)
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
@@ -262,8 +262,8 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 
   Scenario: header bidding frequency capping from Desktop user 3
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
@@ -286,7 +286,8 @@ Feature: Header Bidding flow support
     And I send impression requests to UAS
     Given I sleep for 3 seconds
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 
   Scenario: reset requests and sleep
       Given i reset responses in the UAS
@@ -314,7 +315,8 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 
   Scenario: header bidding frequency capping from Desktop user 3 after 7 minutes
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
@@ -749,7 +751,8 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 
 #   header bidding multiple domains tests
   Scenario: header bidding multiple domains - domain1
@@ -883,13 +886,13 @@ Feature: Header Bidding flow support
   @optimize
   Scenario: send HB request without publisherID configured
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And The responses are passback
+    And The response code is 204
+    #And The responses are passback
   @optimize
   Scenario: Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And The responses are passback
+    And The response code is 204
+    #And The responses are passback
   @optimize
   Scenario: Send HB request with Empty placementID
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty placementID for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -957,8 +960,8 @@ Feature: Header Bidding flow support
   @optimize
   Scenario: Send HBProg request with No D, No response from Pwai
     Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with id 0
+    And The response code is 204
+    #And all HB responses contains adId with id 0
   @optimize
   Scenario: Send HBProg request D selected
     Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
@@ -1059,8 +1062,8 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 #  @optimize
 #  Scenario: header bidding frequency capping from mobile - user 2 (other user)
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
@@ -1085,8 +1088,8 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 #  @optimize
 #  Scenario: header bidding frequency capping from Desktop user 3
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
@@ -1110,7 +1113,8 @@ Feature: Header Bidding flow support
     And I send impression requests to UAS
     Given I sleep for 3 seconds
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 #  @optimize
 #  Scenario: reset requests and sleep
     Given i reset responses in the UAS
@@ -1139,7 +1143,8 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 #  @optimize
 #  Scenario: header bidding frequency capping from Desktop user 3 after 7 minutes
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
@@ -1164,7 +1169,8 @@ Feature: Header Bidding flow support
     And The response contains script
     And I send impression requests to UAS
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And all HB responses contains adId with value {0}
+    And The response code is 204
+    #And all HB responses contains adId with value {0}
 
    #header bidding multiple domains tests
   @optimize
