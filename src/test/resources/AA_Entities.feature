@@ -186,17 +186,13 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3            |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}        |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-Billboard-970X250-D          |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250}      |[]            |58        |14507            |3697           |66736             |
         |campaign-HB-Prog-Billboard-970X250-P          |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250}      |[]            |58        |14507            |3697           |66736             |
-#       sales price for polineitem 65991 = 6
-
-#    AFTER COPYING FROM PROD REMOVE THE COMMENTS!!!!!!!!
-#        |campaign-HB-DynamicPrice-1                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}            |[]            |93        |15133            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-2                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}            |[]            |93        |15143            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-3                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}            |[]            |93        |15134            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-4                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}            |[]            |93        |15144            |3708           |65991             |
-
-#        |campaign-HB-DynamicPrice-ST-1x2-5a           |75396    |240828     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-ST-1x2-5a}     |[]            |93        |15145            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-Desktop-300X250-5b  |75396    |240829      |false                  |85               |{zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b}  |[]      |10        |15145            |3708           |65991             |
-
+#       sales price for polineitem 65991 = 0.4 (new), for polineitem 67354 = 2
+        |campaign-HB-DynamicPrice-1                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}            |[]            |93        |15133            |3708           |65991             |
+        |campaign-HB-DynamicPrice-2                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}            |[]            |93        |15143            |3708           |65991             |
+        |campaign-HB-DynamicPrice-3                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}            |[]            |93        |15134            |3708           |65991             |
+        |campaign-HB-DynamicPrice-4                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}            |[]            |93        |15144            |3708           |65991             |
+        |campaign-HB-DynamicPrice-ST-1x2-5a           |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-ST-1x2-5a}     |[]            |93        |15145            |3708           |67354             |
+        |campaign-HB-DynamicPrice-Desktop-300X250-5b  |75396    |240829     |false                  |85               |{zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b}  |[]      |10        |15145            |3708           |65642             |
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
@@ -212,15 +208,16 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3   |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-Billboard-970X250-D |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
-#remove from comments after copying from Production!!!!!!
-  #    And i update campaign data by name
-#      |Campaign Name                                 |hb_desktop_bid_price_percentage      |hb_mobile_bid_price_percentage |
-#      |campaign-HB-DynamicPrice-1                    |7             ?                       |7               ?               |
-#      |campaign-HB-DynamicPrice-2                    |5          ?                          |5              ?                |
-#      |campaign-HB-DynamicPrice-3                    |7           ?                         |7             ?                 |
-#      |campaign-HB-DynamicPrice-4                    |5            ?                        |8            ?                  |
-#      |campaign-HB-DynamicPrice-ST-1x2-5a            |     ??                                |         ??                      |
-#      |campaign-HB-DynamicPrice-Desktop-300X250-5b   |       ??                              |       ??                        |
+    #    40% gives cpm = 0.6
+    #    70% gives cpm = 0.3
+    And i update campaign data by name
+      |Campaign Name                                 |hb_desktop_bid_price_percentage      |hb_mobile_bid_price_percentage |
+#      |campaign-HB-DynamicPrice-1                    |40                                   |40                           |
+      |campaign-HB-DynamicPrice-2                    |70                                   |70                           |
+      |campaign-HB-DynamicPrice-3                    |40                                   |40                          |
+      |campaign-HB-DynamicPrice-4                    |50                                   |70                           |
+      |campaign-HB-DynamicPrice-ST-1x2-5a            |40                                   |40                           |
+      |campaign-HB-DynamicPrice-Desktop-300X250-5b   |50                                   |50                         |
     And i update zone data by name
       |Zone Name                                  |is_secure    |
       |zone-zoneset-HB-Tablet-160x600             |1            |
@@ -231,160 +228,14 @@ Feature: Entities for tests
       |zone-zoneset-HB-Prog-PGC-1X1               |1            |
       |zone-zoneset-HB-Prog-See-Through-1X2       |1            |
       |zone-zoneset-HB-Prog-Billboard-970X250     |1            |
+      |zone-zoneset-HB-DynamicPrice-1             |1            |
+      |zone-zoneset-HB-DynamicPrice-2             |1            |
+      |zone-zoneset-HB-DynamicPrice-3             |1            |
+      |zone-zoneset-HB-DynamicPrice-4             |1            |
+      |zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b   |1     |
+      |zone-zoneset-HB-DynamicPrice-ST-1x2-5a    |1            |
 
-
-  @HB
-    Scenario: create entities for HB tests with multiple domains
-    Given i disable campaigns by name on db
-      |Campaign Name                    |
-      |HB-Tablet-160x600-D-1-a-1        |
-      |HB-Tablet-160x600-D-1-a-2        |
-      |HB-Tablet-160x600-D-1-b-1        |
-      |HB-Tablet-160x600-D-1-b-2        |
-      |See-Through-1X2-D-1-a-1          |
-      |See-Through-1X2-D-1-a-2          |
-      |See-Through-1X2-D-1-b-1          |
-      |See-Through-1X2-D-1-b-2          |
-      |HB-Tablet-160x600-D-2-a-1        |
-      |HB-Tablet-160x600-D-2-a-2        |
-      |HB-Tablet-160x600-D-2-b-1        |
-      |HB-Tablet-160x600-D-2-b-2        |
-      |See-Through-1X2-D-2-a-1          |
-      |See-Through-1X2-D-2-a-2          |
-      |See-Through-1X2-D-2-b-1          |
-      |See-Through-1X2-D-2-b-2          |
-      |HB-Tablet-160x600-D-3-a-1        |
-      |HB-Tablet-160x600-D-3-a-2        |
-      |HB-Tablet-160x600-D-3-b-1        |
-      |HB-Tablet-160x600-D-3-b-2        |
-      |See-Through-1X2-D-3-a-1          |
-      |See-Through-1X2-D-3-a-2          |
-      |See-Through-1X2-D-3-b-1          |
-      |See-Through-1X2-D-3-b-2          |
-      |HB-Tablet-160x600-D-4-a-1        |
-      |HB-Tablet-160x600-D-4-a-2        |
-      |HB-Tablet-160x600-D-4-b-1        |
-      |HB-Tablet-160x600-D-4-b-2        |
-      |See-Through-1X2-D-4-a-1          |
-      |See-Through-1X2-D-4-a-2          |
-      |See-Through-1X2-D-4-b-1          |
-      |See-Through-1X2-D-4-b-2          |
-      |campaign-HB-SS-1X1-D-1           |
-      |campaign-HB-SS-1X1-D-2           |
-     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} with limitation {[]} with adUnitId 8 and web_section id 14818 with affiliateId 3673 with po_line_item_id 65421
-     And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-1-b} with limitation {[]} with adUnitId 8 and web_section id 14818 with affiliateId 3673 with po_line_item_id 65421
-     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-a} with limitation {[]} with adUnitId 83 and web_section id 14818 with affiliateId 3673 with po_line_item_id 64396
-     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-1-b} with limitation {[]} with adUnitId 83 and web_section id 14818 with affiliateId 3673 with po_line_item_id 64396
-     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} with limitation {[]} with adUnitId 8 and web_section id 14819 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-2-b} with limitation {[]} with adUnitId 8 and web_section id 14819 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-a} with limitation {[]} with adUnitId 83 and web_section id 14819 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-2-b} with limitation {[]} with adUnitId 83 and web_section id 14819 with affiliateId 3673 with po_line_item_id 64396
-      Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} with limitation {[]} with adUnitId 8 and web_section id 14820 with affiliateId 3673 with po_line_item_id 65421
-      And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-3-b} with limitation {[]} with adUnitId 8 and web_section id 14820 with affiliateId 3673 with po_line_item_id 65421
-     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-a} with limitation {[]} with adUnitId 83 and web_section id 14820 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-3-b} with limitation {[]} with adUnitId 83 and web_section id 14820 with affiliateId 3673 with po_line_item_id 64396
-     Given i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} with limitation {[]} with adUnitId 8 and web_section id 14851 with affiliateId 3673 with po_line_item_id 65421
-     And i create new zone named {zone-zoneset-HB-Tablet-160x600-D-4-b} with limitation {[]} with adUnitId 8 and web_section id 14851 with affiliateId 3673 with po_line_item_id 65421
-     And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-a} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-See-Through-1X2-D-4-b} with limitation {[]} with adUnitId 83 and web_section id 14851 with affiliateId 3673 with po_line_item_id 64396
-      And i create new zone named {zone-zoneset-HB-SS-1X1-D-1} with limitation {[]} with adUnitId 69 and web_section id 14818 with affiliateId 3673 with po_line_item_id 66933
-      And i create new zone named {zone-zoneset-HB-SS-1X1-D-2} with limitation {[]} with adUnitId 69 and web_section id 14819 with affiliateId 3673 with po_line_item_id 66933
-    And i create new campaigns with new zoneset
-        |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal        |Zonesets-zone Name                            |
-        |HB-Tablet-160x600-D-1-a-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-1-a}        |
-        |HB-Tablet-160x600-D-1-a-2        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-1-a}        |
-        |HB-Tablet-160x600-D-1-b-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-1-b}        |
-        |HB-Tablet-160x600-D-1-b-2        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-1-b}        |
-        |See-Through-1X2-D-1-a-1          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-1-a}       |
-        |See-Through-1X2-D-1-a-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-1-a}       |
-        |See-Through-1X2-D-1-b-1          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-1-b}       |
-        |See-Through-1X2-D-1-b-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-1-b}       |
-        |HB-Tablet-160x600-D-2-a-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-2-a}        |
-        |HB-Tablet-160x600-D-2-a-2        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-2-a}        |
-        |HB-Tablet-160x600-D-2-b-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-2-b}        |
-        |HB-Tablet-160x600-D-2-b-2        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-2-b}        |
-        |See-Through-1X2-D-2-a-1          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-2-a}       |
-        |See-Through-1X2-D-2-a-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-2-a}       |
-        |See-Through-1X2-D-2-b-1          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-2-b}       |
-        |See-Through-1X2-D-2-b-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-2-b}       |
-        |HB-Tablet-160x600-D-3-a-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-3-a}        |
-        |HB-Tablet-160x600-D-3-a-2        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-3-a}        |
-        |HB-Tablet-160x600-D-3-b-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-3-b}        |
-        |HB-Tablet-160x600-D-3-b-2        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-3-b}        |
-        |See-Through-1X2-D-3-a-1          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-3-a}       |
-        |See-Through-1X2-D-3-a-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-3-a}       |
-        |See-Through-1X2-D-3-b-1          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-3-b}       |
-        |See-Through-1X2-D-3-b-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-3-b}       |
-        |HB-Tablet-160x600-D-4-a-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-4-a}        |
-        |HB-Tablet-160x600-D-4-a-2        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-4-a}        |
-        |HB-Tablet-160x600-D-4-b-1        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-4-b}        |
-        |HB-Tablet-160x600-D-4-b-2        |75396         |223539     |false                  |148                  |{zone-zoneset-HB-Tablet-160x600-D-4-b}        |
-        |See-Through-1X2-D-4-a-1          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-4-a}       |
-        |See-Through-1X2-D-4-a-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-4-a}       |
-        |See-Through-1X2-D-4-b-1          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-4-b}       |
-        |See-Through-1X2-D-4-b-2          |75396         |210722     |false                  |204                  |{zone-zoneset-HB-See-Through-1X2-D-4-b}       |
-        |campaign-HB-SS-1X1-D-1           |75396         |197418     |false                  |86                   |{zone-zoneset-HB-SS-1X1-D-1,zone-zoneset-HB-SS-1X1-D-2}|
-        |campaign-HB-SS-1X1-D-2           |75396         |197418     |false                  |86                   |{zone-zoneset-HB-SS-1X1-D-1,zone-zoneset-HB-SS-1X1-D-2}|
-    And i update campaign data by name
-        |Campaign Name                    |Priority      |campaign_delivery_method|delivery_algorithm|
-        |HB-Tablet-160x600-D-1-a-1        |-2            |1                       |4                 |
-        |HB-Tablet-160x600-D-1-a-2        |-1            |2                       |3                 |
-        |HB-Tablet-160x600-D-1-b-1        | 1            |4                       |2                 |
-        |HB-Tablet-160x600-D-1-b-2        | 1            |4                       |1                 |
-        |See-Through-1X2-D-1-a-1          |-1            |2                       |3                 |
-        |See-Through-1X2-D-1-a-2          |-1            |2                       |3                 |
-        |See-Through-1X2-D-1-b-1          | 1            |4                       |2                 |
-        |See-Through-1X2-D-1-b-2          | 1            |4                       |1                 |
-        |HB-Tablet-160x600-D-2-a-1        |-1            |2                       |3                 |
-        |HB-Tablet-160x600-D-2-a-2        |-1            |2                       |3                 |
-        |HB-Tablet-160x600-D-2-b-1        | 1            |4                       |2                 |
-        |HB-Tablet-160x600-D-2-b-2        | 1            |4                       |1                 |
-        |See-Through-1X2-D-2-a-1          |-2            |1                       |4                 |
-        |See-Through-1X2-D-2-a-2          |-1            |2                       |3                 |
-        |See-Through-1X2-D-2-b-1          | 1            |4                       |2                 |
-        |See-Through-1X2-D-2-b-2          | 1            |4                       |1                 |
-        |HB-Tablet-160x600-D-3-a-1        |-2            |1                       |4                 |
-        |HB-Tablet-160x600-D-3-a-2        |-1            |2                       |3                 |
-        |HB-Tablet-160x600-D-3-b-1        | 1            |4                       |2                 |
-        |HB-Tablet-160x600-D-3-b-2        | 1            |4                       |1                 |
-        |See-Through-1X2-D-3-a-1          |-1            |2                       |3                 |
-        |See-Through-1X2-D-3-a-2          |-1            |2                       |3                 |
-        |See-Through-1X2-D-3-b-1          | 1            |4                       |2                 |
-        |See-Through-1X2-D-3-b-2          | 1            |4                       |1                 |
-        |HB-Tablet-160x600-D-4-a-1        |-1            |2                       |3                 |
-        |HB-Tablet-160x600-D-4-a-2        |-1            |2                       |3                 |
-        |HB-Tablet-160x600-D-4-b-1        | 1            |4                       |2                 |
-        |HB-Tablet-160x600-D-4-b-2        | 1            |4                       |1                 |
-        |See-Through-1X2-D-4-a-1          |-2            |1                       |4                 |
-        |See-Through-1X2-D-4-a-2          |-1            |2                       |3                 |
-        |See-Through-1X2-D-4-b-1          | 1            |4                       |2                 |
-        |See-Through-1X2-D-4-b-2          | 1            |4                       |1                 |
-        |campaign-HB-SS-1X1-D-1           |-2            |1                       |4                 |
-        |campaign-HB-SS-1X1-D-2           |-1            |2                       |3                 |
-    And i update banner data by name
-      |Banner Name                        |limitation             |
-      |campaign-HB-SS-1X1-D-1-banner-1    |[[[4,\"=~\",30,1,1]]]  |
-      |campaign-HB-SS-1X1-D-2-banner-1    |[]                     |
-    And i update zone data by name
-      |Zone Name                                  |is_secure    |
-      |zone-zoneset-HB-Tablet-160x600-D-1-a       |1            |
-      |zone-zoneset-HB-Tablet-160x600-D-1-b       |1            |
-      |zone-zoneset-HB-See-Through-1X2-D-1-a      |1            |
-      |zone-zoneset-HB-See-Through-1X2-D-1-b      |1            |
-      |zone-zoneset-HB-Tablet-160x600-D-2-a       |1            |
-      |zone-zoneset-HB-Tablet-160x600-D-2-b       |1            |
-      |zone-zoneset-HB-See-Through-1X2-D-2-a      |1            |
-      |zone-zoneset-HB-See-Through-1X2-D-2-b      |1            |
-      |zone-zoneset-HB-Tablet-160x600-D-3-a       |1            |
-      |zone-zoneset-HB-Tablet-160x600-D-3-b       |1            |
-      |zone-zoneset-HB-See-Through-1X2-D-3-a      |1            |
-      |zone-zoneset-HB-See-Through-1X2-D-3-b      |1            |
-      |zone-zoneset-HB-Tablet-160x600-D-4-a       |1            |
-      |zone-zoneset-HB-Tablet-160x600-D-4-b       |1            |
-      |zone-zoneset-HB-See-Through-1X2-D-4-a      |1            |
-      |zone-zoneset-HB-See-Through-1X2-D-4-b      |1            |
-      |zone-zoneset-HB-SS-1X1-D-1                 |1            |
-      |zone-zoneset-HB-SS-1X1-D-2                 |1            |
+  Given i updated bid_price_type for publisher = 3708 for adunit = 93 to be 1
 
 
 
@@ -937,7 +788,7 @@ Feature: Entities for tests
   @optimize
   Scenario: update test strategy
     Given i disable all tests except 53
-    And I set test id of test_strategy named {scoringV2} to {53}
+#    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
   Scenario: save entities to file
