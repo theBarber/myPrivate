@@ -12,6 +12,7 @@ Feature: Entities for tests
 #      |campaign-API-performance-1-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
 #      |campaign-API-performance-2-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
 #      |campaign-API-performance-3-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
+#      |campaign-API-performance-3-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
 #      |campaign-API-performance-4-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
 #      |campaign-API-performance-5-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
 #      |campaign-API-performance-6-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
@@ -144,6 +145,7 @@ Feature: Entities for tests
   Scenario: create entities for HB tests
       Given i remove all zones from publishers: {3673}
     Given i remove all zones from publishers: {3697}
+#    Given i remove all zones from publishers: {3708}
     And i disable campaigns by name on db
         |Campaign Name                        |
         |campaign-HB-Tablet-160x600           |
@@ -186,17 +188,13 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3            |407981   |224810     |false                  |6497            |{zone-zoneset-HB-Prog-See-Through-1X2}        |[]            |83        |14507            |3697           |66002             |
         |campaign-HB-Prog-Billboard-970X250-D          |75396    |198082     |false                  |64              |{zone-zoneset-HB-Prog-Billboard-970X250}      |[]            |58        |14507            |3697           |66736             |
         |campaign-HB-Prog-Billboard-970X250-P          |407981   |224539     |false                  |7143            |{zone-zoneset-HB-Prog-Billboard-970X250}      |[]            |58        |14507            |3697           |66736             |
-#       sales price for polineitem 65991 = 6
-
-#    AFTER COPYING FROM PROD REMOVE THE COMMENTS!!!!!!!!
-#        |campaign-HB-DynamicPrice-1                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}            |[]            |93        |15133            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-2                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}            |[]            |93        |15143            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-3                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}            |[]            |93        |15134            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-4                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}            |[]            |93        |15144            |3708           |65991             |
-
-#        |campaign-HB-DynamicPrice-ST-1x2-5a           |75396    |240828     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-ST-1x2-5a}     |[]            |93        |15145            |3708           |65991             |
-#        |campaign-HB-DynamicPrice-Desktop-300X250-5b  |75396    |240829      |false                  |85               |{zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b}  |[]      |10        |15145            |3708           |65991             |
-
+#       sales price for polineitem 65991 = 0.4 (new), for polineitem 67354 = 2
+        |campaign-HB-DynamicPrice-1                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-1}            |[]            |93        |15133            |3708           |65991             |
+        |campaign-HB-DynamicPrice-2                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-2}            |[]            |93        |15143            |3708           |65991             |
+        |campaign-HB-DynamicPrice-3                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-3}            |[]            |93        |15134            |3708           |65991             |
+        |campaign-HB-DynamicPrice-4                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}            |[]            |93        |15144            |3708           |65991             |
+        |campaign-HB-DynamicPrice-ST-1x2-5a           |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-ST-1x2-5a}     |[]            |93        |15145            |3708           |67354             |
+        |campaign-HB-DynamicPrice-Desktop-300X250-5b  |75396    |240829     |false                  |85               |{zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b}  |[]      |10        |15145            |3708           |66811             |
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
@@ -212,15 +210,16 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-3   |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-Billboard-970X250-D |0           |-2            |-1         |[]        |1                       |
         |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
-#remove from comments after copying from Production!!!!!!
-  #    And i update campaign data by name
-#      |Campaign Name                                 |hb_desktop_bid_price_percentage      |hb_mobile_bid_price_percentage |
-#      |campaign-HB-DynamicPrice-1                    |7             ?                       |7               ?               |
-#      |campaign-HB-DynamicPrice-2                    |5          ?                          |5              ?                |
-#      |campaign-HB-DynamicPrice-3                    |7           ?                         |7             ?                 |
-#      |campaign-HB-DynamicPrice-4                    |5            ?                        |8            ?                  |
-#      |campaign-HB-DynamicPrice-ST-1x2-5a            |     ??                                |         ??                      |
-#      |campaign-HB-DynamicPrice-Desktop-300X250-5b   |       ??                              |       ??                        |
+    #    40% gives cpm = 0.6
+    #    70% gives cpm = 0.3
+    And i update campaign data by name
+      |Campaign Name                                 |hb_desktop_bid_price_percentage      |hb_mobile_bid_price_percentage |
+#      |campaign-HB-DynamicPrice-1                    |40                                   |40                           |
+      |campaign-HB-DynamicPrice-2                    |70                                   |70                           |
+      |campaign-HB-DynamicPrice-3                    |40                                   |40                          |
+      |campaign-HB-DynamicPrice-4                    |50                                   |70                           |
+      |campaign-HB-DynamicPrice-ST-1x2-5a            |40                                   |40                           |
+      |campaign-HB-DynamicPrice-Desktop-300X250-5b   |50                                   |50                         |
     And i update zone data by name
       |Zone Name                                  |is_secure    |
       |zone-zoneset-HB-Tablet-160x600             |1            |
@@ -231,6 +230,15 @@ Feature: Entities for tests
       |zone-zoneset-HB-Prog-PGC-1X1               |1            |
       |zone-zoneset-HB-Prog-See-Through-1X2       |1            |
       |zone-zoneset-HB-Prog-Billboard-970X250     |1            |
+      |zone-zoneset-HB-DynamicPrice-1             |1            |
+      |zone-zoneset-HB-DynamicPrice-2             |1            |
+      |zone-zoneset-HB-DynamicPrice-3             |1            |
+      |zone-zoneset-HB-DynamicPrice-4             |1            |
+      |zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b   |1     |
+      |zone-zoneset-HB-DynamicPrice-ST-1x2-5a    |1            |
+
+  Given i updated bid_price_type for publisher = 3708 for adunit = 93 to be 1
+
 
 
   @HB
@@ -882,6 +890,39 @@ Feature: Entities for tests
       |zone-zoneset-PLT-NotPersonaL-ST-1       |1         |
       |zone-zoneset-PLT-YesPersonaL-ST-1       |1         |
 
+#      @falseDomain
+#      Scenario: create entities for false domain feature
+#        Given i disable campaigns by name on db
+#          |Campaign Name                                |
+#          |campaign-YesRunFalseDomain-ST-1              |
+#          |campaign-YesRunFalseDomainInclude-ST-2       |
+#          |campaign-NoRunFalseDomainInclude-ST-3        |
+#          |campaign-NoRunFalseDomainExclude-ST-4        |
+#          |campaign-YesRunFalseDomainExclude-ST-5       |
+#          |campaign-YesRunFalseDomainBothLists-ST-6     |
+#          |campaign-NoRunFalseDomainBothLists-ST-7      |
+#        Given i create new campaigns, new zoneset with domains
+#          |Campaign Name                                |IO            |LineItem   |isServerProgrammatic?  |Creative           |Zonesets-zones Name                               |limitation  |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |domain_include                  |domain_exclude                  |
+#          |campaign-YesRunFalseDomain-ST-1              |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomain-ST-1}            |[]          |93        |14539              |3673           |67638            |[]                              |[]                              |
+#          |campaign-YesRunFalseDomainInclude-ST-2       |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainInclude-ST-2}     |[]          |93        |14539              |3673           |67638            |[{includeFalseDomain.test,1}]   |[]                              |
+#          |campaign-NoRunFalseDomainInclude-ST-3        |75396         |210722     |false                  |8158                |{zone-zoneset-NoRunFalseDomainInclude-ST-3}      |[]          |93        |14539              |3673           |67638            |[{includeFalseDomain.test,1}]   |[]                              |
+#          |campaign-NoRunFalseDomainExclude-ST-4        |75396         |210722     |false                  |8158                |{zone-zoneset-NoRunFalseDomainExclude-ST-4}      |[]          |93        |14539              |3673           |67638            |[]                              |[{includeFalseDomain.test,1}]   |
+#          |campaign-YesRunFalseDomainExclude-ST-5       |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainExclude-ST-5}     |[]          |93        |14539              |3673           |67638            |[]                              |[{includeFalseDomain.test,1}]   |
+#          |campaign-YesRunFalseDomainBothLists-ST-6     |75396         |210722     |false                  |8158                |{zone-zoneset-NoRunFalseDomainExclude-ST-4}      |[]          |93        |14539              |3673           |67638            |[]                              |[{includeFalseDomain.test,1}]   |
+#          |campaign-NoRunFalseDomainBothLists-ST-7      |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainExclude-ST-5}     |[]          |93        |14539              |3673           |67638            |[]                              |[{includeFalseDomain.test,1}]   |
+#        And i update campaign data by name
+#          |Campaign Name                                |run_on_unknown_domains    |
+#          |campaign-YesRunFalseDomain-ST-1              | 1                        |
+#          |campaign-YesRunFalseDomainInclude-ST-2       |  1                       |
+#          |campaign-NoRunFalseDomainInclude-ST-3        |   0                      |
+#          |campaign-NoRunFalseDomainExclude-ST-4        |    0                     |
+#          |campaign-YesRunFalseDomainExclude-ST-5       |     1                    |
+#          |campaign-YesRunFalseDomainBothLists-ST-6     |      1                   |
+#          |campaign-NoRunFalseDomainBothLists-ST-7      |        0                 |
+#
+#
+
+
 
   @DynamicPricing
   @InAppBlackWhiteList
@@ -937,7 +978,7 @@ Feature: Entities for tests
   @optimize
   Scenario: update test strategy
     Given i disable all tests except 53
-    And I set test id of test_strategy named {scoringV2} to {53}
+#    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
   Scenario: save entities to file
