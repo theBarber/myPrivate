@@ -99,19 +99,3 @@ Feature: Dynamic HB bid price
 
 
 
-
-#---------------------------------
-#
-#  Scenario: 6. campaign with dynamic bid price, campaign has no hb pricing, should take cpm from po line item
-#    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 160 size2 = 600, bidreq = 16 with domain {DHB-basicTest6} and extra params {&unlimited=1&optimize=0}
-#    And The response code is 200
-#    And The response contains script
-#    And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-6}
-#    And all HB responses contains adId with id of entity named {campaign-HB-DynamicPrice-6-banner-1}
-#    And all HB responses contains cpm with value {12}
-#    And for all HB responses i simulate winning, and send their zone tag
-#    And The response code is 200
-#    And The response contains script
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-DynamicPrice-1-banner-1} 100% of the time
-#    And For bidID 10 The field CPM in the 17 column of the hbl log is: 12.00
-#
