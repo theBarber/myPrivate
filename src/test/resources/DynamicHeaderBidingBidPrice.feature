@@ -2,7 +2,7 @@
 @parallel
 @noAA
 @HB
-
+@DHB
 Feature: Dynamic HB bid price
 
   Scenario: 1. campaign with fix bid price, should take cpm from po line item
