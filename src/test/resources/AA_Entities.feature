@@ -59,6 +59,20 @@ Feature: Entities for tests
 
   @zoneTagSanity
   Scenario: create entities for zone Tag Sanity test
+    Given i remove all zones from publishers: {3673}
+    Given i remove all zones from publishers: {3697}
+    Given i remove all zones from publishers: {3708}
+    Given i remove all zones from publishers: {3674}
+    Given i remove all zones from publishers: {3675}
+    Given i remove all zones from publishers: {3666}
+    Given i remove all zones from publishers: {3728}
+    Given i remove all zones from publishers: {3690}
+    Given i remove all zones from publishers: {1111}
+    Given i remove all zones from publishers: {3711}
+    Given i remove all zones from publishers: {3739}
+    Given i remove all zones from publishers: {2546}
+    Given i remove all zones from publishers: {3585}
+    Given i remove all zones from publishers: {3586}
     Given i disable campaigns by name on db
       |Campaign Name                        |
       |campaign-API-1-a-sanity              |
@@ -114,10 +128,9 @@ Feature: Entities for tests
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1|
       |campaign-CrossDeviceCappingUDMP-ST-1       |
       |campaign-PTzoneLimitation-ST-1             |
-    Given i remove all zones from publishers: {3708}
     Given i create new campaigns with new zoneset
       |Campaign Name                                    |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                                   |limitation               |adUnitId    |Web_Section id        |publisher ID   |po_line_item ID   |
-      |campaign-ProfileTargetingUDMPforApp-ST-1         |75396         |222908       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMPforApp-ST-1}        |[]                       |80          |14892                 |3708           |27807             |
+      |campaign-ProfileTargetingUDMPforApp-ST-1         |75396         |241783       |false                  |14619             |{zone-zoneset-ProfileTargetingUDMPforApp-ST-1}        |[]                       |80          |14892                 |3708           |27807             |
       |campaign-ProfileTargetingUDMPforWeb-ST-1         |75396         |210722       |false                  |8158               |{zone-zoneset-ProfileTargetingUDMPforWeb-ST-1}        |[]                       |93          |14892                 |3708           |27807             |
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1      |75396         |210722       |false                  |8158               |{zone-zoneset-SeqProfileTargetingUDMPforWeb-ST-1}    |[]                       |93          |15128                 |3708           |67638             |
       |campaign-CrossDeviceCappingUDMP-ST-1             |75396         |210722       |false                  |8158               |{zone-zoneset-CrossDeviceCappingUDMP-ST-1}            |[]                       |93          |14894                 |3708           |27809             |
@@ -143,9 +156,6 @@ Feature: Entities for tests
   @GDPR
   @HB
   Scenario: create entities for HB tests
-      Given i remove all zones from publishers: {3673}
-    Given i remove all zones from publishers: {3697}
-#    Given i remove all zones from publishers: {3708}
     And i disable campaigns by name on db
         |Campaign Name                        |
         |campaign-HB-Tablet-160x600           |
@@ -195,6 +205,13 @@ Feature: Entities for tests
         |campaign-HB-DynamicPrice-4                   |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-4}            |[]            |93        |15144            |3708           |65991             |
         |campaign-HB-DynamicPrice-ST-1x2-5a           |75396    |210722     |false                  |8158             |{zone-zoneset-HB-DynamicPrice-ST-1x2-5a}     |[]            |93        |15145            |3708           |67354             |
         |campaign-HB-DynamicPrice-Desktop-300X250-5b  |75396    |240829     |false                  |85               |{zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b}  |[]      |10        |15145            |3708           |66811             |
+#       for SP
+      |campaign-HB-DP-ServerPr-SS-6a                 |407981     |228962     |true                   |17               |{zone-zoneset-HB-DP-ServerPr-SS-6a}          |[]           |69        |2164              |3711           |66556             |
+      |campaign-HB-DP-ServerPr-PGC-6b                |407981     |224530     |true                   |20               |{zone-zoneset-HB-DP-ServerPr-PGC-6b}         |[]           |75        |2164              |3711           |66557             |
+
+
+
+
     And i update campaign data by name
         |Campaign Name                        |status      |Priority      |units      |limitation|campaign_delivery_method|
         |campaign-HB-Tablet-160x600           |0           |-2            |-1         |[]        |1                       |
@@ -237,8 +254,9 @@ Feature: Entities for tests
       |zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b   |1     |
       |zone-zoneset-HB-DynamicPrice-ST-1x2-5a    |1            |
 
-  Given i updated bid_price_type for publisher = 3708 for adunit = 93 to be 1
-
+    Given i updated bid_price_type for publisher = 3708 for adunit = 93 to be 1
+      Given i updated bid_price_type for publisher = 3711 for adunit = 69 to be 1
+      Given i updated bid_price_type for publisher = 3711 for adunit = 75 to be 1
 
 
   @HB
@@ -410,9 +428,6 @@ Feature: Entities for tests
       |campaign-DT-PGC-3-t-2 |
       |campaign-DT-SI-1-t-3-L|
       |campaign-DT-SI-2-t-3  |
-    Given i remove all zones from publishers: {3674}
-    Given i remove all zones from publishers: {3675}
-    Given i remove all zones from publishers: {3666}
     Given i create new campaigns with new zoneset
         |Campaign Name           |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name           |limitation          |adUnitId   |Web_Section id   |publisher ID   |po_line_item ID   |
         |campaign-DT-SS-1-t-1    |75396    |197418     |false                  |86              |{zone-zoneset-DT-SS-t-1}     |[]                  |69         |14401            |3674           |64397             |
@@ -459,7 +474,6 @@ Feature: Entities for tests
       |campaign-DT-Inline-SS-1  |
       |campaign-DT-Inline-PGC-2 |
       |campaign-DT-Inline-SS-3  |
-      Given i remove all zones from publishers: {3690}
       Given i create new campaigns with new zoneset
         |Campaign Name               |IO       |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name            |limitation          |adUnitId   |Web_Section id   |publisher ID    |po_line_item ID   |
         |campaign-DT-Inline-ST-1     |75396    |210722     |false                  |204             |{zone-zoneset-DT-inline-ST}   |[]                   |83         |14470            |3690           |65422             |
@@ -496,7 +510,6 @@ Feature: Entities for tests
       |campaign-DomainT-ZoneTag-2 |
       |campaign-DomainT-ZoneTag-3 |
       |campaign-DomainT-ZoneTag-4 |
-#    Given i remove all zones from publishers: {3708}
     And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
     Given i create new campaigns, new zoneset with domains
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                                |
@@ -528,7 +541,6 @@ Feature: Entities for tests
   @GDPR
   @appnexus
   Scenario: create entities for server programmatic tests
-    Given i remove all zones from publishers: {3728}
     Given i disable campaigns by name on db
       |Campaign Name                   |
       |campaign-server-prog-SS-1       |
@@ -545,7 +557,6 @@ Feature: Entities for tests
       |campaign-server-prog-ST-4       |
 #     InApp Burl
       |campaign-server-prog-inApp-ST-1 |
-    Given i remove all zones from publishers: {3711}
     Given i create new campaigns with new zoneset
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
@@ -616,7 +627,6 @@ Feature: Entities for tests
         |campaign-SupplyType-Desktop-ALL      |
         |campaign-SupplyType-Desktop-HB       |
         |campaign-SupplyType-Desktop-Direct   |
-      Given i remove all zones from publishers: {3728}
       Given i create new campaigns with Supply type
       |Campaign Name                        |IO            |LineItem   |Deal                   |Creative\Deal   |Zonesets-zone Name                   |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |supplyType |
       |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2080             |3728           |66830             |HB         |
@@ -653,7 +663,6 @@ Feature: Entities for tests
 
   @PG1
   Scenario: create entities for PG1 tests
-#    Given i remove all zones from publishers: {3675,3666}
       Given i disable campaigns by name on db
         |Campaign Name                     |
         |campaign-PG1-Desktop-limited      |
@@ -707,7 +716,6 @@ Feature: Entities for tests
       |campaign-PGX-ST-1-a      |
       |campaign-PGX-PG-1-b      |
       |campaign-PGX-PG-1-c      |
-    Given i remove all zones from publishers: {3739}
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
@@ -737,23 +745,21 @@ Feature: Entities for tests
       |campaign-Inapp-SI-4   |
       |campaign-Inapp-SI-5   |
       |campaign-Inapp-SI-6   |
-    Given i remove all zones from publishers: {2546}
-    Given i remove all zones from publishers: {3585}
-    Given i remove all zones from publishers: {3586}
+
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-Inapp-SI-1       |75396         |222908     |false                  |14619             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |67259             |
-#      |campaign-Inapp-SI-1       |75396         |222908     |false                  |14619             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |?             |
-      |campaign-Inapp-SI-2       |75396         |222908     |false                  |14620             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |67259             |
-#      |campaign-Inapp-SI-2       |75396         |222908     |false                  |14620             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |?             |
-      |campaign-Inapp-SI-3       |75396         |222908     |false                  |14621             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |67259             |
-#      |campaign-Inapp-SI-3       |75396         |222908     |false                  |14621             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |?             |
-      |campaign-Inapp-SI-4       |75396         |222908     |false                  |14451             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |67259             |
-#      |campaign-Inapp-SI-4       |75396         |222908     |false                  |14451             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |?             |
-      |campaign-Inapp-SI-5       |75396         |222908     |false                  |14621             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |67260             |
-#      |campaign-Inapp-SI-5       |75396         |222908     |false                  |14621             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |?             |
-      |campaign-Inapp-SI-6       |75396         |222908     |false                  |14621            |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |67260           |
-#      |campaign-Inapp-SI-6       |75396         |222908     |false                  |14621            |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |?             |
+      |campaign-Inapp-SI-1       |75396         |241783     |false                  |14619             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |67259             |
+#      |campaign-Inapp-SI-1       |75396         |241783     |false                  |14619             |{zone-zoneset-Inapp-SI-1}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-2       |75396         |241783     |false                  |14620             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |67259             |
+#      |campaign-Inapp-SI-2       |75396         |241783     |false                  |14620             |{zone-zoneset-Inapp-SI-2}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-3       |75396         |241783     |false                  |14621             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |67259             |
+#      |campaign-Inapp-SI-3       |75396         |241783     |false                  |14621             |{zone-zoneset-Inapp-SI-3}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-4       |75396         |241783     |false                  |14451             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |67259             |
+#      |campaign-Inapp-SI-4       |75396         |241783     |false                  |14451             |{zone-zoneset-Inapp-SI-4}     |[]           |80        |5164             |2546           |?             |
+      |campaign-Inapp-SI-5       |75396         |241783     |false                  |14621             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |67260             |
+#      |campaign-Inapp-SI-5       |75396         |241783     |false                  |14621             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |?             |
+      |campaign-Inapp-SI-6       |75396         |241783     |false                  |14621            |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |67260           |
+#      |campaign-Inapp-SI-6       |75396         |241783     |false                  |14621            |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |?             |
     And i update campaign data by name
       |Campaign Name             |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-Inapp-SI-1       |-2            |1                       |4                 |
@@ -790,16 +796,15 @@ Feature: Entities for tests
       |campaign-InappBlackWhiteList-SI-5   |
       |campaign-InappBlackWhiteList-SI-6   |
       |campaign-InappBlackWhiteList-SI-7   |
-    Given i remove all zones from publishers: {1111}
     Given i create new campaigns, new zoneset with domains
       |Campaign Name                             |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                          |limitation           |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |app_include                     |app_exclude|
-      |campaign-InappBlackWhiteList-SI-1         |75396         |222908       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-1}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[{app2,2}] |
-      |campaign-InappBlackWhiteList-SI-2         |75396         |222908       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-2}      |[]                   |80        |451               |1111           |67261             |[]                              |[{app2,2}] |
-      |campaign-InappBlackWhiteList-SI-3         |75396         |222908       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-3}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[]         |
-      |campaign-InappBlackWhiteList-SI-4         |75396         |222908       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-4}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[{app1,2}] |
-      |campaign-InappBlackWhiteList-SI-5         |75396         |222908       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-5}      |[]                   |80        |451               |1111           |67261             |[]                              |[]         |
-      |campaign-InappBlackWhiteList-SI-6         |75396         |222908       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-6}      |[]                   |80        |451               |1111           |67261             |[]                              |[{app1,2};{app2,2};{app3,2}]|
-      |campaign-InappBlackWhiteList-SI-7         |75396         |222908       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-7}      |[]                   |80        |451               |1111           |67261             |[{app1,2};{app2,2};{app3,2}]    |[]                          |
+      |campaign-InappBlackWhiteList-SI-1         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-1}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[{app2,2}] |
+      |campaign-InappBlackWhiteList-SI-2         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-2}      |[]                   |80        |451               |1111           |67261             |[]                              |[{app2,2}] |
+      |campaign-InappBlackWhiteList-SI-3         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-3}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[]         |
+      |campaign-InappBlackWhiteList-SI-4         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-4}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[{app1,2}] |
+      |campaign-InappBlackWhiteList-SI-5         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-5}      |[]                   |80        |451               |1111           |67261             |[]                              |[]         |
+      |campaign-InappBlackWhiteList-SI-6         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-6}      |[]                   |80        |451               |1111           |67261             |[]                              |[{app1,2};{app2,2};{app3,2}]|
+      |campaign-InappBlackWhiteList-SI-7         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-7}      |[]                   |80        |451               |1111           |67261             |[{app1,2};{app2,2};{app3,2}]    |[]                          |
     And i update zone data by name
       |Zone Name                                 |is_mraid     |
       |zone-zoneset-InappBlackWhiteList-SI-1     |1            |
@@ -833,8 +838,6 @@ Feature: Entities for tests
       |campaign-DP-ClientProg-970X250-P-2  |
       |campaign-DP-ClientProg-970X250-P-1  |
       |campaign-DP-ClientProg-970X250-D    |
-#When running alone run this step ->
-    # Given i remove all zones from publishers: {3728}
     Given i create new campaigns with new zoneset
       |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                       |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
       |campaign-DP-Direct-300X250-1       |75396         |234550     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14862              |3728           |66833            |
@@ -890,37 +893,37 @@ Feature: Entities for tests
       |zone-zoneset-PLT-NotPersonaL-ST-1       |1         |
       |zone-zoneset-PLT-YesPersonaL-ST-1       |1         |
 
-#      @falseDomain
-#      Scenario: create entities for false domain feature
-#        Given i disable campaigns by name on db
-#          |Campaign Name                                |
-#          |campaign-YesRunFalseDomain-ST-1              |
-#          |campaign-YesRunFalseDomainInclude-ST-2       |
-#          |campaign-NoRunFalseDomainInclude-ST-3        |
-#          |campaign-NoRunFalseDomainExclude-ST-4        |
-#          |campaign-YesRunFalseDomainExclude-ST-5       |
-#          |campaign-YesRunFalseDomainBothLists-ST-6     |
-#          |campaign-NoRunFalseDomainBothLists-ST-7      |
-#        Given i create new campaigns, new zoneset with domains
-#          |Campaign Name                                |IO            |LineItem   |isServerProgrammatic?  |Creative           |Zonesets-zones Name                               |limitation  |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |domain_include                  |domain_exclude                  |
-#          |campaign-YesRunFalseDomain-ST-1              |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomain-ST-1}            |[]          |93        |14539              |3673           |67638            |[]                              |[]                              |
-#          |campaign-YesRunFalseDomainInclude-ST-2       |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainInclude-ST-2}     |[]          |93        |14539              |3673           |67638            |[{includeFalseDomain.test,1}]   |[]                              |
-#          |campaign-NoRunFalseDomainInclude-ST-3        |75396         |210722     |false                  |8158                |{zone-zoneset-NoRunFalseDomainInclude-ST-3}      |[]          |93        |14539              |3673           |67638            |[{includeFalseDomain.test,1}]   |[]                              |
-#          |campaign-NoRunFalseDomainExclude-ST-4        |75396         |210722     |false                  |8158                |{zone-zoneset-NoRunFalseDomainExclude-ST-4}      |[]          |93        |14539              |3673           |67638            |[]                              |[{includeFalseDomain.test,1}]   |
-#          |campaign-YesRunFalseDomainExclude-ST-5       |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainExclude-ST-5}     |[]          |93        |14539              |3673           |67638            |[]                              |[{includeFalseDomain.test,1}]   |
-#          |campaign-YesRunFalseDomainBothLists-ST-6     |75396         |210722     |false                  |8158                |{zone-zoneset-NoRunFalseDomainExclude-ST-4}      |[]          |93        |14539              |3673           |67638            |[]                              |[{includeFalseDomain.test,1}]   |
-#          |campaign-NoRunFalseDomainBothLists-ST-7      |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainExclude-ST-5}     |[]          |93        |14539              |3673           |67638            |[]                              |[{includeFalseDomain.test,1}]   |
-#        And i update campaign data by name
-#          |Campaign Name                                |run_on_unknown_domains    |
-#          |campaign-YesRunFalseDomain-ST-1              | 1                        |
-#          |campaign-YesRunFalseDomainInclude-ST-2       |  1                       |
-#          |campaign-NoRunFalseDomainInclude-ST-3        |   0                      |
-#          |campaign-NoRunFalseDomainExclude-ST-4        |    0                     |
-#          |campaign-YesRunFalseDomainExclude-ST-5       |     1                    |
-#          |campaign-YesRunFalseDomainBothLists-ST-6     |      1                   |
-#          |campaign-NoRunFalseDomainBothLists-ST-7      |        0                 |
-#
-#
+      @falseDomain
+      Scenario: create entities for false domain feature
+        Given i disable campaigns by name on db
+          |Campaign Name                                        |
+          |campaign-YesRunFalseDomain-SP-IL-1*1-1               |
+          |campaign-YesRunFalseDomainInclude-ST-2               |
+          |campaign-NoRunFalseDomainInclude-PG-IA-1*1-3         |
+          |campaign-YesRunFalseDomainExclude-ST-4                |
+          |campaign-YesRunFalseDomainExclude-PG-Ac-1*1-5        |
+          |campaign-YesRunFalseDomainBothLists-InterSR-1*2-6    |
+          |campaign-NoRunFalseDomainBothLists-ST-7              |
+        Given i create new campaigns, new zoneset with domains
+          |Campaign Name                                          |IO            |LineItem   |isServerProgrammatic?  |Creative            |Zonesets-zones Name                                        |limitation   |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |domain_include                  |domain_exclude                  |
+          |campaign-YesRunFalseDomain-69-1                        |75396         |197418     |false                  |86                  |{zone-zoneset-YesRunFalseDomain-69-1}                      |[]           |69        |15160              |3673           |66933            |[]                              |[]                              |
+          |campaign-YesRunFalseDomainInclude-ST-2                 |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainInclude-ST-2}               |[]           |93        |15160              |3673           |64396            |[{includeFalseDomain.test,1}]   |[]                              |
+          |campaign-NoRunFalseDomainInclude-92-3                  |75396         |222908     |false                  |14488               |{zone-zoneset-NoRunFalseDomainInclude-92-3}                |[]           |92        |15160              |3673           |67165            |[{includeFalseDomain.test,1}]   |[]                              |
+          |campaign-YesRunFalseDomainExclude-ST-4                 |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainExclude-ST-4}                |[]           |93        |15160              |3673           |64396           |[]                              |[{daniellafalsedomain.test,1}]  |
+          |campaign-YesRunFalseDomainExclude-10-5                 |75396         |240827     |false                  |85                  |{zone-zoneset-YesRunFalseDomainExclude-10-5}               |[]           |10        |15160              |3673           |66814            |[]                              |[{daniellafalsedomain.test,1}]  |
+          |campaign-YesRunFalseDomainBothLists-ST-6               |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainBothLists-ST-6}             |[]           |93        |15160              |3673           |64396            |[{includeFalseDomain.test,1}]   |[{daniellafalsedomain.test,1}]  |
+          |campaign-NoRunFalseDomainBothLists-ST-7                |75396         |210722     |false                  |8158                |{zone-zoneset-NoRunFalseDomainBothLists-ST-7}              |[]           |93        |15160              |3673           |64396            |[{includeFalseDomain.test,1}]   |[{daniellafalsedomain.test,1}]  |
+        And i update campaign data by name
+          |Campaign Name                                |run_on_unknown_domains    |
+          |campaign-YesRunFalseDomain-69-1              | 1                        |
+          |campaign-YesRunFalseDomainInclude-ST-2       |  1                       |
+          |campaign-NoRunFalseDomainInclude-92-3        |   0                      |
+          |campaign-YesRunFalseDomainExclude-ST-4       |    1                     |
+          |campaign-YesRunFalseDomainExclude-10-5       |     1                    |
+          |campaign-YesRunFalseDomainBothLists-ST-6     |      1                   |
+          |campaign-NoRunFalseDomainBothLists-ST-7      |        0                 |
+
+
 
 
 
