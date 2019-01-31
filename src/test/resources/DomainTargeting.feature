@@ -191,6 +191,7 @@ Feature: Domain Targeting tests
 
   @id:25
   Scenario: 7. send Dynamic Tag requests with black list {cnn.com} (1 campaign with 2 zones)
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I use {http://ynet.co.il} as referer string to send my requests to uas
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 177 to UAS for publisher 3708 with domain {http://ynet.co.il&unlimited=1}
     And The response contains script
@@ -202,9 +203,11 @@ Feature: Domain Targeting tests
   @id:26
   Scenario: 8. send HB requests
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {sahar.cnn.com} with extra params {&unlimited=1&optimize=0}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {cnn.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
@@ -489,9 +492,11 @@ Feature: Domain Targeting tests
   @id:47
   Scenario: 8. send HB requests
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 300x250 request for publisher 3708} for publisher 3708 with domain {sahar.cnn.com} with extra params {&unlimited=1&optimize=0}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 300x250 request for publisher 3708} for publisher 3708 with domain {cnn.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
@@ -684,9 +689,11 @@ Feature: Domain Targeting tests
   @id:60 @optimize
   Scenario: 8. send HB requests
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {sahar.cnn.com} with extra params {&unlimited=1&optimize=0&optimize=1}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {cnn.com} with extra params {&unlimited=1&optimize=0&optimize=1}
     And The response code is 200
     And The response contains script
@@ -770,9 +777,11 @@ Feature: Domain Targeting tests
   @id:67 @optimize
   Scenario: 8. send HB requests
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 300x250 request for publisher 3708} for publisher 3708 with domain {sahar.cnn.com} with extra params {&unlimited=1&optimize=1}
     And The responses are passback
     Given I use {http://cnn.com} as referer string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 300x250 request for publisher 3708} for publisher 3708 with domain {cnn.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
