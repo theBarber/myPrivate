@@ -36,6 +36,7 @@ Feature: PGX - triggering ads tests
   #  And response value {window.ut_renderTriggers} has the values of 1,2,3
     
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through Header Bidding
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 1X2 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=0&unlimited=1}
     Then The response code is 200
     And The response contains script
@@ -98,6 +99,7 @@ Feature: PGX - triggering ads tests
 
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG Header Bidding
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 1X1 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=1&unlimited=1}
     Then The response code is 200
     And The response contains script
@@ -110,6 +112,7 @@ Feature: PGX - triggering ads tests
 
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through Header Bidding
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 1X2 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=1&unlimited=1}
     Then The response code is 200
     And The response contains script
