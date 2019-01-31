@@ -17,7 +17,7 @@
 		<repository>
 			<id>nexus-releases</id>
 			<name>ramp-ut-io-release</name>
-			<url>http://nexus-ext.ramp-ut.io:8081/repository/maven-releases</url>
+			<url>http://nexus-ext.ramp-ut.io:8081/nexus/content/repositories/releases</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -269,7 +269,7 @@
 		<dependency>
 			<groupId>ramp.lift.common</groupId>
 			<artifactId>common-util</artifactId>
-			<version>1.0.115.0</version>
+			<version>1.0.161.0</version>
 			<exclusions>
 				<exclusion>
 				<groupId>org.apache.httpcomponents</groupId>
