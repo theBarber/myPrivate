@@ -51,22 +51,26 @@ Feature: PG1 x - limitation support
 
 
   Scenario: PG1 on Desktop - Header Bidding
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB request 1X2 size for publisher 3666} for publisher 3666 with domain {Dynamic2.com} with extra params {&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request 1X2 size for publisher 3675} for publisher 3675 with domain {Dynamic3.com} with extra params {&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-banner-1}
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request 1X2 size for publisher 3666} for publisher 3666 with domain {Dynamic2.com} with extra params {&optimize=0}
     Then The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
     Given I use {Mozilla/4.0 (compatible; MSIE 10.0; Windows NT 6.0)} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request 1X2 size for publisher 3675} for publisher 3675 with domain {Dynamic3.com} with extra params {&optimize=0}
     Then The response code is 200
     And The response contains script
@@ -164,22 +168,26 @@ Feature: PG1 x - limitation support
 
   @optimize
   Scenario: PG1 on Desktop - Header Bidding
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB request 1X2 size for publisher 3666} for publisher 3666 with domain {Dynamic2.com} with extra params {&optimize=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request 1X2 size for publisher 3675} for publisher 3675 with domain {Dynamic3.com} with extra params {&optimize=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-banner-1}
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request 1X2 size for publisher 3666} for publisher 3666 with domain {Dynamic2.com} with extra params {&optimize=1}
     Then The response code is 200
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
     Given I use {Mozilla/4.0 (compatible; MSIE 10.0; Windows NT 6.0)} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request 1X2 size for publisher 3675} for publisher 3675 with domain {Dynamic3.com} with extra params {&optimize=1}
     Then The response code is 200
     And The response contains script
