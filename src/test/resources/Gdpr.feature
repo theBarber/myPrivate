@@ -2,7 +2,6 @@
 @HeaderBidding
 @cli
 @scheduled
-@parallel
 @noAA
 
 Feature: Gdpr test
@@ -380,50 +379,50 @@ Feature: Gdpr test
 #    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3711 with domain {test.com&requestid=systemTestA&optimize=0&tagid=196}
 #    Then The response code is 200
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-3-banner-1} 100% of the time
-
-##  ---------------------------------------------------------------------------------
 #
-  Scenario: HB request from European user
-    Given I Delete req logs
-    Given I Delete clk logs
-    Given I Delete imp logs
-    Given I add header of {referer} with value {sahar.com}
-    Given I add header of {x-forwarded-for} with value {2.22.232.123}
-    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    And I sleep for 2 seconds
-    Then I read the latest req log file from uas
-    Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
-    And The field zoneid in the 4 column of the req log is the same as in impression-url
-    And The field User_identifier in the 3 column of the req log is: 0
-    And The field IP in the 7 column of the req log is: 0.0.0.0
-    And The field Referrer_URL in the 10 column of the req log is: \N
-    And The field Latitude in the 31 column of the req log is: 0.000000
-    And The field Longitude in the 32 column of the req log is: 0.000000
-    And The field Country_Code in the 35 column of the req log is: \N
-    And The field Region in the 36 column of the req log is: \N
-    And The field City in the 37 column of the req log is: \N
-    And The field DMA_Code in the 38 column of the req log is: -1
-    And The field Zip_Code in the 39 column of the req log is: \N
-    And The field GMT_offset in the 40 column of the req log is: 0
-    And The field Netspeed in the 41 column of the req log is: \N
-    And The field ISP in the 42 column of the req log is: \N
-    And The field Contextual_category_id in the 26 column of the req log is: {}
-    And The field Contextual_language in the 27 column of the req log is: \N
-    And The field Contextual_status_code in the 28 column of the req log is: 0
-    And The field Profile_ids in the 19 column of the req log is: {}
-    And The field hhid in the 54 column of the req log is: {}
-    And The field Context_API in the 58 column of the req log is: {}
-    Then I read the latest imp log file from uas
-    And The field User_identifier in the 3 column of the imp log is: 0
-    And The field hhid in the 8 column of the imp log is: {}
-
+###  ---------------------------------------------------------------------------------
+##
+#  Scenario: HB request from European user
+#    Given I Delete req logs
+#    Given I Delete clk logs
+#    Given I Delete imp logs
+#    Given I add header of {referer} with value {sahar.com}
+#    Given I add header of {x-forwarded-for} with value {2.22.232.123}
+#    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&optimize=0}
+#    And The response code is 200
+#    And The response contains script
+#    And for all HB responses i simulate winning, and send their zone tag
+#    And The response code is 200
+#    And The response contains script
+#    And I send impression requests to UAS
+#    And I sleep for 2 seconds
+#    Then I read the latest req log file from uas
+#    Then I filter in the req log to the lines where id at column 1 is the same as in impression-url
+#    And The field zoneid in the 4 column of the req log is the same as in impression-url
+#    And The field User_identifier in the 3 column of the req log is: 0
+#    And The field IP in the 7 column of the req log is: 0.0.0.0
+#    And The field Referrer_URL in the 10 column of the req log is: \N
+#    And The field Latitude in the 31 column of the req log is: 0.000000
+#    And The field Longitude in the 32 column of the req log is: 0.000000
+#    And The field Country_Code in the 35 column of the req log is: \N
+#    And The field Region in the 36 column of the req log is: \N
+#    And The field City in the 37 column of the req log is: \N
+#    And The field DMA_Code in the 38 column of the req log is: -1
+#    And The field Zip_Code in the 39 column of the req log is: \N
+#    And The field GMT_offset in the 40 column of the req log is: 0
+#    And The field Netspeed in the 41 column of the req log is: \N
+#    And The field ISP in the 42 column of the req log is: \N
+#    And The field Contextual_category_id in the 26 column of the req log is: {}
+#    And The field Contextual_language in the 27 column of the req log is: \N
+#    And The field Contextual_status_code in the 28 column of the req log is: 0
+#    And The field Profile_ids in the 19 column of the req log is: {}
+#    And The field hhid in the 54 column of the req log is: {}
+#    And The field Context_API in the 58 column of the req log is: {}
+#    Then I read the latest imp log file from uas
+#    And The field User_identifier in the 3 column of the imp log is: 0
+#    And The field hhid in the 8 column of the imp log is: {}
 #
+##
 #  Scenario: HB request from Non-European user
 #    Given I Delete req logs
 #    Given I Delete clk logs
