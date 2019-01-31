@@ -9,6 +9,7 @@ Feature: Supply type flow support
 
   @SupplyType
   Scenario: verify when HB first
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [1,2]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
@@ -29,6 +30,7 @@ Feature: Supply type flow support
 
   @SupplyType
   Scenario: verify when Direct first
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [1,1]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
@@ -42,6 +44,7 @@ Feature: Supply type flow support
 
   @SupplyType
   Scenario: verify when All first
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [300,250]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
@@ -57,6 +60,7 @@ Feature: Supply type flow support
 #  -----------------------------------------------------Optimize-------------------------------------------------------------------
   @optimize
   Scenario: verify when HB first
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [1,2]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
@@ -76,6 +80,7 @@ Feature: Supply type flow support
     And The responses are passback
   @optimize
   Scenario: verify when Direct first
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [1,1]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
@@ -89,6 +94,7 @@ Feature: Supply type flow support
 
   @optimize
   Scenario: verify when All first
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 3728 size [300,250]} for publisher 3728 with domain {testing.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains script
