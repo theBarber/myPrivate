@@ -26,6 +26,7 @@ Feature: Programmatic flow support
 
   Scenario: 3. basic Call to Programmatic GW - Header bidding
     Then I sleep for 1 seconds
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=0&requestid=systemTestA}
     And The response code is 200
     And The response contains script
@@ -70,6 +71,7 @@ Feature: Programmatic flow support
 
   Scenario: 8. basic Call to Programmatic GW, GW doing auction, last ad selected - Header bidding
     Then I sleep for 1 seconds
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X2} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&requestid=systemTestC&optimize=0}
     And The response code is 200
     And The response contains script
@@ -118,6 +120,7 @@ Feature: Programmatic flow support
   @optimize
   Scenario: 3. basic Call to Programmatic GW - Header bidding
     Then I sleep for 1 seconds
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=1&requestid=systemTestA}
     And The response code is 200
     And The response contains script
@@ -161,6 +164,7 @@ Feature: Programmatic flow support
   @optimize
   Scenario: 8. basic Call to Programmatic GW, GW doing auction, last ad selected - Header bidding
     Then I sleep for 1 seconds
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X2} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&requestid=systemTestC&optimize=1}
     And The response code is 200
     And The response contains script

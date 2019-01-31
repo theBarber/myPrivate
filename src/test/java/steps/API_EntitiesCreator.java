@@ -61,7 +61,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
         Given("^i create new campaigns with multiple creatives$", this::createCampaignsWithMultipleCreatives);
-
+        Given("i updated bid_price_type for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setBidPriceTypeForPublisherAdunit);
     }
 
     private void createCampaignsWithMultipleCreatives(DataTable campaigns) {
@@ -496,6 +496,12 @@ public class API_EntitiesCreator extends BaseTest{
             sut.write("Banner id:"+ banner.getId());
             sut.write("Banner name:"+ banner.getName());
         }
+    }
+
+    private void setBidPriceTypeForPublisherAdunit(Integer publisherId, Integer adUnitId, Integer bid_price_type){
+        String query = "UPDATE `undertone`.`publisher_selected_adunits` SET `bid_price_type`= '"+ bid_price_type + "' WHERE `pub_id`= '" + publisherId  + "' and adunit_id = '" + adUnitId + "'";
+           System.out.println(query);
+            SqlWorkflowUtils.WorkflowQuery(query);
     }
 
     private void createCampaignWithZonesetName(String campaignName,Integer IO_id, Integer lineItemId,Boolean isServerProgrammatic, Integer creativeID_Or_DealID, String zonesetName)
