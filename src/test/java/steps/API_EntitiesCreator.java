@@ -454,6 +454,7 @@ public class API_EntitiesCreator extends BaseTest{
             updateBannersName(createdCampaign.get().getName(),createdCampaign.get().getName()+"-banner-");
             printCampaign(createdCampaign.get());
             updateCampaign(createdCampaign.get().getId(),"status","0");
+            updateCampaign(createdCampaign.get().getId(),"run_on_unknown_domains","1");
         }
     }
 
