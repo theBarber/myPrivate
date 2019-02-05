@@ -224,7 +224,7 @@ Feature: Entities for tests
         |campaign-HB-Prog-See-Through-1X2-2   |0           |-1            |-1         |[]        |2                       |
         |campaign-HB-Prog-See-Through-1X2-3   |0           |1             |-1         |[]        |4                       |
         |campaign-HB-Prog-Billboard-970X250-D |0           |-2            |-1         |[]        |1                       |
-        |campaign-HB-Pro g-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
+        |campaign-HB-Prog-Billboard-970X250-P |0           |-1            |-1         |[]        |2                       |
     #    40% gives cpm = 0.6
     #    70% gives cpm = 0.3
     And i update campaign data by name
@@ -253,7 +253,7 @@ Feature: Entities for tests
       |zone-zoneset-HB-DynamicPrice-4             |1            |
       |zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b   |1     |
       |zone-zoneset-HB-DynamicPrice-ST-1x2-5a    |1             |
-      |zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6         |1             |
+      |zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a         |1             |
       |zone-zoneset-HB-DP-ServerPr-PGC-6b        |1             |
 
     Given i updated bid_price_type for publisher = 3708 for adunit = 93 to be 1
