@@ -1,8 +1,16 @@
 @NdqFilteringTL
 @scheduled
 @uas
+@Sanity
+@UASBuyAtMost
+@Integration
+@hardcoded
+@cli
+@parallel
+@noAA
 
-Feature: NDQ Filtering Test Level
+
+Feature: ROFD
 
 
   Scenario: 1. a. run on false domain flag = true. req sent from a false domain - zone req, DT req.

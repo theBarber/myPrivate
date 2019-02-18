@@ -5,6 +5,22 @@
 
 Feature: Entities for tests
 
+  Scenario: remove all active zones
+    Given i remove all zones from publishers: {3673}
+    Given i remove all zones from publishers: {3697}
+    Given i remove all zones from publishers: {3708}
+    Given i remove all zones from publishers: {3674}
+    Given i remove all zones from publishers: {3675}
+    Given i remove all zones from publishers: {3666}
+    Given i remove all zones from publishers: {3728}
+    Given i remove all zones from publishers: {3690}
+    Given i remove all zones from publishers: {1111}
+    Given i remove all zones from publishers: {3711}
+    Given i remove all zones from publishers: {3739}
+    Given i remove all zones from publishers: {2546}
+    Given i remove all zones from publishers: {3585}
+    Given i remove all zones from publishers: {3586}
+
 #  @zoneTagSanity
 #  Scenario: create entities for zone Tag Sanity test
 #    Given i create new priority campaigns with new zoneset
@@ -59,20 +75,6 @@ Feature: Entities for tests
 
   @zoneTagSanity
   Scenario: create entities for zone Tag Sanity test
-    Given i remove all zones from publishers: {3673}
-    Given i remove all zones from publishers: {3697}
-    Given i remove all zones from publishers: {3708}
-    Given i remove all zones from publishers: {3674}
-    Given i remove all zones from publishers: {3675}
-    Given i remove all zones from publishers: {3666}
-    Given i remove all zones from publishers: {3728}
-    Given i remove all zones from publishers: {3690}
-    Given i remove all zones from publishers: {1111}
-    Given i remove all zones from publishers: {3711}
-    Given i remove all zones from publishers: {3739}
-    Given i remove all zones from publishers: {2546}
-    Given i remove all zones from publishers: {3585}
-    Given i remove all zones from publishers: {3586}
     Given i disable campaigns by name on db
       |Campaign Name                        |
       |campaign-API-1-a-sanity              |
@@ -251,7 +253,7 @@ Feature: Entities for tests
       |zone-zoneset-HB-DynamicPrice-2             |1            |
       |zone-zoneset-HB-DynamicPrice-3             |1            |
       |zone-zoneset-HB-DynamicPrice-4             |1            |
-      |zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b   |1     |
+      |zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b |1     |
       |zone-zoneset-HB-DynamicPrice-ST-1x2-5a    |1             |
       |zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a         |1             |
       |zone-zoneset-HB-DP-ServerPr-PGC-6b        |1             |
@@ -514,8 +516,8 @@ Feature: Entities for tests
       |campaign-DomainT-ZoneTag-4 |
     And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
     Given i create new campaigns, new zoneset with domains
-      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                                |
-      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |[]                  |[{sahar.cnn.com,1}]                           |
+      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                                        |
+      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |[]                  |[{sahar.cnn.com,1};{DHB.basicTest1,1};{DHB.basicTest2,1};{DHB.basicTest3,1};{DHB.basicTest4,1};{DHB.basicTest5,1}]                           |
       |campaign-DomainT-2         |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |[]                  |[{cnn.com,1}]                                 |
       |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |[]                  |[{sahar.cnn.com,1};{cnn.com,1};{ynet.co.il,1}]|
       |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |[]                  |[{cnn.com,1}]                                 |
@@ -559,194 +561,53 @@ Feature: Entities for tests
       |campaign-server-prog-ST-4       |
 #     InApp Burl
       |campaign-server-prog-inApp-ST-1 |
+#     multiple bids
+#      |campaign-server-prog-MultiBids-SS-1 |
+#      |campaign-server-prog-MultiBids-ST-2 |
     Given i create new campaigns with new zoneset
-      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-server-prog-SS-1  |407981        |228962     |true                   |17               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-SS-2  |407981        |224531     |true                   |18               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-SS-3  |75396         |197418     |false                  |86               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-SS-4  |407981        |224531     |true                   |19               |{zone-zoneset-server-prog-SS} |[]           |69        |2164              |3711           |66556             |
-      |campaign-server-prog-PGC-1 |407981        |224530     |true                   |20               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-PGC-2 |407981        |228961     |true                   |21               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-PGC-3 |407981        |224530     |true                   |22               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-PGC-4 |407981        |228961     |true                   |23               |{zone-zoneset-server-prog-PGC}|[]           |75        |2164              |3711           |66557             |
-      |campaign-server-prog-ST-1  |407981        |229737     |true                   |24               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-2  |407981        |224533     |true                   |31               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-3  |407981        |229737     |true                   |32               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
-      |campaign-server-prog-ST-4  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-ST} |[]           |83        |2164              |3711           |66555             |
+      |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?   |Deal\Creative   |Zonesets-zones Name                   |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-server-prog-SS-1          |407981        |228962     |true                    |17               |{zone-zoneset-server-prog-SS}        |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-2          |407981        |224531     |true                    |18               |{zone-zoneset-server-prog-SS}        |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-3          |75396         |197418     |false                   |86               |{zone-zoneset-server-prog-SS}        |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-SS-4          |407981        |224531     |true                    |19               |{zone-zoneset-server-prog-SS}        |[]           |69        |2164              |3711           |66556             |
+      |campaign-server-prog-PGC-1         |407981        |224530     |true                    |20               |{zone-zoneset-server-prog-PGC}       |[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-2         |407981        |228961     |true                    |21               |{zone-zoneset-server-prog-PGC}       |[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-3         |407981        |224530     |true                    |22               |{zone-zoneset-server-prog-PGC}       |[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-PGC-4         |407981        |228961     |true                    |23               |{zone-zoneset-server-prog-PGC}       |[]           |75        |2164              |3711           |66557             |
+      |campaign-server-prog-ST-1          |407981        |229737     |true                    |24               |{zone-zoneset-server-prog-ST}        |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-2          |407981        |224533     |true                    |31               |{zone-zoneset-server-prog-ST}        |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-3          |407981        |229737     |true                    |32               |{zone-zoneset-server-prog-ST}        |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-ST-4          |407981        |224533     |true                    |33               |{zone-zoneset-server-prog-ST}        |[]           |83        |2164              |3711           |66555             |
       #     InApp Burl
-      |campaign-server-prog-inApp-ST-1  |407981        |224533     |true                   |33               |{zone-zoneset-server-prog-inApp-ST} |[]           |83        |2164              |3711           |66555             |
+      |campaign-server-prog-inApp-ST-1    |407981        |224533     |true                    |33               |{zone-zoneset-server-prog-inApp-ST}  |[]           |83        |2164              |3711           |66555             |
+##     multiple bids
+#      |campaign-server-prog-MultiBids-SS-1  |407981        |243452     |true                  |1719               |{zone-zoneset-server-prog-MultiBids-SS-1}           |[]           |69        |15176              |3711           |66556             |
+#      |campaign-server-prog-MultiBids-ST-2  |407981        |229737     |true                  |1720               |{zone-zoneset-server-prog-MultiBids-ST-2}           |[]           |83        |15177              |3711           |66555             |
     And i update campaign data by name
-      |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|
-      |campaign-server-prog-SS-1       |-2            |1                       |4                 |
-      |campaign-server-prog-SS-2       |-1            |2                       |3                 |
-      |campaign-server-prog-SS-3       | 1            |4                       |2                 |
-      |campaign-server-prog-SS-4       | 1            |4                       |1                 |
-      |campaign-server-prog-PGC-1      |-2            |1                       |4                 |
-      |campaign-server-prog-PGC-2      |-1            |2                       |3                 |
-      |campaign-server-prog-PGC-3      |1             |4                       |2                 |
-      |campaign-server-prog-PGC-4      | 1            |4                       |1                 |
-      |campaign-server-prog-ST-1       |-2            |1                       |4                 |
-      |campaign-server-prog-ST-2       |-1            |2                       |3                 |
-      |campaign-server-prog-ST-3       | 1            |4                       |2                 |
-      |campaign-server-prog-ST-4       | 1            |4                       |1                 |
+      |Campaign Name                   |Priority      |campaign_delivery_method|delivery_algorithm|run_on_unknown_domains|
+      |campaign-server-prog-SS-1       |-2            |1                       |4                 |       1               |
+      |campaign-server-prog-SS-2       |-1            |2                       |3                 |             1         |
+      |campaign-server-prog-SS-3       | 1            |4                       |2                 |     1                 |
+      |campaign-server-prog-SS-4       | 1            |4                       |1                 |      1                |
+      |campaign-server-prog-PGC-1      |-2            |1                       |4                 |       1               |
+      |campaign-server-prog-PGC-2      |-1            |2                       |3                 |        1              |
+      |campaign-server-prog-PGC-3      |1             |4                       |2                 |         1             |
+      |campaign-server-prog-PGC-4      | 1            |4                       |1                 |          1            |
+      |campaign-server-prog-ST-1       |-2            |1                       |4                 |           1           |
+      |campaign-server-prog-ST-2       |-1            |2                       |3                 |            1          |
+      |campaign-server-prog-ST-3       | 1            |4                       |2                 |             1         |
+      |campaign-server-prog-ST-4       | 1            |4                       |1                 |             1         |
       #     InApp Burl
-      |campaign-server-prog-inApp-ST-1       | 1            |4                       |1                 |
+      |campaign-server-prog-inApp-ST-1 | 1            |4                       |1                 |            1           |
     And i update zone data by name
       |Zone Name                        |is_secure    |
       |zone-zoneset-server-prog-SS      |1            |
       |zone-zoneset-server-prog-PGC     |1            |
       |zone-zoneset-server-prog-ST      |1            |
+#     |zone-zoneset-server-prog-MultiBids-SS-1     |1            |
+#     |zone-zoneset-server-prog-MultiBids-ST-2      |1            |
+#     Given i sent an analize req to peer39 for the following website = {https://www.bbc.com/sport}
 
-   @viewability
-    Scenario: create entities for viewability tests
-      Given i disable campaigns by name on db
-        |Campaign Name                   |
-        |campaign-API-1-a-viewability       |
-        |campaign-API-2-a-viewability       |
-      Given i create new campaigns with viewability
-        |Campaign Name                      |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name               |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |avThreshold|avVendor  |
-        |campaign-API-1-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-1-a}   |[]                |83        |4737             |2434           |17116             |30         |ias       |
-        |campaign-API-2-a-viewability       |75396         |210722     |false                  |204             |{zone-zoneset-viewability-2-a}   |[]                |83        |4737             |2434           |17116             |50         |ias       |
-      And i update banner data by name
-        |Banner Name                            |limitation     |
-        |campaign-API-1-a-viewability-banner-1    |[]             |
-        |campaign-API-2-a-viewability-banner-1    |[]             |
-     And i update zone data by name
-       |Zone Name                        |is_secure    |
-       |zone-zoneset-viewability-1-a     |1            |
-       |zone-zoneset-viewability-2-a     |1            |
-
-  @SupplyType
-      Scenario: create entities for Supply type
-      Given i disable campaigns by name on db
-        |Campaign Name                        |
-        |campaign-SupplyType-ST-HB            |
-        |campaign-SupplyType-ST-Direct        |
-        |campaign-SupplyType-ST-ALL           |
-        |campaign-SupplyType-SS-Direct        |
-        |campaign-SupplyType-SS-HB            |
-        |campaign-SupplyType-SS-ALL           |
-        |campaign-SupplyType-Desktop-ALL      |
-        |campaign-SupplyType-Desktop-HB       |
-        |campaign-SupplyType-Desktop-Direct   |
-      Given i create new campaigns with Supply type
-      |Campaign Name                        |IO            |LineItem   |Deal                   |Creative\Deal   |Zonesets-zone Name                   |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |supplyType |
-      |campaign-SupplyType-ST-HB            |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-HB}       |[]                |83        |2080             |3728           |66830             |HB         |
-      |campaign-SupplyType-ST-Direct        |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-Direct}       |[]                |83        |2080             |3728           |66830             |Direct     |
-      |campaign-SupplyType-ST-ALL           |75396         |210722     |false                  |204             |{zone-zoneset-SupplyType-ST-ALL}       |[]                |83        |2080             |3728           |66830             |All        |
-      |campaign-SupplyType-SS-Direct        |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-Direct}       |[]                |69        |2080             |3728           |66831             |Direct     |
-      |campaign-SupplyType-SS-HB            |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-HB}       |[]                |69        |2080             |3728           |66831             |HB         |
-      |campaign-SupplyType-SS-ALL           |75396         |197418     |false                  |86              |{zone-zoneset-SupplyType-SS-ALL}       |[]                |69        |2080             |3728           |66831             |All        |
-      |campaign-SupplyType-Desktop-ALL      |75396         |240827     |false                  |85              |{zone-zoneset-SupplyType-Desktop-ALL}  |[]                |10        |2080             |3728           |66833             |All        |
-      |campaign-SupplyType-Desktop-HB       |75396         |240827     |false                  |85              |{zone-zoneset-SupplyType-Desktop-HB}  |[]                |10        |2080             |3728           |66833             |HB         |
-      |campaign-SupplyType-Desktop-Direct   |75396         |240827     |false                  |85              |{zone-zoneset-SupplyType-Desktop-Direct}  |[]                |10        |2080             |3728           |66833             |Direct     |
- And i update campaign data by name
-      |Campaign Name                        |Priority      |campaign_delivery_method|delivery_algorithm|
-      |campaign-SupplyType-ST-HB            |-2            |1                       |4                 |
-      |campaign-SupplyType-ST-Direct        |-1            |2                       |3                 |
-      |campaign-SupplyType-ST-ALL           | 1            |4                       |2                 |
-      |campaign-SupplyType-SS-Direct        |-2            |1                       |4                 |
-      |campaign-SupplyType-SS-HB            |-1            |2                       |3                 |
-      |campaign-SupplyType-SS-ALL           |1             |4                       |2                 |
-      |campaign-SupplyType-Desktop-ALL      |-2            |1                       |4                 |
-      |campaign-SupplyType-Desktop-HB       |-1            |2                       |3                 |
-      |campaign-SupplyType-Desktop-Direct   | 1            |4                       |2                 |
-    And i update zone data by name
-      |Zone Name                              |is_secure    |
-      |zone-zoneset-SupplyType-ST-HB          |1            |
-      |zone-zoneset-SupplyType-ST-Direct      |1            |
-      |zone-zoneset-SupplyType-ST-ALL         |1            |
-      |zone-zoneset-SupplyType-SS-Direct      |1            |
-      |zone-zoneset-SupplyType-SS-HB          |1            |
-      |zone-zoneset-SupplyType-SS-ALL         |1            |
-      |zone-zoneset-SupplyType-Desktop-ALL    |1            |
-      |zone-zoneset-SupplyType-Desktop-HB     |1            |
-      |zone-zoneset-SupplyType-Desktop-Direct |1            |
-
-  @PG1
-  Scenario: create entities for PG1 tests
-      Given i disable campaigns by name on db
-        |Campaign Name                     |
-        |campaign-PG1-Desktop-limited      |
-        |campaign-PG1-Desktop              |
-        |campaign-PG1-Smartphone-limited   |
-        |campaign-PG1-Smartphone           |
-        |campaign-PG1-Tablet-limited       |
-        |campaign-PG1-Tablet               |
-    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new campaigns with new zoneset
-      |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
-      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14609           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
-      |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
-    And i update campaign data by name
-      |Campaign Name                     |Priority      |campaign_delivery_method|delivery_algorithm|
-      |campaign-PG1-Desktop-limited      |-2            |1                       |4                 |
-      |campaign-PG1-Desktop              |-1            |2                       |3                 |
-      |campaign-PG1-Smartphone-limited   |-2            |1                       |4                 |
-      |campaign-PG1-Smartphone           |-1            |2                       |3                 |
-      |campaign-PG1-Tablet-limited       |-2            |1                       |4                 |
-      |campaign-PG1-Tablet               |-1            |2                       |3                 |
-    And i update banner data by name
-      |Banner Name                     |limitation       |
-      |campaign-PG1-Desktop-banner-1   |[[[50,"==",1]]]  |
-      |campaign-PG1-Smartphone-banner-1|[[[49,"==",1]]]  |
-      |campaign-PG1-Tablet-banner-1    |[[[33,"==",1]]]  |
-    And i update zone data by name
-      |Zone Name                    |is_secure    |
-      |zone-zoneset-PG1-1-allowed   |1            |
-      |zone-zoneset-PG1-2           |1            |
-      |zone-zoneset-PG1-3-allowed   |1            |
-      |zone-zoneset-PG1-4           |1            |
-      |zone-zoneset-PG1-5-allowed   |1            |
-      |zone-zoneset-PG1-6           |1            |
-
-
-  @PGX
-  Scenario: create entities for PGX tests
-    Given i disable campaigns by name on db
-      |Campaign Name            |
-      |campaign-PGX-PG-1-a      |
-      |campaign-PGX-ST-1-a      |
-      |campaign-PGX-PG-1-b      |
-      |campaign-PGX-PG-1-c      |
-    Given i create new campaigns with new zoneset
-      |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-      |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
-      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204                |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
-     |campaign-PGX-PG-1-b       |75396         |222908     |false                   |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
-      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
-    And i update campaign data by name
-      |Campaign Name            |Priority      |campaign_delivery_method|
-      |campaign-PGX-PG-1-b      |1             |4                       |
-      |campaign-PGX-PG-1-c      |1             |4                       |
-    And i update zone data by name
-      |Zone Name                    |is_secure    |
-      |zone-zoneset-PGX-PG-1-a      |1            |
-      |zone-zoneset-PGX-ST-1-a      |1            |
-      |zone-zoneset-PGX-PG-1-b      |1            |
-      |zone-zoneset-PGX-PG-1-c      |1            |
-      |zone-zoneset-PG1-5-allowed   |1            |
-      |zone-zoneset-PG1-6           |1            |
-
-  @Inapp
-  Scenario: create entities for Inapp tests
-    Given i disable campaigns by name on db
-      |Campaign Name         |
-      |campaign-Inapp-SI-1   |
-      |campaign-Inapp-SI-2   |
-      |campaign-Inapp-SI-3   |
-      |campaign-Inapp-SI-4   |
-      |campaign-Inapp-SI-5   |
-      |campaign-Inapp-SI-6   |
 
     Given i create new campaigns with new zoneset
       |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
@@ -878,22 +739,27 @@ Feature: Entities for tests
         |Campaign Name                        |
         |campaign-PLT-NotPersonaL-ST-1        |
         |campaign-PLT-YesPersonaL-ST-1        |
+        |campaign-PLT-YesPersonaL-ST-2        |
       Given i create new campaigns with new zoneset
         |Campaign Name                         |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative       |Zonesets-zones Name                        |limitation  |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |
         |campaign-PLT-NotPersonaL-ST-1         |75396         |210722     |false                  |8158                |{zone-zoneset-PLT-NotPersonaL-ST-1}        |[]          |93        |15132              |3708           |67638            |
         |campaign-PLT-YesPersonaL-ST-1         |75396         |210722     |false                  |8158                |{zone-zoneset-PLT-YesPersonaL-ST-1}        |[]          |93        |15131              |3708           |67638            |
+        |campaign-PLT-YesPersonaL-ST-2         |75396         |210722     |false                  |8158                |{zone-zoneset-PLT-YesPersonaL-ST-2}        |[]          |93        |15131              |3708           |67638            |
       And i update campaign data by name
         |Campaign Name                       |is_persona_targeting |
         |campaign-PLT-NotPersonaL-ST-1       |0                    |
         |campaign-PLT-YesPersonaL-ST-1       |1                    |
+        |campaign-PLT-YesPersonaL-ST-2       |1                    |
       And i update banner data by name
         |Banner Name                                |limitation                           |
         |campaign-PLT-NotPersonaL-ST-1-banner-1     |[[[4,"==",1,1,456],[4,"==",1,1,123]]]|
         |campaign-PLT-YesPersonaL-ST-1-banner-1     |[[[4,"==",1,1,456],[4,"==",1,1,123]]]|
+        |campaign-PLT-YesPersonaL-ST-2-banner-1     |[[[4,"==",1,1,123]]]                   |
       And i update zone data by name
       |Zone Name                               |is_secure |
       |zone-zoneset-PLT-NotPersonaL-ST-1       |1         |
       |zone-zoneset-PLT-YesPersonaL-ST-1       |1         |
+      |zone-zoneset-PLT-YesPersonaL-ST-2       |1         |
 
       @falseDomain
       Scenario: create entities for false domain feature
@@ -911,7 +777,7 @@ Feature: Entities for tests
           |campaign-YesRunFalseDomain-69-1                        |75396         |197418     |false                  |86                  |{zone-zoneset-YesRunFalseDomain-69-1}                      |[]           |69        |15160              |3673           |66933            |[]                              |[]                              |
           |campaign-YesRunFalseDomainInclude-ST-2                 |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainInclude-ST-2}               |[]           |93        |15160              |3673           |64396            |[{includeFalseDomain.test,1}]   |[]                              |
           |campaign-NoRunFalseDomainInclude-92-3                  |75396         |222908     |false                  |14488               |{zone-zoneset-NoRunFalseDomainInclude-92-3}                |[]           |92        |15160              |3673           |67165            |[{includeFalseDomain.test,1}]   |[]                              |
-          |campaign-YesRunFalseDomainExclude-ST-4                 |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainExclude-ST-4}                |[]           |93        |15160              |3673           |64396           |[]                              |[{daniellafalsedomain.test,1}]  |
+          |campaign-YesRunFalseDomainExclude-ST-4                 |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainExclude-ST-4}               |[]           |93        |15160              |3673           |64396            |[]                              |[{daniellafalsedomain.test,1}]  |
           |campaign-YesRunFalseDomainExclude-10-5                 |75396         |240827     |false                  |85                  |{zone-zoneset-YesRunFalseDomainExclude-10-5}               |[]           |10        |15160              |3673           |66814            |[]                              |[{daniellafalsedomain.test,1}]  |
           |campaign-YesRunFalseDomainBothLists-ST-6               |75396         |210722     |false                  |8158                |{zone-zoneset-YesRunFalseDomainBothLists-ST-6}             |[]           |93        |15160              |3673           |64396            |[{includeFalseDomain.test,1}]   |[{daniellafalsedomain.test,1}]  |
           |campaign-NoRunFalseDomainBothLists-ST-7                |75396         |210722     |false                  |8158                |{zone-zoneset-NoRunFalseDomainBothLists-ST-7}              |[]           |93        |15160              |3673           |64396            |[{includeFalseDomain.test,1}]   |[{daniellafalsedomain.test,1}]  |
@@ -926,6 +792,22 @@ Feature: Entities for tests
           |campaign-NoRunFalseDomainBothLists-ST-7      |        0                 |
 
 
+        @wurfl
+
+      Scenario: create entities for false domain feature
+          Given i sent an analize req to peer39 for the following website = {wa}
+        Given i disable campaigns by name on db
+          |Campaign Name                  |
+          |campaign-CT-ST-1               |
+          |campaign-WL-ST-2               |
+        Given i create new campaigns, new zoneset with domains
+          |Campaign Name                                          |IO            |LineItem   |isServerProgrammatic?  |Creative             |Zonesets-zones Name                                        |limitation                               |adUnitId  |Web_Section id       |publisher ID   |po_line_item ID  |domain_include                  |domain_exclude                  |
+          |campaign-CT-ST-1                                       |75396         |210722     |false                  |8290                 |{zone-zoneset-CT-ST-1}                            |[]                                       |93        |15182                |3708           |65991            |[]                              |[]                              |
+          |campaign-WL-ST-1                                       |75396         |210722     |false                  |8290                 |{zone-zoneset-WL-ST-2}                            |[[[36,"==",600],[32,"==",201211]]]       |93        |15183                |3708           |65991            |[]                              |[]                              |
+        Given i update campaign data by name
+        |Campaign Name                  | limitation                                                    |
+        |campaign-CT-ST-1               |[[[26,"=~",7453]]]                                             |
+        |campaign-WL-ST-1               |[[[39,"=~","Windows"],[41,"=~","Chrome"],[35,"==",800]]]       |
 
 
 
