@@ -792,22 +792,22 @@ Feature: Entities for tests
           |campaign-NoRunFalseDomainBothLists-ST-7      |        0                 |
 
 
-        @wurfl
-
-      Scenario: create entities for false domain feature
-          Given i sent an analize req to peer39 for the following website = {wa}
-        Given i disable campaigns by name on db
-          |Campaign Name                  |
-          |campaign-CT-ST-1               |
-          |campaign-WL-ST-2               |
-        Given i create new campaigns, new zoneset with domains
-          |Campaign Name                                          |IO            |LineItem   |isServerProgrammatic?  |Creative             |Zonesets-zones Name                                        |limitation                               |adUnitId  |Web_Section id       |publisher ID   |po_line_item ID  |domain_include                  |domain_exclude                  |
-          |campaign-CT-ST-1                                       |75396         |210722     |false                  |8290                 |{zone-zoneset-CT-ST-1}                            |[]                                       |93        |15182                |3708           |65991            |[]                              |[]                              |
-          |campaign-WL-ST-1                                       |75396         |210722     |false                  |8290                 |{zone-zoneset-WL-ST-2}                            |[[[36,"==",600],[32,"==",201211]]]       |93        |15183                |3708           |65991            |[]                              |[]                              |
-        Given i update campaign data by name
-        |Campaign Name                  | limitation                                                    |
-        |campaign-CT-ST-1               |[[[26,"=~",7453]]]                                             |
-        |campaign-WL-ST-1               |[[[39,"=~","Windows"],[41,"=~","Chrome"],[35,"==",800]]]       |
+#        @wurfl
+#
+#      Scenario: create entities for false domain feature
+#          Given i sent an analize req to peer39 for the following website = {wa}
+#        Given i disable campaigns by name on db
+#          |Campaign Name                  |
+#          |campaign-CT-ST-1               |
+#          |campaign-WL-ST-2               |
+#        Given i create new campaigns, new zoneset with domains
+#          |Campaign Name                                          |IO            |LineItem   |isServerProgrammatic?  |Creative             |Zonesets-zones Name                                        |limitation                               |adUnitId  |Web_Section id       |publisher ID   |po_line_item ID  |domain_include                  |domain_exclude                  |
+#          |campaign-CT-ST-1                                       |75396         |210722     |false                  |8290                 |{zone-zoneset-CT-ST-1}                            |[]                                       |93        |15182                |3708           |65991            |[]                              |[]                              |
+#          |campaign-WL-ST-1                                       |75396         |210722     |false                  |8290                 |{zone-zoneset-WL-ST-2}                            |[[[36,"==",600],[32,"==",201211]]]       |93        |15183                |3708           |65991            |[]                              |[]                              |
+#        Given i update campaign data by name
+#        |Campaign Name                  | limitation                                                    |
+#        |campaign-CT-ST-1               |[[[26,"=~",7453]]]                                             |
+#        |campaign-WL-ST-1               |[[[39,"=~","Windows"],[41,"=~","Chrome"],[35,"==",800]]]       |
 
 
 
