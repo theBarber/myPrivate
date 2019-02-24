@@ -18,7 +18,7 @@ Feature: ROFD
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-YesRunFalseDomain-69-1-banner-1} 100% of the time
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3673 with extra params {daniellaRealDomain.test&tagid=353&unlimited=1&optimize=0}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3673 with extra params {daniellaRealDomain.test&tagid=352&unlimited=1&optimize=0}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-YesRunFalseDomain-69-1-banner-1} 100% of the time
@@ -44,7 +44,7 @@ Feature: ROFD
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-YesRunFalseDomain-69-1-banner-1} 100% of the time
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3673 with extra params {daniellaRealDomain.test&tagid=353&unlimited=1&optimize=0}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3673 with extra params {daniellaRealDomain.test&tagid=352&unlimited=1&optimize=0}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-YesRunFalseDomain-69-1-banner-1} 100% of the time
