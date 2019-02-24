@@ -124,7 +124,7 @@ Feature: Entities for tests
   @UDMP
   Scenario: create entities for profile targeting via UDMP
     Given i disable campaigns by name on db
-      |Campaign Name         |
+      |Campaign Name                               |
       |campaign-ProfileTargetingUDMPforApp-ST-1   |
       |campaign-ProfileTargetingUDMPforWeb-ST-1   |
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1|
@@ -145,9 +145,9 @@ Feature: Entities for tests
       |zone-zoneset-CrossDeviceCappingUDMP-ST-1           |0            |1         |
       |zone-zoneset-PTzoneLimitation-ST-1                 |0            |1         |
     Given i update banner data by name
-      |Banner Name                                               |limitation                           |
+      |Banner Name                                                |limitation                           |
       |campaign-ProfileTargetingUDMPforApp-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
-      |campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1         |[[[4,"==",1,1,1992]]]                |
+      |campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1          |[[[4,"==",1,1,1992]]]                |
       |campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1       |[[[4,"==",1,1,17]]]                  |
     Given i update campaign data by name
       |Campaign Name                                     |capping | session_capping|
@@ -765,12 +765,12 @@ Feature: Entities for tests
       Scenario: create entities for false domain feature
         Given i disable campaigns by name on db
           |Campaign Name                                        |
-          |campaign-YesRunFalseDomain-SP-IL-1*1-1               |
+          |campaign-YesRunFalseDomain-69-1                      |
           |campaign-YesRunFalseDomainInclude-ST-2               |
-          |campaign-NoRunFalseDomainInclude-PG-IA-1*1-3         |
-          |campaign-YesRunFalseDomainExclude-ST-4                |
-          |campaign-YesRunFalseDomainExclude-PG-Ac-1*1-5        |
-          |campaign-YesRunFalseDomainBothLists-InterSR-1*2-6    |
+          |campaign-NoRunFalseDomainInclude-92-3                |
+          |campaign-YesRunFalseDomainExclude-ST-4               |
+          |campaign-YesRunFalseDomainExclude-10-5               |
+          |campaign-YesRunFalseDomainBothLists-ST-6             |
           |campaign-NoRunFalseDomainBothLists-ST-7              |
         Given i create new campaigns, new zoneset with domains
           |Campaign Name                                          |IO            |LineItem   |isServerProgrammatic?  |Creative            |Zonesets-zones Name                                        |limitation   |adUnitId  |Web_Section id     |publisher ID   |po_line_item ID  |domain_include                  |domain_exclude                  |
@@ -792,23 +792,59 @@ Feature: Entities for tests
           |campaign-NoRunFalseDomainBothLists-ST-7      |        0                 |
 
 
-#        @wurfl
-#
-#      Scenario: create entities for false domain feature
-#          Given i sent an analize req to peer39 for the following website = {wa}
-#        Given i disable campaigns by name on db
-#          |Campaign Name                  |
-#          |campaign-CT-ST-1               |
-#          |campaign-WL-ST-2               |
-#        Given i create new campaigns, new zoneset with domains
-#          |Campaign Name                                          |IO            |LineItem   |isServerProgrammatic?  |Creative             |Zonesets-zones Name                                        |limitation                               |adUnitId  |Web_Section id       |publisher ID   |po_line_item ID  |domain_include                  |domain_exclude                  |
-#          |campaign-CT-ST-1                                       |75396         |210722     |false                  |8290                 |{zone-zoneset-CT-ST-1}                            |[]                                       |93        |15182                |3708           |65991            |[]                              |[]                              |
-#          |campaign-WL-ST-1                                       |75396         |210722     |false                  |8290                 |{zone-zoneset-WL-ST-2}                            |[[[36,"==",600],[32,"==",201211]]]       |93        |15183                |3708           |65991            |[]                              |[]                              |
-#        Given i update campaign data by name
-#        |Campaign Name                  | limitation                                                    |
-#        |campaign-CT-ST-1               |[[[26,"=~",7453]]]                                             |
-#        |campaign-WL-ST-1               |[[[39,"=~","Windows"],[41,"=~","Chrome"],[35,"==",800]]]       |
+        @wurfl
+      Scenario: create entities for peer39 and wurfl feature
+        Given i disable campaigns by name on db
+          |Campaign Name                  |
+          |campaign-CT-ST-1               |
+          |campaign-WL-ST-2               |
+        Given i create new campaigns, new zoneset with domains
+          |Campaign Name                   |IO            |LineItem   |isServerProgrammatic?  |Creative             |Zonesets-zones Name                |limitation                               |adUnitId  |Web_Section id       |publisher ID   |po_line_item ID  |domain_include                  |domain_exclude                  |
+          |campaign-CT-ST-1                |75396         |210722     |false                  |8290                 |{zone-zoneset-CT-ST-1}             |[]                                       |93        |15182                |3708           |65991            |[]                              |[]                              |
+          |campaign-WL-ST-1                |75396         |210722     |false                  |8290                 |{zone-zoneset-WL-ST-2}             |[[[36,"==",600],[32,"==",201211]]]       |93        |15183                |3708           |65991            |[]                              |[]                              |
+        And i update banner data by name
+          |Banner Name                              |limitation                                    |
+          |campaign-CT-ST-1-banner-1               |[[[26,"=~",7541],[26,"=~",7543],[26,"=~",5248]]]               |
+          |campaign-WL-ST-1-banner-1               |[[[39,"=~","Windows"],[41,"=~","Chrome"],[35,"==",800]]]       |
 
+
+  Scenario:  create entites for vidAd
+    Given i disable campaigns by name on db
+          |Campaign Name                   |
+          |campaign-TN                     |
+          |campaign-vidAd-SP               |
+          Given i create new campaigns, new zoneset with domains
+            |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
+            |campaign-TN                |75396         |243707     |false                  |21648            |{zone-zoneset-TN}                                   |[]                   |97         |15196             |3708           |68927             |[]                  |[]                           |
+            |campaign-vidAd-SP          |407981        |243711     |true                   |568              |{zone-zoneset-vidAd-SP}                             |[]                   |97         |15196              |3708           |68927             | []                   |      []                       |
+
+
+
+
+  @PGX
+  Scenario: create entities for PGX tests
+    Given i disable campaigns by name on db
+      |Campaign Name            |
+      |campaign-PGX-PG-1-a      |
+      |campaign-PGX-ST-1-a      |
+      |campaign-PGX-PG-1-b      |
+      |campaign-PGX-PG-1-c      |
+    Given i create new campaigns with new zoneset
+      |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
+      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204                |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
+      |campaign-PGX-PG-1-b       |75396         |222908     |false                   |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
+      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
+    And i update campaign data by name
+      |Campaign Name            |Priority      |campaign_delivery_method|
+      |campaign-PGX-PG-1-b      |1             |4                       |
+      |campaign-PGX-PG-1-c      |1             |4                       |
+    And i update zone data by name
+      |Zone Name                    |is_secure    |
+      |zone-zoneset-PGX-PG-1-a      |1            |
+      |zone-zoneset-PGX-ST-1-a      |1            |
+      |zone-zoneset-PGX-PG-1-b      |1            |
+      |zone-zoneset-PGX-PG-1-c      |1            |
 
 
   @DynamicPricing
