@@ -819,6 +819,34 @@ Feature: Entities for tests
             |campaign-vidAd-SP          |407981        |243711     |true                   |568              |{zone-zoneset-vidAd-SP}                             |[]                   |97         |15196              |3708           |68927             | []                   |      []                       |
 
 
+
+
+  @PGX
+  Scenario: create entities for PGX tests
+    Given i disable campaigns by name on db
+      |Campaign Name            |
+      |campaign-PGX-PG-1-a      |
+      |campaign-PGX-ST-1-a      |
+      |campaign-PGX-PG-1-b      |
+      |campaign-PGX-PG-1-c      |
+    Given i create new campaigns with new zoneset
+      |Campaign Name             |IO            |LineItem   |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-PGX-PG-1-a       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-a}     |[]           |92        |14852             |3739           |67163             |
+      |campaign-PGX-ST-1-a       |75396         |210722     |false                  |204                |{zone-zoneset-PGX-ST-1-a}     |[]           |83        |14852             |3739           |67162             |
+      |campaign-PGX-PG-1-b       |75396         |222908     |false                   |14488             |{zone-zoneset-PGX-PG-1-b}     |[]           |92        |14400             |3673           |67165             |
+      |campaign-PGX-PG-1-c       |75396         |222908     |false                  |14488             |{zone-zoneset-PGX-PG-1-c}     |[]           |92        |2080              |3728           |67166             |
+    And i update campaign data by name
+      |Campaign Name            |Priority      |campaign_delivery_method|
+      |campaign-PGX-PG-1-b      |1             |4                       |
+      |campaign-PGX-PG-1-c      |1             |4                       |
+    And i update zone data by name
+      |Zone Name                    |is_secure    |
+      |zone-zoneset-PGX-PG-1-a      |1            |
+      |zone-zoneset-PGX-ST-1-a      |1            |
+      |zone-zoneset-PGX-PG-1-b      |1            |
+      |zone-zoneset-PGX-PG-1-c      |1            |
+
+
   @DynamicPricing
   @InAppBlackWhiteList
   @OpenX
