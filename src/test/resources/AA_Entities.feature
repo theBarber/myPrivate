@@ -818,8 +818,51 @@ Feature: Entities for tests
             |campaign-TN                |75396         |243707     |false                  |21648            |{zone-zoneset-TN}                                   |[]                   |97         |15196             |3708           |68927             |[]                  |[]                           |
             |campaign-vidAd-SP          |407981        |243711     |true                   |568              |{zone-zoneset-vidAd-SP}                             |[]                   |97         |15196              |3708           |68927             | []                   |      []                       |
 
-
-
+  @PG1
+  Scenario: create entities for PG1 tests
+    Given i disable campaigns by name on db
+      |Campaign Name                     |
+      |campaign-PG1-Desktop-limited      |
+      |campaign-PG1-Desktop              |
+      |campaign-PG1-Smartphone-limited   |
+      |campaign-PG1-Smartphone           |
+      |campaign-PG1-Tablet-limited       |
+      |campaign-PG1-Tablet               |
+    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
+    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+    Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
+    And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
+    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+    Given i create new campaigns with new zoneset
+      |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
+      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14609           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+      |campaign-PG1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+      |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+    And i update campaign data by name
+      |Campaign Name                     |Priority      |campaign_delivery_method|delivery_algorithm|
+      |campaign-PG1-Desktop-limited      |-2            |1                       |4                 |
+      |campaign-PG1-Desktop              |-1            |2                       |3                 |
+      |campaign-PG1-Smartphone-limited   |-2            |1                       |4                 |
+      |campaign-PG1-Smartphone           |-1            |2                       |3                 |
+      |campaign-PG1-Tablet-limited       |-2            |1                       |4                 |
+      |campaign-PG1-Tablet               |-1            |2                       |3                 |
+    And i update banner data by name
+      |Banner Name                     |limitation       |
+      |campaign-PG1-Desktop-banner-1   |[[[50,"==",1]]]  |
+      |campaign-PG1-Smartphone-banner-1|[[[49,"==",1]]]  |
+      |campaign-PG1-Tablet-banner-1    |[[[33,"==",1]]]  |
+    And i update zone data by name
+      |Zone Name                    |is_secure    |
+      |zone-zoneset-PG1-1-allowed   |1            |
+      |zone-zoneset-PG1-2           |1            |
+      |zone-zoneset-PG1-3-allowed   |1            |
+      |zone-zoneset-PG1-4           |1            |
+      |zone-zoneset-PG1-5-allowed   |1            |
+      |zone-zoneset-PG1-6           |1            |
 
   @PGX
   Scenario: create entities for PGX tests
