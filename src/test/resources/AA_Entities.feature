@@ -5,6 +5,10 @@
 
 Feature: Entities for tests
 
+#  Scenario: target website
+#    When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
+
+
   Scenario: remove all active zones
     Given i remove all zones from publishers: {3673}
     Given i remove all zones from publishers: {3697}
@@ -803,9 +807,9 @@ Feature: Entities for tests
           |campaign-CT-ST-1                |75396         |210722     |false                  |8290                 |{zone-zoneset-CT-ST-1}             |[]                                       |93        |15182                |3708           |65991            |[]                              |[]                              |
           |campaign-WL-ST-1                |75396         |210722     |false                  |8290                 |{zone-zoneset-WL-ST-2}             |[[[36,"==",600],[32,"==",201211]]]       |93        |15183                |3708           |65991            |[]                              |[]                              |
         And i update banner data by name
-          |Banner Name                              |limitation                                    |
-          |campaign-CT-ST-1-banner-1               |[[[26,"=~",7541],[26,"=~",7543],[26,"=~",5248]]]               |
-          |campaign-WL-ST-1-banner-1               |[[[39,"=~","Windows"],[41,"=~","Chrome"],[35,"==",800]]]       |
+          |Banner Name                           |limitation                                    |
+          |campaign-CT-ST-1-banner-1             |[[[26,"=~",7541],[26,"=~",7531]]]             |
+          |campaign-WL-ST-1-banner-1             |[[[39,"=~","Windows"],[41,"=~","Chrome"]      |
 
 
   Scenario:  create entites for vidAd
