@@ -805,11 +805,11 @@ Feature: Entities for tests
         Given i create new campaigns, new zoneset with domains
           |Campaign Name                   |IO            |LineItem   |isServerProgrammatic?  |Creative             |Zonesets-zones Name                |limitation                               |adUnitId  |Web_Section id       |publisher ID   |po_line_item ID  |domain_include                  |domain_exclude                  |
           |campaign-CT-ST-1                |75396         |210722     |false                  |8290                 |{zone-zoneset-CT-ST-1}             |[]                                       |93        |15182                |3708           |65991            |[]                              |[]                              |
-          |campaign-WL-ST-1                |75396         |210722     |false                  |8290                 |{zone-zoneset-WL-ST-2}             |[[[36,"==",600],[32,"==",201211]]]       |93        |15183                |3708           |65991            |[]                              |[]                              |
+          |campaign-WL-ST-2                |75396         |210722     |false                  |8290                 |{zone-zoneset-WL-ST-2}             |[[[32,"==",201211]]]       |93        |15183                |3708           |65991            |[]                              |[]                              |
         And i update banner data by name
           |Banner Name                           |limitation                                    |
           |campaign-CT-ST-1-banner-1             |[[[26,"=~",7541],[26,"=~",7531]]]             |
-          |campaign-WL-ST-1-banner-1             |[[[39,"=~","Windows"],[41,"=~","Chrome"]      |
+          |campaign-WL-ST-2-banner-1             |[[[39,"=~","Windows"],[41,"=~","Chrome"]      |
 
 
   Scenario:  create entites for vidAd
@@ -819,7 +819,7 @@ Feature: Entities for tests
           |campaign-vidAd-SP               |
           Given i create new campaigns, new zoneset with domains
             |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
-            |campaign-TN                |75396         |243707     |false                  |21648            |{zone-zoneset-TN}                                   |[]                   |97         |15196             |3708           |68927             |[]                  |[]                           |
+            |campaign-TN                |75396         |243707     |false                  |21638            |{zone-zoneset-TN}                                   |[]                   |97         |15196             |3708           |68927             |[]                  |[]                           |
             |campaign-vidAd-SP          |407981        |243711     |true                   |568              |{zone-zoneset-vidAd-SP}                             |[]                   |97         |15196              |3708           |68927             | []                   |      []                       |
 
   @PG1
@@ -953,3 +953,6 @@ Feature: Entities for tests
   @optimize
   Scenario: save entities to file
       And save all entities to json file
+
+    Scenario: sleep 
+      And I sleep for 240 seconds
