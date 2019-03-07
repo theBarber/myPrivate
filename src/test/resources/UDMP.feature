@@ -90,19 +90,19 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
   Scenario: Seq-targeting for udmp, DT req, with deviceid
     Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {&deviceid=00000006-0006-0006-0006-000000000006&tagid=170&bundleid=udmp_seq_profile_web}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=00000006-0006-0006-0006-000000000006&tagid=170}
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {&deviceid=60000006-6006-6006-6006-600000000006&tagid=170&bundleid=udmp_seq_profile_web}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=60000006-6006-6006-6006-600000000006&tagid=170}
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {&bundleid=udmp_seq_profile_web&deviceid=60000006-6006-6006-6006-600000000000&tagid=170}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=60000006-6006-6006-6006-600000000000&tagid=170}
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {&bundleid=udmp_seq_profile_web&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
@@ -114,23 +114,23 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
   Scenario: profile seq targeting for udmp, DT req, from desktop
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248cef1dc2bb} to my requests to uas
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {&bundleid=udmp_seq_profile_web&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a9b8c7faf65436dcbba3248cef1dc2bb} to my requests to uas
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {&bundleid=udmp_seq_profile_web&deviceid=00000006-0006-0006-0006-000000000006&tagid=170}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=00000006-0006-0006-0006-000000000006&tagid=170}
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a9b1c7faf25436dcbba3248cef1dc2bb} to my requests to uas
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {&bundleid=udmp_seq_profile_web&deviceid=60000006-6006-6006-6006-600000000006&tagid=170}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=60000006-6006-6006-6006-600000000006&tagid=170}
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a9b1c8faf27436dcbba3248cef1dc2bb} to my requests to uas
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {&bundleid=udmp_seq_profile_web&deviceid=60000006-6006-6006-6006-600000000000&tagid=170}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=60000006-6006-6006-6006-600000000000&tagid=170}
     Then The response code is 200
     And The responses are passback
 
