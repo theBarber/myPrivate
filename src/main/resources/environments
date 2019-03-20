@@ -18,7 +18,7 @@ dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl
 dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/sharedev_ramp_admin
 
 *.uas.k8s.path.config=k8s_integration_password
-staging.uas.cliconnection.hosts=[10.12.1.229,10.12.1.253]
+staging.uas.cliconnection.hosts=[10.12.1.253]
 integration.uas.cliconnection.hosts=[10.12.1.204,10.12.2.30]
 
 staging.uas.cliconnection.cron = [10.12.1.10]
@@ -82,7 +82,7 @@ dev1.ramp.app.port=3003
 dev1.ramp.test.lineItemId=[210722]
 
 #integration.us-east-1-user-info.couchbase.nodes=[10.12.5.87,10.12.5.220]
-*.couchbase.nodes=[10.12.5.208,10.12.5.201]
+*.couchbase.nodes=[cb-ee-east-staging-01.couchbase.ramp-ut.io,cb-ee-east-staging-02.couchbase.ramp-ut.io,cb-ee-east-staging-03.couchbase.ramp-ut.io,cb-ee-east-staging-04.couchbase.ramp-ut.io]
 
 
 
