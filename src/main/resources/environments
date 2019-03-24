@@ -87,7 +87,7 @@ dev1.ramp.test.lineItemId=[210722]
 
 
 *.couchbase.host=cb-ee-east-staging-01.couchbase.ramp-ut.io
-#*.couchbase.port=8091
+*.couchbase.port=8091
 *.couchbase.user=Administrator
 *.couchbase.password=couchbase
 
