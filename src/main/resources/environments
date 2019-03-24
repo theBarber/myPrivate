@@ -82,12 +82,12 @@ dev1.ramp.app.port=3003
 dev1.ramp.test.lineItemId=[210722]
 
 #integration.us-east-1-user-info.couchbase.nodes=[10.12.5.87,10.12.5.220]
-*.couchbase.nodes=[10.12.5.208,10.12.5.201]
+*.couchbase.nodes=[cb-ee-east-staging-01.couchbase.ramp-ut.io,cb-ee-east-staging-02.couchbase.ramp-ut.io,cb-ee-east-staging-03.couchbase.ramp-ut.io,cb-ee-east-staging-04.couchbase.ramp-ut.io]
 
 
 
-*.couchbase.host=10.12.5.201
-*.couchbase.port=8091
+*.couchbase.host=cb-ee-east-staging-01.couchbase.ramp-ut.io
+#*.couchbase.port=8091
 *.couchbase.user=Administrator
 *.couchbase.password=couchbase
 
