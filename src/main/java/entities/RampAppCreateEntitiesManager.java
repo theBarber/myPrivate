@@ -135,7 +135,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 
 	private String getServicesURL(String service)
 	{
-		return  "https://" + host + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("") + service;
+		return  "http://" + host + Optional.ofNullable(port).filter(s->!s.isEmpty()).map(s->":"+s).orElse("") + service;
 	}
 
 	private void printEntityContent(HttpEntity entity)

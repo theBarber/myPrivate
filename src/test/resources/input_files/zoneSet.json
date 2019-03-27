@@ -206,5 +206,19 @@
 				"status": 0
 			}
 		]
+	},
+	{
+		"zonesetId": 71945,
+		"zonesetName": "Tremor Always On DNU",
+		"Zones": [
+			{
+				"zoneId": 189069,
+				"zoneName": "INT3723 - Linear Video Ad - Tremor Always On DNU",
+				"adUnitId": 35,
+				"isSync": true,
+				"isSecure": true,
+				"status": 0
+			}
+		]
 	}
 ]
