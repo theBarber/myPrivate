@@ -328,6 +328,91 @@ Feature: Header Bidding flow support
     And all HB responses contains cpm with id 3
 
 
+#   header bidding profile targeting tests
+  Scenario: 1. 2 sizes, 1 placment, some banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding secure post request for publisher 3708 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {?} and placmentID group = {SSandST} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And The response contains campaignId
+
+  Scenario: 2. 1 size 1*1, 1 placement, SS banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3708 with size - h1:1 w1:1, with domain {?}, placmentID group = {SSandST} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-SS-1*1}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-SS-1*1-banner-1}
+
+  Scenario: 3. 1 size 1*2, 1 placement, ST banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3708 with size - h1:1 w1:2, with domain {?}, placmentID group = {SSandST} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-ST-1*2}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-ST-1*2-banner-1}
+
+  Scenario: 3. 1 size 1*2, 1 placement, ST banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3708 with size - h1:1 w1:2, with domain {?}, placmentID group = {SSandST} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-ST-1*2}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-ST-1*2-banner-1}
+
+  Scenario: 4. 1 size 300*250, 1 placement, pb expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding post request for publisher 3708 with size1 = 300 size2 = 250, with domain {?} and extra params {&optimize=0&unlimited=1}
+    And The response code is 204
+
+  Scenario: 5. worg size, real placement group, some banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3708 with size - h1:123 w1:321, with domain {?}, placmentID group = {PG} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And The response contains campaignId
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+
+  Scenario: 6. size doesnt belong to placement group, banner from placment group expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3708 with size - h1:300 w1:250, with domain {?}, placmentID group = {PG} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+
+
+  Scenario: 7. valid size, ivalid placement group,
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3708 with size - h1:1 w1:2, with domain {?}, placmentID group = {blabla} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And The response contains campaignId
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-ST-1*2}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-ST-1*2-banner-1}
+
+  Scenario: 8. valid size, no placement filed
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding post request for publisher 3708 with size1 = 1 size2 = 2, with domain {?} and extra params {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And The response contains campaignId
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-ST-1*2}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-ST-1*2-banner-1}
+
+
+
+
 #    #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------
   @optimize
   Scenario: send HB basic request
