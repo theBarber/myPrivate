@@ -893,6 +893,59 @@ Feature: Entities for tests
       |zone-zoneset-PGX-PG-1-b      |1            |
       |zone-zoneset-PGX-PG-1-c      |1            |
 
+##    @ndq
+##    Scenario: create entities for ndq manual test
+##      Given i disable campaigns by name on db
+##        |Campaign Name            |
+##        |campaign-NDQ-ST-1      |
+##        |campaign-NDQ-ST-2      |
+##      Given i create new campaigns with new zoneset
+##        |Campaign Name           |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative  |Zonesets-zones Name         |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+##        |campaign-NDQ-ST-1       |75396         |210722     |false                  |204              |{zone-zoneset-NDQ-ST-1}     |[]           |93        |15133             |3708           |65991             |
+##        |campaign-NDQ-ST-2       |75396         |210722     |false                  |204              |{zone-zoneset-NDQ-ST-2}     |[]           |93        |15133             |3708           |65991             |
+##
+
+  Scenario: create entities for line item level persona level frequency capping
+      Given i disable campaigns by name on db
+        |Campaign Name             |
+        |campaign-LI-FC-ST-1       |
+        |campaign-LI-FC-ST-2       |
+      Given i create new campaigns with new zoneset
+#      first is Inapp
+        |Campaign Name            |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative   |Zonesets-zones Name           |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+        |campaign-LI-FC-ST-1      |75396         |244895     |false                  |8290              |{zone-zoneset-LI-FC-ST-1}     |[]           |93        |15220             |3708           |65991             |
+        |campaign-LI-FC-ST-2      |75396         |244896     |false                  |8290              |{zone-zoneset-LI-FC-ST-2}     |[]           |93        |15221             |3708           |65991             |
+
+
+  Scenario: create entities for HB persona level frequency capping
+    Given i disable campaigns by name on db
+      |Campaign Name               |
+      |campaign-HB-FC-PL-PG-1      |
+      |campaign-HB-FC-PL-PG-2      |
+    Given i create new campaigns with new zoneset
+#      pro id = 151
+      |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative    |Zonesets-zones Name              |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-HB-FC-PL-PG-1      |75396         |241783     |false                  |13265              |{zone-zoneset-HB-FC-PL-PG-1}     |[]           |75        |15222             |3708           |69089             |
+#      |campaign-HB-FC-PL-PG-2      |75396         |241783     |false                  |13265              |{zone-zoneset-HB-FC-PL-PG-2}     |[]           |75        |15222             |3708           |69089             |
+
+
+  Scenario: create entities for Header Bidding - Delivery by placement ID
+#    Given I send 2 times an ad request with parameter {dfa} for zone named {fas} to UAS
+    Given i disable campaigns by name on db
+      |Campaign Name                             |
+      |campaign-HB-PlacementG-SS-1*1             |
+      |campaign-HB-PlacementG-ST-1*2             |
+      |campaign-HB-PlacementG-Billabord-970*250  |
+      |campaign-HB-PlacementG-PG-1*1             |
+    Given i create new campaigns with new zoneset
+      |Campaign Name                                 |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative    |Zonesets-zones Name                             |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
+      |campaign-HB-PlacementG-SS-1*1                 |75396         |197418     |false                  |86                 |{zone-zoneset-HB-PlacementG-SS-1*1}             |[]           |69        |15227             |3728           |                  |
+      |campaign-HB-PlacementG-ST-1*2                 |75396         |210722     |false                  |8158               |{zone-zoneset-HB-PlacementG-SS-1*2}             |[]           |93        |15227             |3728           |65991             |
+      |campaign-HB-PlacementG-Billabord-970*250      |75396         |198082     |false                  |64                 |{zone-zoneset-HB-PlacementG-Billabord-970*250}  |[]           |58        |15227             |3728           |66810             |
+      |campaign-HB-PlacementG-PG-1*1                 |75396         |241783     |false                  |1068               |{zone-zoneset-HB-PlacementG-PG-1*1}             |[]           |75        |15227             |3728           |69089             |
+
+
+
 
   @DynamicPricing
   @InAppBlackWhiteList
