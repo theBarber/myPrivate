@@ -63,19 +63,35 @@ public class HeaderBiddingTest extends BaseTest {
         And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::HBResponsesContainOneOnOf);
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBWithoutParam);
         And("for all HB responses i simulate winning, with extra param \\{([^}]+)\\}",this::sendZoneTagFromHBWithParam);
-        Given("i send (\\d+) headerBidding secure post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), with domain \\{([^}]+)\\} and extra params \\{([^}]+)\\}",this::sendHBSecurePostRequestBidIDcount);
-        Given("i send (\\d+) headerBidding secure post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), bidreq = (\\d+), empty domain, and extra params \\{([^}]+)\\}",this::sendHBSecurePostRequestBidIDcount);
+        Given("i send (\\d+) headerBidding post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), with domain \\{([^}]+)\\} and extra params \\{([^}]+)\\}",this::sendHBPostRequestBidIDcount);
+        Given("i send (\\d+) headerBidding post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), bidreq = (\\d+), empty domain, and extra params \\{([^}]+)\\}",this::sendHBPostRequestBidIDcount);
+        Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi bids. first bid - bidreqID=\\{([^}]+)\\}, h:(\\d+) w:(\\d+), sec bid - bidreqID=\\{([^}]+)\\}, h:(\\d+) w:(\\d+) with domain \\{([^}]+)\\} and extra params \\{([^}]+)\\}",this::sendHBSecurePostRequestMultibid);
+        Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{([^}]+)\\} and placmentID group = \\{([^}]+)\\} and extra params  \\{([^}]+)\\}" ,this::sendHBSecurePostRequestMultiSized);
+        Given("i send 1 basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{([^}]+)\\}, placmentID group = \\{([^}]+)\\} and extra params  \\{([^}]+)\\}" ,this::sendBasicHBSecurePostRequest);
 
+    }
 
-
-
-
-
+    private void sendBasicHBSecurePostRequest (Integer publisherID, Integer h1, Integer w1, String domain, String placmentID, String extraParams){
+        String body = getJsonForBasicReq(publisherID, h1,w1,domain, placmentID);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1,body,publisherID,domain, extraParams,true,false);
     }
 
 
 
-    private void sendHBSecurePostRequestBidIDcount(Integer times, Integer publisherID, Integer size1, Integer size2,String domain, String extraParams) {
+    private void sendHBSecurePostRequestMultiSized (Integer publisherID, Integer h1, Integer w1, Integer h2, Integer w2, String domain, String placmentID, String extraParams){
+        String body = getJsonForMultisizes(publisherID, h1,w1, h2, w2,domain, placmentID);
+
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1,body,publisherID,domain, extraParams,true,false);
+    }
+
+
+    private void sendHBSecurePostRequestMultibid(Integer publisherID, String firstBidReqId, Integer h1, Integer w1, String secBidReqId, Integer h2, Integer w2, String domain, String extraParams){
+        String body = getJsonForMultiJsonBidreqID(publisherID, firstBidReqId, h1,w1, secBidReqId, h2, w2,domain);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1,body,publisherID,domain, extraParams,true,true);
+
+    }
+
+private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Integer size1, Integer size2,String domain, String extraParams) {
 //        if(headerBiddingPostRequests == null)
 //        {
 //            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
@@ -84,7 +100,7 @@ public class HeaderBiddingTest extends BaseTest {
             domain = "";
         }
         String body = getJsonForPublisher3708WithBidID(domain,size1, size2);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,body,publisherID,domain, extraParams,true,true);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,body,publisherID,domain, extraParams,true,false);
     }
 
     private String getJsonForPublisher3708WithBidID(String domain,Integer size1, Integer size2){
@@ -94,17 +110,91 @@ public class HeaderBiddingTest extends BaseTest {
                         "  {\n" +
                         " \"bidRequestId\": \"" + Bidreq + "\",\n" +
                         " \"domain\": \""+ domain +"\",\n" +
-                        " \"placementId\": \"10433394\",\n" +
                         " \"publisherId\": 3708,\n" +
                         " \"sizes\": [\n" +
                         "      [" + size1 + "," + size2 + "]\n" +
                         "    ],\n" +
                         " \"timeout\": 700,\n" +
                         " \"hbadaptor\": \"prebid\",\n" +
-                        " \"params\": {\"placementId\" : \"10433394\",\n" +
                         " \"publisherId\" : 3708 \n" +
                         " }\n" +
                         "  }]}";
+        return  body;
+    }
+
+    private String getJsonForMultiJsonBidreqID(Integer publisherID, String firstBidReq, Integer h1, Integer w1, String secBidReq , Integer h2, Integer w2, String domain){
+        String body =
+        "{\"x-ut-hb-params\":[\n" +
+                "  {\n" +
+                " \"testRequestId\": \"" + firstBidReq + "\",\n" +
+                " \"domain\": \""+ domain +"\",\n" +
+                " \"placementId\": \"10433394\",\n" +
+                " \"publisherId\":  \""+ publisherID +"\",\n" +
+                " \"sizes\": [\n" +
+                "      [" + h1 + "," + w1 + "]\n" +
+                "    ],\n" +
+                " \"timeout\": 700,\n" +
+                " \"hbadaptor\": \"prebid\",\n" +
+                " \"params\": {\"placementId\" : \"10433394\",\n" +
+                " \"publisherId\" : \""+ publisherID +"\"\n" +
+                " }\n" +
+                "},";
+                Bidreq++;
+                body += "{\"testRequestId\": \"" + secBidReq + "\",\n" +
+                        " \"domain\": \""+ domain +"\",\n" +
+                        " \"placementId\": \"10433394\",\n" +
+                        " \"publisherId\": \""+ publisherID +"\",\n" +
+                        " \"sizes\": [\n" +
+                        "      [" + h1 + "," + w1 + "]\n" +
+                        "    ],\n" +
+                        " \"timeout\": 700,\n" +
+                        " \"hbadaptor\": \"prebid\",\n" +
+                        " \"params\": {\"placementId\" : \"10433394\",\n" +
+                        " \"publisherId\" : \""+ publisherID +"\"\n" +
+                        "}\n" +
+                        "}\n" +
+                        "]}";
+        return body;
+    }
+
+
+    private String getJsonForMultisizes(Integer publisherID, Integer h1, Integer w1, Integer h2, Integer w2, String domain,String placementId){
+        String body =
+                "{\"x-ut-hb-params\":[\n" +
+                        "  {\n" +
+                        " \"bidRequestId\": \"123\"," +"\n" +
+                        " \"domain\": \""+ domain +"\",\n" +
+                        " \"placementId\": \"" + placementId + "\",\n" +
+                        " \"publisherId\":  \""+ publisherID +"\",\n" +
+                        " \"sizes\": [\n" +
+                        "[" + h1 + "," + w1 + "],["+ h2 + "," + w2  + "]],\n" +
+                        " \"timeout\": 700,\n" +
+                        " \"hbadaptor\": \"prebid\",\n" +
+                        " \"params\": {\"placementId\" : \"10433394\",\n" +
+                        " \"publisherId\" : \""+ publisherID +"\"\n" +
+                        " }\n" +
+                        "}]}";
+        return  body;
+    }
+
+
+    private String getJsonForBasicReq(Integer publisherID, Integer h1, Integer w1, String domain,String placementId){
+        String body =
+                "{\"x-ut-hb-params\":[\n" +
+                        "  {\n" +
+                        " \"bidRequestId\": \"123\"," +"\n" +
+                        " \"domain\": \""+ domain +"\",\n" +
+                        " \"placementId\": \"" + placementId + "\",\n" +
+                        " \"publisherId\":  \""+ publisherID +"\",\n" +
+                        " \"sizes\": [\n" +
+                        "      [" + h1 + "," + w1 + "]\n" +
+                        "    ],\n" +
+                        " \"timeout\": 700,\n" +
+                        " \"hbadaptor\": \"prebid\",\n" +
+                        " \"params\": {\"placementId\" : \"10433394\",\n" +
+                        " \"publisherId\" : \""+ publisherID +"\"\n" +
+                        "  }}]\n" +
+                        "}" ;
         return  body;
     }
 
@@ -113,8 +203,7 @@ public class HeaderBiddingTest extends BaseTest {
 
 
 
-
-    private void setBidMapByEntity(String entity) {
+        private void setBidMapByEntity(String entity) {
         mapByEntity = entity;
         responses = new ArrayList<>();
         bidCounterMap = new HashMap<>();

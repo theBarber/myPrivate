@@ -233,151 +233,6 @@ Feature: Header Bidding flow support
       And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
       And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
 
-##---frequency capping
-
-  Scenario: header bidding frequency capping from mobile - user 1
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of {crmqauo6r8fzyogl4rxao3gsb} from users bucket with prefix = {2.}
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc7bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
-
-   Scenario: header bidding frequency capping from mobile - user 2 (other user)
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of {crmqauo6r8fzyogl4rxao3h6j} from users bucket with prefix = {2.}
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
-     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-     And all HB responses contains cpm with value {1}
-     And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
-
-  Scenario: header bidding frequency capping from Desktop user 3
-    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given I delete the history of {crmqauo6r8fzyogl4rxao3jy3} from users bucket with prefix = {1.}
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dd7bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
-
-
-  Scenario: reset requests and sleep
-      Given i reset responses in the UAS
-      Given I sleep for 420 seconds
-
-  Scenario: header bidding frequency capping from mobile - user 2 after 7 minutes
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
-
-  Scenario: header bidding frequency capping from Desktop user 3 after 7 minutes
-    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dd7bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And all HB responses contains adId with value {0}
-
 #   header bidding multiple domains tests
   Scenario: header bidding multiple domains - domain1
     Given I add cookie UTID with value {d7a8b9faf42446dcbca3748eef7d47bb} to my requests to uas
@@ -473,6 +328,83 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
     And all HB responses contains cpm with id 3
+
+
+#   header bidding placment group test
+  Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding secure post request for publisher 3728 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {slader.com} and placmentID group = {3708001} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+
+  Scenario: 2. 1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728002} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-SS-1*1}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-SS-1*1-banner-1}
+
+  Scenario: 3. 1 size 1*2 (ST), 1 placement (PG), PG banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+
+  Scenario: 4. 1 size 300*250 (doesn't have a suitable ad), no placement, passback expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding post request for publisher 3728 with size1 = 300 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1}
+    And The response code is 204
+
+  Scenario: 5. wrong size, 1 placement group (PG), PG banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And The response contains campaignId
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+
+  Scenario: 6. size doesn't belong to placement group, banner from placement group expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+
+
+  Scenario: 7. valid size, invalid placement group, banner ST according to sizes expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {blabla} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And The response contains campaignId
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-ST-1*2}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-ST-1*2-banner-1}
+
+  Scenario: 8. valid size 1*2 with suitable add, no placement filed - ST 1*2 banner expected
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding post request for publisher 3728 with size1 = 1 size2 = 2, with domain {slader.com} and extra params {&optimize=0&unlimited=1}
+    And The response code is 200
+    And The response contains script
+    And The response contains campaignId
+    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-ST-1*2}
+    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-ST-1*2-banner-1}
+
+
 
 
 #    #------------------------------------------optimize flow---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -689,148 +621,6 @@ Feature: Header Bidding flow support
     And For bidID bid3 The field Publisher_id in the 3 column of the hbl log is: 3673
     And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
     And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
-
-###---frequency capping
-
-  Scenario: sleeping before optimize flow
-    Given I sleep for 420 seconds
-
-  Scenario: header bidding frequency capping from mobile - user 1
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of {crmqauo6r8fzyogl4rxao3gsb} from users bucket with prefix = {2.}
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc7bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
-#   Scenario: header bidding frequency capping from mobile - user 2 (other user)
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of {crmqauo6r8fzyogl4rxao3h6j} from users bucket with prefix = {2.}
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-     And all HB responses contains cpm with value {1}
-     And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
-#  Scenario: header bidding frequency capping from Desktop user 3
-    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given I delete the history of {crmqauo6r8fzyogl4rxao3jy3} from users bucket with prefix = {1.}
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dd7bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
-#  Scenario: reset requests and sleep
-      Given i reset responses in the UAS
-      Given I sleep for 420 seconds
-#  Scenario: header bidding frequency capping from mobile - user 2 after 7 minutes
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dc9bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And all HB responses contains adId with value {0}
-#  Scenario: header bidding frequency capping from Desktop user 3 after 3 minutes
-    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given I add cookie UTID with value {d7a8b8faf42446dcbba3248cef7dd7bb} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
 
 #   header bidding multiple domains tests
   Scenario: header bidding multiple domains - domain1
@@ -1143,152 +933,6 @@ Feature: Header Bidding flow support
     And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
     And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
 
-###---frequency capping
-  @optimize
-  Scenario: header bidding frequency capping from mobile - user 1
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of {5uklue8wl0eep3j7i9xf4fi5o} from users bucket with prefix = {2.}
-    Given I add cookie UTID with value {62ccf301864347f79306f97bcc7079ac} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
-#  @optimize
-#  Scenario: header bidding frequency capping from mobile - user 2 (other user)
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I delete the history of {1nk2c6va5dabtzkkmngz6n9r7} from users bucket with prefix = {2.}
-    Given I add cookie UTID with value {1bf1beaa1ffd463e8a58ad3be01d8323} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with value {0}
-#  @optimize
-#  Scenario: header bidding frequency capping from Desktop user 3
-    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given I delete the history of a4jmh0yqej7x7w9ijrm10eywg from users bucket
-    Given I add cookie UTID with value {ab0b69ca3ee34ef88ee2d055666c6c30} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 204
-#  @optimize
-#  Scenario: reset requests and sleep
-    Given i reset responses in the UAS
-    Given I sleep for 420 seconds
-#  @optimize
-#  Scenario: header bidding frequency capping from mobile - user 2 after 7 minutes
-    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I add cookie UTID with value {1bf1beaa1ffd463e8a58ad3be01d8323} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And all HB responses contains adId with value {0}
-#  @optimize
-#  Scenario: header bidding frequency capping from Desktop user 3 after 7 minutes
-    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given I add cookie UTID with value {ab0b69ca3ee34ef88ee2d055666c6c30} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
-    And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I sleep for 3 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
-    And all HB responses contains cpm with value {3}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And I send impression requests to UAS
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And all HB responses contains adId with value {0}
 
    #header bidding multiple domains tests
   @optimize
