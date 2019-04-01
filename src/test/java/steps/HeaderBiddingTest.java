@@ -73,14 +73,15 @@ public class HeaderBiddingTest extends BaseTest {
 
     private void sendBasicHBSecurePostRequest (Integer publisherID, Integer h1, Integer w1, String domain, String placmentID, String extraParams){
         String body = getJsonForBasicReq(publisherID, h1,w1,domain, placmentID);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1,body,publisherID,domain, extraParams,true,true);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1,body,publisherID,domain, extraParams,true,false);
     }
 
 
 
     private void sendHBSecurePostRequestMultiSized (Integer publisherID, Integer h1, Integer w1, Integer h2, Integer w2, String domain, String placmentID, String extraParams){
         String body = getJsonForMultisizes(publisherID, h1,w1, h2, w2,domain, placmentID);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1,body,publisherID,domain, extraParams,true,true);
+
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1,body,publisherID,domain, extraParams,true,false);
     }
 
 
@@ -161,17 +162,18 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
         String body =
                 "{\"x-ut-hb-params\":[\n" +
                         "  {\n" +
+                        " \"bidRequestId\": \"123\"," +"\n" +
                         " \"domain\": \""+ domain +"\",\n" +
                         " \"placementId\": \"" + placementId + "\",\n" +
                         " \"publisherId\":  \""+ publisherID +"\",\n" +
                         " \"sizes\": [\n" +
-                        "[" + h1 + "," + w1 + "],["+ h2 + "," + w2  + "],\n" +
+                        "[" + h1 + "," + w1 + "],["+ h2 + "," + w2  + "]],\n" +
                         " \"timeout\": 700,\n" +
                         " \"hbadaptor\": \"prebid\",\n" +
                         " \"params\": {\"placementId\" : \"10433394\",\n" +
                         " \"publisherId\" : \""+ publisherID +"\"\n" +
                         " }\n" +
-                        "},";
+                        "}]}";
         return  body;
     }
 
@@ -180,6 +182,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
         String body =
                 "{\"x-ut-hb-params\":[\n" +
                         "  {\n" +
+                        " \"bidRequestId\": \"123\"," +"\n" +
                         " \"domain\": \""+ domain +"\",\n" +
                         " \"placementId\": \"" + placementId + "\",\n" +
                         " \"publisherId\":  \""+ publisherID +"\",\n" +
@@ -190,8 +193,8 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
                         " \"hbadaptor\": \"prebid\",\n" +
                         " \"params\": {\"placementId\" : \"10433394\",\n" +
                         " \"publisherId\" : \""+ publisherID +"\"\n" +
-                        " }\n" +
-                        "},";
+                        "  }}]\n" +
+                        "}" ;
         return  body;
     }
 
