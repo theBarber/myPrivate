@@ -99,8 +99,8 @@ Feature: Entities for tests
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}     |[]                |83        |4737             |2434           |17116             |
     And i update banner data by name
-      |Banner Name                     |limitation     |
-      |campaign-API-1-a-GDPR-banner-1  |[]             |
+      |Banner Name                     |limitation                    |
+      |campaign-API-1-a-GDPR-banner-1  |[[[5,"=~","fr"]]]             |
     And i update zone data by name
       |Zone Name               |is_secure    |
       |zone-zoneset-GDPR-1-a   |1            |
