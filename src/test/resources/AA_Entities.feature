@@ -24,6 +24,7 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {2546}
     Given i remove all zones from publishers: {3585}
     Given i remove all zones from publishers: {3586}
+    Given i remove all zones from publishers: {2434}
 
 #  @zoneTagSanity
 #  Scenario: create entities for zone Tag Sanity test
@@ -937,6 +938,7 @@ Feature: Entities for tests
       |campaign-HB-PlacementG-ST-1*2             |
       |campaign-HB-PlacementG-Billabord-970*250  |
       |campaign-HB-PlacementG-PG-1*1             |
+#    first po LI not in prod
     Given i create new campaigns with new zoneset
       |Campaign Name                                 |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative    |Zonesets-zones Name                             |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-HB-PlacementG-SS-1*1                 |75396         |197418     |false                  |86                 |{zone-zoneset-HB-PlacementG-SS-1*1}             |[]           |69        |15227             |3728           |66831             |
