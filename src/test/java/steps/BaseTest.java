@@ -9,11 +9,15 @@ import infra.utils.RabbitMQConsumer;
 import infra.utils.RabbitMQPublisher;
 import infra.utils.SqlRampAdminUtils;
 import infra.utils.SqlWorkflowUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.hamcrest.Matchers;
 import ramp.lift.uas.automation.SystemUnderTest;
 
 import com.rabbitmq.client.ConnectionFactory;
 
 import org.junit.Assert;
+import ramp.lift.uas.automation.UASRequestModule;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -22,8 +26,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.BiConsumer;
+
+import static org.hamcrest.Matchers.not;
 
 public class BaseTest implements En {
 
@@ -104,6 +112,8 @@ public class BaseTest implements En {
       }
 
       sut.setup(scenario, config);
+      checkHealth();
+
     });
 
 
@@ -173,6 +183,63 @@ public class BaseTest implements En {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+
+  public void healthCheckResponseNotContains(String something) {
+    sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+      //System.out.println(content); // for checks only
+      Assert.assertThat(content, not(Matchers.containsString(something)));
+    });
+  }
+
+  public void healthCheckResponseContains(String something) {
+    sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+      //System.out.println(content);
+      Assert.assertThat(content, Matchers.containsString(something));
+
+    });
+  }
+
+
+
+  public void healthCheckRequestSkip(String servicenameToSkip) {
+    sut.getUASRquestModule().healthCheckRequestSkip(servicenameToSkip);
+  }
+
+  public void healthCheckRequest() {
+    sut.getUASRquestModule().healthCheckRequest();
+  }
+
+  public void allResponsesHaveCode(Integer expectedResponseCode) {
+    sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+            .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
+            .forEach(CompletableFuture::join);
+  }
+
+  public void allSynchronizedResponsesHaveCode(Integer expectedResponseCode) {
+    sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
+            .map(StatusLine::getStatusCode).forEach(statusCode->Assert.assertThat(statusCode, Matchers.is(expectedResponseCode)));
+  }
+
+  public void allResponsesFinished() {
+    sut.getUASRquestModule().responses().forEach(CompletableFuture::join);
+  }
+
+  public BiConsumer<Integer, Throwable> assertThatResponseCodeIs(int expected) {
+    return (statuscode, failure) -> {
+      if (failure != null) {
+        Assert.fail("unable to get response");
+        return;
+      }
+      Assert.assertThat(statuscode, Matchers.is(expected));
+    };
+  }
+
+  public void checkHealth(){
+    sut.getUASRquestModule().healthCheckRequest();
+    sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+            .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(200)))
+            .forEach(CompletableFuture::join);
   }
 
 }
