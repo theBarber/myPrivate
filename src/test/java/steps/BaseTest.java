@@ -112,7 +112,6 @@ public class BaseTest implements En {
       }
 
       sut.setup(scenario, config);
-
     });
 
 
@@ -183,5 +182,4 @@ public class BaseTest implements En {
       e.printStackTrace();
     }
   }
-
 }

@@ -99,25 +99,24 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
         if (domain.equals("empty")){
             domain = "";
         }
-        String body = getJsonForPublisher3708WithBidID(domain,size1, size2);
+        String body = getJsonForPublisher3708WithBidID(domain,size1, size2, publisherID);
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,body,publisherID,domain, extraParams,true,false);
     }
 
-    private String getJsonForPublisher3708WithBidID(String domain,Integer size1, Integer size2){
+    private String getJsonForPublisher3708WithBidID(String domain,Integer size1,Integer size2, Integer pubID){
         Bidreq++;
         String body =
                 "{\"x-ut-hb-params\":[\n" +
                         "  {\n" +
                         " \"bidRequestId\": \"" + Bidreq + "\",\n" +
                         " \"domain\": \""+ domain +"\",\n" +
-                        " \"publisherId\": 3708,\n" +
+                        " \"publisherId\":  \"" + pubID + "\",\n" +
                         " \"sizes\": [\n" +
                         "      [" + size1 + "," + size2 + "]\n" +
                         "    ],\n" +
                         " \"timeout\": 700,\n" +
                         " \"hbadaptor\": \"prebid\",\n" +
-                        " \"publisherId\" : 3708 \n" +
-                        " }\n" +
+                        " \"publisherId\":  \"" + pubID + "\"\n" +
                         "  }]}";
         return  body;
     }
