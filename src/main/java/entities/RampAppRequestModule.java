@@ -266,7 +266,7 @@ public class RampAppRequestModule implements AutoCloseable {
 			e.printStackTrace();
 			throw new UncheckedIOException("failed to send request (" + url + ") ", e);
 		}
-		assertThat("Status code of impression request", getHealthCheckResponse.getStatusLine().getStatusCode(), is(200));
+		assertThat("Status code of Healthcheck request", getHealthCheckResponse.getStatusLine().getStatusCode(), is(200));
 		return getHealthCheckResponse;
 	}
 
