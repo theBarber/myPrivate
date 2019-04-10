@@ -948,6 +948,14 @@ Feature: Entities for tests
 
 
 
+  Scenario:  create entites for instream_video viewbility
+    Given i disable campaigns by name on db
+      |Campaign Name                   |
+      |campaign-InstreamVid-View-SP    |
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                         |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
+      |campaign-InstreamVid-View-SP        |407981        |244699     |true                   |568              |{zone-zoneset-InstreamVid-View-SP}          |[]                   |35         |15263             |3708           |69156             | []                 |[]                       |
+
 
   @DynamicPricing
   @InAppBlackWhiteList
