@@ -6,6 +6,10 @@
 
 Feature: Programmatic flow support
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: wait more for banner cache to be updated in memory
     Given I sleep for 100 seconds
 

@@ -7,7 +7,11 @@
 	@noAA
 
 	Feature: UAS Ad request flows
-	@Sanity
+	Background: health check
+		When Sending a healthcheck request to UAS
+		Then The response code is 200
+
+		@Sanity
 	Scenario: Send an ad request to UAS and parse impression url
         When I send 1 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 		Then The response code is 200

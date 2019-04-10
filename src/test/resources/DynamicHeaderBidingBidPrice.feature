@@ -5,6 +5,9 @@
 
 Feature: Dynamic HB bid price
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
 
   Scenario: 1. campaign with fix bid price, should take cpm from po line item
     Given I add header of {x-forwarded-for} with value {207.246.116.162}

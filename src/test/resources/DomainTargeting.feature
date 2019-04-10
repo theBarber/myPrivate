@@ -6,6 +6,10 @@
 
 Feature: Domain Targeting tests
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   @id:14
   Scenario: 1.a send zone requests
     Given I use {http://sahar.cnn.com} as referer string to send my requests to uas

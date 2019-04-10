@@ -11,6 +11,10 @@
 
 Feature: Header Bidding flow support
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: send HB basic request
     Given I Delete hbl logs
     Given I add header of {x-forwarded-for} with value {207.246.116.162}

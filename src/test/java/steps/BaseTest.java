@@ -9,11 +9,15 @@ import infra.utils.RabbitMQConsumer;
 import infra.utils.RabbitMQPublisher;
 import infra.utils.SqlRampAdminUtils;
 import infra.utils.SqlWorkflowUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.hamcrest.Matchers;
 import ramp.lift.uas.automation.SystemUnderTest;
 
 import com.rabbitmq.client.ConnectionFactory;
 
 import org.junit.Assert;
+import ramp.lift.uas.automation.UASRequestModule;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -22,8 +26,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.BiConsumer;
+
+import static org.hamcrest.Matchers.not;
 
 public class BaseTest implements En {
 
@@ -104,6 +112,7 @@ public class BaseTest implements En {
       }
 
       sut.setup(scenario, config);
+
     });
 
 

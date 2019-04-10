@@ -6,6 +6,10 @@
 
 Feature: Black and White testing
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   @id:1
   Scenario: 1.a Advertiser has a black and a white list. send zone requests from an app in the black list
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app2} for zone named {zone-zoneset-InappBlackWhiteList-SI-1} to UAS
