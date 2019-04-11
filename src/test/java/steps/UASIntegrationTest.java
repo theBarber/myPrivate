@@ -161,6 +161,16 @@ public class UASIntegrationTest extends BaseTest {
           .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
     });
 
+      Then("The responses? has complete-urls?", () -> {
+          assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
+                  .map(UASIntegrationTest::getCompleteUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
+      });
+
+      Then("The responses? has mute-urls?", () -> {
+          assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
+                  .map(UASIntegrationTest::getMuteUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
+      });
+
   Then("The responses? has dsp-urls?", () -> {
           assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
                   .map(UASIntegrationTest::getDspUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
@@ -349,6 +359,60 @@ public class UASIntegrationTest extends BaseTest {
           });
     });
 
+      When("^I send complete requests to UAS$", () -> {
+          final HttpClientContext ctx = sut.getContext();
+          HttpClient httpclient = HttpClients.custom()
+                  .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(60000).build()).build();
+          sut.getUASRquestModule().responses().map(UASIntegrationTest::getCompleteUrl).map(CompletableFuture::join)
+                  .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
+                  .map(click -> CompletableFuture.supplyAsync(() -> {
+                      try {
+                          System.out.println(click);
+                          HttpGet httpGet = new HttpGet(click.toString());
+                          List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
+                          httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+                          HttpResponse response = httpclient.execute(httpGet ,ctx);
+                          if (response.getEntity() != null) {
+                              response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                          }
+                          return response;
+                      } catch (IOException e) {
+                          throw new UncheckedIOException("failed to send request (" + click + ") ", e);
+                      }
+
+                  })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
+                  .forEach(statusCode -> {
+                      assertThat("Status code of impression request", statusCode, is(200));
+                  });
+      });
+
+      When("^I send mute requests to UAS$", () -> {
+          final HttpClientContext ctx = sut.getContext();
+          HttpClient httpclient = HttpClients.custom()
+                  .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(60000).build()).build();
+          sut.getUASRquestModule().responses().map(UASIntegrationTest::getMuteUrl).map(CompletableFuture::join)
+                  .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
+                  .map(click -> CompletableFuture.supplyAsync(() -> {
+                      try {
+                          System.out.println(click);
+                          HttpGet httpGet = new HttpGet(click.toString());
+                          List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
+                          httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
+                          HttpResponse response = httpclient.execute(httpGet ,ctx);
+                          if (response.getEntity() != null) {
+                              response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                          }
+                          return response;
+                      } catch (IOException e) {
+                          throw new UncheckedIOException("failed to send request (" + click + ") ", e);
+                      }
+
+                  })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
+                  .forEach(statusCode -> {
+                      assertThat("Status code of impression request", statusCode, is(200));
+                  });
+      });
+
     Given("I use \\{([^}]+)\\} as user-agent string to send my requests to uas", (String userAgentStr) -> {
       sut.getUASRquestModule().addHttpHeader("User-Agent", userAgentStr);
     });
@@ -461,6 +525,12 @@ public class UASIntegrationTest extends BaseTest {
     return future.thenApply(UASRequestModule::getClickUrlFrom);
   }
 
+    private static CompletableFuture<Optional<String>> getCompleteUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getCompleteUrlFrom);
+    }
+    private static CompletableFuture<Optional<String>> getMuteUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getMuteUrlFrom);
+    }
     private static CompletableFuture<Optional<String>> getDspUrl(CompletableFuture<HttpResponse> future) {
         return future.thenApply(UASRequestModule::getdspUrlFrom);
     }
@@ -575,6 +645,10 @@ public class UASIntegrationTest extends BaseTest {
                         .thenApply(UASIntegrationTest::parsableClickUrl);
                 return fixedOptionalUrlCF;
             });
+        } else if (urlType.equalsIgnoreCase("complete")) {
+            urlExtractor = UASIntegrationTest::getCompleteUrl;
+        } else if (urlType.equalsIgnoreCase("mute")) {
+            urlExtractor = UASIntegrationTest::getCompleteUrl;
         }
 
         assertThat(entityType, isOneOf("campaign", "banner", "zone"));

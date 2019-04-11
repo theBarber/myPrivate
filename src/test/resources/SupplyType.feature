@@ -1,4 +1,3 @@
-@scheduled
 @HeaderBidding
 @SupplyType
 @scheduled
