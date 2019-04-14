@@ -1,5 +1,6 @@
 @PLT
 @parallel
+@scheduled
 @noAA
 @daniellaPLT
 

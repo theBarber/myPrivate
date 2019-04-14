@@ -1,5 +1,5 @@
 @viewability
-@scheduled
+#@scheduled
 @noAA
 
 Feature: Viewability

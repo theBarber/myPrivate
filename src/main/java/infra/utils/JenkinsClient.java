@@ -13,7 +13,7 @@ import java.net.URI;
 public class JenkinsClient {
     private static final String JENKINS_URL = "http://jenkins.ramp-ut.io/";
     private static final String USER = "yanivc";
-    private static final String PASSWORD = "Yle01102210";
+    private static final String PASSWORD = "Yle0542384689";
     private JenkinsServer js;
 
     public JenkinsClient() throws Exception{

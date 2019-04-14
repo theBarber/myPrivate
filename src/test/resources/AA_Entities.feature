@@ -7,9 +7,9 @@ Feature: Entities for tests
 
 #  Scenario: target website
 #    When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
-  Background: health check
-    When Sending a healthcheck request to RAMP-IO
-    Then The response code is 200
+#  Background: health check
+#    When Sending a healthcheck request to RAMP-IO
+#    Then The response code is 200
 
   Scenario: remove all active zones
     Given i remove all zones from publishers: {3673}
@@ -26,6 +26,7 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {2546}
     Given i remove all zones from publishers: {3585}
     Given i remove all zones from publishers: {3586}
+    Given i remove all zones from publishers: {2434}
 
 #  @zoneTagSanity
 #  Scenario: create entities for zone Tag Sanity test
@@ -100,8 +101,8 @@ Feature: Entities for tests
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}     |[]                |83        |4737             |2434           |17116             |
     And i update banner data by name
-      |Banner Name                     |limitation     |
-      |campaign-API-1-a-GDPR-banner-1  |[]             |
+      |Banner Name                     |limitation                    |
+      |campaign-API-1-a-GDPR-banner-1  |[[[5,"=~","fr"]]]             |
     And i update zone data by name
       |Zone Name               |is_secure    |
       |zone-zoneset-GDPR-1-a   |1            |
@@ -939,6 +940,7 @@ Feature: Entities for tests
       |campaign-HB-PlacementG-ST-1*2             |
       |campaign-HB-PlacementG-Billabord-970*250  |
       |campaign-HB-PlacementG-PG-1*1             |
+#    first po LI not in prod
     Given i create new campaigns with new zoneset
       |Campaign Name                                 |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative    |Zonesets-zones Name                             |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-HB-PlacementG-SS-1*1                 |75396         |197418     |false                  |86                 |{zone-zoneset-HB-PlacementG-SS-1*1}             |[]           |69        |15227             |3728           |66831             |
@@ -947,6 +949,14 @@ Feature: Entities for tests
       |campaign-HB-PlacementG-PG-1*1                 |75396         |241783     |false                  |1068               |{zone-zoneset-HB-PlacementG-PG-1*1}             |[]           |75        |15227             |3728           |66832             |
 
 
+
+  Scenario:  create entites for instream_video viewbility
+    Given i disable campaigns by name on db
+      |Campaign Name                   |
+      |campaign-InstreamVid-View-SP    |
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                         |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
+      |campaign-InstreamVid-View-SP        |407981        |244699     |true                   |568              |{zone-zoneset-InstreamVid-View-SP}          |[]                   |35         |15263             |3708           |69156             | []                 |[]                       |
 
 
   @DynamicPricing
