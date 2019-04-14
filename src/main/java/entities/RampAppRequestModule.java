@@ -36,7 +36,7 @@ import static org.junit.Assert.assertThat;
  * campaign is created for specific lineItem, zonset, and creative (all of them are not created here)
  * add campaign to lineItem List is not made here
  */
-public class RampAppCreateEntitiesManager implements AutoCloseable {
+public class RampAppRequestModule implements AutoCloseable {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private CloseableHttpClient httpclient;
@@ -44,7 +44,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 	private String port;
 
 
-	public RampAppCreateEntitiesManager(String host, String port) {
+	public RampAppRequestModule(String host, String port) {
 		this.host = host;
 		this.port = port;
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -255,6 +255,21 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return createZonesetResponse;
 	}
 
+	public CloseableHttpResponse healthCheckRequest()
+	{
+		CloseableHttpResponse getHealthCheckResponse;
+		String url = getServicesURL("/status");
+		HttpGet httpGet = new HttpGet(url);
+		try {
+			getHealthCheckResponse = httpclient.execute(httpGet);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+		}
+		assertThat("Status code of Healthcheck request", getHealthCheckResponse.getStatusLine().getStatusCode(), is(200));
+		return getHealthCheckResponse;
+	}
+
 	private CloseableHttpResponse createDealRequest(DealRequest dealRequest, Integer IO)
 	{
 		CloseableHttpResponse dealResponse;
@@ -333,6 +348,8 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		assertThat("Status code of create campaign request", creativeResponse.getStatusLine().getStatusCode(), is(200));
 		return creativeResponse;
 	}
+
+
 
 	@Override
 	public void close() throws Exception {

@@ -12,6 +12,10 @@
 
 Feature: ROFD
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
 
   Scenario: 1. a. run on false domain flag = true. req sent from a false domain - zone req, DT req.
     When I send 1 times an ad request with parameter {unlimited=1&optimize=0&domain=daniellafalsedomain.test} for zone named {zone-zoneset-YesRunFalseDomain-69-1} to UAS

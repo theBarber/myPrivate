@@ -8,6 +8,10 @@
 
 Feature: PGX - triggering ads tests
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG zone tag
     Given I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-PGX-PG-1-a} to UAS
     Then The response code is 200

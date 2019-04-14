@@ -7,7 +7,9 @@ Feature: Entities for tests
 
 #  Scenario: target website
 #    When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
-
+#  Background: health check
+#    When Sending a healthcheck request to RAMP-IO
+#    Then The response code is 200
 
   Scenario: remove all active zones
     Given i remove all zones from publishers: {3673}

@@ -3,6 +3,10 @@
 
 Feature: video Adhision new ad unit tests
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: vidAd server prog test, zone req
     When I send 1 times an ad request with parameter {requestid=vidAd&optimize=0&unlimited=1&domain=dnu-tt} for zone named {zone-zoneset-vidAd-SP} to UAS
     Then The response code is 200

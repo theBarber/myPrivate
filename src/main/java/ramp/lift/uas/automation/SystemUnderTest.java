@@ -19,17 +19,14 @@ import java.util.stream.Stream;
 
 import cucumber.api.Scenario;
 import entities.ExecutorCampaignManager;
-import entities.RampAppCreateEntitiesManager;
+import entities.RampAppRequestModule;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
 import infra.utils.CouchBaseUtils;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.junit.Assume;
 
-import cucumber.api.Scenario;
 import entities.CampaignManager;
-import gherkin.deps.com.google.gson.JsonArray;
-import gherkin.deps.com.google.gson.JsonParser;
 import infra.assertion.Assert;
 import infra.assertion.ScenarioWriter;
 import infra.cli.conn.CliConnection;
@@ -42,7 +39,7 @@ import ramp.lift.uas.automation.UAScontainer.Builder;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
 	final int _o;
-	private RampAppCreateEntitiesManager rampAppCreateEntitiesManager;
+	private RampAppRequestModule rampAppCreateEntitiesManager;
 	protected final Map<String, LinuxDefaultCliConnection> uasCliConnections = new HashMap<>();
 	protected final Map<String, LinuxDefaultCliConnection> uasHostConnections = new HashMap<>();
 	protected final Map<String, LinuxDefaultCliConnection> cronCliConnection = new HashMap<>();
@@ -130,9 +127,9 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				if (campaignManager == null)
 						campaignManager = new CampaignManager();
 						break;
-		case "@RampAppCreateEntitiesManager":
+		case "@RampAppRequestModule":
 				if(rampAppCreateEntitiesManager == null)
-						rampAppCreateEntitiesManager = new RampAppCreateEntitiesManager(config.get("ramp.io.host"),
+						rampAppCreateEntitiesManager = new RampAppRequestModule(config.get("ramp.io.host"),
 										(config.get("ramp.io.port")));
 				break;
 	    case "@ramp_admin_db":
@@ -488,10 +485,10 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		return executorCampaignManager;
 	}
 
-	public RampAppCreateEntitiesManager getRampAppCreateEntitiesManager() {
+	public RampAppRequestModule getRampAppRequestModule() {
 		if(rampAppCreateEntitiesManager == null)
 		{
-			rampAppCreateEntitiesManager =  new RampAppCreateEntitiesManager(config.get("ramp.io.host"),
+			rampAppCreateEntitiesManager =  new RampAppRequestModule(config.get("ramp.io.host"),
 										(config.get("ramp.io.port")));
 		}
 		return rampAppCreateEntitiesManager;

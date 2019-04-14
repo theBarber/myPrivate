@@ -7,7 +7,11 @@
 
 
 Feature: UAS E2E Ad request flow - with new entities
-		@zoneTagSanity
+	Background: health check
+		When Sending a healthcheck request to UAS
+		Then The response code is 200
+
+	@zoneTagSanity
 
    Scenario: Send an ad request to UAS and parse impression url
         When I send 10 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-sanity-1-a} to UAS
