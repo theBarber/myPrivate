@@ -403,7 +403,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
        responsesContainEntityWithId(entity, getEntityId(entity,name));
     }
 
-    private Integer getEntityId(String entity, String name)
+    public Integer getEntityId(String entity, String name)
     {
         String myEntity;
         switch (entity.toLowerCase()) {
