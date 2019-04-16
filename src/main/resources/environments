@@ -18,9 +18,9 @@ dev1.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl
 dev2.ramp.admin.db.jdbc.connection = jdbc:mysql://dev-ramp-services.cajkniiojgfl.us-west-2.rds.amazonaws.com/sharedev_ramp_admin
 
 *.uas.k8s.path.config=k8s_integration_password
-staging.uas.cliconnection.hosts=[10.12.1.253]
-integration.uas.cliconnection.hosts=[10.12.1.204,10.12.2.30]
-#integration.uas.cliconnection.hosts=[uas-ramplift-i-us-east-1-normal-1.ramp-ut.io,uas-ramplift-i-us-east-1-normal-2.ramp-ut.io]
+staging.uas.cliconnection.hosts=[uas-ramplift-s-us-east-1-normal-1.ramp-ut.io]
+#integration.uas.cliconnection.hosts=[10.12.1.204,10.12.2.30]
+integration.uas.cliconnection.hosts=[uas-ramplift-i-us-east-1-normal-1.ramp-ut.io,uas-ramplift-i-us-east-1-normal-2.ramp-ut.io]
 
 staging.uas.cliconnection.cron = [10.12.1.10]
 integration.uas.cliconnection.cron = [10.12.2.223]
