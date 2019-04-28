@@ -25,6 +25,7 @@ import org.apache.http.message.BasicHeader;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.util.EntityUtils;
+import ramp.lift.uas.automation.UASRequestModule;
 
 
 import static org.hamcrest.Matchers.is;
@@ -36,7 +37,7 @@ import static org.junit.Assert.assertThat;
  * campaign is created for specific lineItem, zonset, and creative (all of them are not created here)
  * add campaign to lineItem List is not made here
  */
-public class RampAppRequestModule implements AutoCloseable {
+public class RampAppRequestModule extends UASRequestModule implements AutoCloseable {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private CloseableHttpClient httpclient;
@@ -255,19 +256,11 @@ public class RampAppRequestModule implements AutoCloseable {
 		return createZonesetResponse;
 	}
 
-	public CloseableHttpResponse healthCheckRequest()
-	{
-		CloseableHttpResponse getHealthCheckResponse;
-		String url = getServicesURL("/status");
-		HttpGet httpGet = new HttpGet(url);
-		try {
-			getHealthCheckResponse = httpclient.execute(httpGet);
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new UncheckedIOException("failed to send request (" + url + ") ", e);
-		}
-		assertThat("Status code of Healthcheck request", getHealthCheckResponse.getStatusLine().getStatusCode(), is(200));
-		return getHealthCheckResponse;
+	@Override
+	public void healthCheckRequest() {
+
+		String url = "https://" + host + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/status";
+		request(url, true);
 	}
 
 	private CloseableHttpResponse createDealRequest(DealRequest dealRequest, Integer IO)

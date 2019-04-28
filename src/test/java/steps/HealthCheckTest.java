@@ -97,7 +97,9 @@ public class HealthCheckTest extends BaseTest {
 						.forEach(CompletableFuture::join);
 				break;
 			case "RAMP-IO":
-                Assert.assertEquals(expectedResponseCode, (Integer)sut.getRampAppRequestModule().healthCheckRequest().getStatusLine().getStatusCode());
+				sut.getRampAppRequestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+						.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
+						.forEach(CompletableFuture::join);
 				break;
 			default:
 				System.out.println("Invalid service");
