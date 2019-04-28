@@ -225,7 +225,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         request(url, true);
     }
 
-    private void request(String url, boolean toReset) {
+    protected void request(String url, boolean toReset) {
         if (toReset) {
             reset();
         }
