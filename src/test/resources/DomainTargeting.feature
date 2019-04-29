@@ -5,6 +5,9 @@
 @noAA
 
 Feature: Domain Targeting tests
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
 
   Scenario: 1A. send zone requests, ex host is not a false domain + in white list
     Given I use {https://daniref.com} as referer string to send my requests to uas
