@@ -32,4 +32,7 @@ Feature: Dynamic pricing tests
 #    And all HB responses contains cpm with value {1.5}
 #    need to be customize price
 
+
+
+
    #  -----------------------------------------------------Optimize -------------------------------------------------------------
