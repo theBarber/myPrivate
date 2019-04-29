@@ -45,8 +45,9 @@ public class UASHealthCheckTest extends BaseTest {
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains (.*)$", this::healthCheckResponseContains);
 		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
-
 	}
+
+
 
 	private void healthCheckResponseNotContains(String something) {
 		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
@@ -55,12 +56,12 @@ public class UASHealthCheckTest extends BaseTest {
 		});
 	}
 
-	public void healthCheckResponseContains(String something) {
-		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-			//System.out.println(content);
-			Assert.assertThat(content, Matchers.containsString(something));
+		public void healthCheckResponseContains(String something) {
+			sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+				//System.out.println(content);
+				Assert.assertThat(content, Matchers.containsString(something));
 
-		});
+			});
 	}
 
 
