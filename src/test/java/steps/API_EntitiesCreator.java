@@ -17,7 +17,8 @@ import org.junit.Assert;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.file.FileSystems;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -25,6 +26,16 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
+import java.awt.Desktop;
+import java.net.URI;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
 
 
 @CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",
@@ -62,6 +73,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
         Given("^i create new campaigns with multiple creatives$", this::createCampaignsWithMultipleCreatives);
         Given("i updated bid_price_type for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setBidPriceTypeForPublisherAdunit);
+
     }
 
     private void createCampaignsWithMultipleCreatives(DataTable campaigns) {
