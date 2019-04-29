@@ -11,12 +11,12 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.io.UnsupportedEncodingException;
+
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.concurrent.*;
@@ -47,6 +47,8 @@ import co.unruly.matchers.StreamMatchers;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import entities.Zone;
+import entities.Banner;
+import entities.Campaign;
 import infra.assertion.ListItemAt;
 import infra.cli.process.CliCommandExecution;
 import infra.module.WithId;
@@ -72,7 +74,20 @@ public class UASIntegrationTest extends BaseTest {
       sut.getUASRquestModule().zoneRequest(zone.getId());
     });
 
-    When("I send (\\d+) times an ad request for zone named \\{([^}]+)\\} to UAS",
+
+
+
+      And("The response has a moat wrapper with params advanced string with advertiserid = (\\d+), ioid = (\\d+), iolineitemid = (\\d+), bannername = \\{([^}]+)\\}, campaignname = \\{([^}]+)\\}, zonename = \\{([^}]+)\\}, MoatWEBID = (\\d+)",
+              (Integer advertiserid, Integer ioid, Integer iolineitemid, String bannername, String campaignname, String zonename, Integer publisherid) -> {
+                  healthCheckResponseContainsParams(advertiserid, ioid,iolineitemid, bannername, campaignname, zonename, publisherid);
+
+      });
+
+
+
+
+
+      When("I send (\\d+) times an ad request for zone named \\{([^}]+)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequests(times, zoneByName, true);
         });
@@ -86,6 +101,12 @@ public class UASIntegrationTest extends BaseTest {
               (Integer times,String parameter, String zoneByName) -> {
                   sendMultipleAdRequestsWithParameter(times,parameter, zoneByName, true);
               });
+
+      When("I send a req to ramp api for creating a placment group for publisher \\{(\\d+)\\} with ad units = \\{([^}]+)\\} where placement ID = \\{([^}]+)\\}",
+              (Integer publisher,String aduits, String placementID) -> {
+                  sendPlacementGroupReqToRampAPI(publisher,aduits, placementID);
+              });
+
       When("I send (\\d+) times a (wel|prfLog|eve) request with parameters \\{([^}]+)\\} to UAS",
               (Integer times,String requestType, String parameters) -> {
                   sut.getUASRquestModule().sendMultipleTypeGetRequestWithParameter(requestType,times, parameters, true,false);
@@ -178,6 +199,7 @@ public class UASIntegrationTest extends BaseTest {
           Matchers.is(0l));
     });
 
+
       Then("The synchronized responses? are passback?", () -> {
 
           Map<Boolean, Long> countUrls =
@@ -207,7 +229,7 @@ public class UASIntegrationTest extends BaseTest {
 //            sut.write(stringBuilder.toString());
 //        } );
         //---------------------checks-------------------------
-      assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
+      assertThat(logType + "log fxile", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
     });
       When("For bidID (\\w+) The field (\\w+) in the (\\d+) column of the (hbl) log is: (.*)$", (String bidId,String fieldName,Integer column, String logType, String value) -> {
           sut.logFor(logType).filter(raw -> bidId.equals(raw.get(BID_ID_COLUMN)));
@@ -303,13 +325,17 @@ public class UASIntegrationTest extends BaseTest {
           .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
           .map(impurl -> CompletableFuture.supplyAsync(() -> {
               try {
-                System.out.println(impurl);
+                System.out.println(" /n impression to send = " + impurl);
                 HttpGet httpGet = new HttpGet(impurl.toString());
                 List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                 httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
                 HttpResponse response = httpclient.execute(httpGet,ctx);
               if (response.getEntity() != null) {
                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                  InputStream is = response.getEntity().getContent();
+                  BufferedReader buffer = new BufferedReader(new InputStreamReader(is));
+                  String str = buffer.lines().collect(Collectors.joining("\n"));
+                  System.out.println("req: " +  impurl.toString()+ " response : \n" + str);
               }
               return response;
             } catch (IOException e) {
@@ -477,6 +503,13 @@ public class UASIntegrationTest extends BaseTest {
         sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(),parameter, times, toReset);
     }
 
+
+    private void sendPlacementGroupReqToRampAPI(Integer publisher,String aduits, String placementID) {
+        String url = placementID + publisher + aduits;
+        sut.getUASRquestModule().getRequest(url);
+    }
+
+
     private void sendMultipleZoneIDAdRequestsWithParameter(Integer times,String parameter, Integer zoneID, boolean toReset)
     {
         sut.getUASRquestModule().zoneRequestsWithParameter(zoneID,parameter, times, toReset);
@@ -604,5 +637,30 @@ public class UASIntegrationTest extends BaseTest {
         assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
                 actualRate * 100, 10d);
     }
+
+    public void healthCheckResponseContainsParams(Integer advertiserid, Integer ioid, Integer iolineitemid, String bannername, String campaignname, String zoneByName, Integer publisherid) {
+      System.out.println("started!!!!!!!!");
+        System.out.println("111111111");
+        String toCheck;
+        Banner banner = sut.getExecutorCampaignManager().getBanner(bannername).orElseThrow(() -> new AssertionError("The banner " + bannername + " does not exist!"));
+        Zone zone =  sut.getExecutorCampaignManager().getZone(zoneByName).orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+        Campaign campaign =  sut.getExecutorCampaignManager().getCampaign(campaignname).orElseThrow(() -> new AssertionError("The campaign " + campaignname + " does not exist!"));
+        toCheck = "https://svastx.moatads.com/undertonevpaid8571606/template.xml?tmode=1&vast_url=https%3A%2F%2Fpubads.g.doubleclick.net%2Fgampad%2Fads%3Fsz%3D640x480%26iu%3D%2F124319096%2Fexternal%2Fsingle_ad_samples%26ciu_szs%3D300x250%26impl%3Ds%26gdfp_req%3D1%26env%3Dvp%26output%3Dvast%26unviewed_position_start%3D1%26cust_params%3Ddeployment%253Ddevsite%2526sample_ct%253Dredirectlinear%26correlator%3D&"
+                + "level1=" + advertiserid
+                + "level2=" + ioid
+                + "level3=" + iolineitemid
+                + "level4=" + banner.getId()
+                + "slicer1=" + campaign.getId()
+                + "slicer2=" + zone.getId()
+                + "zMoatWEBID=" + publisherid
+                + "&ad_title=undefined&ad_duration=00:00:15&ad_width=640&ad_height=360";
+        System.out.print("String Someting =" + toCheck);
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            Assert.assertThat(content, Matchers.containsString(toCheck));
+
+        });
+    }
+
+
 }
 
