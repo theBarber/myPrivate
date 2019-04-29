@@ -365,7 +365,7 @@ Feature: Header Bidding flow support
   Scenario: 4. 1 size 300*250 (doesn't have a suitable ad), no placement, passback expected
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3728 with size1 = 300 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1}
+    Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 300 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1}
     And The response code is 204
 
   Scenario: 5. wrong size, 1 placement group (PG), PG banner expected
@@ -401,7 +401,7 @@ Feature: Header Bidding flow support
   Scenario: 8. valid size 1*1 with suitable add, no placement filed -PG 1*1 banner expected
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1}
+    Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1}
     And The response code is 200
     And The response contains script
     And The response contains campaignId
