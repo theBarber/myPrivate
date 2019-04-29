@@ -11,6 +11,9 @@ Feature: Geo limitation targeting
 #  |campaign-state-bannerLevelLimit-ST       |state = Germany
 #  |campaign-noGeoLimit-ST                   |
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
 
 
   Scenario: 1. zone req sent from the targeted city/region/state, banner ex

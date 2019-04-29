@@ -5,6 +5,11 @@
 
 Feature: Entities for tests
 
+  Background: health check
+    When Sending a healthcheck request to RAMP-IO
+    Then The response code is 200
+
+
   Scenario: target website
     When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
 
