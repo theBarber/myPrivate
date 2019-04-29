@@ -5,11 +5,9 @@
 
 Feature: Entities for tests
 
-#  Scenario: target website
-#    When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
-  Background: health check
-    When Sending a healthcheck request to RAMP-IO
-    Then The response code is 200
+  Scenario: target website
+    When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
+
 
   Scenario: remove all active zones
     Given i remove all zones from publishers: {3673}
@@ -26,7 +24,7 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {2546}
     Given i remove all zones from publishers: {3585}
     Given i remove all zones from publishers: {3586}
-    Given i remove all zones from publishers: {2434}
+#    Given i remove all zones from publishers: {2434}
 
 #  @zoneTagSanity
 #  Scenario: create entities for zone Tag Sanity test
@@ -524,7 +522,7 @@ Feature: Entities for tests
     And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
     Given i create new campaigns, new zoneset with domains
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                                        |
-      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |[]                  |[{sahar.cnn.com,1};{DHB.basicTest1,1};{DHB.basicTest2,1};{DHB.basicTest3,1};{DHB.basicTest4,1};{DHB.basicTest5,1}]                           |
+      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |[]                  |[{sahar.cnn.com,1}]                           |
       |campaign-DomainT-2         |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |[]                  |[{cnn.com,1}]                                 |
       |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |[]                  |[{sahar.cnn.com,1};{cnn.com,1};{ynet.co.il,1}]|
       |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |[]                  |[{cnn.com,1}]                                 |
@@ -820,10 +818,10 @@ Feature: Entities for tests
           |Campaign Name                   |
           |campaign-TN                     |
           |campaign-vidAd-SP               |
-          Given i create new campaigns, new zoneset with domains
-            |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
-            |campaign-TN                |75396         |243707     |false                  |21638            |{zone-zoneset-TN}                                   |[]                   |97         |15196             |3708           |68927             |[]                  |[]                           |
-            |campaign-vidAd-SP          |407981        |243711     |true                   |568              |{zone-zoneset-vidAd-SP}                             |[]                   |97         |15196              |3708           |68927             | []                   |      []                       |
+    Given i create new campaigns, new zoneset with domains
+          |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
+          |campaign-TN                |75396         |243707     |false                  |21638            |{zone-zoneset-TN}                                   |[]                   |97         |15196             |3708           |68927             |[]                  |[]                           |
+          |campaign-vidAd-SP          |407981        |243711     |true                   |568              |{zone-zoneset-vidAd-SP}                             |[]                   |97         |15196              |3708           |68927             | []                   |      []                       |
 
   @PG1
   Scenario: create entities for PG1 tests
@@ -896,18 +894,6 @@ Feature: Entities for tests
       |zone-zoneset-PGX-PG-1-b      |1            |
       |zone-zoneset-PGX-PG-1-c      |1            |
 
-##    @ndq
-##    Scenario: create entities for ndq manual test
-##      Given i disable campaigns by name on db
-##        |Campaign Name            |
-##        |campaign-NDQ-ST-1      |
-##        |campaign-NDQ-ST-2      |
-##      Given i create new campaigns with new zoneset
-##        |Campaign Name           |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative  |Zonesets-zones Name         |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
-##        |campaign-NDQ-ST-1       |75396         |210722     |false                  |204              |{zone-zoneset-NDQ-ST-1}     |[]           |93        |15133             |3708           |65991             |
-##        |campaign-NDQ-ST-2       |75396         |210722     |false                  |204              |{zone-zoneset-NDQ-ST-2}     |[]           |93        |15133             |3708           |65991             |
-##
-
   Scenario: create entities for line item level persona level frequency capping
       Given i disable campaigns by name on db
         |Campaign Name             |
@@ -956,7 +942,77 @@ Feature: Entities for tests
       |campaign-InstreamVid-View-SP    |
     Given i create new campaigns, new zoneset with domains
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                         |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
-      |campaign-InstreamVid-View-SP        |407981        |244699     |true                   |568              |{zone-zoneset-InstreamVid-View-SP}          |[]                   |35         |15263             |3708           |69156             | []                 |[]                       |
+      |campaign-InstreamVid-View-SP        |407981        |244699     |true                   |568              |{zone-zoneset-InstreamVid-View-SP}          |[]                   |35         |15196             |3708           |69158            | []                 |[]                       |
+
+
+
+  Scenario:  create entities for enrich geo filter
+    Given i disable campaigns by name on db
+      |Campaign Name                            |
+      |campaign-city-zoneLevelLimit-ST          |
+      |campaign-region-bannerLevelLimit-ST      |
+      |campaign-state-zoneLevelLimit-ST         |
+      |campaign-state-bannerLevelLimit-ST       |
+      |campaign-noGeoLimit-ST                   |
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                                  |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                            |limitation         |adUnitId     |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
+      |campaign-city-zoneLevelLimit-ST                |75396         |244896     |false                  |8290              |{zone-zoneset-city-zoneLevelLimit-ST}         |[]                 |93           |15268             |3708           |65991             | []                 | []                            |
+      |campaign-region-bannerLevelLimit-ST            |75396         |244896     |false                  |8290              |{zone-zoneset-region-bannerLevelLimit-ST}     |[]                 |93           |15269             |3708           |65991             | []                 | []                            |
+      |campaign-state-zoneLevelLimit-ST               |75396         |244896     |false                  |8290              |{zone-zoneset-state-zoneLevelLimit-ST}        |[]                 |93           |15270             |3708           |65991             | []                 | []                            |
+      |campaign-state-bannerLevelLimit-ST             |75396         |244896     |false                  |8290              |{zone-zoneset-state-bannerLevelLimit-ST}      |[]                 |93           |15271             |3708           |65991             | []                 | []                            |
+    And i update banner data by name
+      |Banner Name                                    |limitation             |
+      |campaign-region-bannerLevelLimit-ST-banner-1   |[[[7,"=~","us","co"]]] |
+      |campaign-state-bannerLevelLimit-ST-banner-1    |[[[5,"=~","ca"]]]|
+    And i update zone data by name
+      |Zone Name                                 |limitation                      |
+      |zone-zoneset-city-zoneLevelLimit-ST       |[[[8,"=~","bo",["l","la paz"]]]]|
+      |zone-zoneset-state-zoneLevelLimit-ST      |[[[5,"=~","ca"]]]|
+
+  Scenario:  create entites for effctive host choosing
+    Given i disable campaigns by name on db
+      |Campaign Name                            |
+      |campaign-EHC-ST-1A                        |
+      |campaign-EHC-ST-1B                        |
+      |campaign-EHC-ST-2A                        |
+      |campaign-EHC-ST-2B                        |
+      |campaign-EHC-ST-3A                        |
+      |campaign-EHC-ST-3B                        |
+      |campaign-EHC-ST-4A                        |
+      |campaign-EHC-ST-4B                        |
+      |campaign-EHC-ST-5A                        |
+      |campaign-EHC-ST-5B                        |
+      |campaign-EHC-DT-BB-6A                     |
+      |campaign-EHC-DT-BB-6B                     |
+      |campaign-EHC-DT-SS-7A                  |
+      |campaign-EHC-DT-CSB-7B                  |
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                                  |IO            |LineItem   |isServerProgrammatic?  |Creative          |Zonesets-zones Name                            |limitation         |adUnitId     |Web_Section id       |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                     |
+      |campaign-EHC-ST-1A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-1A}                       |[]                 |93           |15269                |3728           |66830             | [{daniref.com,1}]      | []                            |
+      |campaign-EHC-ST-1B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-1B}                       |[]                 |93           |15269                |3728           |66830             | []                 | [{daniref.com,1}]                 |
+      |campaign-EHC-ST-2A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-2A}                       |[]                 |93           |15269                |3728           |66830             | [{danidom.com,1}]      | []                            |
+      |campaign-EHC-ST-2B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-2B}                       |[]                 |93           |15269                |3728           |66830             | []                 | [{danidom.com,1}]                 |
+      |campaign-EHC-ST-3A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-3A}                       |[]                 |93           |15269                |3728           |66830             | [{danifalse.com,1}]    | []                            |
+      |campaign-EHC-ST-3B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-3B}                       |[]                 |93           |15269                |3728           |66830             | []                 | [{danifalse.com,1}]               |
+      |campaign-EHC-ST-4A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-4A}                       |[]                 |93           |15269                |3728           |66830             | [{danidom.com,1}]      | [{danifalse.com,1}]           |
+      |campaign-EHC-ST-4B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-4B}                       |[]                 |93           |15269                |3728           |66830             | [{danidomInc.com,1}]       | [{danidom.com,1}]         |
+      |campaign-EHC-ST-5A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-5A}                       |[]                 |93           |15269                |3728           |66830             | [{news.danidom.com,1}] | []                            |
+      |campaign-EHC-ST-5B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-5B}                       |[]                 |93           |15269                |3728           |66830             | []                 | [{news.danidom.com,1}]            |
+      |campaign-EHC-DT-SS-7A                         |75396         |197418     |false                  |86             |{zone-zoneset-EHC-DT-SS-7A}                       |[]                 |69           |15275                |3739           |69213             | [{danidom.com,1}] |  [{danifalse.com,1}]                                 |
+    And i update campaign data by name
+      |Campaign Name                             | run_on_unknown_domains  |
+      |campaign-EHC-ST-1A                        |               1         |
+      |campaign-EHC-ST-1B                        |               1         |
+      |campaign-EHC-ST-2A                        |               1         |
+      |campaign-EHC-ST-2B                        |               1         |
+      |campaign-EHC-ST-3A                        |               1         |
+      |campaign-EHC-ST-3B                        |               1         |
+      |campaign-EHC-ST-4A                        |               1         |
+      |campaign-EHC-ST-4B                        |               1         |
+      |campaign-EHC-ST-5A                        |               1         |
+      |campaign-EHC-ST-5B                        |               1         |
+      |campaign-EHC-DT-SS-7A                    |               1         |
+
 
 
   @DynamicPricing
@@ -1004,7 +1060,7 @@ Feature: Entities for tests
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 450 seconds
+    And I sleep for 40 seconds
 
   @refreshZoneCache
   Scenario: refresh zone cache
@@ -1019,5 +1075,5 @@ Feature: Entities for tests
   Scenario: save entities to file
       And save all entities to json file
 
-    Scenario: sleep 
+    Scenario: sleep
       And I sleep for 240 seconds

@@ -34,6 +34,11 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Then i create new profile doc with udId {2.17100000-1710-1710-1710-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 666, and reduce 3 days from epoc time stamp
     Then i create new profile doc with udId {2.00000000-0000-0000-0000-000000005678} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 666, and reduce 0 days from epoc time stamp
     Then i create new profile doc with udId {2.73000000-6300-6100-6100-810000009000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 555, and reduce 0 days from epoc time stamp
+    Then i inject new profile doc with udId {2.67000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.67000000-0000-0000-0000-000000000000"},{"udid": "2.78000000-0000-0000-0000-000000000000"}]
+    Then i inject new profile doc with udId {2.78000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.78000000-0000-0000-0000-000000000000"},{"udid": "2.67000000-0000-0000-0000-000000000000"}]
+    Then i inject new profile doc with udId {2.89000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.90000000-0000-0000-0000-000000000000"},{"udid": "2.89000000-0000-0000-0000-000000000000"}]
+    Then i inject new profile doc with udId {2.90000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.90000000-0000-0000-0000-000000000000"},{"udid": "2.89000000-0000-0000-0000-000000000000"}]
+
     And I sleep for 3 seconds
 
   Scenario: cross device capping for udmp,zone req when capping = 2, cross device capping = true
@@ -152,3 +157,69 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     When I send 1 times an ad request with parameter {bundleid=udmp_seq_profile_web&deviceid=73000000-6300-6100-6100-810000009000} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
+
+  Scenario: line item level frequency capping persona level
+##  67000000-0000-0000-0000-000000000000
+##  78000000-0000-0000-0000-000000000000
+    #  step 1: 1 req from device 78
+    Given I clear all cookies from uas requests
+    When I send 2 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
+    And The response code is 200
+    And The response contains script
+    And I send impression requests to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-1-banner-1} 100% of the time
+    And I sleep for 2 seconds
+#   step 2: 1 req from device 89
+    When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
+    And The response code is 200
+    And The response contains script
+    And I send impression requests to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-2-banner-1} 100% of the time
+#    step 3: 1 req from 78, should return pb cause capping = 3
+    When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
+    And The response code is 200
+    And The responses are passback
+#  step 3: renewal after 4 mins
+    And I sleep for 250 seconds
+    Given I clear all cookies from uas requests
+    When I send 1 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
+    And The response code is 200
+    And The response contains script
+    And I send impression requests to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-1-banner-1} 100% of the time
+
+  Scenario: 1.a HB frequency capping persona level.
+#  step 1: 3 req from device 89
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 3 headerBidding post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    And The response code is 200
+    And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains script
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+#  step 2: 2 req from device 90
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 2 headerBidding post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    And The response code is 200
+    And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains script
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    #  step 3: 2 req from device 89. should return passback since capping = 5;
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 2 headerBidding post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    And The response code is 200
+    And The responses are passback
+    Given I sleep for 3 seconds
+#  step 4: renewal after 4 mins
+    And I sleep for 250 seconds
+    Given i send 2 headerBidding post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    And The response code is 200
+    And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}

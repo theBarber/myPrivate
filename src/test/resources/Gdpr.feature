@@ -225,8 +225,8 @@ Feature: Gdpr test
 #    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0} for zone named {zone-zoneset-server-prog-SS} to UAS
 #    Then The response code is 200
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-3-banner-1} 100% of the time
-#
-#
+
+
 ###  ---------------------------------------------------------------------------------
 #
 #   Scenario: DT request from European user with - device id + tsid + hhid

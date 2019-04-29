@@ -356,7 +356,7 @@ Feature: Header Bidding flow support
   Scenario: 3. 1 size 1*2 (ST), 1 placement (PG), PG banner expected
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728004} and extra params  {&optimize=0&unlimited=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -371,7 +371,7 @@ Feature: Header Bidding flow support
   Scenario: 5. wrong size, 1 placement group (PG), PG banner expected
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728004} and extra params  {&optimize=0&unlimited=1}
     And The response code is 200
     And The response contains script
     And The response contains campaignId
@@ -381,7 +381,7 @@ Feature: Header Bidding flow support
   Scenario: 6. size doesn't belong to placement group, banner from placement group expected
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728004} and extra params  {&optimize=0&unlimited=1}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -407,6 +407,12 @@ Feature: Header Bidding flow support
     And The response contains campaignId
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
+
+  Scenario: 9. valid size 1*1 with suitable add, unactive placement group. should ignore sizes and return pb
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    And The response code is 204
 
 
 
