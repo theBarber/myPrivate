@@ -11,6 +11,8 @@ Feature: Geo limitation targeting
 #  |campaign-state-bannerLevelLimit-ST       |state = Germany
 #  |campaign-noGeoLimit-ST                   |
 
+
+
   Scenario: 1. zone req sent from the targeted city/region/state, banner ex
     Given I add header of {x-forwarded-for} with value {190.181.32.176}
     When I send 1 times an ad request with parameter {optimize=0&domain=geo1} for zone named {zone-zoneset-city-zoneLevelLimit-ST} to UAS
