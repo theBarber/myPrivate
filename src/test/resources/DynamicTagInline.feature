@@ -8,6 +8,10 @@
 
 Feature: Dynamic Tag inline flow support
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: 1. Dynamic Tag inline Basic - including migrated tags
     Given I add cookie UTID with random value to my requests to uas
     Then i send 20 times Dynamic Tag ad request to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1&optimize=0}

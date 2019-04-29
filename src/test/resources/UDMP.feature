@@ -7,6 +7,10 @@
 
 Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: injecting to users bucket
 #    Then i inject new profile doc with udId {2.12340000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 123, and reduce 0 days from epoc time stamp and extra devices string = "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23", "devices": [{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1e7zxdn"}]
 #    Then i inject new profile doc with udId {1.9mrjt7trg1a57yd4pv1e7zxdn} on users bucket, where platform = {desktop}, profile type = {udmp_p}, profile num = 456, and reduce 0 days from epoc time stamp and extra devices string = "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23", "devices": [{"udid": "2.12340000-0000-0000-0000-000000000000"},{"udid": "1.9mrjt7trg1a57yd4pv1e7zxdn"}]

@@ -1036,7 +1036,6 @@ Feature: Entities for tests
   @Keren
   @limitationSanity
   @Zonerefresh
-
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
@@ -1057,7 +1056,6 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
-
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}

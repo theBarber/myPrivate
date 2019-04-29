@@ -8,6 +8,10 @@
 
 Feature: InApp testing
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: Image and iframe - Zone request (viewableChange)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar} for zone named {zone-zoneset-Inapp-SI-1} to UAS
     Then The response code is 200

@@ -11,6 +11,10 @@
 
 Feature: Header Bidding flow support
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: send HB basic request
     Given I Delete hbl logs
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -53,12 +57,14 @@ Feature: Header Bidding flow support
   Scenario: send HB request without publisherID configured
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
+    And The response code is 200
+    And The response contains script
 
   Scenario: Send HB request with Empty domain
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
-    And The response code is 204
+    And The response code is 200
+    And The response contains script
 
   Scenario: Send HB request with Empty placementID
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -129,36 +135,36 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
 #   client programmatic tests
-   Scenario: Send HBProg request with D first P selected
-     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
-    And The response code is 200
-    And The response contains script
-     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
-     And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
-     And all HB responses contains cpm with value {1}
-     And for all HB responses i simulate winning, and send their zone tag
-     And The response code is 200
-     And The response contains script
-
-  Scenario: Send HBProg request with No D, No response from Pwai
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
-    And The response code is 204
-
-  Scenario: Send HBProg request D selected
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-Billboard-970X250-D}
-    And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
-    And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Prog-Billboard-970X250-D-banner-1} 100% of the time
-
+#   Scenario: Send HBProg request with D first P selected
+#     Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
+#    And The response code is 200
+#    And The response contains script
+#     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
+#     And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
+#     And all HB responses contains cpm with value {1}
+#     And for all HB responses i simulate winning, and send their zone tag
+#     And The response code is 200
+#     And The response contains script
+#
+#  Scenario: Send HBProg request with No D, No response from Pwai
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
+#    And The response code is 204
+#
+#  Scenario: Send HBProg request D selected
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
+#    And The response code is 200
+#    And The response contains script
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-Billboard-970X250-D}
+#    And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
+#    And all HB responses contains cpm with value {1}
+#    And for all HB responses i simulate winning, and send their zone tag
+#    And The response code is 200
+#    And The response contains script
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Prog-Billboard-970X250-D-banner-1} 100% of the time
+#
 
 
 #   bid price per platform tests
@@ -455,12 +461,14 @@ Feature: Header Bidding flow support
   Scenario: send HB request without publisherID configured
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 204
+    And The response code is 200
+    And The response contains script
   @optimize
   Scenario: Send HB request with Empty domain
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 204
+    And The response code is 200
+    And The response contains script
   @optimize
   Scenario: Send HB request with Empty placementID
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -530,27 +538,27 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
-#   client programmatic tests
-  @optimize
-  Scenario: Send HBProg request with D first P selected
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
-  @optimize
-  Scenario: Send HBProg request with No D, No response from Pwai
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
-    And The response code is 200
-    And all HB responses contains adId with id 0
-  @optimize
-  Scenario: Send HBProg request D selected
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
+##   client programmatic tests
+#  @optimize
+#  Scenario: Send HBProg request with D first P selected
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
+#    And The response code is 200
+#    And The response contains script
+#    And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
+#  @optimize
+#  Scenario: Send HBProg request with No D, No response from Pwai
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
+#    And The response code is 200
+#    And all HB responses contains adId with id 0
+#  @optimize
+#  Scenario: Send HBProg request D selected
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
+#    And The response code is 200
+#    And The response contains script
+#    And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
 
 #   bid price per platform tests
   @optimize
@@ -765,12 +773,14 @@ Feature: Header Bidding flow support
   Scenario: send HB request without publisherID configured
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 204
+    And The response code is 200
+    And The response contains script
   @optimize
   Scenario: Send HB request with Empty domain
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    And The response code is 204
+    And The response code is 200
+    And The response contains script
   @optimize
   Scenario: Send HB request with Empty placementID
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -840,26 +850,26 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
-#   client programmatic tests
-  @optimize
-  Scenario: Send HBProg request with D first P selected
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
-  @optimize
-  Scenario: Send HBProg request with No D, No response from Pwai
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
-    And The response code is 204
-  @optimize
-  Scenario: Send HBProg request D selected
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
-    And The response code is 200
-    And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
+##   client programmatic tests
+#  @optimize
+#  Scenario: Send HBProg request with D first P selected
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
+#    And The response code is 200
+#    And The response contains script
+#    And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
+#  @optimize
+#  Scenario: Send HBProg request with No D, No response from Pwai
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
+#    And The response code is 204
+#  @optimize
+#  Scenario: Send HBProg request D selected
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1}
+#    And The response code is 200
+#    And The response contains script
+#    And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
 
 #   bid price per platform tests
   @optimize

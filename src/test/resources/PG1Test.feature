@@ -6,6 +6,10 @@
 
 Feature: PG1 x - limitation support
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: PG1 on Desktop - zone request
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=0} for zone named {zone-zoneset-PG1-1-allowed} to UAS

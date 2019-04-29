@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
@@ -13,7 +12,6 @@ import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -363,7 +361,7 @@ public class API_EntitiesCreator extends BaseTest{
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
-        Creative creative = sut.getRampAppCreateEntitiesManager().createCreative(creativeName, IO, adUnitID, creativesTemplates.get(htmlTemplateType).toString());
+        Creative creative = sut.getRampAppRequestModule().createCreative(creativeName, IO, adUnitID, creativesTemplates.get(htmlTemplateType).toString());
         sut.getCampaignManager().getIO(IO).orElseThrow(()->new AssertionError("IO: "+IO+ "doesn't exist")).creatives.add(creative);
     }
 
@@ -371,20 +369,20 @@ public class API_EntitiesCreator extends BaseTest{
     {
         List<Integer>adUnitsIds = new ArrayList<Integer>(){{add(adUnitId);}};
         DealRequest dealRequest = new DealRequest(new Deal(0,dealName,dspID,floorPrice,dealType,adUnitsIds));
-        Deal deal = sut.getRampAppCreateEntitiesManager().createDeal(dealRequest,IO);
+        Deal deal = sut.getRampAppRequestModule().createDeal(dealRequest,IO);
         sut.getCampaignManager().getIO(IO).orElseThrow(()->new AssertionError("IO: "+IO+ "doesn't exist")).deals.add(deal);
     }
 
    private void createNewZoneAndZoneset(String zoneAndZonesetName, String limitation,String adUnitId, String web_section_id, String affiliateId, String po_lineItem_id)
     {
-        Optional<Zone> createdZone = sut.getRampAppCreateEntitiesManager().createZone(zoneAndZonesetName, adUnitId, limitation, web_section_id, affiliateId);
+        Optional<Zone> createdZone = sut.getRampAppRequestModule().createZone(zoneAndZonesetName, adUnitId, limitation, web_section_id, affiliateId);
         if(!createdZone.isPresent())
         {
             throw new AssertionError("zone wasn't created!");
         }
        else
         {
-            Optional<ZoneSet> createdZoneset = sut.getRampAppCreateEntitiesManager().createZoneset(zoneAndZonesetName, new TreeSet<Zone>() {{ add(createdZone.get()); }}, "1", "1");
+            Optional<ZoneSet> createdZoneset = sut.getRampAppRequestModule().createZoneset(zoneAndZonesetName, new TreeSet<Zone>() {{ add(createdZone.get()); }}, "1", "1");
             if (!createdZoneset.isPresent()) {
                  throw new AssertionError("zoneset wasn't created!");
             }
@@ -455,7 +453,7 @@ public class API_EntitiesCreator extends BaseTest{
     }
 
     private void createCampaign(CreateCampaignRequest campaignsRequest,Integer IO_id, Boolean isServerProgrammatic){ /*String campaignName, Integer IO_id, Integer lineItemId, Boolean isServerProgrammatic, Integer creativeID_Or_DealID, Integer zonesetID) {*/
-        Optional<Campaign> createdCampaign = sut.getRampAppCreateEntitiesManager().createCampaign(campaignsRequest,isServerProgrammatic);
+        Optional<Campaign> createdCampaign = sut.getRampAppRequestModule().createCampaign(campaignsRequest,isServerProgrammatic);
 
         if(!createdCampaign.isPresent()){
             throw new AssertionError("Error: campaign wasn't created!");
@@ -594,7 +592,7 @@ public class API_EntitiesCreator extends BaseTest{
 
     private void printBannersOfCampaign(Integer campaignID)
     {
-        CloseableHttpResponse getCampaignResponse = sut.getRampAppCreateEntitiesManager().getCampaignRequest(campaignID);
+        CloseableHttpResponse getCampaignResponse = sut.getRampAppRequestModule().getCampaignRequest(campaignID);
         Campaign[] tmpCampaign;
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(getCampaignResponse.getEntity()), Campaign[].class);

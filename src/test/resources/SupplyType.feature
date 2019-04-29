@@ -1,4 +1,3 @@
-@scheduled
 @HeaderBidding
 @SupplyType
 @scheduled
@@ -6,6 +5,10 @@
 @noAA
 
 Feature: Supply type flow support
+
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
 
   @SupplyType
   Scenario: verify when HB first

@@ -7,6 +7,10 @@
 
 Feature: warfle tests - wurfl limitation in campaign and zone level, contextual targeting
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: contextual targeting
     When I send 1 times an ad request with parameter {optimize=0&loc=http://www.cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200

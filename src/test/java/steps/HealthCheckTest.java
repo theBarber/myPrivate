@@ -32,36 +32,36 @@ import static org.hamcrest.Matchers.not;
 @CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",
 		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
-public class UASHealthCheckTest extends BaseTest {
+public class HealthCheckTest extends BaseTest {
 
-	public UASHealthCheckTest() {
+    protected String svc_ut = "";
+	public HealthCheckTest() {
 		super();
 		// ThenResposeCodeIs();
 		When("^Sending a healthcheck request of (RabbitMQ|Couchbase|Redis|Workflow) to UAS$",
 				this::healthCheckRequestSkip);
-		When("^Sending a healthcheck request to UAS$", this::healthCheckRequest);
+		When("^Sending a healthcheck request to (.*)$", this::healthCheckRequest);
 		Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
 		Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains (.*)$", this::healthCheckResponseContains);
 		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
+
 	}
 
-
-
-	private void healthCheckResponseNotContains(String something) {
+	public void healthCheckResponseNotContains(String something) {
 		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
 			//System.out.println(content); // for checks only
 			Assert.assertThat(content, not(Matchers.containsString(something)));
 		});
 	}
 
-		public void healthCheckResponseContains(String something) {
-			sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-				//System.out.println(content);
-				Assert.assertThat(content, Matchers.containsString(something));
+	public void healthCheckResponseContains(String something) {
+		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+			//System.out.println(content);
+			Assert.assertThat(content, Matchers.containsString(something));
 
-			});
+		});
 	}
 
 
@@ -70,14 +70,41 @@ public class UASHealthCheckTest extends BaseTest {
 		sut.getUASRquestModule().healthCheckRequestSkip(servicenameToSkip);
 	}
 
-	public void healthCheckRequest() {
-		sut.getUASRquestModule().healthCheckRequest();
+
+	public void healthCheckRequest(String svc) {
+		switch (svc){
+			case "UAS":
+				sut.getUASRquestModule().healthCheckRequest();
+				svc_ut = "UAS";
+				break;
+			case "RAMP-IO":
+				sut.getRampAppRequestModule().healthCheckRequest();
+                svc_ut = "RAMP-IO";
+				break;
+			default:
+				System.out.println("Invalid service");
+
+		}
+
+
 	}
 
 	public void allResponsesHaveCode(Integer expectedResponseCode) {
-		sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
-				.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
-				.forEach(CompletableFuture::join);
+		switch (svc_ut){
+			case "UAS":
+				sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+						.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
+						.forEach(CompletableFuture::join);
+				break;
+			case "RAMP-IO":
+				sut.getRampAppRequestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+						.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
+						.forEach(CompletableFuture::join);
+				break;
+			default:
+				System.out.println("Invalid service");
+
+		}
 	}
 
 	public void allSynchronizedResponsesHaveCode(Integer expectedResponseCode) {
