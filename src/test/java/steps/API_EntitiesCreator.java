@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
@@ -13,11 +12,11 @@ import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.file.FileSystems;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -25,6 +24,16 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
+import java.awt.Desktop;
+import java.net.URI;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
 
 
 @CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",
@@ -34,6 +43,8 @@ public class API_EntitiesCreator extends BaseTest{
     final private String CREATIVES_SOURCE_FILE_PATH = "/input_files/creativesTemplates.json";
     final private String CAMPAIGN_PATTERN_SOURCE_FILE_PATH = "/input_files/Templates.json";
     private ObjectMapper mapper = new ObjectMapper();
+    public String endDateVal = "2020-03-03";
+    public String startDateVal = "2019-04-04";
 
     public API_EntitiesCreator()
     {
@@ -46,6 +57,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with viewability", this::createCampaignsWithViewability);
         And("i create new campaigns with Supply type", this::createCampaignsWithSupplyType);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
+        And("i update (po_line_item|io_line_item) end date by id \\{([^}]+)\\}",this::updateEndDateEntityDataByID);
         And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityDataByID);
         And("i disable campaigns by name on db",this::removeAllCampaignsByName);
         And("i set campaigns capping on db",this::setCampaignCapping);
@@ -61,6 +73,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
         Given("^i create new campaigns with multiple creatives$", this::createCampaignsWithMultipleCreatives);
+        Given("i updated bid_price_type for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setBidPriceTypeForPublisherAdunit);
 
     }
 
@@ -351,7 +364,7 @@ public class API_EntitiesCreator extends BaseTest{
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
-        Creative creative = sut.getRampAppCreateEntitiesManager().createCreative(creativeName, IO, adUnitID, creativesTemplates.get(htmlTemplateType).toString());
+        Creative creative = sut.getRampAppRequestModule().createCreative(creativeName, IO, adUnitID, creativesTemplates.get(htmlTemplateType).toString());
         sut.getCampaignManager().getIO(IO).orElseThrow(()->new AssertionError("IO: "+IO+ "doesn't exist")).creatives.add(creative);
     }
 
@@ -359,20 +372,20 @@ public class API_EntitiesCreator extends BaseTest{
     {
         List<Integer>adUnitsIds = new ArrayList<Integer>(){{add(adUnitId);}};
         DealRequest dealRequest = new DealRequest(new Deal(0,dealName,dspID,floorPrice,dealType,adUnitsIds));
-        Deal deal = sut.getRampAppCreateEntitiesManager().createDeal(dealRequest,IO);
+        Deal deal = sut.getRampAppRequestModule().createDeal(dealRequest,IO);
         sut.getCampaignManager().getIO(IO).orElseThrow(()->new AssertionError("IO: "+IO+ "doesn't exist")).deals.add(deal);
     }
 
    private void createNewZoneAndZoneset(String zoneAndZonesetName, String limitation,String adUnitId, String web_section_id, String affiliateId, String po_lineItem_id)
     {
-        Optional<Zone> createdZone = sut.getRampAppCreateEntitiesManager().createZone(zoneAndZonesetName, adUnitId, limitation, web_section_id, affiliateId);
+        Optional<Zone> createdZone = sut.getRampAppRequestModule().createZone(zoneAndZonesetName, adUnitId, limitation, web_section_id, affiliateId);
         if(!createdZone.isPresent())
         {
             throw new AssertionError("zone wasn't created!");
         }
        else
         {
-            Optional<ZoneSet> createdZoneset = sut.getRampAppCreateEntitiesManager().createZoneset(zoneAndZonesetName, new TreeSet<Zone>() {{ add(createdZone.get()); }}, "1", "1");
+            Optional<ZoneSet> createdZoneset = sut.getRampAppRequestModule().createZoneset(zoneAndZonesetName, new TreeSet<Zone>() {{ add(createdZone.get()); }}, "1", "1");
             if (!createdZoneset.isPresent()) {
                  throw new AssertionError("zoneset wasn't created!");
             }
@@ -391,12 +404,23 @@ public class API_EntitiesCreator extends BaseTest{
         sut.write("zone created successfully! zone id is:"+ zone.getId());
     }
 
+
+
+    private void updateEndDateEntityDataByID (String entity, String idsStr){
+        String[] idsArr = idsStr.split(",");
+        for (int i=0; i<idsArr.length ;i++){
+            SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id" , idsArr[i]  , "end_date", endDateVal );
+            SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id" , idsArr[i]  , "start_date", startDateVal );
+
+        }
+
+    }
+
     private void updateEntityDataByID(String entity, String updateBy, DataTable entities)
     {
         List<List<String>> EntityList = entities.asLists(String.class);
         List<String> entityData;
         Integer entityID;
-
         for(int i=1;i<EntityList .size();i++)
         {
             entityData = EntityList.get(i);
@@ -443,7 +467,7 @@ public class API_EntitiesCreator extends BaseTest{
     }
 
     private void createCampaign(CreateCampaignRequest campaignsRequest,Integer IO_id, Boolean isServerProgrammatic){ /*String campaignName, Integer IO_id, Integer lineItemId, Boolean isServerProgrammatic, Integer creativeID_Or_DealID, Integer zonesetID) {*/
-        Optional<Campaign> createdCampaign = sut.getRampAppCreateEntitiesManager().createCampaign(campaignsRequest,isServerProgrammatic);
+        Optional<Campaign> createdCampaign = sut.getRampAppRequestModule().createCampaign(campaignsRequest,isServerProgrammatic);
 
         if(!createdCampaign.isPresent()){
             throw new AssertionError("Error: campaign wasn't created!");
@@ -454,6 +478,7 @@ public class API_EntitiesCreator extends BaseTest{
             updateBannersName(createdCampaign.get().getName(),createdCampaign.get().getName()+"-banner-");
             printCampaign(createdCampaign.get());
             updateCampaign(createdCampaign.get().getId(),"status","0");
+            updateCampaign(createdCampaign.get().getId(),"run_on_unknown_domains","1");
         }
     }
 
@@ -496,6 +521,12 @@ public class API_EntitiesCreator extends BaseTest{
             sut.write("Banner id:"+ banner.getId());
             sut.write("Banner name:"+ banner.getName());
         }
+    }
+
+    private void setBidPriceTypeForPublisherAdunit(Integer publisherId, Integer adUnitId, Integer bid_price_type){
+        String query = "UPDATE `undertone`.`publisher_selected_adunits` SET `bid_price_type`= '"+ bid_price_type + "' WHERE `pub_id`= '" + publisherId  + "' and adunit_id = '" + adUnitId + "'";
+           System.out.println(query);
+            SqlWorkflowUtils.WorkflowQuery(query);
     }
 
     private void createCampaignWithZonesetName(String campaignName,Integer IO_id, Integer lineItemId,Boolean isServerProgrammatic, Integer creativeID_Or_DealID, String zonesetName)
@@ -575,7 +606,7 @@ public class API_EntitiesCreator extends BaseTest{
 
     private void printBannersOfCampaign(Integer campaignID)
     {
-        CloseableHttpResponse getCampaignResponse = sut.getRampAppCreateEntitiesManager().getCampaignRequest(campaignID);
+        CloseableHttpResponse getCampaignResponse = sut.getRampAppRequestModule().getCampaignRequest(campaignID);
         Campaign[] tmpCampaign;
         try{
             tmpCampaign  = mapper.readValue(EntityUtils.toString(getCampaignResponse.getEntity()), Campaign[].class);

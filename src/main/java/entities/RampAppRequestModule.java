@@ -25,6 +25,7 @@ import org.apache.http.message.BasicHeader;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.util.EntityUtils;
+import ramp.lift.uas.automation.UASRequestModule;
 
 
 import static org.hamcrest.Matchers.is;
@@ -36,7 +37,7 @@ import static org.junit.Assert.assertThat;
  * campaign is created for specific lineItem, zonset, and creative (all of them are not created here)
  * add campaign to lineItem List is not made here
  */
-public class RampAppCreateEntitiesManager implements AutoCloseable {
+public class RampAppRequestModule extends UASRequestModule implements AutoCloseable {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private CloseableHttpClient httpclient;
@@ -44,7 +45,7 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 	private String port;
 
 
-	public RampAppCreateEntitiesManager(String host, String port) {
+	public RampAppRequestModule(String host, String port) {
 		this.host = host;
 		this.port = port;
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -255,6 +256,13 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		return createZonesetResponse;
 	}
 
+	@Override
+	public void healthCheckRequest() {
+
+		String url = "https://" + host + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/status";
+		request(url, true);
+	}
+
 	private CloseableHttpResponse createDealRequest(DealRequest dealRequest, Integer IO)
 	{
 		CloseableHttpResponse dealResponse;
@@ -333,6 +341,8 @@ public class RampAppCreateEntitiesManager implements AutoCloseable {
 		assertThat("Status code of create campaign request", creativeResponse.getStatusLine().getStatusCode(), is(200));
 		return creativeResponse;
 	}
+
+
 
 	@Override
 	public void close() throws Exception {

@@ -8,6 +8,10 @@
 
 Feature: PGX - triggering ads tests
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG zone tag
     Given I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-PGX-PG-1-a} to UAS
     Then The response code is 200
@@ -36,6 +40,7 @@ Feature: PGX - triggering ads tests
   #  And response value {window.ut_renderTriggers} has the values of 1,2,3
     
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through Header Bidding
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 1X2 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=0&unlimited=1}
     Then The response code is 200
     And The response contains script
@@ -98,6 +103,7 @@ Feature: PGX - triggering ads tests
 
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - PG Header Bidding
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 1X1 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=1&unlimited=1}
     Then The response code is 200
     And The response contains script
@@ -110,6 +116,7 @@ Feature: PGX - triggering ads tests
 
   @optimize
   Scenario: PGX triggering ads - all 3 triggers are enabled - see-through Header Bidding
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB 1X2 size request for publisher 3739} for publisher 3739 with domain {PGXTriggering.com} with extra params {&optimize=1&unlimited=1}
     Then The response code is 200
     And The response contains script
