@@ -43,6 +43,8 @@ public class API_EntitiesCreator extends BaseTest{
     final private String CREATIVES_SOURCE_FILE_PATH = "/input_files/creativesTemplates.json";
     final private String CAMPAIGN_PATTERN_SOURCE_FILE_PATH = "/input_files/Templates.json";
     private ObjectMapper mapper = new ObjectMapper();
+    public String endDateVal = "2020-03-03";
+    public String startDateVal = "2019-04-04";
 
     public API_EntitiesCreator()
     {
@@ -55,6 +57,7 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with viewability", this::createCampaignsWithViewability);
         And("i create new campaigns with Supply type", this::createCampaignsWithSupplyType);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
+        And("i update (po_line_item|io_line_item) end date by id \\{([^}]+)\\}",this::updateEndDateEntityDataByID);
         And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityDataByID);
         And("i disable campaigns by name on db",this::removeAllCampaignsByName);
         And("i set campaigns capping on db",this::setCampaignCapping);
@@ -401,12 +404,23 @@ public class API_EntitiesCreator extends BaseTest{
         sut.write("zone created successfully! zone id is:"+ zone.getId());
     }
 
+
+
+    private void updateEndDateEntityDataByID (String entity, String idsStr){
+        String[] idsArr = idsStr.split(",");
+        for (int i=0; i<idsArr.length ;i++){
+            SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id" , idsArr[i]  , "end_date", endDateVal );
+            SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id" , idsArr[i]  , "start_date", startDateVal );
+
+        }
+
+    }
+
     private void updateEntityDataByID(String entity, String updateBy, DataTable entities)
     {
         List<List<String>> EntityList = entities.asLists(String.class);
         List<String> entityData;
         Integer entityID;
-
         for(int i=1;i<EntityList .size();i++)
         {
             entityData = EntityList.get(i);
