@@ -4,3 +4,4 @@
 *.iml
 resources/input_files/
 
+allure_results/
