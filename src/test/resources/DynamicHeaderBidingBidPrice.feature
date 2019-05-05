@@ -12,7 +12,7 @@ Feature: Dynamic HB bid price
 
   Scenario: 1. campaign with fix bid price, should take cpm from po line item
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest1} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest1} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-1}
@@ -27,7 +27,7 @@ Feature: Dynamic HB bid price
 
   Scenario: 2. campaign with dynamic bid price, campign < po line item ,should take cpm from po line item
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest2} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest2} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-2}
@@ -41,7 +41,7 @@ Feature: Dynamic HB bid price
 
   Scenario: 3. campaign with dynamic bid price, campign > po line item ,should take cpm from campaign
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest3} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest3} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-3}
@@ -56,7 +56,7 @@ Feature: Dynamic HB bid price
   Scenario: 4. campaign with dynamic bid price, campign desktop > po line item > campaign mobile
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest4} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest4} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-4}
@@ -68,7 +68,7 @@ Feature: Dynamic HB bid price
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-DynamicPrice-4-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.4}
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-    Given i send 1 headerBidding post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB-basicTest4} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB-basicTest4} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-4}
@@ -83,7 +83,7 @@ Feature: Dynamic HB bid price
 
   Scenario: 5a. + 5b. publisher with dynamic bid price for adsize 1*2 = 9, fixed price for adsize 300*250
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest5} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest5} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-ST-1x2-5a}
@@ -95,7 +95,7 @@ Feature: Dynamic HB bid price
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-DynamicPrice-ST-1x2-5a-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.6}
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3708 with size1 = 300 size2 = 250, with domain {DHB.basicTest5} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 300 size2 = 250, with domain {DHB.basicTest5} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-Desktop-300X250-5b}
@@ -111,7 +111,7 @@ Feature: Dynamic HB bid price
 # PG tests
   Scenario: 6a. + 6b. Server prog. publisher with dynamic bid price for adsize ST 1*2 = ?? , fixed price for adsize PGC 1*1 = ??. bidid price = 7.7 at mock
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3711 with size1 = 1 size2 = 2, with domain {HB-DynamicP-ServerPr} and extra params {&unlimited=1&optimize=0&requesrid=DynamicPriceHB-SP}
+    Given i send 1 headerBidding secure post request for publisher 3711 with size1 = 1 size2 = 2, with domain {HB-DynamicP-ServerPr} and extra params {&unlimited=1&optimize=0&requesrid=DynamicPriceHB-SP}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a}
@@ -123,7 +123,7 @@ Feature: Dynamic HB bid price
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.6}
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for publisher 3711 with size1 = 1 size2 = 1, with domain {HB-DynamicP-ServerPr} and extra params {&unlimited=1&optimize=0&requesrid=DynamicPriceHB-SP}
+    Given i send 1 headerBidding secure post request for publisher 3711 with size1 = 1 size2 = 1, with domain {HB-DynamicP-ServerPr} and extra params {&unlimited=1&optimize=0&requesrid=DynamicPriceHB-SP}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-DP-ServerPr-PGC-6b}
