@@ -8,7 +8,7 @@ Feature: Entities for tests
   Background: health check
     When Sending a healthcheck request to RAMP-IO
     Then The response code is 200
-    
+
   Scenario: target website
     When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
 
@@ -28,7 +28,6 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {2546}
     Given i remove all zones from publishers: {3585}
     Given i remove all zones from publishers: {3586}
-#    Given i remove all zones from publishers: {2434}
 
 #  @zoneTagSanity
 #  Scenario: create entities for zone Tag Sanity test
@@ -87,6 +86,9 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       |Campaign Name                        |
       |campaign-API-1-a-sanity              |
+    Given i update zone data by name
+    |Zone Name                  | status  |
+    |zone-zoneset-sanity-1-a    |    0    |
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-1-a}   |[]                |83        |4737             |2434           |17116             |
@@ -99,6 +101,9 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       |Campaign Name                        |
       |campaign-API-1-a-GDPR                |
+    Given i update zone data by name
+      |Zone Name                  | status  |
+      |campaign-API-1-a-GDPR      |    0    |
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}     |[]                |83        |4737             |2434           |17116             |
@@ -523,6 +528,12 @@ Feature: Entities for tests
       |campaign-DomainT-ZoneTag-2 |
       |campaign-DomainT-ZoneTag-3 |
       |campaign-DomainT-ZoneTag-4 |
+    And i update zone data by name
+      |Zone Name                                 |status                    |
+      |zone-zoneset-DomainT-ZoneTag-1            |0                         |
+      |zone-zoneset-DomainT-ZoneTag-2            |0                         |
+      |zone-zoneset-DomainT-ZoneTag-3            |0                         |
+      |zone-zoneset-DomainT-ZoneTag-4            |0                         |
     And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
     Given i create new campaigns, new zoneset with domains
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                                        |
