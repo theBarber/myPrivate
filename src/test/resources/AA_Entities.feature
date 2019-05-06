@@ -837,7 +837,11 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
           |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
           |campaign-TN                |75396         |243707     |false                  |21638            |{zone-zoneset-TN}                                   |[]                   |97         |15196             |3708           |68927             |[]                  |[]                           |
-          |campaign-vidAd-SP          |407981        |243711     |true                   |568              |{zone-zoneset-vidAd-SP}                             |[]                   |97         |15196              |3708           |68927             | []                   |      []                       |
+          |campaign-vidAd-SP          |407981        |243711     |true                   |568              |{zone-zoneset-vidAd-SP}                             |[]                   |97         |15292              |3708           |68927             | []                   |      []                       |
+    And i update campaign data by name
+          |Campaign Name                     |Priority      |
+          |campaign-TN                       |-1            |
+          |campaign-vidAd-SP                 |-2            |
 
   @PG1
   Scenario: create entities for PG1 tests
@@ -972,10 +976,10 @@ Feature: Entities for tests
       |campaign-noGeoLimit-ST                   |
     Given i create new campaigns, new zoneset with domains
       |Campaign Name                                  |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                            |limitation         |adUnitId     |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                |
-      |campaign-city-zoneLevelLimit-ST                |75396         |244896     |false                  |8290              |{zone-zoneset-city-zoneLevelLimit-ST}         |[]                 |93           |15268             |3708           |65991             | []                 | []                            |
-      |campaign-region-bannerLevelLimit-ST            |75396         |244896     |false                  |8290              |{zone-zoneset-region-bannerLevelLimit-ST}     |[]                 |93           |15269             |3708           |65991             | []                 | []                            |
-      |campaign-state-zoneLevelLimit-ST               |75396         |244896     |false                  |8290              |{zone-zoneset-state-zoneLevelLimit-ST}        |[]                 |93           |15270             |3708           |65991             | []                 | []                            |
-      |campaign-state-bannerLevelLimit-ST             |75396         |244896     |false                  |8290              |{zone-zoneset-state-bannerLevelLimit-ST}      |[]                 |93           |15271             |3708           |65991             | []                 | []                            |
+      |campaign-city-zoneLevelLimit-ST                |75396         |244896     |false                  |8290              |{zone-zoneset-city-zoneLevelLimit-ST}         |[]                 |93           |15288             |3708           |65991             | []                 | []                            |
+      |campaign-region-bannerLevelLimit-ST            |75396         |244896     |false                  |8290              |{zone-zoneset-region-bannerLevelLimit-ST}     |[]                 |93           |15289             |3708           |65991             | []                 | []                            |
+      |campaign-state-zoneLevelLimit-ST               |75396         |244896     |false                  |8290              |{zone-zoneset-state-zoneLevelLimit-ST}        |[]                 |93           |15291             |3708           |65991             | []                 | []                            |
+      |campaign-state-bannerLevelLimit-ST             |75396         |244896     |false                  |8290              |{zone-zoneset-state-bannerLevelLimit-ST}      |[]                 |93           |15290             |3708           |65991             | []                 | []                            |
     And i update banner data by name
       |Banner Name                                    |limitation             |
       |campaign-region-bannerLevelLimit-ST-banner-1   |[[[7,"=~","us","co"]]] |
