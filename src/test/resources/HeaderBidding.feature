@@ -134,7 +134,7 @@ Feature: Header Bidding flow support
     And The response contains script
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
-   client programmatic tests
+#   client programmatic tests
    Scenario: Send HBProg request with D first P selected
      Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0}
