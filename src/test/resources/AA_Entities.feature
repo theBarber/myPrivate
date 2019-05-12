@@ -955,7 +955,7 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       |Campaign Name                                 |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative    |Zonesets-zones Name                             |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-HB-PlacementG-SS-1*1                 |75396         |197418     |false                  |86                 |{zone-zoneset-HB-PlacementG-SS-1*1}             |[]           |69        |15227             |3728           |66831             |
-      |campaign-HB-PlacementG-ST-1*2                 |75396         |210722     |false                  |8158               |{zone-zoneset-HB-PlacementG-ST-1*2}             |[]           |93        |15227             |3728           |69134             |
+      |campaign-HB-PlacementG-ST-1*2                 |75396         |210722     |false                  |8158               |{zone-zoneset-HB-PlacementG-ST-1*2}             |[]           |93        |15227             |3728           |66830             |
       |campaign-HB-PlacementG-Billabord-970*250      |75396         |198082     |false                  |64                 |{zone-zoneset-HB-PlacementG-Billabord-970*250}  |[]           |58        |15227             |3728           |67231             |
       |campaign-HB-PlacementG-PG-1*1                 |75396         |241783     |false                  |1068               |{zone-zoneset-HB-PlacementG-PG-1*1}             |[]           |75        |15227             |3728           |66832             |
 
