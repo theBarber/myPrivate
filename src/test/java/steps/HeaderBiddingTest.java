@@ -358,7 +358,8 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
         private String getUrlFromAd(String htmlWithQuery) {
         Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
 
-        return new StringBuilder().append(splitedQuery.get("ut_ju ").substring(2,splitedQuery.get("ut_ju ").length()-1)).append("?").
+        return new StringBuilder().
+                append(splitedQuery.get("ut_ju ").substring(2,splitedQuery.get("ut_ju ").length()-1)).append("?").
                 append("&bidid=").append(splitedQuery.get("ut.bidid").substring(1,splitedQuery.get("ut.bidid").length()-1)).
                 append("&bannerid=").append(splitedQuery.get("ut.bannerid")).
                 append("&zoneid=").append(splitedQuery.get("ut.zoneid")).
@@ -371,6 +372,8 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
                 append("&pid=").append(splitedQuery.get("ut.pid")).
                 append("&extpid=").append(splitedQuery.get("ut.extpid")).
                 append("&domain=").append(splitedQuery.get("ut.domain")).
+                append("&id=").append(splitedQuery.get("ut.id")).
+                append("&stid=").append(splitedQuery.get("ut.stid")).
                 append("&ct=1").toString();
     }
 
