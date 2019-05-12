@@ -308,8 +308,7 @@ Feature: Header Bidding flow support
 #   header bidding placment group test
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3728 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {slader.com} and placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 headerBidding secure post request for publisher 3728 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {slader.com} and placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -325,8 +324,7 @@ Feature: Header Bidding flow support
 
   Scenario: 3. 1 size 1*2 (ST), 1 placement (PG), PG banner expected
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -334,14 +332,12 @@ Feature: Header Bidding flow support
 
   Scenario: 4. 1 size 300*250 (doesn't have a suitable ad), no placement, passback expected
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 300 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1}
+    Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 300 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 204
 
   Scenario: 5. wrong size, 1 placement group (PG), PG banner expected
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And The response contains campaignId
@@ -350,8 +346,7 @@ Feature: Header Bidding flow support
 
   Scenario: 6. size doesn't belong to placement group, banner from placement group expected
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -360,8 +355,7 @@ Feature: Header Bidding flow support
 
   Scenario: 7. valid size, invalid placement group, banner ST according to sizes expected
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:970 w1:250, with domain {slader.com}, placmentID group = {blabla} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:970 w1:250, with domain {slader.com}, placmentID group = {blabla} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And The response contains campaignId
@@ -370,8 +364,7 @@ Feature: Header Bidding flow support
 
   Scenario: 8. valid size 1*1 with suitable ad, no placement filed -PG 1*1 banner expected
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1}
+    Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And The response contains campaignId
@@ -380,8 +373,7 @@ Feature: Header Bidding flow support
 
   Scenario: 9. valid size 1*1 with suitable add, unactive placement group. should ignore sizes and return pb
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728005} and extra params  {&optimize=0&unlimited=1}
+    Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728005} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 204
 
 
