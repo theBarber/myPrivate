@@ -9,7 +9,6 @@ Feature: Geo limitation targeting
 #  |campaign-region-bannerLevelLimit-ST      |state = Germany
 #  |campaign-state-zoneLevelLimit-ST         |region = ?
 #  |campaign-state-bannerLevelLimit-ST       |state = Germany
-#  |campaign-noGeoLimit-ST                   |
 
   Background: health check
     When Sending a healthcheck request to UAS
