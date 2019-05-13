@@ -357,24 +357,21 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
 
         private String getUrlFromAd(String htmlWithQuery) {
         Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
+        StringBuilder url = new StringBuilder();
+        //put domain in url
+        url.append(splitedQuery.entrySet().stream().findFirst().get().getValue()).append("?");
 
-        return new StringBuilder().
-                append(splitedQuery.get("ut_ju ").substring(2,splitedQuery.get("ut_ju ").length()-1)).append("?").
-                append("&bidid=").append(splitedQuery.get("ut.bidid").substring(1,splitedQuery.get("ut.bidid").length()-1)).
-                append("&bannerid=").append(splitedQuery.get("ut.bannerid")).
-                append("&zoneid=").append(splitedQuery.get("ut.zoneid")).
-                append("&hbprice=").append(splitedQuery.get("ut.hbprice")).
-                append("&fallbackbannerid=").append(splitedQuery.get("ut.fallbackbannerid")).
-                append("&fallbackzoneid=").append(splitedQuery.get("ut.fallbackzoneid")).
-                append("&width=").append(splitedQuery.get("ut.width")).
-                append("&height=").append(splitedQuery.get("ut.height")).
-                append("&adaptor=").append(splitedQuery.get("ut.adaptor")).
-                append("&pid=").append(splitedQuery.get("ut.pid")).
-                append("&extpid=").append(splitedQuery.get("ut.extpid")).
-                append("&domain=").append(splitedQuery.get("ut.domain")).
-                append("&id=").append(splitedQuery.get("ut.id")).
-                append("&stid=").append(splitedQuery.get("ut.stid")).
-                append("&ct=1").toString().replace("'","");
+        //remove domain from map
+        splitedQuery.remove(splitedQuery.entrySet().stream().findFirst().get().getKey());
+
+        //iterate through rest of query params
+        Iterator<Map.Entry<String, String>> itr = splitedQuery.entrySet().iterator();
+        while(itr.hasNext())
+        {
+            Map.Entry<String, String> entry = itr.next();
+            url.append("&" + entry.getKey().substring(entry.getKey().lastIndexOf('.') + 1)).append("=" + entry.getValue());
+        }
+        return url.toString();
     }
 
     public void responsesAdsContainEntityWithName(String entity, String name)
@@ -430,7 +427,8 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
         for (String pair : pairs) {
             int idx = pair.indexOf("=");
             try {
-                query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+                if(pair.substring(0, idx).contains("ut") && !pair.substring(idx + 1).trim().contains(" "))
+                    query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1).trim().replace("'", ""), "UTF-8"));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
