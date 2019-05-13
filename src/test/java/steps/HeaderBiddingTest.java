@@ -374,7 +374,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
                 append("&domain=").append(splitedQuery.get("ut.domain")).
                 append("&id=").append(splitedQuery.get("ut.id")).
                 append("&stid=").append(splitedQuery.get("ut.stid")).
-                append("&ct=1").toString();
+                append("&ct=1").toString().replace("'","");
     }
 
     public void responsesAdsContainEntityWithName(String entity, String name)
