@@ -80,7 +80,31 @@ Feature: Entities for tests
 #      |campaign-API-performance-39-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","firefox"]]]                          |
 #      |campaign-API-performance-40-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","chrome"]]]                           |
 
-
+  @HB
+  @HBEntitiesCreation
+  @HBFilterEntitiesCreation
+  Scenario: create entities for HeaderBiddingFilter tests
+    Given i remove all zones from publishers: {3708}
+    And i disable campaigns by name on db
+      | Campaign Name           |
+      | campaign-HB-PO-Price    |
+      | campaign-HB-No-PO-Price |
+    And i create new campaigns with new zoneset
+      | Campaign Name           | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-HB-PO-Price    | 75396 | 244896   | false                 | 8290          | {zone-zoneset-HB-PO-Price}    | []         | 93       | 15281          | 3708         | 69212           |
+      | campaign-HB-No-PO-Price | 75396 | 244896   | false                 | 8290          | {zone-zoneset-HB-No-PO-Price} | []         | 93       | 15281          | 3708         | 69211           |
+    And i update campaign data by name
+      | Campaign Name           | status | Priority | units | limitation | campaign_delivery_method | is_wholesale | skip_daily_goal | units | goal_type   |
+      | campaign-HB-PO-Price    | 0      | 1        | -1    | []         | 1                        | 1            | 1               | -1    | impressions |
+      | campaign-HB-No-PO-Price | 0      | -2       | -1    | []         | 1                        | 1            | 1               | -1    | impressions |
+    And i update banner data by name
+      | Banner Name                      | is_secure | limitation |
+      | campaign-HB-PO-Price-banner-1    | 1         | []         |
+      | campaign-HB-No-PO-Price-banner-1 | 1         | []         |
+    And i update zone data by name
+      | Zone Name                   | is_secure | limitation |
+      | zone-zoneset-HB-PO-Price    | 1         | []         |
+      | zone-zoneset-HB-No-PO-Price | 1         | []         |
 
   @zoneTagSanity
   Scenario: create entities for zone Tag Sanity test
