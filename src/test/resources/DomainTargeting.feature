@@ -102,4 +102,4 @@ Feature: Domain Targeting tests
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {news.danidom.com&tagid=472&optimize=0}
     And The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the timer-1}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time

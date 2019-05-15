@@ -549,53 +549,6 @@ Feature: Entities for tests
         |zone-zoneset-DT-inline-PGC   |1            |
       And I flush bucket name {us-east-1-adserver} on couchbase
 
-  @DOT
-  Scenario: create campaigns for Domain Targeting
-    Given i disable campaigns by name on db
-      |Campaign Name              |
-      |campaign-DomainT-1         |
-      |campaign-DomainT-2         |
-      |campaign-DomainT-3         |
-      |campaign-DomainT-4         |
-      |campaign-DomainT-BB-5      |
-      |campaign-DomainT-Desktop-6 |
-      |campaign-DomainT-ZoneTag-1 |
-      |campaign-DomainT-ZoneTag-2 |
-      |campaign-DomainT-ZoneTag-3 |
-      |campaign-DomainT-ZoneTag-4 |
-    And i update zone data by name
-      |Zone Name                                 |status                    |
-      |zone-zoneset-DomainT-ZoneTag-1            |1                         |
-      |zone-zoneset-DomainT-ZoneTag-2            |1                         |
-      |zone-zoneset-DomainT-ZoneTag-3            |1                         |
-      |zone-zoneset-DomainT-ZoneTag-4            |1                         |
-    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
-    Given i create new campaigns, new zoneset with domains
-      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                                        |
-      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |[]                  |[{sahar.cnn.com,1};{DHB.basicTest1,1};{DHB.basicTest2,1};{DHB.basicTest3,1};{DHB.basicTest4,1};{DHB.basicTest5,1};{geo1,1};{geo2,1};{geo3,1};{geo4,1}]  |
-      |campaign-DomainT-2         |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |[]                  |[{cnn.com,1}]                                 |
-      |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |[]                  |[{sahar.cnn.com,1};{cnn.com,1};{ynet.co.il,1}]|
-      |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |[]                  |[{cnn.com,1}]                                 |
-      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |[{sahar.cnn.com,1}] |[]                                            |
-      |campaign-DomainT-Desktop-6 |75396         |240827     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |[{cnn.com,1}]       |[]                                            |
-      |campaign-DomainT-ZoneTag-1 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-1}                    |[]                   |83         |4737              |2434           |62229             |[{sahar.cnn.com,1}] |[]                                            |
-      |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{sahar.ynet.co.il,1}]                        |
-      |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |62229             |[{cnn.com,1}]       |[]                                            |
-      |campaign-DomainT-ZoneTag-4 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-4}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{ynet.co.il,1}]                              |
-    And i update zone data by name
-      |Zone Name                        |is_secure    |
-      |zone-zoneset-DomainT-1           |1            |
-      |zone-zoneset-DomainT-2           |1            |
-      |zone-zoneset-DomainT-3           |1            |
-      |zone-zoneset-DomainT-4-a         |1            |
-      |zone-zoneset-DomainT-4-b         |1            |
-      |zone-zoneset-DomainT-5-BB        |1            |
-      |zone-zoneset-DomainT-6-Desktop   |1            |
-      |zone-zoneset-DomainT-ZoneTag-1   |1            |
-      |zone-zoneset-DomainT-ZoneTag-2   |1            |
-      |zone-zoneset-DomainT-ZoneTag-3   |1            |
-      |zone-zoneset-DomainT-ZoneTag-4   |1            |
-
 
   @GDPR
   @appnexus
