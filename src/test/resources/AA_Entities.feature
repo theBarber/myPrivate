@@ -9,6 +9,11 @@ Feature: Entities for tests
     When Sending a healthcheck request to RAMP-IO
     Then The response code is 200
 
+    Scenario: entities end-date update
+      And i update po_line_item end date by id {17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
+      And i update io_line_item end date by id {210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
+
+
   Scenario: target website
     When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
 
@@ -550,7 +555,7 @@ Feature: Entities for tests
     And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
     Given i create new campaigns, new zoneset with domains
       |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                                        |
-      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |[]                  |[{sahar.cnn.com,1}]                           |
+      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |[]                  |[{sahar.cnn.com,1};{DHB.basicTest1,1};{DHB.basicTest2,1};{DHB.basicTest3,1};{DHB.basicTest4,1};{DHB.basicTest5,1}]  |
       |campaign-DomainT-2         |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |[]                  |[{cnn.com,1}]                                 |
       |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |[]                  |[{sahar.cnn.com,1};{cnn.com,1};{ynet.co.il,1}]|
       |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |[]                  |[{cnn.com,1}]                                 |
@@ -962,7 +967,7 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       |Campaign Name                                 |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative    |Zonesets-zones Name                             |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-HB-PlacementG-SS-1*1                 |75396         |197418     |false                  |86                 |{zone-zoneset-HB-PlacementG-SS-1*1}             |[]           |69        |15227             |3728           |66831             |
-      |campaign-HB-PlacementG-ST-1*2                 |75396         |210722     |false                  |8158               |{zone-zoneset-HB-PlacementG-ST-1*2}             |[]           |93        |15227             |3728           |69134             |
+      |campaign-HB-PlacementG-ST-1*2                 |75396         |210722     |false                  |8158               |{zone-zoneset-HB-PlacementG-ST-1*2}             |[]           |93        |15227             |3728           |66830             |
       |campaign-HB-PlacementG-Billabord-970*250      |75396         |198082     |false                  |64                 |{zone-zoneset-HB-PlacementG-Billabord-970*250}  |[]           |58        |15227             |3728           |67231             |
       |campaign-HB-PlacementG-PG-1*1                 |75396         |241783     |false                  |1068               |{zone-zoneset-HB-PlacementG-PG-1*1}             |[]           |75        |15227             |3728           |66832             |
 
