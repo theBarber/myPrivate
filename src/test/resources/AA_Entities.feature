@@ -118,9 +118,9 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       |Campaign Name                        |
       |campaign-API-1-a-sanity              |
-    Given i update zone data by name
-    |Zone Name                  | status  |
-    |zone-zoneset-sanity-1-a    |    1    |
+#    Given i update zone data by name
+#    |Zone Name                  | status  |
+#    |zone-zoneset-sanity-1-a    |    1    |
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-1-a}   |[]                |83        |4737             |2434           |17116             |
@@ -133,9 +133,9 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       |Campaign Name                        |
       |campaign-API-1-a-GDPR                |
-    Given i update zone data by name
-      |Zone Name                  | status  |
-      |campaign-API-1-a-GDPR      |    1    |
+#    Given i update zone data by name
+#      |Zone Name                  | status  |
+#      |campaign-API-1-a-GDPR      |    1    |
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}     |[]                |83        |4737             |2434           |17116             |
@@ -153,9 +153,9 @@ Feature: Entities for tests
       |campaign-API-limitations-test-F      |
       |campaign-API-limitations-test-C      |
       |campaign-API-limitations-test-W      |
-    And i update zone data by name
-      |Zone Name                            |  status  |
-      |zone-zoneset-limitations-test        |    1     |
+#    And i update zone data by name
+#      |Zone Name                            |  status  |
+#      |zone-zoneset-limitations-test        |    1     |
     Given i create new campaigns with new zoneset
       |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name               |limitation   |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-limitations-test-F  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[]           |83        |4737             |2434           |17116             |
