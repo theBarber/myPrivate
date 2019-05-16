@@ -840,28 +840,28 @@ Feature: Entities for tests
       |campaign-PG1-Smartphone           |
       |campaign-PG1-Tablet-limited       |
       |campaign-PG1-Tablet               |
-    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 92 and web_section id 14402 with affiliateId 3666 with po_line_item_id 67001
+    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 92 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67002
+    Given i create new zone named {zone-zoneset-ST-1} with limitation {[]} with adUnitId 93 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
+    And i create new zone named {zone-zoneset-ST-2} with limitation {[]} with adUnitId 93 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+#    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 92 and web_section id 14402 with affiliateId 3666 with po_line_item_id 67001
+#    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 92 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
     Given i create new campaigns with new zoneset
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
-      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14609           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
-      |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |24315           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+      |campaign-ST1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-ST-1,zone-zoneset-ST-2} |
+#      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+#      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+#      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+#      |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
     And i update campaign data by name
       |Campaign Name                     |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-PG1-Desktop-limited      |-2            |1                       |4                 |
-      |campaign-PG1-Desktop              |-1            |2                       |3                 |
-      |campaign-PG1-Smartphone-limited   |-2            |1                       |4                 |
-      |campaign-PG1-Smartphone           |-1            |2                       |3                 |
-      |campaign-PG1-Tablet-limited       |-2            |1                       |4                 |
-      |campaign-PG1-Tablet               |-1            |2                       |3                 |
+      |campaign-ST1-Desktop              |-1            |2                       |3                 |
+#      |campaign-PG1-Smartphone-limited   |-2            |1                       |4                 |
+#      |campaign-PG1-Smartphone           |-1            |2                       |3                 |
+#      |campaign-PG1-Tablet-limited       |-2            |1                       |4                 |
+#      |campaign-PG1-Tablet               |-1            |2                       |3                 |
 #    And i update banner data by name
 #      |Banner Name                     |limitation       |
 #      |campaign-PG1-Desktop-limited-banner-1   |[[[50,"==",1]]]  |
@@ -871,10 +871,10 @@ Feature: Entities for tests
       |Zone Name                    |is_secure    |
       |zone-zoneset-PG1-1-allowed   |1            |
       |zone-zoneset-PG1-2           |1            |
-      |zone-zoneset-PG1-3-allowed   |1            |
-      |zone-zoneset-PG1-4           |1            |
-      |zone-zoneset-PG1-5-allowed   |1            |
-      |zone-zoneset-PG1-6           |1            |
+      |zone-zoneset-ST-1            |1            |
+      |zone-zoneset-ST-2            |1            |
+#      |zone-zoneset-PG1-5-allowed   |1            |
+#      |zone-zoneset-PG1-6           |1            |
 
   @PGX
   Scenario: create entities for PGX tests
