@@ -10,7 +10,7 @@ Feature: Entities for tests
     Then The response code is 200
 
     Scenario: entities end-date update
-      And i update po_line_item end date by id {17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
+      And i update po_line_item end date by id {67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
       And i update io_line_item end date by id {210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
       And i update io_line_item with id {210722} filed {unit_price} to be {1}
       And i update io_line_item with id {210722} filed {budget} to be {1}
@@ -490,7 +490,7 @@ Feature: Entities for tests
         |campaign-DT-PGC-2-t-1   |75396    |222908     |false                  |1068            |{zone-zoneset-DT-PGC-t-1}    |[]                  |75         |14401            |3674           |64399             |
         |campaign-DT-SS-1-t-2    |75396    |197418     |false                  |86              |{zone-zoneset-DT-SS-t-2}     |[]                  |69         |14402            |3666           |64400             |
         |campaign-DT-SI-2-t-2    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-2}     |[]                  |61         |14402            |3666           |64401             |
-        |    |75396    |222908     |false                  |1068            |{zone-zoneset-DT-PGC-t-2}    |[]                  |75         |14402            |3666           |64402             |
+        |campaign-DT-PGC-3-t-2   |75396    |222908     |false                  |1068            |{zone-zoneset-DT-PGC-t-2}    |[]                  |75         |14402            |3666           |64402             |
         |campaign-DT-SI-1-t-3-L  |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3-L}   |[[[5,"=~","af"]]]   |61         |14403            |3675           |64403             |
         |campaign-DT-SI-2-t-3    |75396    |211456     |false                  |210             |{zone-zoneset-DT-SI-t-3}     |[]                  |61         |14403            |3675           |64403             |
       And i update campaign data by name
@@ -840,41 +840,41 @@ Feature: Entities for tests
       |campaign-PG1-Smartphone           |
       |campaign-PG1-Tablet-limited       |
       |campaign-PG1-Tablet               |
-    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new zone named {zone-zoneset-PG1-3-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-4} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
-    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 83 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
-    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 83 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+    Given i create new zone named {zone-zoneset-PG1-1-allowed} with limitation {[]} with adUnitId 92 and web_section id 14402 with affiliateId 3666 with po_line_item_id 67001
+    And i create new zone named {zone-zoneset-PG1-2} with limitation {[]} with adUnitId 92 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67002
+    Given i create new zone named {zone-zoneset-ST-1} with limitation {[]} with adUnitId 93 and web_section id 14402 with affiliateId 3666 with po_line_item_id 66997
+    And i create new zone named {zone-zoneset-ST-2} with limitation {[]} with adUnitId 93 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
+#    Given i create new zone named {zone-zoneset-PG1-5-allowed} with limitation {[]} with adUnitId 92 and web_section id 14402 with affiliateId 3666 with po_line_item_id 67001
+#    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 92 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
     Given i create new campaigns with new zoneset
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
-      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |14609           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
-      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
-      |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |24315           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+      |campaign-ST1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-ST-1,zone-zoneset-ST-2} |
+#      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+#      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
+#      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
+#      |campaign-PG1-Tablet                 |75396         |210722     |false                  |204             |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
     And i update campaign data by name
       |Campaign Name                     |Priority      |campaign_delivery_method|delivery_algorithm|
       |campaign-PG1-Desktop-limited      |-2            |1                       |4                 |
-      |campaign-PG1-Desktop              |-1            |2                       |3                 |
-      |campaign-PG1-Smartphone-limited   |-2            |1                       |4                 |
-      |campaign-PG1-Smartphone           |-1            |2                       |3                 |
-      |campaign-PG1-Tablet-limited       |-2            |1                       |4                 |
-      |campaign-PG1-Tablet               |-1            |2                       |3                 |
-    And i update banner data by name
-      |Banner Name                     |limitation       |
-      |campaign-PG1-Desktop-limited-banner-1   |[[[50,"==",1]]]  |
-      |campaign-PG1-Smartphone-limited-banner-1|[[[49,"==",1]]]  |
-      |campaign-PG1-Tablet-limited-banner-1    |[[[33,"==",1]]]  |
+      |campaign-ST1-Desktop              |-1            |2                       |3                 |
+#      |campaign-PG1-Smartphone-limited   |-2            |1                       |4                 |
+#      |campaign-PG1-Smartphone           |-1            |2                       |3                 |
+#      |campaign-PG1-Tablet-limited       |-2            |1                       |4                 |
+#      |campaign-PG1-Tablet               |-1            |2                       |3                 |
+#    And i update banner data by name
+#      |Banner Name                     |limitation       |
+#      |campaign-PG1-Desktop-limited-banner-1   |[[[50,"==",1]]]  |
+#      |campaign-PG1-Smartphone-limited-banner-1|[[[49,"==",1]]]  |
+#      |campaign-PG1-Tablet-limited-banner-1    |[[[33,"==",1]]]  |
     And i update zone data by name
       |Zone Name                    |is_secure    |
       |zone-zoneset-PG1-1-allowed   |1            |
       |zone-zoneset-PG1-2           |1            |
-      |zone-zoneset-PG1-3-allowed   |1            |
-      |zone-zoneset-PG1-4           |1            |
-      |zone-zoneset-PG1-5-allowed   |1            |
-      |zone-zoneset-PG1-6           |1            |
+      |zone-zoneset-ST-1            |1            |
+      |zone-zoneset-ST-2            |1            |
+#      |zone-zoneset-PG1-5-allowed   |1            |
+#      |zone-zoneset-PG1-6           |1            |
 
   @PGX
   Scenario: create entities for PGX tests
