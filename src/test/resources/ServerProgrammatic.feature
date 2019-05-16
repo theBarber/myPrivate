@@ -11,7 +11,7 @@ Feature: Programmatic flow support
     Then The response code is 200
 
   Scenario: wait more for banner cache to be updated in memory
-    Given I sleep for 100 seconds
+    Given I sleep for 1 seconds
 
   Scenario: 1. basic Call to Programmatic GW - zone tag
     When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-SS} to UAS
@@ -103,23 +103,6 @@ Feature: Programmatic flow support
     And The response contains <script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com/burl"</script>
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-inApp-ST-1-banner-1} 100% of the time
-
-
-     #SP multibids in the json // goes to mock SP-MultiBids-ST_1.json
-  Scenario: 10. send HB req with multi bid to SP
-    Then I sleep for 1 seconds
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3711 with multi bids. first bid - bidreqID={SP-MultiBids-1*1}, h:1 w:1, sec bid - bidreqID={SP-MultiBids-1*2}, h:1 w:2 with domain {server-prog-MultiBids-DNU-1} and extra params {&unlimited=1&hb_test=1}
-    And The response code is 200
-    And i read all HB responses and map their bidId by adId
-    And in HB responses bidid dani1 has entity of adId with name {campaign-server-prog-MultiBids-SS-1-banner-1} 100% of the times
-    And in HB responses bidid dani2 has entity of adId with name {campaign-server-prog-MultiBids-ST-2-banner-1} 100% of the times
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-MultiBids-SS-1-banner-1} 50% of the time
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-MultiBids-ST-2-banner-1} 50% of the time
-
 
 #  -----------------------------------------------------Optimize-------------------------------------------------------------------
   @optimize
