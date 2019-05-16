@@ -9,6 +9,13 @@ Feature: Entities for tests
     When Sending a healthcheck request to RAMP-IO
     Then The response code is 200
 
+    Scenario: entities end-date update
+      And i update po_line_item end date by id {17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
+      And i update io_line_item end date by id {210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
+      And i update io_line_item with id {210722} filed {unit_price} to be {1}
+      And i update io_line_item with id {210722} filed {budget} to be {1}
+
+
   Scenario: target website
     When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
 
@@ -111,6 +118,9 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       |Campaign Name                        |
       |campaign-API-1-a-sanity              |
+    Given i update zone data by name
+    |Zone Name                  | status  |
+    |zone-zoneset-sanity-1-a    |    1    |
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-1-a}   |[]                |83        |4737             |2434           |17116             |
@@ -123,6 +133,9 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       |Campaign Name                        |
       |campaign-API-1-a-GDPR                |
+    Given i update zone data by name
+      |Zone Name                  | status  |
+      |campaign-API-1-a-GDPR      |    1    |
     Given i create new campaigns with new zoneset
       |Campaign Name               |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name          |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-1-a-GDPR       |75396         |210722     |false                  |204             |{zone-zoneset-GDPR-1-a}     |[]                |83        |4737             |2434           |17116             |
@@ -140,6 +153,9 @@ Feature: Entities for tests
       |campaign-API-limitations-test-F      |
       |campaign-API-limitations-test-C      |
       |campaign-API-limitations-test-W      |
+    And i update zone data by name
+      |Zone Name                            |  status  |
+      |zone-zoneset-limitations-test        |    1     |
     Given i create new campaigns with new zoneset
       |Campaign Name                    |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name               |limitation   |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |
       |campaign-API-limitations-test-F  |75396         |210722     |false                  |204             |{zone-zoneset-limitations-test}  |[]           |83        |4737             |2434           |17116             |
@@ -533,47 +549,6 @@ Feature: Entities for tests
         |zone-zoneset-DT-inline-PGC   |1            |
       And I flush bucket name {us-east-1-adserver} on couchbase
 
-  @DOT
-  Scenario: create campaigns for Domain Targeting
-    Given i disable campaigns by name on db
-      |Campaign Name              |
-      |campaign-DomainT-1         |
-      |campaign-DomainT-2         |
-      |campaign-DomainT-3         |
-      |campaign-DomainT-4         |
-      |campaign-DomainT-BB-5      |
-      |campaign-DomainT-Desktop-6 |
-      |campaign-DomainT-ZoneTag-1 |
-      |campaign-DomainT-ZoneTag-2 |
-      |campaign-DomainT-ZoneTag-3 |
-      |campaign-DomainT-ZoneTag-4 |
-    And i create new zone named {zone-zoneset-DomainT-4-b} with limitation {[]} with adUnitId 61 and web_section id 4140 with affiliateId 3708 with po_line_item_id 66488
-    Given i create new campaigns, new zoneset with domains
-      |Campaign Name              |IO            |LineItem   |isServerProgrammatic?  |Creative         |Zonesets-zones Name                                 |limitation           |adUnitId   |Web_Section id    |publisher ID   |po_line_item ID   |domain_include      |domain_exclude                                        |
-      |campaign-DomainT-1         |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-1}                            |[]                   |83         |14539             |3708           |66418             |[]                  |[{sahar.cnn.com,1}]                           |
-      |campaign-DomainT-2         |75396         |197418     |false                  |86               |{zone-zoneset-DomainT-2}                            |[]                   |69         |14539             |3708           |66486             |[]                  |[{cnn.com,1}]                                 |
-      |campaign-DomainT-3         |75396         |222908     |false                  |1068             |{zone-zoneset-DomainT-3}                            |[]                   |75         |14539             |3708           |66487             |[]                  |[{sahar.cnn.com,1};{cnn.com,1};{ynet.co.il,1}]|
-      |campaign-DomainT-4         |75396         |211456     |false                  |210              |{zone-zoneset-DomainT-4-a,zone-zoneset-DomainT-4-b} |[]                   |61         |11363             |3708           |66488             |[]                  |[{cnn.com,1}]                                 |
-      |campaign-DomainT-BB-5      |75396         |198082     |false                  |64               |{zone-zoneset-DomainT-5-BB}                         |[]                   |58         |14539             |3708           |66810             |[{sahar.cnn.com,1}] |[]                                            |
-      |campaign-DomainT-Desktop-6 |75396         |240827     |false                  |85               |{zone-zoneset-DomainT-6-Desktop}                    |[]                   |10         |14539             |3708           |66811             |[{cnn.com,1}]       |[]                                            |
-      |campaign-DomainT-ZoneTag-1 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-1}                    |[]                   |83         |4737              |2434           |62229             |[{sahar.cnn.com,1}] |[]                                            |
-      |campaign-DomainT-ZoneTag-2 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-2}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{sahar.ynet.co.il,1}]                        |
-      |campaign-DomainT-ZoneTag-3 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-3}                    |[]                   |83         |4737              |2434           |62229             |[{cnn.com,1}]       |[]                                            |
-      |campaign-DomainT-ZoneTag-4 |75396         |210722     |false                  |204              |{zone-zoneset-DomainT-ZoneTag-4}                    |[]                   |83         |4737              |2434           |62229             |[]                  |[{ynet.co.il,1}]                              |
-    And i update zone data by name
-      |Zone Name                        |is_secure    |
-      |zone-zoneset-DomainT-1           |1            |
-      |zone-zoneset-DomainT-2           |1            |
-      |zone-zoneset-DomainT-3           |1            |
-      |zone-zoneset-DomainT-4-a         |1            |
-      |zone-zoneset-DomainT-4-b         |1            |
-      |zone-zoneset-DomainT-5-BB        |1            |
-      |zone-zoneset-DomainT-6-Desktop   |1            |
-      |zone-zoneset-DomainT-ZoneTag-1   |1            |
-      |zone-zoneset-DomainT-ZoneTag-2   |1            |
-      |zone-zoneset-DomainT-ZoneTag-3   |1            |
-      |zone-zoneset-DomainT-ZoneTag-4   |1            |
-
 
   @GDPR
   @appnexus
@@ -693,14 +668,14 @@ Feature: Entities for tests
       |campaign-InappBlackWhiteList-SI-6   |
       |campaign-InappBlackWhiteList-SI-7   |
     Given i create new campaigns, new zoneset with domains
-      |Campaign Name                             |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                          |limitation           |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |app_include                     |app_exclude|
-      |campaign-InappBlackWhiteList-SI-1         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-1}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[{app2,2}] |
-      |campaign-InappBlackWhiteList-SI-2         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-2}      |[]                   |80        |451               |1111           |67261             |[]                              |[{app2,2}] |
-      |campaign-InappBlackWhiteList-SI-3         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-3}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[]         |
-      |campaign-InappBlackWhiteList-SI-4         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-4}      |[]                   |80        |451               |1111           |67261             |[{app1,2}]                      |[{app1,2}] |
-      |campaign-InappBlackWhiteList-SI-5         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-5}      |[]                   |80        |451               |1111           |67261             |[]                              |[]         |
-      |campaign-InappBlackWhiteList-SI-6         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-6}      |[]                   |80        |451               |1111           |67261             |[]                              |[{app1,2};{app2,2};{app3,2}]|
-      |campaign-InappBlackWhiteList-SI-7         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-7}      |[]                   |80        |451               |1111           |67261             |[{app1,2};{app2,2};{app3,2}]    |[]                          |
+      |Campaign Name                             |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative     |Zonesets-zones Name                          |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |app_include                     |app_exclude|
+      |campaign-InappBlackWhiteList-SI-1         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-1}      |[]                   |80        |15300               |1111           |67261             |[{app1,2}]                      |[{app2,2}] |
+      |campaign-InappBlackWhiteList-SI-2         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-2}      |[]                   |80        |15300               |1111           |67261             |[]                              |[{app2,2}] |
+      |campaign-InappBlackWhiteList-SI-3         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-3}      |[]                   |80        |15300               |1111           |67261             |[{app1,2}]                      |[]         |
+      |campaign-InappBlackWhiteList-SI-4         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-4}      |[]                   |80        |15300               |1111           |67261             |[{app1,2}]                      |[{app1,2}] |
+      |campaign-InappBlackWhiteList-SI-5         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-5}      |[]                   |80        |15300               |1111           |67261             |[]                              |[]         |
+      |campaign-InappBlackWhiteList-SI-6         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-6}      |[]                   |80        |15300               |1111           |67261             |[]                              |[{app1,2};{app2,2};{app3,2}]|
+      |campaign-InappBlackWhiteList-SI-7         |75396         |241783       |false                  |14619             |{zone-zoneset-InappBlackWhiteList-SI-7}      |[]                   |80        |15300               |1111           |67261             |[{app1,2};{app2,2};{app3,2}]    |[]                          |
     And i update zone data by name
       |Zone Name                                 |is_mraid     |
       |zone-zoneset-InappBlackWhiteList-SI-1     |1            |
@@ -962,7 +937,7 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       |Campaign Name                                 |IO            |LineItem   |isServerProgrammatic?  |Deal\  Creative    |Zonesets-zones Name                             |limitation   |adUnitId  |Web_Section id    |publisher ID   |po_line_item ID   |
       |campaign-HB-PlacementG-SS-1*1                 |75396         |197418     |false                  |86                 |{zone-zoneset-HB-PlacementG-SS-1*1}             |[]           |69        |15227             |3728           |66831             |
-      |campaign-HB-PlacementG-ST-1*2                 |75396         |210722     |false                  |8158               |{zone-zoneset-HB-PlacementG-ST-1*2}             |[]           |93        |15227             |3728           |69134             |
+      |campaign-HB-PlacementG-ST-1*2                 |75396         |210722     |false                  |8158               |{zone-zoneset-HB-PlacementG-ST-1*2}             |[]           |93        |15227             |3728           |66830             |
       |campaign-HB-PlacementG-Billabord-970*250      |75396         |198082     |false                  |64                 |{zone-zoneset-HB-PlacementG-Billabord-970*250}  |[]           |58        |15227             |3728           |67231             |
       |campaign-HB-PlacementG-PG-1*1                 |75396         |241783     |false                  |1068               |{zone-zoneset-HB-PlacementG-PG-1*1}             |[]           |75        |15227             |3728           |66832             |
 
@@ -1022,7 +997,7 @@ Feature: Entities for tests
       |Campaign Name                                  |IO            |LineItem   |isServerProgrammatic?  |Creative          |Zonesets-zones Name                            |limitation         |adUnitId     |Web_Section id       |publisher ID   |po_line_item ID   |domain_include          |domain_exclude                     |
       |campaign-EHC-ST-1A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-1A}                       |[]                 |93           |15269                |3728           |66830             | [{daniref.com,1}]      | []                                |
       |campaign-EHC-ST-1B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-1B}                       |[]                 |93           |15269                |3728           |66830             | []                     | [{daniref.com,1}]                 |
-      |campaign-EHC-ST-2A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-2A}                       |[]                 |93           |15269                |3728           |66830             | [{danidom.com,1}]      | []                                |
+      |campaign-EHC-ST-2A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-2A}                       |[]                 |93           |15269                |3728           |66830             | [{danifalse.com,1}]      | []                                |
       |campaign-EHC-ST-2B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-2B}                       |[]                 |93           |15269                |3728           |66830             | []                     | [{danidom.com,1}]                 |
       |campaign-EHC-ST-3A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-3A}                       |[]                 |93           |15269                |3728           |66830             | [{danifalse.com,1}]    | []                                |
       |campaign-EHC-ST-3B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-3B}                       |[]                 |93           |15269                |3728           |66830             | []                     | [{danifalse.com,1}]               |
@@ -1030,7 +1005,7 @@ Feature: Entities for tests
       |campaign-EHC-ST-4B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-4B}                       |[]                 |93           |15269                |3728           |66830             | [{danidomInc.com,1}]   | [{danidom.com,1}]                 |
       |campaign-EHC-ST-5A                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-5A}                       |[]                 |93           |15269                |3728           |66830             | [{news.danidom.com,1}] | []                                |
       |campaign-EHC-ST-5B                             |75396         |244896     |false                  |8290              |{zone-zoneset-EHC-ST-5B}                       |[]                 |93           |15269                |3728           |66830             | []                     | [{news.danidom.com,1}]            |
-      |campaign-EHC-DT-SS-7A                         |75396         |197418     |false                  |86             |{zone-zoneset-EHC-DT-SS-7A}                       |[]                 |69           |15275                |3739            |69213             | [{danidom.com,1}]      |  [{danifalse.com,1}]              |
+      |campaign-EHC-DT-SS-7A                         |75396         |197418     |false                  |86             |{zone-zoneset-EHC-DT-SS-7A}                       |[]                 |69           |15275                |3739            |67164             | [{danidom.com,1}]      |  [{danifalse.com,1}]              |
     And i update campaign data by name
       |Campaign Name                             | run_on_unknown_domains  |
       |campaign-EHC-ST-1A                        |               1         |

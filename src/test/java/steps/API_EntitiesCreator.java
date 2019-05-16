@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
@@ -58,7 +59,8 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with Supply type", this::createCampaignsWithSupplyType);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
         And("i update (po_line_item|io_line_item) end date by id \\{([^}]+)\\}",this::updateEndDateEntityDataByID);
-        And("i update (campaign|zone|banner) data by (id|name)",this::updateEntityDataByID);
+        And("i update (po_line_item|io_line_item) with id \\{([^}]+)\\} filed \\{([^}]+)\\} to be \\{([^}]+)\\}",this::updateEntityFiledByID);
+        And("i update (campaign|zone|banner|io_line_item) data by (id|name)",this::updateEntityDataByID);
         And("i disable campaigns by name on db",this::removeAllCampaignsByName);
         And("i set campaigns capping on db",this::setCampaignCapping);
         And("i create new Deals",this::createMultipleDeals);
@@ -74,8 +76,15 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
         Given("^i create new campaigns with multiple creatives$", this::createCampaignsWithMultipleCreatives);
         Given("i updated bid_price_type for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setBidPriceTypeForPublisherAdunit);
-
     }
+
+
+    private void updateEntityFiledByID (String entityName, String id, String field, String updated){
+        SqlWorkflowUtils.setColumnInWorkflow(entityName + 's', "id", id, field, updated);
+    }
+
+
+
 
     private void createCampaignsWithMultipleCreatives(DataTable campaigns) {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
