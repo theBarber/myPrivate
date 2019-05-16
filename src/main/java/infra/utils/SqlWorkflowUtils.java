@@ -1,12 +1,12 @@
 package infra.utils;
 
-import static org.junit.Assert.fail;
+import ramp.lift.uas.automation.SystemUnderTest;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import ramp.lift.uas.automation.SystemUnderTest;
+import static org.junit.Assert.fail;
 
 public class SqlWorkflowUtils {
 
@@ -58,10 +58,10 @@ public class SqlWorkflowUtils {
           }
 
       } catch (SQLException e) {
-      		if(tableName.equals("zones") && columnName.equals("status") && columnValueToChange.equals("1")){
-				System.out.println("zone doesn't exist in database");
-				return;
-			}
+//      		if(tableName.equals("zones") && columnName.equals("status") && columnValueToChange.equals("1")){
+//				System.out.println("zone doesn't exist in database");
+//				return;
+//			}
           e.printStackTrace();
           fail(e.getMessage());
       }
