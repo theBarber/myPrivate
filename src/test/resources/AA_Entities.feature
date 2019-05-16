@@ -5,9 +5,9 @@
 
 Feature: Entities for tests
 
-  Background: health check
-    When Sending a healthcheck request to RAMP-IO
-    Then The response code is 200
+#  Background: health check
+#    When Sending a healthcheck request to RAMP-IO
+#    Then The response code is 200
 
     Scenario: entities end-date update
       And i update po_line_item end date by id {17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
