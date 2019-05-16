@@ -192,7 +192,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #  step 1: 3 req from device 89
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    Given i send 3 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
@@ -203,7 +203,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #  step 2: 2 req from device 90
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 2 headerBidding post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
@@ -214,12 +214,12 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     #  step 3: 2 req from device 89. should return passback since capping = 5;
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 2 headerBidding post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
     And The response code is 200
     And The responses are passback
     Given I sleep for 3 seconds
 #  step 4: renewal after 4 mins
     And I sleep for 250 seconds
-    Given i send 2 headerBidding post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
