@@ -603,7 +603,7 @@
         "publisherId" : 3728
       }
     }]},
-"Send HB request 1X2 size for publisher 3666":
+"Send HB request 1X1 size for publisher 3666":
 {"x-ut-hb-params":[
   {
     "bidRequestId": "21b46f04859b33",
@@ -611,7 +611,7 @@
     "placementId": "10433394",
     "publisherId": 3666,
     "sizes": [
-      [1,2]
+      [1,1]
     ],
     "timeout": 700,
     "hbadaptor": "prebid",
@@ -619,7 +619,7 @@
       "publisherId" : 3666
     }
   }]},
-  "Send HB request 1X2 size for publisher 3675":
+  "Send HB request 1X1 size for publisher 3675":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f04859b33",
@@ -627,7 +627,7 @@
       "placementId": "10433394",
       "publisherId": 3675,
       "sizes": [
-        [1,2]
+        [1,1]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",
