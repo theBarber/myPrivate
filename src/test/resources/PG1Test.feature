@@ -17,8 +17,8 @@ Feature: PG1 x - limitation support
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
     When I send 1 times an ad request with parameter {optimize=0} for zone named {zone-zoneset-PG1-2} to UAS
-    Then The response code is 204
-    And The responses are passback
+    Then The response code is 200
+    And The response not contains script
     When I send 1 times an ad request with parameter {optimize=0} for zone named {zone-zoneset-ST-1} to UAS
     Then The response code is 200
     And The response contains script
@@ -54,8 +54,8 @@ Feature: PG1 x - limitation support
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=255&optimize=0}
-    Then The response code is 204
-    And The responses are passback
+    Then The response code is 200
+    And The response not contains script
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=484&optimize=0}
     Then The response code is 200
     And The response contains script
