@@ -5,9 +5,9 @@
 
 Feature: Entities for tests
 
-  Background: health check
-    When Sending a healthcheck request to RAMP-IO
-    Then The response code is 200
+#  Background: health check
+#    When Sending a healthcheck request to RAMP-IO
+#    Then The response code is 200
 
     Scenario: entities end-date update
       And i update po_line_item end date by id {67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
@@ -848,7 +848,7 @@ Feature: Entities for tests
 #    And i create new zone named {zone-zoneset-PG1-6} with limitation {[]} with adUnitId 92 and web_section id 14403 with affiliateId 3675 with po_line_item_id 67000
     Given i create new campaigns with new zoneset
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
-      |campaign-PG1-Desktop-limited        |75396         |210722     |false                  |24315           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
+      |campaign-PG1-Desktop-limited        |75396         |222908     |false                  |24315           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
       |campaign-ST1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-ST-1,zone-zoneset-ST-2} |
 #      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
 #      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
