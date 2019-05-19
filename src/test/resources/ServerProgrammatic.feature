@@ -104,7 +104,6 @@ Feature: Programmatic flow support
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-inApp-ST-1-banner-1} 100% of the time
 
-
 #  -----------------------------------------------------Optimize-------------------------------------------------------------------
   @optimize
   Scenario: 1. basic Call to Programmatic GW - zone tag
