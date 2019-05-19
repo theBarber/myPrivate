@@ -18,7 +18,7 @@ Feature: Domain Targeting tests
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-1A-banner-1} 100% of the time
 
-  Scenario: 1B. send zone requests, ex host is not a false domain + in black list
+  Scenario: 1B. send zone requests, ex  host is not a false domain + in black list
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://daniref.com} as referer string to send my requests to uas
@@ -109,7 +109,7 @@ Feature: Domain Targeting tests
     And The response code is 200
     And The responses are passback
 
-  Scenario: 7A. send DT requests, referer is a false domain, should choose domain as ex host.
+  Scenario: 7A. send DT requests, referer is a false domain, should choose domain as effective host.
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danifalse.com} as referer string to send my requests to uas

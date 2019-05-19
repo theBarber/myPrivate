@@ -8,6 +8,7 @@
 @cli
 @parallel
 @noAA
+@FalseDom
 
 
 Feature: ROFD
