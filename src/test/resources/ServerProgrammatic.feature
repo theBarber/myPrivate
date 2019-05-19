@@ -155,14 +155,14 @@ Feature: Programmatic flow support
     Then The response code is 200
     And The response contains script
     And The response has impression-url
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-4-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
     When I send impression requests to UAS
   @optimize
   Scenario: 7. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then I sleep for 1 seconds
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 198 to UAS for publisher 3711 with domain {test.com&requestid=systemTestC&unlimited=1&optimize=1&domain=remove}
     And The synchronized response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-4-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
     When I send impression requests to UAS
   @optimize
   Scenario: 8. basic Call to Programmatic GW, GW doing auction, last ad selected - Header bidding
@@ -170,8 +170,8 @@ Feature: Programmatic flow support
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X2} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&requestid=systemTestC&optimize=1&domain=remove}
     And The response code is 200
     And The response contains script
-    And all HB responses contains adId with id of entity named {campaign-server-prog-ST-4-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-server-prog-ST-3-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains script
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-4-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
