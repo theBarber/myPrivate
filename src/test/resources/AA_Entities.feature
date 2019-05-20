@@ -849,7 +849,7 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       |Campaign Name                       |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                              |
       |campaign-PG1-Desktop-limited        |75396         |222908     |false                  |24315           |{zone-zoneset-PG1-1-allowed,zone-zoneset-PG1-2} |
-      |campaign-ST1-Desktop                |75396         |210722     |false                  |204             |{zone-zoneset-ST-1,zone-zoneset-ST-2} |
+      |campaign-ST1-Desktop                |75396         |210722     |false                  |24402             |{zone-zoneset-ST-1,zone-zoneset-ST-2} |
 #      |campaign-PG1-Smartphone-limited     |75396         |210722     |false                  |14610           |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
 #      |campaign-PG1-Smartphone             |75396         |210722     |false                  |204             |{zone-zoneset-PG1-3-allowed,zone-zoneset-PG1-4} |
 #      |campaign-PG1-Tablet-limited         |75396         |210722     |false                  |14611           |{zone-zoneset-PG1-5-allowed,zone-zoneset-PG1-6} |
@@ -865,7 +865,7 @@ Feature: Entities for tests
     And i update banner data by name
       |Banner Name                     |limitation       |
       |campaign-PG1-Desktop-limited-banner-1   |[[[51,"==",1]]]  |
-#      |campaign-PG1-Smartphone-limited-banner-1|[[[49,"==",1]]]  |
+      |campaign-ST1-Desktop-banner-1|[[[51,"==",1]]]  |
     And i update zone data by name
       |Zone Name                    |is_secure    |
       |zone-zoneset-PG1-1-allowed   |1            |
