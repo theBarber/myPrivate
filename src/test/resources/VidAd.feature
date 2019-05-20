@@ -57,4 +57,4 @@ Feature: video Adhision new ad unit tests
   Scenario: 4. InstreamVid, zone req, vpaid_support=1, not inapp. banner with moat wrapper expected
     When I send 1 times an ad request with parameter {optimize=0&unlimited=1&domain=dnu-tt&vpaid_support=1&requestid=vidAd} for zone named {zone-zoneset-InstreamVid-View-SP} to UAS
     And The response has a moat wrapper with params advanced string with advertiserid = 22420, ioid = 407981, iolineitemid = 244699, bannername = {campaign-InstreamVid-View-SP-banner-1}, campaignname = {campaign-InstreamVid-View-SP}, zonename = {zone-zoneset-InstreamVid-View-SP}, MoatWEBID = 3708
-    And The response contains slicer1=342179&slicer2=190574&zMoatWEBID=3708
+    And The response contains &zMoatWEBID=3708
