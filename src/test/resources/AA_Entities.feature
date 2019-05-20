@@ -1019,7 +1019,18 @@ Feature: Entities for tests
       |campaign-EHC-ST-5A                        |               1         |
       |campaign-EHC-ST-5B                        |               1         |
       |campaign-EHC-DT-SS-7A                    |               1         |
-
+    And i update zone data by name
+      |Zone Name                   |     is_secure     |
+      |zone-zoneset-EHC-ST-1A      |        1          |
+      |zone-zoneset-EHC-ST-1B      |        1          |
+      |zone-zoneset-EHC-ST-2A      |        1          |
+      |zone-zoneset-EHC-ST-2B      |        1          |
+      |zone-zoneset-EHC-ST-3A      |        1          |
+      |zone-zoneset-EHC-ST-3B      |        1          |
+      |zone-zoneset-EHC-ST-4A      |        1          |
+      |zone-zoneset-EHC-ST-4B      |        1          |
+      |zone-zoneset-EHC-ST-5A      |        1          |
+      |zone-zoneset-EHC-ST-5B      |        1          |
 
 
   @DynamicPricing
