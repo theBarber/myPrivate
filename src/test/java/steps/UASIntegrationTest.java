@@ -13,7 +13,6 @@ import infra.cli.process.CliCommandExecution;
 import infra.module.WithId;
 import infra.support.StringUtils;
 import infra.utils.HttpContentTest;
-import io.qameta.allure.Flaky;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -658,7 +657,7 @@ public class UASIntegrationTest extends BaseTest {
 
     }
 
-    @Flaky
+
     private void checkTheNumberOfSelectedEntityOfAsyncResponses(String urlType, String fieldName, String entityType, String entityName, Double percent) {
         Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
         if (urlType.equalsIgnoreCase("impression")) {
@@ -704,7 +703,7 @@ public class UASIntegrationTest extends BaseTest {
                 actualRate * 100, 10d);
     }
 
-    @Flaky
+
     public void healthCheckResponseContainsParams(Integer advertiserid, Integer ioid, Integer iolineitemid, String bannername, String campaignname, String zoneByName, Integer publisherid) {
       System.out.println("started!!!!!!!!");
         System.out.println("111111111");
