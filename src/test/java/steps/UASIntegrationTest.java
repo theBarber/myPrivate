@@ -713,22 +713,19 @@ public class UASIntegrationTest extends BaseTest {
     }
 
     public void healthCheckResponseContainsParams(Integer advertiserid, Integer ioid, Integer iolineitemid, String bannername, String campaignname, String zoneByName, Integer publisherid) {
-      System.out.println("started!!!!!!!!");
-        System.out.println("111111111");
         String toCheck;
         Banner banner = sut.getExecutorCampaignManager().getBanner(bannername).orElseThrow(() -> new AssertionError("The banner " + bannername + " does not exist!"));
         Zone zone =  sut.getExecutorCampaignManager().getZone(zoneByName).orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
         Campaign campaign =  sut.getExecutorCampaignManager().getCampaign(campaignname).orElseThrow(() -> new AssertionError("The campaign " + campaignname + " does not exist!"));
-        toCheck = "https://svastx.moatads.com/undertonevpaid8571606/template.xml?tmode=1&vast_url=https%3A%2F%2Fpubads.g.doubleclick.net%2Fgampad%2Fads%3Fsz%3D640x480%26iu%3D%2F124319096%2Fexternal%2Fsingle_ad_samples%26ciu_szs%3D300x250%26impl%3Ds%26gdfp_req%3D1%26env%3Dvp%26output%3Dvast%26unviewed_position_start%3D1%26cust_params%3Ddeployment%253Ddevsite%2526sample_ct%253Dredirectlinear%26correlator%3D&"
-                + "level1=" + advertiserid
-                + "level2=" + ioid
-                + "level3=" + iolineitemid
-                + "level4=" + banner.getId()
-                + "slicer1=" + campaign.getId()
-                + "slicer2=" + zone.getId()
-                + "zMoatWEBID=" + publisherid
-                + "&ad_title=undefined&ad_duration=00:00:15&ad_width=640&ad_height=360";
-        System.out.print("String Someting =" + toCheck);
+        toCheck = "https://svastx.moatads.com/undertonevpaid8571606/template.xml?tmode=1&vast_url=https%3A%2F%2Fstorage.googleapis.com%2Fgvabox%2Fexternal_sample%2Fvpaid2jslinear.xml&"
+                + "level1=" + advertiserid + "&"
+                + "level2=" + ioid+ "&"
+                + "level3=" + iolineitemid+ "&"
+                + "level4=" + banner.getId()+ "&"
+                + "slicer1=" + campaign.getId()+ "&"
+                + "slicer2=" + zone.getId()+ "&"
+                + "zMoatWEBID=" + publisherid+ "&";
+        System.out.print("String expected string is =" + toCheck);
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             Assert.assertThat(content, Matchers.containsString(toCheck));
 

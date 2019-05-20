@@ -8,8 +8,10 @@ Feature: Domain Targeting tests
   Background: health check
     When Sending a healthcheck request to UAS
     Then The response code is 200
+    Given I sleep for 120 seconds
 
   Scenario: 1A. send zone requests, ex host is not a false domain + in white list
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://daniref.com} as referer string to send my requests to uas
@@ -19,6 +21,7 @@ Feature: Domain Targeting tests
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-1A-banner-1} 100% of the time
 
   Scenario: 1B. send zone requests, ex  host is not a false domain + in black list
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://daniref.com} as referer string to send my requests to uas
@@ -27,6 +30,7 @@ Feature: Domain Targeting tests
     And The responses are passback
 
   Scenario: 2B. send zone requests, ex referer is not a false domain + in black list
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {optimize=0&domain=danidom.com} for zone named {zone-zoneset-EHC-ST-2B} to UAS
@@ -34,6 +38,7 @@ Feature: Domain Targeting tests
     And The responses are passback
 
   Scenario: 3A. send zone requests, ex referer is a false domain + in white list
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danifalse.com} as referer string to send my requests to uas
@@ -43,6 +48,7 @@ Feature: Domain Targeting tests
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-3A-banner-1} 100% of the time
 
   Scenario: 3B. send zone requests, ex referer is not a false domain + in black list
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danifalse.com} as referer string to send my requests to uas
@@ -54,6 +60,7 @@ Feature: Domain Targeting tests
   Given I sleep for 1 seconds
 
   Scenario: 4A. send zone requests, make sure a complexed referer is extracted correctly.
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
@@ -62,7 +69,8 @@ Feature: Domain Targeting tests
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-4A-banner-1} 100% of the time
 
-  Scenario: 4B. send zone requests, make sure a complexed referer is extracted correctly.
+  Scenario: 4B. send zone requests, make sure a complexed referer is extracted correctly
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
@@ -71,6 +79,7 @@ Feature: Domain Targeting tests
     And The responses are passback
 
   Scenario: 5A. send zone requests, make sure a complexed referer is extracted correctly.
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
@@ -88,6 +97,7 @@ Feature: Domain Targeting tests
     And The responses are passback
 
   Scenario: 6A. send DT requests, ex is the ref, which is not a false domain + in white list. comp reffrer.
+    Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
