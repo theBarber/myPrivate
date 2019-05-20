@@ -56,11 +56,11 @@ Feature: PG1 x - limitation support
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=255&optimize=0}
     Then The response code is 200
     And The response not contains script
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=484&optimize=0}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=482&optimize=0}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=485&optimize=0}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=483&optimize=0}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
@@ -73,11 +73,11 @@ Feature: PG1 x - limitation support
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=484&optimize=0}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=482&optimize=0}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=485&optimize=0}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=483&optimize=0}
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
