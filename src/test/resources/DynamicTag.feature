@@ -44,7 +44,9 @@ Feature: Dynamic Tag flow support
       And The response code is 200
       And The responses has impression-urls
       And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-2-t-3-banner-1} 100% of the time
-      Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&unlimited=1&optimize=0}
+      Given I clear all cookies from uas requests
+      Given I add header of {x-forwarded-for} with value {27.116.59.255}
+      Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&optimize=0}
       And The response code is 200
       And The response contains script
       And The responses has impression-urls
