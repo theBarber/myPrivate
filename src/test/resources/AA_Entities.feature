@@ -865,7 +865,7 @@ Feature: Entities for tests
     And i update banner data by name
       |Banner Name                     |limitation       |
       |campaign-PG1-Desktop-limited-banner-1   |[[[51,"==",1]]]  |
-      |campaign-ST1-Desktop-banner-1|[[[51,"==",1]]]  |
+#      |campaign-ST1-Desktop-banner-1          |[[[51,"==",1]]]  |
     And i update zone data by name
       |Zone Name                    |is_secure    |
       |zone-zoneset-PG1-1-allowed   |1            |
