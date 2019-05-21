@@ -40,11 +40,13 @@ Feature: Dynamic Tag flow support
 
   Scenario:3. Basic DT logic with zone level filtering
       Given I add cookie UTID with random value to my requests to uas
-      Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&optimize=0}
+      Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&optimize=0}
       And The response code is 200
       And The responses has impression-urls
       And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-2-t-3-banner-1} 100% of the time
-      Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&unlimited=1&optimize=0}
+      Given I clear all cookies from uas requests
+      Given I add header of {x-forwarded-for} with value {27.116.59.255}
+      Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&optimize=0}
       And The response code is 200
       And The response contains script
       And The responses has impression-urls
@@ -82,12 +84,17 @@ Feature: Dynamic Tag flow support
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-2-t-2-banner-1} 99% of the time
   @optimize
   Scenario:3. Basic DT logic with zone level filtering
+    And I sleep for 1 seconds
+    Given I clear all headers from uas requests
     Given I add cookie UTID with random value to my requests to uas
-    Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&optimize=1}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&optimize=1}
     And The response code is 200
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-2-t-3-banner-1} 100% of the time
-    Then i send 2 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&unlimited=1&optimize=1}
+    Given I clear all cookies from uas requests
+    And I sleep for 1 seconds
+    Given I add header of {x-forwarded-for} with value {27.116.59.255}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {dynamic3.com&optimize=1}
     And The response code is 200
     And The response contains script
     And The responses has impression-urls

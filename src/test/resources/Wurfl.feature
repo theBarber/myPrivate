@@ -12,6 +12,8 @@ Feature: warfle tests - wurfl limitation in campaign and zone level, contextual 
     Then The response code is 200
 
   Scenario: contextual targeting
+    When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
+    And I sleep for 600 seconds
     When I send 1 times an ad request with parameter {optimize=0&loc=http://www.cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains script
