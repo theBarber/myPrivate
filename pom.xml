@@ -71,7 +71,7 @@
 				<filtering>true</filtering>
 				<includes>
 					<include>*.properties</include>
-					<include>k8s_${env}_password</include>
+					<include>k8s_integration_password</include>
 				</includes>
 			</resource>
 		</resources>
@@ -97,7 +97,7 @@
 					<forkCount>10</forkCount>
 					<reuseForks>true</reuseForks>				
 					<includes>
-						<include>**/*Test.class</include>
+						<include>**/*.class</include>
 					</includes>
 				</configuration>
 			</plugin>
