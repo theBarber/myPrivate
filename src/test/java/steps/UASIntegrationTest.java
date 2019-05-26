@@ -1,33 +1,18 @@
 package steps;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isOneOf;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.*;
-
+import co.unruly.matchers.OptionalMatchers;
+import co.unruly.matchers.StreamMatchers;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
-import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.file.Files;
-import java.util.*;
-import java.util.AbstractMap.SimpleImmutableEntry;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.LongAdder;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import cucumber.api.PendingException;
-import gherkin.lexer.Fa;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import entities.Banner;
+import entities.Campaign;
+import entities.Zone;
+import infra.assertion.ListItemAt;
+import infra.cli.process.CliCommandExecution;
+import infra.module.WithId;
+import infra.support.StringUtils;
+import infra.utils.HttpContentTest;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -39,22 +24,27 @@ import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import co.unruly.matchers.OptionalMatchers;
-import co.unruly.matchers.StreamMatchers;
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import entities.Zone;
-import entities.Banner;
-import entities.Campaign;
-import infra.assertion.ListItemAt;
-import infra.cli.process.CliCommandExecution;
-import infra.module.WithId;
-import infra.support.StringUtils;
-import infra.utils.HttpContentTest;
 import ramp.lift.uas.automation.UASRequestModule;
+
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.AbstractMap.SimpleImmutableEntry;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.LongAdder;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 
 /**
@@ -667,6 +657,7 @@ public class UASIntegrationTest extends BaseTest {
 
     }
 
+
     private void checkTheNumberOfSelectedEntityOfAsyncResponses(String urlType, String fieldName, String entityType, String entityName, Double percent) {
         Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
         if (urlType.equalsIgnoreCase("impression")) {
@@ -711,6 +702,7 @@ public class UASIntegrationTest extends BaseTest {
         assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
                 actualRate * 100, 10d);
     }
+
 
     public void healthCheckResponseContainsParams(Integer advertiserid, Integer ioid, Integer iolineitemid, String bannername, String campaignname, String zoneByName, Integer publisherid) {
         String toCheck;
