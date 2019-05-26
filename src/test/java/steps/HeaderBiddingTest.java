@@ -3,7 +3,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import io.qameta.allure.Flaky;
 import org.apache.http.HttpResponse;
 import org.junit.Assert;
 import org.junit.AssumptionViolatedException;
@@ -378,7 +377,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
 
     }
 
-    @Flaky
+
     public void responsesAdsContainEntityWithId(String entity, String value) {
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             JsonNode responseInJson = null;
