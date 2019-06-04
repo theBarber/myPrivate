@@ -1,32 +1,11 @@
 package ramp.lift.uas.automation;
 
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.not;
-
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Stream;
-
 import cucumber.api.Scenario;
+import entities.CampaignManager;
 import entities.ExecutorCampaignManager;
 import entities.RampAppRequestModule;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonParser;
-import infra.utils.CouchBaseUtils;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.junit.Assume;
-
-import entities.CampaignManager;
 import infra.assertion.Assert;
 import infra.assertion.ScenarioWriter;
 import infra.cli.conn.CliConnection;
@@ -35,7 +14,21 @@ import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.conn.RootLinuxCliConnection;
 import infra.module.AbstractModuleImpl;
 import infra.support.StringUtils;
+import infra.utils.CouchBaseUtils;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.junit.Assume;
 import ramp.lift.uas.automation.UAScontainer.Builder;
+
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
+
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
 
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
 	final int _o;
@@ -125,7 +118,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	    case "@campaign":
 				if (campaignManager == null)
-						campaignManager = new CampaignManager();
+						campaignManager = new CampaignManager(config.get("env.name"));
 						break;
 		case "@RampAppRequestModule":
 				if(rampAppCreateEntitiesManager == null)
@@ -473,14 +466,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public CampaignManager getCampaignManager() {
 	  if (campaignManager == null) {
-                    campaignManager = new CampaignManager();
+                    campaignManager = new CampaignManager(config.get("env.name"));
 	  }
 		return campaignManager;
 	}
 
 	public ExecutorCampaignManager getExecutorCampaignManager() {
 		if (executorCampaignManager == null) {
-			executorCampaignManager = new ExecutorCampaignManager();
+			executorCampaignManager = new ExecutorCampaignManager(config.get("env.name"));
 		}
 		return executorCampaignManager;
 	}

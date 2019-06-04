@@ -28,7 +28,55 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
+	<profiles>
+
+		<profile>
+			<id>staging</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>staging</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>integration</id>
+			<properties>
+				<env>integration</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>production</id>
+			<properties>
+				<env>production</env>
+			</properties>
+		</profile>
+
+	</profiles>
+
 	<build>
+
+		<!-- Loading all ${} -->
+		<filters>
+			<filter>src/main/resources/env/config.${env}.properties</filter>
+		</filters>
+
+		<!-- Map ${} into resources -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.properties</include>
+					<include>k8s_integration_password</include>
+				</includes>
+			</resource>
+		</resources>
+
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
