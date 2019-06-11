@@ -5,8 +5,8 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:BlackWhiteList.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/BlackWhiteList_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:BlackWhiteList.feature", plugin = {"pretty"})
+//        "infra.RotatingJSONFormatter:target/cucumber/BlackWhiteList_$TIMESTAMP$.json"})
 public class BlackWhiteListTest extends BaseTest{
     public BlackWhiteListTest()
     {

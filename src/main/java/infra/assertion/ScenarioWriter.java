@@ -1,13 +1,14 @@
 package infra.assertion;
 
+import cucumber.api.Result;
+import cucumber.api.Scenario;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collection;
 
-import cucumber.api.Scenario;
-
-public class ScenarioWriter extends Writer implements Scenario {
+public abstract class ScenarioWriter extends Writer implements Scenario {
 
     protected StringWriter local;
     protected final Scenario scenario;
@@ -45,7 +46,7 @@ public class ScenarioWriter extends Writer implements Scenario {
 	return scenario.getSourceTagNames();
     }
 
-    public String getStatus() {
+    public Result.Type getStatus() {
 	return scenario.getStatus();
     }
 

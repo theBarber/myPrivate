@@ -1,16 +1,13 @@
 package steps;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
 import infra.utils.SqlWorkflowUtils;
+import io.cucumber.datatable.DataTable;
 import org.junit.runner.RunWith;
 
-import java.nio.charset.Charset;
 import java.util.List;
-
 import java.util.Random;
-import java.util.UUID;
 
 
 @RunWith(Cucumber.class)

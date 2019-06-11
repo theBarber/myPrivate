@@ -47,6 +47,9 @@ public class BaseTest implements En {
     });
 
     After(scenario -> {
+        if(scenario.isFailed()){
+            System.out.println(scenario.getId());
+        }
       sut.teardown(scenario.getSourceTagNames(), config);
     });
 

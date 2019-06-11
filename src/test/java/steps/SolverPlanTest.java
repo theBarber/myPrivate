@@ -1,24 +1,20 @@
 package steps;
 
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import infra.ParameterPlaceholderParser;
+import infra.utils.S3Client;
+import io.cucumber.datatable.DataTable;
+import org.junit.Assert;
+import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.junit.Assert;
-import org.junit.runner.RunWith;
-
-import cucumber.api.CucumberOptions;
-import cucumber.api.DataTable;
-import cucumber.api.junit.Cucumber;
-import infra.ParameterPlaceholderParser;
-import infra.utils.S3Client;
 
 /**
  * Created by assafm on 02/11/2016.
@@ -34,7 +30,7 @@ public class SolverPlanTest extends BaseTest {
 
       ParameterPlaceholderParser parameterPlaceholderParser = new ParameterPlaceholderParser<>(
           sut.getCampaignManager());
-      List<String> slicesAsList = slices.asList(String.class).stream()
+      List<String> slicesAsList = slices.asList().stream()
           .map(parameterPlaceholderParser::replacePlaceholderOf).collect(Collectors.toList());
       uploadNew(slicesAsList);
     });

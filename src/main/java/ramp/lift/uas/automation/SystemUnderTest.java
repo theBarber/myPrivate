@@ -1,5 +1,6 @@
 package ramp.lift.uas.automation;
 
+import cucumber.api.Result;
 import cucumber.api.Scenario;
 import entities.CampaignManager;
 import entities.ExecutorCampaignManager;
@@ -65,7 +66,17 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 	public synchronized void setup(Scenario scenario, Map<String, String> config) {
-		this.scenarioWriter = new ScenarioWriter(scenario);
+		this.scenarioWriter = new ScenarioWriter(scenario) {
+			@Override
+			public String getUri() {
+				return null;
+			}
+
+			@Override
+			public List<Integer> getLines() {
+				return null;
+			}
+		};
 		this.config = config;
 		this.exception =  new AtomicReference<>();
 	scenario.getSourceTagNames().forEach(tag -> {
@@ -602,7 +613,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 	@Override
-	public String getStatus() {
+	public Result.Type getStatus() {
 		return scenarioWriter.getStatus();
 	}
 
@@ -625,5 +636,15 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	@Override
 	public String getId() {
 		return scenarioWriter.getId();
+	}
+
+	@Override
+	public String getUri() {
+		return null;
+	}
+
+	@Override
+	public List<Integer> getLines() {
+		return null;
 	}
 }
