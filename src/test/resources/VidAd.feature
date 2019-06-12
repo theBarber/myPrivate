@@ -11,7 +11,7 @@ Feature: video Adhision new ad unit tests
     When I send 1 times an ad request with parameter {requestid=vidAd&optimize=0&unlimited=1&domain=dnu-tt} for zone named {zone-zoneset-vidAd-SP} to UAS
     Then The response code is 200
     And The response contains bannerid
-    And The response has impression-url
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-vidAd-SP-banner-1} 100% of the time
     When I send impression requests to UAS
 

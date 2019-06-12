@@ -2,14 +2,10 @@ package steps;
 
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
-import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.process.CliCommandExecution;
-import infra.utils.CouchBaseUtils;
 import infra.utils.JenkinsClient;
 import infra.utils.SqlWorkflowUtils;
-
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.hamcrest.Matchers;
@@ -21,10 +17,12 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.*;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
+
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -32,8 +30,8 @@ import static sun.swing.MenuItemLayoutHelper.max;
 
 
 
-@CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",
-    "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",})
+//    "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
 
 public class CacheProcessTest extends BaseTest {

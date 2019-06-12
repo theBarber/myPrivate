@@ -1,24 +1,20 @@
 package steps;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-
-import java.util.Optional;
-
-import org.junit.Assert;
-import org.junit.runner.RunWith;
-
 import co.unruly.matchers.OptionalMatchers;
-import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import entities.Banner;
 import entities.Campaign;
 import entities.CampaignManager;
 import entities.CampaignPlus;
+import org.junit.Assert;
+import org.junit.runner.RunWith;
+
+import java.util.Optional;
+
+import static org.hamcrest.CoreMatchers.*;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:CreateCampaigns.feature", tags = "@campaign")
+//@CucumberOptions(features = "classpath:CreateCampaigns.feature", tags = "@campaign")
 
 public class CreateCampaigns extends BaseTest {
 

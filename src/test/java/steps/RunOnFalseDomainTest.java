@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:RunOnFalseDomain.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/RunOnFalseDomain_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:RunOnFalseDomain.feature", plugin = {"pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/RunOnFalseDomain_$TIMESTAMP$.json"})
 
 public class RunOnFalseDomainTest extends BaseTest{
     public RunOnFalseDomainTest(){

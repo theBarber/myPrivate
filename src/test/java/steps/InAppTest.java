@@ -5,8 +5,8 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:InAppTest.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/InAppTest_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:InAppTest.feature", plugin = {"pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/InAppTest_$TIMESTAMP$.json"})
 public class InAppTest extends BaseTest{
     public InAppTest()
     {

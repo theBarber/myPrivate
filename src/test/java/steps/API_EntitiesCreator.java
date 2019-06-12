@@ -3,7 +3,6 @@ package steps;
 import co.unruly.matchers.OptionalMatchers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
@@ -25,8 +24,8 @@ import static org.junit.Assert.assertThat;
 
 
 
-@CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/API_Examples_$TIMESTAMP$.json"})
+//@CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/API_Examples_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
 public class API_EntitiesCreator extends BaseTest{
     final private String CREATIVES_SOURCE_FILE_PATH = "/input_files/creativesTemplates.json";

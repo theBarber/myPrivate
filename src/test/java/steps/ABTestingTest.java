@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import entities.ramp.models.Experiment;
 import entities.ramp.models.ExperimentGroup;
@@ -16,8 +15,8 @@ import java.util.List;
  * Created by AssafM on 11/01/2017.
  */
 
-@CucumberOptions(features = "classpath:ABTesting.feature", plugin = { "pretty",
-		"infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json" })
+//@CucumberOptions(features = "classpath:ABTesting.feature", plugin = { "pretty",})
+//		"infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 public class ABTestingTest extends BaseTest {
 	List<Integer> createdExperimentGroupIds = new ArrayList<>();

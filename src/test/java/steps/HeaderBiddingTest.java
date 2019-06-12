@@ -22,8 +22,8 @@ import static org.junit.Assert.assertTrue;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
 public class HeaderBiddingTest extends BaseTest {
     final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/headerBiddingPostRequests.json";
     final private Integer NO_UT_INDEX = 3;

@@ -51,8 +51,8 @@ import static org.junit.Assert.*;
  * Created by noam on 29/09/16.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:UASIntegration.feature", plugin = {"pretty",
-    "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:UASIntegration.feature", plugin = {"pretty",})
+//    "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json"})
 public class UASIntegrationTest extends BaseTest {
 
   public UASIntegrationTest() {
@@ -200,7 +200,7 @@ public class UASIntegrationTest extends BaseTest {
     });
 
 
-      Then("The synchronized responses? are passback?", () -> {
+      Then("The synchronized responses are passback", () -> {
 
           Map<Boolean, Long> countUrls =
                   sut.getUASRquestModule().getSynchronizedResponses()
@@ -618,7 +618,7 @@ public class UASIntegrationTest extends BaseTest {
         }, impExecutorService).join());
     return impressionsSent;
   }
-    public void checkTheNumberOfSelectedEntity(String urlType, String fieldName, String entityType, String entityName, Double percent)
+    public void checkTheNumberOfSelectedEntity(String urlType, String fieldName, String entityType, String entityName, Integer percent)
     {
         if(sut.getUASRquestModule().getSynchronizedResponses().size()==0)
             checkTheNumberOfSelectedEntityOfAsyncResponses(urlType,fieldName,entityType,entityName,percent);
@@ -626,7 +626,7 @@ public class UASIntegrationTest extends BaseTest {
             checkTheNumberOfSelectedEntityOfSyncronizedResponses(urlType,fieldName,entityType,entityName,percent);
     }
 
-    private void checkTheNumberOfSelectedEntityOfSyncronizedResponses(String urlType, String fieldName, String entityType, String entityName, Double percent) {
+    private void checkTheNumberOfSelectedEntityOfSyncronizedResponses(String urlType, String fieldName, String entityType, String entityName, Integer percent) {
         assertThat(entityType, isOneOf("campaign", "banner", "zone"));
         assertThat(urlType, is("impression"));
         Optional<? extends WithId<Integer>> expectedEntity = sut.getExecutorCampaignManager().getterFor(entityType)
@@ -658,7 +658,7 @@ public class UASIntegrationTest extends BaseTest {
     }
 
 
-    private void checkTheNumberOfSelectedEntityOfAsyncResponses(String urlType, String fieldName, String entityType, String entityName, Double percent) {
+    private void checkTheNumberOfSelectedEntityOfAsyncResponses(String urlType, String fieldName, String entityType, String entityName, Integer percent) {
         Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
         if (urlType.equalsIgnoreCase("impression")) {
             urlExtractor = UASIntegrationTest::getImpressionUrl;

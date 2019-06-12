@@ -1,23 +1,12 @@
 package steps;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.time.Instant;
-import java.util.Random;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
+import com.couchbase.client.java.error.DocumentDoesNotExistException;
 import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonElement;
 import gherkin.deps.com.google.gson.JsonParser;
 import infra.utils.SqlWorkflowUtils;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -31,15 +20,23 @@ import org.joda.time.Days;
 import org.joda.time.MutableDateTime;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
-import com.couchbase.client.java.error.DocumentDoesNotExistException;
 import ramp.lift.uas.automation.CouchbaseBucketModule;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.time.Instant;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * Created by kereng on 5/23/2017.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"classpath:CrossDeviceCappingExperiment.feature","classpath:CrossDeviceCappingNoExperiment.feature"}, plugin = { "pretty",
-    "infra.RotatingJSONFormatter:target/cucumber/crossDevice_$TIMESTAMP$.json" })
+@CucumberOptions(features = {"classpath:CrossDeviceCappingExperiment.feature","classpath:CrossDeviceCappingNoExperiment.feature"}, plugin = { "pretty",})
+//    "infra.RotatingJSONFormatter:target/cucumber/crossDevice_$TIMESTAMP$.json" })
 
 public class CrossDeviceCappingTest extends BaseTest{
 

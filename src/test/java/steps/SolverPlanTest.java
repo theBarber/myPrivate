@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
  * Created by assafm on 02/11/2016.
  */
 
-@CucumberOptions(features = "classpath:UASLimitations.feature", plugin = {"pretty",
-    "infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:UASLimitations.feature", plugin = {"pretty",})
+//    "infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
 public class SolverPlanTest extends BaseTest {
   public SolverPlanTest() {

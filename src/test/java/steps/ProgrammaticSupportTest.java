@@ -1,7 +1,5 @@
 package steps;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import infra.utils.S3Client;
 import org.apache.http.Header;
@@ -9,10 +7,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.config.SocketConfig;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
@@ -27,20 +22,17 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import static org.hamcrest.core.Is.is;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:ProgrammaticSupp8ort.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/ProgrammaticSuipport_$TIMESTAMP$.json"})
+//@CucumberOptions(features = "classpath:ProgrammaticSupp8ort.feature", plugin = {"pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/ProgrammaticSuipport_$TIMESTAMP$.json"})
 public class ProgrammaticSupportTest extends BaseTest{
     private String host;
 

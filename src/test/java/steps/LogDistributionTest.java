@@ -1,9 +1,7 @@
 package steps;
 
-import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import infra.assertion.Assert;
-
 import org.junit.runner.RunWith;
 
 import java.sql.Connection;
@@ -11,10 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.fail;
@@ -23,8 +19,8 @@ import static org.junit.Assert.fail;
  * Created by nive on 2017-01-12.
  */
 
-@CucumberOptions(features = {"classpath:LogDistribution.feature","classpath:StrategyServiceTest.feature"}, plugin = { "pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
+//@CucumberOptions(features = {"classpath:LogDistribution.feature","classpath:StrategyServiceTest.feature"}, plugin = { "pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 
 public class LogDistributionTest extends BaseTest {
