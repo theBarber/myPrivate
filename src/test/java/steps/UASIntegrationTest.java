@@ -156,7 +156,7 @@ public class UASIntegrationTest extends BaseTest {
           impressionsSent.longValue(), delta);
 
     });
-    Then("The responses? has impression-urls?", () -> {
+    Then("The response(s) has impression-url(s)", () -> {
         Stream<Optional<String>> impressionURLResponses = Optional.ofNullable(sut.getUASRquestModule().responses()
                 .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)).orElse(sut.getUASRquestModule().getSynchronizedResponses().stream().map(UASRequestModule::getImpressionUrlFrom));
         assertThat(
@@ -167,27 +167,27 @@ public class UASIntegrationTest extends BaseTest {
                 .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join).forEach(response->System.out.println("the request was: "+ response.get()));
     */});
 
-    Then("The responses? has click-urls?", () -> {
+    Then("The response(s) has click-url(s)", () -> {
       assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
           .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
     });
 
-      Then("The responses? has complete-urls?", () -> {
+      Then("The response(s) has complete-url(s)", () -> {
           assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
                   .map(UASIntegrationTest::getCompleteUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
       });
 
-      Then("The responses? has mute-urls?", () -> {
+      Then("The responses(s) has mute-urls(s)", () -> {
           assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
                   .map(UASIntegrationTest::getMuteUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
       });
 
-  Then("The responses? has dsp-urls?", () -> {
+  Then("The response(s) has dsp-url(s)", () -> {
           assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
                   .map(UASIntegrationTest::getDspUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
       });
 
-    Then("The responses? are passback?", () -> {
+    Then("The response(s) are passback", () -> {
 
       Map<Boolean, Long> countUrls =
           sut.getUASRquestModule().responses()

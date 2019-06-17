@@ -48,12 +48,12 @@ public class HeaderBiddingTest extends BaseTest {
 
         Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
         Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
-        And("all HB responses contains (campaignId|adId|cpm) with id (\\d+)",this::responsesContainEntityWithId);
+        And("all HB responses contains? (.*) with id (\\d+)",this::responsesContainEntityWithId);
         And("all HB responses contains (\\w+) with value \\{([^}]+)\\}",this::responsesContainEntityWithValue);
-        And("all HB responses contains (campaignId|adId) with id of entity named \\{([^}]+)\\}",this::responsesContainEntityWithName);
-        And("all HB responses contains ad impression with (campaignId|adId|zoneId) of entity named \\{([^}]+)\\}",this::responsesAdsContainEntityWithName);
-        And("all HB responses contains ad impression with (campaignId|adId|zoneId) with value \\{([^}]+)\\}",this::responsesAdsContainEntityWithId);
-        And("i read all HB responses and map their bidId by (campaignId|adId)",this::setBidMapByEntity);
+        And("all HB responses contains (campaignId|adId) with id of entity named? \\{(.*)\\}$",this::responsesContainEntityWithName);
+        And("all HB responses contains ad impression with? (.*) of entity named? \\{(.*)\\}$",this::responsesAdsContainEntityWithName);
+        And("all HB responses contains ad impression with? (.*) with value? \\{(.*)\\}$",this::responsesAdsContainEntityWithId);
+        And("i read all HB responses and map their bidId by? \\{(.*)\\}$",this::setBidMapByEntity);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
         And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::HBResponsesContainOneOnOf);
