@@ -121,7 +121,7 @@
 					<forkCount>10</forkCount>
 					<reuseForks>true</reuseForks>
 					<includes>
-						<include>**/*.class</include>
+						<include>**/*Test.class</include>
 					</includes>
 				</configuration>
 				<dependencies>
