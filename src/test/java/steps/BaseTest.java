@@ -22,6 +22,8 @@ public class BaseTest implements En {
   protected final String[] HEADERBIDDING = new String[] {"@HeaderBidding"};
   protected final String[] API = new String[] {"@API"};
   protected final String[] CI = new String[] {"@CI"};
+  private ArrayList<String> failed_scenarios = new ArrayList<>();
+  private String failed_scenarios_file = "target/rerun.txt";
 
 
   //protected com.rabbitmq.client.Connection rabbitClientConnection;
@@ -37,12 +39,16 @@ public class BaseTest implements En {
   public BaseTest() {
     Properties properties;
     properties = loadPropertiesFile("config.properties");
-            properties.forEach((k, v) -> {
-              config.put(k.toString(), v.toString());
+    properties.forEach((k, v) -> {
+      config.put(k.toString(), v.toString());
     });
 
     After(scenario -> {
-        sut.teardown(scenario.getSourceTagNames(), config);
+      if(scenario.isFailed()){
+        writeToFile(scenario.getId(),failed_scenarios_file);
+      }
+      stripDuplicatesFromFile(failed_scenarios_file);
+      sut.teardown(scenario.getSourceTagNames(), config);
     });
 
     Before(scenario -> {
@@ -50,9 +56,9 @@ public class BaseTest implements En {
       String userName = System.getProperty("user.name");
       boolean onlyForUser = Boolean.getBoolean("for.user");
       if (!"jenkins".equals(userName) && onlyForUser
-          && scenario.getSourceTagNames().stream().noneMatch(s -> s.equals("@" + userName))) {
+              && scenario.getSourceTagNames().stream().noneMatch(s -> s.equals("@" + userName))) {
         Exception notTaggedForYou = new Exception(
-            "the scenario " + scenario.getName() + " is not tagged for " + userName);
+                "the scenario " + scenario.getName() + " is not tagged for " + userName);
         PendingException pex = new cucumber.api.PendingException();
         StackTraceElement[] trace = new StackTraceElement[1];
         trace[0] = Thread.currentThread().getStackTrace()[1];
@@ -67,6 +73,49 @@ public class BaseTest implements En {
 
 
   }
+
+  public synchronized void stripDuplicatesFromFile(String filename) throws IOException {
+    File f = new File(filename);
+    if (f.isFile() && f.canRead()) {
+      BufferedReader reader = null;
+      try {
+        reader = new BufferedReader(new FileReader(filename));
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+      Set<String> lines = new HashSet<String>(10000); // maybe should be bigger
+      String line;
+      while ((line = reader.readLine()) != null) {
+        lines.add(line);
+      }
+      reader.close();
+      BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+      for (String unique : lines) {
+        writer.write(unique);
+        writer.newLine();
+      }
+      writer.close();
+    }
+  }
+
+  public synchronized void writeToFile(String str, String filepath) {
+    File f = new File(filepath);
+    FileWriter writer = null;
+    try {
+      writer = new FileWriter(f, true);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      writer.write(str);
+      writer.write(System.lineSeparator());
+      writer.flush();
+      writer.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
 
   public Properties loadPropertiesFile(String filePath) {
 
@@ -92,14 +141,14 @@ public class BaseTest implements En {
   protected void cmd(String cmd, String error)
   {
     sut.getHostsConnection().forEach((host, conn) -> {
-        try {
-          sut.write("********************************************************************");
-          CliCommandExecution command = new CliCommandExecution(conn, cmd).error(error)
-                  .withTimeout(3, TimeUnit.MINUTES);
-          command.execute();
-        } catch (IOException e) {
-          throw new UncheckedIOException(e);
-        }
+      try {
+        sut.write("********************************************************************");
+        CliCommandExecution command = new CliCommandExecution(conn, cmd).error(error)
+                .withTimeout(3, TimeUnit.MINUTES);
+        command.execute();
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
 
     });
   }
@@ -112,7 +161,7 @@ public class BaseTest implements En {
     SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`tags` SET `is_migrated`='1' WHERE `tagid`='176';");
     SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`publishers` SET `publisher_status_cd`='ACTIVE' WHERE `id` in (3674,3666,3675,3690,3697,2546);");
     CacheProcessTest.refreshZoneCache("cmd");
-      try {
+    try {
       TimeUnit.SECONDS.sleep(35);
       sut.write("sleeping 10 seconds");
     } catch (InterruptedException e) {
