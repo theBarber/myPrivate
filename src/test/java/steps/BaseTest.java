@@ -22,8 +22,8 @@ public class BaseTest implements En {
   protected final String[] HEADERBIDDING = new String[] {"@HeaderBidding"};
   protected final String[] API = new String[] {"@API"};
   protected final String[] CI = new String[] {"@CI"};
-  private ArrayList<String> failed_scenarios = new ArrayList<>();
-  private String failed_scenarios_file = "target/rerun.txt";
+  private Set<String> failed_scenarios = Collections.synchronizedSet(new TreeSet<>());
+  String failed_scenarios_file = "target/rerun.txt";
 
 
   //protected com.rabbitmq.client.Connection rabbitClientConnection;
@@ -45,9 +45,8 @@ public class BaseTest implements En {
 
     After(scenario -> {
       if(scenario.isFailed()){
-        writeToFile(scenario.getId(),failed_scenarios_file);
+         writeToFile(scenario.getId(),failed_scenarios_file);
       }
-      stripDuplicatesFromFile(failed_scenarios_file);
       sut.teardown(scenario.getSourceTagNames(), config);
     });
 
@@ -74,30 +73,6 @@ public class BaseTest implements En {
 
   }
 
-  public synchronized void stripDuplicatesFromFile(String filename) throws IOException {
-    File f = new File(filename);
-    if (f.isFile() && f.canRead()) {
-      BufferedReader reader = null;
-      try {
-        reader = new BufferedReader(new FileReader(filename));
-      } catch (FileNotFoundException e) {
-        e.printStackTrace();
-      }
-      Set<String> lines = new HashSet<String>(10000); // maybe should be bigger
-      String line;
-      while ((line = reader.readLine()) != null) {
-        lines.add(line);
-      }
-      reader.close();
-      BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-      for (String unique : lines) {
-        writer.write(unique);
-        writer.newLine();
-      }
-      writer.close();
-    }
-  }
-
   public synchronized void writeToFile(String str, String filepath) {
     File f = new File(filepath);
     FileWriter writer = null;
@@ -107,10 +82,13 @@ public class BaseTest implements En {
       e.printStackTrace();
     }
     try {
-      writer.write(str);
-      writer.write(System.lineSeparator());
-      writer.flush();
-      writer.close();
+        boolean condition = failed_scenarios.add(str);
+        if(condition) {
+            writer.write(str);
+            writer.write(System.lineSeparator());
+            writer.flush();
+            writer.close();
+        }
     } catch (IOException e) {
       e.printStackTrace();
     }
