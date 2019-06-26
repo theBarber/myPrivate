@@ -20,7 +20,7 @@ Feature: Domain Targeting tests
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-1A-banner-1} 100% of the time
 
-  Scenario: 1B. send zone requests, ex  host is not a false domain + in black list
+  Scenario: 1B. send zone requests, ex  host is a false domain + in black list
     Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
