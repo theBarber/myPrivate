@@ -1,29 +1,18 @@
 package entities;
 
 import com.amazonaws.regions.Regions;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ramp.app.api.Creative;
-import gherkin.lexer.De;
 import infra.ParameterProvider;
-import infra.assertion.Assert;
 import infra.module.Named;
 import infra.module.WithId;
+import ramp.lift.common.S3Client;
 
+import java.io.File;
 import java.nio.file.FileSystems;
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.net.URL;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectWriter;
-
-import ramp.lift.common.S3Client;
 
 
 public class CampaignManager implements ParameterProvider<WithId<Integer>> {
@@ -35,10 +24,14 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
     final private String INIT_ZONESET_FILE = "/input_files/zoneSet.json";
     final private String CREATED_LINEITEM_FILE = "/input_files/createdlineItem.json";
     final private String CREATED_ZONESET_FILE = "/input_files/createdzoneSet.json";
+    private String envname = "";
 
 
 
-    public CampaignManager() {
+    public CampaignManager(String env) {
+		if(envname.isEmpty()){
+			envname=env;
+		}
 		m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		initHardCodedEntities();
 	}
@@ -63,7 +56,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	private void initLineItemFromS3() {
         try {
-            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/lineItem.json"), IO[].class));
+            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/lineItem.json"), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -74,7 +67,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	private void initZoneSetsFromS3() {
         try {
-            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/zonesets.json"), ZoneSet[].class)));
+            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/zonesets.json"), ZoneSet[].class)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -304,7 +297,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 		return io.stream().flatMap(x -> x.deals.stream()).filter(Named.nameIs(byName)).findFirst();
 	}
 
-	public void writeZoneSets(){
+	public void writeZoneSets(String env){
 	    try{
 	        m.writeValue(new File(this.getClass().getResource(CREATED_ZONESET_FILE).toURI()),zonesets);
             ClassLoader loader = CampaignManager.class.getClassLoader();
@@ -312,14 +305,14 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
                 basePath = basePath.substring(1);
             }
-            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa",basePath + CREATED_ZONESET_FILE,"qa/ramp-lift-automation/createdzoneSet.json");
+            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa",basePath + CREATED_ZONESET_FILE,"qa/ramp-lift-automation/"+ env +"/createdzoneSet.json");
         }catch (Exception e){
 	        System.out.println(e.getMessage());
 	        e.printStackTrace();
         }
     }
 
-    public void writeLineItem(){
+    public void writeLineItem(String env){
         try{
             m.writeValue(new File(this.getClass().getResource(CREATED_LINEITEM_FILE).toURI()),io);
             ClassLoader loader = CampaignManager.class.getClassLoader();
@@ -327,7 +320,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
                 basePath = basePath.substring(1);
             }
-            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa",basePath + CREATED_LINEITEM_FILE,"qa/ramp-lift-automation/createdlineItem.json");
+            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa",basePath + CREATED_LINEITEM_FILE,"qa/ramp-lift-automation/"+ env +"/createdlineItem.json");
         }catch (Exception e){
             System.out.println(e.getMessage());
             e.printStackTrace();

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
@@ -14,26 +13,15 @@ import infra.utils.SqlWorkflowUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.junit.runner.RunWith;
+
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isOneOf;
-import static org.hamcrest.Matchers.not;
+
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import java.awt.Desktop;
-import java.net.URI;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 
 
 
@@ -112,8 +100,8 @@ public class API_EntitiesCreator extends BaseTest{
     {
         if(sut.getCampaignManager() == null)
             throw new AssertionError("io list and zonesets list are empty");
-        sut.getCampaignManager().writeZoneSets();
-        sut.getCampaignManager().writeLineItem();
+        sut.getCampaignManager().writeZoneSets(environmentName);
+        sut.getCampaignManager().writeLineItem(environmentName);
     }
 
 
