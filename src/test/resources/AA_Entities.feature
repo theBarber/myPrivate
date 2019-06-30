@@ -1031,6 +1031,53 @@ Feature: Entities for tests
       |zone-zoneset-EHC-ST-5A      |        1          |
       |zone-zoneset-EHC-ST-5B      |        1          |
 
+  Scenario:  create entites for new pacing mechanism
+    Given i disable campaigns by name on db
+      |Campaign Name                       |
+      |campaign-D-HourlyPacing-ST-1        |
+      |campaign-D-DailyPacing-ST-2         |
+      |campaign-D-ASAP-ST-3                |
+      |campaign-D-HourlyFF-ST-4       |
+      |campaign-D-DailyFF-ST-5     |
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                        |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name                          |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |app_include             |app_exclude |
+      |campaign-D-HourlyPacing-ST-1         |75396         |247767       |false                  |8158             |{zone-zoneset-D-HourlyPacing-ST-1}           |[]                   |93        |15303               |3821           |69255             |[]                      |[]          |
+      |campaign-D-DailyPacing-ST-2          |75396         |247767       |false                  |8158             |{zone-zoneset-D-DailyPacing-ST-2}           |[]                   |93        |15303               |3821           |69255             |[]                      |[]          |
+      |campaign-D-ASAP-ST-3                 |75396         |247767       |false                  |8158             |{zone-zoneset-D-ASAP-ST-3}                  |[]                   |93        |15303               |3821           |69255             |[]                      |[]          |
+      |campaign-D-HourlyFF-ST-4             |75396         |247767       |false                  |8158             |{zone-zoneset-D-HourlyFF-ST-4}               |[]                   |93        |15303               |3821           |69255             |[]                      |[]          |
+      |campaign-D-DailyFF-ST-5              |75396         |247767       |false                  |8158             |{zone-zoneset-D-DailyFF-ST-5}               |[]                   |93        |15303               |3821           |69255             |[]                      |[]          |
+    And i update campaign data by name
+#    deliveryPacing = 1 = hourly pacing
+#    pacing = hourly flex
+      |Campaign Name                    |is_wholesale  |skip_daily_goal  | pacing |  units    |goal_type    |          expire               |
+      |campaign-D-HourlyPacing-ST-1     |0             |0                |   0    |  720      | impressions |      2019-06-26 23:59:59      |
+      |campaign-D-DailyPacing-ST-2      |1             |0                |   0    |  45       |impressions  |      2019-06-26 23:59:59      |
+      |campaign-D-ASAP-ST-3             |1             |1                |   0    |  20       |impressions  |      2019-06-26 23:59:59      |
+      |campaign-D-HourlyFF-ST-4         |0             |0                |   5    |  720      |impressions  |      2019-06-26 23:59:59      |
+      |campaign-D-DailyFF-ST-5          |1             |0                |   10   |  45       |impressions  |      2019-06-26 23:59:59      |
+    And i update zone data by name
+      |Zone Name                            |is_secure    |zone_type_id |
+      |zone-zoneset-D-HourlyPacing-ST-1     |1            |      10     |
+      |zone-zoneset-D-DailyPacing-ST-2      |1            |      10     |
+      |zone-zoneset-D-ASAP-ST-3             |1            |      10     |
+      |zone-zoneset-D-HourlyFF-ST-4         |1            |      10     |
+      |zone-zoneset-D-DailyFF-ST-5          |1            |      10     |
+
+
+  Scenario:  create entites for new pacing mechanism
+#    To do - update all campaigns to end in 3 days from today (including today!!) at the database
+    And i update campaign end day to be 3 days from today
+    Given i disable campaigns by name on db
+      |Campaign Name                       |
+      |campaign-state-screenShift-ST       |
+    Given i create new campaigns, new zoneset with domains
+      |Campaign Name                        |IO            |LineItem     |isServerProgrammatic?  |Deal\Creative    |Zonesets-zones Name                          |limitation           |adUnitId  |Web_Section id      |publisher ID   |po_line_item ID   |app_include             |app_exclude |
+      |campaign-state-screenShift-ST        |75396         |240787     |false                  |192              |{zone-zoneset-state-screenShift-ST}            |[]                 |69           |15290             |3821           |69426             | []                 | []                            |
+    And i update banner data by name
+      |Banner Name                                        |limitation                                    |
+      |campaign-state-screenShift-ST-banner-1             |[[[26,"=~",7541],[26,"=~",7531]]]             |
+
+
 
   @DynamicPricing
   @InAppBlackWhiteList
