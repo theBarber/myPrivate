@@ -9,8 +9,6 @@ import infra.module.Named;
 import infra.module.WithId;
 import ramp.lift.common.S3Client;
 
-import java.io.File;
-import java.nio.file.FileSystems;
 import java.util.*;
 import java.util.function.Function;
 
@@ -20,8 +18,12 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
 	List<IO> io;
 	List<ZoneSet> zonesets;
     private ObjectMapper m = new ObjectMapper();
+	private String envname = "";
 
-    public ExecutorCampaignManager() {
+    public ExecutorCampaignManager(String env) {
+		if(envname.isEmpty()){
+			envname=env;
+		}
 		m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		initHardCodedEntities();
 	}
@@ -44,7 +46,7 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
 
 	private void initLineItemFromS3() {
         try {
-            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/createdlineItem.json"), IO[].class));
+            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname +"/createdlineItem.json"), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -55,7 +57,7 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
 
 	private void initZoneSetsFromS3() {
         try {
-            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/createdzoneSet.json"), ZoneSet[].class)));
+            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname +"/createdzoneSet.json"), ZoneSet[].class)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

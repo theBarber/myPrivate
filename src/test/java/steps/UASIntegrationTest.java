@@ -9,22 +9,12 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import static java.time.Month.*;
-import static java.time.temporal.TemporalAdjusters.*;
-
 import java.util.Calendar;
 import java.util.TimeZone;
-
-
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.file.Files;
 import java.util.*;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.concurrent.*;
@@ -33,10 +23,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import cucumber.api.PendingException;
-import gherkin.lexer.Fa;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -48,9 +34,7 @@ import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import co.unruly.matchers.OptionalMatchers;
 import co.unruly.matchers.StreamMatchers;
 import cucumber.api.CucumberOptions;
@@ -690,6 +674,7 @@ public class UASIntegrationTest extends BaseTest {
 
     }
 
+
     private void checkTheNumberOfSelectedEntityOfAsyncResponses(String urlType, String fieldName, String entityType, String entityName, Double percent) {
         Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
         if (urlType.equalsIgnoreCase("impression")) {
@@ -734,6 +719,7 @@ public class UASIntegrationTest extends BaseTest {
         assertEquals("rate of " + fieldName + " in impression urls", percent.doubleValue(),
                 actualRate * 100, 10d);
     }
+
 
     public void healthCheckResponseContainsParams(Integer advertiserid, Integer ioid, Integer iolineitemid, String bannername, String campaignname, String zoneByName, Integer publisherid) {
         String toCheck;

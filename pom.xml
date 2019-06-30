@@ -28,7 +28,62 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
+	<profiles>
+
+		<profile>
+			<id>staging</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>staging</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>integration</id>
+			<properties>
+				<env>integration</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>production</id>
+			<properties>
+				<env>production</env>
+			</properties>
+		</profile>
+
+	</profiles>
+
 	<build>
+
+		<!-- Loading all ${} -->
+		<filters>
+			<filter>src/main/resources/env/config.${env}.properties</filter>
+		</filters>
+
+		<!-- Map ${} into resources -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.properties</include>
+					<include>k8s_integration_password</include>
+				</includes>
+			</resource>
+		</resources>
+
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -44,14 +99,43 @@
 				<artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
 				<configuration>
+					<rerunFailingTestsCount>2</rerunFailingTestsCount>
+					<useSystemClassLoader>false</useSystemClassLoader>
+					<argLine>
+						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+					</argLine>
+					<properties>
+						<property>
+							<name>listener</name>
+							<value>io.qameta.allure.junit4.AllureJunit4</value>
+						</property>
+					</properties>
+					<systemProperties>
+						<property>
+							<name>allure.results.directory</name>
+							<value>${project.build.directory}/allure-results</value>
+						</property>
+					</systemProperties>
 					<runOrder>alphabetical</runOrder>
 					<disableXmlReport>true</disableXmlReport>
 					<forkCount>10</forkCount>
-					<reuseForks>true</reuseForks>				
+					<reuseForks>true</reuseForks>
 					<includes>
 						<include>**/*.class</include>
 					</includes>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>io.qameta.allure</groupId>
+				<artifactId>allure-maven</artifactId>
+				<version>2.9</version>
 			</plugin>
             <plugin>
                 <groupId>com.github.temyers</groupId>
@@ -72,14 +156,6 @@
                     </execution>
                 </executions>
             </plugin>
-			<!--<plugin>-->
-				<!--<groupId>org.apache.maven.plugins</groupId>-->
-				<!--<artifactId>maven-surefire-plugin</artifactId>-->
-				<!--<version>2.19.1</version>-->
-				<!--<configuration>-->
-					<!--<disableXmlReport>true</disableXmlReport>-->
-				<!--</configuration>-->
-			<!--</plugin>-->
 		</plugins>
 	</build>
 	<properties>
@@ -91,10 +167,15 @@
 		<dogstatsd>2.0.12</dogstatsd>
 		<amqp.client>3.5.6</amqp.client>
 		<com.orbitz.consul.version>0.13.3</com.orbitz.consul.version>
+		<aspectj.version>1.9.1</aspectj.version>
+		<compiler.version>1.7</compiler.version>
 	</properties>
-
-
 	<dependencies>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-junit4</artifactId>
+			<version>2.7.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
@@ -105,26 +186,21 @@
 			<artifactId>jersey-client</artifactId>
 			<version>2.25.1</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>
 			<version>${amqp.client}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j-api.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j-log4j.version}</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
@@ -155,26 +231,17 @@
 			<artifactId>jsch</artifactId>
 			<version>0.1.54</version>
 		</dependency>
-		<!--<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-java</artifactId>
-			<version>1.2.0</version>
-			<scope>test</scope>
-		</dependency>-->
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>1.2.2</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.couchbase.client</groupId>
 			<artifactId>java-client</artifactId>
@@ -255,12 +322,6 @@
 			<version>2.0.0-beta1</version>
 			<scope>compile</scope>
 		</dependency>
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/info.cukes/cucumber-java8 &ndash;&gt;
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java8</artifactId>
-            <version>1.2.2</version>
-        </dependency>-->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>

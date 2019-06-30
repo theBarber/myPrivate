@@ -1,35 +1,25 @@
 package steps;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 import infra.cli.process.CliCommandExecution;
-import infra.utils.MsgProcess;
-import infra.utils.RabbitMQConsumer;
-import infra.utils.RabbitMQPublisher;
-import infra.utils.SqlRampAdminUtils;
 import infra.utils.SqlWorkflowUtils;
 import ramp.lift.uas.automation.SystemUnderTest;
 
-import com.rabbitmq.client.ConnectionFactory;
-
-import org.junit.Assert;
-
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class BaseTest implements En {
 
   protected static SystemUnderTest sut = SystemUnderTest.getInstance();
 
-  protected final String environmentName;
+  protected String environmentName;
   protected final Map<String, String> config = Collections.synchronizedMap(new HashMap<>());
   protected final String[] CAMPAIGNTESTS = new String[] {"@campaign"};
   protected final String[] PROGRAMMATIC = new String[] {"@programmatic"};
@@ -50,44 +40,18 @@ public class BaseTest implements En {
   //protected final String[] CLITESTS = new String[] {"@cli"};
 
   public BaseTest() {
-    environmentName = Optional.ofNullable(System.getenv("ENVIRONMENT")).orElse("staging").toLowerCase();
-//    environmentName ="aws-integration";
-
-    String environmentNameConfigPrefix = environmentName + ".";
-    String allEnvironmentsNameDefaultConfigPrefix = "*.";
-    String allEnvironmentsNameOverrideConfigPrefix = "-.";
-
-    Properties properties = new Properties();
-    try {
-      properties.load(this.getClass().getClassLoader().getResourceAsStream("environments"));
-    } catch (IOException ioException) {
-      Assert.fail("load configuration failed: " + ioException.getMessage());
-    }
-    properties.forEach((k, v) -> {
-      String configurationKey = k.toString(), value = v.toString();
-      if (configurationKey.startsWith(allEnvironmentsNameDefaultConfigPrefix)) {
-        config.put(configurationKey.substring(allEnvironmentsNameDefaultConfigPrefix.length()), value);
-      }
+    Properties properties;
+    properties = loadPropertiesFile("config.properties");
+            properties.forEach((k, v) -> {
+              config.put(k.toString(), v.toString());
     });
-    properties.forEach((k, v) -> {
-      String configurationKey = k.toString(), value = v.toString();
-      if (configurationKey.startsWith(environmentNameConfigPrefix)) {
-        config.put(configurationKey.substring(environmentNameConfigPrefix.length()), value);
-      }
-    });
-    properties.forEach((k, v) -> {
-      String configurationKey = k.toString(), value = v.toString();
-      if (configurationKey.startsWith(allEnvironmentsNameOverrideConfigPrefix)) {
-        config.put(configurationKey.substring(allEnvironmentsNameOverrideConfigPrefix.length()), value);
-      }
-  });
 
     After(scenario -> {
       sut.teardown(scenario.getSourceTagNames(), config);
     });
 
     Before(scenario -> {
-
+      environmentName = config.get("env.name");
       String userName = System.getProperty("user.name");
       boolean onlyForUser = Boolean.getBoolean("for.user");
       if (!"jenkins".equals(userName) && onlyForUser
@@ -107,34 +71,22 @@ public class BaseTest implements En {
     });
 
 
-  }//    Before(RABBITTESTS, scenario -> {
-//
-//      // the consumer will wait on this queue
-//
-//      // will init all the values from the config map object
-//      connectionFactory = new ConnectionFactory();
-//      connectionFactory.setUsername(config.get("de.rabbitmq.user"));
-//      connectionFactory.setPassword(config.get("de.rabbitmq.password"));
-//      connectionFactory.setHost(config.get("de.rabbitmq.host"));
-//      connectionFactory.setPort(Integer.parseInt(config.get("de.rabbitmq.port")));
-//
-//      try {
-//        rabbitClientConnection = connectionFactory.newConnection();
-//        // consumer_tag is basically thread num
-//        publisher = new RabbitMQPublisher("in", rabbitClientConnection.createChannel());
-//        if (this instanceof MsgProcess) {
-//          MsgProcess thisAsMsgProcess = (MsgProcess) this;
-//          consumer = new RabbitMQConsumer(thisAsMsgProcess, rabbitClientConnection.createChannel(), "test",
-//              "out", "integration-test", "integration-test");
-//          consumer.start();
-//        }
-//      } catch (IOException | TimeoutException e) {
-//        infra.assertion.Assert.fail("unable to initialize rabbitmq connection", e);
-//        e.printStackTrace();
-//      }
-//
-//    });
+  }
 
+
+  public Properties loadPropertiesFile(String filePath) {
+
+    Properties prop = new Properties();
+
+    try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+      prop.load(resourceAsStream);
+    } catch (IOException e) {
+      System.err.println("Unable to load properties file : " + filePath);
+    }
+
+    return prop;
+
+  }
 
 
   protected void restartServerNamed(String serverName)
