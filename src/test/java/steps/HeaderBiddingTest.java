@@ -46,24 +46,24 @@ public class HeaderBiddingTest extends BaseTest {
             }
         });
 
-        Given("i send (\\d+) headerBidding post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingPostRequest);
-        Given("i send (\\d+) headerBidding secure post request for scenario \\{([^}]+)\\} for publisher (\\d+) with domain \\{([^}]+)\\} with extra params \\{([^}]+)\\}",this::sendHeaderBiddingSecurePostRequest);
+        Given("i send (\\d+) headerBidding post request for scenario \\{(.*)\\} for publisher (\\d+) with domain \\{(.*)\\} with extra params \\{(.*)\\}",this::sendHeaderBiddingPostRequest);
+        Given("i send (\\d+) headerBidding secure post request for scenario \\{(.*)\\} for publisher (\\d+) with domain \\{(.*)\\} with extra params \\{(.*)\\}",this::sendHeaderBiddingSecurePostRequest);
         And("all HB responses contains? (.*) with id (\\d+)",this::responsesContainEntityWithId);
-        And("all HB responses contains (\\w+) with value \\{([^}]+)\\}",this::responsesContainEntityWithValue);
+        And("all HB responses contains (\\w+) with value \\{(.*)\\}",this::responsesContainEntityWithValue);
         And("all HB responses contains (campaignId|adId) with id of entity named? \\{(.*)\\}$",this::responsesContainEntityWithName);
         And("all HB responses contains ad impression with? (.*) of entity named? \\{(.*)\\}$",this::responsesAdsContainEntityWithName);
         And("all HB responses contains ad impression with? (.*) with value? \\{(.*)\\}$",this::responsesAdsContainEntityWithId);
         And("i read all HB responses and map their bidId by? \\{(.*)\\}$",this::setBidMapByEntity);
-        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{([^}]+)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
+        And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{(.*)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
-        And("all HB responses contains (campaignId|adId) with one of: \\{([^}]+)\\}",this::HBResponsesContainOneOnOf);
+        And("all HB responses contains (campaignId|adId) with one of: \\{(.*)\\}",this::HBResponsesContainOneOnOf);
         And("for all HB responses i simulate winning, and send their zone tag",this::sendZoneTagFromHBWithoutParam);
-        And("for all HB responses i simulate winning, with extra param \\{([^}]+)\\}",this::sendZoneTagFromHBWithParam);
-        Given("i send (\\d+) headerBidding secure post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), with domain \\{([^}]+)\\} and extra params \\{([^}]+)\\}",this::sendHBPostRequestBidIDcount);
-        Given("i send (\\d+) headerBidding secure post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), bidreq = (\\d+), empty domain, and extra params \\{([^}]+)\\}",this::sendHBPostRequestBidIDcount);
-        Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi bids. first bid - bidreqID=\\{([^}]+)\\}, h:(\\d+) w:(\\d+), sec bid - bidreqID=\\{([^}]+)\\}, h:(\\d+) w:(\\d+) with domain \\{([^}]+)\\} and extra params \\{([^}]+)\\}",this::sendHBSecurePostRequestMultibid);
-        Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{([^}]+)\\} and placmentID group = \\{([^}]+)\\} and extra params  \\{([^}]+)\\}" ,this::sendHBSecurePostRequestMultiSized);
-        Given("i send 1 basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{([^}]+)\\}, placmentID group = \\{([^}]+)\\} and extra params  \\{([^}]+)\\}" ,this::sendBasicHBSecurePostRequest);
+        And("for all HB responses i simulate winning, with extra param \\{(.*)\\}",this::sendZoneTagFromHBWithParam);
+        Given("i send (\\d+) headerBidding secure post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), with domain \\{(.*)\\} and extra params \\{(.*)\\}",this::sendHBPostRequestBidIDcount);
+        Given("i send (\\d+) headerBidding secure post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), bidreq = (\\d+), empty domain, and extra params \\{(.*)\\}",this::sendHBPostRequestBidIDcount);
+        Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi bids. first bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+), sec bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+) with domain \\{(.*)\\} and extra params \\{(.*)\\}",this::sendHBSecurePostRequestMultibid);
+        Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{(.*)\\} and placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendHBSecurePostRequestMultiSized);
+        Given("i send 1 basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendBasicHBSecurePostRequest);
 
     }
 

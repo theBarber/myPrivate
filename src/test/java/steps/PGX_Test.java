@@ -21,8 +21,8 @@ public class PGX_Test extends BaseTest{
     public PGX_Test()
     {
         super();
-        Then("response value \\{([^}]+)\\} is one of (.*)$", this::responseContainsOneOf);
-        Then("response value \\{([^}]+)\\} has the values of (.*)$", this::responseHasValuesOf);
+        Then("response value \\{(.*)\\} is one of (.*)$", this::responseContainsOneOf);
+        Then("response value \\{(.*)\\} has the values of (.*)$", this::responseHasValuesOf);
 
     }
 

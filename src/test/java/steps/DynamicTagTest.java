@@ -19,15 +19,15 @@ public class DynamicTagTest extends BaseTest{
         super();
         Then("i update daily capping for publisher id (\\d+) with product id (\\d+) to be (\\d+)",this::updateProductDailyCappingForPublisher);
         Given("I update daily capping for publishers:",this::setupPublishers);
-        Then("i send (\\d+) times Dynamic Tag synchronized ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagSynchronizedRequestsToUAS);
-        Then("i send (\\d+) times Dynamic Tag synchronized ad request to UAS for publisher (\\w+) with url_enc \\{([^}]+)\\}",this::sendDynamicTagSynchronizedRequestsWithFullUrlToUAS);
-        Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
-        Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with extra params \\{([^}]+)\\}",this::sendDynamicTagRequestsToUAS);
-        Then("i send (\\d+) times Dynamic Tag synchronized ad request with tag id (\\w+) to UAS for publisher (\\w+) with domain \\{([^}]+)\\}",this::sendDynamicTagWithTagSynchronizedRequestsToUAS);
+        Then("i send (\\d+) times Dynamic Tag synchronized ad request to UAS for publisher (\\w+) with domain \\{(.*)\\}",this::sendDynamicTagSynchronizedRequestsToUAS);
+        Then("i send (\\d+) times Dynamic Tag synchronized ad request to UAS for publisher (\\w+) with url_enc \\{(.*)\\}",this::sendDynamicTagSynchronizedRequestsWithFullUrlToUAS);
+        Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with domain \\{(.*)\\}",this::sendDynamicTagRequestsToUAS);
+        Then("i send (\\d+) times Dynamic Tag ad request to UAS for publisher (\\w+) with extra params \\{(.*)\\}",this::sendDynamicTagRequestsToUAS);
+        Then("i send (\\d+) times Dynamic Tag synchronized ad request with tag id (\\w+) to UAS for publisher (\\w+) with domain \\{(.*)\\}",this::sendDynamicTagWithTagSynchronizedRequestsToUAS);
         Given("i remove all zones related to web_section id (\\d+)",this::removeAllZonesFrom);
-        Given("only tags \\{([^}]+)\\} are enabled and the rest are disabled for publisher (\\d+)",this::removeTagsFromPublisher);
-        And("i remove all zones from publishers: \\{([^}]+)\\}, apart from zones:\\{([^}]+)\\}",this::removeAllZonesForPublisherApartFrom);
-        And("i remove all zones from publishers: \\{([^}]+)\\}",this::removeAllZonesForPublisher);
+        Given("only tags \\{(.*)\\} are enabled and the rest are disabled for publisher (\\d+)",this::removeTagsFromPublisher);
+        And("i remove all zones from publishers: \\{(.*)\\}, apart from zones:\\{(.*)\\}",this::removeAllZonesForPublisherApartFrom);
+        And("i remove all zones from publishers: \\{(.*)\\}",this::removeAllZonesForPublisher);
         Given("I add cookie (\\w+) with random value to my requests to uas", (String paramName) -> {
             Integer randomCookie = new Random().nextInt()& Integer.MAX_VALUE;;
             System.out.println ("the cookie added "+randomCookie);

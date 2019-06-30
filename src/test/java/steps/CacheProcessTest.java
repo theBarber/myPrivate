@@ -41,15 +41,15 @@ public class CacheProcessTest extends BaseTest {
     super();
 
 
-    And("I refresh (zone|campaign|banner) cache",this::refreshCache);
-    And("I flush bucket name \\{([^}]+)\\} on couchbase", this::flushBucket);
-    Given("^limitations for zoneId (\\d+) is \\{([^}]+)\\} in Workflow DB$",
+    And("I refresh? (.*) cache",this::refreshCache);
+    And("I flush bucket name \\{(.*)\\} on couchbase", this::flushBucket);
+    Given("^limitations for zoneId (\\d+) is \\{(.*)\\} in Workflow DB$",
         (Integer zoneId, String expectedLimitation) -> {
           String currentLimitation = SqlWorkflowUtils.getLimitationForZone(zoneId);
           sut.write(currentLimitation);
           Assert.assertThat(currentLimitation, Matchers.containsString(expectedLimitation));
         });
-    And("^limitations for zoneId (\\d+) updated to \\{([^}]+)\\} in Workflow DB$",
+    And("^limitations for zoneId (\\d+) updated to \\{(.*)\\} in Workflow DB$",
         (Integer zoneId, String newLimitation) -> {
           SqlWorkflowUtils.setLimitationForZone(zoneId, newLimitation);
         });
@@ -59,7 +59,7 @@ public class CacheProcessTest extends BaseTest {
     When("^zoneCache refreshed by http$", () -> {
       refreshZoneCache("http");
     });
-    When("limitation for zone (.*) in zoneCache contains \\{([^}]+)\\}",
+    When("limitation for zone (.*) in zoneCache contains \\{(.*)\\}",
         (String zoneId, String expectedLimitation) -> {
           String zoneInfoCmd = "docker exec ut-ramp-uas  adserver --zone " + zoneId;
           sut.write(zoneInfoCmd);

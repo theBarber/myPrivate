@@ -58,7 +58,7 @@ public class UASIntegrationTest extends BaseTest {
   public UASIntegrationTest() {
     super();
       final Integer BID_ID_COLUMN = 30;
-      When("I send an ad request for zone named \\{([^}]+)\\} to UAS", (String zoneByName) -> {
+      When("I send an ad request for zone named \\{(.*)\\} to UAS", (String zoneByName) -> {
       Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
           .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
       sut.getUASRquestModule().zoneRequest(zone.getId());
@@ -67,7 +67,7 @@ public class UASIntegrationTest extends BaseTest {
 
 
 
-      And("The response has a moat wrapper with params advanced string with advertiserid = (\\d+), ioid = (\\d+), iolineitemid = (\\d+), bannername = \\{([^}]+)\\}, campaignname = \\{([^}]+)\\}, zonename = \\{([^}]+)\\}, MoatWEBID = (\\d+)",
+      And("The response has a moat wrapper with params advanced string with advertiserid = (\\d+), ioid = (\\d+), iolineitemid = (\\d+), bannername = \\{(.*)\\}, campaignname = \\{(.*)\\}, zonename = \\{(.*)\\}, MoatWEBID = (\\d+)",
               (Integer advertiserid, Integer ioid, Integer iolineitemid, String bannername, String campaignname, String zonename, Integer publisherid) -> {
                   healthCheckResponseContainsParams(advertiserid, ioid,iolineitemid, bannername, campaignname, zonename, publisherid);
 
@@ -77,42 +77,42 @@ public class UASIntegrationTest extends BaseTest {
 
 
 
-      When("I send (\\d+) times an ad request for zone named \\{([^}]+)\\} to UAS",
+      When("I send (\\d+) times an ad request for zone named \\{(.*)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequests(times, zoneByName, true);
         });
 
-      When("I send (\\d+) times an ad request with parameter \\{([^}]+)\\} for zone id \\{(\\d+)\\} to UAS",
+      When("I send (\\d+) times an ad request with parameter \\{(.*)\\} for zone id \\{(\\d+)\\} to UAS",
               (Integer times,String parameter, Integer zoneId) -> {
                   sendMultipleZoneIDAdRequestsWithParameter(times,parameter, zoneId, true);
               });
 
-      When("I send (\\d+) times an ad request with parameter \\{([^}]+)\\} for zone named \\{([^}]+)\\} to UAS",
+      When("I send (\\d+) times an ad request with parameter? \\{(.*)\\} for zone named? \\{(.*)\\} to UAS$",
               (Integer times,String parameter, String zoneByName) -> {
                   sendMultipleAdRequestsWithParameter(times,parameter, zoneByName, true);
               });
 
-      When("I send a req to ramp api for creating a placment group for publisher \\{(\\d+)\\} with ad units = \\{([^}]+)\\} where placement ID = \\{([^}]+)\\}",
+      When("I send a req to ramp api for creating a placment group for publisher \\{(\\d+)\\} with ad units = \\{(.*)\\} where placement ID = \\{(.*)\\}",
               (Integer publisher,String aduits, String placementID) -> {
                   sendPlacementGroupReqToRampAPI(publisher,aduits, placementID);
               });
 
-      When("I send (\\d+) times a (wel|prfLog|eve) request with parameters \\{([^}]+)\\} to UAS",
+      When("I send (\\d+) times a (wel|prfLog|eve) request with parameters \\{(.*)\\} to UAS",
               (Integer times,String requestType, String parameters) -> {
                   sut.getUASRquestModule().sendMultipleTypeGetRequestWithParameter(requestType,times, parameters, true,false);
               });
 
-      When("I send (\\d+) times a (profile) post request with parameters \\{([^}]+)\\} to UAS with body: (.*)$",
+      When("I send (\\d+) times a (profile) post request with parameters \\{(.*)\\} to UAS with body: (.*)$",
               (Integer times,String requestType, String parameters, String body) -> {
                   sut.getUASRquestModule().sendMultipleTypePostRequestWithParameter(requestType,body,times, parameters, true,false);
               });
 
-      When("I send (\\d+) times an ad request with query parameters for zone named \\{([^}]+)\\} to UAS",
+      When("I send (\\d+) times an ad request with query parameters for zone named \\{(.*)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequestsWithParams(times, zoneByName, true);
         });
 
-      When("I send (\\d+) times an ad request with query parameters for zone id \\{([^}]+)\\} to UAS",
+      When("I send (\\d+) times an ad request with query parameters for zone id \\{(.*)\\} to UAS",
               (Integer times, Integer zoneId) -> {
                   sut.getUASRquestModule().zoneRequestsWithParams(zoneId, times, true);
               });
@@ -130,12 +130,12 @@ public class UASIntegrationTest extends BaseTest {
           sendMultipleAdRequests(times, zoneId, true);
         });
 
-    When("I send (\\d+) additional ad requests for zone named \\{([^}]+)\\} to UAS",
+    When("I send (\\d+) additional ad requests for zone named \\{(.*)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequests(times, zoneByName, false);
         });
 
-    When("I send (\\d+) additional ad requests with query parameters for zone named \\{([^}]+)\\} to UAS",
+    When("I send (\\d+) additional ad requests with query parameters for zone named \\{(.*)\\} to UAS",
         (Integer times, String zoneByName) -> {
           sendMultipleAdRequestsWithParams(times, zoneByName, false);
         });
@@ -218,7 +218,7 @@ public class UASIntegrationTest extends BaseTest {
     // .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get).findFirst().
     //
     // });
-    Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{([^}]+)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
+    Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{(.*)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
     When("^I read the latest (clk|imp|req|hbl|wel|evt|prf) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
 //        sut.logFor(logType).readLogs().actual().forEach(m->{
@@ -306,7 +306,7 @@ public class UASIntegrationTest extends BaseTest {
 
               });
 
-    When("I want to use cli to execute \\{([^}]+)\\}", (String cmd) -> {
+    When("I want to use cli to execute \\{(.*)\\}", (String cmd) -> {
       sut.uasCliConnections().forEach(conn -> {
         try {
           new CliCommandExecution(conn, cmd).execute();
@@ -429,20 +429,20 @@ public class UASIntegrationTest extends BaseTest {
                   });
       });
 
-    Given("I use \\{([^}]+)\\} as user-agent string to send my requests to uas", (String userAgentStr) -> {
+    Given("I use \\{(.*)\\} as user-agent string to send my requests to uas", (String userAgentStr) -> {
       sut.getUASRquestModule().addHttpHeader("User-Agent", userAgentStr);
     });
 
-      Given("I add header of \\{([^}]+)\\} with value \\{([^}]+)\\}", (String key, String value) -> {
+      Given("I add header of \\{(.*)\\} with value \\{(.*)\\}", (String key, String value) -> {
           sut.getUASRquestModule().addHttpHeader(key, value);
       });
 
-      Given("I use \\{([^}]+)\\} as referer string to send my requests to uas", (String referer) -> {
+      Given("I use \\{(.*)\\} as referer string to send my requests to uas", (String referer) -> {
           sut.getUASRquestModule().emptyHttpHeaders();
           sut.getUASRquestModule().addHttpHeader("referer", referer);
       });
 
-    Given("I add (\\w+) query parameter with value \\{([^}]+)\\} to send my requests to uas",
+    Given("I add (\\w+) query parameter with value \\{(.*)\\} to send my requests to uas",
         (String paramName, String paramValue) -> {
           sut.getUASRquestModule().addQueryParam(paramName, paramValue);
         });

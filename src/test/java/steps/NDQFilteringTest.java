@@ -20,13 +20,13 @@ public class NDQFilteringTest extends BaseTest {
   public NDQFilteringTest() {
     super();
 
-    Given("^I set the \\{([^}]+)\\} of campaign name \\{([^}]+)\\} to \\{([^}]+)\\}$",
+    Given("^I set the \\{(.*)\\} of campaign name \\{(.*)\\} to \\{(.*)\\}$",
         (String columnNameToChange, String columnValue, String columnValueToChange) -> {
           SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", columnValue, columnNameToChange,
               columnValueToChange);
         });
 
-    Given("^I set the \\{([^}]+)\\} in \\{([^}]+)\\} of campaign name \\{([^}]+)\\} to \\{([^}]+)\\}$",
+    Given("^I set the \\{(.*)\\} in \\{(.*)\\} of campaign name \\{(.*)\\} to \\{(.*)\\}$",
         (String columnNameToChange, String tableName, String campaignName, String columnValueToChange) -> {
           try {
             ResultSet campaign = SqlWorkflowUtils.getEntityByName("campaigns", "campaignname", campaignName);
@@ -39,7 +39,7 @@ public class NDQFilteringTest extends BaseTest {
           }
         });
 
-    Given("^I compute the NDQ of campaign name \\{([^}]+)\\}$", (String campaignName) -> {
+    Given("^I compute the NDQ of campaign name \\{(.*)\\}$", (String campaignName) -> {
       ResultSet campaign = SqlWorkflowUtils.getEntityByName("campaigns", "campaignname", campaignName);
       try {
         long lastDay = campaign.getDate("expire").getTime();
@@ -68,7 +68,7 @@ public class NDQFilteringTest extends BaseTest {
       setupDB();
     });
 
-    Given("I restart \\{([^}]+)\\}",(String serverName) -> {
+    Given("I restart \\{(.*)\\}",(String serverName) -> {
       restartServerNamed(serverName);
     });
   }

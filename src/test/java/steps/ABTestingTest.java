@@ -26,7 +26,7 @@ public class ABTestingTest extends BaseTest {
 
 	public ABTestingTest() {
 		super();
-		Given("^I set the activation status of experiment group named \\{([^}]+)\\} and his experiments to \\{([^}]+)\\}$",
+		Given("^I set the activation status of experiment group named \\{(.*)\\} and his experiments to \\{(.*)\\}$",
             (String experimentGroupName, String activationStatus) -> {
               int status = 0;
               if (activationStatus.equals("active")) {
@@ -61,7 +61,7 @@ public class ABTestingTest extends BaseTest {
 			SqlRampAdminUtils.createNewExperimentGroup(experimentGroupsList);
 		});
 
-		And("^I create new test named \\{([^}]+)\\} with the following fields$",
+		And("^I create new test named \\{(.*)\\} with the following fields$",
 				(String experimentGroupName, DataTable experimentsTable) -> {
 					List<Experiment> experiments = experimentsTable.asList(Experiment.class);
 					latestExperimentIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment");
@@ -70,12 +70,12 @@ public class ABTestingTest extends BaseTest {
 					SqlRampAdminUtils.createNewExperimentForGroupId(experimentGroupId, experiments);
 				});
 
-		And("^I set the activation status of tests named \\{([^}]+)\\} to \\{(\\d+)\\}$",
+		And("^I set the activation status of tests named \\{(.*)\\} to \\{(\\d+)\\}$",
 				(String experimentName, Integer activationStatus) -> {
 					SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "test");
 				});
 //srategy
-		And("^I set test id of test_strategy named \\{([^}]+)\\} to \\{(\\d+)\\}$",
+		And("^I set test id of test_strategy named \\{(.*)\\} to \\{(\\d+)\\}$",
 				SqlRampAdminUtils::setTestStrategyToTestIdGroup);
 
 		And("^I update the s3 experiment data$", () -> {

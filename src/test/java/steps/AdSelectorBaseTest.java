@@ -46,7 +46,7 @@ public class AdSelectorBaseTest extends BaseTest  {
             Assert.assertEquals("Total impressions for banner "+bannerId+ " is: "+numOfImp+" out of "+ total+ " responses.", neededRatio, actualRatio, 0.1);
 
         });
-        When("^I send (\\d+) times an ad request for zone named \\{([^}]+)\\} and zone limitation (.*) to UAS",
+        When("^I send (\\d+) times an ad request for zone named \\{(.*)\\} and zone limitation (.*) to UAS",
                 (Integer times, String zoneByName, String param) -> {
                     Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
                             .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));

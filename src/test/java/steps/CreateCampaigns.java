@@ -29,7 +29,7 @@ public class CreateCampaigns extends BaseTest {
 			CampaignManager = manager;
 
 		});
-		Given("^Campaign named \\{([^}]+)\\}$", (String c) -> {
+		Given("^Campaign named \\{(.*)\\}$", (String c) -> {
 
 			Optional<Campaign> campaign = Optional.of(c).flatMap(CampaignManager::getCampaign);
 //			if (!campaign.isPresent()) {
@@ -40,7 +40,7 @@ public class CreateCampaigns extends BaseTest {
 		});
 
 		//
-		Given("^Campaign named \\{([^}]+)\\} has the banner named \\{([^}]+)\\}$",
+		Given("^Campaign named \\{(.*)\\} has the banner named \\{(.*)\\}$",
 				(String camp, String b) -> {
 					Optional<Campaign> campaign = Optional.of(camp).flatMap(CampaignManager::getCampaign);
 
@@ -57,7 +57,7 @@ public class CreateCampaigns extends BaseTest {
 					}
 				});
 
-		Given("^Campaign named \\{([^}]+)\\} limitations are \\{([^}]+)\\}$", (String c, String l) -> {
+		Given("^Campaign named \\{(.*)\\} limitations are \\{(.*)\\}$", (String c, String l) -> {
 			Optional<CampaignPlus> campaign = Optional.of(c).flatMap(CampaignManager::getCampaign)
 					.filter(CampaignPlus.class::isInstance).map(CampaignPlus.class::cast);
 			Assert.assertThat("campaign named [" + c + "] does not exist", campaign, is(not(OptionalMatchers.empty())));
@@ -71,7 +71,7 @@ public class CreateCampaigns extends BaseTest {
 
 		});
 
-//		Given("^Creative named \\{([^}]+)\\} with ad unit id (\\d+)\\. If needed - clone from creative \\{([^}]+)\\}$",
+//		Given("^Creative named \\{(.*)\\} with ad unit id (\\d+)\\. If needed - clone from creative \\{(.*)\\}$",
 //				(String c, Integer adunitid, String src) -> {
 //					Optional<Creative> creative = rampAppCampaignManager.getCreative(c);
 //					if (!creative.isPresent()) {
@@ -84,17 +84,17 @@ public class CreateCampaigns extends BaseTest {
 //
 //				});
 
-		Given("^Zoneset named \\{([^}]+)\\}$", (String z) -> {
+		Given("^Zoneset named \\{(.*)\\}$", (String z) -> {
 			Assert.assertThat("zoneset named [" + z + "] does not exist", CampaignManager.getZoneset(z),
 					is(not(OptionalMatchers.empty())));
 		});
 
-//		Given("^Zone named \\{([^}]+)\\} is in the zoneset named \\{([^}]+)\\}$", (String z, String zs) -> {
+//		Given("^Zone named \\{(.*)\\} is in the zoneset named \\{(.*)\\}$", (String z, String zs) -> {
 //			Assert.assertThat("zone named {" + z + "} does not exist", CampaignManager.getZone(z, zs),
 //					is(not(OptionalMatchers.empty())));
 //		});
 
-		// Given("^Zone named \\{([^}]+)\\} with ad unit id (\\d+)$", (String z,
+		// Given("^Zone named \\{(.*)\\} with ad unit id (\\d+)$", (String z,
 		// Integer adunitid) -> {
 		// Assert.assertThat("zone named {" + z + "} is not attached to adunit "
 		// + adunitid,
@@ -102,8 +102,8 @@ public class CreateCampaigns extends BaseTest {
 		// OptionalMatchers.contains(adunitid));
 		// });
 		//
-		// Given("^Campaign named \\{([^}]+)\\} is in the zoneset named
-		// \\{([^}]+)\\}$", (String c, String zs) -> {
+		// Given("^Campaign named \\{(.*)\\} is in the zoneset named
+		// \\{(.*)\\}$", (String c, String zs) -> {
 		// Optional<Stream<ZoneSet>> oczs =
 		// rampAppCampaignManager.getCampaign(c).map(Campaign::getZoneSetAssoc);
 		// Assert.assertThat("campaign named {" + c + "} does not exist", oczs,
