@@ -372,7 +372,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
 
-  Scenario: 8. valid size 1*1 with suitable ad, no placement filed -PG 1*1 banner expected
+  Scenario: 8. valid size 1*1 with suitable ad, no placement filed -BB 970*250 banner expected
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
