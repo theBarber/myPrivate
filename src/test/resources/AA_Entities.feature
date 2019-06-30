@@ -1046,6 +1046,8 @@ Feature: Entities for tests
       |campaign-D-ASAP-ST-3                 |75396         |247767       |false                  |8158             |{zone-zoneset-D-ASAP-ST-3}                  |[]                   |93        |15303               |3821           |69255             |[]                      |[]          |
       |campaign-D-HourlyFF-ST-4             |75396         |247767       |false                  |8158             |{zone-zoneset-D-HourlyFF-ST-4}               |[]                   |93        |15303               |3821           |69255             |[]                      |[]          |
       |campaign-D-DailyFF-ST-5              |75396         |247767       |false                  |8158             |{zone-zoneset-D-DailyFF-ST-5}               |[]                   |93        |15303               |3821           |69255             |[]                      |[]          |
+# To do - update all campaigns to end in 3 days from today (including today!!) at the database
+#   And i update campaign end day to be 3 days from today
     And i update campaign data by name
 #    deliveryPacing = 1 = hourly pacing
 #    pacing = hourly flex
@@ -1065,8 +1067,6 @@ Feature: Entities for tests
 
 
   Scenario:  create entites for new pacing mechanism
-#    To do - update all campaigns to end in 3 days from today (including today!!) at the database
-    And i update campaign end day to be 3 days from today
     Given i disable campaigns by name on db
       |Campaign Name                       |
       |campaign-state-screenShift-ST       |
