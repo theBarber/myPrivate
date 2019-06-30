@@ -429,6 +429,8 @@ public class API_EntitiesCreator extends BaseTest{
 
 
     private void updateCampaignEndDate(String entity, Integer days){
+
+        // To do - inject to data base the endDate String as the campaigns end day
         Calendar calNewYork = Calendar.getInstance();
         calNewYork.setTimeZone(TimeZone.getTimeZone("America/New_York"));
         Integer day = calNewYork.get(Calendar.DATE);
