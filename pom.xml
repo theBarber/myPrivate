@@ -144,8 +144,8 @@
                             <goal>test</goal>
                         </goals>
                         <configuration>
-                            <parallel>methods</parallel>
-                            <useUnlimitedThreads>true</useUnlimitedThreads>
+                            <!--<parallel>methods</parallel>-->
+                            <!--<useUnlimitedThreads>true</useUnlimitedThreads>-->
                             <argLine>
                                 -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                             </argLine>
@@ -163,8 +163,8 @@
                             </systemProperties>
                             <runOrder>alphabetical</runOrder>
                             <disableXmlReport>false</disableXmlReport>
-                            <forkCount>10</forkCount>
-                            <reuseForks>true</reuseForks>
+                            <!--<forkCount>10</forkCount>-->
+                            <!--<reuseForks>true</reuseForks>-->
                             <includes>
                                 <include>**/Failed*.class</include>
                             </includes>
