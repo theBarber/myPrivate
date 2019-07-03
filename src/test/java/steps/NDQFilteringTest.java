@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import infra.utils.SqlWorkflowUtils;
 
 import org.junit.runner.RunWith;

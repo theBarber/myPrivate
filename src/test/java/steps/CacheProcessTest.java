@@ -4,6 +4,7 @@ package steps;
 import cucumber.api.CucumberOptions;
 import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.process.CliCommandExecution;
 import infra.utils.CouchBaseUtils;

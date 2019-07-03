@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import infra.RerunningCucumber;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 

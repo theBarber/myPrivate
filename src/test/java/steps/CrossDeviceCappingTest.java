@@ -16,6 +16,7 @@ import cucumber.api.junit.Cucumber;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonElement;
 import gherkin.deps.com.google.gson.JsonParser;
+import infra.RerunningCucumber;
 import infra.utils.SqlWorkflowUtils;
 
 import org.apache.http.HttpResponse;
