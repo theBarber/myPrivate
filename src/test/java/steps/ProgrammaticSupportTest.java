@@ -3,6 +3,7 @@ package steps;
 import cucumber.api.CucumberOptions;
 import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import infra.utils.S3Client;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -38,7 +39,7 @@ import java.util.Scanner;
 import static org.hamcrest.core.Is.is;
 
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:ProgrammaticSupp8ort.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/ProgrammaticSuipport_$TIMESTAMP$.json"})
 public class ProgrammaticSupportTest extends BaseTest{

@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import org.apache.http.HttpResponse;
 import org.junit.Assert;
 import org.junit.AssumptionViolatedException;
@@ -21,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
 public class HeaderBiddingTest extends BaseTest {

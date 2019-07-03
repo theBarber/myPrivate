@@ -4,6 +4,7 @@ package steps;
 import cucumber.api.CucumberOptions;
 import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.process.CliCommandExecution;
 import infra.utils.CouchBaseUtils;
@@ -34,7 +35,7 @@ import static sun.swing.MenuItemLayoutHelper.max;
 
 @CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",
     "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json"})
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 
 public class CacheProcessTest extends BaseTest {
     private final String BANNER_CACHE_NAME = "banners_cache_refresh_";

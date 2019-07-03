@@ -23,6 +23,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import infra.RerunningCucumber;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -53,7 +55,7 @@ import ramp.lift.uas.automation.UASRequestModule;
 /**
  * Created by noam on 29/09/16.
  */
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = {"pretty",
     "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json"})
 public class UASIntegrationTest extends BaseTest {

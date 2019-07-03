@@ -3,6 +3,7 @@ package steps;
 import cucumber.api.CucumberOptions;
 import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import infra.utils.SqlWorkflowUtils;
 import org.junit.runner.RunWith;
 
@@ -13,7 +14,7 @@ import java.util.Random;
 import java.util.UUID;
 
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:DynamicTag.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/DynamicTag_$TIMESTAMP$.json"})
 public class DynamicTagTest extends BaseTest{

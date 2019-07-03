@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
+import infra.RerunningCucumber;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.runner.RunWith;
 
@@ -19,7 +20,7 @@ import infra.utils.S3Client;
 /**
  * Created by nive on 2016-09-22.
  */
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty",
 	"infra.RotatingJSONFormatter:target/cucumber/S3Loader_$TIMESTAMP$.json" })
 public class S3LoaderTest extends BaseTest {

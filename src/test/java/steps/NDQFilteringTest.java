@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import infra.utils.SqlWorkflowUtils;
 
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.LongAdder;
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:NDQFiltering.feature", plugin = {"pretty",
     "infra.RotatingJSONFormatter:target/cucumber/NDQ_Filtering_$TIMESTAMP$.json"})
 public class NDQFilteringTest extends BaseTest {

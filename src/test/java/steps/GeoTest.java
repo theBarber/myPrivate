@@ -2,9 +2,10 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import org.junit.runner.RunWith;
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:Geo.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/Geo_$TIMESTAMP$.json"})
 public class GeoTest extends BaseTest{

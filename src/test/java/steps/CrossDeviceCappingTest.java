@@ -16,6 +16,7 @@ import cucumber.api.junit.Cucumber;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonElement;
 import gherkin.deps.com.google.gson.JsonParser;
+import infra.RerunningCucumber;
 import infra.utils.SqlWorkflowUtils;
 
 import org.apache.http.HttpResponse;
@@ -37,7 +38,7 @@ import ramp.lift.uas.automation.CouchbaseBucketModule;
 /**
  * Created by kereng on 5/23/2017.
  */
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = {"classpath:CrossDeviceCappingExperiment.feature","classpath:CrossDeviceCappingNoExperiment.feature"}, plugin = { "pretty",
     "infra.RotatingJSONFormatter:target/cucumber/crossDevice_$TIMESTAMP$.json" })
 

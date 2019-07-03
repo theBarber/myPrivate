@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import com.google.common.io.Files;
 import com.sun.org.apache.xpath.internal.operations.Or;
+import infra.RerunningCucumber;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.hamcrest.Matchers;
@@ -31,7 +32,7 @@ import static org.hamcrest.Matchers.not;
 
 @CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",
 		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 public class HealthCheckTest extends BaseTest {
 
     protected String svc_ut = "";

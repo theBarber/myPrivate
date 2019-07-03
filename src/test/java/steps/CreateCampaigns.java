@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.not;
 
 import java.util.Optional;
 
+import infra.RerunningCucumber;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
@@ -17,7 +18,7 @@ import entities.Campaign;
 import entities.CampaignManager;
 import entities.CampaignPlus;
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:CreateCampaigns.feature", tags = "@campaign")
 
 public class CreateCampaigns extends BaseTest {
