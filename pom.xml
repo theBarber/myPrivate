@@ -64,6 +64,11 @@
 
 		<profile>
 			<id>retry</id>
+			<activation>
+				<file>
+					<exists>${basedir}/target/rerun.properties</exists>
+				</file>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
