@@ -79,10 +79,10 @@
 							<!-- Associate the read-project-properties goal with the initialize
                                 phase, to read the properties file. -->
 							<execution>
-								<!--<phase>pre-clean</phase>-->
-								<!--<goals>-->
-									<!--<goal>read-project-properties</goal>-->
-								<!--</goals>-->
+								<phase>pre-clean</phase>
+								<goals>
+									<goal>read-project-properties</goal>
+								</goals>
 								<configuration>
 									<files>
 										<file>target/rerun.properties</file>
