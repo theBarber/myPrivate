@@ -26,7 +26,7 @@ import infra.utils.S3Client;
 
 @CucumberOptions(features = "classpath:UASLimitations.feature", plugin = {"pretty",
     "infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json"})
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 public class SolverPlanTest extends BaseTest {
   public SolverPlanTest() {
     super();

@@ -27,7 +27,7 @@ import static org.junit.Assert.assertThat;
 
 @CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/API_Examples_$TIMESTAMP$.json"})
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 public class API_EntitiesCreator extends BaseTest{
     final private String CREATIVES_SOURCE_FILE_PATH = "/input_files/creativesTemplates.json";
     final private String CAMPAIGN_PATTERN_SOURCE_FILE_PATH = "/input_files/Templates.json";

@@ -34,7 +34,7 @@ import static sun.swing.MenuItemLayoutHelper.max;
 
 @CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",
     "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json"})
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 
 public class CacheProcessTest extends BaseTest {
     private final String BANNER_CACHE_NAME = "banners_cache_refresh_";

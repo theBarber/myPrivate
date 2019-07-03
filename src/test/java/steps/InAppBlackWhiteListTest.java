@@ -4,7 +4,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:InAppBlackWhiteList.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/InAppBlackWhiteList_$TIMESTAMP$.json"})
 public class InAppBlackWhiteListTest extends BaseTest{

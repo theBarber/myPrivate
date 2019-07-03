@@ -38,7 +38,7 @@ import java.util.Scanner;
 import static org.hamcrest.core.Is.is;
 
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:ProgrammaticSupp8ort.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/ProgrammaticSuipport_$TIMESTAMP$.json"})
 public class ProgrammaticSupportTest extends BaseTest{

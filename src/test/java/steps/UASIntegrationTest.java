@@ -53,7 +53,7 @@ import ramp.lift.uas.automation.UASRequestModule;
 /**
  * Created by noam on 29/09/16.
  */
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:UASIntegration.feature", plugin = {"pretty",
     "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json"})
 public class UASIntegrationTest extends BaseTest {

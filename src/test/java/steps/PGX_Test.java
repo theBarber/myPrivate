@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 import static org.hamcrest.Matchers.isIn;
 import static org.hamcrest.Matchers.not;
 
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 @CucumberOptions(features = "classpath:PGXTest.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/PGX_$TIMESTAMP$.json"})
 public class PGX_Test extends BaseTest{
