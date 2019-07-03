@@ -130,7 +130,7 @@
                                 </property>
                             </systemProperties>
                             <runOrder>alphabetical</runOrder>
-                            <disableXmlReport>true</disableXmlReport>
+                            <disableXmlReport>false</disableXmlReport>
                             <forkCount>10</forkCount>
                             <reuseForks>true</reuseForks>
                             <includes>
@@ -162,7 +162,7 @@
                                 </property>
                             </systemProperties>
                             <runOrder>alphabetical</runOrder>
-                            <disableXmlReport>true</disableXmlReport>
+                            <disableXmlReport>false</disableXmlReport>
                             <forkCount>10</forkCount>
                             <reuseForks>true</reuseForks>
                             <includes>

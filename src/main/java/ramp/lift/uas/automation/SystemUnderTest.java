@@ -628,7 +628,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	}
 
 	@Override
-	public void write(String text) {
+	public synchronized void write(String text) {
 		scenarioWriter.write(text);
 
 	}

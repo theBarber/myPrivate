@@ -53,7 +53,7 @@ public class HeaderBiddingTest extends BaseTest {
         And("all HB responses contains (campaignId|adId) with id of entity named? \\{(.*)\\}$",this::responsesContainEntityWithName);
         And("all HB responses contains ad impression with? (.*) of entity named? \\{(.*)\\}$",this::responsesAdsContainEntityWithName);
         And("all HB responses contains ad impression with? (.*) with value? \\{(.*)\\}$",this::responsesAdsContainEntityWithId);
-        And("i read all HB responses and map their bidId by? \\{(.*)\\}$",this::setBidMapByEntity);
+        And("i read all HB responses and map their bidId by? (.*)$",this::setBidMapByEntity);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with name \\{(.*)\\} (\\d+)% of the times", this::responsesContainEntityByBidIdWithName);
         And("in HB responses bidid (\\w+) has entity of (campaignId|adId) with value (\\d+) (\\d+)% of the times", this::responsesContainEntityByBidIdWithValue);
         And("all HB responses contains (campaignId|adId) with one of: \\{(.*)\\}",this::HBResponsesContainOneOnOf);
@@ -234,7 +234,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
         });
     }
 
-    private void responsesContainEntityByBidIdWithValue(String bidId, String entity, Integer value, Double percent) {
+    private void responsesContainEntityByBidIdWithValue(String bidId, String entity, Integer value, Integer percent) {
         Assert.assertNotNull("bid mapper doesn't exist",bidCounterMap);
         Assert.assertEquals("inconsistent mapping..",mapByEntity,entity);
         Assert.assertTrue("bid id "+ bidId+ " doesn't exist", bidCounterMap.containsKey(bidId));
@@ -246,7 +246,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
     }
 
 
-    private void responsesContainEntityByBidIdWithName(String bidId, String entity, String name, Double percent) {
+    private void responsesContainEntityByBidIdWithName(String bidId, String entity, String name, Integer percent) {
         responsesContainEntityByBidIdWithValue(bidId,entity,getEntityId(entity,name),percent);
     }
 

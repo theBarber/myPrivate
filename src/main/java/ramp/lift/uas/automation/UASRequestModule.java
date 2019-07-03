@@ -271,7 +271,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         reset();
     }
 
-    public final void reset() {
+    public synchronized final void reset() {
         if (synchronizedResponses != null)
             synchronizedResponses.clear();
         this.actual().stream()
