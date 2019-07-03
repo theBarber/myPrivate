@@ -171,32 +171,6 @@
                         </configuration>
                     </execution>
                 </executions>
-				<configuration>
-                    <parallel>methods</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
-					<argLine>
-						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-					</argLine>
-					<properties>
-						<property>
-							<name>listener</name>
-							<value>io.qameta.allure.junit4.AllureJunit4</value>
-						</property>
-					</properties>
-					<systemProperties>
-						<property>
-							<name>allure.results.directory</name>
-							<value>${project.build.directory}/allure-results</value>
-						</property>
-					</systemProperties>
-					<runOrder>alphabetical</runOrder>
-					<disableXmlReport>true</disableXmlReport>
-					<forkCount>10</forkCount>
-					<reuseForks>true</reuseForks>
-					<includes>
-						<include>**/*Test.class</include>
-					</includes>
-				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.aspectj</groupId>
