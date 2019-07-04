@@ -201,21 +201,21 @@
                 <version>2.22.0</version>
 				<configuration>
 					<useSystemClassLoader>false</useSystemClassLoader>
-					<argLine>
-						 -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-					</argLine>
-					<properties>
-						<property>
-							<name>listener</name>
-							<value>io.qameta.allure.junit4.AllureJunit4</value>
-						</property>
-					</properties>
-					<systemProperties>
-						<property>
-							<name>allure.results.directory</name>
-							<value>${project.build.directory}/allure-results</value>
-						</property>
-					</systemProperties>
+					<!--<argLine>-->
+						 <!-- -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"-->
+					<!--</argLine>-->
+					<!--<properties>-->
+						<!--<property>-->
+							<!--<name>listener</name>-->
+							<!--<value>io.qameta.allure.junit4.AllureJunit4</value>-->
+						<!--</property>-->
+					<!--</properties>-->
+					<!--<systemProperties>-->
+						<!--<property>-->
+							<!--<name>allure.results.directory</name>-->
+							<!--<value>${project.build.directory}/allure-results</value>-->
+						<!--</property>-->
+					<!--</systemProperties>-->
 					<runOrder>alphabetical</runOrder>
 					<disableXmlReport>false</disableXmlReport>
 					<forkCount>10</forkCount>
