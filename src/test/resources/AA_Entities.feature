@@ -16,10 +16,6 @@ Feature: Entities for tests
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
 
-  Scenario: target website
-    When I send 1 times an ad request with parameter {optimize=0&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
-
-
   Scenario: remove all active zones
 #    zones that are linked to publisher 2434 are disabled specifically!!
     Given i remove all zones from publishers: {3673}
