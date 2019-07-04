@@ -17,7 +17,7 @@ Feature: Entities for tests
 
 
   Scenario: target website
-    When I send 1 times an ad request with parameter {optimize=0&https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-WL-ST-2} to UAS
 
 
   Scenario: remove all active zones
@@ -629,6 +629,7 @@ Feature: Entities for tests
 #      |campaign-Inapp-SI-5       |75396         |241783     |false                  |14621             |{zone-zoneset-Inapp-SI-5}     |[]           |80        |10138            |3585           |?             |
       | campaign-Inapp-SI-6 | 75396 | 241783   | false                 | 14621         | {zone-zoneset-Inapp-SI-6} | []         | 80       | 8803           | 3586         | 67260           |
 #      |campaign-Inapp-SI-6       |75396         |241783     |false                  |14621            |{zone-zoneset-Inapp-SI-6}     |[]           |80        |8803             |3586           |?             |
+
     And i update campaign data by name
       | Campaign Name       | Priority | campaign_delivery_method | delivery_algorithm |
       | campaign-Inapp-SI-1 | -2       | 1                        | 4                  |
@@ -637,6 +638,7 @@ Feature: Entities for tests
       | campaign-Inapp-SI-4 | -1       | 2                        | 3                  |
       | campaign-Inapp-SI-5 | -1       | 2                        | 3                  |
       | campaign-Inapp-SI-6 | -1       | 2                        | 3                  |
+
     And i update zone data by name
       | Zone Name               | is_mraid |
       | zone-zoneset-Inapp-SI-1 | 1        |
@@ -803,14 +805,17 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name    |
       | campaign-CT-ST-1 |
+      | campaign-CT-ST-2 |
       | campaign-WL-ST-2 |
     Given i create new campaigns, new zoneset with domains
       | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name    | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-CT-ST-1 | 75396 | 210722   | false                 | 8290     | {zone-zoneset-CT-ST-1} | []                   | 93       | 15182          | 3708         | 65991           | []             | []             |
+      | campaign-CT-ST-2 | 75396 | 210722   | false                 | 8290     | {zone-zoneset-CT-ST-2} | []                   | 93       | 15182          | 3708         | 65991           | []             | []             |
       | campaign-WL-ST-2 | 75396 | 210722   | false                 | 8290     | {zone-zoneset-WL-ST-2} | [[[32,"==",201211]]] | 93       | 15183          | 3708         | 65991           | []             | []             |
     And i update banner data by name
       | Banner Name               | limitation                               |
       | campaign-CT-ST-1-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]]        |
+      | campaign-CT-ST-2-banner-1 | [[[64,"=~",1_7541],[64,"=~",1_7531]]]    |
       | campaign-WL-ST-2-banner-1 | [[[39,"=~","Windows"],[41,"=~","Chrome"] |
 
 
@@ -971,6 +976,23 @@ Feature: Entities for tests
       | zone-zoneset-city-zoneLevelLimit-ST  | [[[8,"=~","bo",["l","la paz"]]]] |
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                |
 
+
+  Scenario:  create entities for contextual targeting - double verify
+    Given i disable campaigns by name on db
+      | Campaign Name                     |
+      | campaign-dv-zoneLevelLimit-ST     |
+      | campaign-dv-campaignLevelLimit-ST |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                     | IO    | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                     | limitation                              | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude |
+      | campaign-dv-zoneLevelLimit-ST     | 75396 | 244896   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-ST}     | []                                      | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []             |
+      | campaign-dv-campaignLevelLimit-ST | 75396 | 244896   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-ST} | [[[64,"=~","2_80012001","2_80012003"]]] | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []             |
+
+    And i update zone data by name
+      | Zone Name                         | limitation                              |
+      | zone-zoneset-dv-zoneLevelLimit-ST | [[[64,"=~","2_80012001","2_80012003"]]] |
+
+
   Scenario:  create entites for effctive host choosing
     Given i disable campaigns by name on db
       | Campaign Name          |
@@ -1075,15 +1097,14 @@ Feature: Entities for tests
 
   Scenario: Create entities for double verify
     Given i disable campaigns by name on db
-      | Campaign Name                 |
+      | Campaign Name           |
       | campaign-dv-screenShift |
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name           | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-dv-screenShift | 75396 | 240787   | false                 | 192           | {zone-zoneset-dv-screenShift} | []         | 69       | 15290          | 3821         | 69426           | []          | []          |
     And i update banner data by name
-      | Banner Name                            | limitation                        |
+      | Banner Name                            | limitation                                    |
       | campaign-state-screenShift-ST-banner-1 | [[[64,"=~",2_80012003],[64,"=~",2_80012002]]] |
-
 
 
   @DynamicPricing
