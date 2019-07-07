@@ -797,7 +797,7 @@ Feature: Entities for tests
 
 
   @wurfl
-  @doron
+
   Scenario: create entities for peer39 and wurfl feature
     Given i disable campaigns by name on db
       | Campaign Name    |
@@ -974,7 +974,7 @@ Feature: Entities for tests
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                |
 
 
-  @doron
+
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                             |
@@ -1138,7 +1138,7 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
-  @doron
+
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1146,7 +1146,7 @@ Feature: Entities for tests
     And I sleep for 40 seconds
 
   @refreshZoneCache
-  @doron
+
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
@@ -1156,7 +1156,7 @@ Feature: Entities for tests
 #    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
-  @doron
+
   Scenario: save entities to file
     And save all entities to json file
 
