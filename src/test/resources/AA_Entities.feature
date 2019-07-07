@@ -1138,6 +1138,7 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
+  @doron
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1145,6 +1146,7 @@ Feature: Entities for tests
     And I sleep for 40 seconds
 
   @refreshZoneCache
+  @doron
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
@@ -1154,6 +1156,7 @@ Feature: Entities for tests
 #    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
+  @doron
   Scenario: save entities to file
     And save all entities to json file
 
