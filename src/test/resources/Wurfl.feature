@@ -2,6 +2,7 @@
 @parallel
 @scheduled
 @noAA
+@doron
 
 
 
@@ -34,32 +35,45 @@ Feature: warfle tests - wurfl limitation in campaign and zone level, contextual 
     And The responses are passback
 
   Scenario: contextual targeting by dv - campaign level limitation
-    When I send 1 times an ad request with parameter {optimize=0&loc=https://disney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fdisney.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-campaignLevelLimit-ST-banner-1} 100% of the time
-    When I send 1 times an ad request with parameter {optimize=0&loc=https://drugs.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fdrugs.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
-    When I send 1 times an ad request with parameter {optimize=0&loc=https://www.military.com/equipment/weapons} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons%3Fdv_test%3D1} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
-    When I send 1 times an ad request with parameter {optimize=0&loc=notarealweblala.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=notarealweblala.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    And The response code is 200
+    And The responses are passback
+
+  Scenario: contextual targeting by dv - campaign level limitation domain exclude
+    When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fdisney.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    And The response code is 200
+    And The responses are passback
+    And The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons%3Fdv_test%3D1} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    And The response code is 200
+    And The responses are passback
+    When I send 1 times an ad request with parameter {optimize=0&loc=notarealweblala.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
 
   Scenario: contextual targeting by dv - zone level limitation
-    When I send 1 times an ad request with parameter {optimize=0&loc=https://disney.com} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fdisney.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-zoneLevelLimit-ST-banner-1} 100% of the time
-    When I send 1 times an ad request with parameter {optimize=0&loc=https://drugs.com} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fdrugs.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
-    When I send 1 times an ad request with parameter {optimize=0&loc=https://www.military.com/equipment/weapons} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons%3Fdv_test%3D1} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
-    When I send 1 times an ad request with parameter {optimize=0&loc=notarealweblala.com} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&loc=notarealweblala.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
 

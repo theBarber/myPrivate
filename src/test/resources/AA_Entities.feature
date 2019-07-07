@@ -797,6 +797,7 @@ Feature: Entities for tests
 
 
   @wurfl
+  @doron
   Scenario: create entities for peer39 and wurfl feature
     Given i disable campaigns by name on db
       | Campaign Name    |
@@ -973,20 +974,24 @@ Feature: Entities for tests
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                |
 
 
+  @doron
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
-      | Campaign Name                     |
-      | campaign-dv-zoneLevelLimit-ST     |
-      | campaign-dv-campaignLevelLimit-ST |
+      | Campaign Name                             |
+      | campaign-dv-zoneLevelLimit-ST             |
+      | campaign-dv-campaignLevelLimit-ST         |
+      | campaign-dv-campaignLevelLimit-exclude-ST |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                     | IO    | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                     | limitation                              | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude |
-      | campaign-dv-zoneLevelLimit-ST     | 75396 | 244896   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-ST}     | []                                      | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []             |
-      | campaign-dv-campaignLevelLimit-ST | 75396 | 244896   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-ST} | [[[64,"=~","2_80012001","2_80012003"]]] | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []             |
+      | Campaign Name                             | IO    | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                             | limitation                              | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude                                                                |
+      | campaign-dv-zoneLevelLimit-ST             | 75396 | 244896   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-ST}             | [[[64,"!=","2_80012001","2_80012003"]]] | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
+      | campaign-dv-campaignLevelLimit-ST         | 75396 | 244896   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-ST}         | []                                      | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
+      | campaign-dv-campaignLevelLimit-exclude-ST | 75396 | 244896   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-exclude-ST} | []                                      | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
 
-    And i update zone data by name
-      | Zone Name                         | limitation                              |
-      | zone-zoneset-dv-zoneLevelLimit-ST | [[[64,"=~","2_80012001","2_80012003"]]] |
+    And i update campaign data by name
+      | Campaign Name                             | limitation                              |
+      | campaign-dv-campaignLevelLimit-ST         | [[[64,"!=","2_80012001","2_80012003"]]] |
+      | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"!=","2_80012001","2_80012003"]]] |
 
 
   Scenario:  create entites for effctive host choosing
@@ -1090,17 +1095,6 @@ Feature: Entities for tests
     And i update banner data by name
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
-
-  Scenario: Create entities for double verify
-    Given i disable campaigns by name on db
-      | Campaign Name           |
-      | campaign-dv-screenShift |
-    Given i create new campaigns, new zoneset with domains
-      | Campaign Name           | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name           | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-dv-screenShift | 75396 | 240787   | false                 | 192           | {zone-zoneset-dv-screenShift} | []         | 69       | 15290          | 3821         | 69426           | []          | []          |
-    And i update banner data by name
-      | Banner Name                            | limitation                                    |
-      | campaign-state-screenShift-ST-banner-1 | [[[64,"=~",2_80012003],[64,"=~",2_80012002]]] |
 
 
   @DynamicPricing
