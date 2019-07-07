@@ -32,7 +32,7 @@ import static org.hamcrest.Matchers.not;
 
 @CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",
 		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 public class HealthCheckTest extends BaseTest {
 
     protected String svc_ut = "";

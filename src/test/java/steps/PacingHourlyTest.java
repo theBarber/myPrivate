@@ -7,7 +7,7 @@ import infra.RerunningCucumber;
 import org.junit.runner.RunWith;
 
 
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:PacingHourly.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/PacingHourly_$TIMESTAMP$.json"})
 public class PacingHourlyTest extends BaseTest  {

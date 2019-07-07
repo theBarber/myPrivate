@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.UUID;
 
 
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:DynamicTag.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/DynamicTag_$TIMESTAMP$.json"})
 public class DynamicTagTest extends BaseTest{
