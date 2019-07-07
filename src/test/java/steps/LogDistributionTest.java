@@ -26,7 +26,7 @@ import static org.junit.Assert.fail;
 
 @CucumberOptions(features = {"classpath:LogDistribution.feature","classpath:StrategyServiceTest.feature"}, plugin = { "pretty",
         "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 
 public class LogDistributionTest extends BaseTest {
     HashMap<Integer, Map<String, Long>> dist = new HashMap<>();

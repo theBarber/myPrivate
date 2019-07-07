@@ -15,7 +15,7 @@ package steps;
 /**
  * Created by nive on 2016-09-28.
  */
-//@RunWith(RerunningCucumber.class)
+//@RunWith(Cucumber.class)
 //@CucumberOptions(features = "classpath:RabbitMQ_integration.feature", plugin = { "pretty",
 	//"infra.RotatingJSONFormatter:target/cucumber/rabbit_$TIMESTAMP$.json" })
 /*

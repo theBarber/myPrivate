@@ -18,7 +18,7 @@ import entities.Campaign;
 import entities.CampaignManager;
 import entities.CampaignPlus;
 
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:CreateCampaigns.feature", tags = "@campaign")
 
 public class CreateCampaigns extends BaseTest {

@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 /**
  * Created by nive on 2016-10-30.
  */
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:AdSelectorBase.feature", plugin = { "pretty",
         "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" }, glue = "C:\\Dev\\ramp-lift-automation\\src\\test\\resources\\AdSelectorBase.feature")
 
