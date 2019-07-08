@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
+import infra.RerunningCucumber;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.runner.RunWith;
 

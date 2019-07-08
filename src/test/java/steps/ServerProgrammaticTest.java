@@ -2,7 +2,8 @@ package steps;
 
 import cucumber.api.CucumberOptions;
         import cucumber.api.junit.Cucumber;
-        import org.junit.runner.RunWith;
+import infra.RerunningCucumber;
+import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:ServerProgrammatic.feature", plugin = {"pretty",

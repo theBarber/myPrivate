@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.not;
 
 import java.util.Optional;
 
+import infra.RerunningCucumber;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import entities.*;
+import infra.RerunningCucumber;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.Matchers.is;

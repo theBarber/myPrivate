@@ -54,7 +54,7 @@ Feature: ROFD
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-YesRunFalseDomain-69-1-banner-1} 100% of the time
 
-  Scenario: 2a. run on false domain flag = true, campaign has an include list. req sent from a false domain not in the include. zone + HB req
+  Scenario: 2a. run on false domain flag = true, campaign has an include list. req sent from a false domain in the include. zone + HB req
     When I send 1 times an ad request with parameter {domain=daniellafalsedomain.test&unlimited=1&optimize=0} for zone named {zone-zoneset-YesRunFalseDomainInclude-ST-2} to UAS
     Then The response code is 200
     And The response contains script

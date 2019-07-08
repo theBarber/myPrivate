@@ -4,6 +4,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.java.en.*;
 import entities.Zone;
+import infra.RerunningCucumber;
 import infra.utils.HttpContentTest;
 
 import org.junit.Assert;
