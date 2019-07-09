@@ -989,15 +989,20 @@ Feature: Entities for tests
       | campaign-dv-campaignLevelLimit-exclude-ST | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-exclude-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
       | campaign-dv-zoneLevelLimit-peer-ST        | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-peer-ST}        | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
 
+    And i update banner data by name
+      | Banner Name                                        | limitation                              |
+      | campaign-dv-campaignLevelLimit-ST-banner-1         | [[[64,"=~","2_84251001","2_84252026"]]] |
+      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1 | [[[64,"=~","2_84251001","2_84252026"]]] |
+
     And i update campaign data by name
-      | Campaign Name                             | limitation                                       |
-      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_80012001","2_80012003"]]]          |
-      | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_80012001","2_80012003"]]]          |
+      | Campaign Name                             | limitation                              |
+      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84251001","2_84252026"]]] |
+      | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
-      | Zone Name                         | limitation                              |
-      | zone-zoneset-dv-zoneLevelLimit-ST | [[[64,"=~","2_80012001","2_80012003"]]] |
-      | zone-zoneset-dv-zoneLevelLimit-peer-ST | [[[64,"=~","2_80012001","2_80012003","1_7510"]]] |
+      | Zone Name                              | limitation                                        |
+      | zone-zoneset-dv-zoneLevelLimit-ST      | [[[64,"=~","2_84251001","2_84252026"]]]           |
+      | zone-zoneset-dv-zoneLevelLimit-peer-ST | [[[64,"=~","2_84251001","2_84252026","1_13724"]]] |
 
 
   Scenario:  create entites for effctive host choosing
