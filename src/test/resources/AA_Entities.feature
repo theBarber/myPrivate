@@ -994,6 +994,10 @@ Feature: Entities for tests
       | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_80012001","2_80012003"]]] |
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_80012001","2_80012003"]]] |
 
+    And i update zone data by name
+      | Zone Name                         | limitation                              |
+      | zone-zoneset-dv-zoneLevelLimit-ST | [[[64,"=~","2_80012001","2_80012003"]]] |
+
 
   Scenario:  create entites for effctive host choosing
     Given i disable campaigns by name on db
