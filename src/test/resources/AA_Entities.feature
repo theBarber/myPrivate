@@ -983,20 +983,22 @@ Feature: Entities for tests
       | campaign-dv-zoneLevelLimit-peer-ST        |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                             | IO    | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                             | limitation                                       | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude                                                                |
-      | campaign-dv-zoneLevelLimit-ST             | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-ST}             | [[[64,"=~","2_80012001","2_80012003"]]]          | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
-      | campaign-dv-campaignLevelLimit-ST         | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-ST}         | []                                               | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
-      | campaign-dv-campaignLevelLimit-exclude-ST | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-exclude-ST} | []                                               | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
-      | campaign-dv-zoneLevelLimit-peer-ST        | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-peer-ST}        | [[[64,"=~","2_80012001","2_80012003","1_7510"]]] | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
+      | Campaign Name                             | IO    | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude                                                                |
+      | campaign-dv-zoneLevelLimit-ST             | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-ST}             | []         | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
+      | campaign-dv-campaignLevelLimit-ST         | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-ST}         | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
+      | campaign-dv-campaignLevelLimit-exclude-ST | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-campaignLevelLimit-exclude-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
+      | campaign-dv-zoneLevelLimit-peer-ST        | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-peer-ST}        | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
 
     And i update campaign data by name
-      | Campaign Name                             | limitation                              |
-      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_80012001","2_80012003"]]] |
-      | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_80012001","2_80012003"]]] |
+      | Campaign Name                             | limitation                                       |
+      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_80012001","2_80012003"]]]          |
+      | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_80012001","2_80012003"]]]          |
+      | campaign-dv-zoneLevelLimit-peer-ST        | [[[64,"=~","2_80012001","2_80012003","1_7510"]]] |
 
     And i update zone data by name
       | Zone Name                         | limitation                              |
       | zone-zoneset-dv-zoneLevelLimit-ST | [[[64,"=~","2_80012001","2_80012003"]]] |
+      | zone-zoneset-dv-zoneLevelLimit-peer-ST | [[[64,"=~","2_80012001","2_80012003","1_7510"]]] |
 
 
   Scenario:  create entites for effctive host choosing
