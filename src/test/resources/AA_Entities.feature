@@ -993,7 +993,6 @@ Feature: Entities for tests
       | Campaign Name                             | limitation                                       |
       | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_80012001","2_80012003"]]]          |
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_80012001","2_80012003"]]]          |
-      | campaign-dv-zoneLevelLimit-peer-ST        | [[[64,"=~","2_80012001","2_80012003","1_7510"]]] |
 
     And i update zone data by name
       | Zone Name                         | limitation                              |
