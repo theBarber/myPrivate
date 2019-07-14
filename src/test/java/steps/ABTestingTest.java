@@ -20,7 +20,7 @@ import java.util.List;
 
 @CucumberOptions(features = "classpath:ABTesting.feature", plugin = { "pretty",
 		"infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json" })
-@RunWith(Cucumber.class)
+@RunWith(RerunningCucumber.class)
 public class ABTestingTest extends BaseTest {
 	List<Integer> createdExperimentGroupIds = new ArrayList<>();
 	List<Integer> createdExperimentIds = new ArrayList<>();
