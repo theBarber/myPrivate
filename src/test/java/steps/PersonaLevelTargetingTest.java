@@ -30,7 +30,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:PersonaLevelTargeting.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/PersonaLevelTargeting_$TIMESTAMP$.json"})
 public class PersonaLevelTargetingTest  extends BaseTest{

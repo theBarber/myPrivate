@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
 public class HeaderBiddingTest extends BaseTest {

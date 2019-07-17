@@ -5,7 +5,7 @@ import cucumber.api.junit.Cucumber;
 import infra.RerunningCucumber;
 import org.junit.runner.RunWith;
 
-@RunWith(RerunningCucumber.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:DynamicPricing.feature", plugin = {"pretty",
         "infra.RotatingJSONFormatter:target/cucumber/DynamicPricing_$TIMESTAMP$.json"})
 public class DynamicPricingTest extends BaseTest {
