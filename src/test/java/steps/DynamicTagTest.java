@@ -2,6 +2,7 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import infra.RerunningCucumber;
 import infra.utils.SqlWorkflowUtils;
 import io.cucumber.datatable.DataTable;
 import org.junit.runner.RunWith;

@@ -161,7 +161,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
   Scenario: line item level frequency capping persona level
 ##  67000000-0000-0000-0000-000000000000
 ##  78000000-0000-0000-0000-000000000000
-    #  step 1: 1 req from device 78
+    #  step 1: 2 req from device 78
     Given I clear all cookies from uas requests
     When I send 2 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
     And The response code is 200
@@ -169,17 +169,17 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-1-banner-1} 100% of the time
     And I sleep for 2 seconds
-#   step 2: 1 req from device 89
+#   step 2: 1 req from device 67
     When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
     And The response code is 200
     And The response contains script
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-2-banner-1} 100% of the time
-#    step 3: 1 req from 78, should return pb cause capping = 3
+#    step 3: 1 req from 67, should return pb cause capping = 3
     When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
     And The response code is 200
     And The responses are passback
-#  step 3: renewal after 4 mins
+#  step 4: renewal after 4 mins
     And I sleep for 250 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS

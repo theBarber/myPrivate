@@ -91,13 +91,13 @@ Feature: InApp testing
     And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
 
-  Scenario: without trackers  - Zone request (viewableChange)
-    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar} for zone named {zone-zoneset-Inapp-SI-4} to UAS
-    Then The response code is 200
-    And The response contains script
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-4-banner-1} 100% of the time
-    And The response not contains var ut_pixels
+#  Scenario: without trackers  - Zone request (viewableChange)
+#    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar} for zone named {zone-zoneset-Inapp-SI-4} to UAS
+#    Then The response code is 200
+#    And The response contains script
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-4-banner-1} 100% of the time
+#    And The response not contains var ut_pixels
 
 
   Scenario: image, markup and iframe - Zone request (render)
@@ -109,7 +109,7 @@ Feature: InApp testing
     And The response contains var ut_pixels
     And The response contains var ut_pixel_event = 'render';
     And The response contains {type:'image', url:'https://www.example.com/1'}
-      And The response contains {type:'markup', url:'PElNRyBTUkM9Imh0dHBzOi8vYWQuZG91YmxlY2xpY2submV0L2RkbS90cmFja2ltcC9ONDEwMDAxLjEyNDU0MVVOREVSVE9ORU5FVFdPUktTL0IyMTEyNjcyNC4yMjE1NDc2MDA7ZGNfdHJrX2FpZD00MjAwMzAxMDg7ZGNfdHJrX2NpZD0xMDE4OTEzMDA7b3JkPXRlc3Q7ZGNfbGF0PTtkY19yZGlkPTt0YWdfZm9yX2NoaWxkX2RpcmVjdGVkX3RyZWF0bWVudD0/IiBCT1JERVI9IjAiIEhFSUdIVD0iMSIgV0lEVEg9IjEiIEFMVD0iQWR2ZXJ0aXNlbWVudCI+'}
+    And The response contains {type:'markup', url:'PElNRyBTUkM9Imh0dHBzOi8vYWQuZG91YmxlY2xpY2submV0L2RkbS90cmFja2ltcC9ONDEwMDAxLjEyNDU0MVVOREVSVE9ORU5FVFdPUktTL0IyMTEyNjcyNC4yMjE1NDc2MDA7ZGNfdHJrX2FpZD00MjAwMzAxMDg7ZGNfdHJrX2NpZD0xMDE4OTEzMDA7b3JkPXRlc3Q7ZGNfbGF0PTtkY19yZGlkPTt0YWdfZm9yX2NoaWxkX2RpcmVjdGVkX3RyZWF0bWVudD0/IiBCT1JERVI9IjAiIEhFSUdIVD0iMSIgV0lEVEg9IjEiIEFMVD0iQWR2ZXJ0aXNlbWVudCI+'}
     And The response contains {type:'markup', url:'PHNjcmlwdCBzcmM9Imh0dHBzOi8vei5tb2F0YWRzLmNvbS9zcGFya3VzZGlzY292ZXJkY203ODE3NDQzNDk0OTEvbW9hdGFkLmpzI21vYXRDbGllbnRMZXZlbDE9MjA0ODgyNTgmbW9hdENsaWVudExldmVsMj0yNzgwNzYxJm1vYXRDbGllbnRMZXZlbDM9MjA5MjQwNDY2Jm1vYXRDbGllbnRMZXZlbDQ9MXgxX1NpdGVfU2VydmVkX1VuaXQmbW9hdENsaWVudFNsaWNlcjE9LSZtb2F0Q2xpZW50U2xpY2VyMj0tJnNraW49MCZ6TW9hdERDTUlNUD0lJVRURF9DQUNIRUJVU1RFUiUlIiB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPjwvc2NyaXB0Pg=='}
     And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
@@ -209,14 +209,14 @@ Feature: InApp testing
     And The response contains var ut_pixel_event = 'viewableChange';
     And The response contains https://creative-p.undertone.com/inapp/ut_pixels.min.js
 
-  @optimize
-  Scenario: without trackers  - Zone request (viewableChange)
-    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&optimize=1} for zone named {zone-zoneset-Inapp-SI-4} to UAS
-    Then The response code is 200
-    And The response contains script
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-4-banner-1} 100% of the time
-    And The response not contains var ut_pixels
+#  @optimize
+#  Scenario: without trackers  - Zone request (viewableChange)
+#    When I send 1 times an ad request with parameter {unlimited=1&deviceid=sahar&optimize=1} for zone named {zone-zoneset-Inapp-SI-4} to UAS
+#    Then The response code is 200
+#    And The response contains script
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-4-banner-1} 100% of the time
+#    And The response not contains var ut_pixels
 
   @optimize
   Scenario: image, markup and iframe - Zone request (render)

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
+import infra.RerunningCucumber;
 import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
 import io.cucumber.datatable.DataTable;
@@ -405,12 +406,63 @@ public class API_EntitiesCreator extends BaseTest{
     private void updateEndDateEntityDataByID (String entity, String idsStr){
         String[] idsArr = idsStr.split(",");
         for (int i=0; i<idsArr.length ;i++){
-            SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id" , idsArr[i]  , "end_date", endDateVal );
+                SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id" , idsArr[i]  , "end_date", endDateVal );
             SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id" , idsArr[i]  , "start_date", startDateVal );
 
         }
 
     }
+
+
+    private void updateCampaignEndDate(String entity, Integer days){
+
+        // To do - inject to data base the endDate String as the campaigns end day
+
+        Calendar calNewYork = Calendar.getInstance();
+        calNewYork.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+        Integer day = calNewYork.get(Calendar.DATE);
+        Integer month,year;
+        month = calNewYork.get(Calendar.MONTH);
+        year = calNewYork.get(Calendar.YEAR);
+        calNewYork.set(Calendar.DATE, day + days);
+        day = calNewYork.get(Calendar.DATE);
+        month++;
+        if (month>12){
+            month = 1;
+        }
+        month.toString();
+        String monthStr = month.toString();
+        String dayStr = day.toString();
+        if(month < 10) {
+            monthStr = "0" + monthStr;
+            System.out.println("montstr = " + monthStr + "   ");
+        }
+        if(day < 10) {
+            System.out.println("day str = " + dayStr + "   ");
+            dayStr = "0" + dayStr;
+        }
+        String endDate = year + "-" + monthStr + "-" + dayStr + " " + "23:59:59";
+
+    }
+
+
+
+    private void updateCampaignStartEndDates(String entity, String updateBy, DataTable entities)
+    {
+        List<List<String>> EntityList = entities.asLists(String.class);
+        List<String> entityData;
+        Integer entityID;
+        for(int i=1;i<EntityList .size();i++)
+        {
+            entityData = EntityList.get(i);
+            entityID = updateBy.equals("name")?sut.getCampaignManager().getterFor(entity).apply(entityData.get(0)).orElseThrow(()->new AssertionError("entity wasn't found")).getId():Integer.valueOf(entityData.get(0));
+            for(int j=1;j<entityData.size();j++)
+            {
+                SqlWorkflowUtils.setColumnInWorkflow(entity+"s", entity + "id",entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
+            }
+        }
+    }
+
 
     private void updateEntityDataByID(String entity, String updateBy, DataTable entities)
     {

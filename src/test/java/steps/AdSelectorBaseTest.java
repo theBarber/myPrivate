@@ -2,6 +2,7 @@ package steps;
 
 import cucumber.api.junit.Cucumber;
 import entities.Zone;
+import infra.RerunningCucumber;
 import infra.utils.HttpContentTest;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
