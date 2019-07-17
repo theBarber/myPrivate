@@ -3,7 +3,6 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import infra.RerunningCucumber;
 import org.junit.runner.RunWith;
 
 

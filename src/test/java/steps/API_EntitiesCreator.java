@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
-import infra.RerunningCucumber;
 import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
 import io.cucumber.datatable.DataTable;
