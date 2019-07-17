@@ -4,11 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.beans.IntrospectionException;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UncheckedIOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.*;
@@ -18,6 +14,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Link;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
@@ -220,11 +219,14 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         request(url, true);
     }
 
+
     public void zoneCacheRequest(String action) {
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/zonecache?action=" + action;
         request(url, true);
     }
 
+
+    @Attachment("{0}")
     protected void request(String url, boolean toReset) {
         if (toReset) {
             reset();
@@ -245,6 +247,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                     withSleepInMillis = 0;
                 }
                 return response;
+
 
 
             } catch (IOException e) {
