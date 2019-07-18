@@ -1,24 +1,12 @@
 package steps;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.time.Instant;
-import java.util.Random;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
+import com.couchbase.client.java.error.DocumentDoesNotExistException;
 import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonElement;
 import gherkin.deps.com.google.gson.JsonParser;
-import infra.RerunningCucumber;
 import infra.utils.SqlWorkflowUtils;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -32,15 +20,23 @@ import org.joda.time.Days;
 import org.joda.time.MutableDateTime;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
-import com.couchbase.client.java.error.DocumentDoesNotExistException;
 import ramp.lift.uas.automation.CouchbaseBucketModule;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.time.Instant;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * Created by kereng on 5/23/2017.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"classpath:CrossDeviceCappingExperiment.feature","classpath:CrossDeviceCappingNoExperiment.feature"}, plugin = { "pretty",
-    "infra.RotatingJSONFormatter:target/cucumber/crossDevice_$TIMESTAMP$.json" })
+@CucumberOptions(features = {"classpath:CrossDeviceCappingExperiment.feature","classpath:CrossDeviceCappingNoExperiment.feature"}, plugin = { "pretty",})
+//    "infra.RotatingJSONFormatter:target/cucumber/crossDevice_$TIMESTAMP$.json" })
 
 public class CrossDeviceCappingTest extends BaseTest{
 
@@ -54,7 +50,7 @@ public class CrossDeviceCappingTest extends BaseTest{
       sut.getUserInfoBucket().insertDocument(paramName, paramValue);
     });
 
-    Then("i inject profile id (\\d+) to user \\{([^}]+)\\} on adserver bucket", (Integer profileId, String userID) -> {
+    Then("i inject profile id (\\d+) to user \\{(.*)\\} on adserver bucket", (Integer profileId, String userID) -> {
       CouchbaseBucketModule adserverBucket = sut.getAdserverBucket();
       try{
         adserverBucket.deleteDocument(userID);
@@ -77,7 +73,7 @@ public class CrossDeviceCappingTest extends BaseTest{
     });
 
 //for single profile type, and single profile. optional epoc time for this single profile
-    Then("i create new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp", (String udId,String platform ,String profileType ,Integer profileNum, Integer daysToReduce) -> {
+    Then("i create new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, profile type = \\{(.*)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp", (String udId,String platform ,String profileType ,Integer profileNum, Integer daysToReduce) -> {
       CouchbaseBucketModule usersBucket = sut.getUsersBucket();
       try{
         usersBucket.deleteDocument(udId);
@@ -94,7 +90,7 @@ public class CrossDeviceCappingTest extends BaseTest{
     });
 
 
-    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp and extra devices string = (.*)$", (String udId, String platform,String profileType,Integer profileNum ,Integer daysToReduce, String otherDevices) -> {
+    Then("i inject new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, profile type = \\{(.*)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp and extra devices string = (.*)$", (String udId, String platform,String profileType,Integer profileNum ,Integer daysToReduce, String otherDevices) -> {
       CouchbaseBucketModule usersBucket = sut.getUsersBucket();
       try{
         usersBucket.deleteDocument(udId);
@@ -118,7 +114,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
       //one user with one empty optional profile type filed
-      Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, empty profile type = \\{([^}]+)\\}, non-empty profile type = \\{([^}]+)\\}", (String udId, String platform, String emptyProfileType, String nonEmptyProfileType) -> {
+      Then("i inject new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, empty profile type = \\{(.*)\\}, non-empty profile type = \\{(.*)\\}", (String udId, String platform, String emptyProfileType, String nonEmptyProfileType) -> {
           CouchbaseBucketModule usersBucket = sut.getUsersBucket();
       try{
         usersBucket.deleteDocument(udId);
@@ -139,7 +135,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
 //    //for both profile types. udmp profile with optional time. sqmsg with auto current time stamp
-//    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, udmp_p profile with time stamp  = \\{([^}]+)\\}, sqmsg_p profile with auto time stamp = \\{([^}]+)\\}",  (String udId,String platform ,String udmp_pFull,String sqmsg_p) -> {
+//    Then("i inject new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, udmp_p profile with time stamp  = \\{(.*)\\}, sqmsg_p profile with auto time stamp = \\{(.*)\\}",  (String udId,String platform ,String udmp_pFull,String sqmsg_p) -> {
 //      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
 //      try{
 //        usersBucket.deleteDocument(udId);
@@ -166,7 +162,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
 //one profile for each profile type. optional days reduce from epoch time for both profiles types.
-    Then("i inject new profile for udId \\{([^}]+)\\} on users bucket, platform = \\{([^}]+)\\}, single udmp_p profile is \\{([^}]+)\\} with (\\d+) days reduce and one sqmsg_p profile = \\{([^}]+)\\} with (\\d+) days reduce ", (String udId, String platform, String udmp_pString, Integer daysToReduceFromUdmp ,String sqmsg_pString, Integer daysToReduceFromSqmg) -> {
+    Then("i inject new profile for udId \\{(.*)\\} on users bucket, platform = \\{(.*)\\}, single udmp_p profile is \\{(.*)\\} with (\\d+) days reduce and one sqmsg_p profile = \\{(.*)\\} with (\\d+) days reduce ", (String udId, String platform, String udmp_pString, Integer daysToReduceFromUdmp ,String sqmsg_pString, Integer daysToReduceFromSqmg) -> {
       CouchbaseBucketModule usersBucket = sut.getUsersBucket();
       try{
         usersBucket.deleteDocument(udId);
@@ -187,7 +183,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
 //one profile for each profile type. optional days reduce from epoch time for both profiles types.
-    Then("i inject new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, with one udmp_p profile = \\{([^}]+)\\} with (\\d+) days reduce and one sqmsg_p profile = \\{([^}]+)\\} with (\\d+) days reduce", (String udId, String platform, String udmp_pString, Integer daysToReduceFromUdmp ,String sqmsg_pString, Integer daysToReduceFromSqmg) -> {
+    Then("i inject new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, with one udmp_p profile = \\{(.*)\\} with (\\d+) days reduce and one sqmsg_p profile = \\{(.*)\\} with (\\d+) days reduce", (String udId, String platform, String udmp_pString, Integer daysToReduceFromUdmp ,String sqmsg_pString, Integer daysToReduceFromSqmg) -> {
       CouchbaseBucketModule usersBucket = sut.getUsersBucket();
       try{
         usersBucket.deleteDocument(udId);
@@ -207,7 +203,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
 //one profile for each profile type. optional days reduce from epoch time for both profiles types.
-    Then("i inject new profile doc with two udmp_p profiles with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}. First p = (\\d+) with (\\d+) days reduce. Second profile = (\\d+) with (\\d+) days reduce", (String udId, String platform, Integer profile1, Integer daysToReduceFromProfile1 ,Integer profile2, Integer daysToReduceFromProfile2) -> {
+    Then("i inject new profile doc with two udmp_p profiles with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}. First p = (\\d+) with (\\d+) days reduce. Second profile = (\\d+) with (\\d+) days reduce", (String udId, String platform, Integer profile1, Integer daysToReduceFromProfile1 ,Integer profile2, Integer daysToReduceFromProfile2) -> {
       CouchbaseBucketModule usersBucket = sut.getUsersBucket();
       try{
         usersBucket.deleteDocument(udId);
@@ -227,7 +223,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
 // for multiple profiles, start, optional profile type
-    Then("i start injecting new profile doc with udId \\{([^}]+)\\} on users bucket, where platform = \\{([^}]+)\\}, profile type = \\{([^}]+)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp", (String udId,String platform,String profileType, Integer profileNum, Integer daysToReduceFromProfile)-> {
+    Then("i start injecting new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, profile type = \\{(.*)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp", (String udId,String platform,String profileType, Integer profileNum, Integer daysToReduceFromProfile)-> {
         long epocTimeInDays = getEpocTimeInDays();
       jsonDocForMultipleProfiles = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
               "\"platform\": " + platform + ",\n" +
@@ -247,7 +243,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
     // for multiple profiles, end
-    Then("i end adding profiles to user with udId  \\{([^}]+)\\}  on users bucket, platform was = \\{([^}]+)\\},and finally inject it",(String udId, String platform)-> {
+    Then("i end adding profiles to user with udId  \\{(.*)\\}  on users bucket, platform was = \\{(.*)\\},and finally inject it",(String udId, String platform)-> {
       CouchbaseBucketModule usersBucket = sut.getUsersBucket();
       try{
         usersBucket.deleteDocument(udId);
@@ -271,7 +267,7 @@ public class CrossDeviceCappingTest extends BaseTest{
       }
     });
 
-    Then("I delete the history of \\{([^}]+)\\} from users bucket with prefix = \\{([^}]+)\\}", (String udId, String prefix) -> {
+    Then("I delete the history of \\{(.*)\\} from users bucket with prefix = \\{(.*)\\}", (String udId, String prefix) -> {
       try{
         sut.getUsersBucket().deleteDocument(prefix+udId);
 
@@ -288,7 +284,7 @@ public class CrossDeviceCappingTest extends BaseTest{
       }
     });
 
-    Given("I add cookie (\\w+) with value \\{([^}]+)\\} to my requests to uas", (String paramName, String paramValue) -> {
+    Given("I add cookie (\\w+) with value \\{(.*)\\} to my requests to uas", (String paramName, String paramValue) -> {
       sut.getUASRquestModule().addCookie(paramName, paramValue);
     });
 
@@ -346,7 +342,7 @@ public class CrossDeviceCappingTest extends BaseTest{
         System.out.println(e.getMessage());
       }
     });
-    Given("^I change IO id \\{(\\d+)\\} cross device Capping to \\{([^}]+)\\}$", (String ioId, String cappingState) -> {
+    Given("^I change IO id \\{(\\d+)\\} cross device Capping to \\{(.*)\\}$", (String ioId, String cappingState) -> {
 
       String crossCapping = "1";
       if (cappingState.equalsIgnoreCase("inactive")) {

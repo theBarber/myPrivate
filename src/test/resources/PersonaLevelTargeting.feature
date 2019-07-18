@@ -30,7 +30,7 @@ Feature: Persona level targeting
     Then The response code is 200
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
-    And The response has click-url
+    And The responses has click-urls
     When I send impression requests to UAS
     And I sleep for 1 seconds
     Given I clear all cookies from uas requests

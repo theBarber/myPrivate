@@ -1,15 +1,12 @@
 package steps;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
 import entities.ramp.models.Experiment;
 import entities.ramp.models.ExperimentGroup;
-import infra.RerunningCucumber;
 import infra.utils.SqlRampAdminUtils;
-import ramp.lift.uas.automation.RampAppRequestModule;
-
+import io.cucumber.datatable.DataTable;
 import org.junit.runner.RunWith;
+import ramp.lift.uas.automation.RampAppRequestModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +15,8 @@ import java.util.List;
  * Created by AssafM on 11/01/2017.
  */
 
-@CucumberOptions(features = "classpath:ABTesting.feature", plugin = { "pretty",
-		"infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json" })
+//@CucumberOptions(features = "classpath:ABTesting.feature", plugin = { "pretty",})
+//		"infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 public class ABTestingTest extends BaseTest {
 	List<Integer> createdExperimentGroupIds = new ArrayList<>();
@@ -29,7 +26,7 @@ public class ABTestingTest extends BaseTest {
 
 	public ABTestingTest() {
 		super();
-		Given("^I set the activation status of experiment group named \\{([^}]+)\\} and his experiments to \\{([^}]+)\\}$",
+		Given("^I set the activation status of experiment group named \\{(.*)\\} and his experiments to \\{(.*)\\}$",
             (String experimentGroupName, String activationStatus) -> {
               int status = 0;
               if (activationStatus.equals("active")) {
@@ -64,7 +61,7 @@ public class ABTestingTest extends BaseTest {
 			SqlRampAdminUtils.createNewExperimentGroup(experimentGroupsList);
 		});
 
-		And("^I create new test named \\{([^}]+)\\} with the following fields$",
+		And("^I create new test named \\{(.*)\\} with the following fields$",
 				(String experimentGroupName, DataTable experimentsTable) -> {
 					List<Experiment> experiments = experimentsTable.asList(Experiment.class);
 					latestExperimentIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment");
@@ -73,12 +70,12 @@ public class ABTestingTest extends BaseTest {
 					SqlRampAdminUtils.createNewExperimentForGroupId(experimentGroupId, experiments);
 				});
 
-		And("^I set the activation status of tests named \\{([^}]+)\\} to \\{(\\d+)\\}$",
+		And("^I set the activation status of tests named \\{(.*)\\} to \\{(\\d+)\\}$",
 				(String experimentName, Integer activationStatus) -> {
 					SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "test");
 				});
 //srategy
-		And("^I set test id of test_strategy named \\{([^}]+)\\} to \\{(\\d+)\\}$",
+		And("^I set test id of test_strategy named \\{(.*)\\} to \\{(\\d+)\\}$",
 				SqlRampAdminUtils::setTestStrategyToTestIdGroup);
 
 		And("^I update the s3 experiment data$", () -> {

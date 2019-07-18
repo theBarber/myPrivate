@@ -1,14 +1,8 @@
 package entities;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UncheckedIOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ramp.app.api.*;
-import gherkin.lexer.De;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -21,15 +15,18 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.util.EntityUtils;
 import ramp.lift.uas.automation.UASRequestModule;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 /**
  * created by Sahar
@@ -257,11 +254,12 @@ public class RampAppRequestModule extends UASRequestModule implements AutoClosea
 	}
 
 	@Override
-	public void healthCheckRequest() {
+	public String healthCheckRequest() {
 
 		String url = "https://" + host + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/status";
 		request(url, true);
-	}
+        return url;
+    }
 
 	private CloseableHttpResponse createDealRequest(DealRequest dealRequest, Integer IO)
 	{

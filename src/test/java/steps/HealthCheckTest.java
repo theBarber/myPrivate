@@ -1,37 +1,21 @@
 package steps;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
-
-
-import com.google.common.io.Files;
-import com.sun.org.apache.xpath.internal.operations.Or;
-import infra.RerunningCucumber;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
-
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
 import ramp.lift.uas.automation.UASRequestModule;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isIn;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
+
 import static org.hamcrest.Matchers.not;
 
-@CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",
-		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
+@CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",})
+//		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 public class HealthCheckTest extends BaseTest {
 
