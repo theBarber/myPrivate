@@ -1,28 +1,24 @@
 package steps;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.io.IOException;
-
-import infra.RerunningCucumber;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.junit.runner.RunWith;
-
 import com.amazonaws.services.s3.model.PutObjectResult;
-
-import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import infra.assertion.Assert;
 import infra.cli.conn.CliCommand;
 import infra.cli.process.CliCommandExecution;
 import infra.utils.S3Client;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.junit.runner.RunWith;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by nive on 2016-09-22.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty",
-	"infra.RotatingJSONFormatter:target/cucumber/S3Loader_$TIMESTAMP$.json" })
+//@CucumberOptions(features = "classpath:S3PlanLoader.feature", plugin = { "pretty",})
+//	"infra.RotatingJSONFormatter:target/cucumber/S3Loader_$TIMESTAMP$.json" })
 public class S3LoaderTest extends BaseTest {
 
     public S3LoaderTest() {

@@ -17,7 +17,7 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The response contains script
-    And The response has impression-url
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
 
@@ -46,7 +46,7 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=systemTestB&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-PGC} to UAS
     Then The response code is 200
     And The response contains script
-    And The response has impression-url
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
     When I send impression requests to UAS
 
@@ -62,7 +62,7 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=systemTestC&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-ST} to UAS
     Then The response code is 200
     And The response contains script
-    And The response has impression-url
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
     When I send impression requests to UAS
 
@@ -90,7 +90,7 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=BUrlTest&optimize=0&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The response contains <script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com/burl"</script>
-    And The response has impression-url
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
 
@@ -111,7 +111,7 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=1&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The response contains script
-    And The response has impression-url
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
   @optimize
@@ -138,7 +138,7 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=systemTestB&optimize=1&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-PGC} to UAS
     Then The response code is 200
     And The response contains script
-    And The response has impression-url
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
     When I send impression requests to UAS
   @optimize
@@ -154,7 +154,7 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=systemTestC&optimize=1&domain=remove&unlimited=1} for zone named {zone-zoneset-server-prog-ST} to UAS
     Then The response code is 200
     And The response contains script
-    And The response has impression-url
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
     When I send impression requests to UAS
   @optimize

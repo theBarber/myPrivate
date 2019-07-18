@@ -1,34 +1,32 @@
 package steps;
 
-import static org.junit.Assert.assertEquals;
-
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import infra.RerunningCucumber;
 import infra.utils.SqlWorkflowUtils;
-
 import org.junit.runner.RunWith;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.LongAdder;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:NDQFiltering.feature", plugin = {"pretty",
-    "infra.RotatingJSONFormatter:target/cucumber/NDQ_Filtering_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:NDQFiltering.feature", plugin = {"pretty",})
+//    "infra.RotatingJSONFormatter:target/cucumber/NDQ_Filtering_$TIMESTAMP$.json"})
 public class NDQFilteringTest extends BaseTest {
   double experimentNdq;
 
   public NDQFilteringTest() {
     super();
 
-    Given("^I set the \\{([^}]+)\\} of campaign name \\{([^}]+)\\} to \\{([^}]+)\\}$",
+    Given("^I set the \\{(.*)\\} of campaign name \\{(.*)\\} to \\{(.*)\\}$",
         (String columnNameToChange, String columnValue, String columnValueToChange) -> {
           SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", columnValue, columnNameToChange,
               columnValueToChange);
         });
 
-    Given("^I set the \\{([^}]+)\\} in \\{([^}]+)\\} of campaign name \\{([^}]+)\\} to \\{([^}]+)\\}$",
+    Given("^I set the \\{(.*)\\} in \\{(.*)\\} of campaign name \\{(.*)\\} to \\{(.*)\\}$",
         (String columnNameToChange, String tableName, String campaignName, String columnValueToChange) -> {
           try {
             ResultSet campaign = SqlWorkflowUtils.getEntityByName("campaigns", "campaignname", campaignName);
@@ -41,7 +39,7 @@ public class NDQFilteringTest extends BaseTest {
           }
         });
 
-    Given("^I compute the NDQ of campaign name \\{([^}]+)\\}$", (String campaignName) -> {
+    Given("^I compute the NDQ of campaign name \\{(.*)\\}$", (String campaignName) -> {
       ResultSet campaign = SqlWorkflowUtils.getEntityByName("campaigns", "campaignname", campaignName);
       try {
         long lastDay = campaign.getDate("expire").getTime();
@@ -70,7 +68,7 @@ public class NDQFilteringTest extends BaseTest {
       setupDB();
     });
 
-    Given("I restart \\{([^}]+)\\}",(String serverName) -> {
+    Given("I restart \\{(.*)\\}",(String serverName) -> {
       restartServerNamed(serverName);
     });
   }

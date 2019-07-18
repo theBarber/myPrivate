@@ -62,107 +62,6 @@
 			</properties>
 		</profile>
 
-		<profile>
-			<id>retry</id>
-			<activation>
-				<file>
-					<exists>target/rerun.properties</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>properties-maven-plugin</artifactId>
-						<version>1.0.0</version>
-						<executions>
-							<!-- Associate the read-project-properties goal with the initialize
-                                phase, to read the properties file. -->
-							<execution>
-								<phase>pre-clean</phase>
-								<goals>
-									<goal>read-project-properties</goal>
-								</goals>
-								<configuration>
-									<files>
-										<file>target/rerun.properties</file>
-									</files>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-clean-plugin</artifactId>
-						<version>3.1.0</version>
-						<configuration>
-							<filesets>
-								<fileset>
-									<directory>target</directory>
-									<includes>
-										<include>rerun.properties</include>
-									</includes>
-								</fileset>
-							</filesets>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.8</version>
-						<executions>
-							<execution>
-								<phase>compile</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<target>
-										<echo>Retrying the following classes: "${retryclasses}"</echo>
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.22.0</version>
-						<configuration>
-							<includes>
-								<include>${retryclasses}</include>
-							</includes>
-							<!--<testFailureIgnore>true</testFailureIgnore>-->
-								<!--<argLine>-->
-								 <!-- -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"-->
-								<!--</argLine>-->
-							<!--<properties>-->
-								<!--<property>-->
-									<!--<name>listener</name>-->
-									<!--<value>io.qameta.allure.junit4.AllureJunit4</value>-->
-								<!--</property>-->
-							<!--</properties>-->
-							<!--<systemProperties>-->
-								<!--<property>-->
-									<!--<name>allure.results.directory</name>-->
-									<!--<value>${project.build.directory}/allure-results</value>-->
-								<!--</property>-->
-							<!--</systemProperties>-->
-							<!--<disableXmlReport>false</disableXmlReport>-->
-						</configuration>
-						<executions>
-							<execution>
-								<phase>test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
 	</profiles>
 
 	<build>
@@ -199,31 +98,79 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
-				<configuration>
-					<useSystemClassLoader>false</useSystemClassLoader>
-					<argLine>
-						 -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-					</argLine>
-					<properties>
-						<property>
-							<name>listener</name>
-							<value>io.qameta.allure.junit4.AllureJunit4</value>
-						</property>
-					</properties>
-					<systemProperties>
-						<property>
-							<name>allure.results.directory</name>
-							<value>${project.build.directory}/allure-results</value>
-						</property>
-					</systemProperties>
-					<runOrder>alphabetical</runOrder>
-					<disableXmlReport>false</disableXmlReport>
-					<forkCount>10</forkCount>
-					<reuseForks>true</reuseForks>
-					<includes>
-						<include>**/*.class</include>
-					</includes>
-				</configuration>
+
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>run</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <parallel>methods</parallel>
+                            <useUnlimitedThreads>true</useUnlimitedThreads>
+                            <argLine>
+                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                            </argLine>
+                            <properties>
+                                <property>
+                                    <name>listener</name>
+                                    <value>io.qameta.allure.junit4.AllureJunit4</value>
+                                </property>
+                            </properties>
+                            <systemProperties>
+                                <property>
+                                    <name>allure.results.directory</name>
+                                    <value>target/allure-results</value>
+                                </property>
+                            </systemProperties>
+                            <runOrder>alphabetical</runOrder>
+                            <disableXmlReport>false</disableXmlReport>
+                            <forkCount>10</forkCount>
+                            <reuseForks>true</reuseForks>
+                            <includes>
+                                <include>**/*Test.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>rerun</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <parallel>methods</parallel>
+                            <useUnlimitedThreads>true</useUnlimitedThreads>
+                            <argLine>
+                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                            </argLine>
+                            <properties>
+                                <property>
+                                    <name>listener</name>
+                                    <value>io.qameta.allure.junit4.AllureJunit4</value>
+                                </property>
+                            </properties>
+                            <systemProperties>
+                                <property>
+                                    <name>allure.results.directory</name>
+                                    <value>target/allure-results</value>
+                                </property>
+                            </systemProperties>
+                            <runOrder>alphabetical</runOrder>
+                            <disableXmlReport>false</disableXmlReport>
+                            <forkCount>10</forkCount>
+                            <reuseForks>true</reuseForks>
+                            <includes>
+                                <include>**/Failed*.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
 				<dependencies>
 					<dependency>
 						<groupId>org.aspectj</groupId>
@@ -313,12 +260,6 @@
 			<version>0.1.54</version>
 		</dependency>
 		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>1.2.2</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
@@ -333,12 +274,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-jvm-deps</artifactId>
-			<version>1.0.5</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>co.unruly</groupId>
@@ -366,17 +301,23 @@
 			<version>262</version>
 		</dependency>
 		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-core</artifactId>
-			<version>1.2.5</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.orbitz.consul</groupId>
 			<artifactId>consul-client</artifactId>
 			<version>${com.orbitz.consul.version}</version>
 		</dependency>
-		<dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java8</artifactId>
+            <version>4.3.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>datatable</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+
+        <dependency>
 			<groupId>org.immutables</groupId>
 			<artifactId>value</artifactId>
 			<version>2.1.19</version>
@@ -385,12 +326,6 @@
 			<groupId>com.offbytwo.jenkins</groupId>
 			<artifactId>jenkins-client</artifactId>
 			<version>0.3.7</version>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-java8</artifactId>
-			<version>1.2.5</version>
-			<scope>test</scope>
 		</dependency>
         <dependency>
             <groupId>org.json</groupId>
@@ -420,10 +355,21 @@
 			</exclusions>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>4.3.0</version>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>gherkin</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>4.3.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
