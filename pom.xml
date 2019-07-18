@@ -130,7 +130,7 @@
                             <runOrder>alphabetical</runOrder>
                             <disableXmlReport>false</disableXmlReport>
 							<parallel>methods</parallel>
-                            <forkCount>10</forkCount>
+                            <threadCount>10</threadCount>
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
