@@ -74,7 +74,7 @@ public class HealthCheckTest extends BaseTest {
 
 	}
 
-	public void allResponsesHaveCode(Integer expectedResponseCode) {
+	public synchronized void allResponsesHaveCode(Integer expectedResponseCode) {
 		switch (svc_ut){
 			case "UAS":
 				sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
