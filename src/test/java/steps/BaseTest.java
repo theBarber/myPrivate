@@ -4,6 +4,8 @@ import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 import infra.cli.process.CliCommandExecution;
 import infra.utils.SqlWorkflowUtils;
+import org.junit.Rule;
+import org.junit.rules.Timeout;
 import ramp.lift.uas.automation.SystemUnderTest;
 
 import java.io.*;
@@ -11,6 +13,10 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest implements En {
+
+
+  @Rule
+  public Timeout globalTimeout = Timeout.seconds(600); // 10 minutes max per method tested
 
   protected static SystemUnderTest sut = SystemUnderTest.getInstance();
 
