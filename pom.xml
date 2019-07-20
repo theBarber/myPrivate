@@ -129,45 +129,13 @@
                             </systemProperties>
                             <runOrder>alphabetical</runOrder>
                             <disableXmlReport>false</disableXmlReport>
-							<parallel>methods</parallel>
-                            <threadCount>10</threadCount>
+							<parallel>classes</parallel>
+                            <threadCount>4</threadCount>
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
                         </configuration>
                     </execution>
-                    <!--<execution>-->
-                        <!--<id>rerun</id>-->
-                        <!--<goals>-->
-                            <!--<goal>test</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<parallel>methods</parallel>-->
-                            <!--<useUnlimitedThreads>true</useUnlimitedThreads>-->
-                            <!--<argLine>-->
-                                <!-- -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"-->
-                            <!--</argLine>-->
-                            <!--<properties>-->
-                                <!--<property>-->
-                                    <!--<name>listener</name>-->
-                                    <!--<value>io.qameta.allure.junit4.AllureJunit4</value>-->
-                                <!--</property>-->
-                            <!--</properties>-->
-                            <!--<systemProperties>-->
-                                <!--<property>-->
-                                    <!--<name>allure.results.directory</name>-->
-                                    <!--<value>target/allure-results</value>-->
-                                <!--</property>-->
-                            <!--</systemProperties>-->
-                            <!--<runOrder>alphabetical</runOrder>-->
-                            <!--<disableXmlReport>false</disableXmlReport>-->
-                            <!--<forkCount>10</forkCount>-->
-                            <!--<reuseForks>true</reuseForks>-->
-                            <!--<includes>-->
-                                <!--<include>**/Failed*.class</include>-->
-                            <!--</includes>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
                 </executions>
 				<dependencies>
 					<dependency>
