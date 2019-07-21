@@ -50,9 +50,9 @@ public class BaseTest implements En {
     });
 
     After(scenario -> {
-      if(scenario.isFailed()){
-         writeToFile(scenario.getId(),failed_scenarios_file);
-      }
+//      if(scenario.isFailed()){
+//         writeToFile(scenario.getId(),failed_scenarios_file);
+//      }
       sut.teardown(scenario.getSourceTagNames(), config);
     });
 
