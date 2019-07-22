@@ -129,13 +129,6 @@
                             </systemProperties>
                             <runOrder>alphabetical</runOrder>
                             <disableXmlReport>false</disableXmlReport>
-<<<<<<< HEAD
-							<parallel>classes</parallel>
-                            <threadCount>4</threadCount>
-=======
-							<parallel>methods</parallel>
-                            <forkCount>10</forkCount>
->>>>>>> parent of 36bee9b... parallel config
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
