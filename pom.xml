@@ -129,8 +129,6 @@
                             </systemProperties>
                             <runOrder>alphabetical</runOrder>
                             <disableXmlReport>false</disableXmlReport>
-							<parallel>classes</parallel>
-                            <threadCount>4</threadCount>
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
