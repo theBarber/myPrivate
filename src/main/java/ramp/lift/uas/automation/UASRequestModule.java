@@ -1,7 +1,9 @@
 package ramp.lift.uas.automation;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
+import java.beans.IntrospectionException;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Link;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
@@ -114,15 +118,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         synchronizedResponses = new ArrayList<>();
     }
 
-    @Attachment("{method}")
-    public String zoneRequest(Integer forZone) {
+    public void zoneRequest(Integer forZone) {
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
         request(url, true);
-        return url;
     }
 
-    @Attachment("{method}")
-    public String zoneRequests(Integer forZone, int times, boolean toReset) {
+    public void zoneRequests(Integer forZone, int times, boolean toReset) {
         if (toReset) {
             reset();
         }
@@ -136,11 +137,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             }
             request(url, false);
         }
-        return url;
     }
 
-    @Attachment("{method}")
-    public String zoneRequestsWithParams(Integer forZone, int times, boolean toReset) {
+    public void zoneRequestsWithParams(Integer forZone, int times, boolean toReset) {
         if (toReset) {
             reset();
         }
@@ -159,11 +158,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             }
             request(url, false);
         }
-        return url;
     }
 
-    @Attachment("{method}")
-    public String zoneRequestsWithParameter(Integer forZone, String parameter, int times, boolean toReset) {
+    public void zoneRequestsWithParameter(Integer forZone, String parameter, int times, boolean toReset) {
         if (toReset) {
             reset();
         }
@@ -180,18 +177,15 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
 
         }
-        return url;
     }
 
-    @Attachment("{method}")
-    public String zoneRequestsWithGeo(Integer forZone, int times, String params) {
+    public void zoneRequestsWithGeo(Integer forZone, int times, String params) {
         reset();
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&sim_geo=1&" + params;
 
         for (; times > 0; times--) {
             request(url, false);
         }
-        return url;
     }
 
     public UASRequestModule thatSleeps(long millis) {
@@ -199,12 +193,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         return this;
     }
 
-    @Attachment("{method}")
-    public String healthCheckRequest() {
+    public void healthCheckRequest() {
 
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/health?stid=999";
         request(url, true);
-        return url;
     }
 
     public void healthCheckRequestSkip(String servicenameToSkip) {
@@ -227,14 +219,14 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         request(url, true);
     }
 
-    @Attachment("{method}")
-    public String zoneCacheRequest(String action) {
+
+    public void zoneCacheRequest(String action) {
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/zonecache?action=" + action;
         request(url, true);
-        return url;
     }
 
 
+    @Attachment("{0}")
     protected void request(String url, boolean toReset) {
         if (toReset) {
             reset();

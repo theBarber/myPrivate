@@ -254,12 +254,11 @@ public class RampAppRequestModule extends UASRequestModule implements AutoClosea
 	}
 
 	@Override
-	public String healthCheckRequest() {
+	public void healthCheckRequest() {
 
 		String url = "https://" + host + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/status";
 		request(url, true);
-        return url;
-    }
+	}
 
 	private CloseableHttpResponse createDealRequest(DealRequest dealRequest, Integer IO)
 	{
