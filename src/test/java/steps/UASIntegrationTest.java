@@ -658,7 +658,7 @@ public class UASIntegrationTest extends BaseTest {
     }
 
 
-    private void checkTheNumberOfSelectedEntityOfAsyncResponses(String urlType, String fieldName, String entityType, String entityName, Integer percent) {
+    private synchronized void checkTheNumberOfSelectedEntityOfAsyncResponses(String urlType, String fieldName, String entityType, String entityName, Integer percent) {
         Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
         if (urlType.equalsIgnoreCase("impression")) {
             urlExtractor = UASIntegrationTest::getImpressionUrl;

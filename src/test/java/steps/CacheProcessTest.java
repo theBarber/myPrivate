@@ -114,6 +114,7 @@ public class CacheProcessTest extends BaseTest {
                         break;
                     } catch (IOException e) {
                         e.printStackTrace();
+                        break;
                     } catch (AssertionError e) {
                         if (count++ == maxTries) {
                             System.out.println("Couldn't refresh zone cache, assuming cache is already updated. if its not the case check upgrade.lock");
