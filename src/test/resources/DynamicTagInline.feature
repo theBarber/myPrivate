@@ -5,7 +5,7 @@
 @DT
 @parallel
 @noAA
-@doron
+
 Feature: Dynamic Tag inline flow support
 
   Background: health check

@@ -15,9 +15,13 @@ Feature: Entities for tests
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
+  @doron
+  Scenario: remove all active zones
+    Given i remove all zones from publishers: {3836}
 
   Scenario: remove all active zones
 #    zones that are linked to publisher 2434 are disabled specifically!!
+    Given i remove all zones from publishers: {3836}
     Given i remove all zones from publishers: {3673}
     Given i remove all zones from publishers: {3697}
     Given i remove all zones from publishers: {3708}
@@ -1000,8 +1004,8 @@ Feature: Entities for tests
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
-      | Zone Name                              | limitation                                        |
-      | zone-zoneset-dv-zoneLevelLimit-ST      | [[[64,"=~","2_84251001","2_84252026"]]]           |
+      | Zone Name                              | limitation                                       |
+      | zone-zoneset-dv-zoneLevelLimit-ST      | [[[64,"=~","2_84251001","2_84252026"]]]          |
       | zone-zoneset-dv-zoneLevelLimit-peer-ST | [[[64,"=~","2_84251001","2_84252026","1_5261"]]] |
 
 
@@ -1107,6 +1111,37 @@ Feature: Entities for tests
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
+  @doron
+  Scenario: create entities for dynamic pricing with margin
+    Given i disable campaigns by name on db
+      | Campaign Name                               |
+      | campaign-dpm-direct-no-margin-MR-ES         |
+      | campaign-dpm-reserved-no-margin-MR-ES       |
+      | campaign-dpm-unreserved-no-margin-MR-ES     |
+      | campaign-dpm-direct-margin-MR-ES            |
+      | campaign-dpm-reserved-margin-MR-ES          |
+      | campaign-dpm-unreserved-margin-MR-ES        |
+      | campaign-dpm-unreserved-margin-MR-ES-mobile |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                               | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-dpm-direct-no-margin-MR-ES         | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-no-margin-MR-ES}         | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-reserved-no-margin-MR-ES       | 407981 | 249770   | true                  | 192           | {zone-zoneset-dpm-reserved-no-margin-MR-ES}       | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-unreserved-no-margin-MR-ES     | 407981 | 249772   | true                  | 18            | {zone-zoneset-dpm-unreserved-no-margin-MR-ES}     | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-direct-margin-MR-ES            | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-margin-MR-ES}            | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-reserved-margin-MR-ES          | 407981 | 249770   | true                  | 192           | {zone-zoneset-dpm-reserved-margin-MR-ES}          | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-unreserved-margin-MR-ES        | 407981 | 249772   | true                  | 18            | {zone-zoneset-dpm-unreserved-margin-MR-ES}        | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-unreserved-margin-MR-ES-mobile | 407981 | 249772   | true                  | 18            | {zone-zoneset-dpm-unreserved-margin-MR-ES-mobile} | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+
+    And i update campaign data by name
+      | Campaign Name                               | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
+      | campaign-dpm-direct-no-margin-MR-ES         | 20                              | 0                              |
+      | campaign-dpm-reserved-no-margin-MR-ES       | 50                              | 0                              |
+      | campaign-dpm-unreserved-no-margin-MR-ES     | 20                              | 0                              |
+      | campaign-dpm-direct-margin-MR-ES            | 0                               | 0                              |
+      | campaign-dpm-reserved-margin-MR-ES          | 90                              | 0                              |
+      | campaign-dpm-unreserved-margin-MR-ES        | 100                             | 0                              |
+      | campaign-dpm-unreserved-margin-MR-ES-mobile | 0                               | 20                             |
 
   @DynamicPricing
   @InAppBlackWhiteList
@@ -1149,7 +1184,7 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
-
+  @doron
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1157,7 +1192,7 @@ Feature: Entities for tests
     And I sleep for 40 seconds
 
   @refreshZoneCache
-
+  @doron
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
