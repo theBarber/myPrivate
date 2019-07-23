@@ -11,7 +11,7 @@ Feature: warfle tests - wurfl limitation in campaign and zone level, contextual 
   Background: health check
     When Sending a healthcheck request to UAS
     Then The response code is 200
-
+    
   Scenario: contextual targeting by dv - zone level limitation brand safety
     When I send 1 times an ad request with parameter {optimize=0&loc=https%3A%2F%2Fdisney.com%3Fdv_test%3D1} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
     And The response code is 200
