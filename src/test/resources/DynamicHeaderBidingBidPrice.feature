@@ -4,12 +4,13 @@
 @noAA
 @HB
 @DHB
+@doron
 Feature: Dynamic HB bid price
 
-  Background: health check
-    When Sending a healthcheck request to UAS
-    Then The response code is 200
-
+#  Background: health check
+#    When Sending a healthcheck request to UAS
+#    Then The response code is 200
+#
 #  Scenario: 1. IO line item with fix bid price, should take cpm from po line item
 #    Given I add header of {x-forwarded-for} with value {207.246.116.162}
 #    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 2, with domain {DHB.basicTest1} and extra params {&unlimited=1&optimize=0}
@@ -87,7 +88,7 @@ Feature: Dynamic HB bid price
     Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin.com} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-margin-MR-ES}
+    And all HB responses contains campaignId with id of entity named {campaign-dpm-reserved-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-reserved-margin-MR-ES-1-banner-1}
     And all HB responses contains cpm with value {10.0}
     #Campaign Non-Reserved
@@ -95,7 +96,7 @@ Feature: Dynamic HB bid price
     Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin.com} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-margin-MR-ES}
+    And all HB responses contains campaignId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES-1-banner-1}
     And all HB responses contains cpm with value {10.0}
 
