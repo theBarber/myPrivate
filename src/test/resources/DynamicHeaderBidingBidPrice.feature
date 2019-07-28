@@ -81,94 +81,94 @@ Feature: Dynamic HB bid price
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-no-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-direct-no-margin-MR-ES-1-banner-1}
-    And all HB responses contains cpm with value {10.0}
+    And all HB responses contains adId with id of entity named {campaign-dpm-direct-no-margin-MR-ES-banner-1}
+    And all HB responses contains cpm with value {10}
     #Campaign Reserved
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin1.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin1.com} and extra params {&requestid=OX-und-AG3aTv&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-dpm-reserved-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-reserved-margin-MR-ES-1-banner-1}
-    And all HB responses contains cpm with value {10.0}
+    And all HB responses contains campaignId with id of entity named {campaign-dpm-reserved-no-margin-MR-ES}
+    And all HB responses contains adId with id of entity named {campaign-dpm-reserved-no-margin-MR-ES-banner-1}
+    And all HB responses contains cpm with value {10}
     #Campaign Non-Reserved
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin2.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin2.com} and extra params {&requestid=OX-und-AG3aTv&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
-    And all HB responses contains campaignId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES-1-banner-1}
-    And all HB responses contains cpm with value {10.0}
+    And all HB responses contains campaignId with id of entity named {campaign-dpm-non-reserved-no-margin-MR-ES}
+    And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-no-margin-MR-ES-banner-1}
+    And all HB responses contains cpm with value {10}
 
 
   Scenario: Publisher with dynamic bid price, Campaign with dynamic HB
     #Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin3.com} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-direct-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-direct-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {CPM*(1-MARGIN)}
     #Campaign Reserved
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin1.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin4.com} and extra params {&requestid=OX-und-AG3aTv&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-reserved-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-reserved-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-reserved-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {CPM*(1-MARGIN)}
     #Campaign Non-Reserved - how to get rt price?
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin2.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin5.com} and extra params {&requestid=OX-und-AG3aTv&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {SSP_BID_PR_RESP*MARGIN}
 
   Scenario: Publisher with dynamic bid price, Campaign with fixed HB
     #Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin6.com} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-direct-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-direct-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {PUB_FLOOR_PRICE}
     #Campaign Reserved
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin1.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin7.com} and extra params {&requestid=OX-und-AG3aTv&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-reserved-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-reserved-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-reserved-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {PUB_FLOOR_PRICE}
     #Campaign Non-Reserved
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin2.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3836 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin2.com} and extra params {&requestid=OX-und-AG3aTv&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-non-reserved-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {PUB_FLOOR_PRICE}
 
   Scenario: Publisher with fixed bid price, Campaign with dynamic HB
     #Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin.com} and extra params {&requestid=OX-und-AG3aTv&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-direct-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-direct-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {PO_LI_PRICE}
     #Campaign Reserved
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin1.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 300 size2 = 250, with domain {DynamicPricingWithMargin1.com} and extra params {&requestid=OX-und-AG3aTv&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-reserved-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-reserved-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-reserved-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {PO_LI_PRICE}
     #Campaign Non-Reserved
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -176,7 +176,7 @@ Feature: Dynamic HB bid price
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES-1-banner-1}
+    And all HB responses contains adId with id of entity named {campaign-dpm-non-reserved-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {PO_LI_PRICE}
 
 

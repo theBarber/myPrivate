@@ -1129,12 +1129,12 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                                 | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-dpm-direct-no-margin-MR-ES           | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-no-margin-MR-ES}           | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-reserved-no-margin-MR-ES         | 407981 | 249770   | true                  | 192           | {zone-zoneset-dpm-reserved-no-margin-MR-ES}         | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-non-reserved-no-margin-MR-ES     | 407981 | 249772   | true                  | 18            | {zone-zoneset-dpm-non-reserved-no-margin-MR-ES}     | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-direct-margin-MR-ES              | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-margin-MR-ES}              | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-reserved-margin-MR-ES            | 407981 | 249770   | true                  | 192           | {zone-zoneset-dpm-reserved-margin-MR-ES}            | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-non-reserved-margin-MR-ES        | 407981 | 249772   | true                  | 18            | {zone-zoneset-dpm-non-reserved-margin-MR-ES}        | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-non-reserved-margin-MR-ES-mobile | 407981 | 249772   | true                  | 18            | {zone-zoneset-dpm-non-reserved-margin-MR-ES-mobile} | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-reserved-no-margin-MR-ES         | 407981 | 249770   | true                  | 192           | {zone-zoneset-dpm-reserved-no-margin-MR-ES}         | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-non-reserved-no-margin-MR-ES     | 407981 | 249772   | true                  | 192           | {zone-zoneset-dpm-non-reserved-no-margin-MR-ES}     | []         | 10       | 15356          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-direct-margin-MR-ES              | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-margin-MR-ES}              | []         | 10       | 15359          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-reserved-margin-MR-ES            | 407981 | 249770   | true                  | 192           | {zone-zoneset-dpm-reserved-margin-MR-ES}            | []         | 10       | 15360          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-non-reserved-margin-MR-ES        | 407981 | 249772   | true                  | 192           | {zone-zoneset-dpm-non-reserved-margin-MR-ES}        | []         | 10       | 15361          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-non-reserved-margin-MR-ES-mobile | 407981 | 249772   | true                  | 192           | {zone-zoneset-dpm-non-reserved-margin-MR-ES-mobile} | []         | 10       | 15362          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
       | Campaign Name                                 | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
@@ -1205,7 +1205,7 @@ Feature: Entities for tests
 #    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
-
+  @doron
   Scenario: save entities to file
     And save all entities to json file
 
