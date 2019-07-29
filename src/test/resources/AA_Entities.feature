@@ -1141,7 +1141,7 @@ Feature: Entities for tests
       | campaign-dpm-direct-no-margin-MR-ES           | 20                              | 0                              |
       | campaign-dpm-reserved-no-margin-MR-ES         | 50                              | 0                              |
       | campaign-dpm-non-reserved-no-margin-MR-ES     | 20                              | 0                              |
-      | campaign-dpm-direct-margin-MR-ES              | 0                               | 0                              |
+      | campaign-dpm-direct-margin-MR-ES              | 20                              | 0                              |
       | campaign-dpm-reserved-margin-MR-ES            | 90                              | 0                              |
       | campaign-dpm-non-reserved-margin-MR-ES        | 100                             | 0                              |
       | campaign-dpm-non-reserved-margin-MR-ES-mobile | 0                               | 20                             |
