@@ -15,23 +15,23 @@ Feature: Entities for tests
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
-@dv
+
   Scenario: remove all active zones
 #    zones that are linked to publisher 2434 are disabled specifically!!
-#    Given i remove all zones from publishers: {3673}
-#    Given i remove all zones from publishers: {3697}
+    Given i remove all zones from publishers: {3673}
+    Given i remove all zones from publishers: {3697}
     Given i remove all zones from publishers: {3708}
-#    Given i remove all zones from publishers: {3674}
-#    Given i remove all zones from publishers: {3675}
-#    Given i remove all zones from publishers: {3666}
-#    Given i remove all zones from publishers: {3728}
-#    Given i remove all zones from publishers: {3690}
-#    Given i remove all zones from publishers: {1111}
-#    Given i remove all zones from publishers: {3711}
-#    Given i remove all zones from publishers: {3739}
-#    Given i remove all zones from publishers: {2546}
-#    Given i remove all zones from publishers: {3585}
-#    Given i remove all zones from publishers: {3586}
+    Given i remove all zones from publishers: {3674}
+    Given i remove all zones from publishers: {3675}
+    Given i remove all zones from publishers: {3666}
+    Given i remove all zones from publishers: {3728}
+    Given i remove all zones from publishers: {3690}
+    Given i remove all zones from publishers: {1111}
+    Given i remove all zones from publishers: {3711}
+    Given i remove all zones from publishers: {3739}
+    Given i remove all zones from publishers: {2546}
+    Given i remove all zones from publishers: {3585}
+    Given i remove all zones from publishers: {3586}
 
 #  @zoneTagSanity
 #  Scenario: create entities for zone Tag Sanity test
@@ -973,7 +973,6 @@ Feature: Entities for tests
       | zone-zoneset-city-zoneLevelLimit-ST  | [[[8,"=~","bo",["l","la paz"]]]] |
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                |
 
-@dv
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                              |
@@ -1152,7 +1151,6 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
-@dv
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1160,7 +1158,6 @@ Feature: Entities for tests
     And I sleep for 40 seconds
 
   @refreshZoneCache
-@dv
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
