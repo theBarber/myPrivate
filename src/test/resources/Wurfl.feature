@@ -2,9 +2,8 @@
 @parallel
 @scheduled
 @noAA
-
-
-
+@uas
+@cli
 
 Feature: warfle tests - wurfl limitation in campaign and zone level, contextual targeting
 

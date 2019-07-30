@@ -973,7 +973,6 @@ Feature: Entities for tests
       | zone-zoneset-city-zoneLevelLimit-ST  | [[[8,"=~","bo",["l","la paz"]]]] |
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                |
 
-
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                              |
@@ -1152,7 +1151,6 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
-
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1160,7 +1158,6 @@ Feature: Entities for tests
     And I sleep for 40 seconds
 
   @refreshZoneCache
-
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
