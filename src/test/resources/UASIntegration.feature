@@ -31,7 +31,7 @@
 #		Given I add cookie UTID with value {d7a8b8faf42446dcbba4248cef7dc7bb} to my requests to uas
 #		When I send 1 times an ad request with parameter {unlimited=1} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 #		Then The response code is 200
-#		And The response has impression-url
+#		And The responses has impression-urls
 #		And The response has click-url
 ##		And i print the responses
 #		When I send impression requests to UAS
@@ -64,7 +64,7 @@
 #		  Given I add cookie UTID with value {d7a8y8ftf42446dcbba4248cef7dc7bb} to my requests to uas
 #          When I send 1 times an ad request with parameter {unlimited=1&deviceid=SaharTest} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 #          Then The response code is 200
-#          And The response has impression-url
+#          And The responses has impression-urls
 #          And The response has click-url
 #          When I send impression requests to UAS
 #          And I sleep for 10 seconds

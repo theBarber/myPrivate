@@ -2,8 +2,6 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import infra.RerunningCucumber;
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -14,18 +12,17 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import static org.hamcrest.Matchers.isIn;
-import static org.hamcrest.Matchers.not;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:PGXTest.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/PGX_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:PGXTest.feature", plugin = {"pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/PGX_$TIMESTAMP$.json"})
 public class PGX_Test extends BaseTest{
 
     public PGX_Test()
     {
         super();
-        Then("response value \\{([^}]+)\\} is one of (.*)$", this::responseContainsOneOf);
-        Then("response value \\{([^}]+)\\} has the values of (.*)$", this::responseHasValuesOf);
+        Then("response value \\{(.*)\\} is one of (.*)$", this::responseContainsOneOf);
+        Then("response value \\{(.*)\\} has the values of (.*)$", this::responseHasValuesOf);
 
     }
 

@@ -2,15 +2,10 @@ package steps;
 
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.junit.Cucumber;
-import infra.RerunningCucumber;
-import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.process.CliCommandExecution;
-import infra.utils.CouchBaseUtils;
 import infra.utils.JenkinsClient;
 import infra.utils.SqlWorkflowUtils;
-
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.hamcrest.Matchers;
@@ -22,10 +17,12 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.*;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
+
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -33,8 +30,8 @@ import static sun.swing.MenuItemLayoutHelper.max;
 
 
 
-@CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",
-    "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json"})
+@CucumberOptions(features = "classpath:ZoneCacheProcess.feature", plugin = {"pretty",})
+//    "infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
 
 public class CacheProcessTest extends BaseTest {
@@ -44,15 +41,15 @@ public class CacheProcessTest extends BaseTest {
     super();
 
 
-    And("I refresh (zone|campaign|banner) cache",this::refreshCache);
-    And("I flush bucket name \\{([^}]+)\\} on couchbase", this::flushBucket);
-    Given("^limitations for zoneId (\\d+) is \\{([^}]+)\\} in Workflow DB$",
+    And("I refresh? (.*) cache",this::refreshCache);
+    And("I flush bucket name \\{(.*)\\} on couchbase", this::flushBucket);
+    Given("^limitations for zoneId (\\d+) is \\{(.*)\\} in Workflow DB$",
         (Integer zoneId, String expectedLimitation) -> {
           String currentLimitation = SqlWorkflowUtils.getLimitationForZone(zoneId);
           sut.write(currentLimitation);
           Assert.assertThat(currentLimitation, Matchers.containsString(expectedLimitation));
         });
-    And("^limitations for zoneId (\\d+) updated to \\{([^}]+)\\} in Workflow DB$",
+    And("^limitations for zoneId (\\d+) updated to \\{(.*)\\} in Workflow DB$",
         (Integer zoneId, String newLimitation) -> {
           SqlWorkflowUtils.setLimitationForZone(zoneId, newLimitation);
         });
@@ -62,7 +59,7 @@ public class CacheProcessTest extends BaseTest {
     When("^zoneCache refreshed by http$", () -> {
       refreshZoneCache("http");
     });
-    When("limitation for zone (.*) in zoneCache contains \\{([^}]+)\\}",
+    When("limitation for zone (.*) in zoneCache contains \\{(.*)\\}",
         (String zoneId, String expectedLimitation) -> {
           String zoneInfoCmd = "docker exec ut-ramp-uas  adserver --zone " + zoneId;
           sut.write(zoneInfoCmd);
@@ -117,6 +114,7 @@ public class CacheProcessTest extends BaseTest {
                         break;
                     } catch (IOException e) {
                         e.printStackTrace();
+                        break;
                     } catch (AssertionError e) {
                         if (count++ == maxTries) {
                             System.out.println("Couldn't refresh zone cache, assuming cache is already updated. if its not the case check upgrade.lock");

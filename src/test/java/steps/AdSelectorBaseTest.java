@@ -1,20 +1,16 @@
 package steps;
 
-import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import cucumber.api.java.en.*;
 import entities.Zone;
-import infra.RerunningCucumber;
 import infra.utils.HttpContentTest;
-
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 /**
  * Created by nive on 2016-10-30.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:AdSelectorBase.feature", plugin = { "pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" }, glue = "C:\\Dev\\ramp-lift-automation\\src\\test\\resources\\AdSelectorBase.feature")
+//@CucumberOptions(features = "classpath:AdSelectorBase.feature", plugin = { "pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/uas-adselector-integration_$TIMESTAMP$.json" }, glue = "C:\\Dev\\ramp-lift-automation\\src\\test\\resources\\AdSelectorBase.feature")
 
 public class AdSelectorBaseTest extends BaseTest  {
     private String slice  = "{\"buying_strategy_id\": -1, \"slices\": [{\"banner_id\": 879498, \"weight\": 4, " +
@@ -50,7 +46,7 @@ public class AdSelectorBaseTest extends BaseTest  {
             Assert.assertEquals("Total impressions for banner "+bannerId+ " is: "+numOfImp+" out of "+ total+ " responses.", neededRatio, actualRatio, 0.1);
 
         });
-        When("^I send (\\d+) times an ad request for zone named \\{([^}]+)\\} and zone limitation (.*) to UAS",
+        When("^I send (\\d+) times an ad request for zone named \\{(.*)\\} and zone limitation (.*) to UAS",
                 (Integer times, String zoneByName, String param) -> {
                     Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
                             .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));

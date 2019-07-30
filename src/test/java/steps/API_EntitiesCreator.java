@@ -3,14 +3,12 @@ package steps;
 import co.unruly.matchers.OptionalMatchers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import cucumber.api.CucumberOptions;
-import cucumber.api.DataTable;
 import cucumber.api.junit.Cucumber;
 import entities.*;
 import entities.ramp.app.api.*;
-import infra.RerunningCucumber;
 import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
+import io.cucumber.datatable.DataTable;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.junit.runner.RunWith;
@@ -26,8 +24,8 @@ import static org.junit.Assert.assertThat;
 
 
 
-@CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",
-        "infra.RotatingJSONFormatter:target/cucumber/API_Examples_$TIMESTAMP$.json"})
+//@CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",})
+//        "infra.RotatingJSONFormatter:target/cucumber/API_Examples_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
 public class API_EntitiesCreator extends BaseTest{
     final private String CREATIVES_SOURCE_FILE_PATH = "/input_files/creativesTemplates.json";
@@ -39,7 +37,7 @@ public class API_EntitiesCreator extends BaseTest{
     public API_EntitiesCreator()
     {
         super();
-        Then("i create new zone named \\{([^}]+)\\} with limitation \\{([^}]+)\\} with adUnitId (\\w+) and web_section id (\\d+) with affiliateId (\\d+) with po_line_item_id (\\d+)",this::createNewZoneAndZoneset);
+        Then("i create new zone named \\{(.*)\\} with limitation \\{(.*)\\} with adUnitId? (.*) and web_section id? (.*) with affiliateId? (.*) with po_line_item_id? (.*)",this::createNewZoneAndZoneset);
         And("i create new campaigns with existing zoneset",this::createMultipleCampaigns);
         And("i create new campaigns with zoneset by name",this::createMultipleCampaignsWithZoneName);
         And("i create new campaigns with new zoneset",this::createMultipleCampaignsWithNewZoneset);
@@ -47,24 +45,22 @@ public class API_EntitiesCreator extends BaseTest{
         And("i create new campaigns with viewability", this::createCampaignsWithViewability);
         And("i create new campaigns with Supply type", this::createCampaignsWithSupplyType);
         Given("i create new campaigns, new zoneset with domains",this::createMultipleCampaignsWithNewZonesetWithDomains);
-        And("i update (po_line_item|io_line_item) end date by id \\{([^}]+)\\}",this::updateEndDateEntityDataByID);
-        And("i update campaign end day to be (\\d+) days from today",this::updateCampaignEndDate);
-        And("i update (po_line_item|io_line_item) with id \\{([^}]+)\\} filed \\{([^}]+)\\} to be \\{([^}]+)\\}",this::updateEntityFiledByID);
-        And("i update (campaign|zone|banner|io_line_item) data by (id|name)",this::updateEntityDataByID);
-        And("i update campaign start and end date according to NY Time zone. starts (yesterday|today), ends in (48|72) hours." ,this::updateCampaignStartEndDates);
+        And("i update? (.*) end date by id \\{(.*)\\}",this::updateEndDateEntityDataByID);
+        And("i update? (.*) with id \\{(.*)\\} filed \\{(.*)\\} to be \\{(.*)\\}",this::updateEntityFiledByID);
+        And("i update? (.*) data by? (.*)",this::updateEntityDataByID);
         And("i disable campaigns by name on db",this::removeAllCampaignsByName);
         And("i set campaigns capping on db",this::setCampaignCapping);
         And("i create new Deals",this::createMultipleDeals);
         And("i create new creatives",this::createMultipleCreatives);
         And("i create campaigns from Template",this::createMultipleCampaignsFromTemplate);
         And("save all entities to json file",this::saveEntities);
-        Given("I disable all campaigns named \\{([^}]+)\\} in DB", this::disableAllCampaignsNamed);
-        When("I create new Campaign named \\{([^}]+)\\} using ramp-app api's for LineItem (\\d+) associated to creative (\\d+) with zoneset (\\d+) with priority \\{([^}]+)\\}", this::createCampaign);
-        And("I update the created campaign \\{([^}]+)\\} banners name to \\{([^}]+)\\} chained with the serial number",this::updateBannersName);
-        And("I update the created (\\w+) named \\{([^}]+)\\} (\\w+) to be (\\w+) in the DB", this::updateDB);
-        And("I update last created campaign named \\{([^}]+)\\} (\\w+) to be \\{([^}]+)\\} in the DB", this::updateLastCreatedCampaignDB);
+        Given("I disable all campaigns named \\{(.*)\\} in DB", this::disableAllCampaignsNamed);
+        When("I create new Campaign named \\{(.*)\\} using ramp-app api's for LineItem (\\d+) associated to creative (\\d+) with zoneset (\\d+) with priority \\{(.*)\\}", this::createCampaign);
+        And("I update the created campaign \\{(.*)\\} banners name to \\{(.*)\\} chained with the serial number",this::updateBannersName);
+        And("I update the created (\\w+) named \\{(.*)\\} (\\w+) to be (\\w+) in the DB", this::updateDB);
+        And("I update last created campaign named \\{(.*)\\} (\\w+) to be \\{(.*)\\} in the DB", this::updateLastCreatedCampaignDB);
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
-        And("i create new Campaign named \\{([^}]+)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{([^}]+)\\} with priority \\{([^}]+)\\}",this::createCampaignWithZonesetName);
+        And("i create new Campaign named \\{(.*)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{(.*)\\} with priority \\{(.*)\\}",this::createCampaignWithZonesetName);
         Given("^i create new campaigns with multiple creatives$", this::createCampaignsWithMultipleCreatives);
         Given("i updated bid_price_type for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setBidPriceTypeForPublisherAdunit);
     }
@@ -475,7 +471,8 @@ public class API_EntitiesCreator extends BaseTest{
         for(int i=1;i<EntityList .size();i++)
         {
             entityData = EntityList.get(i);
-            entityID = updateBy.equals("name")?sut.getCampaignManager().getterFor(entity).apply(entityData.get(0)).orElseThrow(()->new AssertionError("entity wasn't found")).getId():Integer.valueOf(entityData.get(0));
+            entityID = updateBy.equals("name")?sut.getCampaignManager()
+                    .getterFor(entity).apply(entityData.get(0)).orElseThrow(()->new AssertionError("entity wasn't found")).getId():Integer.valueOf(entityData.get(0));
             for(int j=1;j<entityData.size();j++)
             {
                 SqlWorkflowUtils.setColumnInWorkflow(entity+"s", entity + "id",entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
