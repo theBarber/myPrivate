@@ -65,12 +65,12 @@ public class CreateCampaignRequest {
         this.priority = priority;
     }
 
-    @JsonProperty("SupplySources")
+    @JsonProperty("RawSupplySources")
     public SupplySources getSupplySources() {
         return supplySources;
     }
 
-    @JsonProperty("SupplySources")
+    @JsonProperty("RawSupplySources")
     public void setSupplySources(SupplySources supplySources) {
         this.supplySources = supplySources;
     }

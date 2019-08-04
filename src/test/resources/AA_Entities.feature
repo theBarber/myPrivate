@@ -995,7 +995,6 @@ Feature: Entities for tests
       | campaign-dv-zoneLevelLimit-peer-ST         | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-peer-ST}         | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | []                                                                            |
 
-
     And i update banner data by name
       | Banner Name                                        | limitation                              |
       | campaign-dv-campaignLevelLimit-ST-banner-1         | [[[64,"=~","2_84251001","2_84252026"]]] |
@@ -1007,9 +1006,10 @@ Feature: Entities for tests
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
-      | Zone Name                              | limitation                                       |
-      | zone-zoneset-dv-zoneLevelLimit-ST      | [[[64,"=~","2_84251001","2_84252026"]]]          |
-      | zone-zoneset-dv-zoneLevelLimit-peer-ST | [[[64,"=~","2_84251001","2_84252026","1_5261"]]] |
+      | Zone Name                                      | limitation                                                     |
+      | zone-zoneset-dv-zoneLevelLimit-ST              | [[[64,"=~","2_84251001","2_84252026"]]]                        |
+      | zone-zoneset-dv-zoneLevelLimit-peer-ST         | [[[64,"=~","2_84251001","2_84252026","1_5261"]]]               |
+      | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | [[[64,"!=","2_80012001"],[64,"=~","2_99012011","2_99012012"]]] |
 
 
   Scenario:  create entites for effctive host choosing
