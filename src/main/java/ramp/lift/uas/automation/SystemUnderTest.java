@@ -129,7 +129,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	    case "@campaign":
 				if (campaignManager == null)
-						campaignManager = new CampaignManager(config.get("env.name"));
+						campaignManager = new CampaignManager(config.get("env.name"), config.get("is.dev"));
 						break;
 		case "@RampAppRequestModule":
 				if(rampAppCreateEntitiesManager == null)
@@ -477,7 +477,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public CampaignManager getCampaignManager() {
 	  if (campaignManager == null) {
-                    campaignManager = new CampaignManager(config.get("env.name"));
+                    campaignManager = new CampaignManager(config.get("env.name"), config.get("is.dev"));
 	  }
 		return campaignManager;
 	}
