@@ -586,10 +586,9 @@ public class API_EntitiesCreator extends BaseTest{
 
     private void insertCampaignToIOMap(Campaign campaign, Integer IO_id,Integer lineItemID)
     {
-        if(sut.getCampaignManager().getCampaign(campaign.getName()).isPresent())
-            throw new AssertionError("campaign name should be with unique name");
-
-        sut.getCampaignManager().insertCampaignToIOMap(campaign,lineItemID,IO_id);
+        if(!sut.getCampaignManager().getCampaign(campaign.getName()).isPresent()) {
+            sut.getCampaignManager().insertCampaignToIOMap(campaign, lineItemID, IO_id);
+        }
     }
 
 
