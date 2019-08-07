@@ -367,6 +367,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
             Map.Entry<String, String> entry = itr.next();
             url.append("&" + entry.getKey().substring(entry.getKey().lastIndexOf('.') + 1)).append("=" + entry.getValue());
         }
+        System.out.println("URL from ad: "+ "\n" + url.toString());
         return url.toString();
     }
 
