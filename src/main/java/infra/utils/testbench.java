@@ -15,7 +15,7 @@ public class testbench {
     private static void hv() {
         String salt = "dv#Omn!@Xclusion";
         String encodedUrl = "com.peoplefun.wordcross";
-        String urlPath = String.format("/dv-iqc?partnerid=%d&bundleId=%s", 81234, encodedUrl);
+        String urlPath = String.format("/dv-iqc?partnerid=%d&bundleid=%s", 81234, encodedUrl);
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("SHA-256");

@@ -4,7 +4,7 @@
 @scheduled
 @DT
 @noAA
-@doron
+
 Feature: Dynamic Tag inline flow support
 
   Background: health check
