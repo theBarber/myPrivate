@@ -992,9 +992,10 @@ Feature: Entities for tests
       | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | []                                                                            |
 
     And i update banner data by name
-      | Banner Name                                        | limitation                              |
-      | campaign-dv-campaignLevelLimit-ST-banner-1         | [[[64,"=~","2_84251001","2_84252026"]]] |
-      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1 | [[[64,"=~","2_84251001","2_84252026"]]] |
+      | Banner Name                                         | limitation                                                     |
+      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                        |
+      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                        |
+      | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80512003","2_80512001"]]] |
 
     And i update campaign data by name
       | Campaign Name                             | limitation                              |
@@ -1002,10 +1003,9 @@ Feature: Entities for tests
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
-      | Zone Name                                      | limitation                                                     |
-      | zone-zoneset-dv-zoneLevelLimit-ST              | [[[64,"=~","2_84251001","2_84252026"]]]                        |
-      | zone-zoneset-dv-zoneLevelLimit-peer-ST         | [[[64,"=~","2_84251001","2_84252026","1_5261"]]]               |
-      | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | [[[64,"!=","2_80012001"],[64,"=~","2_80512003","2_80512001"]]] |
+      | Zone Name                              | limitation                                       |
+      | zone-zoneset-dv-zoneLevelLimit-ST      | [[[64,"=~","2_84251001","2_84252026"]]]          |
+      | zone-zoneset-dv-zoneLevelLimit-peer-ST | [[[64,"=~","2_84251001","2_84252026","1_5261"]]] |
 
 
   Scenario:  create entites for effctive host choosing
@@ -1109,6 +1109,17 @@ Feature: Entities for tests
     And i update banner data by name
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
+
+  Scenario: create entites for new publisher block list
+    Given i disable campaigns by name on db
+      | Campaign Name           |
+      | campaign-pbl-TOYOTA-PGX |
+      | campaign-pbl-FORD-PGX   |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-pbl-TOYOTA-PGX | 574531 | 245654   | false                 | 204           | {zone-zoneset-campaign-pbl-TOYOTA-PGX} | []         | 69       | 15290          | 3708         | 69426           | []          | []          |
+      | campaign-pbl-FORD-PGX   | 596596 | 242806   | false                 | 204           | {zone-zoneset-campaign-pbl-FORD-PGX}   | []         | 92       | 15290          | 3708         | 69426           | []          | []          |
 
 
   @DynamicPricing
