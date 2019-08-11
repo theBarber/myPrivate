@@ -1118,8 +1118,8 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-pbl-BRAND1-ES  | 574531 | 251644   | false                 | 204           | {zone-zoneset-campaign-pbl-BRAND1-ES}  | []         | 10       | 15290          | 3708         | 69426           | []          | []          |
-      | campaign-pbl-BRAND2-PGX | 75396  | 251648   | false                 | 204           | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15290          | 3708         | 69426           | []          | []          |
+      | campaign-pbl-BRAND1-ES  | 574531 | 251644   | false                 | 84            | {zone-zoneset-campaign-pbl-BRAND1-ES}  | []         | 10       | 25159          | 3843         | 69607           | []          | []          |
+      | campaign-pbl-BRAND2-PGX | 75396  | 251661   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 25159          | 3843         | 69608           | []          | []          |
 
 
   @DynamicPricing
