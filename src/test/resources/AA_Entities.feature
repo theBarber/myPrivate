@@ -1005,7 +1005,7 @@ Feature: Entities for tests
       | Zone Name                                      | limitation                                                     |
       | zone-zoneset-dv-zoneLevelLimit-ST              | [[[64,"=~","2_84251001","2_84252026"]]]                        |
       | zone-zoneset-dv-zoneLevelLimit-peer-ST         | [[[64,"=~","2_84251001","2_84252026","1_5261"]]]               |
-      | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | [[[64,"!=","2_80012001"],[64,"=~","2_83041150","2_82042205"]]] |
+      | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | [[[64,"!=","2_80012001"],[64,"=~","2_80512003","2_80512001"]]] |
 
 
   Scenario:  create entites for effctive host choosing
