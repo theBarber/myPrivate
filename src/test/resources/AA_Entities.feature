@@ -1113,13 +1113,13 @@ Feature: Entities for tests
   Scenario: create entites for new publisher block list
     Given i disable campaigns by name on db
       | Campaign Name           |
-      | campaign-pbl-TOYOTA-PGX |
-      | campaign-pbl-FORD-PGX   |
+      | campaign-pbl-BRAND1-ES  |
+      | campaign-pbl-BRAND2-PGX |
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-pbl-TOYOTA-PGX | 574531 | 245654   | false                 | 204           | {zone-zoneset-campaign-pbl-TOYOTA-PGX} | []         | 69       | 15290          | 3708         | 69426           | []          | []          |
-      | campaign-pbl-FORD-PGX   | 596596 | 242806   | false                 | 204           | {zone-zoneset-campaign-pbl-FORD-PGX}   | []         | 92       | 15290          | 3708         | 69426           | []          | []          |
+      | campaign-pbl-BRAND1-ES  | 574531 | 251644   | false                 | 204           | {zone-zoneset-campaign-pbl-BRAND1-ES}  | []         | 10       | 15290          | 3708         | 69426           | []          | []          |
+      | campaign-pbl-BRAND2-PGX | 75396  | 251648   | false                 | 204           | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15290          | 3708         | 69426           | []          | []          |
 
 
   @DynamicPricing
