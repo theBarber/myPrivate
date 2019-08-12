@@ -18,20 +18,17 @@ Feature: Publisher blacklist tests
     And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND1-ES-banner-1} 100% of the time
-
     Given I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-campaign-pbl-BRAND2-PGX} to UAS
     Then The response code is 200
     And The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND1-PGX-banner-1} 100% of the time
-
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://daniref.com} as referer string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=0&domain=danifalse.com} for zone named {zone-zoneset-EHC-ST-1B} to UAS
     And The response code is 200
     And The responses are passback
-
 
   Scenario: For a publisher block advertiser - dynamic tag request
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=0}
