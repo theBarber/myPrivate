@@ -72,7 +72,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	private void initZoneSetsFromS3() {
         try {
-            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/createdzoneSets.json"), ZoneSet[].class)));
+            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/createdzoneSet.json"), ZoneSet[].class)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
