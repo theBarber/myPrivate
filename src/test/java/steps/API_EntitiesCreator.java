@@ -15,10 +15,14 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static junit.framework.TestCase.fail;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -62,10 +66,41 @@ public class API_EntitiesCreator extends BaseTest{
         And("I refresh the zone Cache",()->CacheProcessTest.refreshZoneCache("cmd"));
         And("i create new Campaign named \\{(.*)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{(.*)\\} with priority \\{(.*)\\}",this::createCampaignWithZonesetName);
         Given("^i create new campaigns with multiple creatives$", this::createCampaignsWithMultipleCreatives);
-        Given("i updated bid_price_type for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setBidPriceTypeForPublisherAdunit);
+        Given("i update bid_price_type for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setBidPriceTypeForPublisherAdunit);
+        Given("i update floor_price for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setFloorPriceForPublisherAdunit);
+        Given("I run (select|update) SQL query? (.*)", this::runSqlQuery);
+        Given("^I set (mobile|desktop) margin (\\d+)% for campaign? (.*)$", this::setMarginForCampaign);
     }
 
+    private void setMarginForCampaign(String method, Integer margin, String campaignName) {
+        String query = "UPDATE `undertone`.`campaigns` SET `hb_" + method + "_bid_price_percentage`= '"+ margin + "' WHERE `campaignname` LIKE '%" + campaignName  + "%'";
+        System.out.println(query);
+        SqlWorkflowUtils.WorkflowQuery(query);
+    }
 
+    private void setFloorPriceForPublisherAdunit(Integer publisherId, Integer adUnitId, Integer floor_price) {
+        String query = "UPDATE `undertone`.`publisher_selected_adunits` SET `floor_price`= '"+ floor_price + "' WHERE `pub_id`= '" + publisherId  + "' and adunit_id = '" + adUnitId + "'";
+        System.out.println(query);
+        SqlWorkflowUtils.WorkflowQuery(query);
+    }
+
+    private void runSqlQuery(String method, String sqlQuery) {
+        try {
+            Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
+            if(method.equalsIgnoreCase("select")){
+                ResultSet rs = stmt.executeQuery(sqlQuery);
+                rs.next();
+                sut.write(rs.getString(1));
+                rs.close();
+            }
+            if(method.equalsIgnoreCase("update")){
+                stmt.executeUpdate(sqlQuery);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+    }
     private void updateEntityFiledByID (String entityName, String id, String field, String updated){
         SqlWorkflowUtils.setColumnInWorkflow(entityName + 's', "id", id, field, updated);
     }
