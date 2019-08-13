@@ -15,10 +15,6 @@ Feature: Entities for tests
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
-  @HB
-  Scenario: remove all active zones
-    Given i remove all zones from publishers: {3836}
-
   Scenario: remove all active zones
 #    zones that are linked to publisher 2434 are disabled specifically!!
     Given i remove all zones from publishers: {3836}
@@ -1202,7 +1198,6 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
-  @HB
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1210,7 +1205,6 @@ Feature: Entities for tests
     And I sleep for 40 seconds
 
   @refreshZoneCache
-  @HB
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
@@ -1220,7 +1214,6 @@ Feature: Entities for tests
 #    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
-  @HB
   Scenario: save entities to file
     And save all entities to json file
 
