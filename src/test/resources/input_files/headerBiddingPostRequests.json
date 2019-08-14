@@ -820,6 +820,216 @@
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {}
+    }]},
+
+  "Send HB request for publisher 3836 with fixed bid price for campaign with fixed HB":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b34",
+      "domain": "DynamicPricingWithMargin.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with fixed bid price for campaign Reserved with fixed HB with fixed HB":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin1.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with fixed bid price for campaign with no margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with fixed bid price for campaign with margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin1.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with dynamic bid price for campaign with no margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with dynamic bid price for campaign with margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin1.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with reserved fixed bid price for campaign with margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin1.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with reserved fixed bid price for campaign with no margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with reserved dynamic bid price for campaign with margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin1.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with reserved dynamic bid price for campaign with no margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with non reserved fixed bid price for campaign with margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin1.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with non reserved fixed bid price for campaign with no margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [970,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin1.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with no margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+
+  "Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with margin HP":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin2.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [600,300]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
     }]}
 
 }

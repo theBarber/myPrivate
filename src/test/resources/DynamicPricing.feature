@@ -1,6 +1,6 @@
 @HeaderBidding
 @DynamicPricing
-@doron
+
 Feature: Dynamic pricing tests
   Scenario: HB Dynamic-Pricing for Direct - control and optimize flow
     Given i send 1 headerBidding post request for scenario {Send HB request with 300X250 size (DT) for publisher 3728} for publisher 3728 with domain {DynamicPricingTest.com} with extra params {&unlimited=1&optimize=0}
