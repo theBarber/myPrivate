@@ -1147,15 +1147,15 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 249772   | true                  | 1238          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
-      | Campaign Name                                       | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
-      | campaign-dpm-direct-fixed-margin-BB-ES              | 20                              | 0                              |
-      | campaign-dpm-direct-dynamic-margin-MR-ES            | 50                              | 0                              |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES       | 20                              | 0                              |
-      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES     | 20                              | 60                             |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES   | 90                              | 0                              |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES | 0                               | 0                              |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES | 100                             | 0                              |
-      | campaign-dpm-non-reserved-margin-MR-ES-mobile       | 90                              | 20                             |
+      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 50                              | 0                              |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 100                             | 0                              |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             |
 
   @DynamicPricing
   @InAppBlackWhiteList
