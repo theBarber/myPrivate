@@ -477,13 +477,13 @@ public class API_EntitiesCreator extends BaseTest {
             entityID = updateBy.equals("name") ? sut.getCampaignManager()
                     .getterFor(entity).apply(entityData.get(0)).orElseThrow(() -> new AssertionError("entity wasn't found")).getId() : Integer.valueOf(entityData.get(0));
             for (int j = 1; j < entityData.size(); j++) {
-                try {
-                    if (SqlWorkflowUtils.getEntityByName(entity + "s", entity + "id", entityData.get(0)).next()) {
+//                try {
+//                    if (SqlWorkflowUtils.getEntityByName(entity + "s", entity + "id", entityData.get(0)).next()) {
                         SqlWorkflowUtils.setColumnInWorkflow(entity + "s", entity + "id", entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
-                    }
-                } catch (SQLException e) {
-                    Assert.fail(e.getMessage());
-                }
+//                    }
+//                } catch (SQLException e) {
+//                    Assert.fail(e.getMessage());
+//                }
 
             }
         }
