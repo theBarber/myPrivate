@@ -11,13 +11,13 @@ Feature: Entities for tests
 
   Scenario: entities end-date update
     And i update po_line_item end date by id {67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
-    And i update io_line_item end date by id {210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
+    And i update io_line_item end date by id {245653,210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
-
   Scenario: remove all active zones
 #    zones that are linked to publisher 2434 are disabled specifically!!
+    Given i remove all zones from publishers: {3836}
     Given i remove all zones from publishers: {3673}
     Given i remove all zones from publishers: {3697}
     Given i remove all zones from publishers: {3708}
@@ -302,9 +302,9 @@ Feature: Entities for tests
       | zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 1         |
       | zone-zoneset-HB-DP-ServerPr-PGC-6b              | 1         |
 
-    Given i updated bid_price_type for publisher = 3708 for adunit = 93 to be 1
-    Given i updated bid_price_type for publisher = 3711 for adunit = 69 to be 1
-    Given i updated bid_price_type for publisher = 3711 for adunit = 75 to be 1
+    Given i update bid_price_type for publisher = 3708 for adunit = 93 to be 1
+    Given i update bid_price_type for publisher = 3711 for adunit = 69 to be 1
+    Given i update bid_price_type for publisher = 3711 for adunit = 75 to be 1
 
 
   @HB
@@ -1111,16 +1111,69 @@ Feature: Entities for tests
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
+
   Scenario: create entites for new publisher block list
     Given i disable campaigns by name on db
       | Campaign Name           |
       | campaign-pbl-BRAND1-ES  |
+      | campaign-pbl-BRAND1-PGX |
       | campaign-pbl-BRAND2-PGX |
+      | campaign-pbl-BRAND2-ST  |
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-pbl-BRAND1-ES  | 574531 | 251644   | false                 | 84            | {zone-zoneset-campaign-pbl-BRAND1-ES}  | []         | 10       | 25159          | 3843         | 69607           | []          | []          |
+      | campaign-pbl-BRAND1-PGX | 574531 | 245653   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND1-PGX} | []         | 92       | 25159          | 3843         | 69608           | []          | []          |
       | campaign-pbl-BRAND2-PGX | 75396  | 251648   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 25159          | 3843         | 69608           | []          | []          |
+      | campaign-pbl-BRAND2-ST  | 75396  | 208153   | false                 | 8290          | {zone-zoneset-campaign-pbl-BRAND2-ST}  | []         | 93       | 25159          | 3843         | 69625           | []          | []          |
+
+
+  @HB
+  Scenario: create entities for dynamic pricing with margin
+    Given i disable campaigns by name on db
+      | Campaign Name                                              |
+      | campaign-dpm-direct-fixed-no-margin-BB-ES                  |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     |
+      | campaign-dpm-direct-dynamic-no-margin-MR-ES                |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              |
+      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES           |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            |
+      | campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES         |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          |
+      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        |
+      | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                                              | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-dpm-direct-fixed-no-margin-BB-ES                  | 75396  | 198082   | false                 | 1782          | {zone-zoneset-dpm-direct-fixed-no-margin-BB-ES}                  | []         | 58       | 15349          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 75396  | 198082   | false                 | 1782          | {zone-zoneset-dpm-direct-fixed-margin-BB-ES}                     | []         | 58       | 15355          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-direct-dynamic-no-margin-MR-ES                | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-dynamic-no-margin-MR-ES}                | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-dynamic-margin-MR-ES}                   | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 407981 | 224528   | true                  | 1351          | {zone-zoneset-dpm-prog-reserved-fixed-margin-BB-ES}              | []         | 58       | 15355          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES           | 407981 | 224528   | true                  | 1351          | {zone-zoneset-dpm-prog-reserved-fixed-no-margin-BB-ES}           | []         | 58       | 15349          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 407981 | 249770   | true                  | 1351          | {zone-zoneset-dpm-prog-reserved-dynamic-margin-MR-ES}            | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES         | 407981 | 249770   | true                  | 1351          | {zone-zoneset-dpm-prog-reserved-dynamic-no-margin-MR-ES}         | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 407981 | 234810   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES}          | []         | 58       | 15355          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 407981 | 234810   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES}       | []         | 58       | 15349          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 407981 | 249772   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES}        | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 407981 | 249772   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}     | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 407981 | 249772   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES}        | []         | 29       | 15356          | 3836         | 69503           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 249772   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+
+    And i update campaign data by name
+      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 50                              | 0                              |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 100                             | 0                              |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             |
 
 
   @DynamicPricing
@@ -1164,7 +1217,6 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
-
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1172,7 +1224,6 @@ Feature: Entities for tests
     And I sleep for 40 seconds
 
   @refreshZoneCache
-
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
@@ -1182,7 +1233,6 @@ Feature: Entities for tests
 #    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
-
   Scenario: save entities to file
     And save all entities to json file
 
