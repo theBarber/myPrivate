@@ -3,7 +3,6 @@ package entities;
 import com.amazonaws.regions.Regions;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import entities.ramp.app.api.Creative;
 import infra.ParameterProvider;
 import infra.module.Named;
@@ -14,12 +13,10 @@ import java.io.File;
 import java.nio.file.FileSystems;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 
 public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
-	boolean isDev = false;
 	List<IO> io;
 	List<ZoneSet> zonesets;
     private ObjectMapper m = new ObjectMapper();
@@ -31,12 +28,12 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 
 
-    public CampaignManager(String env, String isDev) {
+    public CampaignManager(String env) {
 		if(envname.isEmpty()){
 			envname=env;
 		}
 		m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		initHardCodedEntities(isDev);
+		initHardCodedEntities();
 	}
 
 
@@ -50,29 +47,27 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	}*/
 
-    private void initHardCodedEntities(String isDev) {
-    	if(isDev.equalsIgnoreCase("true")){
-			initLineItemFromS3();
-			initZoneSetsFromS3();
-		}else {
-			initLineItem();
-			initZoneSets();
-		}
+    private void initHardCodedEntities() {
+        initLineItem();
+        //initLineItemFromS3();
+        initZoneSets();
+        //initZoneSetsFromS3();
     }
 
 	private void initLineItemFromS3() {
         try {
-            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/createdlineItem.json"), IO[].class));
+            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/lineItem.json"), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+
         }
 
 	}
 
 	private void initZoneSetsFromS3() {
         try {
-            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/createdzoneSet.json"), ZoneSet[].class)));
+            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/zonesets.json"), ZoneSet[].class)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -91,8 +86,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
     private void initZoneSets() {
         try {
-        	this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(this.getClass().getResourceAsStream(INIT_ZONESET_FILE), ZoneSet[].class)));
-
+            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(this.getClass().getResourceAsStream(INIT_ZONESET_FILE), ZoneSet[].class)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -301,11 +295,6 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	public Optional<Deal> getDeal(String byName) {
 		return io.stream().flatMap(x -> x.deals.stream()).filter(Named.nameIs(byName)).findFirst();
-	}
-
-
-	public void writeEntities(String env, boolean isDev){
-
 	}
 
 	public void writeZoneSets(String env){
