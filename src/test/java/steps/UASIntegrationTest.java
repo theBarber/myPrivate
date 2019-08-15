@@ -26,6 +26,8 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
+import util.ApiRoutines;
+import util.TestsRoutines;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -157,19 +159,11 @@ public class UASIntegrationTest extends BaseTest {
 
     });
     Then("The response(s) has impression-url(s)", () -> {
-        Stream<Optional<String>> impressionURLResponses = Optional.ofNullable(sut.getUASRquestModule().responses()
-                .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)).orElse(sut.getUASRquestModule().getSynchronizedResponses().stream().map(UASRequestModule::getImpressionUrlFrom));
-        assertThat(
-          "all of the responses should have a url", impressionURLResponses,
-          StreamMatchers.allMatch(is(not(OptionalMatchers.empty()))));
-        //print check
-       /* sut.getUASRquestModule().responses()
-                .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join).forEach(response->System.out.println("the request was: "+ response.get()));
-    */});
+        TestsRoutines.verifyImpressions();
+    });
 
     Then("The response(s) has click-url(s)", () -> {
-      assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
-          .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
+      TestsRoutines.verifyClicks();
     });
 
       Then("The response(s) has complete-url(s)", () -> {
@@ -188,15 +182,7 @@ public class UASIntegrationTest extends BaseTest {
       });
 
     Then("The response(s) are passback", () -> {
-
-      Map<Boolean, Long> countUrls =
-          sut.getUASRquestModule().responses()
-              .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
-              .collect(Collectors.groupingBy(Optional::isPresent, Collectors.counting()));
-
-      assertThat(
-          "all of the responses should not have an impression url", countUrls.getOrDefault(true, 0l),
-          Matchers.is(0l));
+        TestsRoutines.verifyPassback();
     });
 
 
@@ -447,8 +433,8 @@ public class UASIntegrationTest extends BaseTest {
           sut.getUASRquestModule().addQueryParam(paramName, paramValue);
         });
 
-    Then("I reset the http headers sent to uas$", () -> {
-      sut.getUASRquestModule().emptyHttpHeaders();
+    Then("^I reset the http headers sent to uas$", () -> {
+        TestsRoutines.resetHeaders();
     });
 
     Then("The passback ratio should be (\\d+)%", (Integer percentage) -> {
@@ -537,7 +523,7 @@ public class UASIntegrationTest extends BaseTest {
     return originalClickUrl.map(s -> s.replaceAll("__", "&"));
   }
 
-  private static CompletableFuture<Optional<String>> getClickUrl(CompletableFuture<HttpResponse> future) {
+  public static CompletableFuture<Optional<String>> getClickUrl(CompletableFuture<HttpResponse> future) {
     return future.thenApply(UASRequestModule::getClickUrlFrom);
   }
 
@@ -570,9 +556,9 @@ public class UASIntegrationTest extends BaseTest {
     }
 
 
-    private void sendMultipleZoneIDAdRequestsWithParameter(Integer times,String parameter, Integer zoneID, boolean toReset)
+    private void sendMultipleZoneIDAdRequestsWithParameter(Integer times, String parameter, Integer zoneID, boolean toReset)
     {
-        sut.getUASRquestModule().zoneRequestsWithParameter(zoneID,parameter, times, toReset);
+        ApiRoutines.sendMultipleZoneIdAdRequestsWithParameter(times, parameter, zoneID, toReset);
     }
 
 
@@ -723,7 +709,5 @@ public class UASIntegrationTest extends BaseTest {
 
         });
     }
-
-
 }
 

@@ -36,8 +36,10 @@ Feature: GDPR - Europe Delivery Logic
 # both of params are specified
  Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - request from eu
  Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - request not from eu
+
  Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_EXCLUDED - request from eu
  Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_EXCLUDED - request not from eu
+
  Scenario: gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - request from eu
  Scenario: gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - request not from eu
  Scenario: gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - request from eu

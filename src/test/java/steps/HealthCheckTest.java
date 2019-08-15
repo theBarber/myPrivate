@@ -8,6 +8,7 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
+import util.TestsRoutines;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
@@ -42,11 +43,7 @@ public class HealthCheckTest extends BaseTest {
 	}
 
 	public void healthCheckResponseContains(String something) {
-		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-			//System.out.println(content);
-			Assert.assertThat(content, Matchers.containsString(something));
-
-		});
+		TestsRoutines.verifyContains(something);
 	}
 
 
