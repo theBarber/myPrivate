@@ -21,6 +21,7 @@ public class LineItem implements WithId<Integer> {
     public IO Io;
     @JsonProperty("Campaigns")
     public List<Campaign> campaigns;
+    @JsonProperty("id")
     private Integer ioLineItemId = null;
     public static final DateTimeFormatter formatter;
     static {

@@ -51,7 +51,7 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<env>dev</env>
+				<dev>true</dev>
 			</properties>
 		</profile>
 
