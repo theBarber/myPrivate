@@ -18,6 +18,7 @@ Feature: Entities for tests
   Scenario: remove all active zones
 #    zones that are linked to publisher 2434 are disabled specifically!!
     Given i remove all zones from publishers: {3836}
+    Given i remove all zones from publishers: {3843}
     Given i remove all zones from publishers: {3673}
     Given i remove all zones from publishers: {3697}
     Given i remove all zones from publishers: {3708}
@@ -1129,6 +1130,7 @@ Feature: Entities for tests
 
 
   @HB
+  @yaniv
   Scenario: create entities for dynamic pricing with margin
     Given i disable campaigns by name on db
       | Campaign Name                                              |
@@ -1153,27 +1155,44 @@ Feature: Entities for tests
       | campaign-dpm-direct-fixed-margin-BB-ES                     | 75396  | 198082   | false                 | 1782          | {zone-zoneset-dpm-direct-fixed-margin-BB-ES}                     | []         | 58       | 15355          | 3836         | 69502           | []          | []          |
       | campaign-dpm-direct-dynamic-no-margin-MR-ES                | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-dynamic-no-margin-MR-ES}                | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
       | campaign-dpm-direct-dynamic-margin-MR-ES                   | 75396  | 249737   | false                 | 22986         | {zone-zoneset-dpm-direct-dynamic-margin-MR-ES}                   | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 407981 | 224528   | true                  | 1351          | {zone-zoneset-dpm-prog-reserved-fixed-margin-BB-ES}              | []         | 58       | 15355          | 3836         | 69502           | []          | []          |
-      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES           | 407981 | 224528   | true                  | 1351          | {zone-zoneset-dpm-prog-reserved-fixed-no-margin-BB-ES}           | []         | 58       | 15349          | 3836         | 69502           | []          | []          |
-      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 407981 | 249770   | true                  | 1351          | {zone-zoneset-dpm-prog-reserved-dynamic-margin-MR-ES}            | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES         | 407981 | 249770   | true                  | 1351          | {zone-zoneset-dpm-prog-reserved-dynamic-no-margin-MR-ES}         | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 407981 | 234810   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES}          | []         | 58       | 15355          | 3836         | 69502           | []          | []          |
-      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 407981 | 234810   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES}       | []         | 58       | 15349          | 3836         | 69502           | []          | []          |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 407981 | 249772   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES}        | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 407981 | 249772   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}     | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 407981 | 249772   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES}        | []         | 29       | 15356          | 3836         | 69503           | []          | []          |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 249772   | true                  | 1352          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 407981 | 224528   | true                  | 1400          | {zone-zoneset-dpm-prog-reserved-fixed-margin-BB-ES}              | []         | 58       | 15355          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES           | 407981 | 224528   | true                  | 1400          | {zone-zoneset-dpm-prog-reserved-fixed-no-margin-BB-ES}           | []         | 58       | 15349          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 407981 | 249770   | true                  | 1400          | {zone-zoneset-dpm-prog-reserved-dynamic-margin-MR-ES}            | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES         | 407981 | 249770   | true                  | 1400          | {zone-zoneset-dpm-prog-reserved-dynamic-no-margin-MR-ES}         | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 407981 | 234810   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES}          | []         | 58       | 15355          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 407981 | 234810   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES}       | []         | 58       | 15349          | 3836         | 69502           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES}        | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}     | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES}        | []         | 29       | 15356          | 3836         | 69503           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
-      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
-      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              |
-      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 50                              | 0                              |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              |
-      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 100                             | 0                              |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             |
+      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              | -1       |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 50                              | 0                              | -1       |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              | -2       |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 100                             | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
+
+    And i update zone data by name
+      | Zone Name                                                      | is_secure |
+      | zone-zoneset-dpm-direct-fixed-no-margin-BB-ES                  | 1         |
+      | zone-zoneset-dpm-direct-fixed-margin-BB-ES                     | 1         |
+      | zone-zoneset-dpm-direct-dynamic-no-margin-MR-ES                | 1         |
+      | zone-zoneset-dpm-direct-dynamic-margin-MR-ES                   | 1         |
+      | zone-zoneset-dpm-prog-reserved-fixed-margin-BB-ES              | 1         |
+      | zone-zoneset-dpm-prog-reserved-fixed-no-margin-BB-ES           | 1         |
+      | zone-zoneset-dpm-prog-reserved-dynamic-margin-MR-ES            | 1         |
+      | zone-zoneset-dpm-prog-reserved-dynamic-no-margin-MR-ES         | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES          | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 1         |
 
 
   @DynamicPricing
@@ -1197,6 +1216,7 @@ Feature: Entities for tests
   @Keren
   @limitationSanity
   @Zonerefresh
+  @yaniv
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
@@ -1217,13 +1237,16 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
+  @yaniv
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
     And I sleep for 40 seconds
 
+  @HB
   @refreshZoneCache
+  @yaniv
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
