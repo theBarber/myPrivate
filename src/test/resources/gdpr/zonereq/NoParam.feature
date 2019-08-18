@@ -1,6 +1,7 @@
 @GDPR
 @UtConsent
 @NoGdprParam
+@ZoneReqNoGdprParam
 Feature: GDPR - Zone Reqs - Europe Delivery Logic - No Param Is Specified In URL
 
   @ZoneReqNoGdprParamEu

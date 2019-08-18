@@ -1,5 +1,6 @@
 @GDPR
 @UtConsent
+@NoGdprParam
 @DynTagNoGdprParam
 Feature: GDPR - DynTag - Europe Delivery Logic - No Param Is Specified In URL
 

@@ -1,11 +1,19 @@
 package steps;
 
+import com.iab.gdpr.consent.VendorConsent;
+import com.iab.gdpr.consent.implementation.v1.VendorConsentBuilder;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import model.Country;
 import org.junit.runner.RunWith;
-import util.ApiRoutines;
-import util.TestsRoutines;
+import ramp.lift.common.gdpr.IabConsent;
+import util.api.UasApi;
+import util.Verifier;
+import util.gdpr.ConsentStringBuilder;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -30,7 +38,7 @@ public class GdprTest extends BaseTest {
 
         Given("I add \\{([^\"]*)\\} ip header", (Country country) -> {
             final String ip = country.getIps().iterator().next();
-            TestsRoutines.addCountryIpHeader(ip);
+            Verifier.addCountryIpHeader(ip);
         });
 
         Given("I send (\\d+) times an ad request for gdpr entities to UAS", (Integer times) -> {
@@ -42,15 +50,31 @@ public class GdprTest extends BaseTest {
         });
 
         Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities", (Integer times) -> {
-            ApiRoutines.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), PUBLISHER_PARAMS);
+            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), PUBLISHER_PARAMS);
         });
 
         Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with parameter \\{(.*)\\}", (Integer times, String parameter) -> {
-            ApiRoutines.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter));
+            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter));
+        });
+
+        Given("I send (\\d+) times an ad request for gdpr entities to UAS with gdprstr which includes ut vendor id and includes ut purpose ids", (Integer times) -> {
+           UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=" + utIdIncludedUtPurposesIncludedGdprStr(), ZONE_ID, true);
+        });
+
+        Given("I send (\\d+) times an ad request for gdpr entities to UAS with gdprstr which includes ut vendor id and excludes ut purpose ids", (Integer times) -> {
+            UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=" + utIdIncludedUtPurposesExcludedGdprStr(), ZONE_ID, true);
+        });
+
+        Given("I send (\\d+) times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and includes ut purpose ids", (Integer times) -> {
+            UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=" + utIdExcludedUtPurposesIncludedGdprStr(), ZONE_ID, true);
+        });
+
+        Given("I send (\\d+) times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and excludes ut purpose ids", (Integer times) -> {
+            UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=" + utIdExcludedUtPurposesExcludedGdprStr(), ZONE_ID, true);
         });
 
         Then("^I expect (delivery|gdpr passback)$", (String expectedResponseType) -> {
-            TestsRoutines.verifyResponseExpectation(expectedResponseType);
+            Verifier.verifyResponseBody(expectedResponseType);
         });
     }
 
@@ -61,10 +85,26 @@ public class GdprTest extends BaseTest {
     }
 
     private void sendGdprZoneReq(Integer times) {
-        ApiRoutines.sendZoneReq(ZONE_ID, times, true);
+        UasApi.sendZoneReq(ZONE_ID, times, true);
     }
 
     private void sendParameteredGdprZoneReq(Integer times, String parameter) {
-        ApiRoutines.sendMultipleZoneIdAdRequestsWithParameter(times, parameter, ZONE_ID, true);
+        UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, parameter, ZONE_ID, true);
+    }
+
+    private String utIdIncludedUtPurposesIncludedGdprStr() {
+        return new ConsentStringBuilder(true, true).build();
+    }
+
+    private String utIdIncludedUtPurposesExcludedGdprStr() {
+        return new ConsentStringBuilder(true, false).build();
+    }
+
+    private String utIdExcludedUtPurposesIncludedGdprStr() {
+        return new ConsentStringBuilder(false, true).build();
+    }
+
+    private String utIdExcludedUtPurposesExcludedGdprStr() {
+        return new ConsentStringBuilder(false, false).build();
     }
 }

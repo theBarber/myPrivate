@@ -1,11 +1,11 @@
-package util;
+package util.api;
 
 import ramp.lift.uas.automation.SystemUnderTest;
 
-public class ApiRoutines {
+public class UasApi {
     private static SystemUnderTest sut = SystemUnderTest.getInstance();
 
-    private ApiRoutines() {
+    private UasApi() {
     }
 
     public static void sendZoneReq(Integer zoneId, Integer times, boolean toReset) {

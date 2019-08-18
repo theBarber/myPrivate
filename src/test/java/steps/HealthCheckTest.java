@@ -8,7 +8,7 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
-import util.TestsRoutines;
+import util.Verifier;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
@@ -43,7 +43,7 @@ public class HealthCheckTest extends BaseTest {
 	}
 
 	public void healthCheckResponseContains(String something) {
-		TestsRoutines.verifyContains(something);
+		Verifier.verifyContains(something);
 	}
 
 

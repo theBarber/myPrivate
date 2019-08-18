@@ -26,8 +26,8 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
-import util.ApiRoutines;
-import util.TestsRoutines;
+import util.api.UasApi;
+import util.Verifier;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -159,11 +159,11 @@ public class UASIntegrationTest extends BaseTest {
 
     });
     Then("The response(s) has impression-url(s)", () -> {
-        TestsRoutines.verifyImpressions();
+        Verifier.verifyImpressions();
     });
 
     Then("The response(s) has click-url(s)", () -> {
-      TestsRoutines.verifyClicks();
+      Verifier.verifyClicks();
     });
 
       Then("The response(s) has complete-url(s)", () -> {
@@ -182,7 +182,7 @@ public class UASIntegrationTest extends BaseTest {
       });
 
     Then("The response(s) are passback", () -> {
-        TestsRoutines.verifyPassback();
+        Verifier.verifyPassback();
     });
 
 
@@ -434,7 +434,7 @@ public class UASIntegrationTest extends BaseTest {
         });
 
     Then("^I reset the http headers sent to uas$", () -> {
-        TestsRoutines.resetHeaders();
+        Verifier.resetHeaders();
     });
 
     Then("The passback ratio should be (\\d+)%", (Integer percentage) -> {
@@ -558,7 +558,7 @@ public class UASIntegrationTest extends BaseTest {
 
     private void sendMultipleZoneIDAdRequestsWithParameter(Integer times, String parameter, Integer zoneID, boolean toReset)
     {
-        ApiRoutines.sendMultipleZoneIdAdRequestsWithParameter(times, parameter, zoneID, toReset);
+        UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, parameter, zoneID, toReset);
     }
 
 

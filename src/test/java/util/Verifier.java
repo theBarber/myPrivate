@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class TestsRoutines {
+public class Verifier {
 
     private static SystemUnderTest sut = SystemUnderTest.getInstance();
 
@@ -30,7 +30,7 @@ public class TestsRoutines {
     private static final String GDPR_PASSBACK = "gdpr passback";
     private static final String UNSUPPORTED_RESPONSE_PREFIX = "Unsupported expected response type: expected delivery or passback, got: ";
 
-    private TestsRoutines() {
+    private Verifier() {
     }
 
     public static void verifyPassback() {
@@ -76,7 +76,7 @@ public class TestsRoutines {
         sut.getUASRquestModule().addHttpHeader("X-Forwarded-For", ip);
     }
 
-    public static void verifyResponseExpectation(String expectedResponseType) {
+    public static void verifyResponseBody(String expectedResponseType) {
         if (expectedResponseType.equals(DELIVERY)) {
             verifyContains(SCRIPT);
             verifyImpressions();
@@ -85,7 +85,7 @@ public class TestsRoutines {
             verifyPassback();
         } else if (expectedResponseType.equals(GDPR_PASSBACK)) {
             verifyPassback();
-            // and logs
+            // todo: verify no logs
         } else {
             throw new IllegalArgumentException(UNSUPPORTED_RESPONSE_PREFIX + expectedResponseType);
         }
