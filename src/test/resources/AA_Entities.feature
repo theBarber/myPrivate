@@ -1111,7 +1111,7 @@ Feature: Entities for tests
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
-
+  @doron
   Scenario: create entites for new publisher block list
     Given i disable campaigns by name on db
       | Campaign Name           |
@@ -1122,10 +1122,10 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-pbl-BRAND1-ES  | 574531 | 251644   | false                 | 84            | {zone-zoneset-campaign-pbl-BRAND1-ES}  | []         | 10       | 25159          | 3843         | 69607           | []          | []          |
-      | campaign-pbl-BRAND1-PGX | 574531 | 245653   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND1-PGX} | []         | 92       | 25159          | 3843         | 69608           | []          | []          |
-      | campaign-pbl-BRAND2-PGX | 75396  | 251648   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 25159          | 3843         | 69608           | []          | []          |
-      | campaign-pbl-BRAND2-ST  | 75396  | 208153   | false                 | 8290          | {zone-zoneset-campaign-pbl-BRAND2-ST}  | []         | 93       | 25159          | 3843         | 69625           | []          | []          |
+      | campaign-pbl-BRAND1-ES  | 574531 | 251644   | false                 | 84            | {zone-zoneset-campaign-pbl-BRAND1-ES}  | []         | 10       | 15376          | 3843         | 69607           | []          | []          |
+      | campaign-pbl-BRAND1-PGX | 574531 | 245653   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND1-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
+      | campaign-pbl-BRAND2-PGX | 75396  | 222908   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
+      | campaign-pbl-BRAND2-ST  | 75396  | 208153   | false                 | 8290          | {zone-zoneset-campaign-pbl-BRAND2-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
 
 
   @HB
@@ -1197,6 +1197,7 @@ Feature: Entities for tests
   @Keren
   @limitationSanity
   @Zonerefresh
+  @refresh
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
@@ -1217,6 +1218,7 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
+    @refresh
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1224,6 +1226,7 @@ Feature: Entities for tests
     And I sleep for 40 seconds
 
   @refreshZoneCache
+  @refresh
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
@@ -1233,6 +1236,7 @@ Feature: Entities for tests
 #    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
+  @refresh
   Scenario: save entities to file
     And save all entities to json file
 
