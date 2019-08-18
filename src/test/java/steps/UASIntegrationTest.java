@@ -13,6 +13,7 @@ import infra.cli.process.CliCommandExecution;
 import infra.module.WithId;
 import infra.support.StringUtils;
 import infra.utils.HttpContentTest;
+import model.ResponseType;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -24,10 +25,11 @@ import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 import util.api.UasApi;
-import util.Verifier;
+import util.TestsRoutines;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -159,11 +161,11 @@ public class UASIntegrationTest extends BaseTest {
 
     });
     Then("The response(s) has impression-url(s)", () -> {
-        Verifier.verifyImpressions();
+        TestsRoutines.verifyResponseBody(ResponseType.IMPRESSIONS);
     });
 
     Then("The response(s) has click-url(s)", () -> {
-      Verifier.verifyClicks();
+        TestsRoutines.verifyResponseBody(ResponseType.CLICKS);
     });
 
       Then("The response(s) has complete-url(s)", () -> {
@@ -182,7 +184,7 @@ public class UASIntegrationTest extends BaseTest {
       });
 
     Then("The response(s) are passback", () -> {
-        Verifier.verifyPassback();
+        TestsRoutines.verifyResponseBody(ResponseType.PASSBACK);
     });
 
 
@@ -434,7 +436,7 @@ public class UASIntegrationTest extends BaseTest {
         });
 
     Then("^I reset the http headers sent to uas$", () -> {
-        Verifier.resetHeaders();
+        TestsRoutines.resetHeaders();
     });
 
     Then("The passback ratio should be (\\d+)%", (Integer percentage) -> {

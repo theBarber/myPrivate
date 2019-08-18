@@ -35,7 +35,8 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdprstr
   @ZoneReqGdprStrUtIdUtPurposesIncludedEu
   Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - zone request from eu
-    Given I add {UK} ip header
+    Given I reset the http headers sent to uas
+    And I add {UK} ip header
     And I send 1 times an ad request for gdpr entities to UAS with gdprstr which includes ut vendor id and includes ut purpose ids
     Then I expect delivery
 
@@ -49,7 +50,8 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdprstr
   @ZoneReqGdprStrUtIdIncludedUtPurposeIdsExcludedEu
   Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - zone request from eu
-    Given I add {UK} ip header
+    Given I reset the http headers sent to uas
+    And I add {UK} ip header
     And I send 1 times an ad request for gdpr entities to UAS with gdprstr which includes ut vendor id and excludes ut purpose ids
     Then I expect gdpr passback
 
@@ -63,7 +65,8 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdprstr
   @ZoneReqGdprStrUtIdExcludedUtPurposeIdsIncludedEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - zone request from eu
-    Given I add {UK} ip header
+    Given I reset the http headers sent to uas
+    And I add {UK} ip header
     And I send 1 times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and includes ut purpose ids
     Then I expect gdpr passback
 
@@ -79,7 +82,8 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdprstr
   @ZoneReqGdprStrUtIdExcludedUtPurposeIdsExcludedEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - zone request from eu
-    Given I add {UK} ip header
+    Given I reset the http headers sent to uas
+    And I add {UK} ip header
     And I send 1 times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and excludes ut purpose ids
     Then I expect gdpr passback
 
@@ -88,4 +92,19 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - zone request not from eu
     Given I reset the http headers sent to uas
     And I send 1 times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and excludes ut purpose ids
+    Then I expect delivery
+
+  @gdprstr
+  @ZoneReqGdprStrEmptyStringEu
+  Scenario: gdprstr=empty_string - zone request from eu
+    Given I reset the http headers sent to uas
+    And I add {UK} ip header
+    And I send 1 times an ad request for gdpr entities to UAS with an empty gdprstr
+    Then I expect gdpr passback
+
+  @gdprstr
+  @ZoneReqGdprStrEmptyStringNotEu
+  Scenario: gdprstr=empty_string - zone request not from eu
+    Given I reset the http headers sent to uas
+    And I send 1 times an ad request for gdpr entities to UAS with an empty gdprstr
     Then I expect delivery

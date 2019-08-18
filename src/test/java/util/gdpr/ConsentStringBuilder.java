@@ -9,7 +9,6 @@ import ramp.lift.common.gdpr.IabConsent;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

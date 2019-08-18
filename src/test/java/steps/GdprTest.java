@@ -1,19 +1,12 @@
 package steps;
 
-import com.iab.gdpr.consent.VendorConsent;
-import com.iab.gdpr.consent.implementation.v1.VendorConsentBuilder;
-
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import model.Country;
 import org.junit.runner.RunWith;
-import ramp.lift.common.gdpr.IabConsent;
 import util.api.UasApi;
-import util.Verifier;
+import util.TestsRoutines;
 import util.gdpr.ConsentStringBuilder;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -38,7 +31,7 @@ public class GdprTest extends BaseTest {
 
         Given("I add \\{([^\"]*)\\} ip header", (Country country) -> {
             final String ip = country.getIps().iterator().next();
-            Verifier.addCountryIpHeader(ip);
+            TestsRoutines.addCountryIpHeader(ip);
         });
 
         Given("I send (\\d+) times an ad request for gdpr entities to UAS", (Integer times) -> {
@@ -73,8 +66,12 @@ public class GdprTest extends BaseTest {
             UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=" + utIdExcludedUtPurposesExcludedGdprStr(), ZONE_ID, true);
         });
 
+        Given("I send (\\d) times an ad request for gdpr entities to UAS with an empty gdprstr", (Integer times) -> {
+            UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=", ZONE_ID, true);
+        });
+
         Then("^I expect (delivery|gdpr passback)$", (String expectedResponseType) -> {
-            Verifier.verifyResponseBody(expectedResponseType);
+            TestsRoutines.verifyResponseBody(expectedResponseType);
         });
     }
 
