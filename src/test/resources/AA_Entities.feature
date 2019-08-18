@@ -1110,7 +1110,7 @@ Feature: Entities for tests
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
-  @HB
+  @yaniv
   Scenario: create entities for dynamic pricing with margin
     Given i disable campaigns by name on db
       | Campaign Name                                              |
@@ -1147,15 +1147,32 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
-      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
-      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              |
-      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 50                              | 0                              |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              |
-      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 100                             | 0                              |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             |
+      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              | -1       |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 50                              | 0                              | -1       |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              | -2       |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 100                             | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
+
+    And i update zone data by name
+      | Zone Name                                                      | is_secure |
+      | zone-zoneset-dpm-direct-fixed-no-margin-BB-ES                  | 1         |
+      | zone-zoneset-dpm-direct-fixed-margin-BB-ES                     | 1         |
+      | zone-zoneset-dpm-direct-dynamic-no-margin-MR-ES                | 1         |
+      | zone-zoneset-dpm-direct-dynamic-margin-MR-ES                   | 1         |
+      | zone-zoneset-dpm-prog-reserved-fixed-margin-BB-ES              | 1         |
+      | zone-zoneset-dpm-prog-reserved-fixed-no-margin-BB-ES           | 1         |
+      | zone-zoneset-dpm-prog-reserved-dynamic-margin-MR-ES            | 1         |
+      | zone-zoneset-dpm-prog-reserved-dynamic-no-margin-MR-ES         | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES          | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 1         |
 
   @DynamicPricing
   @InAppBlackWhiteList
@@ -1178,6 +1195,7 @@ Feature: Entities for tests
   @Keren
   @limitationSanity
   @Zonerefresh
+  @yaniv
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
@@ -1198,13 +1216,16 @@ Feature: Entities for tests
   @DOT
   @DT
   @Keren
+  @yaniv
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
     And I sleep for 40 seconds
 
+  @HB
   @refreshZoneCache
+  @yaniv
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
