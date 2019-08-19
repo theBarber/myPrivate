@@ -1114,20 +1114,17 @@ Feature: Entities for tests
 
   @doron
   Scenario: create entites for new publisher block list
+    Given i remove all zones from publishers: {3843}
     Given i disable campaigns by name on db
       | Campaign Name           |
-      | campaign-pbl-BRAND1-ES  |
-      | campaign-pbl-BRAND1-PGX |
+      | campaign-pbl-BRAND1-ST  |
       | campaign-pbl-BRAND2-PGX |
-      | campaign-pbl-BRAND2-ST  |
-
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-pbl-BRAND1-ES  | 574531 | 251644   | false                 | 84            | {zone-zoneset-campaign-pbl-BRAND1-ES}  | []         | 10       | 15376          | 3843         | 69607           | []          | []          |
-      | campaign-pbl-BRAND1-PGX | 574531 | 245653   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND1-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
-      | campaign-pbl-BRAND2-PGX | 75396  | 222908   | false                 | 1068          | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
-      | campaign-pbl-BRAND2-ST  | 75396  | 208153   | false                 | 8290          | {zone-zoneset-campaign-pbl-BRAND2-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
-
+#      | campaign-pbl-BRAND1-ST  | 574531 | 251644   | false                 | 26778          | {zone-zoneset-campaign-pbl-BRAND1-ST}  | []         | 93       | 15376  (*update parent)        | 3843         | 69625           | []          | []          |
+      | campaign-pbl-BRAND1-ST  | 574531 | 251644   | false                 | 26749         | {zone-zoneset-campaign-pbl-BRAND1-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
+      | campaign-pbl-BRAND2-PGX | 75396  | 222908   | false                 | 11958          | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
+#add is secure for zone
 
   @HB
   @yaniv
@@ -1239,7 +1236,7 @@ Feature: Entities for tests
   @DT
   @Keren
   @yaniv
-    @refresh
+  @refresh
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
