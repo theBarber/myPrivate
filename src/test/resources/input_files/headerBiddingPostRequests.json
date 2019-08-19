@@ -1044,7 +1044,57 @@
       "timeout": 0,
       "hbadaptor": "prebid",
       "publisherId":  "3836"
+    }]},
+  "For a publisher 3843 for advertiser 28004 - HB request":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "publisherblocklist.com",
+      "publisherId": "3843",
+      "sizes":[1,2],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {
+        "publisherId" : "3843"
+      }
+    }]},
+  "For a publisher 3843 for advertiser 3112 - HB request":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "publisherblocklist.com",
+      "publisherId": "3843",
+      "sizes":[1,1],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {
+        "publisherId" : "3843"
+      }
+    }]},
+  "For a publisher 3843 block advertiser 3112 by categories - HB request":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "kids.com",
+      "publisherId": "3843",
+      "sizes":[1,1],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {
+        "publisherId" : "3843"
+      }
+    }]},
+  "For a publisher 3843 block advertiser 28004 by categories - HB request":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "kids.com",
+      "publisherId": "3843",
+      "sizes":[1,2],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {
+        "publisherId" : "3843"
+      }
     }]}
-
-
 }
