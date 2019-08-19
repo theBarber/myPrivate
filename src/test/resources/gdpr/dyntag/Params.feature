@@ -1,10 +1,10 @@
 @GDPR
 @UtConsent
-@ZoneReqBothGdprParams
+@DynTagBothGdprParams
 Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - zone request from eu
+  Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - dyntag request from eu
     Given I add {UK} ip header
     And I send 1 times an ad request with parameter {gdpr=1} for gdpr entities to UAS and with gdprstr which includes ut vendor id and includes ut purpose ids
     Then I expect delivery

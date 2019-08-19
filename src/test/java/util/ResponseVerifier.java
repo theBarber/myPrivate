@@ -84,16 +84,18 @@ public class ResponseVerifier {
     }
 
     public void verifyResponse(ResponseType responseType) {
-        if (responseType.equals(ResponseType.DELIVERY)) {
-            verifyContains("script");
-            verifyImpressions();
-            verifyClicks();
-        } else if (responseType.equals(ResponseType.PASSBACK)) {
-            verifyPassback();
-        } else if (responseType.equals(ResponseType.GDPR_PASSBACK)) {
-            verifyGdprPassback();
-        } else {
-            throw new IllegalArgumentException(UNSUPPORTED_RESPONSE_PREFIX + responseType);
+        switch (responseType) {
+            case DELIVERY:
+                verifyDelivery();
+                break;
+            case PASSBACK:
+                verifyPassback();
+                break;
+            case GDPR_PASSBACK:
+                verifyGdprPassback();
+                break;
+            default:
+                throw new IllegalArgumentException(UNSUPPORTED_RESPONSE_PREFIX + responseType);
         }
     }
 }

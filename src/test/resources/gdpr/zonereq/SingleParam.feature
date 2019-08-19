@@ -29,7 +29,8 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdpr
   @GdprFalseParamNotEu
   Scenario: gdpr=0 - zone request not from Eu
-    Given I send 1 times an ad request with parameter {gdpr=0} for gdpr entities to UAS
+    Given I reset the http headers sent to uas
+    And I send 1 times an ad request with parameter {gdpr=0} for gdpr entities to UAS
     Then I expect delivery
 
   @gdprstr
