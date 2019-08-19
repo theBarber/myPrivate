@@ -148,7 +148,7 @@ Feature: Dynamic HB bid price
 #    Given i update floor_price for publisher = 3836 for adunit = 10 to be 4
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved fixed bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=ANbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved fixed bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=ANbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-fixed-margin-BB-ES}
@@ -162,7 +162,7 @@ Feature: Dynamic HB bid price
 #    Given i update floor_price for publisher = 3836 for adunit = 10 to be 4
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved fixed bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=ANbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved fixed bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=ANbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-fixed-no-margin-BB-ES}
@@ -176,7 +176,7 @@ Feature: Dynamic HB bid price
     Given i update floor_price for publisher = 3836 for adunit = 10 to be 1
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved dynamic bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=ANbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved dynamic bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=ANbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-dynamic-margin-MR-ES}
@@ -190,7 +190,7 @@ Feature: Dynamic HB bid price
     Given i update floor_price for publisher = 3836 for adunit = 10 to be 2
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved dynamic bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=ANbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved dynamic bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=ANbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES}
@@ -205,7 +205,7 @@ Feature: Dynamic HB bid price
 #    Given i update floor_price for publisher = 3836 for adunit = 10 to be 4
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved fixed bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=OXbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved fixed bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-fixed-margin-BB-ES}
@@ -219,7 +219,7 @@ Feature: Dynamic HB bid price
 #    Given i update floor_price for publisher = 3836 for adunit = 10 to be 4
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved fixed bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=OXbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved fixed bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES}
@@ -233,7 +233,7 @@ Feature: Dynamic HB bid price
     Given i update floor_price for publisher = 3836 for adunit = 10 to be 1
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=OXbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES}
@@ -247,7 +247,7 @@ Feature: Dynamic HB bid price
     Given i update floor_price for publisher = 3836 for adunit = 10 to be 1
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=OXbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}
@@ -261,7 +261,7 @@ Feature: Dynamic HB bid price
     Given i update floor_price for publisher = 3836 for adunit = 29 to be 0
  #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with margin HP} for publisher 3836 with domain {DynamicPricingWithMargin2.com} with extra params {&requestid=OXbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with margin HP} for publisher 3836 with domain {DynamicPricingWithMargin2.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The responses are passback
 
@@ -272,7 +272,7 @@ Feature: Dynamic HB bid price
     Given i update floor_price for publisher = 3836 for adunit = 10 to be 1
  #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with mobile margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=OXbidDynMarg_1_D&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with mobile margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile}
