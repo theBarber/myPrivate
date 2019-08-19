@@ -11,13 +11,14 @@ Feature: Entities for tests
 
   Scenario: entities end-date update
     And i update po_line_item end date by id {67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
-    And i update io_line_item end date by id {210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
+    And i update io_line_item end date by id {245653,210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
   Scenario: remove all active zones
 #    zones that are linked to publisher 2434 are disabled specifically!!
     Given i remove all zones from publishers: {3836}
+    Given i remove all zones from publishers: {3843}
     Given i remove all zones from publishers: {3673}
     Given i remove all zones from publishers: {3697}
     Given i remove all zones from publishers: {3708}
@@ -992,9 +993,10 @@ Feature: Entities for tests
       | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | []                                                                            |
 
     And i update banner data by name
-      | Banner Name                                        | limitation                              |
-      | campaign-dv-campaignLevelLimit-ST-banner-1         | [[[64,"=~","2_84251001","2_84252026"]]] |
-      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1 | [[[64,"=~","2_84251001","2_84252026"]]] |
+      | Banner Name                                         | limitation                                                     |
+      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                        |
+      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                        |
+      | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80512003","2_80512001"]]] |
 
     And i update campaign data by name
       | Campaign Name                             | limitation                              |
@@ -1110,6 +1112,23 @@ Feature: Entities for tests
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
+  @doron
+  Scenario: create entites for new publisher block list
+    Given i remove all zones from publishers: {3843}
+    Given i disable campaigns by name on db
+      | Campaign Name           |
+      | campaign-pbl-BRAND1-ST  |
+      | campaign-pbl-BRAND2-PGX |
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-pbl-BRAND1-ST  | 574531 | 251644   | false                 | 26778         | {zone-zoneset-campaign-pbl-BRAND1-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
+      | campaign-pbl-BRAND2-PGX | 75396  | 222908   | false                 | 11958         | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
+    And i update zone data by name
+      | Zone Name                            | is_secure |
+      | zone-zoneset-campaign-pbl-BRAND1-ST  | 1         |
+      | zone-zoneset-campaign-pbl-BRAND2-PGX | 1         |
+
+  @HB
   @yaniv
   Scenario: create entities for dynamic pricing with margin
     Given i disable campaigns by name on db
@@ -1180,6 +1199,7 @@ Feature: Entities for tests
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 1         |
 
+
   @DynamicPricing
   @InAppBlackWhiteList
   @OpenX
@@ -1202,6 +1222,7 @@ Feature: Entities for tests
   @limitationSanity
   @Zonerefresh
   @yaniv
+  @refresh
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
@@ -1223,6 +1244,7 @@ Feature: Entities for tests
   @DT
   @Keren
   @yaniv
+  @refresh
   Scenario: refresh banner cache
     And I refresh banner cache
     And I restart {ramp-lift-services}
@@ -1232,6 +1254,7 @@ Feature: Entities for tests
   @HB
   @refreshZoneCache
   @yaniv
+  @refresh
   Scenario: refresh zone cache
     And I refresh the zone Cache
 
@@ -1241,6 +1264,7 @@ Feature: Entities for tests
 #    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
+  @refresh
   Scenario: save entities to file
     And save all entities to json file
 
