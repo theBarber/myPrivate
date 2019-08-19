@@ -187,7 +187,7 @@ Feature: Dynamic HB bid price
 #  Set fixed HB
 #    Given i update bid_price_type for publisher = 3836 for adunit = 10 to be 0
 #  Set floor price
-    Given i update floor_price for publisher = 3836 for adunit = 10 to be 2
+#   Given i update floor_price for publisher = 3836 for adunit = 10 to be 2
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved dynamic bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin.com} with extra params {&requestid=ANbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
@@ -195,7 +195,7 @@ Feature: Dynamic HB bid price
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {2}
+    And all HB responses contains cpm with value {1}
 
 
   Scenario: Publisher with non reserved fixed bid price for BB, Campaign with margin
@@ -272,7 +272,7 @@ Feature: Dynamic HB bid price
     Given i update floor_price for publisher = 3836 for adunit = 10 to be 1
  #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with mobile margin} for publisher 3836 with domain {DynamicPricingWithMargin1.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with mobile margin} for publisher 3836 with domain {DynamicPricingWithMargin3.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile}
