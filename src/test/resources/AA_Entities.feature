@@ -1144,7 +1144,7 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES}        | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}     | []         | 10       | 15349          | 3836         | 69501           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES}        | []         | 29       | 15356          | 3836         | 69503           | []          | []          |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15355          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15359          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
       | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority |
@@ -1158,10 +1158,11 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
 
     And i update campaign data by name
-      | Campaign Name                                        | priority |
-      | campaign-dpm-direct-fixed-no-margin-BB-ES            | -1       |
-      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES | -2       |
-      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES     | -2       |
+      | Campaign Name                                          | priority |
+      | campaign-dpm-direct-fixed-no-margin-BB-ES              | -1       |
+      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES   | -2       |
+      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES       | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES | -2       |
 
     And i update zone data by name
       | Zone Name                                                      | is_secure |
