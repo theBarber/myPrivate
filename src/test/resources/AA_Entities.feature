@@ -1176,6 +1176,12 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 100                             | 0                              | -2       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
 
+    And i update campaign data by name
+      | Campaign Name                                        | priority |
+      | campaign-dpm-direct-fixed-no-margin-BB-ES            | -1       |
+      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES | -2       |
+      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES     | -2       |
+
     And i update zone data by name
       | Zone Name                                                      | is_secure |
       | zone-zoneset-dpm-direct-fixed-no-margin-BB-ES                  | 1         |
