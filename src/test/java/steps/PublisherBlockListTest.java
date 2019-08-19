@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @CucumberOptions(features = "classpath:PublisherBlockList.feature", plugin = { "pretty"})
 @RunWith(Cucumber.class)
-public class TestBench {
+public class PublisherBlockListTest {
 
 
 }
