@@ -80,11 +80,11 @@ Feature: Publisher blacklist tests
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND1-ST}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND1-ST-banner-1}
-    And all HB responses contains cpm with value {0.4}
+    And all HB responses contains cpm with value {1}
 
   Scenario: For a publisher 3843 for advertiser 3112 - HB request
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3843 with size1 = 1 size2 = 2, with domain {publisherblocklist.com} and extra params {&unlimited=1&optimize=0}
+    Given i send 1 headerBidding secure post request for publisher 3843 with size1 = 1 size2 = 1, with domain {publisherblocklist.com} and extra params {&unlimited=1&optimize=0}
     And The response code is 204
 
   Scenario: For a publisher 3843 block advertiser 3112 by categories - HB request
