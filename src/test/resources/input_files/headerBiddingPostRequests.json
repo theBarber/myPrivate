@@ -966,7 +966,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin1.com",
+      "domain": "DynamicPricingWithMargin4.com",
       "publisherId":  "3836",
       "sizes": [
         [970,250]
@@ -980,7 +980,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin.com",
+      "domain": "DynamicPricingWithMargin5.com",
       "publisherId":  "3836",
       "sizes": [
         [970,250]
@@ -994,7 +994,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin1.com",
+      "domain": "DynamicPricingWithMargin6.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
@@ -1008,7 +1008,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin.com",
+      "domain": "DynamicPricingWithMargin7.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
@@ -1036,7 +1036,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin1.com",
+      "domain": "DynamicPricingWithMargin3.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
