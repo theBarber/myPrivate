@@ -30,7 +30,7 @@ public class ResponseVerifier {
 
     private static SystemUnderTest sut = SystemUnderTest.getInstance();
 
-    private static final String UNSUPPORTED_RESPONSE_PREFIX = "Unsupported response type: expected " + Arrays.toString(ResponseType.values()) + " delivery or passback, got: ";
+    private static final String UNSUPPORTED_RESPONSE_PREFIX = "Unsupported response type: expected " + Arrays.toString(ResponseType.values()) + ", got: ";
 
     private ResponseVerifier() {
     }
