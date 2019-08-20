@@ -161,8 +161,15 @@
 		<com.orbitz.consul.version>0.13.3</com.orbitz.consul.version>
 		<aspectj.version>1.9.1</aspectj.version>
 		<compiler.version>1.7</compiler.version>
+		<common.version>1.0.244.0</common.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.conversantmedia.gdpr</groupId>
+			<artifactId>consent-string-sdk-java</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-junit4</artifactId>
@@ -310,7 +317,7 @@
 		<dependency>
 			<groupId>ramp.lift.common</groupId>
 			<artifactId>common-util</artifactId>
-			<version>1.0.161.0</version>
+			<version>${common.version}</version>
 			<exclusions>
 				<exclusion>
 				<groupId>org.apache.httpcomponents</groupId>
