@@ -5,6 +5,7 @@ import cucumber.api.junit.Cucumber;
 import infra.utils.SqlWorkflowUtils;
 import io.cucumber.datatable.DataTable;
 import org.junit.runner.RunWith;
+import util.api.UasApi;
 
 import java.util.List;
 import java.util.Random;
@@ -60,12 +61,12 @@ public class DynamicTagTest extends BaseTest{
 
     public void sendDynamicTagRequestsToUAS(Integer times, String publisherId, String domain)
     {
-        sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,null,publisherId, domain,null,true,false);
+        UasApi.sendDynamicTagRequestsToUAS(times, publisherId, domain);
     }
 
     public void sendDynamicTagRequestsToUASWithParams(Integer times, String publisherId, String extraParams)
     {
-        sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times,null,publisherId, null,extraParams,true,false);
+        UasApi.sendDynamicTagRequestsToUASWithParams(times, publisherId, extraParams);
     }
 
     public void sendDynamicTagWithTagSynchronizedRequestsToUAS(Integer times,String tagID, String publisherId, String domain)
