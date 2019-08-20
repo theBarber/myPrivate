@@ -207,6 +207,9 @@ public class UASIntegrationTest extends BaseTest {
     //
     // });
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{(.*)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
+    Then("^The latest (clk|imp|req|hbl|wel|evt|prf) log file from uas is empty$", (String logType) -> {
+        TestsRoutines.verifyEmptyLog(logType);
+    });
     When("^I read the latest (clk|imp|req|hbl|wel|evt|prf) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
 //        sut.logFor(logType).readLogs().actual().forEach(m->{
@@ -217,7 +220,7 @@ public class UASIntegrationTest extends BaseTest {
 //            sut.write(stringBuilder.toString());
 //        } );
         //---------------------checks-------------------------
-      assertThat(logType + "log fxile", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
+      assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(not(StreamMatchers.empty())));
     });
       When("For bidID (\\w+) The field (\\w+) in the (\\d+) column of the (hbl) log is: (.*)$", (String bidId,String fieldName,Integer column, String logType, String value) -> {
           sut.logFor(logType).filter(raw -> bidId.equals(raw.get(BID_ID_COLUMN)));

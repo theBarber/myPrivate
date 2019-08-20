@@ -65,13 +65,11 @@ public class ResponseVerifier {
         }
     }
 
-    public static void verifyGdprPassback() {
+    public static void verifyGdprResponse() {
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             assertEquals("response should be an empty string", "", content);
         });
         verifyNoHeaders("Set-Cookie");
-
-        // todo: verify no sensitive data is written to logs
     }
 
     public static void verifyImpressions() {
@@ -108,7 +106,7 @@ public class ResponseVerifier {
                 verifyPassback();
                 break;
             case GDPR_PASSBACK:
-                verifyGdprPassback();
+                verifyGdprResponse();
                 break;
             default:
                 throw new IllegalArgumentException(UNSUPPORTED_RESPONSE_PREFIX + responseType);

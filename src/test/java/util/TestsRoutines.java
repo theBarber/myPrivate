@@ -1,7 +1,11 @@
 package util;
 
+import co.unruly.matchers.StreamMatchers;
 import model.ResponseType;
 import ramp.lift.uas.automation.SystemUnderTest;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class TestsRoutines {
 
@@ -29,5 +33,9 @@ public class TestsRoutines {
 
     public static void verifyResponseBody(ResponseType responseType) {
         ResponseVerifier.getInstance().verifyResponse(responseType);
+    }
+
+    public static void verifyEmptyLog(String logType) {
+        assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(StreamMatchers.empty()));
     }
 }

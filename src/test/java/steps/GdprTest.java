@@ -3,6 +3,7 @@ package steps;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import model.Country;
+import model.ResponseType;
 import org.junit.runner.RunWith;
 import util.TestsRoutines;
 import util.api.UasApi;
@@ -134,8 +135,13 @@ public class GdprTest extends BaseTest {
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter + "&gdprstr="));
         });
 
-        Then("^I expect (delivery|gdpr passback)$", (String expectedResponseType) -> {
-            TestsRoutines.verifyResponseBody(expectedResponseType);
+        Then("I expect delivery", () -> {
+            TestsRoutines.verifyResponseBody(ResponseType.DELIVERY);
+        });
+
+        Then("^I expect (clk|imp|req|hbl|wel|evt|prf) gdpr passback$", (String logType) -> {
+            TestsRoutines.verifyResponseBody(ResponseType.GDPR_PASSBACK);
+            TestsRoutines.verifyEmptyLog(logType);
         });
     }
 
