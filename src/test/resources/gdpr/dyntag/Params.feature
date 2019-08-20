@@ -49,7 +49,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
   Scenario: gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - dyntag request not from eu
     Given I reset the http headers sent to uas
     And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with parameter {gdpr=1} and with gdprstr which excludes ut vendor id and excludes ut purpose ids
-    Then I expect gdpr passbackd
+    Then I expect gdpr passback
 
   @gdprgdprstr
   Scenario: gdpr=1 and gdprstr=empty_string - dyntag request from eu
