@@ -55,6 +55,13 @@
 			</properties>
 		</profile>
 
+        <profile>
+            <id>remote-entities</id>
+            <properties>
+                <remote>true</remote>
+            </properties>
+        </profile>
+
 		<profile>
 			<id>production</id>
 			<properties>

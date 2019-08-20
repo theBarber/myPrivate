@@ -17,6 +17,7 @@ import java.util.function.Function;
 
 public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
+	String remote="";
 	List<IO> io;
 	List<ZoneSet> zonesets;
     private ObjectMapper m = new ObjectMapper();
@@ -48,10 +49,12 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	}*/
 
     private void initHardCodedEntities() {
+    	if(remote.equals("true")){
+			initLineItemFromS3();
+			initZoneSetsFromS3();
+		}
         initLineItem();
-        //initLineItemFromS3();
         initZoneSets();
-        //initZoneSetsFromS3();
     }
 
 	private void initLineItemFromS3() {
