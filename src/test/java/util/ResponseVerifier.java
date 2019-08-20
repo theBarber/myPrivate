@@ -102,6 +102,12 @@ public class ResponseVerifier {
             case DELIVERY:
                 verifyDelivery();
                 break;
+            case IMPRESSIONS:
+                verifyImpressions();
+                break;
+            case CLICKS:
+                verifyClicks();
+                break;
             case PASSBACK:
                 verifyPassback();
                 break;
