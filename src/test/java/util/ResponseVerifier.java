@@ -3,6 +3,8 @@ package util;
 import co.unruly.matchers.OptionalMatchers;
 import co.unruly.matchers.StreamMatchers;
 import model.ResponseType;
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpResponse;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -50,10 +52,24 @@ public class ResponseVerifier {
                 Matchers.is(0l));
     }
 
+    public static void verifyNoHeaders(String... headersNames) {
+        List<HttpResponse> responses = sut.getUASRquestModule().responses().map(CompletableFuture::join).collect(Collectors.toList());
+        for (HttpResponse response : responses) {
+            for (Header responseHeader : response.getAllHeaders()) {
+                for (HeaderElement responseHeaderElement : responseHeader.getElements()) {
+                    for (String header : headersNames) {
+                        assertNotEquals("response must not contain " + header + " header", header, responseHeaderElement.getName());
+                    }
+                }
+            }
+        }
+    }
+
     public static void verifyGdprPassback() {
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             assertEquals("response should be an empty string", "", content);
         });
+        verifyNoHeaders("Set-Cookie");
 
         // todo: verify no sensitive data is written to logs
     }
