@@ -12,6 +12,7 @@ import ramp.lift.uas.automation.SystemUnderTest;
 import ramp.lift.uas.automation.UASRequestModule;
 import steps.UASIntegrationTest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,7 +30,7 @@ public class ResponseVerifier {
 
     private static SystemUnderTest sut = SystemUnderTest.getInstance();
 
-    private static final String UNSUPPORTED_RESPONSE_PREFIX = "Unsupported expected response type: expected delivery or passback, got: ";
+    private static final String UNSUPPORTED_RESPONSE_PREFIX = "Unsupported response type: expected " + Arrays.toString(ResponseType.values()) + " delivery or passback, got: ";
 
     private ResponseVerifier() {
     }
@@ -101,6 +102,12 @@ public class ResponseVerifier {
         switch (responseType) {
             case DELIVERY:
                 verifyDelivery();
+                break;
+            case IMPRESSIONS:
+                verifyImpressions();
+                break;
+            case CLICKS:
+                verifyClicks();
                 break;
             case PASSBACK:
                 verifyPassback();
