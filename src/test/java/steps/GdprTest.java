@@ -4,6 +4,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import model.Country;
 import model.ResponseType;
+import org.json.JSONObject;
 import org.junit.runner.RunWith;
 import util.TestsRoutines;
 import util.api.UasApi;
@@ -18,11 +19,18 @@ import util.gdpr.ConsentStringBuilder;
                 "classpath:gdpr/dyntag/NoParam.feature",
                 "classpath:gdpr/dyntag/SingleParam.feature",
                 "classpath:gdpr/dyntag/Params.feature",
+                "classpath:gdpr/hb/NoParam.feature"
         },
         plugin = {"pretty",})
 public class GdprTest extends BaseTest {
     private static final Integer ZONE_ID = 2;
     private static final Integer PUBLISHER_ID = 3711;
+    private static final Integer HB_PUBLISHER_ID = 3708;
+
+    private static final String HB_REQ_DOMAIN = "HB-FC-PL.com";
+    private static final String HB_BID_REQ_ID = "GDPR-HB-Testing";
+    private static final String HB_GDPR_REQ_BODY_STR = getGdprHbReqBody();
+//    private static final String HB_GDPR_EXPECTED_BODY_RESPONSE = getGdprHbExpectedResponse();
     private static final String PUBLISHER_PARAMS = "&domain=test.com&requestid=systemTestC&unlimited=1&optimize=0&tagid=198";
 
     private final StringBuilder sb = new StringBuilder();
@@ -135,14 +143,57 @@ public class GdprTest extends BaseTest {
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter + "&gdprstr="));
         });
 
+        Given("I send (\\d+) times Header Bidding request to UAS for gdpr entities", (Integer times) -> {
+            UasApi.sendHbReq(times, HB_GDPR_REQ_BODY_STR, HB_PUBLISHER_ID, HB_REQ_DOMAIN, null);
+        });
+
         Then("I expect delivery", () -> {
             TestsRoutines.verifyResponseBody(ResponseType.DELIVERY);
+        });
+
+        Then("I expect gdpr hb ad response", () -> {
+
         });
 
         Then("^I expect (clk|imp|req|hbl|wel|evt|prf) gdpr passback$", (String logType) -> {
             TestsRoutines.verifyResponseBody(ResponseType.GDPR_PASSBACK);
             TestsRoutines.verifyEmptyLog(logType);
         });
+    }
+
+//    private static String getGdprHbExpectedResponse() {
+//
+//        final String hbBody
+//
+//        {
+//            "ad": "<html><body><script type=\"text/javascript\">var ut_ju = 'http://ads-s-us-east-1.undertone.com/aj';ut = new Object();ut.bidid='GDPR-HB-Testing';ut.bannerid=1400821;ut.zoneid=190740;ut.hbprice=0.01;ut.fallbackbannerid='';ut.fallbackzoneid='';ut.width=1;ut.height=1;ut.adaptor='prebid';ut.pid=3708;ut.extpid='';ut.domain='HB-FC-PL.com';ut.id='9t3tbqopc084lfzgbjehsz3jp';ut.stid=149;</script><script type=\"text/javascript\" src=\"http://cdn.undertone.com/js/ajs.js\"></script></body></html>",
+//                "publisherId": 3708,
+//                "bidRequestId": "GDPR-HB-Testing",
+//                "placementId": "",
+//                "adId": 1400821,
+//                "campaignId": 348106,
+//                "height": 1,
+//                "width": 1,
+//                "ttl": 720,
+//                "currency": "USD",
+//                "cpm": 0.01,
+//                "adaptor": "prebid",
+//                "netRevenue": "true"
+//        }
+//    }
+
+    private static String getGdprHbReqBody() {
+        final String hbInnerBody = new JSONObject()
+                .put("publisherId", HB_PUBLISHER_ID)
+                .put("sizes", "[1,1]")
+                .put("hbadaptor", "prebid")
+                .put("bidRequestId", HB_BID_REQ_ID)
+                .toString();
+        final String hbBody = new JSONObject()
+                .put("x-ut-hb-params", "[" + hbInnerBody + "]")
+                .toString();
+
+        return hbBody;
     }
 
     private String getExtendedPubParams(String params) {
