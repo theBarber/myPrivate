@@ -157,7 +157,7 @@ public class GdprTest extends BaseTest {
 
         Then("^I expect (clk|imp|req|hbl|wel|evt|prf) gdpr passback$", (String logType) -> {
             TestsRoutines.verifyResponseBody(ResponseType.GDPR_PASSBACK);
-            TestsRoutines.verifyEmptyLog(logType);
+            TestsRoutines.verifyGdprLog(logType);
         });
     }
 

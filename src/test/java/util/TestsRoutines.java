@@ -35,7 +35,7 @@ public class TestsRoutines {
         ResponseVerifier.getInstance().verifyResponse(responseType);
     }
 
-    public static void verifyEmptyLog(String logType) {
-        assertThat(logType + "log file", sut.logFor(logType).readLogs().actual(), is(StreamMatchers.empty()));
+    public static void verifyGdprLog(String logType) {
+        // todo: implement
     }
 }
