@@ -157,30 +157,9 @@ public class GdprTest extends BaseTest {
 
         Then("^I expect (clk|imp|req|hbl|wel|evt|prf) gdpr passback$", (String logType) -> {
             TestsRoutines.verifyResponseBody(ResponseType.GDPR_PASSBACK);
-            TestsRoutines.verifyGdprLog(logType);
+            TestsRoutines.verifyGdprLogs(logType);
         });
     }
-
-//    private static String getGdprHbExpectedResponse() {
-//
-//        final String hbBody
-//
-//        {
-//            "ad": "<html><body><script type=\"text/javascript\">var ut_ju = 'http://ads-s-us-east-1.undertone.com/aj';ut = new Object();ut.bidid='GDPR-HB-Testing';ut.bannerid=1400821;ut.zoneid=190740;ut.hbprice=0.01;ut.fallbackbannerid='';ut.fallbackzoneid='';ut.width=1;ut.height=1;ut.adaptor='prebid';ut.pid=3708;ut.extpid='';ut.domain='HB-FC-PL.com';ut.id='9t3tbqopc084lfzgbjehsz3jp';ut.stid=149;</script><script type=\"text/javascript\" src=\"http://cdn.undertone.com/js/ajs.js\"></script></body></html>",
-//                "publisherId": 3708,
-//                "bidRequestId": "GDPR-HB-Testing",
-//                "placementId": "",
-//                "adId": 1400821,
-//                "campaignId": 348106,
-//                "height": 1,
-//                "width": 1,
-//                "ttl": 720,
-//                "currency": "USD",
-//                "cpm": 0.01,
-//                "adaptor": "prebid",
-//                "netRevenue": "true"
-//        }
-//    }
 
     private static String getGdprHbReqBody() {
         final String hbInnerBody = new JSONObject()

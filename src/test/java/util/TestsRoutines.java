@@ -34,8 +34,8 @@ public class TestsRoutines {
     public static void verifyResponseBody(ResponseType responseType) {
         ResponseVerifier.getInstance().verifyResponse(responseType);
     }
-
-    public static void verifyGdprLog(String logType) {
+  
+    public static void verifyGdprLogs(String logType) {
         // todo: implement
     }
 }
