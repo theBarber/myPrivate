@@ -136,12 +136,11 @@ public class GdprTest extends BaseTest {
         });
 
         Then("I expect delivery", () -> {
-            TestsRoutines.verifyResponseBody(ResponseType.DELIVERY);
+            TestsRoutines.verifyResponse(ResponseType.DELIVERY);
         });
 
         Then("^I expect (clk|imp|req|hbl|wel|evt|prf) gdpr passback$", (String logType) -> {
-            TestsRoutines.verifyResponseBody(ResponseType.GDPR_PASSBACK);
-            TestsRoutines.verifyGdprLogs(logType);
+            TestsRoutines.verifyResponse(ResponseType.GDPR_PASSBACK);
         });
     }
 

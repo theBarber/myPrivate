@@ -6,6 +6,7 @@ import model.ResponseType;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import ramp.lift.uas.automation.SystemUnderTest;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,7 +43,7 @@ public class ResponseVerifier {
         return instance;
     }
 
-    public static void verifyPassback() {
+    public void verifyPassback() {
         final Map<Boolean, Long> countUrls =
                 sut.getUASRquestModule().responses()
                         .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
@@ -52,8 +54,8 @@ public class ResponseVerifier {
                 Matchers.is(0l));
     }
 
-    public static void verifyNoHeaders(String... headersNames) {
-        List<HttpResponse> responses = sut.getUASRquestModule().responses().map(CompletableFuture::join).collect(Collectors.toList());
+    public void verifyNoHeaders(String... headersNames) {
+        List<HttpResponse> responses = sut.getUASRquestModule().getSynchronizedResponses();
         for (HttpResponse response : responses) {
             for (Header responseHeader : response.getAllHeaders()) {
                 for (HeaderElement responseHeaderElement : responseHeader.getElements()) {
@@ -65,14 +67,12 @@ public class ResponseVerifier {
         }
     }
 
-    public static void verifyGdprResponse() {
-        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-            assertEquals("response should be an empty string", "", content);
-        });
+    public void verifyGdprPassback() {
+        verifyUasResponseCode(204);
         verifyNoHeaders("Set-Cookie");
     }
 
-    public static void verifyImpressions() {
+    public void verifyImpressions() {
         Stream<Optional<String>> impressionURLResponses = Optional.ofNullable(sut.getUASRquestModule().responses()
                 .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)).orElse(sut.getUASRquestModule().getSynchronizedResponses().stream().map(UASRequestModule::getImpressionUrlFrom));
         assertThat(
@@ -92,9 +92,26 @@ public class ResponseVerifier {
     }
 
     public void verifyDelivery() {
+        verifyUasResponseCode(200);
         verifyContains("script");
         verifyImpressions();
         verifyClicks();
+    }
+
+    public synchronized void verifyUasResponseCode(Integer expectedResponseCode) {
+        sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+                .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
+                .forEach(CompletableFuture::join);
+    }
+
+    public BiConsumer<Integer, Throwable> assertThatResponseCodeIs(int expected) {
+        return (statuscode, failure) -> {
+            if (failure != null) {
+                Assert.fail("unable to get response");
+                return;
+            }
+            Assert.assertThat(statuscode, Matchers.is(expected));
+        };
     }
 
     public synchronized void verifyResponse(ResponseType responseType) {
@@ -112,7 +129,7 @@ public class ResponseVerifier {
                 verifyPassback();
                 break;
             case GDPR_PASSBACK:
-                verifyGdprResponse();
+                verifyGdprPassback();
                 break;
             default:
                 throw new IllegalArgumentException(UNSUPPORTED_RESPONSE_PREFIX + responseType);

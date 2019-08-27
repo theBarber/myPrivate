@@ -160,11 +160,11 @@ public class UASIntegrationTest extends BaseTest {
 
     });
     Then("The response(s) has impression-url(s)", () -> {
-        TestsRoutines.verifyResponseBody(ResponseType.IMPRESSIONS);
+        TestsRoutines.verifyResponse(ResponseType.IMPRESSIONS);
     });
 
     Then("The response(s) has click-url(s)", () -> {
-        TestsRoutines.verifyResponseBody(ResponseType.CLICKS);
+        TestsRoutines.verifyResponse(ResponseType.CLICKS);
     });
 
       Then("The response(s) has complete-url(s)", () -> {
@@ -183,7 +183,7 @@ public class UASIntegrationTest extends BaseTest {
       });
 
     Then("The response(s) are passback", () -> {
-        TestsRoutines.verifyResponseBody(ResponseType.PASSBACK);
+        TestsRoutines.verifyResponse(ResponseType.PASSBACK);
     });
 
 
@@ -206,9 +206,6 @@ public class UASIntegrationTest extends BaseTest {
     //
     // });
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{(.*)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
-    Then("^The latest (clk|imp|req|hbl|wel|evt|prf) log file from uas is empty$", (String logType) -> {
-        TestsRoutines.verifyGdprLogs(logType);
-    });
     When("^I read the latest (clk|imp|req|hbl|wel|evt|prf) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
 //        sut.logFor(logType).readLogs().actual().forEach(m->{
