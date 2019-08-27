@@ -1122,6 +1122,7 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-pbl-BRAND1-ST  | 574531 | 251644   | false                 | 26778         | {zone-zoneset-campaign-pbl-BRAND1-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
+#      | campaign-pbl-BRAND1-ST  | 574531 | 251644   | false                 | 26803         | {zone-zoneset-campaign-pbl-BRAND1-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
       | campaign-pbl-BRAND2-PGX | 75396  | 222908   | false                 | 11958         | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
     And i update zone data by name
       | Zone Name                            | is_secure |
