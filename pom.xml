@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ramp-lift-automation</groupId>
+	<artifactId>ramp-lift-automation</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>bintray</name>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
+		<repository>
+			<id>nexus-releases</id>
+			<name>ramp-ut-io-release</name>
+			<url>http://nexus-ext.ramp-ut.io:8081/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<profiles>
+
+		<profile>
+			<id>staging</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>staging</env>
+			</properties>
+		<build>
+<plugins>
+<plugin>
+<groupId>io.sealights.on-premise.agents.plugin</groupId>
+<artifactId>sealights-maven-plugin</artifactId>
+<configuration>
+<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
+<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
+<createBuildSessionId>false</createBuildSessionId>
+<filesStorage>target/sealights-tmp</filesStorage>
+<testStage>{$JOB_NAME}</testStage>
+<logLevel>OFF</logLevel>
+<includeResources>true</includeResources>
+</configuration>
+<executions>
+<execution>
+<id>a2</id>
+<goals>
+<goal>test-listener</goal>
+</goals>
+</execution>
+<execution>
+<id>a3</id>
+<goals>
+<goal>prepare-test-listener</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+</plugins>
+</build>
+</profile>
+
+		<profile>
+			<id>integration</id>
+			<properties>
+				<env>integration</env>
+			</properties>
+		<build>
+<plugins>
+<plugin>
+<groupId>io.sealights.on-premise.agents.plugin</groupId>
+<artifactId>sealights-maven-plugin</artifactId>
+<configuration>
+<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
+<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
+<createBuildSessionId>false</createBuildSessionId>
+<filesStorage>target/sealights-tmp</filesStorage>
+<testStage>{$JOB_NAME}</testStage>
+<logLevel>OFF</logLevel>
+<includeResources>true</includeResources>
+</configuration>
+<executions>
+<execution>
+<id>a2</id>
+<goals>
+<goal>test-listener</goal>
+</goals>
+</execution>
+<execution>
+<id>a3</id>
+<goals>
+<goal>prepare-test-listener</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+</plugins>
+</build>
+</profile>
+
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+			</properties>
+		<build>
+<plugins>
+<plugin>
+<groupId>io.sealights.on-premise.agents.plugin</groupId>
+<artifactId>sealights-maven-plugin</artifactId>
+<configuration>
+<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
+<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
+<createBuildSessionId>false</createBuildSessionId>
+<filesStorage>target/sealights-tmp</filesStorage>
+<testStage>{$JOB_NAME}</testStage>
+<logLevel>OFF</logLevel>
+<includeResources>true</includeResources>
+</configuration>
+<executions>
+<execution>
+<id>a2</id>
+<goals>
+<goal>test-listener</goal>
+</goals>
+</execution>
+<execution>
+<id>a3</id>
+<goals>
+<goal>prepare-test-listener</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+</plugins>
+</build>
+</profile>
+
+		<profile>
+			<id>production</id>
+			<properties>
+				<env>production</env>
+			</properties>
+		<build>
+<plugins>
+<plugin>
+<groupId>io.sealights.on-premise.agents.plugin</groupId>
+<artifactId>sealights-maven-plugin</artifactId>
+<configuration>
+<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
+<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
+<createBuildSessionId>false</createBuildSessionId>
+<filesStorage>target/sealights-tmp</filesStorage>
+<testStage>{$JOB_NAME}</testStage>
+<logLevel>OFF</logLevel>
+<includeResources>true</includeResources>
+</configuration>
+<executions>
+<execution>
+<id>a2</id>
+<goals>
+<goal>test-listener</goal>
+</goals>
+</execution>
+<execution>
+<id>a3</id>
+<goals>
+<goal>prepare-test-listener</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+</plugins>
+</build>
+</profile>
+
+	</profiles>
+
+	<build>
+
+		<!-- Loading all ${} -->
+		<filters>
+			<filter>src/main/resources/env/config.${env}.properties</filter>
+		</filters>
+
+		<!-- Map ${} into resources -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.properties</include>
+					<include>k8s_integration_password</include>
+				</includes>
+			</resource>
+		</resources>
+
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>${project.build.jdk}</source>
+					<target>${project.build.jdk}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>run</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <argLine>
+                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                            </argLine>
+                            <properties>
+                                <property>
+                                    <name>listener</name>
+                                    <value>io.qameta.allure.junit4.AllureJunit4</value>
+                                </property>
+                            </properties>
+                            <systemProperties>
+                                <property>
+                                    <name>allure.results.directory</name>
+                                    <value>target/allure-results</value>
+                                </property>
+                            </systemProperties>
+                            <runOrder>alphabetical</runOrder>
+                            <disableXmlReport>false</disableXmlReport>
+                            <includes>
+                                <include>**/*Test.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>io.qameta.allure</groupId>
+				<artifactId>allure-maven</artifactId>
+				<version>2.9</version>
+			</plugin>
+		<plugin>
+<groupId>io.sealights.on-premise.agents.plugin</groupId>
+<artifactId>sealights-maven-plugin</artifactId>
+<configuration>
+<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
+<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
+<createBuildSessionId>false</createBuildSessionId>
+<filesStorage>target/sealights-tmp</filesStorage>
+<testStage>{$JOB_NAME}</testStage>
+<logLevel>OFF</logLevel>
+<includeResources>true</includeResources>
+</configuration>
+<executions>
+<execution>
+<id>a2</id>
+<goals>
+<goal>test-listener</goal>
+</goals>
+</execution>
+<execution>
+<id>a3</id>
+<goals>
+<goal>prepare-test-listener</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+</plugins>
+	</build>
+	<properties>
+		<project.build.jdk>1.8</project.build.jdk>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<surefire.useFile>false</surefire.useFile>
+		<slf4j-api.version>1.7.13</slf4j-api.version>
+		<slf4j-log4j.version>1.7.13</slf4j-log4j.version>
+		<dogstatsd>2.0.12</dogstatsd>
+		<amqp.client>3.5.6</amqp.client>
+		<com.orbitz.consul.version>0.13.3</com.orbitz.consul.version>
+		<aspectj.version>1.9.1</aspectj.version>
+		<compiler.version>1.7</compiler.version>
+		<common.version>1.0.244.0</common.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.conversantmedia.gdpr</groupId>
+			<artifactId>consent-string-sdk-java</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-junit4</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.25.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.25.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>${amqp.client}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.15</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>1.11.349</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.444</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.couchbase.client</groupId>
+			<artifactId>java-client</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>co.unruly</groupId>
+			<artifactId>java-8-matchers</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>java-hamcrest</artifactId>
+			<version>2.0.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-exec</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.ethz.ganymed</groupId>
+			<artifactId>ganymed-ssh2</artifactId>
+			<version>262</version>
+		</dependency>
+		<dependency>
+			<groupId>com.orbitz.consul</groupId>
+			<artifactId>consul-client</artifactId>
+			<version>${com.orbitz.consul.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java8</artifactId>
+            <version>4.3.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>datatable</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+
+        <dependency>
+			<groupId>org.immutables</groupId>
+			<artifactId>value</artifactId>
+			<version>2.1.19</version>
+		</dependency>
+		<dependency>
+			<groupId>com.offbytwo.jenkins</groupId>
+			<artifactId>jenkins-client</artifactId>
+			<version>0.3.7</version>
+		</dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+        </dependency>
+		<dependency>
+			<groupId>io.kubernetes</groupId>
+			<artifactId>client-java</artifactId>
+			<version>2.0.0-beta1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>ramp.lift.common</groupId>
+			<artifactId>common-util</artifactId>
+			<version>${common.version}</version>
+			<exclusions>
+				<exclusion>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>compile</scope>
+		</dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>gherkin</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>4.3.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
