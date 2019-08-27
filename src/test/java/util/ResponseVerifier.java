@@ -29,7 +29,7 @@ public class ResponseVerifier {
 
     private static SystemUnderTest sut = SystemUnderTest.getInstance();
 
-    private static final String UNSUPPORTED_RESPONSE_PREFIX = "Unsupported expected response type: expected delivery or passback, got: ";
+    private static final String UNSUPPORTED_RESPONSE_PREFIX = "Unsupported expected response type - got: ";
 
     private ResponseVerifier() {
     }
@@ -80,27 +80,33 @@ public class ResponseVerifier {
                 StreamMatchers.allMatch(is(not(OptionalMatchers.empty()))));
     }
 
-    public static void verifyClicks() {
+    public void verifyClicks() {
         assertTrue("all of the responses should have a url", sut.getUASRquestModule().responses()
                 .map(UASIntegrationTest::getClickUrl).map(CompletableFuture::join).allMatch(Optional::isPresent));
     }
 
-    public static void verifyContains(String something) {
+    public synchronized void verifyContains(String something) {
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             Assert.assertThat(content, Matchers.containsString(something));
         });
     }
 
-    public static void verifyDelivery() {
+    public void verifyDelivery() {
         verifyContains("script");
         verifyImpressions();
         verifyClicks();
     }
 
-    public void verifyResponse(ResponseType responseType) {
+    public synchronized void verifyResponse(ResponseType responseType) {
         switch (responseType) {
             case DELIVERY:
                 verifyDelivery();
+                break;
+            case CLICKS:
+                verifyClicks();
+                break;
+            case IMPRESSIONS:
+                verifyImpressions();
                 break;
             case PASSBACK:
                 verifyPassback();
