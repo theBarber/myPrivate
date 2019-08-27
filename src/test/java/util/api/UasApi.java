@@ -8,6 +8,10 @@ public class UasApi {
     private UasApi() {
     }
 
+    public static void sendHbReq(Integer times, String hbReqBody, Integer publisherID, String domain, String extraParams) {
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, hbReqBody, publisherID, domain, extraParams,true,false);
+    }
+
     public static void sendZoneReq(Integer zoneId, Integer times, boolean toReset) {
         sut.getUASRquestModule().zoneRequests(zoneId, times, toReset);
     }

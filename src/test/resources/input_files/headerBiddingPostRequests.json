@@ -882,7 +882,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin.com",
+      "domain": "DynamicPricingWithMargin8.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
@@ -896,7 +896,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin1.com",
+      "domain": "DynamicPricingWithMargin9.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
@@ -910,7 +910,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin1.com",
+      "domain": "DynamicPricingWithMargin10.com",
       "publisherId":  "3836",
       "sizes": [
         [970,250]
@@ -924,7 +924,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin.com",
+      "domain": "DynamicPricingWithMargin11.com",
       "publisherId":  "3836",
       "sizes": [
         [970,250]
@@ -938,7 +938,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin1.com",
+      "domain": "DynamicPricingWithMargin12.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
@@ -952,7 +952,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin.com",
+      "domain": "DynamicPricingWithMargin13.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
@@ -966,7 +966,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin1.com",
+      "domain": "DynamicPricingWithMargin4.com",
       "publisherId":  "3836",
       "sizes": [
         [970,250]
@@ -980,7 +980,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin.com",
+      "domain": "DynamicPricingWithMargin5.com",
       "publisherId":  "3836",
       "sizes": [
         [970,250]
@@ -994,7 +994,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin1.com",
+      "domain": "DynamicPricingWithMargin6.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
@@ -1008,7 +1008,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46f0d859b35",
-      "domain": "DynamicPricingWithMargin.com",
+      "domain": "DynamicPricingWithMargin7.com",
       "publisherId":  "3836",
       "sizes": [
         [300,250]
@@ -1030,6 +1030,71 @@
       "timeout": 0,
       "hbadaptor": "prebid",
       "publisherId":  "3836"
-    }]}
+    }]},
 
+  "Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with mobile margin":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b35",
+      "domain": "DynamicPricingWithMargin3.com",
+      "publisherId":  "3836",
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 0,
+      "hbadaptor": "prebid",
+      "publisherId":  "3836"
+    }]},
+  "For a publisher 3843 for advertiser 28004 - HB request":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "publisherblocklist.com",
+      "publisherId": "3843",
+      "sizes":[1,2],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {
+        "publisherId" : "3843"
+      }
+    }]},
+  "For a publisher 3843 for advertiser 3112 - HB request":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "publisherblocklist.com",
+      "publisherId": "3843",
+      "sizes":[1,1],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {
+        "publisherId" : "3843"
+      }
+    }]},
+  "For a publisher 3843 block advertiser 3112 by categories - HB request":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "kids.com",
+      "publisherId": "3843",
+      "sizes":[1,1],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {
+        "publisherId" : "3843"
+      }
+    }]},
+  "For a publisher 3843 block advertiser 28004 by categories - HB request":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d859b33",
+      "domain": "kids.com",
+      "publisherId": "3843",
+      "sizes":[1,2],
+      "timeout": 700,
+      "hbadaptor": "prebida",
+      "params": {
+        "publisherId" : "3843"
+      }
+    }]}
 }
