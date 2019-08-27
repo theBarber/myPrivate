@@ -138,7 +138,7 @@ Feature: Dynamic HB bid price
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-dynamic-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-direct-dynamic-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {1.5}
+    And all HB responses contains cpm with value {2}
 
 
   Scenario: Publisher with reserved fixed bid price for BB, Campaign with margin
@@ -195,7 +195,7 @@ Feature: Dynamic HB bid price
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {2}
 
 
   Scenario: Publisher with non reserved fixed bid price for BB, Campaign with margin
@@ -238,7 +238,7 @@ Feature: Dynamic HB bid price
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {2}
 
   Scenario: Publisher with non reserved dynamic bid price for MR, Campaign with no margin
 #  Set fixed HB
@@ -252,7 +252,7 @@ Feature: Dynamic HB bid price
     And The response contains script
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {2}
 
   Scenario: Publisher with non reserved dynamic bid price for HP, Campaign with margin
  #  Set fixed HB
