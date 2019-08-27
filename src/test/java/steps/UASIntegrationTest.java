@@ -25,7 +25,6 @@ import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 import util.api.UasApi;
@@ -208,7 +207,7 @@ public class UASIntegrationTest extends BaseTest {
     // });
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{(.*)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
     Then("^The latest (clk|imp|req|hbl|wel|evt|prf) log file from uas is empty$", (String logType) -> {
-        TestsRoutines.verifyEmptyLog(logType);
+        TestsRoutines.verifyGdprLogs(logType);
     });
     When("^I read the latest (clk|imp|req|hbl|wel|evt|prf) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
