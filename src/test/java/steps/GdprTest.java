@@ -20,7 +20,8 @@ import util.gdpr.ConsentStringBuilder;
                 "classpath:gdpr/dyntag/SingleParam.feature",
                 "classpath:gdpr/dyntag/Params.feature",
                 "classpath:gdpr/hb/NoParam.feature",
-                "classpath:gdpr/hb/SingleParam.feature"
+                "classpath:gdpr/hb/SingleParam.feature",
+                "classpath:gdpr/hb/Params.feature"
         },
         plugin = {"pretty",})
 public class GdprTest extends BaseTest {
@@ -36,6 +37,7 @@ public class GdprTest extends BaseTest {
     private static final String HB_SIZES = "[[970,250]]";
     private static final String HB_EXTRA_URL_PARAMS = "&sim_geo=1&country=us";
 
+    private static final String INCLUDES = "includes";
 
     private final StringBuilder sb = new StringBuilder();
 
@@ -177,6 +179,16 @@ public class GdprTest extends BaseTest {
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprStrParams, true, false);
         });
 
+        Given("^I send (\\d+) times Header Bidding request for gdpr entities with gdpr=(0|1) and gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
+            final String gdprstr = utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&gdpr=" + gdpr + "&gdprstr=" + gdprstr;
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprGdprstrParams, true, false);
+        });
+
+        Given("^I send (\\d+) times Header Bidding request for gdpr entities with gdpr=(0|1) and an empty gdprstr$", (Integer times, Integer gdpr) -> {
+            final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&gdpr=" + gdpr + "&gdprstr=";
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprGdprstrParams, true, false);
+        });
 
         Then("I expect delivery", () -> {
             TestsRoutines.verifyResponse(ResponseType.DELIVERY);
@@ -184,10 +196,6 @@ public class GdprTest extends BaseTest {
 
         Then("^I expect (clk|imp|req|hbl|wel|evt|prf) gdpr passback$", (String logType) -> {
             TestsRoutines.verifyResponse(ResponseType.GDPR_PASSBACK);
-        });
-
-        Then("^I expect gdpr hb delivery$", () -> {
-
         });
     }
 
@@ -222,6 +230,15 @@ public class GdprTest extends BaseTest {
 
     private String utIdIncludedUtPurposesIncludedGdprStr() {
         return new ConsentStringBuilder(true, true).build();
+    }
+
+    private String utGdprStr(boolean isUtVendorIdIncluded, boolean isUtPurposeIdsIncluded) {
+        sb.setLength(0);
+        sb.append(
+                isUtVendorIdIncluded ? (isUtPurposeIdsIncluded ? utIdIncludedUtPurposesIncludedGdprStr() : utIdIncludedUtPurposesExcludedGdprStr())
+                        : (isUtPurposeIdsIncluded ? utIdExcludedUtPurposesIncludedGdprStr() : utIdExcludedUtPurposesExcludedGdprStr())
+        );
+        return sb.toString();
     }
 
     private String utIdIncludedUtPurposesExcludedGdprStr() {
