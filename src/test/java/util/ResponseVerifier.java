@@ -68,8 +68,10 @@ public class ResponseVerifier {
     }
 
     public void verifyGdprPassback() {
-        verifyUasResponseCode(204);
-        verifyNoHeaders("Set-Cookie");
+        if (!sut.getUASRquestModule().isSynchronizedResponsesEmpty()) {
+            verifyUasResponseCode(204);
+            verifyNoHeaders("Set-Cookie");
+        }
     }
 
     public void verifyImpressions() {

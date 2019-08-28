@@ -199,6 +199,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         request(url, true);
     }
 
+    public synchronized boolean isSynchronizedResponsesEmpty() {
+        return getSynchronizedResponses().size() == 0;
+    }
+
     public void healthCheckRequestSkip(String servicenameToSkip) {
         int skipFlag = 0xF;
         switch (servicenameToSkip) {
@@ -224,6 +228,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/zonecache?action=" + action;
         request(url, true);
     }
+
+
 
 
     @Attachment("{0}")
