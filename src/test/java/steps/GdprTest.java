@@ -19,7 +19,8 @@ import util.gdpr.ConsentStringBuilder;
                 "classpath:gdpr/dyntag/NoParam.feature",
                 "classpath:gdpr/dyntag/SingleParam.feature",
                 "classpath:gdpr/dyntag/Params.feature",
-                "classpath:gdpr/hb/NoParam.feature"
+                "classpath:gdpr/hb/NoParam.feature",
+                "classpath:gdpr/hb/SingleParam.feature"
         },
         plugin = {"pretty",})
 public class GdprTest extends BaseTest {
@@ -149,6 +150,33 @@ public class GdprTest extends BaseTest {
         Given("I send (\\d+) times Header Bidding request for gdpr entities", (Integer times) -> {
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, HB_EXTRA_URL_PARAMS, true, false);
         });
+
+        Given("I send (\\d+) times Header Bidding request for gdpr entities with parameter \\{(.*)\\}", (Integer times, String gdprParam) -> {
+            final String hbGdprParams = HB_EXTRA_URL_PARAMS + "&" + gdprParam;
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprParams, true, false);
+        });
+
+        Given("I send (\\d+) times Header Bidding request for gdpr entities with gdprstr which includes ut vendor id and includes ut purpose ids", (Integer times) -> {
+            final String hbGdprStrParams = HB_EXTRA_URL_PARAMS + "&gdprstr=" + utIdIncludedUtPurposesIncludedGdprStr();
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprStrParams, true, false);
+        });
+        Given("I send (\\d+) times Header Bidding request for gdpr entities with gdprstr which includes ut vendor id and excludes ut purpose ids", (Integer times) -> {
+            final String hbGdprStrParams = HB_EXTRA_URL_PARAMS + "&gdprstr=" + utIdIncludedUtPurposesExcludedGdprStr();
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprStrParams, true, false);
+        });
+        Given("I send (\\d+) times Header Bidding request for gdpr entities with gdprstr which excludes ut vendor id and includes ut purpose ids", (Integer times) -> {
+            final String hbGdprStrParams = HB_EXTRA_URL_PARAMS + "&gdprstr=" + utIdExcludedUtPurposesIncludedGdprStr();
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprStrParams, true, false);
+        });
+        Given("I send (\\d+) times Header Bidding request for gdpr entities with gdprstr which excludes ut vendor id and excludes ut purpose ids", (Integer times) -> {
+            final String hbGdprStrParams = HB_EXTRA_URL_PARAMS + "&gdprstr=" + utIdExcludedUtPurposesExcludedGdprStr();
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprStrParams, true, false);
+        });
+        Given("I send (\\d+) times Header Bidding request for gdpr entities with an empty gdprstr", (Integer times) -> {
+            final String hbGdprStrParams = HB_EXTRA_URL_PARAMS + "&gdprstr=";
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprStrParams, true, false);
+        });
+
 
         Then("I expect delivery", () -> {
             TestsRoutines.verifyResponse(ResponseType.DELIVERY);
