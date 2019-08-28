@@ -3,6 +3,7 @@
 @NoGdprParam
 @hbNoGdprParam
 @hbConsent
+@parallel
 Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - No Param Is Specified In URL
 
   @hbNoGdprParamEu

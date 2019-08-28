@@ -2,6 +2,7 @@
 @UtConsent
 @hbSingleGdprParam
 @hbConsent
+@parallel
 Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param Is Specified In URL
 
   @gdpr
