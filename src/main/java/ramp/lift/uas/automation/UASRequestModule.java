@@ -226,7 +226,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
 
-    @Attachment("{0}")
+    @Attachment(value = "{0}", type = "text/plain")
     protected void request(String url, boolean toReset) {
         if (toReset) {
             reset();
@@ -497,6 +497,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
     }
 
+    @Attachment(value = "{0}", type = "text/plain")
     public HttpResponse getRequest(String url) {
         try {
             HttpGet get = new HttpGet(url);
