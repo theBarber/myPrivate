@@ -9,21 +9,21 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param 
   @GdprTrueParamEu
   Scenario: gdpr=1 - hb request from Eu
     Given I add {UK} ip header
-    And I send 1 times Header Bidding request for gdpr entities with parameter {gdpr=1}
+    And I send 1 times Header Bidding request for gdpr entities with gdpr=1
     Then I expect hbl gdpr passback
 
   @gdpr
   @GdprTrueParamNotEu
   Scenario: gdpr=1 - hb request not from Eu
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for gdpr entities with parameter {gdpr=1}
+    And I send 1 times Header Bidding request for gdpr entities with gdpr=1
     Then I expect hbl gdpr passback
 
   @gdpr
   @GdprFalseParamEu
   Scenario: gdpr=0 - hb request from Eu
     Given I add {UK} ip header
-    And I send 1 times Header Bidding request for gdpr entities with parameter {gdpr=0}
+    And I send 1 times Header Bidding request for gdpr entities with gdpr=0
     Then all HB responses contains bidRequestId with value {"21b46f0d859b35"}
     And all HB responses contains publisherId with value {3836}
 
@@ -31,7 +31,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param 
   @GdprFalseParamNotEu
   Scenario: gdpr=0 - hb request not from Eu
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for gdpr entities with parameter {gdpr=0}
+    And I send 1 times Header Bidding request for gdpr entities with gdpr=0
     Then all HB responses contains bidRequestId with value {"21b46f0d859b35"}
     And all HB responses contains publisherId with value {3836}
 
