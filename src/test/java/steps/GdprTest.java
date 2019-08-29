@@ -4,7 +4,6 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import model.Country;
 import model.ResponseType;
-import org.json.JSONObject;
 import org.junit.runner.RunWith;
 import util.TestsRoutines;
 import util.api.UasApi;

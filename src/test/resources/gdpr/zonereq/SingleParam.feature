@@ -2,6 +2,7 @@
 @UtConsent
 @ZoneReqSingleGdprParam
 @ZoneReqConsent
+@parallel
 Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specified In URL
 
   @gdpr
