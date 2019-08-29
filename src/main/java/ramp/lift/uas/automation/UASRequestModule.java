@@ -199,6 +199,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         request(url, true);
     }
 
+    public synchronized boolean isSynchronizedResponsesEmpty() {
+        return getSynchronizedResponses().size() == 0;
+    }
+
     public void healthCheckRequestSkip(String servicenameToSkip) {
         int skipFlag = 0xF;
         switch (servicenameToSkip) {

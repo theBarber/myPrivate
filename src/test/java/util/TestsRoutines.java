@@ -1,11 +1,7 @@
 package util;
 
-import co.unruly.matchers.StreamMatchers;
 import model.ResponseType;
 import ramp.lift.uas.automation.SystemUnderTest;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 public class TestsRoutines {
 
@@ -14,7 +10,7 @@ public class TestsRoutines {
     private TestsRoutines() {
     }
 
-    public static void resetHeaders() {
+    public synchronized static void resetHeaders() {
         sut.getUASRquestModule().emptyHttpHeaders();
     }
 
@@ -23,19 +19,15 @@ public class TestsRoutines {
      *
      * @param ip X-Forwarded-For header value
      */
-    public static void addCountryIpHeader(String ip) {
+    public synchronized static void addCountryIpHeader(String ip) {
         sut.getUASRquestModule().addHttpHeader("X-Forwarded-For", ip);
     }
 
-    public static void verifyResponseBody(String expectedResponseType) {
+    public synchronized static void verifyResponse(String expectedResponseType) {
         ResponseVerifier.getInstance().verifyResponse(ResponseType.textToResponseType(expectedResponseType));
     }
 
-    public static void verifyResponseBody(ResponseType responseType) {
+    public synchronized static void verifyResponse(ResponseType responseType) {
         ResponseVerifier.getInstance().verifyResponse(responseType);
-    }
-  
-    public static void verifyGdprLogs(String logType) {
-        // todo: implement
     }
 }
