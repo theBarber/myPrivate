@@ -232,7 +232,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
 
 
-    @Attachment("{0}")
+    @Attachment(value = "{0}", type = "text/plain")
     protected void request(String url, boolean toReset) {
         if (toReset) {
             reset();
