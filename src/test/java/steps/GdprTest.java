@@ -49,6 +49,7 @@ public class GdprTest extends BaseTest {
             TestsRoutines.addCountryIpHeader(ip);
         });
 
+        /* zone reqs */
         Given("I send (\\d+) times an ad request for gdpr entities to UAS", (Integer times) -> {
             sendGdprZoneReq(times);
         });
@@ -71,54 +72,31 @@ public class GdprTest extends BaseTest {
             sendParameteredGdprZoneReq(times, params);
         });
 
+        /* dynamic tag reqs */
         Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities", (Integer times) -> {
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), PUBLISHER_PARAMS);
         });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with parameter \\{(.*)\\}", (Integer times, String parameter) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter));
+        Given("^I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
+            final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(gdprstr));
         });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which includes ut vendor id and includes ut purpose ids", (Integer times) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams("gdprstr=" + utIdIncludedUtPurposesIncludedGdprStr()));
-        });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which includes ut vendor id and excludes ut purpose ids", (Integer times) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams("gdprstr=" + utIdIncludedUtPurposesExcludedGdprStr()));
-        });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which excludes ut vendor id and includes ut purpose ids", (Integer times) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams("gdprstr=" + utIdExcludedUtPurposesIncludedGdprStr()));
-        });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which excludes ut vendor id and excludes ut purpose ids", (Integer times) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams("gdprstr=" + utIdExcludedUtPurposesExcludedGdprStr()));
-        });
-
         Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with an empty gdprstr", (Integer times) -> {
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams("gdprstr="));
         });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with parameter \\{(.*)\\} and with gdprstr which includes ut vendor id and includes ut purpose ids", (Integer times, String parameter) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter + "&gdprstr=" + utIdIncludedUtPurposesIncludedGdprStr()));
+        Given("^I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=(0|1) and with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
+            final String params = "gdpr=" + gdpr + "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(params));
+        });
+        Given("^I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=(0|1) and with an empty gdprstr$", (Integer times, Integer gdpr) -> {
+            final String params = "gdpr=" + gdpr + "&gdprstr=";
+            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(params));
+        });
+        Given("^I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=(0|1)$", (Integer times, Integer gdpr) -> {
+           final String gdprParam = "gdpr=" + gdpr;
+           UasApi.sendDynamicTagRequestsToUAS(times, PUBLISHER_ID.toString(), getExtendedPubParams(gdprParam));
         });
 
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with parameter \\{(.*)\\} and with gdprstr which includes ut vendor id and excludes ut purpose ids", (Integer times, String parameter) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter + "&gdprstr=" + utIdIncludedUtPurposesExcludedGdprStr()));
-        });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with parameter \\{(.*)\\} and with gdprstr which excludes ut vendor id and includes ut purpose ids", (Integer times, String parameter) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter + "&gdprstr=" + utIdExcludedUtPurposesIncludedGdprStr()));
-        });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with parameter \\{(.*)\\} and with gdprstr which excludes ut vendor id and excludes ut purpose ids", (Integer times, String parameter) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter + "&gdprstr=" + utIdExcludedUtPurposesExcludedGdprStr()));
-        });
-
-        Given("I send (\\d+) times Dynamic Tag ad request to UAS for gdpr publisher's entities with parameter \\{(.*)\\} and with an empty gdprstr", (Integer times, String parameter) -> {
-            UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(parameter + "&gdprstr="));
-        });
-
+        /* hb reqs */
         Given("I send (\\d+) times Header Bidding request for gdpr entities", (Integer times) -> {
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, HB_EXTRA_URL_PARAMS, true, false);
         });
@@ -183,23 +161,7 @@ public class GdprTest extends BaseTest {
         UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, parameter, ZONE_ID, true);
     }
 
-    private String utIdIncludedUtPurposesIncludedGdprStr() {
-        return new ConsentStringBuilder(true, true).build();
-    }
-
     private String utGdprStr(boolean isUtVendorIdIncluded, boolean isUtPurposeIdsIncluded) {
         return new ConsentStringBuilder(isUtVendorIdIncluded, isUtPurposeIdsIncluded).build();
-    }
-
-    private String utIdIncludedUtPurposesExcludedGdprStr() {
-        return new ConsentStringBuilder(true, false).build();
-    }
-
-    private String utIdExcludedUtPurposesIncludedGdprStr() {
-        return new ConsentStringBuilder(false, true).build();
-    }
-
-    private String utIdExcludedUtPurposesExcludedGdprStr() {
-        return new ConsentStringBuilder(false, false).build();
     }
 }
