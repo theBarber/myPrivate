@@ -21,7 +21,7 @@ public class AthenaClientFactory
      * - Configure the client to increase the execution timeout.
      */
     private final AmazonAthenaClientBuilder builder = AmazonAthenaClientBuilder.standard()
-            .withRegion(Regions.US_WEST_2)
+            .withRegion(Regions.US_EAST_1)
             .withCredentials(InstanceProfileCredentialsProvider.getInstance())
             .withClientConfiguration(new ClientConfiguration().withClientExecutionTimeout(ExampleConstants.CLIENT_EXECUTION_TIMEOUT));
 
