@@ -242,7 +242,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
 //        System.out.println("sending get request to UAS with url: "+url);
                 HttpResponse response = httpclient.execute(get, context);
-                response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                if (response.getEntity() != null) {
+                    response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                } else {
+                    response.setEntity(new StringEntity(""));
+                }
                 try {
                     if (withSleepInMillis > 0) {
                         Thread.sleep(withSleepInMillis);
@@ -507,7 +511,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             HttpGet get = new HttpGet(url);
             get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
             HttpResponse response = httpclient.execute(get, context);
-            response.setEntity(new BufferedHttpEntity(response.getEntity()));
+            if (response.getEntity() != null) {
+                response.setEntity(new BufferedHttpEntity(response.getEntity()));
+            } else {
+                response.setEntity(new StringEntity(""));
+            }
             try {
                 if (withSleepInMillis > 0) {
                     Thread.sleep(withSleepInMillis);

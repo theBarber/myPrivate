@@ -8,6 +8,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
@@ -40,7 +41,11 @@ public class RampAppRequestModule extends AbstractModuleImpl<CompletableFuture<H
         get.setHeader("rampinternal", "true");
         get.setHeader("X-Forwarded-For", "s3://ramp-optimization/entities_data/experiments_meta_data.json");
         HttpResponse response = httpclient.execute(get);
-        response.setEntity(new BufferedHttpEntity(response.getEntity()));
+        if (response.getEntity() != null) {
+          response.setEntity(new BufferedHttpEntity(response.getEntity()));
+        } else {
+          response.setEntity(new StringEntity(""));
+        }
         
         return response;
 

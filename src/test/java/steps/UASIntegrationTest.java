@@ -22,6 +22,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -348,9 +349,11 @@ public class UASIntegrationTest extends BaseTest {
                 List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                 httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
               HttpResponse response = httpclient.execute(httpGet ,ctx);
-              if (response.getEntity() != null) {
-                response.setEntity(new BufferedHttpEntity(response.getEntity()));
-              }
+                  if (response.getEntity() != null) {
+                      response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                  } else {
+                      response.setEntity(new StringEntity(""));
+                  }
               return response;
             } catch (IOException e) {
               throw new UncheckedIOException("failed to send request (" + click + ") ", e);
@@ -377,6 +380,8 @@ public class UASIntegrationTest extends BaseTest {
                           HttpResponse response = httpclient.execute(httpGet ,ctx);
                           if (response.getEntity() != null) {
                               response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                          } else {
+                              response.setEntity(new StringEntity(""));
                           }
                           return response;
                       } catch (IOException e) {
@@ -404,6 +409,8 @@ public class UASIntegrationTest extends BaseTest {
                           HttpResponse response = httpclient.execute(httpGet ,ctx);
                           if (response.getEntity() != null) {
                               response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                          } else {
+                              response.setEntity(new StringEntity(""));
                           }
                           return response;
                       } catch (IOException e) {
@@ -594,9 +601,11 @@ public class UASIntegrationTest extends BaseTest {
                 if (sc == 204) {
                   impressionsSent.increment();
                 }
-                if (response.getEntity() != null) {
-                  response.setEntity(new BufferedHttpEntity(response.getEntity()));
-                }
+                  if (response.getEntity() != null) {
+                      response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                  } else {
+                      response.setEntity(new StringEntity(""));
+                  }
               } catch (IOException e) {
                 throw new UncheckedIOException("failed to send request (" + url + ") ", e);
               }
