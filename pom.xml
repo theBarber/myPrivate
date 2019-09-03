@@ -132,7 +132,7 @@
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
-							<parallel>methods</parallel>
+							<parallel>classes</parallel>
 							<useUnlimitedThreads>true</useUnlimitedThreads>
                         </configuration>
                     </execution>
@@ -191,16 +191,6 @@
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>
 			<version>${amqp.client}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-api.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j-log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -324,6 +314,10 @@
 				<exclusion>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
 				</exclusion>
 			</exclusions>
 			<scope>compile</scope>

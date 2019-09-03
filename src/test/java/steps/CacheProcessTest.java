@@ -23,10 +23,11 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
+import static java.lang.Math.max;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-import static sun.swing.MenuItemLayoutHelper.max;
+//import static sun.swing.MenuItemLayoutHelper.max;
 
 
 

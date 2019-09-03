@@ -100,9 +100,12 @@ public class ResponseVerifier {
         verifyClicks();
     }
 
-    public synchronized void verifyUasResponseCode(Integer expectedResponseCode) {
-        sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
-                .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
+    public void verifyUasResponseCode(Integer expectedResponseCode) {
+        sut.getUASRquestModule()
+                .responses()
+                .map(f -> f.thenApply(HttpResponse::getStatusLine)
+                .thenApply(StatusLine::getStatusCode)
+                .whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
                 .forEach(CompletableFuture::join);
     }
 
