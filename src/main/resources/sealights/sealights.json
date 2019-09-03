@@ -1,9 +1,0 @@
-{
-  "tokenFile": "src/main/resources/sealights/sl_token.txt",
-  "createBuildSessionId": false,
-  "buildSessionIdFile": "src/main/resources/sealights/buildSessionId.txt",
-  "testStage": "${JOB_NAME}",
-  "executionType": "testsonly",
-  "proxy": "",
-  "filesStorage": "target/sealights-tmp"
-}

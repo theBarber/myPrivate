@@ -367,8 +367,8 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
 		JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
 		File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
-				.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename)).orElse(null);
-
+				.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename))
+				.orElse(new File("../perion-automation/pems/" + cliconnectionKeyname));
 		hostsConfig.forEach(jsonElement -> {
 			String host = jsonElement.getAsString();
 			LinuxDefaultCliConnection conn = getConnection(host,keyFile);
