@@ -23,7 +23,7 @@ public class AthenaClientFactory
      */
     private final AmazonAthenaClientBuilder builder = AmazonAthenaClientBuilder.standard()
             .withRegion(Regions.US_EAST_1)
-            .withCredentials(DefaultAWSCredentialsProviderChain.getInstance(    ))
+            .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
             .withClientConfiguration(new ClientConfiguration().withClientExecutionTimeout(ExampleConstants.CLIENT_EXECUTION_TIMEOUT));
 
     public AmazonAthena createClient()
