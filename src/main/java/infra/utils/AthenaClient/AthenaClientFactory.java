@@ -2,6 +2,7 @@
 package infra.utils.AthenaClient;
 
 import com.amazonaws.ClientConfiguration;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.InstanceProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.athena.AmazonAthena;
@@ -22,7 +23,7 @@ public class AthenaClientFactory
      */
     private final AmazonAthenaClientBuilder builder = AmazonAthenaClientBuilder.standard()
             .withRegion(Regions.US_EAST_1)
-            .withCredentials(InstanceProfileCredentialsProvider.getInstance())
+            .withCredentials(DefaultAWSCredentialsProviderChain.getInstance(    ))
             .withClientConfiguration(new ClientConfiguration().withClientExecutionTimeout(ExampleConstants.CLIENT_EXECUTION_TIMEOUT));
 
     public AmazonAthena createClient()
