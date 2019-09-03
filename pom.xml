@@ -132,8 +132,8 @@
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
-							<parallel>classes</parallel>
-							<useUnlimitedThreads>true</useUnlimitedThreads>
+							<!--<parallel>classes</parallel>-->
+							<!--<useUnlimitedThreads>true</useUnlimitedThreads>-->
                         </configuration>
                     </execution>
                 </executions>
