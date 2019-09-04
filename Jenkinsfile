@@ -8,7 +8,7 @@ pipeline {
     stages {
             stage('Checkout perion-automation'){
                 steps{
-                  sh 'mkdir -p ramp-lift-automation/src/main/resources/sealights && mkdir -p perion-automation'
+                  sh 'mkdir -p perion-automation && mkdir -p src/main/resources/sealights'
                   dir("perion-automation")
                   {
                       git branch: 'master',
