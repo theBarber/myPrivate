@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ramp-lift-automation</groupId>
 	<artifactId>ramp-lift-automation</artifactId>
@@ -38,152 +39,35 @@
 			<properties>
 				<env>staging</env>
 			</properties>
-		<build>
-<plugins>
-<plugin>
-<groupId>io.sealights.on-premise.agents.plugin</groupId>
-<artifactId>sealights-maven-plugin</artifactId>
-<configuration>
-<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
-<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
-<createBuildSessionId>false</createBuildSessionId>
-<filesStorage>target/sealights-tmp</filesStorage>
-<testStage>{$JOB_NAME}</testStage>
-<logLevel>OFF</logLevel>
-<includeResources>true</includeResources>
-</configuration>
-<executions>
-<execution>
-<id>a2</id>
-<goals>
-<goal>test-listener</goal>
-</goals>
-</execution>
-<execution>
-<id>a3</id>
-<goals>
-<goal>prepare-test-listener</goal>
-</goals>
-</execution>
-</executions>
-</plugin>
-</plugins>
-</build>
-</profile>
+		</profile>
+
+		<profile>
+			<id>remote</id>
+			<properties>
+				<remote>true</remote>
+			</properties>
+		</profile>
 
 		<profile>
 			<id>integration</id>
 			<properties>
 				<env>integration</env>
 			</properties>
-		<build>
-<plugins>
-<plugin>
-<groupId>io.sealights.on-premise.agents.plugin</groupId>
-<artifactId>sealights-maven-plugin</artifactId>
-<configuration>
-<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
-<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
-<createBuildSessionId>false</createBuildSessionId>
-<filesStorage>target/sealights-tmp</filesStorage>
-<testStage>{$JOB_NAME}</testStage>
-<logLevel>OFF</logLevel>
-<includeResources>true</includeResources>
-</configuration>
-<executions>
-<execution>
-<id>a2</id>
-<goals>
-<goal>test-listener</goal>
-</goals>
-</execution>
-<execution>
-<id>a3</id>
-<goals>
-<goal>prepare-test-listener</goal>
-</goals>
-</execution>
-</executions>
-</plugin>
-</plugins>
-</build>
-</profile>
+		</profile>
 
 		<profile>
 			<id>dev</id>
 			<properties>
 				<env>dev</env>
 			</properties>
-		<build>
-<plugins>
-<plugin>
-<groupId>io.sealights.on-premise.agents.plugin</groupId>
-<artifactId>sealights-maven-plugin</artifactId>
-<configuration>
-<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
-<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
-<createBuildSessionId>false</createBuildSessionId>
-<filesStorage>target/sealights-tmp</filesStorage>
-<testStage>{$JOB_NAME}</testStage>
-<logLevel>OFF</logLevel>
-<includeResources>true</includeResources>
-</configuration>
-<executions>
-<execution>
-<id>a2</id>
-<goals>
-<goal>test-listener</goal>
-</goals>
-</execution>
-<execution>
-<id>a3</id>
-<goals>
-<goal>prepare-test-listener</goal>
-</goals>
-</execution>
-</executions>
-</plugin>
-</plugins>
-</build>
-</profile>
+		</profile>
 
 		<profile>
 			<id>production</id>
 			<properties>
 				<env>production</env>
 			</properties>
-		<build>
-<plugins>
-<plugin>
-<groupId>io.sealights.on-premise.agents.plugin</groupId>
-<artifactId>sealights-maven-plugin</artifactId>
-<configuration>
-<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
-<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
-<createBuildSessionId>false</createBuildSessionId>
-<filesStorage>target/sealights-tmp</filesStorage>
-<testStage>{$JOB_NAME}</testStage>
-<logLevel>OFF</logLevel>
-<includeResources>true</includeResources>
-</configuration>
-<executions>
-<execution>
-<id>a2</id>
-<goals>
-<goal>test-listener</goal>
-</goals>
-</execution>
-<execution>
-<id>a3</id>
-<goals>
-<goal>prepare-test-listener</goal>
-</goals>
-</execution>
-</executions>
-</plugin>
-</plugins>
-</build>
-</profile>
+		</profile>
 
 	</profiles>
 
@@ -271,34 +155,7 @@
 				<artifactId>allure-maven</artifactId>
 				<version>2.9</version>
 			</plugin>
-		<plugin>
-<groupId>io.sealights.on-premise.agents.plugin</groupId>
-<artifactId>sealights-maven-plugin</artifactId>
-<configuration>
-<tokenFile>src/main/resources/sealights/sl_token.txt</tokenFile>
-<buildSessionIdFile>src/main/resources/sealights/buildSessionId.txt</buildSessionIdFile>
-<createBuildSessionId>false</createBuildSessionId>
-<filesStorage>target/sealights-tmp</filesStorage>
-<testStage>{$JOB_NAME}</testStage>
-<logLevel>OFF</logLevel>
-<includeResources>true</includeResources>
-</configuration>
-<executions>
-<execution>
-<id>a2</id>
-<goals>
-<goal>test-listener</goal>
-</goals>
-</execution>
-<execution>
-<id>a3</id>
-<goals>
-<goal>prepare-test-listener</goal>
-</goals>
-</execution>
-</executions>
-</plugin>
-</plugins>
+		</plugins>
 	</build>
 	<properties>
 		<project.build.jdk>1.8</project.build.jdk>
