@@ -97,6 +97,7 @@ public class AthenaUtils {
 
     private static void processRow(Row row, List<ColumnInfo> columnInfoList)
     {
+        System.out.println(row);
         for (int i = 0; i < columnInfoList.size(); ++i) {
             switch (columnInfoList.get(i).getType()) {
                 case "varchar":
