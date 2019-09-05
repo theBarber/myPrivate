@@ -63,9 +63,9 @@
 		</profile>
 
         <profile>
-            <id>remote-entities</id>
+            <id>append-entities</id>
             <properties>
-                <remote>true</remote>
+                <append>true</append>
             </properties>
         </profile>
 

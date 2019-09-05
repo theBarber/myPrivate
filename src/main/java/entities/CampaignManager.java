@@ -17,7 +17,7 @@ import java.util.function.Function;
 
 public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
-	String remote="";
+	String append_entities ="";
 	List<IO> io;
 	List<ZoneSet> zonesets;
     private ObjectMapper m = new ObjectMapper();
@@ -29,9 +29,12 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 
 
-    public CampaignManager(String env) {
+    public CampaignManager(String env, String append_entities) {
 		if(envname.isEmpty()){
 			envname=env;
+		}
+		if(this.append_entities.isEmpty()){
+			this.append_entities=append_entities;
 		}
 		m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		initHardCodedEntities();
@@ -49,12 +52,13 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	}*/
 
     private void initHardCodedEntities() {
-    	if(remote.equals("true")){
+    	if(this.append_entities.equals("true")){
 			initLineItemFromS3();
 			initZoneSetsFromS3();
+		}else {
+			initLineItem();
+			initZoneSets();
 		}
-        initLineItem();
-        initZoneSets();
     }
 
 	private void initLineItemFromS3() {
@@ -63,9 +67,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-
         }
-
 	}
 
 	private void initZoneSetsFromS3() {
