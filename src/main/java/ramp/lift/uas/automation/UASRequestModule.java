@@ -199,6 +199,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         request(url, true);
     }
 
+    public synchronized boolean isSynchronizedResponsesEmpty() {
+        return getSynchronizedResponses().size() == 0;
+    }
+
     public void healthCheckRequestSkip(String servicenameToSkip) {
         int skipFlag = 0xF;
         switch (servicenameToSkip) {
@@ -226,7 +230,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
 
-    @Attachment("{0}")
+    @Attachment(value = "{0}", type = "text/plain")
     protected void request(String url, boolean toReset) {
         if (toReset) {
             reset();
@@ -238,7 +242,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
 //        System.out.println("sending get request to UAS with url: "+url);
                 HttpResponse response = httpclient.execute(get, context);
-                response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                if (response.getEntity() != null) {
+                    response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                } else {
+                    response.setEntity(new StringEntity(""));
+                }
                 try {
                     if (withSleepInMillis > 0) {
                         Thread.sleep(withSleepInMillis);
@@ -275,7 +283,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     public synchronized final void reset() {
-        if (synchronizedResponses != null)
+        if (synchronizedResponses.size() !=0)
             synchronizedResponses.clear();
         this.actual().stream()
                 .filter(((Predicate<Future<HttpResponse>>) Future::isDone).negate())
@@ -497,12 +505,17 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
     }
 
+    @Attachment(value = "{0}", type = "text/plain")
     public HttpResponse getRequest(String url) {
         try {
             HttpGet get = new HttpGet(url);
             get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
             HttpResponse response = httpclient.execute(get, context);
-            response.setEntity(new BufferedHttpEntity(response.getEntity()));
+            if (response.getEntity() != null) {
+                response.setEntity(new BufferedHttpEntity(response.getEntity()));
+            } else {
+                response.setEntity(new StringEntity(""));
+            }
             try {
                 if (withSleepInMillis > 0) {
                     Thread.sleep(withSleepInMillis);

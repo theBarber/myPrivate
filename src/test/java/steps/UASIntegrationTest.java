@@ -22,10 +22,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 import util.api.UasApi;
@@ -161,11 +161,11 @@ public class UASIntegrationTest extends BaseTest {
 
     });
     Then("The response(s) has impression-url(s)", () -> {
-        TestsRoutines.verifyResponseBody(ResponseType.IMPRESSIONS);
+        TestsRoutines.verifyResponse(ResponseType.IMPRESSIONS);
     });
 
     Then("The response(s) has click-url(s)", () -> {
-        TestsRoutines.verifyResponseBody(ResponseType.CLICKS);
+        TestsRoutines.verifyResponse(ResponseType.CLICKS);
     });
 
       Then("The response(s) has complete-url(s)", () -> {
@@ -184,7 +184,7 @@ public class UASIntegrationTest extends BaseTest {
       });
 
     Then("The response(s) are passback", () -> {
-        TestsRoutines.verifyResponseBody(ResponseType.PASSBACK);
+        TestsRoutines.verifyResponse(ResponseType.PASSBACK);
     });
 
 
@@ -207,9 +207,6 @@ public class UASIntegrationTest extends BaseTest {
     //
     // });
     Then("The (\\w+)Url has (\\w+) field matching the id of the (\\w+) named \\{(.*)\\} (\\d+)% of the time",this::checkTheNumberOfSelectedEntity);
-    Then("^The latest (clk|imp|req|hbl|wel|evt|prf) log file from uas is empty$", (String logType) -> {
-        TestsRoutines.verifyEmptyLog(logType);
-    });
     When("^I read the latest (clk|imp|req|hbl|wel|evt|prf) log file from uas$", (String logType) -> {
         //---------------------checks-------------------------
 //        sut.logFor(logType).readLogs().actual().forEach(m->{
@@ -352,9 +349,11 @@ public class UASIntegrationTest extends BaseTest {
                 List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                 httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
               HttpResponse response = httpclient.execute(httpGet ,ctx);
-              if (response.getEntity() != null) {
-                response.setEntity(new BufferedHttpEntity(response.getEntity()));
-              }
+                  if (response.getEntity() != null) {
+                      response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                  } else {
+                      response.setEntity(new StringEntity(""));
+                  }
               return response;
             } catch (IOException e) {
               throw new UncheckedIOException("failed to send request (" + click + ") ", e);
@@ -381,6 +380,8 @@ public class UASIntegrationTest extends BaseTest {
                           HttpResponse response = httpclient.execute(httpGet ,ctx);
                           if (response.getEntity() != null) {
                               response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                          } else {
+                              response.setEntity(new StringEntity(""));
                           }
                           return response;
                       } catch (IOException e) {
@@ -408,6 +409,8 @@ public class UASIntegrationTest extends BaseTest {
                           HttpResponse response = httpclient.execute(httpGet ,ctx);
                           if (response.getEntity() != null) {
                               response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                          } else {
+                              response.setEntity(new StringEntity(""));
                           }
                           return response;
                       } catch (IOException e) {
@@ -598,9 +601,11 @@ public class UASIntegrationTest extends BaseTest {
                 if (sc == 204) {
                   impressionsSent.increment();
                 }
-                if (response.getEntity() != null) {
-                  response.setEntity(new BufferedHttpEntity(response.getEntity()));
-                }
+                  if (response.getEntity() != null) {
+                      response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                  } else {
+                      response.setEntity(new StringEntity(""));
+                  }
               } catch (IOException e) {
                 throw new UncheckedIOException("failed to send request (" + url + ") ", e);
               }

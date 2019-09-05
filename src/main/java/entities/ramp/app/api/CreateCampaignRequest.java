@@ -1,13 +1,10 @@
 package entities.ramp.app.api;
 
-import java.time.temporal.Temporal;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import entities.LineItem;
+
 
 public class CreateCampaignRequest {
 
