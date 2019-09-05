@@ -62,6 +62,13 @@
 			</properties>
 		</profile>
 
+        <profile>
+            <id>append-entities</id>
+            <properties>
+                <append>true</append>
+            </properties>
+        </profile>
+
 		<profile>
 			<id>production</id>
 			<properties>

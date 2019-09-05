@@ -993,9 +993,9 @@ Feature: Entities for tests
       | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | []                                                                            |
 
     And i update banner data by name
-      | Banner Name                                         | limitation                                                     |
-      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                        |
-      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                        |
+      | Banner Name                                         | limitation                                                                               |
+      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                  |
+      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                  |
       | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105"]]] |
 
     And i update campaign data by name
@@ -1112,9 +1112,7 @@ Feature: Entities for tests
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
-  @doron
   Scenario: create entites for new publisher block list
-    Given i remove all zones from publishers: {3843}
     Given i disable campaigns by name on db
       | Campaign Name           |
       | campaign-pbl-BRAND1-ST  |
