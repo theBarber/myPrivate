@@ -1112,9 +1112,7 @@ Feature: Entities for tests
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
-  @doron
   Scenario: create entites for new publisher block list
-    Given i remove all zones from publishers: {3843}
     Given i disable campaigns by name on db
       | Campaign Name           |
       | campaign-pbl-BRAND1-ST  |
