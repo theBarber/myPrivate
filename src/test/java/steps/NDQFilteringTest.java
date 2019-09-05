@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.LongAdder;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:NDQFiltering.feature", plugin = {"pretty",})
+@CucumberOptions(features = "classpath:NDQFilteringTL.feature", plugin = {"pretty",})
 //    "infra.RotatingJSONFormatter:target/cucumber/NDQ_Filtering_$TIMESTAMP$.json"})
 public class NDQFilteringTest extends BaseTest {
   double experimentNdq;
