@@ -1112,9 +1112,7 @@ Feature: Entities for tests
       | Banner Name                            | limitation                        |
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
-  @doron
   Scenario: create entites for new publisher block list
-    Given i remove all zones from publishers: {3843}
     Given i disable campaigns by name on db
       | Campaign Name           |
       | campaign-pbl-BRAND1-ST  |
@@ -1128,20 +1126,6 @@ Feature: Entities for tests
       | Zone Name                            | is_secure |
       | zone-zoneset-campaign-pbl-BRAND1-ST  | 1         |
       | zone-zoneset-campaign-pbl-BRAND2-PGX | 1         |
-
-  Scenario: create entities for NDQ filtering
-    Given i disable campaigns by name on db
-      | Campaign Name       |
-      | NDQfilteringCL-ST-1 |
-
-    Given i create new campaigns, new zoneset with domains
-      | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NDQfilteringCL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringCL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
-
-    And i update zone data by name
-      | Zone Name                        | is_secure |
-      | zone-zoneset-NDQfilteringCL-ST-1 | 1         |
-
 
   @HB
   @yaniv
