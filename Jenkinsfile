@@ -6,20 +6,9 @@ pipeline {
         }
     }
     stages {
-            stage('Checkout ramp-lift-automation'){
-                steps{
-                  sh 'mkdir -p ramp-lift-automation/src/main/resources/sealights'
-                  dir("ramp-lift-automation")
-                  {
-                      git branch: 'master',
-                      credentialsId: 'ut-israel-devops',
-                      url: 'https://github.com/PerionNet/ramp-lift-automation.git'
-                  }
-                }
-            }
             stage('Checkout perion-automation'){
                 steps{
-                  sh 'mkdir -p perion-automation'
+                  sh 'mkdir -p perion-automation && mkdir -p src/main/resources/sealights'
                   dir("perion-automation")
                   {
                       git branch: 'master',
@@ -30,21 +19,19 @@ pipeline {
             }
             stage('Prepare ramp-lift-automation'){
     			steps{
-    			    dir("ramp-lift-automation"){
-        				script{
-        					try{
-        						sh '''
-        						rm -rf target
-        						cp ../perion-automation/java-maven/sealights.json src/main/resources/sealights/sealights.json
-        						'''
-        							currentBuild.result = 'SUCCESS'
-        					}catch(Exception ex){
-        						currentBuild.result = 'FAILURE'
-        					}
-        				}
-    			    }
+                    script{
+                        try{
+                            sh '''
+                            rm -rf target
+                            cp perion-automation/java-maven/sealights.json src/main/resources/sealights/sealights.json
+                            '''
+                                currentBuild.result = 'SUCCESS'
+                        }catch(Exception ex){
+                            currentBuild.result = 'FAILURE'
+                        }
+                    }
     			}
-            }
+    		}
     		stage('Prepare sealights'){
     			steps{
     			    dir("perion-automation"){
@@ -55,42 +42,39 @@ pipeline {
     		}
 			stage('Listen'){
 				steps{
-					dir("ramp-lift-automation"){
-						script{
-							try{
-								sh '''
-								mv ../perion-automation/buildSessionId.txt src/main/resources/sealights/buildSessionId.txt
-								mv ../perion-automation/sl-build-scanner.jar src/main/resources/sealights/sl-build-scanner.jar
-								mv ../perion-automation/scripts/sl_token.txt src/main/resources/sealights/sl_token.txt
-								cd src/main/resources/sealights/
-								java -jar sl-build-scanner.jar -pom -configfile sealights.json -workspacepath ../../../../
-								'''
-								currentBuild.result = 'SUCCESS'
-							}catch(Exception ex){
-								currentBuild.result = 'FAILURE'
-							}
-						}
-					}
+                    script{
+                        try{
+                            sh '''
+                            mv perion-automation/buildSessionId.txt src/main/resources/sealights/buildSessionId.txt
+                            mv perion-automation/sl-build-scanner.jar src/main/resources/sealights/sl-build-scanner.jar
+                            mv perion-automation/scripts/sl_token.txt src/main/resources/sealights/sl_token.txt
+                            cd src/main/resources/sealights/
+                            java -jar sl-build-scanner.jar -pom -configfile sealights.json -workspacepath ../../../../
+                            '''
+                            currentBuild.result = 'SUCCESS'
+                        }catch(Exception ex){
+                            currentBuild.result = 'FAILURE'
+                        }
+                    }
 			   }
 		   }
 			stage('Test'){
 				steps{
-					dir("ramp-lift-automation"){
-						script{
-							try{
-								sh 'mvn clean install test -Dcucumber.options="--tags $TAGS_TO_RUN" -P$ENVIRONMENT'
-								currentBuild.result = 'SUCCESS'
-							}catch(Exception ex){
-								currentBuild.result = 'FAILURE'
-							}
-						}
-					}
+                    script{
+                        try{
+                            sh 'mvn clean install test -Dcucumber.options="--tags $TAGS_TO_RUN" -P remote,$ENVIRONMENT'
+                            currentBuild.result = 'SUCCESS'
+                        }catch(Exception ex){
+                            currentBuild.result = 'FAILURE'
+                        }
+                    }
 				}
 			}
 	}
-	//post { 
-	//	always { 
-	//		cleanWs()
-	//	}
-	//}
+	post {
+		always {
+            junit 'target/surefire-reports/*.xml'
+			cleanWs()
+		}
+	}
 }
