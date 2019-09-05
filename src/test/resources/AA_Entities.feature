@@ -1129,20 +1129,6 @@ Feature: Entities for tests
       | zone-zoneset-campaign-pbl-BRAND1-ST  | 1         |
       | zone-zoneset-campaign-pbl-BRAND2-PGX | 1         |
 
-  Scenario: create entities for NDQ filtering
-    Given i disable campaigns by name on db
-      | Campaign Name       |
-      | NDQfilteringCL-ST-1 |
-
-    Given i create new campaigns, new zoneset with domains
-      | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NDQfilteringCL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringCL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
-
-    And i update zone data by name
-      | Zone Name                        | is_secure |
-      | zone-zoneset-NDQfilteringCL-ST-1 | 1         |
-
-
   @HB
   @yaniv
   Scenario: create entities for dynamic pricing with margin
@@ -1214,6 +1200,24 @@ Feature: Entities for tests
       | zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 1         |
+
+  Scenario: create entities for NDQ filtering
+    Given i disable campaigns by name on db
+      | Campaign Name                 |
+      | campaign-NDQfiltering2TL-ST-1 |
+      | campaign-NDQfiltering2TL-ST-2 |
+      | NDQfiltering2SL-ST-1          |
+      | NDQfiltering2SL-ST-2          |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NDQfilteringTL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
+      | NDQfilteringTL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringTL-ST-2} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
+
+    And i update zone data by name
+      | Zone Name                        | is_secure |
+      | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
+      | zone-zoneset-NDQfilteringTL-ST-2 | 1         |
 
 
   @DynamicPricing
