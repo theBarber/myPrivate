@@ -42,6 +42,13 @@
 		</profile>
 
 		<profile>
+			<id>remote</id>
+			<properties>
+				<remote>true</remote>
+			</properties>
+		</profile>
+
+		<profile>
 			<id>integration</id>
 			<properties>
 				<env>integration</env>
