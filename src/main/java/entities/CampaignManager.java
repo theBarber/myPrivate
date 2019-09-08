@@ -63,7 +63,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	private void initLineItemFromS3() {
         try {
-            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/lineItem.json"), IO[].class));
+            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/createdlineItem.json"), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -72,7 +72,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	private void initZoneSetsFromS3() {
         try {
-            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/zonesets.json"), ZoneSet[].class)));
+            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/createdzoneSet.json"), ZoneSet[].class)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -304,7 +304,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
 	public void writeZoneSets(String env){
 	    try{
-	        m.writeValue(new File(this.getClass().getResource(CREATED_ZONESET_FILE).toURI()),zonesets);
+	        m.writeValue(new File(this.getClass().getResource(CREATED_ZONESET_FILE).toURI()),this.zonesets);
             ClassLoader loader = CampaignManager.class.getClassLoader();
             String basePath = loader.getResource(".").getPath();
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
@@ -319,7 +319,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
     public void writeLineItem(String env){
         try{
-            m.writeValue(new File(this.getClass().getResource(CREATED_LINEITEM_FILE).toURI()),io);
+            m.writeValue(new File(this.getClass().getResource(CREATED_LINEITEM_FILE).toURI()),this.io);
             ClassLoader loader = CampaignManager.class.getClassLoader();
             String basePath = loader.getResource(".").getPath();
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
