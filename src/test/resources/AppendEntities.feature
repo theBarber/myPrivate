@@ -23,14 +23,9 @@ Feature: Append entities for tests
     And I refresh banner cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 40 seconds
 
   Scenario: refresh zone cache
     And I refresh the zone Cache
-
-  Scenario: update test strategy
-    Given i disable all tests except 53
-    Given i set test 53 status to 1
 
   Scenario: save entities to file
     And save all entities to json file

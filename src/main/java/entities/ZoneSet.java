@@ -17,7 +17,9 @@ import infra.module.WithId;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ZoneSet implements Named, WithId<Integer>, Comparable<ZoneSet> {
 
+	@JsonProperty("zonesetName")
 	private String name;
+	@JsonProperty("zonesetId")
 	private Integer id;
 	@JsonProperty("Zones")
 	private Set<Zone> zones = new TreeSet<>();
