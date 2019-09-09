@@ -419,14 +419,15 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
 
     public Map<String, String> splitHBQuery(String query){
 
-        Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+        Map<String, String> query_pairs = new LinkedHashMap<>();
         String[] pairs = query.split(";");
         pairs[0] = pairs[0].substring(pairs[0].indexOf("ut_ju")).trim();
         for (String pair : pairs) {
             int idx = pair.indexOf("=");
             try {
-                if(pair.substring(0, idx).contains("ut") && !pair.substring(idx + 1).trim().contains(" "))
-                    query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1).trim().replace("'", ""), "UTF-8"));
+                if(pair.substring(0, idx).contains("ut.") || pair.substring(0, idx).contains("ut_"))
+                    query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1).trim().replace("+","%2B").replace("'", ""), "UTF-8"));
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
