@@ -6,11 +6,11 @@
 Feature: NDQ Filtering Campaign Level
 
   Scenario: Send Zone request and verify strategy
-    Given i disable all tests except 100
-    Given i set test 100 status to 1
+#    Given i disable all tests except 100
+#    Given i set test 100 status to 1
     And I send generic request 1 times until I get strategy {random}
-    Given i disable all tests except 53
-    Given i set test 53 status to 1
+#    Given i disable all tests except 53
+#    Given i set test 53 status to 1
 
 
 #  Scenario: 1. Campaign level, zone request, verify NDQ filtering obeys to skip daily goal flag when flag = false

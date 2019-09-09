@@ -4,13 +4,22 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import infra.utils.SqlWorkflowUtils;
 import model.ResponseType;
+import org.apache.http.HttpResponse;
+import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
+import ramp.lift.uas.automation.UASRequestModule;
 import util.ResponseVerifier;
 import util.api.UasApi;
 
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.LongAdder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 
@@ -74,7 +83,13 @@ public class NDQFilteringTest extends BaseTest {
 
         And("^I send generic request (\\d+) times until I get strategy \\{(.*)\\}$", (Integer times, String strategy) -> {
             UasApi.sendZoneReq(2, times, true);
-            ResponseVerifier.getInstance().verifyContains(strategy);
+            Pattern pat = Pattern.compile("src=[.*]");
+            sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+//                System.out.println(content);
+                Matcher mat = pat.matcher(content);
+                while (mat.find())
+                    System.out.println("Match: " + mat.group());
+            });
         });
 
         Given("^I setup the db$", () -> {
