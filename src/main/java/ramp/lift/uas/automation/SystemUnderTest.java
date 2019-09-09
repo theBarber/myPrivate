@@ -129,7 +129,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	    case "@campaign":
 				if (campaignManager == null)
-						campaignManager = new CampaignManager(config.get("env.name"));
+						campaignManager = new CampaignManager(config.get("env.name"), config.get("append.entities"));
 						break;
 		case "@RampAppRequestModule":
 				if(rampAppCreateEntitiesManager == null)
@@ -367,18 +367,24 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
 		JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
 		File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
-				.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename)).orElse(null);
+				.map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename))
+				.orElse(null);
 
+		if(config.get("is.remote").equals("true")){
+			keyFile = new File("perion-automation/pems/"+cliconnectionKeyname);
+		}
+
+		File finalKeyFile = keyFile;
 		hostsConfig.forEach(jsonElement -> {
 			String host = jsonElement.getAsString();
-			LinuxDefaultCliConnection conn = getConnection(host,keyFile);
+			LinuxDefaultCliConnection conn = getConnection(host, finalKeyFile);
 			uasHostConnections.put(host, conn);
 			uasCliConnections.put(host, conn);
 		});
 
 		cronsConfig.forEach(jsonElement -> {
 			String host = jsonElement.getAsString();
-			LinuxDefaultCliConnection conn = getConnection(host,keyFile);
+			LinuxDefaultCliConnection conn = getConnection(host,finalKeyFile);
 			cronCliConnection.put(host, conn);
 			uasCliConnections.put(host, conn);
 		});
@@ -477,7 +483,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public CampaignManager getCampaignManager() {
 	  if (campaignManager == null) {
-                    campaignManager = new CampaignManager(config.get("env.name"));
+                    campaignManager = new CampaignManager(config.get("env.name"), config.get("append.entities"));
 	  }
 		return campaignManager;
 	}

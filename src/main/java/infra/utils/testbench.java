@@ -1,15 +1,19 @@
 package infra.utils;
 
+import com.amazonaws.services.athena.AmazonAthena;
+import infra.utils.AthenaClient.AthenaClientFactory;
 import org.apache.commons.codec.binary.Hex;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static infra.utils.AthenaClient.AthenaUtils.*;
+
 public class testbench {
     public static void main(String[] args) {
 
-        hv();
+        testAthena();
     }
 
     private static void hv() {
@@ -31,5 +35,24 @@ public class testbench {
         String urlPathHash = Hex.encodeHexString(bytes);
 
         System.out.println("http://testauth.iq.doubleverify.com" + urlPath + "&hv=" + urlPathHash);
+    }
+
+
+    private static void testAthena(){
+
+        // Build an AmazonAthena client
+        AthenaClientFactory factory = new AthenaClientFactory();
+        AmazonAthena athenaClient = factory.createClient();
+
+        String queryExecutionId = submitAthenaQuery(athenaClient);
+
+        try {
+            waitForQueryToComplete(athenaClient, queryExecutionId);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        processResultRows(athenaClient, queryExecutionId);
+
     }
 }

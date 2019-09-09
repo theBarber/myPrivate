@@ -20,6 +20,7 @@ public class IO implements WithId<Integer>{
     public int ioId;
     @JsonProperty("creatives")
     public List<Creative> creatives = new ArrayList<>();
+    @JsonProperty("deals")
     public List<Deal> deals = new ArrayList<>();
     @JsonProperty("LI")
     private List<LineItem> lineItems = new ArrayList<>();

@@ -42,6 +42,13 @@
 		</profile>
 
 		<profile>
+			<id>remote</id>
+			<properties>
+				<remote>true</remote>
+			</properties>
+		</profile>
+
+		<profile>
 			<id>integration</id>
 			<properties>
 				<env>integration</env>
@@ -54,6 +61,13 @@
 				<env>dev</env>
 			</properties>
 		</profile>
+
+        <profile>
+            <id>append-entities</id>
+            <properties>
+                <append>true</append>
+            </properties>
+        </profile>
 
 		<profile>
 			<id>production</id>
@@ -97,7 +111,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M3</version>
+				<version>2.22.2</version>
 
                 <executions>
                     <execution>
@@ -132,6 +146,8 @@
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
+							<!--<parallel>classes</parallel>-->
+							<!--<useUnlimitedThreads>true</useUnlimitedThreads>-->
                         </configuration>
                     </execution>
                 </executions>
@@ -163,6 +179,19 @@
 		<compiler.version>1.7</compiler.version>
 		<common.version>1.0.244.0</common.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.amazonaws</groupId>
+				<artifactId>aws-java-sdk-bom</artifactId>
+				<version>1.11.444</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.conversantmedia.gdpr</groupId>
@@ -191,16 +220,6 @@
 			<version>${amqp.client}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-api.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j-log4j.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.15</version>
@@ -216,14 +235,14 @@
 			<version>1.11.349</version>
 		</dependency>
 		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk</artifactId>
-			<version>1.11.444</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-athena</artifactId>
+			<version>1.11.444</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jcraft</groupId>
@@ -322,6 +341,10 @@
 				<exclusion>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
 				</exclusion>
 			</exclusions>
 			<scope>compile</scope>

@@ -44,7 +44,7 @@ public class HealthCheckTest extends BaseTest {
 	}
 
 	public void healthCheckResponseContains(String something) {
-		ResponseVerifier.verifyContains(something);
+		ResponseVerifier.getInstance().verifyContains(something);
 	}
 
 
