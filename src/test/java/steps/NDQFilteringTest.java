@@ -83,12 +83,12 @@ public class NDQFilteringTest extends BaseTest {
 
         And("^I send generic request (\\d+) times until I get strategy \\{(.*)\\}$", (Integer times, String strategy) -> {
             UasApi.sendZoneReq(2, times, true);
-            Pattern pat = Pattern.compile("src=[.*]");
+            Pattern pat = Pattern.compile("(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
             sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-                System.out.println(content);
-//                Matcher mat = pat.matcher(content);
-//                while (mat.find())
-//                    System.out.println("Match: " + mat.group());
+                Matcher mat = pat.matcher(content);
+                while (mat.find())
+                    if(mat.group().contains("/l?"))
+                        System.out.println("Match: " + mat.group());
             });
         });
 
