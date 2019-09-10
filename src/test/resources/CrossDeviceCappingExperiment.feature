@@ -5,12 +5,12 @@
 @uas
 Feature: Cross Device Capping Experiment
   Background:
-    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from user history
-    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from user history
-    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from user history
-    Given I delete the history of cod753pf0jp65qhx4dr166uw0 from user history
-    Given I delete the history of 1pnpdzss6uvgknzizqm4tji45 from user history
-    Given I delete the history of 68h4mtmqsp9mul4d8ica9jks3 from user history
+    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from users bucket
+    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from users bucket
+    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from users bucket
+    Given I delete the history of cod753pf0jp65qhx4dr166uw0 from users bucket
+    Given I delete the history of 1pnpdzss6uvgknzizqm4tji45 from users bucket
+    Given I delete the history of 68h4mtmqsp9mul4d8ica9jks3 from users bucket
     Given I clear all cookies from uas requests
 
   Scenario: test uas star logic
