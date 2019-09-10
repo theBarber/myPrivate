@@ -85,10 +85,10 @@ public class NDQFilteringTest extends BaseTest {
             UasApi.sendZoneReq(2, times, true);
             Pattern pat = Pattern.compile("src=[.*]");
             sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-//                System.out.println(content);
-                Matcher mat = pat.matcher(content);
-                while (mat.find())
-                    System.out.println("Match: " + mat.group());
+                System.out.println(content);
+//                Matcher mat = pat.matcher(content);
+//                while (mat.find())
+//                    System.out.println("Match: " + mat.group());
             });
         });
 
