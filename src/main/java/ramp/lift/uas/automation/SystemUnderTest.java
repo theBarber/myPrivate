@@ -88,12 +88,12 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 				break;
 			case "@userinfo":
 				if (userInfoBucket == null) {
-					userInfoBucket = createCouchbaseBucketModule("us-east-1-user-info", config);
+					userInfoBucket = createCouchbaseBucketModule("us-east-1-users", config);
 				}
 				break;
 			case "@userhistory":
 				if (userHistoryBucket == null) {
-					userHistoryBucket = createCouchbaseBucketModule("us-east-1-user-history", config);
+					userHistoryBucket = createCouchbaseBucketModule("us-east-1-users", config);
 			}
 			break;
 				case "@adserverBucket":

@@ -5,9 +5,9 @@
 @uas
 Feature: Cross Device Capping No Experiment
   Background:
-    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from user history
-    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from user history
-    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from user history
+    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from users bucket
+    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from users bucket
+    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from users bucket
     Given I clear all cookies from uas requests
   Scenario: test old uas logic
     Given I change IO id {75396} cross device Capping to {active}
