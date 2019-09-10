@@ -187,11 +187,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		List<String> nodes = new ArrayList<>(nodesConfig.size());
 		nodesConfig.forEach(jsonElement -> nodes.add(jsonElement.getAsString()));
 		CouchbaseBucketModule module = new CouchbaseBucketModule(name, nodes);
-		try {
-			module.init();
-		} catch (Exception e) {
-			delegate(exception, e);
-		}
+		module.init();
 		return module;
 	}
 

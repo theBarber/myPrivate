@@ -13,7 +13,7 @@ Feature: Cross Device Capping No Experiment
     Given I change IO id {75396} cross device Capping to {active}
     Given I set the activation status of experiment group named {rampLift_NDQ_scenario} and his experiments to {inactive}
     Given I set the activation status of experiment group named {rampLift_capping_scenario} and his experiments to {inactive}
-    Then I refresh staging delivery engine data cache
+    Then I refresh delivery-engine cache
 
 #UTID 44444444444444444444444444444444 to 41hun7qe6bn47gfxgfbzwh938
 #UTID 22222222222222222222222222222222 to deviceId 20qxblv735tk3q7yq7nzy8mjm
@@ -173,7 +173,7 @@ Feature: Cross Device Capping No Experiment
 
   Scenario: verify campaign capping enforced when sending zone requests from same user (same cookie) - in time frame
     Given I change IO id {75396} cross device Capping to {inactive}
-    Then I refresh staging delivery engine data cache
+    Then I refresh delivery-engine cache
     And I sleep for 140 seconds
 
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
