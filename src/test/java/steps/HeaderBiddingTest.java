@@ -426,7 +426,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
             int idx = pair.indexOf("=");
             try {
                 if(pair.substring(0, idx).contains("ut.") || pair.substring(0, idx).contains("ut_"))
-                    query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1).trim().replace("'", ""), "UTF-8"));
+                    query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1).trim().replace("+","%2B").replace("'", ""), "UTF-8"));
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
