@@ -1,7 +1,9 @@
 package steps;
 
+import com.amazonaws.services.athena.AmazonAthena;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import infra.utils.AthenaClient.AthenaClientFactory;
 import infra.utils.SqlWorkflowUtils;
 import model.ResponseType;
 import org.apache.http.HttpResponse;
@@ -22,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
+import static steps.UASIntegrationTest.sendImpressionRequestsToUASImmediately;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = {
@@ -74,7 +77,7 @@ public class NDQFilteringTest extends BaseTest {
         });
 
         And("^I send the same amount of impressions url as the number of NDQ$", () -> {
-            LongAdder impressionsSent = UASIntegrationTest.sendImpressionRequestsToUASImmediately();
+            LongAdder impressionsSent = sendImpressionRequestsToUASImmediately();
             System.out.println("impressionsSent: " + impressionsSent);
             assertEquals("Number of impression urls sent as the number of NDQ", experimentNdq,
                     impressionsSent.intValue(), 8d);
@@ -83,13 +86,18 @@ public class NDQFilteringTest extends BaseTest {
 
         And("^I send generic request (\\d+) times until I get strategy \\{(.*)\\}$", (Integer times, String strategy) -> {
             UasApi.sendZoneReq(2, times, true);
-            Pattern pat = Pattern.compile("(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-            sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-                Matcher mat = pat.matcher(content);
-                while (mat.find())
-                    if(mat.group().contains("/l?"))
-                        System.out.println("Match: " + mat.group());
-            });
+            AmazonAthena aa = new AthenaClientFactory().createClient();
+
+            for(int i=0; i<55; i++) {
+                sendImpressionRequestsToUASImmediately();
+            }
+//            Pattern pat = Pattern.compile("(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+//            sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+//                Matcher mat = pat.matcher(content);
+//                while (mat.find())
+//                    if(mat.group().contains("/l?"))
+//                        System.out.println("Match: " + mat.group());
+//            });
         });
 
         Given("^I setup the db$", () -> {
