@@ -399,7 +399,6 @@ public class HeaderBiddingTest extends BaseTest {
     }
 
     public Map<String, String> splitHBQuery(String query) {
-
         Map<String, String> query_pairs = new LinkedHashMap<>();
         String[] pairs = query.split(";");
         pairs[0] = pairs[0].substring(pairs[0].indexOf("ut_ju")).trim();
