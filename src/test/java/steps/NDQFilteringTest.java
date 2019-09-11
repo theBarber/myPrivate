@@ -85,8 +85,8 @@ public class NDQFilteringTest extends BaseTest {
 
 
         And("^I send generic request (\\d+) times until I get strategy \\{(.*)\\}$", (Integer times, String strategy) -> {
-            UasApi.sendZoneReq(2, times, true);
-            AmazonAthena aa = new AthenaClientFactory().createClient();
+            UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "requestid=meow123", 2, true);
+//            AmazonAthena aa = new AthenaClientFactory().createClient();
 
             for(int i=0; i<55; i++) {
                 sendImpressionRequestsToUASImmediately();
@@ -106,9 +106,6 @@ public class NDQFilteringTest extends BaseTest {
 
         Given("I restart \\{(.*)\\}", (String serverName) -> {
             restartServerNamed(serverName);
-        });
-        And("^I send ad request to UAS till getting strategy \\{(.*)\\}$", (String strategy) -> {
-
         });
     }
 }
