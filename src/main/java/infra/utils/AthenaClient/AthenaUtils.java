@@ -10,7 +10,7 @@ public class AthenaUtils {
     /**
      * Submits a sample query to Athena and returns the execution ID of the query.
      */
-    public static String submitAthenaQuery(AmazonAthena athenaClient)
+    public static String submitAthenaQuery(AmazonAthena athenaClient, String query)
     {
         // The QueryExecutionContext allows us to set the Database.
         QueryExecutionContext queryExecutionContext = new QueryExecutionContext().withDatabase(ExampleConstants.ATHENA_DEFAULT_DATABASE);
@@ -23,7 +23,7 @@ public class AthenaUtils {
 
         // Create the StartQueryExecutionRequest to send to Athena which will start the query.
         StartQueryExecutionRequest startQueryExecutionRequest = new StartQueryExecutionRequest()
-                .withQueryString(ExampleConstants.ATHENA_SAMPLE_QUERY)
+                .withQueryString(query)
                 .withQueryExecutionContext(queryExecutionContext)
                 .withResultConfiguration(resultConfiguration);
 
@@ -68,7 +68,7 @@ public class AthenaUtils {
      * The query must be in a completed state before the results can be retrieved and
      * paginated. The first row of results are the column headers.
      */
-    public static void processResultRows(AmazonAthena athenaClient, String queryExecutionId)
+    public static List<Row> processResultRows(AmazonAthena athenaClient, String queryExecutionId)
     {
         GetQueryResultsRequest getQueryResultsRequest = new GetQueryResultsRequest()
                 // Max Results can be set but if its not set,
@@ -80,19 +80,21 @@ public class AthenaUtils {
         GetQueryResultsResult getQueryResultsResult = athenaClient.getQueryResults(getQueryResultsRequest);
         List<ColumnInfo> columnInfoList = getQueryResultsResult.getResultSet().getResultSetMetadata().getColumnInfo();
 
-        while (true) {
-            List<Row> results = getQueryResultsResult.getResultSet().getRows();
-            for (Row row : results) {
-                // Process the row. The first row of the first page holds the column names.
-                processRow(row, columnInfoList);
-            }
-            // If nextToken is null, there are no more pages to read. Break out of the loop.
-            if (getQueryResultsResult.getNextToken() == null) {
-                break;
-            }
-            getQueryResultsResult = athenaClient.getQueryResults(
-                    getQueryResultsRequest.withNextToken(getQueryResultsResult.getNextToken()));
-        }
+         return getQueryResultsResult.getResultSet().getRows();
+
+//        while (true) {
+//            List<Row> results = getQueryResultsResult.getResultSet().getRows();
+//            for (Row row : results) {
+//                // Process the row. The first row of the first page holds the column names.
+//                processRow(row, columnInfoList);
+//            }
+//            // If nextToken is null, there are no more pages to read. Break out of the loop.
+//            if (getQueryResultsResult.getNextToken() == null) {
+//                break;
+//            }
+//            getQueryResultsResult = athenaClient.getQueryResults(
+//                    getQueryResultsRequest.withNextToken(getQueryResultsResult.getNextToken()));
+//        }
     }
 
     private static void processRow(Row row, List<ColumnInfo> columnInfoList)
