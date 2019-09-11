@@ -5,19 +5,19 @@
 @uas
 Feature: Cross Device Capping Experiment
   Background:
-    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from user history
-    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from user history
-    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from user history
-    Given I delete the history of cod753pf0jp65qhx4dr166uw0 from user history
-    Given I delete the history of 1pnpdzss6uvgknzizqm4tji45 from user history
-    Given I delete the history of 68h4mtmqsp9mul4d8ica9jks3 from user history
+    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from users bucket
+    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from users bucket
+    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from users bucket
+    Given I delete the history of cod753pf0jp65qhx4dr166uw0 from users bucket
+    Given I delete the history of 1pnpdzss6uvgknzizqm4tji45 from users bucket
+    Given I delete the history of 68h4mtmqsp9mul4d8ica9jks3 from users bucket
     Given I clear all cookies from uas requests
 
   Scenario: test uas star logic
     Given I change IO id {75396} cross device Capping to {active}
     Given I set the activation status of experiment group named {rampLift_NDQ_scenario} and his experiments to {inactive}
     Given I set the activation status of experiment group named {rampLift_capping_scenario} and his experiments to {active}
-    Then I refresh staging delivery engine data cache
+    Then I refresh delivery-engine cache
     And I sleep for 140 seconds
 #UTID 44444444444444444444444444444444 to 41hun7qe6bn47gfxgfbzwh938
 #UTID 22222222222222222222222222222222 to deviceId 20qxblv735tk3q7yq7nzy8mjm
@@ -178,7 +178,7 @@ Feature: Cross Device Capping Experiment
 
   Scenario: verify campaign capping enforced when sending zone requests from same user (same cookie) - in time frame
     Given I change IO id {75396} cross device Capping to {inactive}
-    Then I refresh staging delivery engine data cache
+    Then I refresh delivery-engine cache
     And I sleep for 140 seconds
 
 

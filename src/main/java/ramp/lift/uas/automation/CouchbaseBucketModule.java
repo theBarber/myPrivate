@@ -30,8 +30,13 @@ public class CouchbaseBucketModule extends AbstractModuleImpl<Void>{
   }
 
   @Override
-  public void init() throws Exception {
-    CouchbaseEnvironment couchbaseEnvironment = DefaultCouchbaseEnvironment.builder().build();
+  public void init() {
+    CouchbaseEnvironment couchbaseEnvironment = DefaultCouchbaseEnvironment.builder()
+            //this set the IO socket timeout globally, to 45s
+            .socketConnectTimeout((int) TimeUnit.SECONDS.toMillis(45))
+            //this sets the connection timeout for openBucket calls globally (unless a particular call provides its own timeout)
+            .connectTimeout(TimeUnit.SECONDS.toMillis(60))
+            .build();
     couchbase = CouchbaseCluster.create(couchbaseEnvironment, nodes);
     openBucket(name);
   }
@@ -46,6 +51,10 @@ public class CouchbaseBucketModule extends AbstractModuleImpl<Void>{
     else {
       bucket = couchbase.openBucket(name, 1, TimeUnit.MINUTES);
     }
+  }
+
+  public Bucket getBucket() {
+    return bucket;
   }
 
   @Override
