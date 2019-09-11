@@ -15,8 +15,8 @@ Feature: Append entities for tests
       | zone-zoneset-campaign-NDQfilteringCL-ST-1 | 1         |
 
     And i update campaign data by name
-      | Campaign Name                | units | skip_daily_goal |
-      | campaign-NDQfilteringCL-ST-1 | 100   | 0               |
+      | Campaign Name                | units | skip_daily_goal | factor |
+      | campaign-NDQfilteringCL-ST-1 | 100   | 0               | 0.1    |
 
 
   Scenario: refresh banner cache
