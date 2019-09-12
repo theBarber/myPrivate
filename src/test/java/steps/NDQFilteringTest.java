@@ -1,34 +1,23 @@
 package steps;
 
-import com.amazonaws.services.athena.AmazonAthena;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import infra.utils.AthenaClient.AthenaClientFactory;
 import infra.utils.AthenaClient.AthenaUtils;
 import infra.utils.SqlWorkflowUtils;
-import model.ResponseType;
-import org.apache.http.HttpResponse;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
-import ramp.lift.uas.automation.UASRequestModule;
-import util.ResponseVerifier;
 import util.api.UasApi;
-
-import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static steps.UASIntegrationTest.sendImpressionRequestsToUASImmediately;
 
 @RunWith(Cucumber.class)
@@ -39,7 +28,7 @@ import static steps.UASIntegrationTest.sendImpressionRequestsToUASImmediately;
 //        "classpath:NdqFilteringTL.feature",
 }, plugin = {"pretty",})
 public class NDQFilteringTest extends BaseTest {
-    AmazonAthena aa = new AthenaClientFactory().createClient();
+
     double experimentNdq;
     private static DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     private static Date date = new Date();
@@ -95,24 +84,31 @@ public class NDQFilteringTest extends BaseTest {
 
 
         And("^I send generic request (\\d+) times until I get strategy \\{(.*)\\}$", (Integer times, String strategy) -> {
-            UasApi.sendMultipleZoneIdAdRequestsWithParameter(1, "requestid=meow123", 2, true);
+            String requestId = UUID.randomUUID().toString();
+            int cnt=0;
             for(int i = 0; i<times; i ++) {
-                if (AthenaUtils.testAthena(ATHENA_SAMPLE_QUERY + " where dt='" + dateFormat.format(yesterday()) + "' and request_id like '%meow123%';", "300")) {
+                if (AthenaUtils.testAthena(ATHENA_SAMPLE_QUERY
+                        + " where dt='" + dateFormat.format(date)
+                        + "' and request_id like '" + requestId +"';", String.valueOf((strategy.equals("random")?301:300)))) {
+                    System.out.println("Found requests in Req bucket. Sending impressions!");
                     for (int j = 0; j < 55; j++) {
                         sendImpressionRequestsToUASImmediately();
+                        try {
+                            TimeUnit.SECONDS.sleep(3);
+                        } catch (InterruptedException e) {
+                            fail(e.getMessage());
+                        }
                     }
+                    break;
                 } else {
-                    UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "requestid=meow123", 2, true);
+//                    cnt++;
+//                    System.out.println("Didn't find requests with req id " + requestId +
+//                            " and strategy " + strategy + " in Req bucket. Sending " + times +
+//                            " zone requests!\nSo far sent " + cnt*times + " requests.");
+                    sut.getUASRquestModule().addHttpHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36");
+                    UasApi.sendMultipleZoneIdAdRequestsWithParameter(90, "requestid=" + requestId, 2, true);
                 }
             }
-
-//            Pattern pat = Pattern.compile("(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-//            sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-//                Matcher mat = pat.matcher(content);
-//                while (mat.find())
-//                    if(mat.group().contains("/l?"))
-//                        System.out.println("Match: " + mat.group());
-//            });
         });
 
 

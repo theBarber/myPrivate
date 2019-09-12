@@ -8,7 +8,6 @@ Feature: NDQ Filtering Campaign Level
   Scenario: Send Zone request and verify strategy
     Given i disable all tests except 100
     Given i set test 100 status to 1
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36} as user-agent string to send my requests to uas
     And I send generic request 10 times until I get strategy {random}
     And I send 1 times an ad request for gdpr entities to UAS
     Then I expect req gdpr passback
