@@ -22,18 +22,22 @@ Feature: Cross Device Capping Experiment
 #UTID 44444444444444444444444444444444 to 41hun7qe6bn47gfxgfbzwh938
 #UTID 22222222222222222222222222222222 to deviceId 20qxblv735tk3q7yq7nzy8mjm
 #UTID 33333333333333333333333333333333 to deviceId 314dzessmqqc5lby3bhzxcxtf
+
+
   Scenario: verify campaign capping enforced when sending zone requests from same user (different cookies) - in time frame
-    Given I add device 20qxblv735tk3q7yq7nzy8mjm with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"314dzessmqqc5lby3bhzxcxtf"}]}> to user info
-    Given I add device 314dzessmqqc5lby3bhzxcxtf with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"314dzessmqqc5lby3bhzxcxtf"}]}> to user info
+    Given I add device 20qxblv735tk3q7yq7nzy8mjm with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}> to user info
+    Given I add device 314dzessmqqc5lby3bhzxcxtf with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
-    And I add optimize query parameter with value {1} to send my requests to uas
+#    And I add optimize query parameter with value {1} to send my requests to uas
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
-    And I send impression requests to UAS immediately with delta {0}
+
     Then The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
-    And I sleep for 1 seconds
+    And I send impression requests to UAS immediately with delta {0}
+#    And I sleep for 1 seconds
+
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains script
