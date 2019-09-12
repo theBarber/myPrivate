@@ -68,38 +68,66 @@ public class AthenaUtils {
      * The query must be in a completed state before the results can be retrieved and
      * paginated. The first row of results are the column headers.
      */
-    public static List<Row> processResultRows(AmazonAthena athenaClient, String queryExecutionId)
+    public static void processResultRows(AmazonAthena athenaClient, String queryExecutionId)
     {
         GetQueryResultsRequest getQueryResultsRequest = new GetQueryResultsRequest()
                 // Max Results can be set but if its not set,
                 // it will choose the maximum page size
                 // As of the writing of this code, the maximum value is 1000
-                // .withMaxResults(1000)
+                .withMaxResults(1000)
                 .withQueryExecutionId(queryExecutionId);
 
         GetQueryResultsResult getQueryResultsResult = athenaClient.getQueryResults(getQueryResultsRequest);
         List<ColumnInfo> columnInfoList = getQueryResultsResult.getResultSet().getResultSetMetadata().getColumnInfo();
 
-         return getQueryResultsResult.getResultSet().getRows();
+        while (true) {
+            List<Row> results = getQueryResultsResult.getResultSet().getRows();
+            for (Row row : results) {
+                // Process the row. The first row of the first page holds the column names.
+                processRow(row, columnInfoList);
+            }
+            // If nextToken is null, there are no more pages to read. Break out of the loop.
+            if (getQueryResultsResult.getNextToken() == null) {
+                break;
+            }
+            getQueryResultsResult = athenaClient.getQueryResults(
+                    getQueryResultsRequest.withNextToken(getQueryResultsResult.getNextToken()));
+        }
+    }
 
-//        while (true) {
-//            List<Row> results = getQueryResultsResult.getResultSet().getRows();
-//            for (Row row : results) {
-//                // Process the row. The first row of the first page holds the column names.
-//                processRow(row, columnInfoList);
-//            }
-//            // If nextToken is null, there are no more pages to read. Break out of the loop.
-//            if (getQueryResultsResult.getNextToken() == null) {
-//                break;
-//            }
-//            getQueryResultsResult = athenaClient.getQueryResults(
-//                    getQueryResultsRequest.withNextToken(getQueryResultsResult.getNextToken()));
-//        }
+
+    public static boolean processResultRowsContains(AmazonAthena athenaClient, String queryExecutionId, String value)
+    {
+        GetQueryResultsRequest getQueryResultsRequest = new GetQueryResultsRequest()
+                // Max Results can be set but if its not set,
+                // it will choose the maximum page size
+                // As of the writing of this code, the maximum value is 1000
+                //.withMaxResults(1000)
+                .withQueryExecutionId(queryExecutionId);
+
+        GetQueryResultsResult getQueryResultsResult = athenaClient.getQueryResults(getQueryResultsRequest);
+        List<ColumnInfo> columnInfoList = getQueryResultsResult.getResultSet().getResultSetMetadata().getColumnInfo();
+
+        while (true) {
+            List<Row> results = getQueryResultsResult.getResultSet().getRows();
+            for (Row row : results) {
+                // Process the row. The first row of the first page holds the column names.
+                if(row.toString().contains(value))
+                    return true;
+                processRow(row, columnInfoList);
+            }
+            // If nextToken is null, there are no more pages to read. Break out of the loop.
+            if (getQueryResultsResult.getNextToken() == null) {
+                break;
+            }
+            getQueryResultsResult = athenaClient.getQueryResults(
+                    getQueryResultsRequest.withNextToken(getQueryResultsResult.getNextToken()));
+        }
+        return false;
     }
 
     private static void processRow(Row row, List<ColumnInfo> columnInfoList)
-    {
-        System.out.println(row);
+    {   System.out.println(row);
         for (int i = 0; i < columnInfoList.size(); ++i) {
             switch (columnInfoList.get(i).getType()) {
                 case "varchar":
@@ -133,6 +161,25 @@ public class AthenaUtils {
                     throw new RuntimeException("Unexpected Type is not expected" + columnInfoList.get(i).getType());
             }
         }
+    }
+
+    public static boolean testAthena(String query, String valueToBeRetrieved){
+
+        // Build an AmazonAthena client
+        AthenaClientFactory factory = new AthenaClientFactory();
+        AmazonAthena athenaClient = factory.createClient();
+
+        String queryExecutionId = submitAthenaQuery(athenaClient, query);
+
+        try {
+            waitForQueryToComplete(athenaClient, queryExecutionId);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+//        processResultRows(athenaClient, queryExecutionId);
+        return processResultRowsContains(athenaClient, queryExecutionId, valueToBeRetrieved);
+
     }
 
 

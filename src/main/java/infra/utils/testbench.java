@@ -2,6 +2,7 @@ package infra.utils;
 
 import com.amazonaws.services.athena.AmazonAthena;
 import infra.utils.AthenaClient.AthenaClientFactory;
+import infra.utils.AthenaClient.ExampleConstants;
 import org.apache.commons.codec.binary.Hex;
 
 import java.io.UnsupportedEncodingException;
@@ -13,7 +14,7 @@ import static infra.utils.AthenaClient.AthenaUtils.*;
 public class testbench {
     public static void main(String[] args) {
 
-//        testAthena();
+        testAthena();
     }
 
     private static void hv() {
@@ -41,18 +42,18 @@ public class testbench {
     private static void testAthena(){
 
         // Build an AmazonAthena client
-//        AthenaClientFactory factory = new AthenaClientFactory();
-//        AmazonAthena athenaClient = factory.createClient();
+        AthenaClientFactory factory = new AthenaClientFactory();
+        AmazonAthena athenaClient = factory.createClient();
 
-//        String queryExecutionId = submitAthenaQuery(athenaClient);
+        String queryExecutionId = submitAthenaQuery(athenaClient, ExampleConstants.ATHENA_SAMPLE_QUERY);
 
-//        try {
-//            waitForQueryToComplete(athenaClient, queryExecutionId);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//        processResultRows(athenaClient, queryExecutionId);
+        try {
+            waitForQueryToComplete(athenaClient, queryExecutionId);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        processResultRows(athenaClient, queryExecutionId);
 
     }
 }

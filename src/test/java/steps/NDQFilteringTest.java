@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -42,7 +43,8 @@ public class NDQFilteringTest extends BaseTest {
     double experimentNdq;
     private static DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     private static Date date = new Date();
-    private static final String ATHENA_SAMPLE_QUERY = "select zone_id,request_id,experiment_id FROM dl_raw_data.fact_dam_requests where zone_id=2 and dt='" + dateFormat.format(date) + "'";
+    public static final String ATHENA_SAMPLE_QUERY = "select request_id,experiment_id FROM dl_raw_data.fact_dam_requests";
+//    private static final String ATHENA_SAMPLE_QUERY = "select zone_id,request_id,experiment_id FROM dl_raw_data.fact_dam_requests where zone_id=2 and dt='" + dateFormat.format(date) + "'";
 
     public NDQFilteringTest() {
         super();
@@ -93,14 +95,17 @@ public class NDQFilteringTest extends BaseTest {
 
 
         And("^I send generic request (\\d+) times until I get strategy \\{(.*)\\}$", (Integer times, String strategy) -> {
-            String output = AthenaUtils.submitAthenaQuery(aa, ATHENA_SAMPLE_QUERY);
-            while(!output.contains("300")) {
-                output = AthenaUtils.submitAthenaQuery(aa, ATHENA_SAMPLE_QUERY);
-                UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "requestid=meow123", 2, true);
+            UasApi.sendMultipleZoneIdAdRequestsWithParameter(1, "requestid=meow123", 2, true);
+            for(int i = 0; i<times; i ++) {
+                if (AthenaUtils.testAthena(ATHENA_SAMPLE_QUERY + " where dt='" + dateFormat.format(yesterday()) + "' and request_id like '%meow123%';", "300")) {
+                    for (int j = 0; j < 55; j++) {
+                        sendImpressionRequestsToUASImmediately();
+                    }
+                } else {
+                    UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "requestid=meow123", 2, true);
+                }
             }
-            for (int i = 0; i < 55; i++) {
-                sendImpressionRequestsToUASImmediately();
-            }
+
 //            Pattern pat = Pattern.compile("(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 //            sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
 //                Matcher mat = pat.matcher(content);
@@ -120,17 +125,12 @@ public class NDQFilteringTest extends BaseTest {
         Given("I restart \\{(.*)\\}", (String serverName) -> {
             restartServerNamed(serverName);
         });
+
     }
-
-    private boolean athenaResponseContains(String query){
-        String queryExecutionId = AthenaUtils.submitAthenaQuery(aa, query);
-
-        try {
-            AthenaUtils.waitForQueryToComplete(aa, queryExecutionId);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        AthenaUtils.processResultRows(aa, queryExecutionId).contains();
+    private Date yesterday(){
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
     }
 }
 
