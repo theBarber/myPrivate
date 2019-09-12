@@ -337,16 +337,18 @@ public class HeaderBiddingTest extends BaseTest {
         Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
         StringBuilder url = new StringBuilder();
         //put domain in url
-        url.append(splitedQuery.entrySet().stream().findFirst().get().getValue()).append("?");
+        url.append(splitedQuery.entrySet().stream().findFirst().get().getValue());
 
         //remove domain from map
         splitedQuery.remove(splitedQuery.entrySet().stream().findFirst().get().getKey());
 
         //iterate through rest of query params
         Iterator<Map.Entry<String, String>> itr = splitedQuery.entrySet().iterator();
+        int i = 0;
         while (itr.hasNext()) {
             Map.Entry<String, String> entry = itr.next();
-            url.append("&" + entry.getKey().substring(entry.getKey().lastIndexOf('.') + 1)).append("=" + entry.getValue());
+            final String chr = i++ == 0 ? "?" : "&";
+            url.append(chr + entry.getKey().substring(entry.getKey().lastIndexOf('.') + 1)).append("=" + entry.getValue());
         }
         System.out.println("URL from ad: " + "\n" + url.toString());
         return url.toString();
@@ -402,8 +404,13 @@ public class HeaderBiddingTest extends BaseTest {
         pairs[0] = pairs[0].substring(pairs[0].indexOf("ut_ju")).trim();
         for (String pair : pairs) {
             int idx = pair.indexOf("=");
-            if (pair.substring(0, idx).contains("ut.") || pair.substring(0, idx).contains("ut_"))
-                query_pairs.put(pair.substring(0, idx), pair.substring(idx + 1).trim().replace("'", ""));
+            try {
+                if (pair.substring(0, idx).contains("ut.") || pair.substring(0, idx).contains("ut_"))
+                    query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1).trim().replace("+", "%2B").replace("'", ""), "UTF-8"));
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
         return query_pairs;
     }
