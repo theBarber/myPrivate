@@ -3,9 +3,20 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import gherkin.deps.com.google.gson.JsonArray;
+import gherkin.deps.com.google.gson.JsonElement;
+import gherkin.deps.com.google.gson.JsonParser;
 import infra.cli.process.CliCommandExecution;
 import infra.utils.JenkinsClient;
 import infra.utils.SqlWorkflowUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.config.SocketConfig;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.hamcrest.Matchers;
@@ -17,10 +28,16 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
+import java.net.URI;
 import java.util.Calendar;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.lang.Math.max;
@@ -37,6 +54,7 @@ import static org.junit.Assert.fail;
 
 public class CacheProcessTest extends BaseTest {
     private final String BANNER_CACHE_NAME = "banners_cache_refresh_";
+    public final String START_REFRESH_CACHE = "start refresh cache";
     private final static Integer LASTING_TIME_CACHE = 7;
   public CacheProcessTest() {
     super();
@@ -235,14 +253,61 @@ public class CacheProcessTest extends BaseTest {
   }
 
     private void refreshCache(String typeOfCache) {
-      assertThat(typeOfCache, isOneOf("campaign", "banner", "zone"));
+      assertThat(typeOfCache, isOneOf("campaign", "banner", "zone", "delivery-engine"));
 
       switch (typeOfCache.toLowerCase())
       {
           case "zone": refreshZoneCache("cmd");break;
           case "campaign":refreshCampaignCache();break;
           case "banner": refreshBannerCache();break;
+          case "delivery-engine": refreshDeliveryEngineCache();break;
       }
+    }
+
+    private void refreshDeliveryEngineCache() {
+        JsonArray hostsArray = new JsonParser().parse(config.get("uas.cliconnection.hosts")).getAsJsonArray();
+        CountDownLatch latch = new CountDownLatch(hostsArray.size());
+
+        try {
+
+            for (JsonElement el  : hostsArray) {
+                URIBuilder uriBuilderIad1 = new URIBuilder()
+                        .setScheme("http")
+                        .setPath("/delivery_engine/refreshCache")
+                        .setPort(8877)
+                        .setHost(el.getAsString());
+
+                StringEntity entity = new StringEntity("{\"action\":\"start\"}", ContentType.TEXT_PLAIN);
+                URI iad1 = uriBuilderIad1.build();
+                HttpPost postIad1 = new HttpPost(iad1);
+                postIad1.setEntity(entity);
+
+                HttpClient httpclient = HttpClients.custom()
+                        .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
+
+                CompletableFuture.runAsync(() -> {
+                    try {
+                        HttpResponse httpResponse1 = httpclient.execute(postIad1);
+                        Assert.assertEquals("status code should be 200", 200, httpResponse1.getStatusLine().getStatusCode());
+                        BufferedReader bufferedReader1 =
+                                new BufferedReader(new InputStreamReader(httpResponse1.getEntity().getContent()));
+                        boolean isRefresh1 = bufferedReader1.lines()
+                                .collect(Collectors.joining("\n"))
+                                .contains(START_REFRESH_CACHE);
+                        Assert.assertTrue("data cache should start refresh", isRefresh1);
+                        bufferedReader1.close();
+                        latch.countDown();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        Assert.fail("http post fail");
+                    }
+                });
+
+            }
+            latch.await(3, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void refreshCampaignCache() {

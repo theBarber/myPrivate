@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 
 public class CrossDeviceCappingTest extends BaseTest{
 
-  public final String START_REFRESH_CACHE = "start refresh cache";
+
   public  String jsonDocForMultipleProfiles;
 
   public CrossDeviceCappingTest() {
@@ -298,58 +298,15 @@ public class CrossDeviceCappingTest extends BaseTest{
       sut.getUASRquestModule().emptyHttpHeaders();
     });
     Then("^I refresh staging delivery engine data cache$", () -> {
-      JsonArray hostsArray = new JsonParser().parse(config.get("uas.cliconnection.hosts")).getAsJsonArray();
-      CountDownLatch latch = new CountDownLatch(hostsArray.size());
 
-      try {
-
-        for (JsonElement el  : hostsArray) {
-          URIBuilder uriBuilderIad1 = new URIBuilder()
-            .setScheme("http")
-            .setPath("/delivery_engine/refreshCache")
-            .setPort(8877)
-            .setHost(el.getAsString());
-
-          StringEntity entity = new StringEntity("{\"action\":\"start\"}", ContentType.TEXT_PLAIN);
-          URI iad1 = uriBuilderIad1.build();
-          HttpPost postIad1 = new HttpPost(iad1);
-          postIad1.setEntity(entity);
-
-          HttpClient httpclient = HttpClients.custom()
-            .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
-
-          CompletableFuture.runAsync(() -> {
-            try {
-              HttpResponse httpResponse1 = httpclient.execute(postIad1);
-              Assert.assertEquals("status code should be 200", 200, httpResponse1.getStatusLine().getStatusCode());
-              BufferedReader bufferedReader1 =
-                new BufferedReader(new InputStreamReader(httpResponse1.getEntity().getContent()));
-              boolean isRefresh1 = bufferedReader1.lines()
-                .collect(Collectors.joining("\n"))
-                .contains(START_REFRESH_CACHE);
-              Assert.assertTrue("data cache should start refresh", isRefresh1);
-              bufferedReader1.close();
-              latch.countDown();
-            } catch (Exception e) {
-              System.out.println(e.getMessage());
-              Assert.fail("http post fail");
-            }
-          });
-
-        }
-        latch.await(3, TimeUnit.SECONDS);
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }
     });
-    Given("^I change IO id \\{(\\d+)\\} cross device Capping to \\{(.*)\\}$", (String ioId, String cappingState) -> {
-
+    Given("^I change IO id \\{(\\d+)\\} cross device Capping to \\{(active|inactive)\\}$", (Integer ioId, String cappingState) -> {
       String crossCapping = "1";
       if (cappingState.equalsIgnoreCase("inactive")) {
         crossCapping = "0";
       }
 
-      SqlWorkflowUtils.setColumnInWorkflow("ios","id",ioId,
+      SqlWorkflowUtils.setColumnInWorkflow("ios","id",ioId.toString(),
         "cap_across_devices", crossCapping);
 
     });

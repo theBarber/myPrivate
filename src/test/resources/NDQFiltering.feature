@@ -34,7 +34,7 @@
 #		Given I set the {impressions} in {campaign_today_stats} of campaign name {ramp-lift-auto-campaign1-test} to {0}
 #		And zoneCache refreshed by http
 #		And I update the s3 experiment data
-#		Then I refresh staging delivery engine data cache
+#		Then I refresh delivery-engine cache
 #		And I sleep for 150 seconds
 #		Given I compute the NDQ of campaign name {ramp-lift-auto-campaign1-test}
 #		And I add unlimited query parameter with value {1} to send my requests to uas

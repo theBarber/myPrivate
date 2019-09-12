@@ -5,35 +5,39 @@
 @uas
 Feature: Cross Device Capping Experiment
   Background:
-    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from user history
-    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from user history
-    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from user history
-    Given I delete the history of cod753pf0jp65qhx4dr166uw0 from user history
-    Given I delete the history of 1pnpdzss6uvgknzizqm4tji45 from user history
-    Given I delete the history of 68h4mtmqsp9mul4d8ica9jks3 from user history
+    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from users bucket
+    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from users bucket
+    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from users bucket
+    Given I delete the history of cod753pf0jp65qhx4dr166uw0 from users bucket
+    Given I delete the history of 1pnpdzss6uvgknzizqm4tji45 from users bucket
+    Given I delete the history of 68h4mtmqsp9mul4d8ica9jks3 from users bucket
     Given I clear all cookies from uas requests
 
   Scenario: test uas star logic
     Given I change IO id {75396} cross device Capping to {active}
     Given I set the activation status of experiment group named {rampLift_NDQ_scenario} and his experiments to {inactive}
     Given I set the activation status of experiment group named {rampLift_capping_scenario} and his experiments to {active}
-    Then I refresh staging delivery engine data cache
+    Then I refresh delivery-engine cache
     And I sleep for 140 seconds
 #UTID 44444444444444444444444444444444 to 41hun7qe6bn47gfxgfbzwh938
 #UTID 22222222222222222222222222222222 to deviceId 20qxblv735tk3q7yq7nzy8mjm
 #UTID 33333333333333333333333333333333 to deviceId 314dzessmqqc5lby3bhzxcxtf
+
+
   Scenario: verify campaign capping enforced when sending zone requests from same user (different cookies) - in time frame
-    Given I add device 20qxblv735tk3q7yq7nzy8mjm with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"314dzessmqqc5lby3bhzxcxtf"}]}> to user info
-    Given I add device 314dzessmqqc5lby3bhzxcxtf with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"314dzessmqqc5lby3bhzxcxtf"}]}> to user info
+    Given I add device 20qxblv735tk3q7yq7nzy8mjm with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}> to user info
+    Given I add device 314dzessmqqc5lby3bhzxcxtf with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
-    And I add optimize query parameter with value {1} to send my requests to uas
+#    And I add optimize query parameter with value {1} to send my requests to uas
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
-    And I send impression requests to UAS immediately with delta {0}
+
     Then The response contains script
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
-    And I sleep for 1 seconds
+    And I send impression requests to UAS immediately with delta {0}
+#    And I sleep for 1 seconds
+
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains script
@@ -178,7 +182,7 @@ Feature: Cross Device Capping Experiment
 
   Scenario: verify campaign capping enforced when sending zone requests from same user (same cookie) - in time frame
     Given I change IO id {75396} cross device Capping to {inactive}
-    Then I refresh staging delivery engine data cache
+    Then I refresh delivery-engine cache
     And I sleep for 140 seconds
 
 

@@ -87,7 +87,7 @@ public class HeaderBiddingTest extends BaseTest {
 
     }
 
-private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Integer size1, Integer size2,String domain, String extraParams) {
+    private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Integer size1, Integer size2,String domain, String extraParams) {
 //        if(headerBiddingPostRequests == null)
 //        {
 //            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
@@ -119,26 +119,12 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
 
     private String getJsonForMultiJsonBidreqID(Integer publisherID, String firstBidReq, Integer h1, Integer w1, String secBidReq , Integer h2, Integer w2, String domain){
         String body =
-        "{\"x-ut-hb-params\":[\n" +
-                "  {\n" +
-                " \"testRequestId\": \"" + firstBidReq + "\",\n" +
-                " \"domain\": \""+ domain +"\",\n" +
-                " \"placementId\": \"10433394\",\n" +
-                " \"publisherId\":  \""+ publisherID +"\",\n" +
-                " \"sizes\": [\n" +
-                "      [" + h1 + "," + w1 + "]\n" +
-                "    ],\n" +
-                " \"timeout\": 700,\n" +
-                " \"hbadaptor\": \"prebid\",\n" +
-                " \"params\": {\"placementId\" : \"10433394\",\n" +
-                " \"publisherId\" : \""+ publisherID +"\"\n" +
-                " }\n" +
-                "},";
-                Bidreq++;
-                body += "{\"testRequestId\": \"" + secBidReq + "\",\n" +
+                "{\"x-ut-hb-params\":[\n" +
+                        "  {\n" +
+                        " \"testRequestId\": \"" + firstBidReq + "\",\n" +
                         " \"domain\": \""+ domain +"\",\n" +
                         " \"placementId\": \"10433394\",\n" +
-                        " \"publisherId\": \""+ publisherID +"\",\n" +
+                        " \"publisherId\":  \""+ publisherID +"\",\n" +
                         " \"sizes\": [\n" +
                         "      [" + h1 + "," + w1 + "]\n" +
                         "    ],\n" +
@@ -146,9 +132,23 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
                         " \"hbadaptor\": \"prebid\",\n" +
                         " \"params\": {\"placementId\" : \"10433394\",\n" +
                         " \"publisherId\" : \""+ publisherID +"\"\n" +
-                        "}\n" +
-                        "}\n" +
-                        "]}";
+                        " }\n" +
+                        "},";
+        Bidreq++;
+        body += "{\"testRequestId\": \"" + secBidReq + "\",\n" +
+                " \"domain\": \""+ domain +"\",\n" +
+                " \"placementId\": \"10433394\",\n" +
+                " \"publisherId\": \""+ publisherID +"\",\n" +
+                " \"sizes\": [\n" +
+                "      [" + h1 + "," + w1 + "]\n" +
+                "    ],\n" +
+                " \"timeout\": 700,\n" +
+                " \"hbadaptor\": \"prebid\",\n" +
+                " \"params\": {\"placementId\" : \"10433394\",\n" +
+                " \"publisherId\" : \""+ publisherID +"\"\n" +
+                "}\n" +
+                "}\n" +
+                "]}";
         return body;
     }
 
@@ -198,7 +198,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
 
 
 
-        private void setBidMapByEntity(String entity) {
+    private void setBidMapByEntity(String entity) {
         mapByEntity = entity;
         responses = new ArrayList<>();
         bidCounterMap = new HashMap<>();
@@ -351,7 +351,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
     }
 
 
-        private String getUrlFromAd(String htmlWithQuery) {
+    private String getUrlFromAd(String htmlWithQuery) {
         Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
         StringBuilder url = new StringBuilder();
         //put domain in url
@@ -398,7 +398,7 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
 
     private void responsesContainEntityWithName(String entity, String name)
     {
-       responsesContainEntityWithId(entity, getEntityId(entity,name));
+        responsesContainEntityWithId(entity, getEntityId(entity,name));
     }
 
     public Integer getEntityId(String entity, String name)
@@ -424,12 +424,8 @@ private void sendHBPostRequestBidIDcount(Integer times, Integer publisherID, Int
         pairs[0] = pairs[0].substring(pairs[0].indexOf("ut_ju")).trim();
         for (String pair : pairs) {
             int idx = pair.indexOf("=");
-            try {
-                if(pair.substring(0, idx).contains("ut") && !pair.substring(idx + 1).trim().contains(" "))
-                    query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1).trim().replace("'", ""), "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            if(pair.substring(0, idx).contains("ut") && !pair.substring(idx + 1).trim().contains(" "))
+                query_pairs.put(pair.substring(0, idx), pair.substring(idx + 1).trim().replace("'", ""));
         }
         return query_pairs;
     }
