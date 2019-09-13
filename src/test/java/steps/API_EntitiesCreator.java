@@ -423,14 +423,18 @@ public class API_EntitiesCreator extends BaseTest {
     }
 
 
-    private void updateCampaignEndDate(String campagin_name, Integer days) {
-        Date currentDate = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(currentDate);
+    private void updateCampaignEndDate(String campaign_name, Integer days) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String currentDate = formatter.format(date);
+        Calendar cal = new GregorianCalendar(/* remember about timezone! */);
+        cal.setTime(date);
         cal.add(Calendar.DATE, days);
+        String endDate = formatter.format(cal.getTime());
+
         SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` " +
-                "SET `activate` = `" + sdf.format(new Date()) + "`, `expire` = `" + sdf.format(currentDate) + "` WHERE `campaignname`=`" + campagin_name + "`;");
+                "SET `activate`='" + currentDate + "', `expire`='" + endDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status`=0;");
     }
 
 
