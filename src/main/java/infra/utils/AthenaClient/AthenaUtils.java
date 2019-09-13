@@ -10,7 +10,7 @@ public class AthenaUtils {
     /**
      * Submits a sample query to Athena and returns the execution ID of the query.
      */
-    public static String submitAthenaQuery(AmazonAthena athenaClient)
+    public static String submitAthenaQuery(AmazonAthena athenaClient, String query)
     {
         // The QueryExecutionContext allows us to set the Database.
         QueryExecutionContext queryExecutionContext = new QueryExecutionContext().withDatabase(ExampleConstants.ATHENA_DEFAULT_DATABASE);
@@ -23,7 +23,7 @@ public class AthenaUtils {
 
         // Create the StartQueryExecutionRequest to send to Athena which will start the query.
         StartQueryExecutionRequest startQueryExecutionRequest = new StartQueryExecutionRequest()
-                .withQueryString(ExampleConstants.ATHENA_SAMPLE_QUERY)
+                .withQueryString(query)
                 .withQueryExecutionContext(queryExecutionContext)
                 .withResultConfiguration(resultConfiguration);
 
@@ -74,7 +74,7 @@ public class AthenaUtils {
                 // Max Results can be set but if its not set,
                 // it will choose the maximum page size
                 // As of the writing of this code, the maximum value is 1000
-                // .withMaxResults(1000)
+                .withMaxResults(1000)
                 .withQueryExecutionId(queryExecutionId);
 
         GetQueryResultsResult getQueryResultsResult = athenaClient.getQueryResults(getQueryResultsRequest);
@@ -95,9 +95,39 @@ public class AthenaUtils {
         }
     }
 
-    private static void processRow(Row row, List<ColumnInfo> columnInfoList)
+
+    public static boolean processResultRowsContains(AmazonAthena athenaClient, String queryExecutionId, String value)
     {
-        System.out.println(row);
+        GetQueryResultsRequest getQueryResultsRequest = new GetQueryResultsRequest()
+                // Max Results can be set but if its not set,
+                // it will choose the maximum page size
+                // As of the writing of this code, the maximum value is 1000
+                //.withMaxResults(1000)
+                .withQueryExecutionId(queryExecutionId);
+
+        GetQueryResultsResult getQueryResultsResult = athenaClient.getQueryResults(getQueryResultsRequest);
+        List<ColumnInfo> columnInfoList = getQueryResultsResult.getResultSet().getResultSetMetadata().getColumnInfo();
+
+        while (true) {
+            List<Row> results = getQueryResultsResult.getResultSet().getRows();
+            for (Row row : results) {
+                // Process the row. The first row of the first page holds the column names.
+                if(row.toString().contains(value))
+                    return true;
+                processRow(row, columnInfoList);
+            }
+            // If nextToken is null, there are no more pages to read. Break out of the loop.
+            if (getQueryResultsResult.getNextToken() == null) {
+                break;
+            }
+            getQueryResultsResult = athenaClient.getQueryResults(
+                    getQueryResultsRequest.withNextToken(getQueryResultsResult.getNextToken()));
+        }
+        return false;
+    }
+
+    private static void processRow(Row row, List<ColumnInfo> columnInfoList)
+    {   System.out.println(row);
         for (int i = 0; i < columnInfoList.size(); ++i) {
             switch (columnInfoList.get(i).getType()) {
                 case "varchar":
@@ -131,6 +161,25 @@ public class AthenaUtils {
                     throw new RuntimeException("Unexpected Type is not expected" + columnInfoList.get(i).getType());
             }
         }
+    }
+
+    public static boolean testAthena(String query, String valueToBeRetrieved){
+
+        // Build an AmazonAthena client
+        AthenaClientFactory factory = new AthenaClientFactory();
+        AmazonAthena athenaClient = factory.createClient();
+
+        String queryExecutionId = submitAthenaQuery(athenaClient, query);
+
+        try {
+            waitForQueryToComplete(athenaClient, queryExecutionId);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+//        processResultRows(athenaClient, queryExecutionId);
+        return processResultRowsContains(athenaClient, queryExecutionId, valueToBeRetrieved);
+
     }
 
 

@@ -1,5 +1,6 @@
 package infra.utils;
 
+import junit.framework.TestCase;
 import ramp.lift.uas.automation.SystemUnderTest;
 
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import static org.junit.Assert.fail;
 public class SqlWorkflowUtils {
 
 	protected static SystemUnderTest sut = SystemUnderTest.getInstance();
+
 
 	public static String getLimitationForZone(int zoneId) {
 		String limitation = "";
