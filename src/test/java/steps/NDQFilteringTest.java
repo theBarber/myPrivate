@@ -2,6 +2,7 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import entities.Zone;
 import infra.utils.AthenaClient.AthenaUtils;
 import infra.utils.SqlWorkflowUtils;
 import org.junit.runner.RunWith;
@@ -84,8 +85,9 @@ public class NDQFilteringTest extends BaseTest {
 
 
 
-        And("^I send zone request (\\d+) times for zone (.*) until I get strategy (.*)$", (Integer times, String zone_name, String strategy) -> {
-            ResultSet entityByName = SqlWorkflowUtils.getEntityByName("zones", "zonename", zone_name);
+        And("^I send zone request (\\d+) times for zone (.*) until I get strategy (.*) and I expect (\\d+) impressions till I get NDQ passback$", (Integer times, String zone_name, String strategy, Integer ndq_passback) -> {
+            Zone zone = sut.getExecutorCampaignManager().getZone(zone_name)
+                    .orElseThrow(() -> new AssertionError("The Zone " + zone_name + " does not exist!"));
             String requestId = UUID.randomUUID().toString();
 //            int cnt=0;
             for(int i = 0; i<times; i ++) {
@@ -93,7 +95,7 @@ public class NDQFilteringTest extends BaseTest {
                         + " where dt='" + dateFormat.format(date)
                         + "' and request_id like '" + requestId +"';", String.valueOf((strategy.equals("random")?301:300)))) {
                     System.out.println("Found requests in Req bucket. Sending impressions!");
-                    for (int j = 0; j < 55; j++) {
+                    for (int j = 0; j < ndq_passback; j++) {
                         sendImpressionRequestsToUASImmediately();
                         try {
                             TimeUnit.SECONDS.sleep(3);
@@ -108,7 +110,7 @@ public class NDQFilteringTest extends BaseTest {
 //                            " and strategy " + strategy + " in Req bucket. Sending " + times +
 //                            " zone requests!\nSo far sent " + cnt*times + " requests.");
                     sut.getUASRquestModule().addHttpHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36");
-                    UasApi.sendMultipleZoneIdAdRequestsWithParameter(90, "requestid=" + requestId, 2, true);
+                    UasApi.sendMultipleZoneIdAdRequestsWithParameter(90, "requestid=" + requestId, zone.getId(), true);
                 }
             }
         });
