@@ -10,7 +10,7 @@ Feature: NDQ Filtering Campaign Level
     Given i disable all tests except 100
     Given i set test 100 status to 1
     Given I set campaign NDQfiltering2SL-ST-1 for 100 days
-    And I send zone request 10 times for zone NDQfilteringTL-ST-1 until I get strategy random and I expect 55 impressions till I get NDQ passback
+    And I send zone request 10 times for zone zone-zoneset-NDQfilteringTL-ST-1 until I get strategy random and I expect 55 impressions till I get NDQ passback
     And I send 1 times an ad request for zone named {NDQfilteringTL-ST-1} to UAS
     And The response code is 200
     And The responses are passback
