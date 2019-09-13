@@ -8,7 +8,7 @@ Feature: NDQ Filtering Campaign Level
   Scenario: Send Zone request and verify strategy
     Given i disable all tests except 100
     Given i set test 100 status to 1
-    And I send generic request 10 times until I get strategy {random}
+    And I send zone request 10 times for zone NDQfilteringTL-ST-1 until I get strategy random
     And I send 1 times an ad request for gdpr entities to UAS
     Then I expect req gdpr passback
     Given i disable all tests except 53

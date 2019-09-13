@@ -33,7 +33,6 @@ public class NDQFilteringTest extends BaseTest {
     private static DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     private static Date date = new Date();
     public static final String ATHENA_SAMPLE_QUERY = "select request_id,experiment_id FROM dl_raw_data.fact_dam_requests";
-//    private static final String ATHENA_SAMPLE_QUERY = "select zone_id,request_id,experiment_id FROM dl_raw_data.fact_dam_requests where zone_id=2 and dt='" + dateFormat.format(date) + "'";
 
     public NDQFilteringTest() {
         super();
@@ -83,9 +82,12 @@ public class NDQFilteringTest extends BaseTest {
         });
 
 
-        And("^I send generic request (\\d+) times until I get strategy \\{(.*)\\}$", (Integer times, String strategy) -> {
+
+
+        And("^I send zone request (\\d+) times for zone (.*) until I get strategy (.*)$", (Integer times, String zone_name, String strategy) -> {
+            ResultSet entityByName = SqlWorkflowUtils.getEntityByName("zones", "zonename", zone_name);
             String requestId = UUID.randomUUID().toString();
-            int cnt=0;
+//            int cnt=0;
             for(int i = 0; i<times; i ++) {
                 if (AthenaUtils.testAthena(ATHENA_SAMPLE_QUERY
                         + " where dt='" + dateFormat.format(date)
@@ -110,9 +112,6 @@ public class NDQFilteringTest extends BaseTest {
                 }
             }
         });
-
-
-
 
         Given("^I setup the db$", () -> {
             setupDB();

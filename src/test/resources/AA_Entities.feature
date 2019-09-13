@@ -1208,14 +1208,15 @@ Feature: Entities for tests
       | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | NDQfilteringTL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
 
+    Given I set campaign NDQfiltering2SL-ST-1 for 100 days
+
+    And i update campaign data by name
+      | Campaign Name       | factor |
+      | NDQfilteringTL-ST-1 | 0.10   |
+
     And i update zone data by name
       | Zone Name                        | is_secure |
       | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
-
-
-    And i update campaign data by name
-      | Campaign Name        | units | skip_daily_goal | factor |
-      | NDQfiltering2SL-ST-1 | 100   | 0               | 0.1    |
 
 
   @DynamicPricing
