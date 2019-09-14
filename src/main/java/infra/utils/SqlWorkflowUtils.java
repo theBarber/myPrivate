@@ -72,10 +72,10 @@ public class SqlWorkflowUtils {
     public static void WorkflowQuery(String query) {
         try {
             Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
-            if (stmt.executeUpdate(query) == 1) {
-                sut.write(query + " succeeded");
+            if (stmt.executeUpdate(query) == 0) {
+                fail(query + " didn't succeed. got: " + stmt.executeUpdate(query));
             }else{
-                fail(query + " didn't succeeded. got: " + stmt.executeUpdate(query));
+                sut.write(query + " succeed");
             }
         } catch (SQLException e) {
             e.printStackTrace();
