@@ -433,8 +433,7 @@ public class API_EntitiesCreator extends BaseTest {
         cal.add(Calendar.DATE, days);
         String endDate = formatter.format(cal.getTime());
 
-        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` " +
-                "SET `activate`='" + currentDate + "', `expire`='" + endDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status`=0;");
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '"+ currentDate +"' WHERE `campaignname` like '%" + campaign_name +"%' and `status` = 0;");
     }
 
 
@@ -469,6 +468,9 @@ public class API_EntitiesCreator extends BaseTest {
             try {
                 if (SqlWorkflowUtils.getEntityByName("campaigns", "campaignname", entityData.get(0)).next()) {
                     SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", entityData.get(0), "status", "1");
+                }else{
+                    sut.write("Unable to fetch campaign " + entityData.get(0)+ " data!");
+                    break;
                 }
             } catch (SQLException e) {
                 Assert.fail(e.getMessage());

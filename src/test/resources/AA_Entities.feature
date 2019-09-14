@@ -1202,7 +1202,7 @@ Feature: Entities for tests
   Scenario: create entities for NDQ filtering
     Given i disable campaigns by name on db
       | Campaign Name        |
-      | NDQfiltering2SL-ST-1 |
+      | NDQfilteringTL-ST-1 |
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
