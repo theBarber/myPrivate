@@ -1081,17 +1081,23 @@ Feature: Entities for tests
       | campaign-D-ASAP-ST-3         | 75396 | 247767   | false                 | 8158          | {zone-zoneset-D-ASAP-ST-3}         | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
       | campaign-D-HourlyFF-ST-4     | 75396 | 247767   | false                 | 8158          | {zone-zoneset-D-HourlyFF-ST-4}     | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
       | campaign-D-DailyFF-ST-5      | 75396 | 247767   | false                 | 8158          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-# To do - update all campaigns to end in 3 days from today (including today!!) at the database
-#   And i update campaign end day to be 3 days from today
+
+    Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
+    Given I set campaign campaign-D-DailyPacing-ST-2 for 3 days
+    Given I set campaign campaign-D-ASAP-ST-3 for 3 days
+    Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
+    Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
+
     And i update campaign data by name
 #    deliveryPacing = 1 = hourly pacing
 #    pacing = hourly flex
-      | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   | expire              |
-      | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions | 2019-06-26 23:59:59 |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 45    | impressions | 2019-06-26 23:59:59 |
-      | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions | 2019-06-26 23:59:59 |
-      | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions | 2019-06-26 23:59:59 |
-      | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions | 2019-06-26 23:59:59 |
+      | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
+      | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
+      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 45    | impressions |
+      | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
+      | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
+      | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |
+
     And i update zone data by name
       | Zone Name                        | is_secure | zone_type_id |
       | zone-zoneset-D-HourlyPacing-ST-1 | 1         | 10           |
@@ -1201,7 +1207,7 @@ Feature: Entities for tests
 
   Scenario: create entities for NDQ filtering
     Given i disable campaigns by name on db
-      | Campaign Name        |
+      | Campaign Name       |
       | NDQfilteringTL-ST-1 |
 
     Given i create new campaigns, new zoneset with domains
