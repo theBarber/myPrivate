@@ -69,6 +69,7 @@ public class API_EntitiesCreator extends BaseTest {
         Given("i update floor_price for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setFloorPriceForPublisherAdunit);
         Given("I run (select|update) SQL query? (.*)", this::runSqlQuery);
         Given("^I set (mobile|desktop) margin (\\d+)% for campaign? (.*)$", this::setMarginForCampaign);
+        Given("^I set campaign (.*) for (\\d+) days$", this::updateCampaignEndDate);
     }
 
     private void setMarginForCampaign(String method, Integer margin, String campaignName) {
@@ -422,49 +423,17 @@ public class API_EntitiesCreator extends BaseTest {
     }
 
 
-    private void updateCampaignEndDate(String entity, Integer days) {
+    private void updateCampaignEndDate(String campaign_name, Integer days) {
 
-        // To do - inject to data base the endDate String as the campaigns end day
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String currentDate = formatter.format(date);
+        Calendar cal = new GregorianCalendar(/* remember about timezone! */);
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days);
+        String endDate = formatter.format(cal.getTime());
 
-        Calendar calNewYork = Calendar.getInstance();
-        calNewYork.setTimeZone(TimeZone.getTimeZone("America/New_York"));
-        Integer day = calNewYork.get(Calendar.DATE);
-        Integer month, year;
-        month = calNewYork.get(Calendar.MONTH);
-        year = calNewYork.get(Calendar.YEAR);
-        calNewYork.set(Calendar.DATE, day + days);
-        day = calNewYork.get(Calendar.DATE);
-        month++;
-        if (month > 12) {
-            month = 1;
-        }
-        month.toString();
-        String monthStr = month.toString();
-        String dayStr = day.toString();
-        if (month < 10) {
-            monthStr = "0" + monthStr;
-            System.out.println("montstr = " + monthStr + "   ");
-        }
-        if (day < 10) {
-            System.out.println("day str = " + dayStr + "   ");
-            dayStr = "0" + dayStr;
-        }
-        String endDate = year + "-" + monthStr + "-" + dayStr + " " + "23:59:59";
-
-    }
-
-
-    private void updateCampaignStartEndDates(String entity, String updateBy, DataTable entities) {
-        List<List<String>> EntityList = entities.asLists(String.class);
-        List<String> entityData;
-        Integer entityID;
-        for (int i = 1; i < EntityList.size(); i++) {
-            entityData = EntityList.get(i);
-            entityID = updateBy.equals("name") ? sut.getCampaignManager().getterFor(entity).apply(entityData.get(0)).orElseThrow(() -> new AssertionError("entity wasn't found")).getId() : Integer.valueOf(entityData.get(0));
-            for (int j = 1; j < entityData.size(); j++) {
-                SqlWorkflowUtils.setColumnInWorkflow(entity + "s", entity + "id", entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
-            }
-        }
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '"+ currentDate +"' WHERE `campaignname` like '%" + campaign_name +"%' and `status` = 0;");
     }
 
 
@@ -479,7 +448,7 @@ public class API_EntitiesCreator extends BaseTest {
             for (int j = 1; j < entityData.size(); j++) {
 //                try {
 //                    if (SqlWorkflowUtils.getEntityByName(entity + "s", entity + "id", entityData.get(0)).next()) {
-                        SqlWorkflowUtils.setColumnInWorkflow(entity + "s", entity + "id", entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
+                SqlWorkflowUtils.setColumnInWorkflow(entity + "s", entity + "id", entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
 //                    }
 //                } catch (SQLException e) {
 //                    Assert.fail(e.getMessage());
@@ -499,6 +468,9 @@ public class API_EntitiesCreator extends BaseTest {
             try {
                 if (SqlWorkflowUtils.getEntityByName("campaigns", "campaignname", entityData.get(0)).next()) {
                     SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", entityData.get(0), "status", "1");
+                }else{
+                    sut.write("Unable to fetch campaign " + entityData.get(0)+ " data!");
+                    break;
                 }
             } catch (SQLException e) {
                 Assert.fail(e.getMessage());
@@ -538,13 +510,6 @@ public class API_EntitiesCreator extends BaseTest {
             updateCampaign(createdCampaign.get().getId(), "status", "0");
             updateCampaign(createdCampaign.get().getId(), "run_on_unknown_domains", "1");
         }
-    }
-
-    private void updateCamapaignInitiativeSetUpOnDB(Integer campaignid) {
-        updateCampaign(campaignid, "status", "0");
-        updateCampaign(campaignid, "priority", "-1");
-        updateCampaign(campaignid, "units", "-1");
-        updateCampaign(campaignid, "campaign_delivery_method", "2");
     }
 
     private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName, String lineItemId, Integer creativeID_Or_DealID, List<Integer> zonesetsIDs, Boolean isServerProgrammatic) {
@@ -598,28 +563,6 @@ public class API_EntitiesCreator extends BaseTest {
         sut.getCampaignManager().insertCampaignToIOMap(campaign, lineItemID, IO_id);
     }
 
-
-
-   /* private void setLastCreatedCampaignEntityFromResponse(CloseableHttpResponse createCampaignResponse)
-    {
-        Campaign[] tmpCampaign = null;
-
-        try{
-            tmpCampaign  = mapper.readValue(EntityUtils.toString(createCampaignResponse.getEntity()), CampaignsRequest.class).getCampaignsArray();
-
-        }catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        if(tmpCampaign[0]!=null){
-            lastCreatedCampaign = tmpCampaign[0];
-            sut.write("campaign successfully created!\ncampaign name: "+lastCreatedCampaign.getName() + "\ncampaign id: "+ lastCreatedCampaign.getId());
-        }
-        else
-        {
-            sut.write("campaign created is null!");
-        }
-    }*/
 
     private void updateCampaign(Integer id, String columnToChange, String value) {
         SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignid", String.valueOf(id), columnToChange, value);

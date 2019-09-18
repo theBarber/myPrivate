@@ -2,6 +2,7 @@ package infra.utils;
 
 import com.amazonaws.services.athena.AmazonAthena;
 import infra.utils.AthenaClient.AthenaClientFactory;
+import infra.utils.AthenaClient.ExampleConstants;
 import org.apache.commons.codec.binary.Hex;
 
 import java.io.UnsupportedEncodingException;
@@ -48,7 +49,7 @@ public class testbench {
         AthenaClientFactory factory = new AthenaClientFactory();
         AmazonAthena athenaClient = factory.createClient();
 
-        String queryExecutionId = submitAthenaQuery(athenaClient);
+        String queryExecutionId = submitAthenaQuery(athenaClient, ExampleConstants.ATHENA_SAMPLE_QUERY);
 
         try {
             waitForQueryToComplete(athenaClient, queryExecutionId);
