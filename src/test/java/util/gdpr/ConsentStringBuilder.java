@@ -14,8 +14,11 @@ import java.util.Set;
 
 public class ConsentStringBuilder {
 
-    final Boolean isUtVendorIdIncluded;
-    final Boolean isUtPurposeIdsIncluded;
+    private final Boolean isUtVendorIdIncluded;
+    private final Boolean isUtPurposeIdsIncluded;
+
+    private final int vendorListVersion = 165;
+    private final int maxVendorId = 677;
 
     public ConsentStringBuilder(Boolean isUtVendorIdIncluded, Boolean isUtPurposeIdsIncluded) {
         this.isUtVendorIdIncluded = isUtVendorIdIncluded;
@@ -57,8 +60,6 @@ public class ConsentStringBuilder {
         final int cmpVersion = 1;
         final int consentScreenID = 1;
         final String consentLanguage = "EN";
-        final int vendorListVersion = 10;
-        final int maxVendorId = 180;
         final int vendorEncodingType = 0; // Bit field
         final Set<Integer> allowedVendors = getAllowedVendorIds();
 

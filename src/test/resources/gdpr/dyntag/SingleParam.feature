@@ -7,8 +7,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdpr
   @DynTagGdprTrueParamEu
   Scenario: gdpr=1 - dyntag request from Eu
-    Given I reset the http headers sent to uas
-    And I add {UK} ip header
+    Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=1
     Then I expect req gdpr passback
 
@@ -22,8 +21,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdpr
   @DynTagGdprFalseParamEu
   Scenario: gdpr=0 - dyntag request from Eu
-    Given I reset the http headers sent to uas
-    And I add {UK} ip header
+    Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=0
     Then I expect delivery
 
@@ -52,8 +50,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdprstr
   @DynTagGdprStrUtIdIncludedUtPurposeIdsExcludedEu
   Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - dyntag request from eu
-    Given I reset the http headers sent to uas
-    And I add {UK} ip header
+    Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which includes ut vendor id and excludes ut purpose ids
     Then I expect req gdpr passback
 
@@ -67,8 +64,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdprstr
   @DynTagGdprStrUtIdExcludedUtPurposeIdsIncludedEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - dyntag request from eu
-    Given I reset the http headers sent to uas
-    And I add {UK} ip header
+    Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which excludes ut vendor id and includes ut purpose ids
     Then I expect req gdpr passback
 
@@ -84,8 +80,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @gdprstr
   @DynTagGdprStrUtIdExcludedUtPurposeIdsExcludedEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - dyntag request from eu
-    Given I reset the http headers sent to uas
-    And I add {UK} ip header
+    Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which excludes ut vendor id and excludes ut purpose ids
     Then I expect req gdpr passback
 
