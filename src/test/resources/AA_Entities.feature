@@ -200,6 +200,22 @@ Feature: Entities for tests
       | campaign-CrossDeviceCappingUDMP-ST-1 | 2       | 2               |
 
 
+  @CrossDeviceCapping
+  Scenario: create entities for cross device capping
+    Given i disable campaigns by name on db
+      | Campaign Name                    |
+      | campaign-CrossDeviceCapping-ST-1 |
+    Given i create new campaigns with new zoneset
+      | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
+
+    And i update zone data by name
+      | Zone Name                                    | is_mraid | is_secure |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
+    Given i update campaign data by name
+      | Campaign Name                    | capping | session_capping |
+      | campaign-CrossDeviceCapping-ST-1 | 2       | 2               |
+
   @GDPR
   @HB
   Scenario: create entities for HB tests

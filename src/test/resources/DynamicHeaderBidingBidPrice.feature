@@ -95,14 +95,14 @@ Feature: Dynamic HB bid price
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-fixed-margin-BB-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-direct-fixed-margin-BB-ES-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-dpm-direct-fixed-margin-BB-ES}
-    And all HB responses contains cpm with id 1
+    And all HB responses contains cpm with value {1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains script
     And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-dpm-direct-fixed-margin-BB-ES-banner-1} 100% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-dpm-direct-fixed-margin-BB-ES} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-dpm-direct-fixed-margin-BB-ES} 100% of the time
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-dpm-direct-fixed-margin-BB-ES-banner-1} 100% of the time
+#    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-dpm-direct-fixed-margin-BB-ES} 100% of the time
+#    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-dpm-direct-fixed-margin-BB-ES} 100% of the time
 #    And I read the latest hbl log file from uas
 #    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
 #    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
