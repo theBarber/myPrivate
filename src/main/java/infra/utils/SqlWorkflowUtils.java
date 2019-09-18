@@ -72,15 +72,11 @@ public class SqlWorkflowUtils {
     public static void WorkflowQuery(String query) {
         try {
             Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
-            if (stmt.executeUpdate(query) == 0) {
-                fail(query + " didn't succeed. got: " + stmt.executeUpdate(query));
-            }else{
-                sut.write(query + " succeed");
-            }
+            stmt.executeUpdate(query);
         } catch (SQLException e) {
-            e.printStackTrace();
-            fail(e.getMessage());
+            fail(query + " didn't succeed. got: " + e);
         }
+        sut.write(query + " succeed");
     }
 
     public static ResultSet getEntityByName(String tableName, String columnName, String columnValue) {
