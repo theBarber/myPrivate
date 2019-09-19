@@ -949,6 +949,9 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                | IO     | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-InstreamVid-View-SP | 407981 | 244699   | true                  | 568      | {zone-zoneset-InstreamVid-View-SP} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+    And i update campaign data by name
+      | Campaign Name                | viewability_wrapper_enabled | viewability_wrapper_vendor |
+      | campaign-InstreamVid-View-SP | 1                           | MOAT                       |
 
 
   Scenario:  create entities for enrich geo filter
