@@ -88,19 +88,18 @@ Feature: Entities for tests
   @HBEntitiesCreation
   @HBFilterEntitiesCreation
   Scenario: create entities for HeaderBiddingFilter tests
-    Given i remove all zones from publishers: {3708}
     And i disable campaigns by name on db
       | Campaign Name           |
       | campaign-HB-PO-Price    |
       | campaign-HB-No-PO-Price |
     And i create new campaigns with new zoneset
       | Campaign Name           | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-HB-PO-Price    | 75396 | 244896   | false                 | 8290          | {zone-zoneset-HB-PO-Price}    | []         | 93       | 15281          | 3708         | 69212           |
-      | campaign-HB-No-PO-Price | 75396 | 244896   | false                 | 8290          | {zone-zoneset-HB-No-PO-Price} | []         | 93       | 15281          | 3708         | 69211           |
+      | campaign-HB-PO-Price    | 75396 | 246300   | false                 | 288          | {zone-zoneset-HB-PO-Price}    | []         | 58       | 15281          | 3708         | 69726           |
+      | campaign-HB-No-PO-Price | 75396 | 246300   | false                 | 288          | {zone-zoneset-HB-No-PO-Price} | []         | 58       | 15281          | 3708         | 69725           |
     And i update campaign data by name
-      | Campaign Name           | status | Priority | units | limitation | campaign_delivery_method | is_wholesale | skip_daily_goal | units | goal_type   |
-      | campaign-HB-PO-Price    | 0      | 1        | -1    | []         | 1                        | 1            | 1               | -1    | impressions |
-      | campaign-HB-No-PO-Price | 0      | -2       | -1    | []         | 1                        | 1            | 1               | -1    | impressions |
+      | Campaign Name           | status | Priority | units | limitation | campaign_delivery_method | is_wholesale | skip_daily_goal | goal_type   |
+      | campaign-HB-PO-Price    | 0      | 1        | -1    | []         | 1                        | 1            | 1               | impressions |
+      | campaign-HB-No-PO-Price | 0      | -2       | -1    | []         | 1                        | 1            | 1               | impressions |
     And i update banner data by name
       | Banner Name                      | is_secure | limitation |
       | campaign-HB-PO-Price-banner-1    | 1         | []         |
@@ -199,6 +198,22 @@ Feature: Entities for tests
       | Campaign Name                        | capping | session_capping |
       | campaign-CrossDeviceCappingUDMP-ST-1 | 2       | 2               |
 
+
+#  @CrossDeviceCapping
+#  Scenario: create entities for cross device capping
+#    Given i disable campaigns by name on db
+#      | Campaign Name                    |
+#      | campaign-CrossDeviceCapping-ST-1 |
+#    Given i create new campaigns with new zoneset
+#      | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+#      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
+
+#   And i update zone data by name
+#      | Zone Name                                    | is_mraid | is_secure |
+#      | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
+#    Given i update campaign data by name
+#      | Campaign Name                    | capping | session_capping |
+#      | campaign-CrossDeviceCapping-ST-1 | 2       | 2               |
 
   @GDPR
   @HB
