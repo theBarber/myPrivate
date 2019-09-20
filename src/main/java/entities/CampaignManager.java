@@ -140,9 +140,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 		Optional<IO> io_O;
     	Optional<LineItem> li_O;
 
-    	if(getCampaign(campaign.getName()).isPresent())
-    		throw new AssertionError("campaign is already exist!");
-    	else if((li_O = getLineItem(lineItemID)).isPresent())
+    	if((li_O = getLineItem(lineItemID)).isPresent())
 			li_O.get().addCampaign(campaign);
     	else
     	{
