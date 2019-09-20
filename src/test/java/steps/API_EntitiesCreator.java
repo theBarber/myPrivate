@@ -28,8 +28,6 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 
-//@CucumberOptions(features = "classpath:API_Examples.feature", plugin = {"pretty",})
-//        "infra.RotatingJSONFormatter:target/cucumber/API_Examples_$TIMESTAMP$.json"})
 @RunWith(Cucumber.class)
 public class API_EntitiesCreator extends BaseTest {
     final private String CREATIVES_SOURCE_FILE_PATH = "/input_files/creativesTemplates.json";
@@ -62,7 +60,6 @@ public class API_EntitiesCreator extends BaseTest {
         And("I update the created campaign \\{(.*)\\} banners name to \\{(.*)\\} chained with the serial number", this::updateBannersName);
         And("I update the created (\\w+) named \\{(.*)\\} (\\w+) to be (\\w+) in the DB", this::updateDB);
         And("I update last created campaign named \\{(.*)\\} (\\w+) to be \\{(.*)\\} in the DB", this::updateLastCreatedCampaignDB);
-        And("I refresh the zone Cache", () -> CacheProcessTest.refreshZoneCache("cmd"));
         And("i create new Campaign named \\{(.*)\\} for LineItem (\\d+) associated to creative (\\d+) with zoneset named \\{(.*)\\} with priority \\{(.*)\\}", this::createCampaignWithZonesetName);
         Given("^i create new campaigns with multiple creatives$", this::createCampaignsWithMultipleCreatives);
         Given("i update bid_price_type for publisher = (\\d+) for adunit = (\\d+) to be (\\d+)", this::setBidPriceTypeForPublisherAdunit);
@@ -444,16 +441,9 @@ public class API_EntitiesCreator extends BaseTest {
         for (int i = 1; i < EntityList.size(); i++) {
             entityData = EntityList.get(i);
             entityID = updateBy.equals("name") ? sut.getCampaignManager()
-                    .getterFor(entity).apply(entityData.get(0)).orElseThrow(() -> new AssertionError("entity wasn't found")).getId() : Integer.valueOf(entityData.get(0));
+                    .getterFor(entity).apply(entityData.get(0)).orElseThrow(() -> new AssertionError("Entity wasn't found")).getId() : Integer.valueOf(entityData.get(0));
             for (int j = 1; j < entityData.size(); j++) {
-//                try {
-//                    if (SqlWorkflowUtils.getEntityByName(entity + "s", entity + "id", entityData.get(0)).next()) {
                 SqlWorkflowUtils.setColumnInWorkflow(entity + "s", entity + "id", entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
-//                    }
-//                } catch (SQLException e) {
-//                    Assert.fail(e.getMessage());
-//                }
-
             }
         }
     }
@@ -557,9 +547,6 @@ public class API_EntitiesCreator extends BaseTest {
     }
 
     private void insertCampaignToIOMap(Campaign campaign, Integer IO_id, Integer lineItemID) {
-        if (sut.getCampaignManager().getCampaign(campaign.getName()).isPresent())
-            throw new AssertionError("campaign name should be with unique name");
-
         sut.getCampaignManager().insertCampaignToIOMap(campaign, lineItemID, IO_id);
     }
 
