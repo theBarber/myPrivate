@@ -26,13 +26,13 @@ Feature: Cross Device Capping No Experiment
     And I add optimize query parameter with value {1} to send my requests to uas
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     And I sleep for 1 seconds
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
 
@@ -40,7 +40,7 @@ Feature: Cross Device Capping No Experiment
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     And I sleep for 2 seconds
@@ -56,7 +56,7 @@ Feature: Cross Device Capping No Experiment
     And I add stid query parameter with value {1} to send my requests to uas
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
 
@@ -65,7 +65,7 @@ Feature: Cross Device Capping No Experiment
 
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately
@@ -87,7 +87,7 @@ Feature: Cross Device Capping No Experiment
     And I add stid query parameter with value {1} to send my requests to uas
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     Given I clear all cookies from uas requests
@@ -96,7 +96,7 @@ Feature: Cross Device Capping No Experiment
     And I sleep for 1 seconds
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
 
@@ -104,7 +104,7 @@ Feature: Cross Device Capping No Experiment
 
     When I send 2 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
     Given I clear all cookies from uas requests
@@ -113,7 +113,7 @@ Feature: Cross Device Capping No Experiment
     And I sleep for 2 seconds
     When I send 2 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     Given I sleep for 2 seconds
@@ -127,7 +127,7 @@ Feature: Cross Device Capping No Experiment
     And I add optimize query parameter with value {1} to send my requests to uas
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
 
@@ -144,7 +144,7 @@ Feature: Cross Device Capping No Experiment
     And I add optimize query parameter with value {1} to send my requests to uas
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
 
@@ -152,7 +152,7 @@ Feature: Cross Device Capping No Experiment
 
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
 
@@ -167,7 +167,7 @@ Feature: Cross Device Capping No Experiment
     And I add optimize query parameter with value {1} to send my requests to uas
     When I send 4 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
 
@@ -182,7 +182,7 @@ Feature: Cross Device Capping No Experiment
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
     And I send impression requests to UAS immediately
     And I sleep for 1 seconds
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     Given I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
@@ -196,7 +196,7 @@ Feature: Cross Device Capping No Experiment
     And I send impression requests to UAS immediately
     And I sleep for 2 seconds
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
 
@@ -208,7 +208,7 @@ Feature: Cross Device Capping No Experiment
     And I add optimize query parameter with value {1} to send my requests to uas
     And I add stid query parameter with value {1} to send my requests to uas
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately
@@ -216,7 +216,7 @@ Feature: Cross Device Capping No Experiment
     Given I sleep for 70 seconds
 
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately
@@ -225,7 +225,7 @@ Feature: Cross Device Capping No Experiment
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately
@@ -238,13 +238,13 @@ Feature: Cross Device Capping No Experiment
     And I add optimize query parameter with value {1} to send my requests to uas
     And I add stid query parameter with value {1} to send my requests to uas
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately
     And I add zoneid query parameter with value {160093} to send my requests to uas
     When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately
@@ -253,13 +253,13 @@ Feature: Cross Device Capping No Experiment
 
     And I add zoneid query parameter with value {160092} to send my requests to uas
     When I send 2 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately
     Given I add zoneid query parameter with value {160093} to send my requests to uas
     When I send 2 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately
@@ -268,7 +268,7 @@ Feature: Cross Device Capping No Experiment
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
     When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
-    Then The response contains script
+    Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
     And I send impression requests to UAS immediately

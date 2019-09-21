@@ -52,7 +52,7 @@ Feature: UAS connectivity to other components
 	#Scenario: 6. Uas is responsive to zone request
 	#	When I send 10 times an ad request with parameter {unlimited=1&requestid=yaniv} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 	#	Then The response code is 200
-	#	And The response contains script
+	#	And The response contains {script}
 	#	And The responses has impression-urls
 	#	And I send impression requests to UAS immediately!
 	#	And The response has click-url
@@ -64,7 +64,7 @@ Feature: UAS connectivity to other components
 	#Scenario: 7. Uas is responsive to a lot of zone requests
 	#	When I send 500 times an ad request with parameter {unlimited=1&requestid=yaniv} for zone named {INT2434 - See Through - RAMP Lift Test 1} to UAS
 	#	Then The response code is 200
-	#	And The response contains script
+	#	And The response contains {script}
 	#	And The responses has impression-urls
 	#	And The response has click-url
 

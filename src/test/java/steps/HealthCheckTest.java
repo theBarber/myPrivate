@@ -31,7 +31,7 @@ public class HealthCheckTest extends BaseTest {
 		Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
 		Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
 		Then("^All requests are sent$", this::allResponsesFinished);
-		Then("^The response contains (.*)$", this::healthCheckResponseContains);
+		Then("^The response contains \\{(.*)\\}$", this::healthCheckResponseContains);
 		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
 
 	}

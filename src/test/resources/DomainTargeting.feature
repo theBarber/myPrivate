@@ -17,7 +17,7 @@ Feature: Domain Targeting tests
     Given I use {https://daniref.com} as referer string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=0&domain=danifalse.com} for zone named {zone-zoneset-EHC-ST-1A} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-1A-banner-1} 100% of the time
 
   Scenario: 1B. send zone requests, ex  host is a false domain + in black list
@@ -44,7 +44,7 @@ Feature: Domain Targeting tests
     Given I use {https://danifalse.com} as referer string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=0} for zone named {zone-zoneset-EHC-ST-3A} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-3A-banner-1} 100% of the time
 
   Scenario: 3B. send zone requests, ex referer is not a false domain + in black list
@@ -66,7 +66,7 @@ Feature: Domain Targeting tests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
     When I send 1 times an ad request with parameter {domain=danifalse.com&optimize=0} for zone named {zone-zoneset-EHC-ST-4A} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-4A-banner-1} 100% of the time
 
   Scenario: 4B. send zone requests, make sure a complexed referer is extracted correctly
@@ -85,7 +85,7 @@ Feature: Domain Targeting tests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=0} for zone named {zone-zoneset-EHC-ST-5A} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-5A-banner-1} 100% of the time
 
   Scenario: 5B. send zone requests, make sure a complexed referer is extracted correctly.
@@ -103,14 +103,14 @@ Feature: Domain Targeting tests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danidom.com} as referer string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
@@ -125,12 +125,12 @@ Feature: Domain Targeting tests
     Given I use {https://danifalse.com} as referer string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danidom.com&tagid=470&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {news.danidom.com&tagid=470&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
 

@@ -15,7 +15,7 @@ Feature: Publisher blacklist tests
   Scenario: For a publisher 3843 block advertiser 28004 - zone tag request
     Given I send 1 times an ad request with parameter {unlimited=1&domain=publisherblocklist.com} for zone named {zone-zoneset-campaign-pbl-BRAND1-ST} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND1-ST-banner-1} 100% of the time
     Given I send 1 times an ad request with parameter {unlimited=1&domain=publisherblocklist.com} for zone named {zone-zoneset-campaign-pbl-BRAND2-PGX} to UAS
@@ -23,7 +23,7 @@ Feature: Publisher blacklist tests
     And The responses are passback
     Given I send 1 times an ad request with parameter {unlimited=1&domain=nick.com} for zone named {zone-zoneset-campaign-pbl-BRAND2-PGX} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND2-PGX-banner-1} 100% of the time
 
@@ -31,7 +31,7 @@ Feature: Publisher blacklist tests
   Scenario: For a publisher 3843 block advertiser 3112 by categories - zone tag request
     Given I send 1 times an ad request with parameter {unlimited=1&domain=kids.com} for zone named {zone-zoneset-campaign-pbl-BRAND2-PGX} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND2-PGX-banner-1} 100% of the time
     Given I send 1 times an ad request with parameter {unlimited=1&domain=kids.com} for zone named {zone-zoneset-campaign-pbl-BRAND1-ST} to UAS
@@ -39,7 +39,7 @@ Feature: Publisher blacklist tests
     And The responses are passback
     Given I send 1 times an ad request with parameter {unlimited=1&domain=nick.com} for zone named {zone-zoneset-campaign-pbl-BRAND2-PGX} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND2-PGX-banner-1} 100% of the time
 
@@ -47,14 +47,14 @@ Feature: Publisher blacklist tests
   Scenario: For a publisher 3843 block advertiser 28004 - dynamic tag request
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3843 with extra params {publisherblocklist.com&tagid=541&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND1-ST-banner-1} 100% of the time
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3843 with extra params {publisherblocklist.com&tagid=542&optimize=0}
     And The response code is 200
     And The responses are passback
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3843 with extra params {nick.com&tagid=542&optimize=0}
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND2-PGX-banner-1} 100% of the time
 
@@ -62,14 +62,14 @@ Feature: Publisher blacklist tests
   Scenario: For a publisher 3843 block advertiser 3112 by categories - dynamic tag request
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3843 with extra params {kids.com&tagid=542&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND2-PGX-banner-1} 100% of the time
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3843 with extra params {kids.com&tagid=541&optimize=0}
     And The response code is 200
     And The responses are passback
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3843 with extra params {nick.com&tagid=541&optimize=0}
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND1-ST-banner-1} 100% of the time
     
@@ -77,7 +77,7 @@ Feature: Publisher blacklist tests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding secure post request for publisher 3843 with size1 = 1 size2 = 2, with domain {publisherblocklist.com} and extra params {&unlimited=1&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND1-ST}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND1-ST-banner-1}
     And all HB responses contains cpm with value {1}
@@ -91,7 +91,7 @@ Feature: Publisher blacklist tests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding secure post request for publisher 3843 with size1 = 1 size2 = 1, with domain {kids.com} and extra params {&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND2-PGX}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND2-PGX-banner-1}
     And all HB responses contains cpm with value {1}

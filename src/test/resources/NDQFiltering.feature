@@ -20,7 +20,7 @@
 #		And I refresh the zone Cache
 #		Given I compute the NDQ of campaign name {ramp-lift-auto-campaign1-test}
 #		When I send 10 times an ad request for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
-#		And The response contains script
+#		And The response contains {script}
 #		And I send the same amount of impressions url as the number of NDQ
 #
 #	Scenario: verify NDQ filtering on control experiment level
@@ -39,5 +39,5 @@
 #		Given I compute the NDQ of campaign name {ramp-lift-auto-campaign1-test}
 #		And I add unlimited query parameter with value {1} to send my requests to uas
 #		When I send 100 times an ad request with query parameters for zone named {INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test} to UAS
-#		And The response contains script
+#		And The response contains {script}
 #		And I send the same amount of impressions url as the number of NDQ

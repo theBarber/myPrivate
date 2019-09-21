@@ -45,14 +45,14 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=11000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCappingUDMP-ST-1-banner-1} 100% of the time
     And I sleep for 2 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=12000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCappingUDMP-ST-1-banner-1} 100% of the time
     And I sleep for 2 seconds
@@ -69,7 +69,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=00000000-0000-0000-0000-000000000000&optimize=0&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPforApp-ST-1-banner-1} 100% of the time
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=61000000-6100-6100-6100-610000000000&optimize=0&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
@@ -89,7 +89,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef7dc7bb} to my requests to uas
     When I send 1 times an ad request for zone named {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef1dc2bb} to my requests to uas
@@ -113,7 +113,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given I clear all cookies from uas requests
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
 
 #  UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
@@ -125,7 +125,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248cef1dc2bb} to my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a9b8c7faf65436dcbba3248cef1dc2bb} to my requests to uas
@@ -151,7 +151,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=00000000-0000-0000-0000-000000005678&bundleid=udmp_seq_profile_web} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PTzoneLimitation-ST-1-banner-1} 100% of the time
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {bundleid=udmp_seq_profile_web&deviceid=73000000-6300-6100-6100-810000009000} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
@@ -165,14 +165,14 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given I clear all cookies from uas requests
     When I send 2 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-1-banner-1} 100% of the time
     And I sleep for 2 seconds
 #   step 2: 1 req from device 67
     When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-2-banner-1} 100% of the time
 #    step 3: 1 req from 67, should return pb cause capping = 3
@@ -184,7 +184,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-1-banner-1} 100% of the time
 
@@ -197,7 +197,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And I send impression requests to UAS
     Given I sleep for 3 seconds
 #  step 2: 2 req from device 90
@@ -208,7 +208,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And I send impression requests to UAS
     Given I sleep for 3 seconds
     #  step 3: 2 req from device 89. should return passback since capping = 5;
