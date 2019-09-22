@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import io.qameta.allure.Attachment;
 import org.apache.http.HttpResponse;
 import org.junit.Assert;
 import org.junit.AssumptionViolatedException;
@@ -11,6 +12,8 @@ import ramp.lift.uas.automation.UASRequestModule;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -350,7 +353,7 @@ public class HeaderBiddingTest extends BaseTest {
         });
     }
 
-
+    @Attachment(value = "Win URL", type = "text/plain")
     private String getUrlFromAd(String htmlWithQuery) {
         Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
         StringBuilder url = new StringBuilder();
@@ -368,7 +371,15 @@ public class HeaderBiddingTest extends BaseTest {
             url.append("&" + entry.getKey().substring(entry.getKey().lastIndexOf('.') + 1)).append("=" + entry.getValue());
         }
         System.out.println("URL from ad: "+ "\n" + url.toString());
-        return url.toString();
+        return encodeValue(url.toString());
+    }
+
+    private static String encodeValue(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex.getCause());
+        }
     }
 
     public void responsesAdsContainEntityWithName(String entity, String name)
