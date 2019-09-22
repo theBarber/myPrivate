@@ -1,23 +1,30 @@
 @append-entities
 Feature: Append entities for tests
 
-  Scenario: create entities for NDQ filtering
-    Given i disable campaigns by name on db
-      | Campaign Name        |
-      | NDQfilteringTL-ST-1 |
-
-    Given i create new campaigns, new zoneset with domains
-      | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NDQfilteringTL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
-
-
+  @HB
+  @HBEntitiesCreation
+  @HBFilterEntitiesCreation
+  Scenario: create entities for HeaderBiddingFilter tests
+    And i disable campaigns by name on db
+      | Campaign Name           |
+      | campaign-HB-PO-Price    |
+      | campaign-HB-No-PO-Price |
+    And i create new campaigns with new zoneset
+      | Campaign Name           | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-HB-PO-Price    | 75396 | 246300   | false                 | 288          | {zone-zoneset-HB-PO-Price}    | []         | 58       | 15281          | 3708         | 69726           |
+      | campaign-HB-No-PO-Price | 75396 | 246300   | false                 | 288          | {zone-zoneset-HB-No-PO-Price} | []         | 58       | 15281          | 3708         | 69725           |
     And i update campaign data by name
-      | Campaign Name       | factor |
-      | NDQfilteringTL-ST-1 | 0.10   |
-
+      | Campaign Name           | status | Priority | units | limitation | campaign_delivery_method | is_wholesale | skip_daily_goal | goal_type   |
+      | campaign-HB-PO-Price    | 0      | 1        | -1    | []         | 1                        | 1            | 1               | impressions |
+      | campaign-HB-No-PO-Price | 0      | -2       | -1    | []         | 1                        | 1            | 1               | impressions |
+    And i update banner data by name
+      | Banner Name                      | is_secure | limitation |
+      | campaign-HB-PO-Price-banner-1    | 1         | []         |
+      | campaign-HB-No-PO-Price-banner-1 | 1         | []         |
     And i update zone data by name
-      | Zone Name                        | is_secure |
-      | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
+      | Zone Name                   | is_secure | limitation |
+      | zone-zoneset-HB-PO-Price    | 1         | []         |
+      | zone-zoneset-HB-No-PO-Price | 1         | []         |
 
 
 
