@@ -5,18 +5,31 @@
 @parallel
 
 Feature: NDQ Filtering Campaign Level
+  Background:
 
-  Scenario: Send Zone request and verify strategy
+#  Scenario: Send Zone request and verify strategy
+#    Given i disable all tests except 100
+#    Given i set test 100 status to 1
+#    Given I set campaign NDQfilteringTL-ST-1 for 100 days
+#    And I send zone request 10 times for zone zone-zoneset-NDQfilteringTL-ST-1 until I get strategy random and I expect 55 impressions till I get NDQ passback
+#    And I send 1 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
+#    And The response code is 200
+#    And The responses are passback
+#    Given i disable all tests except 53
+#    Given i set test 53 status to 1
+
+  Scenario: Set Strategy 50-50 random-empty
     Given i disable all tests except 100
     Given i set test 100 status to 1
-    Given I set campaign NDQfilteringTL-ST-1 for 100 days
-    And I send zone request 10 times for zone zone-zoneset-NDQfilteringTL-ST-1 until I get strategy random and I expect 55 impressions till I get NDQ passback
-    And I send 1 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
-    And The response code is 200
-    And The responses are passback
+
+  Scenario: try to consume all impressions
+    Given I set campaign NDQfilteringTL-ST-1 for 10 days
+    And I send 1000 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {NDQfilteringTL-ST-1-banner-1} 50% of the time
+
+  Scenario: Set strategy to common one
     Given i disable all tests except 53
     Given i set test 53 status to 1
-
 
 #  Scenario: 1. Campaign level, zone request, verify NDQ filtering obeys to skip daily goal flag when flag = false
 #    Given i disable all tests except 100
