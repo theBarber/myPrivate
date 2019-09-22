@@ -5,6 +5,7 @@
 @parallel
 
 Feature: NDQ Filtering Campaign Level
+
   Background:
 
 #  Scenario: Send Zone request and verify strategy
@@ -18,6 +19,33 @@ Feature: NDQ Filtering Campaign Level
 #    Given i disable all tests except 53
 #    Given i set test 53 status to 1
 
+  Scenario: create entities for NDQ filtering
+    Given i disable campaigns by name on db
+      | Campaign Name       |
+      | NDQfilteringTL-ST-1 |
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NDQfilteringTL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
+
+    Given I set campaign NDQfilteringTL-ST-1 for 10 days
+
+    And i update campaign data by name
+      | Campaign Name       | factor | units |
+      | NDQfilteringTL-ST-1 | 0      | 1000  |
+
+    And i update zone data by name
+      | Zone Name                        | is_secure |
+      | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
+
+  Scenario: refresh caches
+    And I refresh banner cache
+    And I refresh zone cache
+    And I restart {ramp-lift-services}
+    And I restart {ut-programmatic-gw}
+
+  Scenario: save entities to file
+    And save all entities to json file
+
   Scenario: Set Strategy 50-50 random-empty
     Given i disable all tests except 100
     Given i set test 100 status to 1
@@ -25,11 +53,13 @@ Feature: NDQ Filtering Campaign Level
   Scenario: try to consume all impressions
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
     And I send 1000 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {NDQfilteringTL-ST-1-banner-1} 50% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {NDQfilteringTL-ST-1-banner-1} 5% of the time
 
   Scenario: Set strategy to common one
     Given i disable all tests except 53
     Given i set test 53 status to 1
+
+
 
 #  Scenario: 1. Campaign level, zone request, verify NDQ filtering obeys to skip daily goal flag when flag = false
 #    Given i disable all tests except 100
