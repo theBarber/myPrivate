@@ -13,20 +13,20 @@ Feature: Programmatic flow support
   Scenario: wait more for banner cache to be updated in memory
     Given I sleep for 1 seconds
 
-  Scenario: 1. basic Call to Programmatic GW - zone tag
-    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-SS} to UAS
-    Then The response code is 200
-    And The response contains script
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
-    When I send impression requests to UAS
+#  Scenario: 1. basic Call to Programmatic GW - zone tag
+#    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-SS} to UAS
+#    Then The response code is 200
+#    And The response contains script
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
+#    When I send impression requests to UAS
 
-  Scenario: 2. basic Call to Programmatic GW - dynamic tag
-    Then I sleep for 1 seconds
-    Then i send 1 times Dynamic Tag synchronized ad request with tag id 196 to UAS for publisher 3711 with domain {test.com&requestid=systemTestA&unlimited=1&optimize=0}
-    And The synchronized response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
-    When I send impression requests to UAS
+#  Scenario: 2. basic Call to Programmatic GW - dynamic tag
+#    Then I sleep for 1 seconds
+#    Then i send 1 times Dynamic Tag synchronized ad request with tag id 196 to UAS for publisher 3711 with domain {test.com&requestid=systemTestA&unlimited=1&optimize=0}
+#    And The synchronized response code is 200
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
+#    When I send impression requests to UAS
 
   Scenario: 3. basic Call to Programmatic GW - Header bidding
     Then I sleep for 1 seconds
@@ -41,14 +41,14 @@ Feature: Programmatic flow support
     And The response contains script
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
 
-  Scenario: 4. Call Programmatic GW, GW doing auction, last ad selected - zone tag
-    Then I sleep for 1 seconds
-    When I send 1 times an ad request with parameter {requestid=systemTestB&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-PGC} to UAS
-    Then The response code is 200
-    And The response contains script
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
-    When I send impression requests to UAS
+#  Scenario: 4. Call Programmatic GW, GW doing auction, last ad selected - zone tag
+#    Then I sleep for 1 seconds
+#    When I send 1 times an ad request with parameter {requestid=systemTestB&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-PGC} to UAS
+#    Then The response code is 200
+#    And The response contains script
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
+#    When I send impression requests to UAS
 
   Scenario: 5. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then I sleep for 1 seconds
