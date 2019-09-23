@@ -5,9 +5,11 @@
 
 Feature: Entities for tests
 
-#  Background: health check
-#    When Sending a healthcheck request to RAMP-IO
-#    Then The response code is 200
+  Scenario: Make sure entities are fresh
+    And I refresh banner cache
+    And I refresh zone cache
+    And I restart {ramp-lift-services}
+    And I restart {ut-programmatic-gw}
 
   Scenario: entities end-date update
     And i update po_line_item end date by id {67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
@@ -94,8 +96,8 @@ Feature: Entities for tests
       | campaign-HB-No-PO-Price |
     And i create new campaigns with new zoneset
       | Campaign Name           | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-HB-PO-Price    | 75396 | 246300   | false                 | 288          | {zone-zoneset-HB-PO-Price}    | []         | 58       | 15281          | 3708         | 69726           |
-      | campaign-HB-No-PO-Price | 75396 | 246300   | false                 | 288          | {zone-zoneset-HB-No-PO-Price} | []         | 58       | 15281          | 3708         | 69725           |
+      | campaign-HB-PO-Price    | 75396 | 246300   | false                 | 288           | {zone-zoneset-HB-PO-Price}    | []         | 58       | 15281          | 3708         | 69726           |
+      | campaign-HB-No-PO-Price | 75396 | 246300   | false                 | 288           | {zone-zoneset-HB-No-PO-Price} | []         | 58       | 15281          | 3708         | 69725           |
     And i update campaign data by name
       | Campaign Name           | status | Priority | units | limitation | campaign_delivery_method | is_wholesale | skip_daily_goal | goal_type   |
       | campaign-HB-PO-Price    | 0      | 1        | -1    | []         | 1                        | 1            | 1               | impressions |
@@ -199,21 +201,25 @@ Feature: Entities for tests
       | campaign-CrossDeviceCappingUDMP-ST-1 | 2       | 2               |
 
 
-#  @CrossDeviceCapping
-#  Scenario: create entities for cross device capping
-#    Given i disable campaigns by name on db
-#      | Campaign Name                    |
-#      | campaign-CrossDeviceCapping-ST-1 |
-#    Given i create new campaigns with new zoneset
-#      | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-#      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
+  @CrossDeviceCapping
+  Scenario: create entities for cross device capping
+    Given i disable campaigns by name on db
+      | Campaign Name                    |
+      | campaign-CrossDeviceCapping-ST-1 |
+      | campaign-CrossDeviceCapping-ST-2 |
+    Given i create new campaigns with new zoneset
+      | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceCapping-ST-2 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} | []         | 93       | 14892          | 3708         | 27807           |
 
-#   And i update zone data by name
-#      | Zone Name                                    | is_mraid | is_secure |
-#      | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
-#    Given i update campaign data by name
-#      | Campaign Name                    | capping | session_capping |
-#      | campaign-CrossDeviceCapping-ST-1 | 2       | 2               |
+   And i update zone data by name
+      | Zone Name                                    | is_mraid | is_secure |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST-2 | 0        | 1         |
+    Given i update campaign data by name
+      | Campaign Name                    | capping | session_capping |
+      | campaign-CrossDeviceCapping-ST-1 | 2       | 2               |
+      | campaign-CrossDeviceCapping-ST-2 | 2       | 2               |
 
   @GDPR
   @HB
@@ -320,8 +326,8 @@ Feature: Entities for tests
 
 
     Given i update bid_price_type for publisher = 3708 for adunit = 93 to be 1
-    Given i update bid_price_type for publisher = 3711 for adunit = 69 to be 1
-    Given i update bid_price_type for publisher = 3711 for adunit = 75 to be 1
+#    Given i update bid_price_type for publisher = 3711 for adunit = 69 to be 1
+#    Given i update bid_price_type for publisher = 3711 for adunit = 75 to be 1
 
 
   @HB
@@ -965,6 +971,9 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                | IO     | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-InstreamVid-View-SP | 407981 | 244699   | true                  | 568      | {zone-zoneset-InstreamVid-View-SP} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+#    And i update campaign data by name
+#      | Campaign Name                | viewability_wrapper_enabled | viewability_wrapper_vendor |
+#      | campaign-InstreamVid-View-SP | 1                           | MOAT                       |
 
 
   Scenario:  create entities for enrich geo filter
@@ -1142,7 +1151,6 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-pbl-BRAND1-ST  | 574531 | 251644   | false                 | 26778         | {zone-zoneset-campaign-pbl-BRAND1-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
-#      | campaign-pbl-BRAND1-ST  | 574531 | 251644   | false                 | 26803         | {zone-zoneset-campaign-pbl-BRAND1-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
       | campaign-pbl-BRAND2-PGX | 75396  | 222908   | false                 | 11958         | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
     And i update zone data by name
       | Zone Name                            | is_secure |
@@ -1230,11 +1238,11 @@ Feature: Entities for tests
       | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | NDQfilteringTL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
 
-    Given I set campaign NDQfilteringTL-ST-1 for 100 days
+    Given I set campaign NDQfilteringTL-ST-1 for 10 days
 
     And i update campaign data by name
-      | Campaign Name       | factor |
-      | NDQfilteringTL-ST-1 | 0.10   |
+      | Campaign Name       | factor | units |
+      | NDQfilteringTL-ST-1 | 0      | 100   |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
@@ -1286,18 +1294,12 @@ Feature: Entities for tests
   @Keren
   @yaniv
   @refresh
-  Scenario: refresh banner cache
+  Scenario: refresh caches
     And I refresh banner cache
+    And I refresh zone cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
-    And I sleep for 40 seconds
 
-  @HB
-  @refreshZoneCache
-  @yaniv
-  @refresh
-  Scenario: refresh zone cache
-    And I refresh the zone Cache
 
   @optimize
   Scenario: update test strategy
@@ -1308,6 +1310,3 @@ Feature: Entities for tests
   @refresh
   Scenario: save entities to file
     And save all entities to json file
-
-  Scenario: sleep
-    And I sleep for 240 seconds

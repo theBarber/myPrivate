@@ -17,46 +17,49 @@ import infra.module.WithId;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LineItem implements WithId<Integer> {
-	
+    @JsonProperty("ioId")
     public IO Io;
     @JsonProperty("Campaigns")
     public List<Campaign> campaigns;
-    private Integer ioLineItemId = null;
+    @JsonProperty("ioLineItemId")
+    private Integer ioLineItemId;
     public static final DateTimeFormatter formatter;
+
     static {
-	formatter = new DateTimeFormatterBuilder().append(DateTimeFormatter.ISO_LOCAL_DATE).appendLiteral(' ')
-		.append(DateTimeFormatter.ISO_LOCAL_TIME).toFormatter().withZone(ZoneOffset.UTC);
+        formatter = new DateTimeFormatterBuilder().append(DateTimeFormatter.ISO_LOCAL_DATE).appendLiteral(' ')
+                .append(DateTimeFormatter.ISO_LOCAL_TIME).toFormatter().withZone(ZoneOffset.UTC);
     }
 
-    public LineItem(){}
+    public LineItem() {
+    }
 
-    public LineItem(Integer id)
-    {
+    public LineItem(Integer id) {
         ioLineItemId = id;
     }
+
     private ZonedDateTime startDate, endDate;
 
     @Override
     public Integer getId() {
-	return Optional.ofNullable(this.ioLineItemId).orElseThrow(NullPointerException::new);
+        return Optional.ofNullable(this.ioLineItemId).orElseThrow(NullPointerException::new);
     }
 
-    
+
     public void setStartDate(String startDate) {
-	this.startDate = formatter.parse(startDate, ZonedDateTime::from);
+        this.startDate = formatter.parse(startDate, ZonedDateTime::from);
 
     }
 
     public void setEndDate(String endDate) {
-	this.endDate = formatter.parse(endDate, ZonedDateTime::from);
+        this.endDate = formatter.parse(endDate, ZonedDateTime::from);
     }
 
     public Temporal getStartDate() {
-	return startDate;
+        return startDate;
     }
 
     public Temporal getEndDate() {
-	return endDate;
+        return endDate;
     }
 
 
@@ -69,9 +72,8 @@ public class LineItem implements WithId<Integer> {
         this.ioLineItemId = ioLineItemId;
     }
 
-    public void addCampaign(Campaign campaign)
-    {
-        if(campaigns == null)
+    public void addCampaign(Campaign campaign) {
+        if (campaigns == null)
             campaigns = new ArrayList<>();
         campaigns.add(campaign);
     }

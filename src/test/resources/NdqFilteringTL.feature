@@ -29,7 +29,7 @@
 #  Scenario 3: Test level, HB request, make sure ndq feature navigates requests according to strategy traffic portion
 #    Given i send 100 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {NDQfiltering} with extra params {&unlimited=1&optimize=0}
 #    And The response code is 200
-#    And The response contains script
+#    And The response contains {script}
 #    And The responses has impression-urls
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-NDQfiltering2TL-ST-1-banner-1} 98% of the time
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-NDQfiltering2TL-ST-2-banner-1} 2% of the time

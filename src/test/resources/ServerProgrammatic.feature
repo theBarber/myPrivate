@@ -33,12 +33,12 @@ Feature: Programmatic flow support
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=0&requestid=systemTestA}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
     And all HB responses contains cpm with value {1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
 
 #  Scenario: 4. Call Programmatic GW, GW doing auction, last ad selected - zone tag
@@ -61,7 +61,7 @@ Feature: Programmatic flow support
      Then I sleep for 1 seconds
     When I send 1 times an ad request with parameter {requestid=systemTestC&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-ST} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
     When I send impression requests to UAS
@@ -78,11 +78,11 @@ Feature: Programmatic flow support
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X2} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&requestid=systemTestC&optimize=0}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-ST-3-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
 
     #web Burl
@@ -99,7 +99,7 @@ Feature: Programmatic flow support
     Then I sleep for 1 seconds
     When I send 1 times an ad request with parameter {requestid=BUrlTestInApp&unlimited=1&bundleid=app1} for zone named {zone-zoneset-server-prog-inApp-ST} to UAS
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The response contains <script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com/burl"</script>
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-inApp-ST-1-banner-1} 100% of the time
@@ -110,7 +110,7 @@ Feature: Programmatic flow support
     Then I sleep for 1 seconds
     When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=1&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
@@ -126,18 +126,18 @@ Feature: Programmatic flow support
     Then I sleep for 1 seconds
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=1&domain=remove&requestid=systemTestA}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
   @optimize
   Scenario: 4. Call Programmatic GW, GW doing auction, last ad selected - zone tag
     Then I sleep for 1 seconds
     When I send 1 times an ad request with parameter {requestid=systemTestB&optimize=1&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-PGC} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
     When I send impression requests to UAS
@@ -153,7 +153,7 @@ Feature: Programmatic flow support
     Then I sleep for 1 seconds
     When I send 1 times an ad request with parameter {requestid=systemTestC&optimize=1&domain=remove&unlimited=1} for zone named {zone-zoneset-server-prog-ST} to UAS
     Then The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
     When I send impression requests to UAS
@@ -169,9 +169,9 @@ Feature: Programmatic flow support
     Then I sleep for 1 seconds
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X2} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&requestid=systemTestC&optimize=1&domain=remove}
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-ST-3-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
-    And The response contains script
+    And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
