@@ -2,7 +2,7 @@
 @headerBidding
 @scheduled
 @NdqFilteringCL
-@parallel
+#@parallel
 
 Feature: NDQ Filtering Campaign Level
 
