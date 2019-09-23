@@ -16,7 +16,7 @@ Feature: Programmatic flow support
 #  Scenario: 1. basic Call to Programmatic GW - zone tag
 #    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-SS} to UAS
 #    Then The response code is 200
-#    And The response contains script
+#    And The response contains {script}
 #    And The responses has impression-urls
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
 #    When I send impression requests to UAS
@@ -45,7 +45,7 @@ Feature: Programmatic flow support
 #    Then I sleep for 1 seconds
 #    When I send 1 times an ad request with parameter {requestid=systemTestB&optimize=0&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-PGC} to UAS
 #    Then The response code is 200
-#    And The response contains script
+#    And The response contains {script}
 #    And The responses has impression-urls
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-PGC-2-banner-1} 100% of the time
 #    When I send impression requests to UAS

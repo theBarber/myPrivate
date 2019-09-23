@@ -151,7 +151,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #    Given I clear all cookies from uas requests
 #    When I send 1 times an ad request with parameter {deviceid=00000000-0000-0000-0000-000000005678&bundleid=udmp_seq_profile_web} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
 #    Then The response code is 200
-#    And The response contains script
+#    And The response contains {script}
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PTzoneLimitation-ST-1-banner-1} 100% of the time
 #    Given I clear all cookies from uas requests
 #    When I send 1 times an ad request with parameter {bundleid=udmp_seq_profile_web&deviceid=73000000-6300-6100-6100-810000009000} for zone named {zone-zoneset-PTzoneLimitation-ST-1} to UAS
