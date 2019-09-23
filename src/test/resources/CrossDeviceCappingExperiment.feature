@@ -30,29 +30,29 @@ Feature: Cross Device Capping Experiment
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
 #    And I add optimize query parameter with value {1} to send my requests to uas
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
 
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
 #    And I sleep for 1 seconds
 
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
 
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     And I sleep for 2 seconds
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
@@ -62,70 +62,75 @@ Feature: Cross Device Capping Experiment
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
     And I add stid query parameter with value {1} to send my requests to uas
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
 
 
     Given I sleep for 70 seconds
 
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
     Given I sleep for 70 seconds
 
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
 
   Scenario: verify line items capping enforced when sending zone requests from same user (different cookies)
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    And I add zoneid query parameter with value {160092} to send my requests to uas
-    And I add ct query parameter with value {1} to send my requests to uas
-    And I add unlimited query parameter with value {1} to send my requests to uas
-    And I add optimize query parameter with value {1} to send my requests to uas
-    And I add stid query parameter with value {1} to send my requests to uas
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
+    #And I add zoneid query parameter with value {160092} to send my requests to uas
+    #And I add ct query parameter with value {1} to send my requests to uas
+    #And I add unlimited query parameter with value {1} to send my requests to uas
+    #And I add optimize query parameter with value {1} to send my requests to uas
+    #And I add stid query parameter with value {1} to send my requests to uas
+    #When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
-    And I add zoneid query parameter with value {160093} to send my requests to uas
+    #And I add zoneid query parameter with value {160093} to send my requests to uas
     And I sleep for 1 seconds
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
+    When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
+    #When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-2-banner-1} 100% of the time
 
     Given I sleep for 70 seconds
 
-    When I send 2 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
+    When I send 2 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-2-banner-1} 100% of the time
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    And I add zoneid query parameter with value {160092} to send my requests to uas
+
+    #And I add zoneid query parameter with value {160092} to send my requests to uas
     And I sleep for 2 seconds
-    When I send 2 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 2 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
+    #When I send 2 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     Given I sleep for 2 seconds
-    Given I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
+    #Given I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
@@ -133,15 +138,15 @@ Feature: Cross Device Capping Experiment
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
 
     And I sleep for 3 seconds
 
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
@@ -150,23 +155,23 @@ Feature: Cross Device Capping Experiment
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
 
     And I sleep for 70 seconds
 
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
 
     And I sleep for 70 seconds
 
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
@@ -174,11 +179,11 @@ Feature: Cross Device Capping Experiment
     Given I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
     And I clear all cookies from uas requests
-    When I send 4 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 4 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
 
   Scenario: verify campaign capping enforced when sending zone requests from same user (same cookie) - in time frame
     Given I change IO id {75396} cross device Capping to {inactive}
@@ -189,12 +194,12 @@ Feature: Cross Device Capping Experiment
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     And I send impression requests to UAS immediately with delta {0}
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
-    Given I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
+    Given I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
@@ -202,80 +207,87 @@ Feature: Cross Device Capping Experiment
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
     And I send impression requests to UAS immediately with delta {0}
     And I sleep for 2 seconds
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
 
   Scenario: verify campaign capping enforced when sending zone requests from same user (same cookie) - out of time frame
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    And I add zoneid query parameter with value {160092} to send my requests to uas
-    And I add ct query parameter with value {1} to send my requests to uas
-    And I add unlimited query parameter with value {1} to send my requests to uas
-    And I add optimize query parameter with value {1} to send my requests to uas
-    And I add stid query parameter with value {1} to send my requests to uas
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
+    #And I add zoneid query parameter with value {160092} to send my requests to uas
+    #And I add ct query parameter with value {1} to send my requests to uas
+    #And I add unlimited query parameter with value {1} to send my requests to uas
+    #And I add optimize query parameter with value {1} to send my requests to uas
+    #And I add stid query parameter with value {1} to send my requests to uas
+    #When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
 
     Given I sleep for 70 seconds
 
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
+    #When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
     Given I sleep for 70 seconds
 
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
+    #When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
 
   Scenario: verify line items capping enforced when sending zone requests from same user (same cookie)
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    And I add zoneid query parameter with value {160092} to send my requests to uas
-    And I add ct query parameter with value {1} to send my requests to uas
-    And I add unlimited query parameter with value {1} to send my requests to uas
-    And I add optimize query parameter with value {1} to send my requests to uas
-    And I add stid query parameter with value {1} to send my requests to uas
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
+    #And I add zoneid query parameter with value {160092} to send my requests to uas
+    #And I add ct query parameter with value {1} to send my requests to uas
+    #And I add unlimited query parameter with value {1} to send my requests to uas
+    #And I add optimize query parameter with value {1} to send my requests to uas
+    #And I add stid query parameter with value {1} to send my requests to uas
+    #When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
-    And I add zoneid query parameter with value {160093} to send my requests to uas
-    When I send 3 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
+    When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
+    #And I add zoneid query parameter with value {160093} to send my requests to uas
+    #When I send 3 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-2-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
 
     Given I sleep for 70 seconds
 
-    And I add zoneid query parameter with value {160092} to send my requests to uas
-    When I send 2 times an ad request for zone named {INT2434 - See Through - Test-Lift2} to UAS
+    When I send 2 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209943-277924-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-1-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
-    Given I add zoneid query parameter with value {160093} to send my requests to uas
-    When I send 2 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
+    When I send 2 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
+    #Given I add zoneid query parameter with value {160093} to send my requests to uas
+    #When I send 2 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-2-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
+    #When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
     Then The responses are passback
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
-    When I send 1 times an ad request for zone named {INT2434 - See Through - Test-Lift3} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
+    #When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} to UAS
     Then The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-209942-277923-See Through-RampLift-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-2-banner-1} 100% of the time
     And I send impression requests to UAS immediately with delta {0}

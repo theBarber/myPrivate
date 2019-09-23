@@ -119,18 +119,18 @@ Feature: Domain Targeting tests
     And The response code is 200
     And The responses are passback
 
-  Scenario: 7A. send DT requests, referer is a false domain, should choose domain as effective host.
-    Given I clear all headers from uas requests
-    Given I clear all cookies from uas requests
-    Given I use {https://danifalse.com} as referer string to send my requests to uas
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danidom.com&tagid=470&optimize=0}
-    And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
-    Given I clear all headers from uas requests
-    Given I clear all cookies from uas requests
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {news.danidom.com&tagid=470&optimize=0}
-    And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
+#  Scenario: 7A. send DT requests, referer is a false domain, should choose domain as effective host.
+#    Given I clear all headers from uas requests
+#    Given I clear all cookies from uas requests
+#    Given I use {https://danifalse.com} as referer string to send my requests to uas
+#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danidom.com&tagid=470&optimize=0}
+#    And The response code is 200
+#    And The response contains {script}
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
+#    Given I clear all headers from uas requests
+#    Given I clear all cookies from uas requests
+#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {news.danidom.com&tagid=470&optimize=0}
+#    And The response code is 200
+#    And The response contains {script}
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
 

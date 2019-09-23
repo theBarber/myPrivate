@@ -18,19 +18,19 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
     And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=1
     Then I expect req gdpr passback
 
-  @gdpr
-  @DynTagGdprFalseParamEu
-  Scenario: gdpr=0 - dyntag request from Eu
-    Given I add {UK} ip header
-    And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=0
-    Then I expect delivery
+#  @gdpr
+#  @DynTagGdprFalseParamEu
+#  Scenario: gdpr=0 - dyntag request from Eu
+#    Given I add {UK} ip header
+#    And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=0
+#    Then I expect delivery
 
-  @gdpr
-  @DynTagGdprFalseParamNotEu
-  Scenario: gdpr=0 - dyntag request not from Eu
-    Given I reset the http headers sent to uas
-    And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=0
-    Then I expect delivery
+#  @gdpr
+#  @DynTagGdprFalseParamNotEu
+#  Scenario: gdpr=0 - dyntag request not from Eu
+#    Given I reset the http headers sent to uas
+#    And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdpr=0
+#    Then I expect delivery
 
   @gdprstr
   @DynTagGdprStrUtIdUtPurposesIncludedEu

@@ -201,21 +201,25 @@ Feature: Entities for tests
       | campaign-CrossDeviceCappingUDMP-ST-1 | 2       | 2               |
 
 
-#  @CrossDeviceCapping
-#  Scenario: create entities for cross device capping
-#    Given i disable campaigns by name on db
-#      | Campaign Name                    |
-#      | campaign-CrossDeviceCapping-ST-1 |
-#    Given i create new campaigns with new zoneset
-#      | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-#      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
+  @CrossDeviceCapping
+  Scenario: create entities for cross device capping
+    Given i disable campaigns by name on db
+      | Campaign Name                    |
+      | campaign-CrossDeviceCapping-ST-1 |
+      | campaign-CrossDeviceCapping-ST-2 |
+    Given i create new campaigns with new zoneset
+      | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceCapping-ST-2 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} | []         | 93       | 14892          | 3708         | 27807           |
 
-#   And i update zone data by name
-#      | Zone Name                                    | is_mraid | is_secure |
-#      | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
-#    Given i update campaign data by name
-#      | Campaign Name                    | capping | session_capping |
-#      | campaign-CrossDeviceCapping-ST-1 | 2       | 2               |
+   And i update zone data by name
+      | Zone Name                                    | is_mraid | is_secure |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST-2 | 0        | 1         |
+    Given i update campaign data by name
+      | Campaign Name                    | capping | session_capping |
+      | campaign-CrossDeviceCapping-ST-1 | 2       | 2               |
+      | campaign-CrossDeviceCapping-ST-2 | 2       | 2               |
 
   @GDPR
   @HB
@@ -319,6 +323,7 @@ Feature: Entities for tests
       | zone-zoneset-HB-DynamicPrice-ST-1x2-5a          | 1         |
       | zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 1         |
       | zone-zoneset-HB-DP-ServerPr-PGC-6b              | 1         |
+
 
     Given i update bid_price_type for publisher = 3708 for adunit = 93 to be 1
 #    Given i update bid_price_type for publisher = 3711 for adunit = 69 to be 1
