@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
+    stages {
+        stage('Refresh cache') {
+            stage('Refresh zone cache') {
+                steps {
+                    script {
+                        try {
+                            sh 'mvn clean install test -DtestCacheProcessTest.refreshZoneCache("cmd") -P $ENVIRONMENT'
+                            currentBuild.result = 'SUCCESS'
+                        } catch (Exception ex) {
+                            currentBuild.result = 'FAILURE'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+post {
+    always {
+        junit 'target/surefire-reports/*.xml'
+        cleanWs()
+    }
+}

@@ -1,0 +1,78 @@
+pipeline {
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
+    stages {
+        stage('Refresh caches') {
+            parallel {
+                stage('Refresh banner cache') {
+                    build job: 'banners_cache_refresh_' + $ENVIRONMENT
+                }
+                stage('Refresh zone cache') {
+                    build job: 'zones_cache_refresh_' + $ENVIRONMENT
+                }
+            }
+        }
+        stage('Test') {
+            parallel {
+                stage('Domain Targeting tests') {
+                    steps {
+                        script {
+                            try {
+                                sh 'mvn clean install test -DtestDomainTargetingTest -P $ENVIRONMENT'
+                                currentBuild.result = 'SUCCESS'
+                            } catch (Exception ex) {
+                                currentBuild.result = 'FAILURE'
+                            }
+                        }
+                    }
+                }
+                stage('UDMP tests') {
+                    steps {
+                        script {
+                            try {
+                                sh 'mvn clean install test -DtestUDMPTest -P $ENVIRONMENT'
+                                currentBuild.result = 'SUCCESS'
+                            } catch (Exception ex) {
+                                currentBuild.result = 'FAILURE'
+                            }
+                        }
+                    }
+                }
+                stage('Server Programmatic tests') {
+                    steps {
+                        script {
+                            try {
+                                sh 'mvn clean install test -DtestServerProgrammaticTest -P $ENVIRONMENT'
+                                currentBuild.result = 'SUCCESS'
+                            } catch (Exception ex) {
+                                currentBuild.result = 'FAILURE'
+                            }
+                        }
+                    }
+                }
+                stage('Server Programmatic tests') {
+                    steps {
+                        script {
+                            try {
+                                sh 'mvn clean install test -DtestServerProgrammaticTest -P $ENVIRONMENT'
+                                currentBuild.result = 'SUCCESS'
+                            } catch (Exception ex) {
+                                currentBuild.result = 'FAILURE'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            junit 'target/surefire-reports/*.xml'
+            cleanWs()
+        }
+    }
+}
