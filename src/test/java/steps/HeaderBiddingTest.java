@@ -353,7 +353,7 @@ public class HeaderBiddingTest extends BaseTest {
         });
     }
 
-    @Attachment(value = "Win URL", type = "text/plain")
+    @Attachment(value = "URL from ad: ", type = "text/plain")
     private String getUrlFromAd(String htmlWithQuery) {
         Map<String, String> splitedQuery = splitHBQuery(htmlWithQuery);
         StringBuilder url = new StringBuilder();
@@ -371,7 +371,7 @@ public class HeaderBiddingTest extends BaseTest {
             url.append("&" + entry.getKey().substring(entry.getKey().lastIndexOf('.') + 1)).append("=" + entry.getValue());
         }
         System.out.println("URL from ad: "+ "\n" + url.toString());
-        return encodeValue(url.toString());
+        return url.toString();
     }
 
     private static String encodeValue(String value) {
