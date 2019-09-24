@@ -35,6 +35,8 @@ Feature: NDQ Filtering Campaign Level
   Scenario: refresh caches
     And I refresh banner cache
     And I refresh zone cache
+    And I restart {ramp-lift-services}
+    And I restart {ut-programmatic-gw}
 
   Scenario: save entities to file
     And save all entities to json file
