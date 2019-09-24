@@ -1236,7 +1236,7 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NDQfilteringTL-ST-1 | 75396 | 251644   | false                 | 8158          | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
+      | NDQfilteringTL-ST-1 | 75396 | 210722   | false                 | 8158          | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
 
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
 
