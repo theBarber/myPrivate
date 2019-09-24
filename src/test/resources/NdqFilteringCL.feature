@@ -14,16 +14,6 @@ Feature: NDQ Filtering Campaign Level
 #    Given i set test 53 status to 1
 
 
-
-  Scenario: refresh caches
-    And I refresh banner cache
-    And I refresh zone cache
-    And I restart {ramp-lift-services}
-    And I restart {ut-programmatic-gw}
-
-  Scenario: save entities to file
-    And save all entities to json file
-
   Scenario: Set Strategy 50-50 random-empty
     Given i disable all tests except 100
     Given i set test 100 status to 1

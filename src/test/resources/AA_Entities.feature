@@ -5,12 +5,6 @@
 
 Feature: Entities for tests
 
-  Scenario: Make sure entities are fresh
-    And I refresh banner cache
-    And I refresh zone cache
-    And I restart {ramp-lift-services}
-    And I restart {ut-programmatic-gw}
-
   Scenario: entities end-date update
     And i update po_line_item end date by id {67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
     And i update io_line_item end date by id {245653,210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
@@ -1247,6 +1241,22 @@ Feature: Entities for tests
     And i update zone data by name
       | Zone Name                        | is_secure |
       | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
+
+
+  Scenario: Create Entities for brand reveal 300*600
+    Given i disable campaigns by name on db
+      | Campaign Name     |
+      | NewBrandReveal-BR |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name     | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NewBrandReveal-BR | 407981 | 253747   | false                 | 27534         | {zone-zoneset-NewBrandReveal-BR} | []         | 89       | 15376          | 3695         | 69723           | []          | []          |
+
+    Given I set campaign NewBrandReveal-BR for 10 days
+
+    And i update zone data by name
+      | Zone Name                      | is_secure |
+      | zone-zoneset-NewBrandReveal-BR | 1         |
 
   @DynamicPricing
   @InAppBlackWhiteList
