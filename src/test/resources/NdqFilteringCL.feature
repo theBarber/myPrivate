@@ -6,8 +6,6 @@
 
 Feature: NDQ Filtering Campaign Level
 
-  Background:
-
 #  Scenario: Send Zone request and verify strategy
 #    Given i disable all tests except 100
 #    Given i set test 100 status to 1
@@ -18,6 +16,25 @@ Feature: NDQ Filtering Campaign Level
 #    And The responses are passback
 #    Given i disable all tests except 53
 #    Given i set test 53 status to 1
+
+  Scenario: create entities for NDQ filtering
+    Given i disable campaigns by name on db
+      | Campaign Name       |
+      | NDQfilteringTL-ST-1 |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NDQfilteringTL-ST-1 | 75396 | 210722   | false                 | 8158          | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
+
+    Given I set campaign NDQfilteringTL-ST-1 for 10 days
+
+    And i update campaign data by name
+      | Campaign Name       | factor | units |
+      | NDQfilteringTL-ST-1 | 0      | 100   |
+
+    And i update zone data by name
+      | Zone Name                        | is_secure |
+      | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
 
   Scenario: Set Strategy 50-50 random-empty
     Given i disable all tests except 100
