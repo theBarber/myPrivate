@@ -1,4 +1,4 @@
-#@parallel
+@parallel
 
 Feature: NDQ Filtering Campaign Level
 
@@ -20,7 +20,7 @@ Feature: NDQ Filtering Campaign Level
 
   Scenario: try to consume all impressions
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
-    And I send 1 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
+    And I send 1000 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
     Then The response code is 200
     And The response contains {script}
     And The responses has impression-urls
