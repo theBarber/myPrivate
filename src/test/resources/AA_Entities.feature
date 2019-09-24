@@ -1236,7 +1236,7 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NDQfilteringTL-ST-1 | 75396 | 210722   | false                 | 8158          | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 14894          | 3708         | 27809           | []          | []          |
+      | NDQfilteringTL-ST-1 | 75396 | 210722   | false                 | 25156         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
 
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
 
@@ -1247,7 +1247,6 @@ Feature: Entities for tests
     And i update zone data by name
       | Zone Name                        | is_secure |
       | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
-
 
   @DynamicPricing
   @InAppBlackWhiteList
