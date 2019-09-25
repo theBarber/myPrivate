@@ -1242,21 +1242,28 @@ Feature: Entities for tests
       | Zone Name                        | is_secure |
       | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
 
-
+  @append
   Scenario: Create Entities for brand reveal 300*600
     Given i disable campaigns by name on db
-      | Campaign Name     |
-      | NewBrandReveal-BR |
+      | Campaign Name            |
+      | NewBrandReveal-BR-Direct |
+      | NewBrandReveal-BR-PROG   |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name     | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NewBrandReveal-BR | 407981 | 253747   | false                 | 27534         | {zone-zoneset-NewBrandReveal-BR} | []         | 89       | 15376          | 3695         | 69723           | []          | []          |
+      | Campaign Name            | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NewBrandReveal-BR-Direct | 75396 | 254126   | false                 | 27534         | {zone-zoneset-NewBrandReveal-BR-Direct} | []         | 95       | 15376          | 3708         | 69723           | []          | []          |
+      | NewBrandReveal-BR-PROG   | 75396 | 252900   | false                 | 27534         | {zone-zoneset-NewBrandReveal-BR-PROG}   | []         | 95       | 15376          | 3708         | 69723           | []          | []          |
 
     Given I set campaign NewBrandReveal-BR for 10 days
 
+    And i update campaign data by name
+      | Campaign Name            | factor | units |
+      | NewBrandReveal-BR-Direct | 0      | 100   |
+
     And i update zone data by name
-      | Zone Name                      | is_secure |
-      | zone-zoneset-NewBrandReveal-BR | 1         |
+      | Zone Name                             | is_secure |
+      | zone-zoneset-NewBrandReveal-BR-Direct | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG   | 1         |
 
   @DynamicPricing
   @InAppBlackWhiteList
@@ -1303,6 +1310,7 @@ Feature: Entities for tests
   @Keren
   @yaniv
   @refresh
+  @append
   Scenario: refresh caches
     And I refresh banner cache
     And I refresh zone cache
