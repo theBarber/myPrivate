@@ -423,9 +423,12 @@ public class API_EntitiesCreator extends BaseTest {
     private void updateCampaignEndDate(String campaign_name, Integer days) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date(System.currentTimeMillis());
+        TimeZone etTimeZone = TimeZone.getTimeZone("America/New_York");
+        formatter.setTimeZone(etTimeZone);
+
+        Date date = new Date();
         String currentDate = formatter.format(date);
-        Calendar cal = new GregorianCalendar(/* remember about timezone! */);
+        Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DATE, days);
         String endDate = formatter.format(cal.getTime());

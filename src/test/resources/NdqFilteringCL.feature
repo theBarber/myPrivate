@@ -20,7 +20,7 @@ Feature: NDQ Filtering Campaign Level
 
   Scenario: try to consume all impressions
     Given I set campaign NewBrandReveal-BR-Direct for 10 days
-    And I send 1000 times an ad request for zone named {zone-zoneset-NewBrandReveal-BR-Direct} to UAS
+    And I send 1 times an ad request for zone named {zone-zoneset-NewBrandReveal-BR-Direct} to UAS
     Then The response code is 200
     And The response contains {script}
     And The responses has impression-urls
