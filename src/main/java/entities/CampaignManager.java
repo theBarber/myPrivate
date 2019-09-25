@@ -131,36 +131,9 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
         return io.stream().filter(WithId.idIs(byId)).findFirst();
     }
 
-    //why use optional???
-    public void insertCampaignToIOMap1(Campaign campaign, Integer lineItemID, Integer io_id) {
-        Optional<IO> io_O;
-        Optional<LineItem> li_O = null;
-        LineItem li = null;
 
-        //if campaign exc, delete it and add new one
-        if (getCampaign(campaign.getName()).isPresent()) {
-            removeCampaignFromIOMap(campaign, li_O);
-            li_O.get().addCampaign(campaign);
-        }
-        //figure if li exists
-        try {
-            li_O = getLineItem(lineItemID);
-            li_O.get().addCampaign(campaign);
-        } catch (Exception e) {
-            li = new LineItem(lineItemID);
-            li.addCampaign(campaign);
-        }
-        if ((io_O = getIO(io_id)).isPresent())
-            io_O.get().addLineItem(li);
-        else {
-            IO io = new IO(io_id);
-            io.addLineItem(li);
-            this.io = new ArrayList<>(this.io);
-            this.io.add(io);
-        }
-    }
 
-    public void insertCampaignToIOMap(Campaign campaign, Integer lineItemID, Integer io_id) {
+    public void insertCampaignToIOMapOld(Campaign campaign, Integer lineItemID, Integer io_id) {
         Optional<IO> io_O;
         Optional<LineItem> li_O;
 
@@ -182,13 +155,40 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
         }
     }
 
-    private void removeCampaignFromIOMap(Campaign campaign, Optional<LineItem> li_O) {
+    public void insertCampaignToIOMap(Campaign campaign, Integer lineItemID, Integer io_id) {
+        IO io;
+        LineItem li;
+
+        //figure if io exists
+        if (getIO(io_id).isPresent())
+            io = getIO(io_id).get();
+        else {
+            io = new IO(io_id);
+        }
+
+        //figure if li exists
+        if(getLineItem(lineItemID).isPresent())
+            li = getLineItem(lineItemID).get();
+            //if not - create
+        else
+            li = new LineItem(lineItemID);
+
+        //figure if campaign exists, delete it and add new one
+        if (getCampaign(campaign.getName()).isPresent())
+            removeCampaignFromIOMap(campaign, li);
+
+        li.addCampaign(campaign);
+        io.addLineItem(li);
+
+        if(this.io.isEmpty())
+            this.io = new ArrayList<>(this.io);
+        this.io.add(io);
+    }
+
+
+    private void removeCampaignFromIOMap(Campaign campaign, LineItem li) {
         System.out.println("Campaign already exists. Deleting...");
-        li_O.get().removeCampaign(campaign);
-
-
-
-
+        li.removeCampaign(campaign);
     }
 
 
