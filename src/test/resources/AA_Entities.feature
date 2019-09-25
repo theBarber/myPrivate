@@ -1258,7 +1258,8 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name            | factor | units |
-      | NewBrandReveal-BR-Direct | 0      | 100   |
+      | NewBrandReveal-BR-Direct | 0.1    | 100   |
+      | NewBrandReveal-BR-PROG   | 0.1    | 100   |
 
     And i update zone data by name
       | Zone Name                             | is_secure |
@@ -1325,5 +1326,6 @@ Feature: Entities for tests
 
   @optimize
   @refresh
+  @append
   Scenario: save entities to file
     And save all entities to json file

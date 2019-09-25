@@ -77,4 +77,10 @@ public class LineItem implements WithId<Integer> {
             campaigns = new ArrayList<>();
         campaigns.add(campaign);
     }
+
+    public void removeCampaign(Campaign campaign){
+        if(campaigns.contains(campaign)){
+            campaigns.remove(campaign);
+        }
+    }
 }

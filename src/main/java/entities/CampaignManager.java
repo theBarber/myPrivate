@@ -17,9 +17,9 @@ import java.util.function.Function;
 
 public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
-	String append_entities ="";
-	List<IO> io;
-	List<ZoneSet> zonesets;
+    String append_entities = "";
+    List<IO> io;
+    List<ZoneSet> zonesets;
     private ObjectMapper m = new ObjectMapper();
     final private String INIT_LINEITEM_FILE = "/input_files/lineItem.json";
     final private String INIT_ZONESET_FILE = "/input_files/zoneSet.json";
@@ -28,17 +28,16 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
     private String envname = "";
 
 
-
     public CampaignManager(String env, String append_entities) {
-		if(envname.isEmpty()){
-			envname=env;
-		}
-		if(this.append_entities.isEmpty()){
-			this.append_entities=append_entities;
-		}
-		m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		initHardCodedEntities();
-	}
+        if (envname.isEmpty()) {
+            envname = env;
+        }
+        if (this.append_entities.isEmpty()) {
+            this.append_entities = append_entities;
+        }
+        m.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        initHardCodedEntities();
+    }
 
 
 
@@ -52,36 +51,36 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 	}*/
 
     private void initHardCodedEntities() {
-    	if(this.append_entities.equals("true")){
-			initLineItemFromS3();
-			initZoneSetsFromS3();
-		}else {
-			initLineItem();
-			initZoneSets();
-		}
+        if (this.append_entities.equals("true")) {
+            initLineItemFromS3();
+            initZoneSetsFromS3();
+        } else {
+            initLineItem();
+            initZoneSets();
+        }
     }
 
-	private void initLineItemFromS3() {
+    private void initLineItemFromS3() {
         try {
-            this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/createdlineItem.json"), IO[].class));
+            this.io = Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/" + envname + "/createdlineItem.json"), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-	}
+    }
 
-	private void initZoneSetsFromS3() {
+    private void initZoneSetsFromS3() {
         try {
-            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname + "/createdzoneSet.json"), ZoneSet[].class)));
+            this.zonesets = new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/" + envname + "/createdzoneSet.json"), ZoneSet[].class)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-	}
+    }
 
-	private void initLineItem() {
+    private void initLineItem() {
         try {
-            this.io =  Arrays.asList(m.readValue(this.getClass().getResourceAsStream(INIT_LINEITEM_FILE), IO[].class));
+            this.io = Arrays.asList(m.readValue(this.getClass().getResourceAsStream(INIT_LINEITEM_FILE), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -91,7 +90,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
     private void initZoneSets() {
         try {
-            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(this.getClass().getResourceAsStream(INIT_ZONESET_FILE), ZoneSet[].class)));
+            this.zonesets = new ArrayList<>(Arrays.asList(m.readValue(this.getClass().getResourceAsStream(INIT_ZONESET_FILE), ZoneSet[].class)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -99,84 +98,117 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
     }
 
 
-    public Optional<LineItem> getLineItem(Integer LineItemID)
-	{
-		return io.stream().flatMap(x -> x.lineItems()).filter(WithId.idIs(LineItemID)).findFirst();
-	}
+    public Optional<LineItem> getLineItem(Integer LineItemID) {
+        return io.stream().flatMap(x -> x.lineItems()).filter(WithId.idIs(LineItemID)).findFirst();
+    }
 
-	public Optional<Campaign> getCampaign(String byName) {
+    public Optional<Campaign> getCampaign(String byName) {
 
-	  return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().filter(Named.nameIs(byName))).findFirst();
-	}
+        return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().filter(Named.nameIs(byName))).findFirst();
+    }
 
-	public final Optional<Zone> getZone(String byName) {
-		return zonesets.stream().flatMap(ZoneSet::zones).filter(Named.nameIs(byName)).findFirst();
-	}
+    public final Optional<Zone> getZone(String byName) {
+        return zonesets.stream().flatMap(ZoneSet::zones).filter(Named.nameIs(byName)).findFirst();
+    }
 
-	public Optional<Banner> getBanner(String byName) {
-		return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName))).findFirst();
-	}
+    public Optional<Banner> getBanner(String byName) {
+        return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName))).findFirst();
+    }
 
-	public List<ZoneSet> getZonesets()
-	{
-		return zonesets;
-	}
+    public List<ZoneSet> getZonesets() {
+        return zonesets;
+    }
 
-	public Optional<ZoneSet> getZoneset(Integer byId) {
-		return zonesets.stream().filter(WithId.idIs(byId)).findFirst();
-	}
+    public Optional<ZoneSet> getZoneset(Integer byId) {
+        return zonesets.stream().filter(WithId.idIs(byId)).findFirst();
+    }
 
-	public Optional<ZoneSet> getZoneset(String byName) {
-		return zonesets.stream().filter(Named.nameIs(byName)).findFirst();
-	}
+    public Optional<ZoneSet> getZoneset(String byName) {
+        return zonesets.stream().filter(Named.nameIs(byName)).findFirst();
+    }
 
-	public Optional<IO> getIO(Integer byId)
-	{
-		return io.stream().filter(WithId.idIs(byId)).findFirst();
-	}
+    public Optional<IO> getIO(Integer byId) {
+        return io.stream().filter(WithId.idIs(byId)).findFirst();
+    }
+
+    //why use optional???
+    public void insertCampaignToIOMap1(Campaign campaign, Integer lineItemID, Integer io_id) {
+        Optional<IO> io_O;
+        Optional<LineItem> li_O = null;
+        LineItem li = null;
+
+        //if campaign exc, delete it and add new one
+        if (getCampaign(campaign.getName()).isPresent()) {
+            removeCampaignFromIOMap(campaign, li_O);
+            li_O.get().addCampaign(campaign);
+        }
+        //figure if li exists
+        try {
+            li_O = getLineItem(lineItemID);
+            li_O.get().addCampaign(campaign);
+        } catch (Exception e) {
+            li = new LineItem(lineItemID);
+            li.addCampaign(campaign);
+        }
+        if ((io_O = getIO(io_id)).isPresent())
+            io_O.get().addLineItem(li);
+        else {
+            IO io = new IO(io_id);
+            io.addLineItem(li);
+            this.io = new ArrayList<>(this.io);
+            this.io.add(io);
+        }
+    }
+
+    public void insertCampaignToIOMap(Campaign campaign, Integer lineItemID, Integer io_id) {
+        Optional<IO> io_O;
+        Optional<LineItem> li_O;
+
+        if (getCampaign(campaign.getName()).isPresent())
+            throw new AssertionError("campaign is already exist!");
+        else if ((li_O = getLineItem(lineItemID)).isPresent())
+            li_O.get().addCampaign(campaign);
+        else {
+            LineItem li = new LineItem(lineItemID);
+            li.addCampaign(campaign);
+            if ((io_O = getIO(io_id)).isPresent())
+                io_O.get().addLineItem(li);
+            else {
+                IO io = new IO(io_id);
+                io.addLineItem(li);
+                this.io = new ArrayList<>(this.io);
+                this.io.add(io);
+            }
+        }
+    }
+
+    private void removeCampaignFromIOMap(Campaign campaign, Optional<LineItem> li_O) {
+        System.out.println("Campaign already exists. Deleting...");
+        li_O.get().removeCampaign(campaign);
 
 
-	public void insertCampaignToIOMap(Campaign campaign, Integer lineItemID, Integer io_id) {
-		Optional<IO> io_O;
-    	Optional<LineItem> li_O;
-
-    	if((li_O = getLineItem(lineItemID)).isPresent())
-			li_O.get().addCampaign(campaign);
-    	else
-    	{
-    		LineItem li = new LineItem(lineItemID);
-    		li.addCampaign(campaign);
-			if((io_O = getIO(io_id)).isPresent())
-				io_O.get().addLineItem(li);
-			else{
-				IO io = new IO(io_id);
-				io.addLineItem(li);
-				this.io = new ArrayList<>(this.io);
-				this.io.add(io);
-			}
-		}
-	}
 
 
+    }
 
 
-	// this is not javadoc, comment out
-	/*
-	 * get a zone that may result with the given campaign
-	 * 
-	 * @param forCampaignId
-	 *            the {@link Campaign#getId()}
-	 * @param byName
-	 *            the name of the zone
-	 * @return
-	 */
-	// public Optional<Zone> getZone(Integer forCampaignId, String byName) {
-	// return
-	// campaigns.stream().filter(WithId.idIs(forCampaignId)).flatMap(Campaign::getZoneSetAssoc)
-	// .flatMap(ZoneSet::zones).filter(Optional.ofNullable(byName).map(Named::nameIs).orElse(b
-	// -> true))
-	// .findFirst();
-	// }
+    // this is not javadoc, comment out
+    /*
+     * get a zone that may result with the given campaign
+     *
+     * @param forCampaignId
+     *            the {@link Campaign#getId()}
+     * @param byName
+     *            the name of the zone
+     * @return
+     */
+    // public Optional<Zone> getZone(Integer forCampaignId, String byName) {
+    // return
+    // campaigns.stream().filter(WithId.idIs(forCampaignId)).flatMap(Campaign::getZoneSetAssoc)
+    // .flatMap(ZoneSet::zones).filter(Optional.ofNullable(byName).map(Named::nameIs).orElse(b
+    // -> true))
+    // .findFirst();
+    // }
 //
 //	/**
 //	 * Create a new {@link Campaign}
@@ -247,84 +279,84 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 //				.map(c -> c.addBanner(bannerEnricher.apply(new Banner(name, id))));
 //	}
 
-	// protected Optional<ZoneSet> createZoneSet(String name, Integer id,
-	// Integer forCampaignId) {
-	// return campaigns.stream().filter(idIs(forCampaignId)).findFirst().map(c
-	// -> c.addZoneSet(new ZoneSet(name, id)));
-	// }
+    // protected Optional<ZoneSet> createZoneSet(String name, Integer id,
+    // Integer forCampaignId) {
+    // return campaigns.stream().filter(idIs(forCampaignId)).findFirst().map(c
+    // -> c.addZoneSet(new ZoneSet(name, id)));
+    // }
 
-	// protected Optional<Zone> createZone(String name, Integer id, Integer
-	// forZoneSetId) {
-	// return createZone(name, id, forZoneSetId, identity());
-	// }
+    // protected Optional<Zone> createZone(String name, Integer id, Integer
+    // forZoneSetId) {
+    // return createZone(name, id, forZoneSetId, identity());
+    // }
 
-	// protected <Z extends Zone> Optional<Z> createZone(String name, Integer
-	// id, Integer forZoneSetId,
-	// Function<Zone, Z> zoneEnricher) {
-	// return
-	// campaigns.stream().flatMap(Campaign::getZoneSetAssoc).filter(idIs(forZoneSetId)).findFirst()
-	// .map(zs -> zs.addZone(requireNonNull(zoneEnricher).apply(new Zone(name,
-	// id))));
-	// }
+    // protected <Z extends Zone> Optional<Z> createZone(String name, Integer
+    // id, Integer forZoneSetId,
+    // Function<Zone, Z> zoneEnricher) {
+    // return
+    // campaigns.stream().flatMap(Campaign::getZoneSetAssoc).filter(idIs(forZoneSetId)).findFirst()
+    // .map(zs -> zs.addZone(requireNonNull(zoneEnricher).apply(new Zone(name,
+    // id))));
+    // }
 
-	@Override
-	public Function<String, Optional<? extends WithId<Integer>>> getterFor(String entityType) {
-		switch (entityType.toLowerCase()) {
-		case "banner":
-			return this::getBanner;
-		case "campaign":
-			return this::getCampaign;
-		case "zone":
-			return this::getZone;
-		default:
-			return noSuchEntity -> Optional.empty();
-		}
-	}
-
-	@Override
-	public String stringify(WithId<Integer> t) {
-		return Objects.toString(t.getId());
-	}
-
-	@Override
-	public String className() {
-		return "workflow";
-	}
-
-
-    public Optional<Creative> getCreative(String byName) {
-		return io.stream().flatMap(x -> x.creatives.stream()).filter(Named.nameIs(byName)).findFirst();
-    }
-
-	public Optional<Deal> getDeal(String byName) {
-		return io.stream().flatMap(x -> x.deals.stream()).filter(Named.nameIs(byName)).findFirst();
-	}
-
-	public void writeZoneSets(String env){
-	    try{
-	        m.writeValue(new File(this.getClass().getResource(CREATED_ZONESET_FILE).toURI()),this.zonesets);
-            ClassLoader loader = CampaignManager.class.getClassLoader();
-            String basePath = loader.getResource(".").getPath();
-            if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
-                basePath = basePath.substring(1);
-            }
-            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa",basePath + CREATED_ZONESET_FILE,"qa/ramp-lift-automation/"+ env +"/createdzoneSet.json");
-        }catch (Exception e){
-	        System.out.println(e.getMessage());
-	        e.printStackTrace();
+    @Override
+    public Function<String, Optional<? extends WithId<Integer>>> getterFor(String entityType) {
+        switch (entityType.toLowerCase()) {
+            case "banner":
+                return this::getBanner;
+            case "campaign":
+                return this::getCampaign;
+            case "zone":
+                return this::getZone;
+            default:
+                return noSuchEntity -> Optional.empty();
         }
     }
 
-    public void writeLineItem(String env){
-        try{
-            m.writeValue(new File(this.getClass().getResource(CREATED_LINEITEM_FILE).toURI()),this.io);
+    @Override
+    public String stringify(WithId<Integer> t) {
+        return Objects.toString(t.getId());
+    }
+
+    @Override
+    public String className() {
+        return "workflow";
+    }
+
+
+    public Optional<Creative> getCreative(String byName) {
+        return io.stream().flatMap(x -> x.creatives.stream()).filter(Named.nameIs(byName)).findFirst();
+    }
+
+    public Optional<Deal> getDeal(String byName) {
+        return io.stream().flatMap(x -> x.deals.stream()).filter(Named.nameIs(byName)).findFirst();
+    }
+
+    public void writeZoneSets(String env) {
+        try {
+            m.writeValue(new File(this.getClass().getResource(CREATED_ZONESET_FILE).toURI()), this.zonesets);
             ClassLoader loader = CampaignManager.class.getClassLoader();
             String basePath = loader.getResource(".").getPath();
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
                 basePath = basePath.substring(1);
             }
-            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa",basePath + CREATED_LINEITEM_FILE,"qa/ramp-lift-automation/"+ env +"/createdlineItem.json");
-        }catch (Exception e){
+            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_ZONESET_FILE, "qa/ramp-lift-automation/" + env + "/createdzoneSet.json");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void writeLineItem(String env) {
+        try {
+            m.writeValue(new File(this.getClass().getResource(CREATED_LINEITEM_FILE).toURI()), this.io);
+            ClassLoader loader = CampaignManager.class.getClassLoader();
+            String basePath = loader.getResource(".").getPath();
+            if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
+                basePath = basePath.substring(1);
+            }
+            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_LINEITEM_FILE, "qa/ramp-lift-automation/" + env + "/createdlineItem.json");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
