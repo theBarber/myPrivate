@@ -1235,8 +1235,8 @@ Feature: Entities for tests
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
 
     And i update campaign data by name
-      | Campaign Name       | factor | units |goal_type   |
-      | NDQfilteringTL-ST-1 | 0      | 100   |impressions |
+      | Campaign Name       | factor | units | goal_type   |
+      | NDQfilteringTL-ST-1 | 0      | 100   | impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
@@ -1245,27 +1245,28 @@ Feature: Entities for tests
   @append
   Scenario: Create Entities for brand reveal 300*600
     Given i disable campaigns by name on db
-      | Campaign Name                        |
-      | NewBrandReveal-BR-Direct             |
-      | NewBrandReveal-BR-PROG-NonGuaranteed |
+      | Campaign Name                               |
+      | NewBrandReveal-BR-Direct                    |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                        | IO     | LI     | prog? | Deal  | Zonesets-zones Name                                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NewBrandReveal-BR-PROG-NonGuaranteed | 407981 | 253747 | true  | 1643  | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
-      | NewBrandReveal-BR-Direct             | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-Direct}             | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
-
-    Given I set campaign NewBrandReveal-BR-Direct for 10 days
-    Given I set campaign NewBrandReveal-BR-PROG-NonGuaranteed for 10 days
+      | Campaign Name                               | IO     | LI     | prog? | Deal  | Zonesets-zones Name                                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253747 | true  | 1653  | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253747 | true  | 1652  | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-Direct                    | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-Direct}             | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
 
     And i update campaign data by name
-      | Campaign Name                        | factor | units |goal_type   |
-      | NewBrandReveal-BR-Direct             | 0.1    | 100   |impressions |
-      | NewBrandReveal-BR-PROG-NonGuaranteed | 0.1    | 100   |impressions |
+      | Campaign Name                               | units | goal_type   |
+      | NewBrandReveal-BR-Direct                    | 100   | impressions |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        | 100   | impressions |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 100   | impressions |
 
     And i update zone data by name
-      | Zone Name                                         | is_secure |
-      | zone-zoneset-NewBrandReveal-BR-Direct             | 1         |
-      | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed | 1         |
+      | Zone Name                                                | is_secure |
+      | zone-zoneset-NewBrandReveal-BR-Direct                    | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed        | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 1         |
 
 
   @DynamicPricing
