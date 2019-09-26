@@ -25,7 +25,7 @@ Feature: NDQ Filtering Campaign Level
       | NDQfilteringTL-ST-1 |
     Given i create new campaigns, new zoneset with domains
       | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NDQfilteringTL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
+      | NDQfilteringTL-ST-1 | 75396 | 210722   | false                 | 8158         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
 
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
 
@@ -53,6 +53,8 @@ Feature: NDQ Filtering Campaign Level
   Scenario: try to consume all impressions
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
     And I send 1000 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
+    And The response code is 200
+    And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {NDQfilteringTL-ST-1-banner-1} 5% of the time
 
   Scenario: Set strategy to common one

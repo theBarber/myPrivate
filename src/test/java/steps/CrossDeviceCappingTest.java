@@ -46,8 +46,8 @@ public class CrossDeviceCappingTest extends BaseTest{
   public CrossDeviceCappingTest() {
     super();
 
-    Given("I add device ([a-zA-Z0-9]*) with record <([^>]*)> to user info", (String paramName, String paramValue) -> {
-      sut.getUserInfoBucket().insertDocument(paramName, paramValue);
+    Given("I add device ([0-9][.][a-zA-Z0-9]*) with record <([^>]*)> to user info", (String paramName, String paramValue) -> {
+      sut.getUsersBucket().insertDocument(paramName, paramValue);
     });
 
     Then("i inject profile id (\\d+) to user \\{(.*)\\} on adserver bucket", (Integer profileId, String userID) -> {
@@ -257,7 +257,7 @@ public class CrossDeviceCappingTest extends BaseTest{
 
 
 
-    Then("I delete the history of ([a-zA-Z0-9]*) from users bucket", (String udId) -> {
+    Then("I delete the history of ([0-9][.][a-zA-Z0-9]*) from users bucket", (String udId) -> {
       try{
 
         sut.getUsersBucket().deleteDocument(udId);
@@ -276,7 +276,7 @@ public class CrossDeviceCappingTest extends BaseTest{
       }
     });
 
-    Given("I delete user info record of ([a-zA-Z0-9]*) from user info", (String userInfoRecordKey) -> {
+    Given("I delete user info record of ([0-9][.][a-zA-Z0-9]*) from user info", (String userInfoRecordKey) -> {
       try{
         sut.getUserInfoBucket().deleteDocument(userInfoRecordKey);
       } catch (DocumentDoesNotExistException e) {
