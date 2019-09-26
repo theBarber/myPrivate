@@ -19,12 +19,12 @@ Feature: NDQ Filtering Campaign Level
     Given i set test 100 status to 1
 
   Scenario: try to consume all impressions
-    Given I set campaign NewBrandReveal-BR-Direct for 10 days
-    And I send 1 times an ad request for zone named {zone-zoneset-NewBrandReveal-BR-Direct} to UAS
+    Given I set campaign NDQfilteringTL-ST-1 for 10 days
+    And I send 1000 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
     Then The response code is 200
     And The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {NewBrandReveal-BR-Direct-banner-1} 5% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {NDQfilteringTL-ST-1-banner-1} 5% of the time
 
   Scenario: Set strategy to common one
     Given i disable all tests except 53

@@ -74,7 +74,10 @@ pipeline {
     post {
         always {
             junit 'target/surefire-reports/*.xml'
-            allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+            unstash 'allure-results' //unpack test results
+            script {
+                allure results: [[path: 'target/allure-results']]
+            }
             cleanWs()
         }
     }
