@@ -1258,9 +1258,10 @@ Feature: Entities for tests
     Given I set campaign NewBrandReveal-BR for 10 days
 
     And i update campaign data by name
-      | Campaign Name            | factor | units |
-      | NewBrandReveal-BR-Direct | 0.1    | 100   |
-      | NewBrandReveal-BR-PROG   | 0.1    | 100   |
+      | Campaign Name                        | factor | units |
+      | NewBrandReveal-BR-Direct             | 0.1    | 100   |
+      | NewBrandReveal-BR-PROG-NonGuaranteed | 0.1    | 100   |
+      | NewBrandReveal-BR-PROG-Guaranteed    | 0.1    | 100   |
 
     And i update zone data by name
       | Zone Name                                         | is_secure |
