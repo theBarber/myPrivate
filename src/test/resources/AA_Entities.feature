@@ -1250,9 +1250,9 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG   |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name            | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | NewBrandReveal-BR-Direct | 75396  | 254126   | false                 | 20331         | {zone-zoneset-NewBrandReveal-BR-Direct} | []         | 95       | 15376          | 3708         | 69723           |
-      | NewBrandReveal-BR-PROG   | 407981 | 252900   | true                  | 20331         | {zone-zoneset-NewBrandReveal-BR-PROG}   | []         | 95       | 15376          | 3708         | 69723           |
+      | Campaign Name            | IO     | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | NewBrandReveal-BR-Direct | 75396  | 254126   | false                 | 20331    | {zone-zoneset-NewBrandReveal-BR-Direct} | []         | 95       | 15376          | 3708         | 69723           | []             | []             |
+      | NewBrandReveal-BR-PROG   | 407981 | 252900   | true                  | 20331    | {zone-zoneset-NewBrandReveal-BR-PROG}   | []         | 95       | 15376          | 3708         | 69723           | []             | []             |
 
     Given I set campaign NewBrandReveal-BR for 10 days
 
