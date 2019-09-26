@@ -132,7 +132,6 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
     }
 
 
-
     public void insertCampaignToIOMapOld(Campaign campaign, Integer lineItemID, Integer io_id) {
         Optional<IO> io_O;
         Optional<LineItem> li_O;
@@ -167,10 +166,10 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
         }
 
         //figure if li exists
-        if(getLineItem(lineItemID).isPresent())
+        if (getLineItem(lineItemID).isPresent())
             li = getLineItem(lineItemID).get();
-            //if not - create
         else
+            //if not - create
             li = new LineItem(lineItemID);
 
         //figure if campaign exists, delete it and add new one
@@ -180,8 +179,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
         li.addCampaign(campaign);
         io.addLineItem(li);
 
-        if(this.io.isEmpty())
-            this.io = new ArrayList<>(this.io);
+        this.io = new ArrayList<>(this.io);
         this.io.add(io);
     }
 
