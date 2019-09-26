@@ -1254,8 +1254,6 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed | 407981 | 253747 | true  |       | {zone-zoneset-NewBrandReveal-BR-PROGPROG-NonGuaranteed} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
       | NewBrandReveal-BR-Direct             | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-PROG}                   | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
       | NewBrandReveal-BR-PROG-Guaranteed    | 407981 | 253748 | true  |       | {zone-zoneset-NewBrandReveal-BR-PROG-Guaranteed}        | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
-      | NewBrandReveal-BR-PROG-Reserved      | 407981 | 252900 | true  |       | {zone-zoneset-NewBrandReveal-BR-PROG-Reserved}          | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
-      | NewBrandReveal-BR-PROG-Non-Reserved  | 407981 | 252900 | true  |       | {zone-zoneset-NewBrandReveal-BR-PROG-Non-Reserved}      | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
 
     Given I set campaign NewBrandReveal-BR for 10 days
 
@@ -1269,8 +1267,6 @@ Feature: Entities for tests
       | zone-zoneset-NewBrandReveal-BR-Direct             | 1         |
       | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed | 1         |
       | zone-zoneset-NewBrandReveal-BR-PROG-Guaranteed    | 1         |
-      | zone-zoneset-NewBrandReveal-BR-PROG-Reserved      | 1         |
-      | zone-zoneset-NewBrandReveal-BR-PROG-Non-Reserved  | 1         |
 
   @DynamicPricing
   @InAppBlackWhiteList
