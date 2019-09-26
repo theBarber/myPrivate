@@ -1245,15 +1245,16 @@ Feature: Entities for tests
   @append
   Scenario: Create Entities for brand reveal 300*600
     Given i disable campaigns by name on db
-      | Campaign Name            |
-      | NewBrandReveal-BR-Direct |
-      | NewBrandReveal-BR-PROG   |
+      | Campaign Name                        |
+      | NewBrandReveal-BR-Direct             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed |
+      | NewBrandReveal-BR-PROG-Guaranteed    |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                        | IO     | LI     | prog? | Deal  | Zonesets-zones Name                                     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NewBrandReveal-BR-PROG-NonGuaranteed | 407981 | 253747 | true  | 666   | {zone-zoneset-NewBrandReveal-BR-PROGPROG-NonGuaranteed} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
-      | NewBrandReveal-BR-Direct             | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-PROG}                   | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
-      | NewBrandReveal-BR-PROG-Guaranteed    | 407981 | 253748 | true  | 666   | {zone-zoneset-NewBrandReveal-BR-PROG-Guaranteed}        | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | Campaign Name                        | IO     | LI     | prog? | Deal  | Zonesets-zones Name                                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NewBrandReveal-BR-PROG-NonGuaranteed | 407981 | 253747 | true  | 666   | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-Direct             | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-Direct}             | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-PROG-Guaranteed    | 407981 | 253748 | true  | 666   | {zone-zoneset-NewBrandReveal-BR-PROG-Guaranteed}    | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
 
     Given I set campaign NewBrandReveal-BR for 10 days
 
