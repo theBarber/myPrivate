@@ -1250,9 +1250,12 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG   |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name            | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NewBrandReveal-BR-Direct | 75396  | 252900   | false                 | 20331         | {zone-zoneset-NewBrandReveal-BR-Direct} | []         | 95       | 15376          | 3708         | 69723           | []          | []          |
-      | NewBrandReveal-BR-PROG   | 407981 | 252900   | true                  | 20331         | {zone-zoneset-NewBrandReveal-BR-PROG}   | []         | 95       | 15376          | 3708         | 69723           | []          | []          |
+      | Campaign Name                        | IO     | LI     | prog? | Deal  | Zonesets-zones Name                                     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NewBrandReveal-BR-PROG-NonGuaranteed | 407981 | 253747 | true  |       | {zone-zoneset-NewBrandReveal-BR-PROGPROG-NonGuaranteed} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-Direct             | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-PROG}                   | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-PROG-Guaranteed    | 407981 | 253748 | true  |       | {zone-zoneset-NewBrandReveal-BR-PROG-Guaranteed}        | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-PROG-Reserved      | 407981 | 252900 | true  |       | {zone-zoneset-NewBrandReveal-BR-PROG-Reserved}          | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-PROG-Non-Reserved  | 407981 | 252900 | true  |       | {zone-zoneset-NewBrandReveal-BR-PROG-Non-Reserved}      | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
 
     Given I set campaign NewBrandReveal-BR for 10 days
 
@@ -1262,9 +1265,12 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG   | 0.1    | 100   |
 
     And i update zone data by name
-      | Zone Name                             | is_secure |
-      | zone-zoneset-NewBrandReveal-BR-Direct | 1         |
-      | zone-zoneset-NewBrandReveal-BR-PROG   | 1         |
+      | Zone Name                                         | is_secure |
+      | zone-zoneset-NewBrandReveal-BR-Direct             | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG-Guaranteed    | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG-Reserved      | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG-Non-Reserved  | 1         |
 
   @DynamicPricing
   @InAppBlackWhiteList
