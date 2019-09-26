@@ -1247,12 +1247,14 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name            |
       | NewBrandReveal-BR-Direct |
-      | NewBrandReveal-BR-PROG   |
+      | NewBrandReveal-BR-PROG-NonGuaranteed   |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600   |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name            | IO     | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | NewBrandReveal-BR-Direct | 75396  | 254126   | false                 | 20331    | {zone-zoneset-NewBrandReveal-BR-Direct} | []         | 95       | 15376          | 3708         | 69723           | []             | []             |
-      | NewBrandReveal-BR-PROG   | 407981 | 252900   | true                  | 20331    | {zone-zoneset-NewBrandReveal-BR-PROG}   | []         | 95       | 15376          | 3708         | 69723           | []             | []             |
+      | Campaign Name                               | IO     | LI     | prog? | Deal  | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253747 | true  | 1653  | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253747 | true  | 1652  | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-Direct                    | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
 
     Given I set campaign NewBrandReveal-BR for 10 days
 
