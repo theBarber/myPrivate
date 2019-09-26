@@ -14,12 +14,12 @@ Feature: warfle tests - wurfl limitation in campaign and zone level, contextual 
 
   Scenario: contextual targeting by dv - inapp
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36} as user-agent string to send my requests to uas
-    When I send 1 times an ad request with parameter {optimize=0&bundleid=com.peoplefun.wordcross%3Fdv_test%3D1} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&bundleid=com.outfit7.mytalkingtomfree%3Fdv_test%3D1} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1} 100% of the time
     Given I use {Mozilla/5.0 (Linux; U; Android 2.2) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1} as user-agent string to send my requests to uas
-    When I send 1 times an ad request with parameter {optimize=0&bundleid=com.peoplefun.wordcross%3Fdv_test%3D1} for zone named {zone-zoneset-WL-ST-2} to UAS
+    When I send 1 times an ad request with parameter {optimize=0&bundleid=com.outfit7.mytalkingtomfree%3Fdv_test%3D1} for zone named {zone-zoneset-WL-ST-2} to UAS
     And The response code is 200
     And The responses are passback
 

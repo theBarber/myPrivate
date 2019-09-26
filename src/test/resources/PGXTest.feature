@@ -71,7 +71,7 @@ Feature: PGX - triggering ads tests
     And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-PG-1-b-banner-1} 100% of the time
-    And The response contains window.ut_renderTriggers=[1]
+    And The response contains {window.ut_renderTriggers=[1]}
 
   Scenario: PGX triggering ads - 2 triggers are enabled (Exit, Back) - PG zone tag default
     Given I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-PGX-PG-1-c} to UAS
@@ -150,7 +150,7 @@ Feature: PGX - triggering ads tests
     And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-PG-1-b-banner-1} 100% of the time
-    And The response contains window.ut_renderTriggers=[1]
+    And The response contains {window.ut_renderTriggers=[1]}
 
   @optimize
   Scenario: PGX triggering ads - 2 triggers are enabled (Exit, Back) - PG zone tag default

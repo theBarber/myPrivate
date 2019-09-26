@@ -53,7 +53,8 @@ Feature: NDQ Filtering Campaign Level
   Scenario: try to consume all impressions
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
     And I send 1000 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
-    And The response code is 200
+    Then The response code is 200
+    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {NDQfilteringTL-ST-1-banner-1} 5% of the time
 

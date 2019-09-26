@@ -5,12 +5,6 @@
 
 Feature: Entities for tests
 
-  Scenario: Make sure entities are fresh
-    And I refresh banner cache
-    And I refresh zone cache
-    And I restart {ramp-lift-services}
-    And I restart {ut-programmatic-gw}
-
   Scenario: entities end-date update
     And i update po_line_item end date by id {67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
     And i update io_line_item end date by id {245653,210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
@@ -180,10 +174,10 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       | Campaign Name                               | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                               | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-ProfileTargetingUDMPforApp-ST-1    | 75396 | 241783   | false                 | 14619         | {zone-zoneset-ProfileTargetingUDMPforApp-ST-1}    | []                   | 80       | 14892          | 3708         | 27807           |
-      | campaign-ProfileTargetingUDMPforWeb-ST-1    | 75396 | 210722   | false                 | 8158          | {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1}    | []                   | 93       | 14892          | 3708         | 27807           |
-      | campaign-SeqProfileTargetingUDMPforWeb-ST-1 | 75396 | 210722   | false                 | 8158          | {zone-zoneset-SeqProfileTargetingUDMPforWeb-ST-1} | []                   | 93       | 15128          | 3708         | 67638           |
-      | campaign-CrossDeviceCappingUDMP-ST-1        | 75396 | 210722   | false                 | 8158          | {zone-zoneset-CrossDeviceCappingUDMP-ST-1}        | []                   | 93       | 14894          | 3708         | 27809           |
-      | campaign-PTzoneLimitation-ST-1              | 75396 | 210722   | false                 | 8158          | {zone-zoneset-PTzoneLimitation-ST-1}              | [[[4,"==",1,1,666]]] | 93       | 15124          | 3708         | 27807           |
+      | campaign-ProfileTargetingUDMPforWeb-ST-1    | 75396 | 210722   | false                 | 8290          | {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1}    | []                   | 93       | 14892          | 3708         | 27807           |
+      | campaign-SeqProfileTargetingUDMPforWeb-ST-1 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-SeqProfileTargetingUDMPforWeb-ST-1} | []                   | 93       | 15128          | 3708         | 67638           |
+      | campaign-CrossDeviceCappingUDMP-ST-1        | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CrossDeviceCappingUDMP-ST-1}        | []                   | 93       | 14894          | 3708         | 27809           |
+      | campaign-PTzoneLimitation-ST-1              | 75396 | 210722   | false                 | 8290          | {zone-zoneset-PTzoneLimitation-ST-1}              | [[[4,"==",1,1,666]]] | 93       | 15124          | 3708         | 27807           |
     And i update zone data by name
       | Zone Name                                       | is_mraid | is_secure |
       | zone-zoneset-ProfileTargetingUDMPforApp-ST-1    | 1        | 1         |
@@ -209,10 +203,10 @@ Feature: Entities for tests
       | campaign-CrossDeviceCapping-ST-2 |
     Given i create new campaigns with new zoneset
       | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
-      | campaign-CrossDeviceCapping-ST-2 | 75396 | 210722   | false                 | 8158          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceCapping-ST-2 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} | []         | 93       | 14892          | 3708         | 27807           |
 
-   And i update zone data by name
+    And i update zone data by name
       | Zone Name                                    | is_mraid | is_secure |
       | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
       | INT3708-zone-zoneset-CrossDeviceCapping-ST-2 | 0        | 1         |
@@ -269,11 +263,11 @@ Feature: Entities for tests
       | campaign-HB-Prog-Billboard-970X250-D        | 75396  | 198082   | false                 | 64            | {zone-zoneset-HB-Prog-Billboard-970X250}          | []         | 58       | 14507          | 3697         | 66736           |
       | campaign-HB-Prog-Billboard-970X250-P        | 407981 | 224539   | false                 | 7143          | {zone-zoneset-HB-Prog-Billboard-970X250}          | []         | 58       | 14507          | 3697         | 66736           |
 #       sales price for polineitem 65991 = 0.4 (new), for polineitem 67354 = 2
-      | campaign-HB-DynamicPrice-1                  | 75396  | 210722   | false                 | 8158          | {zone-zoneset-HB-DynamicPrice-1}                  | []         | 10       | 15133          | 3708         | 66736           |
-      | campaign-HB-DynamicPrice-2                  | 75396  | 210722   | false                 | 8158          | {zone-zoneset-HB-DynamicPrice-2}                  | []         | 10       | 15143          | 3708         | 66736           |
-      | campaign-HB-DynamicPrice-3                  | 75396  | 210722   | false                 | 8158          | {zone-zoneset-HB-DynamicPrice-3}                  | []         | 10       | 15134          | 3708         | 66736           |
-      | campaign-HB-DynamicPrice-4                  | 75396  | 210722   | false                 | 8158          | {zone-zoneset-HB-DynamicPrice-4}                  | []         | 10       | 15144          | 3708         | 66736           |
-      | campaign-HB-DynamicPrice-ST-1x2-5a          | 75396  | 210722   | false                 | 8158          | {zone-zoneset-HB-DynamicPrice-ST-1x2-5a}          | []         | 93       | 15145          | 3708         | 67354           |
+      | campaign-HB-DynamicPrice-1                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-1}                  | []         | 10       | 15133          | 3708         | 66736           |
+      | campaign-HB-DynamicPrice-2                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-2}                  | []         | 10       | 15143          | 3708         | 66736           |
+      | campaign-HB-DynamicPrice-3                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-3}                  | []         | 10       | 15134          | 3708         | 66736           |
+      | campaign-HB-DynamicPrice-4                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-4}                  | []         | 10       | 15144          | 3708         | 66736           |
+      | campaign-HB-DynamicPrice-ST-1x2-5a          | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-ST-1x2-5a}          | []         | 93       | 15145          | 3708         | 67354           |
       | campaign-HB-DynamicPrice-Desktop-300X250-5b | 75396  | 240829   | false                 | 85            | {zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b} | []         | 10       | 15145          | 3708         | 66811           |
 #       for SP !!!!!!!after DB copy - change web section
       | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 407981 | 224533   | true                  | 31            | {zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a}  | []         | 83       | 15168          | 3711         | 66555           |
@@ -769,9 +763,9 @@ Feature: Entities for tests
       | campaign-PLT-YesPersonaL-ST-2 |
     Given i create new campaigns with new zoneset
       | Campaign Name                 | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-PLT-NotPersonaL-ST-1 | 75396 | 210722   | false                 | 8158          | {zone-zoneset-PLT-NotPersonaL-ST-1} | []         | 93       | 15132          | 3708         | 67638           |
-      | campaign-PLT-YesPersonaL-ST-1 | 75396 | 210722   | false                 | 8158          | {zone-zoneset-PLT-YesPersonaL-ST-1} | []         | 93       | 15131          | 3708         | 67638           |
-      | campaign-PLT-YesPersonaL-ST-2 | 75396 | 210722   | false                 | 8158          | {zone-zoneset-PLT-YesPersonaL-ST-2} | []         | 93       | 15131          | 3708         | 67638           |
+      | campaign-PLT-NotPersonaL-ST-1 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-PLT-NotPersonaL-ST-1} | []         | 93       | 15132          | 3708         | 67638           |
+      | campaign-PLT-YesPersonaL-ST-1 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-PLT-YesPersonaL-ST-1} | []         | 93       | 15131          | 3708         | 67638           |
+      | campaign-PLT-YesPersonaL-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-PLT-YesPersonaL-ST-2} | []         | 93       | 15131          | 3708         | 67638           |
     And i update campaign data by name
       | Campaign Name                 | is_persona_targeting |
       | campaign-PLT-NotPersonaL-ST-1 | 0                    |
@@ -802,12 +796,12 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                            | IO    | LineItem | isServerProgrammatic? | Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                | domain_exclude                 |
       | campaign-YesRunFalseDomain-69-1          | 75396 | 197418   | false                 | 86       | {zone-zoneset-YesRunFalseDomain-69-1}          | []         | 69       | 15160          | 3673         | 66933           | []                            | []                             |
-      | campaign-YesRunFalseDomainInclude-ST-2   | 75396 | 210722   | false                 | 8158     | {zone-zoneset-YesRunFalseDomainInclude-ST-2}   | []         | 93       | 15160          | 3673         | 64396           | [{includeFalseDomain.test,1}] | []                             |
+      | campaign-YesRunFalseDomainInclude-ST-2   | 75396 | 210722   | false                 | 8290     | {zone-zoneset-YesRunFalseDomainInclude-ST-2}   | []         | 93       | 15160          | 3673         | 64396           | [{includeFalseDomain.test,1}] | []                             |
       | campaign-NoRunFalseDomainInclude-92-3    | 75396 | 222908   | false                 | 14488    | {zone-zoneset-NoRunFalseDomainInclude-92-3}    | []         | 92       | 15160          | 3673         | 67165           | [{includeFalseDomain.test,1}] | []                             |
-      | campaign-YesRunFalseDomainExclude-ST-4   | 75396 | 210722   | false                 | 8158     | {zone-zoneset-YesRunFalseDomainExclude-ST-4}   | []         | 93       | 15160          | 3673         | 64396           | []                            | [{daniellafalsedomain.test,1}] |
+      | campaign-YesRunFalseDomainExclude-ST-4   | 75396 | 210722   | false                 | 8290     | {zone-zoneset-YesRunFalseDomainExclude-ST-4}   | []         | 93       | 15160          | 3673         | 64396           | []                            | [{daniellafalsedomain.test,1}] |
       | campaign-YesRunFalseDomainExclude-10-5   | 75396 | 240827   | false                 | 85       | {zone-zoneset-YesRunFalseDomainExclude-10-5}   | []         | 10       | 15160          | 3673         | 66814           | []                            | [{daniellafalsedomain.test,1}] |
-      | campaign-YesRunFalseDomainBothLists-ST-6 | 75396 | 210722   | false                 | 8158     | {zone-zoneset-YesRunFalseDomainBothLists-ST-6} | []         | 93       | 15160          | 3673         | 64396           | [{includeFalseDomain.test,1}] | [{daniellafalsedomain.test,1}] |
-      | campaign-NoRunFalseDomainBothLists-ST-7  | 75396 | 210722   | false                 | 8158     | {zone-zoneset-NoRunFalseDomainBothLists-ST-7}  | []         | 93       | 15160          | 3673         | 64396           | [{includeFalseDomain.test,1}] | [{daniellafalsedomain.test,1}] |
+      | campaign-YesRunFalseDomainBothLists-ST-6 | 75396 | 210722   | false                 | 8290     | {zone-zoneset-YesRunFalseDomainBothLists-ST-6} | []         | 93       | 15160          | 3673         | 64396           | [{includeFalseDomain.test,1}] | [{daniellafalsedomain.test,1}] |
+      | campaign-NoRunFalseDomainBothLists-ST-7  | 75396 | 210722   | false                 | 8290     | {zone-zoneset-NoRunFalseDomainBothLists-ST-7}  | []         | 93       | 15160          | 3673         | 64396           | [{includeFalseDomain.test,1}] | [{daniellafalsedomain.test,1}] |
     And i update campaign data by name
       | Campaign Name                            | run_on_unknown_domains |
       | campaign-YesRunFalseDomain-69-1          | 1                      |
@@ -959,7 +953,7 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       | Campaign Name                            | IO    | LineItem | isServerProgrammatic? | Deal\  Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-HB-PlacementG-SS-1*1            | 75396 | 197418   | false                 | 86              | {zone-zoneset-HB-PlacementG-SS-1*1}            | []         | 69       | 15227          | 3728         | 66831           |
-      | campaign-HB-PlacementG-ST-1*2            | 75396 | 210722   | false                 | 8158            | {zone-zoneset-HB-PlacementG-ST-1*2}            | []         | 93       | 15227          | 3728         | 66830           |
+      | campaign-HB-PlacementG-ST-1*2            | 75396 | 210722   | false                 | 8290            | {zone-zoneset-HB-PlacementG-ST-1*2}            | []         | 93       | 15227          | 3728         | 66830           |
       | campaign-HB-PlacementG-Billabord-970*250 | 75396 | 198082   | false                 | 64              | {zone-zoneset-HB-PlacementG-Billabord-970*250} | []         | 58       | 15227          | 3728         | 67231           |
       | campaign-HB-PlacementG-PG-1*1            | 75396 | 241783   | false                 | 1068            | {zone-zoneset-HB-PlacementG-PG-1*1}            | []         | 75       | 15227          | 3728         | 66832           |
 
@@ -1018,10 +1012,10 @@ Feature: Entities for tests
       | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290     | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | []                                                                            |
 
     And i update banner data by name
-      | Banner Name                                         | limitation                                                                               |
-      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                  |
-      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                  |
-      | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105"]]] |
+      | Banner Name                                         | limitation                                                                                            |
+      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
+      | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
+      | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105","2_80512001"]]] |
 
     And i update campaign data by name
       | Campaign Name                             | limitation                              |
@@ -1101,11 +1095,11 @@ Feature: Entities for tests
       | campaign-D-DailyFF-ST-5      |
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-D-HourlyPacing-ST-1 | 75396 | 247767   | false                 | 8158          | {zone-zoneset-D-HourlyPacing-ST-1} | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-DailyPacing-ST-2  | 75396 | 247767   | false                 | 8158          | {zone-zoneset-D-DailyPacing-ST-2}  | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-ASAP-ST-3         | 75396 | 247767   | false                 | 8158          | {zone-zoneset-D-ASAP-ST-3}         | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-HourlyFF-ST-4     | 75396 | 247767   | false                 | 8158          | {zone-zoneset-D-HourlyFF-ST-4}     | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-DailyFF-ST-5      | 75396 | 247767   | false                 | 8158          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | campaign-D-HourlyPacing-ST-1 | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyPacing-ST-1} | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | campaign-D-DailyPacing-ST-2  | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-DailyPacing-ST-2}  | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | campaign-D-ASAP-ST-3         | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-ASAP-ST-3}         | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | campaign-D-HourlyFF-ST-4     | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyFF-ST-4}     | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | campaign-D-DailyFF-ST-5      | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
 
     Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
     Given I set campaign campaign-D-DailyPacing-ST-2 for 3 days
@@ -1235,18 +1229,43 @@ Feature: Entities for tests
       | NDQfilteringTL-ST-1 |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name       | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | NDQfilteringTL-ST-1 | 574531 | 251644   | false                 | 26778         | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3708         | 69625           | []          | []          |
+      | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NDQfilteringTL-ST-1 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
 
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
 
     And i update campaign data by name
-      | Campaign Name       | factor | units |
-      | NDQfilteringTL-ST-1 | 0      | 100   |
+      | Campaign Name       | factor | units |goal_type   |
+      | NDQfilteringTL-ST-1 | 0      | 100   |impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
       | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
+
+  @append
+  Scenario: Create Entities for brand reveal 300*600
+    Given i disable campaigns by name on db
+      | Campaign Name                        |
+      | NewBrandReveal-BR-Direct             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                        | IO     | LI     | prog? | Deal  | Zonesets-zones Name                                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | NewBrandReveal-BR-PROG-NonGuaranteed | 407981 | 253747 | true  | 1643  | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+      | NewBrandReveal-BR-Direct             | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-Direct}             | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
+
+    Given I set campaign NewBrandReveal-BR-Direct for 10 days
+    Given I set campaign NewBrandReveal-BR-PROG-NonGuaranteed for 10 days
+
+    And i update campaign data by name
+      | Campaign Name                        | factor | units |goal_type   |
+      | NewBrandReveal-BR-Direct             | 0.1    | 100   |impressions |
+      | NewBrandReveal-BR-PROG-NonGuaranteed | 0.1    | 100   |impressions |
+
+    And i update zone data by name
+      | Zone Name                                         | is_secure |
+      | zone-zoneset-NewBrandReveal-BR-Direct             | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed | 1         |
 
 
   @DynamicPricing
@@ -1271,7 +1290,6 @@ Feature: Entities for tests
   @limitationSanity
   @Zonerefresh
   @yaniv
-  @refresh
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
@@ -1294,6 +1312,7 @@ Feature: Entities for tests
   @Keren
   @yaniv
   @refresh
+  @append
   Scenario: refresh caches
     And I refresh banner cache
     And I refresh zone cache
@@ -1307,6 +1326,6 @@ Feature: Entities for tests
 #    And I set test id of test_strategy named {scoringV2} to {53}
 
   @optimize
-  @refresh
+  @append
   Scenario: save entities to file
     And save all entities to json file

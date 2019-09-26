@@ -368,7 +368,7 @@ public class HeaderBiddingTest extends BaseTest {
         while(itr.hasNext())
         {
             Map.Entry<String, String> entry = itr.next();
-            url.append("&" + entry.getKey().substring(entry.getKey().lastIndexOf('.') + 1)).append("=" + entry.getValue());
+            url.append("&" + entry.getKey().substring(entry.getKey().lastIndexOf('.') + 1)).append("=" + encodeValue(entry.getValue()));
         }
         System.out.println("URL from ad: "+ "\n" + url.toString());
         return url.toString();
