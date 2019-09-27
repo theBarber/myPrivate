@@ -1236,33 +1236,33 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name       | factor | units | goal_type   |
-      | NDQfilteringTL-ST-1 | 0      | 100   | impressions |
+      | NDQfilteringTL-ST-1 | 0.1    | 100   | impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
       | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
 
   @append
-  Scenario: Create Entities for brand reveal 300*600 
-  Given i disable campaigns by name on db
-      | Campaign Name            |
-      | NewBrandReveal-BR-Direct |
-      | NewBrandReveal-BR-PROG-NonGuaranteed   |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600   |
+  Scenario: Create Entities for brand reveal 300*600
+    Given i disable campaigns by name on db
+      | Campaign Name                               |
+      | NewBrandReveal-BR-Direct                    |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 |
 
-  Given i create new campaigns, new zoneset with domains
+    Given i create new campaigns, new zoneset with domains
       | Campaign Name                               | IO     | LI     | prog? | Deal  | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253747 | true  | 1653  | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253747 | true  | 1652  | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
       | NewBrandReveal-BR-Direct                    | 407981 | 253288 | false | 27838 | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3695         | 69723           | []          | []          |
 
-  And i update campaign data by name
+    And i update campaign data by name
       | Campaign Name                               | units | goal_type   |
       | NewBrandReveal-BR-Direct                    | 100   | impressions |
       | NewBrandReveal-BR-PROG-NonGuaranteed        | 100   | impressions |
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 100   | impressions |
 
-  And i update zone data by name
+    And i update zone data by name
       | Zone Name                                                | is_secure |
       | zone-zoneset-NewBrandReveal-BR-Direct                    | 1         |
       | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed        | 1         |
