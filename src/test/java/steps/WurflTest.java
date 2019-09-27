@@ -11,17 +11,15 @@ import java.security.NoSuchAlgorithmException;
 
 
 @RunWith(Cucumber.class)
-    @CucumberOptions(features = {
-            "classpath:Wurfl.feature",
-            "classpath:br.feature",
-    }, plugin = {"pretty",})
-//            "infra.RotatingJSONFormatter:target/cucumber/Wurfl_$TIMESTAMP$.json"})
-    public class WurflTest extends BaseTest {
-        public WurflTest(){
-            super();
-        }
-
+@CucumberOptions(features = {
+        "classpath:Wurfl.feature",
+}, plugin = {"pretty",})
+public class WurflTest extends BaseTest {
+    public WurflTest() {
+        super();
     }
+
+}
 
 
 
