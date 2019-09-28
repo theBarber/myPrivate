@@ -243,7 +243,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 HttpResponse response = httpclient.execute(get, context);
                 if (response.getEntity() != null) {
                     response.setEntity(new BufferedHttpEntity(response.getEntity()));
-                    sut.write("Response Content: " + response.getEntity().toString());
                 } else {
                     response.setEntity(new StringEntity(""));
                 }
