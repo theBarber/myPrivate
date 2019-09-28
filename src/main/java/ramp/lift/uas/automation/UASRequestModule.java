@@ -230,8 +230,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
 
-    @Attachment(value = "Request url: {0}", type = "text/plain")
-    protected void request(String url, boolean toReset) {
+    @Attachment(value = "{url}", type = "text/plain")
+    protected String request(String url, boolean toReset) {
+        String response_body = null;
         if (toReset) {
             reset();
         }
@@ -255,13 +256,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                     withSleepInMillis = 0;
                 }
                 return response;
-
-
-
             } catch (IOException e) {
                 throw new UncheckedIOException("failed to send request (" + url + ") ", e);
             }
         }, requestSubmitter));
+        return response_body;
     }
 
     public Stream<CompletableFuture<HttpResponse>> responses() {
