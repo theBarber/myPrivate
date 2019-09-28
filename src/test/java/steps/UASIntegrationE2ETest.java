@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 
 @CucumberOptions(features = {
         "classpath:UASIntegrationE2E.feature",
-        "classpath:BrandRevealMultipleSizes.feature"
 }, plugin = {"pretty",})
 @RunWith(Cucumber.class)
 public class UASIntegrationE2ETest extends BaseTest {

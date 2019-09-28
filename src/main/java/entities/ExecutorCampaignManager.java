@@ -8,6 +8,7 @@ import infra.ParameterProvider;
 import infra.module.Named;
 import infra.module.WithId;
 import ramp.lift.common.S3Client;
+import ramp.lift.uas.automation.SystemUnderTest;
 
 import java.util.*;
 import java.util.function.Function;
@@ -15,6 +16,7 @@ import java.util.function.Function;
 
 public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer>> {
 
+	protected static SystemUnderTest sut = SystemUnderTest.getInstance();
 	List<IO> io;
 	List<ZoneSet> zonesets;
     private ObjectMapper m = new ObjectMapper();
@@ -45,6 +47,7 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
     }
 
 	private void initLineItemFromS3() {
+		sut.write("Initializing IO Line Item from S3...");
         try {
             this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname +"/createdlineItem.json"), IO[].class));
         } catch (Exception e) {
@@ -56,6 +59,7 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
 	}
 
 	private void initZoneSetsFromS3() {
+		sut.write("Initializing Zone Sets from S3...");
         try {
             this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname +"/createdzoneSet.json"), ZoneSet[].class)));
         } catch (Exception e) {
@@ -63,26 +67,6 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
             e.printStackTrace();
         }
 	}
-//
-//	private void initLineItem() {
-//        try {
-//            this.io =  Arrays.asList(m.readValue(this.getClass().getResourceAsStream(INIT_LINEITEM_FILE), IO[].class));
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            e.printStackTrace();
-//
-//        }
-//    }
-//
-//    private void initZoneSets() {
-//        try {
-//            this.zonesets =  new ArrayList<>(Arrays.asList(m.readValue(this.getClass().getResourceAsStream(INIT_ZONESET_FILE), ZoneSet[].class)));
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-
 
     public Optional<LineItem> getLineItem(Integer LineItemID)
 	{
