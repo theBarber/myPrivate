@@ -1,3 +1,4 @@
+@parallel
 Feature: Brand reveal new
 
   Scenario: send request expect delivery
