@@ -14,6 +14,7 @@ Feature: Entities for tests
   Scenario: remove all active zones
 #    zones that are linked to publisher 2434 are disabled specifically!!
     Given i remove all zones from publishers: {3836}
+    Given i remove all zones from publishers: {3695}
     Given i remove all zones from publishers: {3843}
     Given i remove all zones from publishers: {3673}
     Given i remove all zones from publishers: {3697}
