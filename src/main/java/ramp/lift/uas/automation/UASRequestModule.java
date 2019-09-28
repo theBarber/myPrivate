@@ -44,7 +44,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     public enum requestTypesEnum {
         ZONE, DYNAMIC_TAG, HEADER_BIDDING, WEL, PRF, EVE
     }
-
+    protected static SystemUnderTest sut = SystemUnderTest.getInstance();
     private ExecutorService requestSubmitter;
     private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_,%/=()]";
     protected static final Pattern impressionURLPattern = Pattern
@@ -231,20 +231,19 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
 
     @Attachment(value = "{url}", type = "text/plain")
-    protected String request(String url, boolean toReset) {
-        String response_body = null;
+    protected void request(String url, boolean toReset) {
         if (toReset) {
             reset();
         }
-
         actual().add(CompletableFuture.supplyAsync(() -> {
             try {
                 HttpGet get = new HttpGet(url);
                 get.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
-//        System.out.println("sending get request to UAS with url: "+url);
+                sut.write("Sending get request: " + url);
                 HttpResponse response = httpclient.execute(get, context);
                 if (response.getEntity() != null) {
                     response.setEntity(new BufferedHttpEntity(response.getEntity()));
+                    sut.write("Response Content: " + response.getEntity().getContent());
                 } else {
                     response.setEntity(new StringEntity(""));
                 }
@@ -260,7 +259,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 throw new UncheckedIOException("failed to send request (" + url + ") ", e);
             }
         }, requestSubmitter));
-        return response_body;
     }
 
     public Stream<CompletableFuture<HttpResponse>> responses() {
