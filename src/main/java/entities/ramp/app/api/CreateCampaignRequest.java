@@ -45,11 +45,11 @@ public class CreateCampaignRequest {
         this.zonesets = zonesets;
         this.selectedCreativeId = selectedCreativeId;
         this.selectedDealId = selectedDealId;
-        this.startDateTime = "2018-03-06T19:06:44.809Z";
-        this.endDateTime = "2020-12-31T04:59:59.999Z";
+//        this.startDateTime = "2018-03-06T19:06:44.809Z";
+//        this.endDateTime = "2020-12-31T04:59:59.999Z";
         this.CampaignPassBacks = new ArrayList<>();
-//        this.startDateTime = startDateTime;
-//        this.endDateTime = endDateTime;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     @JsonProperty("priority")

@@ -510,14 +510,18 @@ public class API_EntitiesCreator extends BaseTest {
 
         return new CreateCampaignRequest(campaignName, lineItemId,
                 zonesets, creatives, dealID,
-                dateFromNow(-1), dateFromNow(1));
+                dateFromNow(0), dateFromNow(365));
     }
 
     private String dateFromNow(Integer daysToAdd) {
-        final Calendar cal = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        TimeZone etTimeZone = TimeZone.getTimeZone("America/New_York");
+        formatter.setTimeZone(etTimeZone);
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
         cal.add(Calendar.DATE, daysToAdd);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        return dateFormat.format(cal.getTime());
+        return formatter.format(cal.getTime());
     }
 
     private void printCampaign(Campaign campaign) {
