@@ -1269,9 +1269,9 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name                               | units | goal_type   |
-      | NewBrandReveal-BR-Direct                    | 100   | impressions |
-      | NewBrandReveal-BR-PROG-NonGuaranteed        | 100   | impressions |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 100   | impressions |
+      | NewBrandReveal-BR-Direct                    | -1    | impressions |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        | -1    | impressions |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | -1    | impressions |
 
     And i update zone data by name
       | Zone Name                                                | is_secure |
