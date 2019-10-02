@@ -433,7 +433,7 @@ public class API_EntitiesCreator extends BaseTest {
         cal.add(Calendar.DATE, days);
         String endDate = formatter.format(cal.getTime());
 
-        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '"+ currentDate +"' WHERE `campaignname` like '%" + campaign_name +"%' and `status` = 0;");
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '" + currentDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status` = 0;");
     }
 
 
@@ -454,22 +454,15 @@ public class API_EntitiesCreator extends BaseTest {
     private void removeAllCampaignsByName(DataTable entities) {
         List<List<String>> EntityList = entities.asLists(String.class);
         List<String> entityData;
-
-
         for (int i = 1; i < EntityList.size(); i++) {
             entityData = EntityList.get(i);
             try {
                 if (SqlWorkflowUtils.getEntityByName("campaigns", "campaignname", entityData.get(0)).next()) {
                     SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", entityData.get(0), "status", "1");
-                }else{
-                    sut.write("Unable to fetch campaign " + entityData.get(0)+ " data!");
-                    break;
                 }
             } catch (SQLException e) {
-                Assert.fail(e.getMessage());
+                sut.write("Unable to fetch campaign " + entityData.get(0) + " data!\nLet's hope you're creating one...");
             }
-
-
         }
     }
 
@@ -517,14 +510,18 @@ public class API_EntitiesCreator extends BaseTest {
 
         return new CreateCampaignRequest(campaignName, lineItemId,
                 zonesets, creatives, dealID,
-                dateFromNow(-1), dateFromNow(1));
+                dateFromNow(0), dateFromNow(365));
     }
 
     private String dateFromNow(Integer daysToAdd) {
-        final Calendar cal = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        TimeZone etTimeZone = TimeZone.getTimeZone("America/New_York");
+        formatter.setTimeZone(etTimeZone);
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
         cal.add(Calendar.DATE, daysToAdd);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        return dateFormat.format(cal.getTime());
+        return formatter.format(cal.getTime());
     }
 
     private void printCampaign(Campaign campaign) {

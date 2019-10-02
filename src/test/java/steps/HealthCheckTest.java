@@ -65,7 +65,7 @@ public class HealthCheckTest extends BaseTest {
                 svc_ut = "RAMP-IO";
 				break;
 			default:
-				System.out.println("Invalid service");
+				System.out.println("Invalid service " + svc);
 
 		}
 
@@ -85,7 +85,7 @@ public class HealthCheckTest extends BaseTest {
 						.forEach(CompletableFuture::join);
 				break;
 			default:
-				System.out.println("Invalid service");
+				System.out.println("Invalid service "+svc_ut);
 
 		}
 	}
