@@ -201,19 +201,30 @@ Feature: Entities for tests
       | Campaign Name                    |
       | campaign-CrossDeviceCapping-ST-1 |
       | campaign-CrossDeviceCapping-ST-2 |
+      | campaign-CrossDeviceCapping-ST-3 |
+      | campaign-CrossDeviceCapping-ST-4 |
+
     Given i create new campaigns with new zoneset
       | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-CrossDeviceCapping-ST-2 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceCapping-ST-3 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-3} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceCapping-ST-4 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-4} | []         | 93       | 14892          | 3708         | 27807           |
 
     And i update zone data by name
       | Zone Name                                    | is_mraid | is_secure |
       | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
       | INT3708-zone-zoneset-CrossDeviceCapping-ST-2 | 0        | 1         |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST-3 | 0        | 1         |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST-4 | 0        | 1         |
+
     Given i update campaign data by name
-      | Campaign Name                    | capping | session_capping |
-      | campaign-CrossDeviceCapping-ST-1 | 2       | 2               |
-      | campaign-CrossDeviceCapping-ST-2 | 2       | 2               |
+      | Campaign Name                    | capping | session_capping | Block |
+      | campaign-CrossDeviceCapping-ST-1 | 2       | 0               | 0     |
+      | campaign-CrossDeviceCapping-ST-2 | 2       | 0               | 0     |
+      | campaign-CrossDeviceCapping-ST-3 | 0       | 2               | 60    |
+      | campaign-CrossDeviceCapping-ST-4 | 0       | 2               | 60    |
+
 
   @GDPR
   @HB

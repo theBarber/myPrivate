@@ -29,7 +29,7 @@ Feature: Cross Device Capping Experiment
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
 #    And I add optimize query parameter with value {1} to send my requests to uas
-    When I send 1   times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
+    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
 
     Then The response contains {script}
     And The responses has impression-urls
