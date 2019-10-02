@@ -1,6 +1,12 @@
+@uas
+@headerBidding
+@scheduled
+@NdqFilteringCL
 @parallel
 
 Feature: NDQ Filtering Campaign Level
+
+  Background:
 
 #  Scenario: Send Zone request and verify strategy
 #    Given i disable all tests except 100
@@ -13,7 +19,7 @@ Feature: NDQ Filtering Campaign Level
 #    Given i disable all tests except 53
 #    Given i set test 53 status to 1
 
-
+ 
   Scenario: Set Strategy 50-50 random-empty
     Given i disable all tests except 100
     Given i set test 100 status to 1
@@ -29,6 +35,8 @@ Feature: NDQ Filtering Campaign Level
   Scenario: Set strategy to common one
     Given i disable all tests except 53
     Given i set test 53 status to 1
+
+
 
 #  Scenario: 1. Campaign level, zone request, verify NDQ filtering obeys to skip daily goal flag when flag = false
 #    Given i disable all tests except 100

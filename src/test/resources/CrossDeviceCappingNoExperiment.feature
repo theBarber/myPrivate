@@ -5,9 +5,9 @@
 @uas
 Feature: Cross Device Capping No Experiment
   Background:
-    Given I delete the history of 20qxblv735tk3q7yq7nzy8mjm from users bucket
-    Given I delete the history of 314dzessmqqc5lby3bhzxcxtf from users bucket
-    Given I delete the history of 41hun7qe6bn47gfxgfbzwh938 from users bucket
+    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
+    Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket
+    Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from users bucket
     Given I clear all cookies from uas requests
   Scenario: test old uas logic
     Given I change IO id {75396} cross device Capping to {active}
@@ -19,8 +19,8 @@ Feature: Cross Device Capping No Experiment
 #UTID 22222222222222222222222222222222 to deviceId 20qxblv735tk3q7yq7nzy8mjm
 #UTID 33333333333333333333333333333333 to deviceId 314dzessmqqc5lby3bhzxcxtf
   Scenario: verify campaign capping enforced when sending zone requests from same user (different cookies) - in time frame
-    Given I add device 20qxblv735tk3q7yq7nzy8mjm with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"314dzessmqqc5lby3bhzxcxtf"}]}> to user info
-    Given I add device 314dzessmqqc5lby3bhzxcxtf with record <{"upid":"11111111111111111111111111111111", "devices":[{"udid":"20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"314dzessmqqc5lby3bhzxcxtf"}]}> to user info
+    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+    Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
@@ -141,7 +141,7 @@ Feature: Cross Device Capping No Experiment
     And The responses are passback
 
   Scenario: New device (cookie) at first time-> device graph loading weekly process)-> device linked to exiting user->  (send another request  capping enforced at user level
-    Given I delete user info record of 41hun7qe6bn47gfxgfbzwh938 from user info
+    Given I delete user info record of 1.41hun7qe6bn47gfxgfbzwh938 from user info
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
