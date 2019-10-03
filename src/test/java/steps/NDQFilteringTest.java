@@ -86,11 +86,14 @@ public class NDQFilteringTest extends BaseTest {
 
 
         And("^I send zone request (\\d+) times for zone (.*) until I get strategy (.*) and I expect (\\d+) impressions till I get NDQ passback$", (Integer times, String zone_name, String strategy, Integer ndq_passback) -> {
+            cmd("set AWS_PROFILE=\"ramp-nonprod\"", "RAMP-NONPROD ERR");
             Zone zone = sut.getExecutorCampaignManager().getZone(zone_name)
                     .orElseThrow(() -> new AssertionError("The Zone " + zone_name + " does not exist!"));
             String requestId = UUID.randomUUID().toString();
 //            int cnt=0;
+
             for(int i = 0; i<times; i ++) {
+                cmd("set AWS_PROFILE=\"udms-nonprod\"", "UDMS-NONPROD ERR");
                 if (AthenaUtils.testAthena(ATHENA_SAMPLE_QUERY
                         + " where dt='" + dateFormat.format(date)
                         + "' and request_id like '" + requestId +"';", String.valueOf((strategy.equals("random")?301:300)))) {
@@ -113,6 +116,7 @@ public class NDQFilteringTest extends BaseTest {
                     UasApi.sendMultipleZoneIdAdRequestsWithParameter(90, "requestid=" + requestId, zone.getId(), true);
                 }
             }
+
         });
 
         Given("^I setup the db$", () -> {
