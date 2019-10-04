@@ -42,13 +42,14 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
 	}*/
 
     private void initHardCodedEntities() {
-        initLineItemFromS3();
+//		sut.cmd("set AWS_PROFILE=\"ramp-nonprod\"", "RAMP-NONPROD ERR");
+		initLineItemFromS3();
         initZoneSetsFromS3();
     }
 
 	private void initLineItemFromS3() {
 		sut.write("Initializing IO Line Item from S3...");
-        try {
+		try {
             this.io =  Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/"+ envname +"/createdlineItem.json"), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());

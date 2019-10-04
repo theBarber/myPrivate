@@ -86,7 +86,7 @@ public class NDQFilteringTest extends BaseTest {
 
 
         And("^I send zone request (\\d+) times for zone (.*) until I get strategy (.*) and I expect (\\d+) impressions till I get NDQ passback$", (Integer times, String zone_name, String strategy, Integer ndq_passback) -> {
-            cmd("set AWS_PROFILE=\"ramp-nonprod\"", "RAMP-NONPROD ERR");
+//            cmd("set AWS_PROFILE=\"ramp-nonprod\"", "RAMP-NONPROD ERR");
             Zone zone = sut.getExecutorCampaignManager().getZone(zone_name)
                     .orElseThrow(() -> new AssertionError("The Zone " + zone_name + " does not exist!"));
             String requestId = UUID.randomUUID().toString();
