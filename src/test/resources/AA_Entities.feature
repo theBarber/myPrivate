@@ -1279,13 +1279,10 @@ Feature: Entities for tests
       | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 1         |
 
     And i update banner data by name
-      | Banner Name                                   | limitation |
-      | NewBrandReveal-BR-Direct-banner-1             | []         |
-      | NewBrandReveal-BR-PROG-NonGuaranteed-banner-1 | []         |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600   | []         |
-
-
-
+      | Banner Name                                          | limitation |
+      | NewBrandReveal-BR-Direct-banner-1                    | []         |
+      | NewBrandReveal-BR-PROG-NonGuaranteed-banner-1        | []         |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
 
   @DynamicPricing
