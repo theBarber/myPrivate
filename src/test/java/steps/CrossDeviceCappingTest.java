@@ -261,6 +261,7 @@ public class CrossDeviceCappingTest extends BaseTest{
       try{
 
         sut.getUsersBucket().deleteDocument(udId);
+        sut.getUsersLogsBucket().deleteDocument(udId);
 
       } catch (DocumentDoesNotExistException e) {
         System.out.println(e.getMessage());
