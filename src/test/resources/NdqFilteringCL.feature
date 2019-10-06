@@ -15,8 +15,8 @@ Feature: NDQ Filtering Campaign Level
 
   Scenario: try to consume all impressions
     Given I set campaign NDQfilteringTL-ST-1 for 100 days
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
     And I send 1000 times an ad request with query parameters for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
-
 
   Scenario: Set strategy to common one
     Given i disable all tests except 53

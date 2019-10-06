@@ -93,7 +93,7 @@ public class NDQFilteringTest extends BaseTest {
 //            int cnt=0;
 
             for(int i = 0; i<times; i ++) {
-                cmd("set AWS_PROFILE=\"udms-nonprod\"", "UDMS-NONPROD ERR");
+//                cmd("set AWS_PROFILE=\"udms-nonprod\"", "UDMS-NONPROD ERR");
                 if (AthenaUtils.testAthena(ATHENA_SAMPLE_QUERY
                         + " where dt='" + dateFormat.format(date)
                         + "' and request_id like '" + requestId +"';", String.valueOf((strategy.equals("random")?301:300)))) {
