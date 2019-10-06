@@ -439,12 +439,12 @@ public class API_EntitiesCreator extends BaseTest {
 
     private void updateEntityDataByID(String entity, String updateBy, DataTable entities) {
         List<List<String>> EntityList = entities.asLists(String.class);
-        List<String> entityData;
+
         Integer entityID;
         for (int i = 1; i < EntityList.size(); i++) {
-            entityData = EntityList.get(i);
+            List<String> entityData = EntityList.get(i);
             entityID = updateBy.equals("name") ? sut.getCampaignManager()
-                    .getterFor(entity).apply(entityData.get(0)).orElseThrow(() -> new AssertionError("Entity wasn't found")).getId() : Integer.valueOf(entityData.get(0));
+                    .getterFor(entity).apply(entityData.get(0)).orElseThrow(() -> new AssertionError(entity.toUpperCase() + "entity with the name " + entityData.get(0) + " wasn't found")).getId() : Integer.valueOf(entityData.get(0));
             for (int j = 1; j < entityData.size(); j++) {
                 SqlWorkflowUtils.setColumnInWorkflow(entity + "s", entity + "id", entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
             }

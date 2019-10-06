@@ -13,6 +13,7 @@ import infra.cli.conn.CliConnection;
 import infra.cli.conn.CliConnectionImpl.EnumConnectionType;
 import infra.cli.conn.LinuxDefaultCliConnection;
 import infra.cli.conn.RootLinuxCliConnection;
+import infra.cli.process.CliCommandExecution;
 import infra.module.AbstractModuleImpl;
 import infra.support.StringUtils;
 import infra.utils.CouchBaseUtils;
@@ -25,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
@@ -616,6 +618,21 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	public String getProgrammaticHost()
 	{
 		return config.get("programmatic.host") + Optional.ofNullable(config.get("programmatic.port")).filter(s->!s.isEmpty()).map(s->":"+s).orElse("");
+	}
+
+	public void cmd(String cmd, String error)
+	{
+		this.getHostsConnection().forEach((host, conn) -> {
+			try {
+				this.write("********************************************************************");
+				CliCommandExecution command = new CliCommandExecution(conn, cmd).error(error)
+						.withTimeout(3, TimeUnit.MINUTES);
+				command.execute();
+			} catch (IOException e) {
+				throw new UncheckedIOException(e);
+			}
+
+		});
 	}
 
 	@Override

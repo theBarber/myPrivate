@@ -124,17 +124,7 @@ public class BaseTest implements En {
 
   protected void cmd(String cmd, String error)
   {
-    sut.getHostsConnection().forEach((host, conn) -> {
-      try {
-        sut.write("********************************************************************");
-        CliCommandExecution command = new CliCommandExecution(conn, cmd).error(error)
-                .withTimeout(3, TimeUnit.MINUTES);
-        command.execute();
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
-
-    });
+    sut.cmd(cmd, error);
   }
 
   public void setupDB(){
