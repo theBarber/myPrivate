@@ -198,32 +198,48 @@ Feature: Entities for tests
   @CrossDeviceCapping
   Scenario: create entities for cross device capping
     Given i disable campaigns by name on db
-      | Campaign Name                    |
-      | campaign-CrossDeviceCapping-ST-1 |
-      | campaign-CrossDeviceCapping-ST-2 |
-      | campaign-CrossDeviceCapping-ST-3 |
-      | campaign-CrossDeviceCapping-ST-4 |
+      | Campaign Name                                |
+      | campaign-DeviceSessionCapping-ST-1           |
+      | campaign-CrossDeviceSessionCapping-ST-2      |
+      | campaign-DeviceLifetimeCapping-ST-3          |
+      | campaign-CrossDeviceLifetimeCapping-ST-4     |
+      | campaign-DeviceCappingMultipleCampaigns-ST-5 |
+      | campaign-DeviceCappingMultipleCampaigns-ST-6 |
+      | campaign-DeviceCappingMultipleCampaigns-ST-7 |
+      | campaign-DeviceLiCapping-ST-8                |
 
     Given i create new campaigns with new zoneset
-      | Campaign Name                    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-CrossDeviceCapping-ST-1 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} | []         | 93       | 14892          | 3708         | 27807           |
-      | campaign-CrossDeviceCapping-ST-2 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-2} | []         | 93       | 14892          | 3708         | 27807           |
-      | campaign-CrossDeviceCapping-ST-3 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-3} | []         | 93       | 14892          | 3708         | 27807           |
-      | campaign-CrossDeviceCapping-ST-4 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST-4} | []         | 93       | 14892          | 3708         | 27807           |
+      | Campaign Name                                | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-DeviceSessionCapping-ST-1           | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceSessionCapping-ST-1}           | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceSessionCapping-ST-2      | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2}      | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-DeviceLifetimeCapping-ST-3          | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3}          | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceLifetimeCapping-ST-4     | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4}     | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-DeviceCappingMultipleCampaigns-ST-5 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-DeviceCappingMultipleCampaigns-ST-6 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-DeviceCappingMultipleCampaigns-ST-7 | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5} | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-DeviceLiCapping-ST-8                | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceLiCapping-ST-8}                | []         | 93       | 14892          | 3708         | 27807           |
 
     And i update zone data by name
-      | Zone Name                                    | is_mraid | is_secure |
-      | INT3708-zone-zoneset-CrossDeviceCapping-ST-1 | 0        | 1         |
-      | INT3708-zone-zoneset-CrossDeviceCapping-ST-2 | 0        | 1         |
-      | INT3708-zone-zoneset-CrossDeviceCapping-ST-3 | 0        | 1         |
-      | INT3708-zone-zoneset-CrossDeviceCapping-ST-4 | 0        | 1         |
+      | Zone Name                                                | is_mraid | is_secure |
+      | INT3708-zone-zoneset-DeviceSessionCapping-ST-1           | 0        | 1         |
+      | INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2      | 0        | 1         |
+      | INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3          | 0        | 1         |
+      | INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4     | 0        | 1         |
+      | INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5 | 0        | 1         |
+      | INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-6 | 0        | 1         |
+      | INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-7 | 0        | 1         |
+      | INT3708-zone-zoneset-DeviceLiCapping-ST-8                | 0        | 1         |
 
     Given i update campaign data by name
-      | Campaign Name                    | capping | session_capping | Block |
-      | campaign-CrossDeviceCapping-ST-1 | 2       | 0               | 0     |
-      | campaign-CrossDeviceCapping-ST-2 | 2       | 0               | 0     |
-      | campaign-CrossDeviceCapping-ST-3 | 0       | 2               | 60    |
-      | campaign-CrossDeviceCapping-ST-4 | 0       | 2               | 60    |
+      | Campaign Name                                | capping | session_capping | Block | Priority |
+      | campaign-DeviceSessionCapping-ST-1           | 0       | 2               | 60    | -2       |
+      | campaign-CrossDeviceSessionCapping-ST-2      | 0       | 2               | 60    | -2       |
+      | campaign-DeviceLifetimeCapping-ST-3          | 2       | 0               | 0     | -2       |
+      | campaign-CrossDeviceLifetimeCapping-ST-4     | 2       | 0               | 0     | -2       |
+      | campaign-DeviceCappingMultipleCampaigns-ST-5 | 2       | 0               | 0     | -2       |
+      | campaign-DeviceCappingMultipleCampaigns-ST-6 | 1       | 0               | 0     | -1       |
+      | campaign-DeviceCappingMultipleCampaigns-ST-7 | 0       | 0               | 0     | 1        |
+      | campaign-DeviceLiCapping-ST-8                | 4       | 0               | 0     | -2       |
 
 
   @GDPR

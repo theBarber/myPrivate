@@ -49,6 +49,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 	protected CouchbaseBucketModule userHistoryBucket;
 	protected CouchbaseBucketModule adserverBucket;
 	protected CouchbaseBucketModule usersBucket;
+	protected CouchbaseBucketModule usersLogsBucket;
 	protected CouchBaseUtils couchBaseUtils;
 	private static SystemUnderTest instance = null;
 	//public static final List<String> SETUP_CONF = Arrays.asList(System.getenv("SETUP_CONF").split(","));
@@ -556,6 +557,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 		}
 		return usersBucket;
 	}
+
+	public CouchbaseBucketModule getUsersLogsBucket() {
+		if(usersLogsBucket == null){
+			usersLogsBucket = createCouchbaseBucketModule("us-east-1-users_logs", config);
+		}
+		return usersLogsBucket;
+	}
+
 	@Override
 	public void init() throws Exception {
 		super.init();
