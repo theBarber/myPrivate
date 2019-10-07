@@ -388,12 +388,15 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             sendGetRequestsSync(times, url);
     }
 
-    private void sendMultiplePostRequestsToUAS(Integer times, String url, String body, boolean isAsync) {
-        System.out.println("req sent = " + url + " body = " + body);
+    @Attachment(value = "Post request: ", type = "text/plain")
+    private String sendMultiplePostRequestsToUAS(Integer times, String url, String body, boolean isAsync) {
+        String post = "req sent = " + url + " body = " + body;
+        System.out.println(post);
         if (isAsync)
             sendPostRequestsAsync(times, url, body);
         else
             sendPostRequestSync(times, url, body);
+        return post;
     }
 
     public void sendMultipleTypeGetRequestWithParameter(String requestTypes, Integer times, String parameters, boolean isAsync, boolean isSecure) {
