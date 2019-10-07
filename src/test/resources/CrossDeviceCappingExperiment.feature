@@ -1,13 +1,14 @@
 @Sanity
 @CrossDeviceCapping
 @userinfo
-@userhistory
+@userhistory@
+@headerBidding
 @uas
 Feature: Cross Device Capping Experiment
   Background:
     Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
     Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket
-    Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from users bucket
+    Given I delete the history of 2.41hun7qe6bn47gfxgfbzwh938 from users bucket
     Given I delete the history of 1.cod753pf0jp65qhx4dr166uw0 from users bucket
     Given I delete the history of 1.1pnpdzss6uvgknzizqm4tji45 from users bucket
     Given I delete the history of 1.68h4mtmqsp9mul4d8ica9jks3 from users bucket
@@ -49,7 +50,7 @@ Feature: Cross Device Capping Experiment
     And The responses are passback
 
   Scenario: verify campaign session capping enforced when sending zone requests from user using inapp - in time frame
-    Given I add cookie UTID with value {{44444444444444444444444444444444}} to my requests to uas
+    Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
     And I add DeviceID query parameter with value {41hun7qe6bn47gfxgfbzwh938} to send my requests to uas
@@ -75,7 +76,6 @@ Feature: Cross Device Capping Experiment
 
 
   Scenario: verify campaign session capping enforced when sending zone requests from same user (different cookies)
-    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
@@ -102,7 +102,6 @@ Feature: Cross Device Capping Experiment
     And The responses are passback
 
   Scenario: verify campaign lifetime capping enforced when sending zone requests from user
-    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
@@ -129,8 +128,6 @@ Feature: Cross Device Capping Experiment
 
 
   Scenario: verify campaign lifetime capping enforced when sending zone requests from same user (different cookies)
-    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
-    Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
@@ -155,8 +152,6 @@ Feature: Cross Device Capping Experiment
     And The responses are passback
 
   Scenario: verify multiple campaigns lifetime capping enforced when sending zone requests from same user (different cookies)
-    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
-    Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
@@ -183,8 +178,6 @@ Feature: Cross Device Capping Experiment
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceCappingMultipleCampaigns-ST-7-banner-1} 100% of the time
 
   Scenario: verify line items capping enforced when sending zone requests from same user (different cookies)
-    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
-    Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
     #And I add zoneid query parameter with value {160092} to send my requests to uas
@@ -272,3 +265,141 @@ Feature: Cross Device Capping Experiment
 #    Given I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST-1} to UAS
 #    Then The response code is 200
 #    And The responses are passback
+
+  Scenario: header bidding frequency capping from mobile - user 1
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+    Given I add cookie UTID with random value to my requests to uas
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And all HB responses contains adId with value {0}
+
+  Scenario: header bidding frequency capping from Desktop user 1
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And all HB responses contains adId with value {0}
+
+  Scenario: header bidding frequency capping from mobile - user 2
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+    Given I add cookie UTID with random value to my requests to uas
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And all HB responses contains adId with value {0}
+
+  Scenario: header bidding frequency capping from Desktop user 2
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And all HB responses contains adId with value {0}
+
+  Scenario: header bidding frequency capping from mobile - user 2 after 5 minutes
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+    Given I sleep for 300 seconds
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And all HB responses contains adId with value {0}
+
+  Scenario: header bidding frequency capping from Desktop user 2 after 5 minutes
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    Given I sleep for 3 seconds
+    Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0}
+    And all HB responses contains adId with value {0}

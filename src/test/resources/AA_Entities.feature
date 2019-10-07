@@ -219,8 +219,8 @@ Feature: Entities for tests
       | campaign-DeviceLifetimeCapping-ST-3             | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3}             | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-CrossDeviceLifetimeCapping-ST-4        | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4}        | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceCappingMultipleCampaigns-ST-5    | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5}    | []         | 93       | 14892          | 3708         | 27807           |
-      | campaign-DeviceCappingMultipleCampaigns-ST-6    | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5}    | []         | 93       | 14892          | 3708         | 27807           |
-      | campaign-DeviceCappingMultipleCampaigns-ST-7    | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5}    | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-DeviceCappingMultipleCampaigns-ST-6    | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-6}    | []         | 93       | 14892          | 3708         | 27807           |
+      | campaign-DeviceCappingMultipleCampaigns-ST-7    | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-7}    | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceLiCapping-ST-8                   | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceLiCapping-ST-8}                   | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceSessionCapping-Inapp-ST-9        | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9}        | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-CrossDeviceSessionCapping-Inapp-ST-10  | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceSessionCapping-Inapp-ST-10}  | []         | 93       | 14892          | 3708         | 27807           |
@@ -243,7 +243,7 @@ Feature: Entities for tests
       | INT3708-zone-zoneset-CrossDeviceLifetimeCapping-Inapp-ST-12 | 1        | 1         |
 
     Given i update campaign data by name
-      | Campaign Name                                   | capping | session_capping | Block | Priority |
+      | Campaign Name                                   | capping | session_capping | block | priority |
       | campaign-DeviceSessionCapping-ST-1              | 0       | 2               | 60    | -2       |
       | campaign-CrossDeviceSessionCapping-ST-2         | 0       | 2               | 60    | -2       |
       | campaign-DeviceLifetimeCapping-ST-3             | 2       | 0               | 0     | -2       |
