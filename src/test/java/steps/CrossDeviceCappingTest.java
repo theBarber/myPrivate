@@ -21,15 +21,8 @@ import org.joda.time.MutableDateTime;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.CouchbaseBucketModule;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URI;
 import java.time.Instant;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+import static steps.HeaderBiddingTest.*;
 
 /**
  * Created by kereng on 5/23/2017.
@@ -151,15 +144,6 @@ public class CrossDeviceCappingTest extends BaseTest{
 //              "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
 //      usersBucket.insertDocument(udId,jsonDoc);
 //    });
-
-
-
-
-
-
-
-
-
 
 //one profile for each profile type. optional days reduce from epoch time for both profiles types.
     Then("i inject new profile for udId \\{(.*)\\} on users bucket, platform = \\{(.*)\\}, single udmp_p profile is \\{(.*)\\} with (\\d+) days reduce and one sqmsg_p profile = \\{(.*)\\} with (\\d+) days reduce ", (String udId, String platform, String udmp_pString, Integer daysToReduceFromUdmp ,String sqmsg_pString, Integer daysToReduceFromSqmg) -> {
