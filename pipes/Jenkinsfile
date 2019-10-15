@@ -22,7 +22,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'mvn clean install test -DtestDomainTargetingTest -P $ENVIRONMENT'
+                                sh 'mvn test -Dtest=steps.DomainTargetingTest -P $ENVIRONMENT'
                                 currentBuild.result = 'SUCCESS'
                             } catch (Exception ex) {
                                 currentBuild.result = 'FAILURE'
@@ -34,7 +34,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'mvn clean install test -DtestUDMPTest -P $ENVIRONMENT'
+                                sh 'mvn test -Dtest=steps.UDMPTest -P $ENVIRONMENT'
                                 currentBuild.result = 'SUCCESS'
                             } catch (Exception ex) {
                                 currentBuild.result = 'FAILURE'
@@ -46,7 +46,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'mvn clean install test -DtestServerProgrammaticTest -P $ENVIRONMENT'
+                                sh 'mvn test -Dtest=steps.ServerProgrammaticTest -P $ENVIRONMENT'
                                 currentBuild.result = 'SUCCESS'
                             } catch (Exception ex) {
                                 currentBuild.result = 'FAILURE'
@@ -58,7 +58,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'mvn clean install test -DtestServerProgrammaticTest -P $ENVIRONMENT'
+                                sh 'mvn test -Dtest=steps.ServerProgrammaticTest -P $ENVIRONMENT'
                                 currentBuild.result = 'SUCCESS'
                             } catch (Exception ex) {
                                 currentBuild.result = 'FAILURE'
