@@ -9,10 +9,10 @@ pipeline {
         stage('Refresh caches') {
             parallel {
                 stage('Refresh banner cache') {
-                    build 'banners_cache_refresh_' + $ENVIRONMENT
+                    build job: 'banners_cache_refresh_' + $ENVIRONMENT
                 }
                 stage('Refresh zone cache') {
-                    build 'zones_cache_refresh_' + $ENVIRONMENT
+                    build job: 'zones_cache_refresh_' + $ENVIRONMENT
                 }
             }
         }
