@@ -1,5 +1,29 @@
 {
-    "send HB request without params for publisher 3673":
+
+  "send basic HB request for publisher 3470":
+  {"x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b47",
+        "domain": "ranker.com",
+        "placementId": "10433394",
+        "publisherId": 3470,
+        "sizes": [
+          [
+            1,
+            1
+          ]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "placementId": "10433394",
+          "publisherId": 3470
+        }
+      }
+    ]
+  },
+
+  "send HB request without params for publisher 3673":
     {"x-ut-hb-params":[
       {
         "bidRequestId": "21b46f0d859b33",

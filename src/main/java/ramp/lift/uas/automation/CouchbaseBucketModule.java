@@ -45,7 +45,7 @@ public class CouchbaseBucketModule extends AbstractModuleImpl<Void>{
     if (name.contains("adserver")) {
       bucket = couchbase.openBucket(name, ADSERVER_PASS, 1, TimeUnit.MINUTES);
     }
-    if (name.contains("users")) {
+    if (name.contains("user")) {
       bucket = couchbase.openBucket(name, USERS_PASS, 1, TimeUnit.MINUTES);
     }
     else {

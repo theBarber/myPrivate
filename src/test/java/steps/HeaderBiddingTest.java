@@ -299,7 +299,12 @@ public class HeaderBiddingTest extends BaseTest {
     private void sendHeaderBiddingSecurePostRequest(Integer times, String scenario, Integer publisherID, String domain,String extraParams) {
         if(headerBiddingPostRequests == null)
         {
-            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
+            try {
+                headerBiddingPostRequests = mapper.readTree(this.getClass().getResourceAsStream(HEADER_BIDDING_SOURCE_FILE_PATH));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
         }
         JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
         Assert.assertNotNull( "There is no suitable scenario for scenario: "+scenario, jsonNode);
@@ -311,7 +316,12 @@ public class HeaderBiddingTest extends BaseTest {
     {
         if(headerBiddingPostRequests == null)
         {
-            throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
+            try {
+                headerBiddingPostRequests = mapper.readTree(this.getClass().getResourceAsStream(HEADER_BIDDING_SOURCE_FILE_PATH));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
         }
         JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
         Assert.assertNotNull( "There is no suitable scenario for scenario: "+scenario, jsonNode);
