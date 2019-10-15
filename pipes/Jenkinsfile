@@ -7,13 +7,15 @@ pipeline {
     }
     stages {
         stage('Refresh caches') {
-            parallel {
-                stage('Refresh banner cache') {
-                    build job: 'banners_cache_refresh_' + $ENVIRONMENT
-                }
-                stage('Refresh zone cache') {
-                    build job: 'zones_cache_refresh_' + $ENVIRONMENT
-                }
+            steps{
+                parallel (
+                    banners: {
+                        build job: 'banners_cache_refresh_' + $ENVIRONMENT
+                    },
+                    zones: {
+                        build job: 'zones_cache_refresh_' + $ENVIRONMENT
+                    }
+                )
             }
         }
         stage('Test') {
