@@ -3,13 +3,14 @@
 @scheduled
 @parallel
 @noAA
-
+@DomainTargetingFeature
 Feature: Domain Targeting tests
   Background: health check
     When Sending a healthcheck request to UAS
     Then The response code is 200
     Given I sleep for 120 seconds
 
+   @1A
   Scenario: 1A. send zone requests, ex host is not a false domain + in white list
     Given I sleep for 3 seconds
     Given I clear all headers from uas requests

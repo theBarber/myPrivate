@@ -562,7 +562,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
 	public CouchbaseBucketModule getUsersLogsBucket() {
 		if(usersLogsBucket == null){
-			usersLogsBucket = createCouchbaseBucketModule("us-east-1-users_logs", config);
+			usersLogsBucket = createCouchbaseBucketModule("us-east-1-user_logs", config);
 		}
 		return usersLogsBucket;
 	}
