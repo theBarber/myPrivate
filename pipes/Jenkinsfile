@@ -6,13 +6,18 @@ pipeline {
         }
     }
     stages {
-        stage('Refresh caches') {
+        stage('Refresh banners and zones') {
+            failFast true
             parallel {
-                stage('Refresh banner cache') {
-                    build job: 'banners_cache_refresh_' + $ENVIRONMENT
+                stage('Refresh banners cache') {
+                    steps {
+                        build job: "banners_cache_refresh_$ENVIRONMENT", wait: true
+                    }
                 }
-                stage('Refresh zone cache') {
-                    build job: 'zones_cache_refresh_' + $ENVIRONMENT
+                stage('Refresh zones cache') {
+                    steps {
+                        build job: "zones_cache_refresh_$ENVIRONMENT", wait: true
+                    }
                 }
             }
         }
@@ -22,7 +27,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'mvn clean install test -DtestDomainTargetingTest -P $ENVIRONMENT'
+                                sh 'mvn test -Dtest=steps.DomainTargetingTest -P $ENVIRONMENT'
                                 currentBuild.result = 'SUCCESS'
                             } catch (Exception ex) {
                                 currentBuild.result = 'FAILURE'
@@ -34,7 +39,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'mvn clean install test -DtestUDMPTest -P $ENVIRONMENT'
+                                sh 'mvn test -Dtest=steps.UDMPTest -P $ENVIRONMENT'
                                 currentBuild.result = 'SUCCESS'
                             } catch (Exception ex) {
                                 currentBuild.result = 'FAILURE'
@@ -46,7 +51,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'mvn clean install test -DtestServerProgrammaticTest -P $ENVIRONMENT'
+                                sh 'mvn test -Dtest=steps.ServerProgrammaticTest -P $ENVIRONMENT'
                                 currentBuild.result = 'SUCCESS'
                             } catch (Exception ex) {
                                 currentBuild.result = 'FAILURE'
@@ -58,7 +63,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'mvn clean install test -DtestServerProgrammaticTest -P $ENVIRONMENT'
+                                sh 'mvn test -Dtest=steps.ServerProgrammaticTest -P $ENVIRONMENT'
                                 currentBuild.result = 'SUCCESS'
                             } catch (Exception ex) {
                                 currentBuild.result = 'FAILURE'
