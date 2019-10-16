@@ -243,8 +243,14 @@ public class CrossDeviceCappingTest extends BaseTest{
 
     Then("I delete the history of ([0-9][.][a-zA-Z0-9]*) from users bucket", (String udId) -> {
       try{
-
         sut.getUsersBucket().deleteDocument(udId);
+      } catch (DocumentDoesNotExistException e) {
+        System.out.println(e.getMessage());
+      }
+    });
+
+    Then("I delete the history of ([0-9][.][a-zA-Z0-9]*) from user logs bucket", (String udId) -> {
+      try{
         sut.getUsersLogsBucket().deleteDocument(udId);
 
       } catch (DocumentDoesNotExistException e) {
@@ -252,9 +258,19 @@ public class CrossDeviceCappingTest extends BaseTest{
       }
     });
 
+
     Then("I delete the history of \\{(.*)\\} from users bucket with prefix = \\{(.*)\\}", (String udId, String prefix) -> {
       try{
         sut.getUsersBucket().deleteDocument(prefix+udId);
+
+      } catch (DocumentDoesNotExistException e) {
+        System.out.println(e.getMessage());
+      }
+    });
+
+    Then("I delete the history of \\{(.*)\\} from user logs bucket with prefix = \\{(.*)\\}", (String udId, String prefix) -> {
+      try{
+        sut.getUsersLogsBucket().deleteDocument(prefix+udId);
 
       } catch (DocumentDoesNotExistException e) {
         System.out.println(e.getMessage());
