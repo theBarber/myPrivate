@@ -129,16 +129,16 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
 #   client programmatic tests
-   Scenario: Send HBProg request with D first P selected
+  Scenario: Send HBProg request with D first P selected
     Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
-     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
-     And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
-     And all HB responses contains cpm with value {1}
-     And for all HB responses i simulate winning, and send their zone tag
-     And The response code is 200
-     And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
+    And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
+    And all HB responses contains cpm with value {1}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
 
   Scenario: Send HBProg request with No D, No response from Pwai
     Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=0&sim_geo=1&country=us}
@@ -197,32 +197,32 @@ Feature: Header Bidding flow support
 
 #   header bidding multiple bids tests
   Scenario: header bidding multiple bids requests
-      Given I Delete hbl logs
-      Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
-      And The response code is 200
-      And The response contains {script}
-      And i read all HB responses and map their bidId by adId
-      And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
-      And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
-      And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
-      And I sleep for 5 seconds
-      Given I read the latest hbl log file from uas
-      And For bidID bid1 The field bid_request_id in the 30 column of the hbl log is: bid1
-      And For bidID bid1 The field Selected_Ad_Size in the 6 column of the hbl log is: [[1,2],[160,600]]
-      And For bidID bid1 The field Bid_price in the 15 column of the hbl log is: 1.00
-      And For bidID bid1 The field Publisher_id in the 3 column of the hbl log is: 3673
-      And For bidID bid1 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-      And For bidID bid2 The field bid_request_id in the 30 column of the hbl log is: bid2
-      And For bidID bid2 The field Selected_Ad_Size in the 6 column of the hbl log is: [[970,250]]
-      And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 0.50
-      And For bidID bid2 The field Publisher_id in the 3 column of the hbl log is: 3673
-      And For bidID bid2 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-      And For bidID bid3 The field bid_request_id in the 30 column of the hbl log is: bid3
-      And For bidID bid3 The field Selected_Ad_Size in the 6 column of the hbl log is: [[300,250]]
-      And For bidID bid3 The field Bid_price in the 15 column of the hbl log is: 2.50
-      And For bidID bid3 The field Publisher_id in the 3 column of the hbl log is: 3673
-      And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-      And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
+    Given I Delete hbl logs
+    Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
+    And The response code is 200
+    And The response contains {script}
+    And i read all HB responses and map their bidId by adId
+    And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
+    And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
+    And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
+    And I sleep for 5 seconds
+    Given I read the latest hbl log file from uas
+    And For bidID bid1 The field bid_request_id in the 30 column of the hbl log is: bid1
+    And For bidID bid1 The field Selected_Ad_Size in the 6 column of the hbl log is: [[1,2],[160,600]]
+    And For bidID bid1 The field Bid_price in the 15 column of the hbl log is: 1.00
+    And For bidID bid1 The field Publisher_id in the 3 column of the hbl log is: 3673
+    And For bidID bid1 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+    And For bidID bid2 The field bid_request_id in the 30 column of the hbl log is: bid2
+    And For bidID bid2 The field Selected_Ad_Size in the 6 column of the hbl log is: [[970,250]]
+    And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 0.50
+    And For bidID bid2 The field Publisher_id in the 3 column of the hbl log is: 3673
+    And For bidID bid2 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+    And For bidID bid3 The field bid_request_id in the 30 column of the hbl log is: bid3
+    And For bidID bid3 The field Selected_Ad_Size in the 6 column of the hbl log is: [[300,250]]
+    And For bidID bid3 The field Bid_price in the 15 column of the hbl log is: 2.50
+    And For bidID bid3 The field Publisher_id in the 3 column of the hbl log is: 3673
+    And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+    And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
 
 #   header bidding multiple domains tests
   Scenario: header bidding multiple domains - domain1
@@ -350,7 +350,7 @@ Feature: Header Bidding flow support
     Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
-    And The response contains campaignId
+    And The response contains {campaignId}
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
@@ -368,7 +368,7 @@ Feature: Header Bidding flow support
     Given i send 1 basic headerBidding secure post request for publisher 3728 with size - h1:970 w1:250, with domain {slader.com}, placmentID group = {blabla} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
-    And The response contains campaignId
+    And The response contains {campaignId}
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
 
@@ -377,7 +377,7 @@ Feature: Header Bidding flow support
     Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=0&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
-    And The response contains campaignId
+    And The response contains {campaignId}
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
 
@@ -414,6 +414,7 @@ Feature: Header Bidding flow support
     And The field Bid_price in the 15 column of the hbl log is: 1.00
     And The field Publisher_id in the 3 column of the hbl log is: 3673
     And The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+
   @optimize
   Scenario: send HB basic request with domain as array
     Given i send 1 headerBidding post request for scenario {Send HB basic request with domain as array for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -426,66 +427,80 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
+
   @optimize
   Scenario: send HB request without publisherID configured
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
+
   @optimize
   Scenario: Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
+
   @optimize
   Scenario: Send HB request with Empty placementID
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty placementID for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+
   @optimize
   Scenario: Send HB request with Empty sizes
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with Empty timeout
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty timeout for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+
   @optimize
   Scenario: Send HB request with wrong values
     Given i send 1 headerBidding post request for scenario {Send HB request with wrong values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - sizes as string
     Given i send 1 headerBidding post request for scenario {Send HB request with sizes as string for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - sizes as string array
     Given i send 1 headerBidding post request for scenario {Send HB request with string array sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - everything is empty in parmeters
     Given i send 1 headerBidding post request for scenario {Send HB request with empty values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - partial data
     Given i send 1 headerBidding post request for scenario {Send HB request with partial data for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - empty data
     Given i send 1 headerBidding post request for scenario {Send HB request with empty for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - wrong format
     Given i send 1 headerBidding post request for scenario {Send HB request with wrong format for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with one size
     Given i send 1 headerBidding post request for scenario {Send HB request with one size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+
   @optimize
   Scenario: Send HB request with no 1X1 size
     Given i send 1 headerBidding post request for scenario {Send HB request with no 1X1 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -525,6 +540,7 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
+
   @optimize
   Scenario: Send Price per platform request with 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -537,6 +553,7 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
+
   @optimize
   Scenario: Send Price per platform request with 970X250, 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with [970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -697,6 +714,7 @@ Feature: Header Bidding flow support
     And The field Bid_price in the 15 column of the hbl log is: 1.00
     And The field Publisher_id in the 3 column of the hbl log is: 3673
     And The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+
   @optimize
   Scenario: send HB basic request with domain as array
     Given i send 1 headerBidding post request for scenario {Send HB basic request with domain as array for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -709,66 +727,80 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
+
   @optimize
   Scenario: send HB request without publisherID configured
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
+
   @optimize
   Scenario: Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
+
   @optimize
   Scenario: Send HB request with Empty placementID
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty placementID for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+
   @optimize
   Scenario: Send HB request with Empty sizes
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with Empty timeout
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty timeout for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+
   @optimize
   Scenario: Send HB request with wrong values
     Given i send 1 headerBidding post request for scenario {Send HB request with wrong values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - sizes as string
     Given i send 1 headerBidding post request for scenario {Send HB request with sizes as string for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - sizes as string array
     Given i send 1 headerBidding post request for scenario {Send HB request with string array sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - everything is empty in parmeters
     Given i send 1 headerBidding post request for scenario {Send HB request with empty values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - partial data
     Given i send 1 headerBidding post request for scenario {Send HB request with partial data for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - empty data
     Given i send 1 headerBidding post request for scenario {Send HB request with empty for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with wrong values - wrong format
     Given i send 1 headerBidding post request for scenario {Send HB request with wrong format for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
+
   @optimize
   Scenario: Send HB request with one size
     Given i send 1 headerBidding post request for scenario {Send HB request with one size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
+
   @optimize
   Scenario: Send HB request with no 1X1 size
     Given i send 1 headerBidding post request for scenario {Send HB request with no 1X1 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -810,6 +842,7 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
+
   @optimize
   Scenario: Send Price per platform request with 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -822,6 +855,7 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
+
   @optimize
   Scenario: Send Price per platform request with 970X250, 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with [970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -839,7 +873,7 @@ Feature: Header Bidding flow support
   @optimize
   Scenario: header bidding multiple bids requests
     Given I Delete hbl logs
-   Given i send 3 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
+    Given i send 3 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And i read all HB responses and map their bidId by adId
@@ -848,7 +882,7 @@ Feature: Header Bidding flow support
     And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
     And I sleep for 5 seconds
     Given I read the latest hbl log file from uas
-   And For bidID bid1 The field bid_request_id in the 30 column of the hbl log is: bid1
+    And For bidID bid1 The field bid_request_id in the 30 column of the hbl log is: bid1
     And For bidID bid1 The field Selected_Ad_Size in the 6 column of the hbl log is: [[1,2],[160,600]]
     And For bidID bid1 The field Bid_price in the 15 column of the hbl log is: 1.00
     And For bidID bid1 The field Publisher_id in the 3 column of the hbl log is: 3673
@@ -884,6 +918,7 @@ Feature: Header Bidding flow support
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-1-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-1-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} 100% of the time
+
   @optimize
   Scenario: header bidding multiple domains - domain2
     Given I add cookie UTID with value {d7a8b9faf42446dcbca3248kef7d47bb} to my requests to uas
@@ -919,6 +954,7 @@ Feature: Header Bidding flow support
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-3-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-3-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} 100% of the time
+
   @optimize
   Scenario: header bidding multiple domains - domain4
     Given I add cookie UTID with value {d7a8b9caf42446dcbca3248eef7d47bb} to my requests to uas
@@ -959,3 +995,99 @@ Feature: Header Bidding flow support
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
     And all HB responses contains cpm with id 3
 
+
+  @throttling
+  Scenario: send HB basic request without placement group id, delivery 100% of the time
+    Given I Delete hbl logs
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/o placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains adId with id of entity named {Throttling-BR-PROG-NonGuaranteed-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains cpm with id 1
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-PROG-NonGuaranteed-banner-1} 100% of the time
+    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-PROG-NonGuaranteed} 100% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} 100% of the time
+    And I read the latest hbl log file from uas
+    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
+    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
+    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
+    And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
+    And The field Bid_price in the 15 column of the hbl log is: 1.00
+    And The field Publisher_id in the 3 column of the hbl log is: 3728
+    And The field Domain in the 5 column of the hbl log is: headerbiddingthrottlingtest.com
+
+  @throttling
+  Scenario: send HB basic request with placement group id, throttling 0%, delivery 100% of the time
+    #set throttling 0%
+    Given I Delete hbl logs
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal }
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains adId with id of entity named {Throttling-BR-PROG-NonGuaranteed-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains cpm with id 1
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-PROG-NonGuaranteed-banner-1} 100% of the time
+    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-PROG-NonGuaranteed} 100% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} 100% of the time
+    And I read the latest hbl log file from uas
+    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
+    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
+    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
+    And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
+    And The field Bid_price in the 15 column of the hbl log is: 1.00
+    And The field Publisher_id in the 3 column of the hbl log is: 3728
+    And The field Domain in the 5 column of the hbl log is: headerbiddingthrottlingtest.com
+
+  @throttling
+  Scenario: send HB basic request with placement group id, throttling 60%, delivery 40% of the time
+    #set throttling 60%
+    Given I Delete hbl logs
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains adId with id of entity named {Throttling-BR-PROG-NonGuaranteed-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains cpm with id 1
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-PROG-NonGuaranteed-banner-1} 40% of the time
+    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-PROG-NonGuaranteed} 40% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} 40% of the time
+    And I read the latest hbl log file from uas
+    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
+    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
+    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
+    And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
+    And The field Bid_price in the 15 column of the hbl log is: 1.00
+    And The field Publisher_id in the 3 column of the hbl log is: 3728
+    And The field Domain in the 5 column of the hbl log is: headerbiddingthrottlingtest.com
+
+  @throttling
+  Scenario: send HB basic request with placement group id, throttling 100%, delivery 0% of the time
+    #set throttling 100%
+    Given I Delete hbl logs
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
+    And The response code is 200
+    And The responses are passback
+
+  @throttling
+  Scenario: send HB basic request with placement group id, disable the whole placement group, delivery 0% of the time
+    #disable the whole placement group
+    Given I Delete hbl logs
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
+    And The response code is 200
+    And The responses are passback
