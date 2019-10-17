@@ -456,13 +456,7 @@ public class API_EntitiesCreator extends BaseTest {
         List<String> entityData;
         for (int i = 1; i < EntityList.size(); i++) {
             entityData = EntityList.get(i);
-            //try {
-                //if (SqlWorkflowUtils.getEntityByName("campaigns", "campaignname", entityData.get(0)).next()) {
-                    SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", entityData.get(0), "status", "1");
-                //}
-            //} catch (SQLException e) {
-            //    sut.write("Unable to fetch campaign " + entityData.get(0) + " data!\nLet's hope you're creating one...");
-            //}
+            SqlWorkflowUtils.setColumnInWorkflow("campaigns", "campaignname", entityData.get(0), "status", "1");
         }
     }
 
