@@ -1,4 +1,5 @@
 #@parallel
+@NDQFilteringTest
 
 Feature: NDQ Filtering Campaign Level
 
@@ -13,11 +14,236 @@ Feature: NDQ Filtering Campaign Level
 #    And The response code is 200
 #    And The responses are passback
 
-  Scenario: try to consume all impressions
-    Given I set campaign NDQfilteringTL-ST-1 for 100 days
+  Scenario Outline: try to consume all impressions
     Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-    And I send 1000 times an ad request with query parameters for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
+    And I send 1 times an ad request with query parameters for zone named <zone> to UAS
+    And The response code is 200
+    Then The response contains {script}
     And I send impression requests to UAS immediately!
+
+    Examples:
+      | zone                               |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+      | {zone-zoneset-NDQfilteringTL-ST-1} |
+
 
   Scenario: Set strategy to common one
     Given i disable all tests except 53

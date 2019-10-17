@@ -1264,6 +1264,8 @@ Feature: Entities for tests
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 1         |
 
+
+  @NDQFilteringTest
   Scenario: create entities for NDQ filtering
     Given i disable campaigns by name on db
       | Campaign Name       |
@@ -1277,7 +1279,7 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name       | factor | units | goal_type   |
-      | NDQfilteringTL-ST-1 | 0.1    | 100   | impressions |
+      | NDQfilteringTL-ST-1 | 0.1    | 1000   | impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
@@ -1337,6 +1339,7 @@ Feature: Entities for tests
   @limitationSanity
   @Zonerefresh
   @yaniv
+  @NDQFilteringTest
   Scenario: refresh zone cache with wait
     Given i kill replay on the machines
     And I setup the db
@@ -1360,6 +1363,7 @@ Feature: Entities for tests
   @yaniv
   @refresh
   @append
+  @NDQFilteringTest
   Scenario: refresh caches
     And I refresh banner cache
     And I refresh zone cache
