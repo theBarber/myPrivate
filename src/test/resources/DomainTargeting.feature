@@ -10,7 +10,7 @@ Feature: Domain Targeting tests
     Then The response code is 200
     Given I sleep for 120 seconds
 
-   @1A
+  @1A
   Scenario: 1A. send zone requests, ex host is not a false domain + in white list
     Given I sleep for 3 seconds
     Given I clear all headers from uas requests
@@ -58,7 +58,7 @@ Feature: Domain Targeting tests
     And The responses are passback
 
   Scenario: sleep
-  Given I sleep for 1 seconds
+    Given I sleep for 1 seconds
 
   Scenario: 4A. send zone requests, make sure a complexed referer is extracted correctly.
     Given I sleep for 3 seconds
@@ -67,8 +67,7 @@ Feature: Domain Targeting tests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
     When I send 1 times an ad request with parameter {domain=danifalse.com&optimize=0} for zone named {zone-zoneset-EHC-ST-4A} to UAS
     And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-4A-banner-1} 100% of the time
+    And The responses are passback
 
   Scenario: 4B. send zone requests, make sure a complexed referer is extracted correctly
     Given I sleep for 3 seconds
@@ -97,27 +96,37 @@ Feature: Domain Targeting tests
     And The response code is 200
     And The responses are passback
 
-  Scenario: 6A. send DT requests, ex is the ref, which is not a false domain + in white list. comp reffrer.
+  Scenario: 6A. send DT requests where referer string is in domain_inclusion_list and domain is in domain_exclusion_list
     Given I sleep for 3 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=0}
     And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
+    And The responses are passback
+
+  Scenario: 6B. send DT requests where referer string is in domain_inclusion_list and domain is in domain_exclusion_list
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danidom.com} as referer string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=0}
     And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-DT-SS-7A-banner-1} 100% of the time
+    And The responses are passback
+
+  Scenario: 6C. send DT requests where referer string is in domain_exclusion_list and no domain is specified
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danifalse.com} as referer string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {tagid=470&optimize=0}
     And The response code is 200
+    And The responses are passback
+
+  Scenario: 6D. send DT request where referer string is not in any list and domain is in domain_exclusion_list
+    Given I clear all headers from uas requests
+    Given I clear all cookies from uas requests
+    Given I use {https://unknown.com} as referer string to send my requests to uas
+    And i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=0}
+    Then The response code is 200
     And The responses are passback
 
 #  Scenario: 7A. send DT requests, referer is a false domain, should choose domain as effective host.
