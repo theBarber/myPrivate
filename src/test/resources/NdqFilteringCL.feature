@@ -1,4 +1,4 @@
-#@parallel
+@parallel
 @NDQFilteringTest
 
 Feature: NDQ Filtering Campaign Level

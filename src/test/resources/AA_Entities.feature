@@ -1279,7 +1279,7 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name       | factor | units | goal_type   |
-      | NDQfilteringTL-ST-1 | 0.1    | 1000   | impressions |
+      | NDQfilteringTL-ST-1 | 0.1    | 1000  | impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
@@ -1316,6 +1316,8 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed-banner-1        | []         |
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
+
+  @append
   Scenario: Create Entities for throttling feature
     Given i disable campaigns by name on db
       | Campaign Name                    |
@@ -1323,7 +1325,7 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                    | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | Throttling-BR-PROG-NonGuaranteed | 407981 | 253747   | true                  | 1653          | {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
+      | Throttling-BR-PROG-NonGuaranteed | 407981 | 253287   | true                  | 1653          | {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
 
     And i update campaign data by name
       | Campaign Name                    | units | goal_type   |
@@ -1332,10 +1334,6 @@ Feature: Entities for tests
     And i update zone data by name
       | Zone Name                                     | is_secure |
       | zone-zoneset-Throttling-BR-PROG-NonGuaranteed | 1         |
-
-    And i update banner data by name
-      | Banner Name                               | limitation |
-      | Throttling-BR-PROG-NonGuaranteed-banner-1 | []         |
 
 
   @DynamicPricing

@@ -996,6 +996,7 @@ Feature: Header Bidding flow support
     And all HB responses contains cpm with id 3
 
 
+  @throttling
   Scenario: send HB basic request without placement group id, delivery 100% of the time
     Given I Delete hbl logs
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/o placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
@@ -1021,10 +1022,11 @@ Feature: Header Bidding flow support
     And The field Publisher_id in the 3 column of the hbl log is: 3728
     And The field Domain in the 5 column of the hbl log is: headerbiddingthrottlingtest.com
 
+  @throttling
   Scenario: send HB basic request with placement group id, throttling 0%, delivery 100% of the time
     #set throttling 0%
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal }
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
@@ -1047,11 +1049,11 @@ Feature: Header Bidding flow support
     And The field Publisher_id in the 3 column of the hbl log is: 3728
     And The field Domain in the 5 column of the hbl log is: headerbiddingthrottlingtest.com
 
-
+  @throttling
   Scenario: send HB basic request with placement group id, throttling 60%, delivery 40% of the time
     #set throttling 60%
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
@@ -1074,17 +1076,18 @@ Feature: Header Bidding flow support
     And The field Publisher_id in the 3 column of the hbl log is: 3728
     And The field Domain in the 5 column of the hbl log is: headerbiddingthrottlingtest.com
 
+  @throttling
   Scenario: send HB basic request with placement group id, throttling 100%, delivery 0% of the time
     #set throttling 100%
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
     And The response code is 200
     And The responses are passback
 
-
+  @throttling
   Scenario: send HB basic request with placement group id, disable the whole placement group, delivery 0% of the time
     #disable the whole placement group
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {headerbiddingthrottlingtest.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
     And The response code is 200
     And The responses are passback

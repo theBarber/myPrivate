@@ -1121,23 +1121,23 @@
         "publisherId" : "3843"
       }
     }]},
-  "Send HB basic request w/ throttling for publisher 3728":
+  "Send HB basic request w/ placementId for publisher 3728":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46gfd59b33",
       "domain": "headerbiddingthrottlingtest.com",
-      "placementId": "10433394",
+      "placementId": "3728006",
       "publisherId": 3728,
       "sizes": [
         [600,300]
       ],
       "timeout": 700,
       "hbadaptor": "prebid",
-      "params": {"placementId" : "10433394",
+      "params": {"placementId" : "3728006",
         "publisherId" : 3728
       }
     }]},
-  "Send HB basic request w/o throttling for publisher 3728":
+  "Send HB basic request w/o placementId for publisher 3728":
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46gfd59b33",
