@@ -1125,7 +1125,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46gfd59b33",
-      "domain": "headerbiddingthrottlingtest.com",
+      "domain": "slader.com",
       "placementId": "3728006",
       "publisherId": 3728,
       "sizes": [
@@ -1141,7 +1141,7 @@
   {"x-ut-hb-params":[
     {
       "bidRequestId": "21b46gfd59b33",
-      "domain": "headerbiddingthrottlingtest.com",
+      "domain": "slader.com",
       "placementId": "",
       "publisherId": 3728,
       "sizes": [
