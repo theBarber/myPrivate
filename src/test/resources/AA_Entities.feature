@@ -1294,9 +1294,9 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                               | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253287   | true                  | 1653          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253748   | true                  | 1652          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
-      | NewBrandReveal-BR-Direct                    | 407981 | 253288   | false                 | 28428         | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253287   | true                  | 1653          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3728         | 69822           | []             | []             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253748   | true                  | 1652          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3728         | 69822           | []             | []             |
+      | NewBrandReveal-BR-Direct                    | 407981 | 253288   | false                 | 28428         | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3728         | 69822           | []             | []             |
 
     And i update campaign data by name
       | Campaign Name                               | units | goal_type   |
@@ -1325,7 +1325,7 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                    | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | Throttling-BR-PROG-NonGuaranteed | 407981 | 253287   | true                  | 1653          | {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
+      | Throttling-BR-PROG-NonGuaranteed | 407981 | 253287   | true                  | 1653          | {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} | []         | 95       | 15376          | 3728         | 69822           | []             | []             |
 
     And i update campaign data by name
       | Campaign Name                    | units | goal_type   |
