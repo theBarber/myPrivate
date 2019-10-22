@@ -1128,9 +1128,7 @@
       "domain": "slader.com",
       "placementId": "3728006",
       "publisherId": 3728,
-      "sizes": [
-        [600,300]
-      ],
+      "sizes": [600,300],
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "3728006",
@@ -1144,9 +1142,7 @@
       "domain": "slader.com",
       "placementId": "",
       "publisherId": 3728,
-      "sizes": [
-        [600,300]
-      ],
+      "sizes": [600,300],
       "timeout": 700,
       "hbadaptor": "prebid",
       "params": {"placementId" : "",

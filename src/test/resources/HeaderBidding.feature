@@ -999,7 +999,8 @@ Feature: Header Bidding flow support
   @throttling
   Scenario: send HB basic request without placement group id, delivery 100% of the time
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/o placementId for publisher 3728} for publisher 3728 with domain {HBTest2.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us}
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/o placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
@@ -1026,7 +1027,8 @@ Feature: Header Bidding flow support
   Scenario: send HB basic request with placement group id, throttling 0%, delivery 100% of the time
     #set throttling 0%
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {HBTest2.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
@@ -1053,7 +1055,8 @@ Feature: Header Bidding flow support
   Scenario: send HB basic request with placement group id, throttling 60%, delivery 40% of the time
     #set throttling 60%
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
@@ -1080,7 +1083,8 @@ Feature: Header Bidding flow support
   Scenario: send HB basic request with placement group id, throttling 100%, delivery 0% of the time
     #set throttling 100%
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
     And The responses are passback
 
@@ -1088,6 +1092,7 @@ Feature: Header Bidding flow support
   Scenario: send HB basic request with placement group id, disable the whole placement group, delivery 0% of the time
     #disable the whole placement group
     Given I Delete hbl logs
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&sim_geo=1&country=us&requestid=OX_BrandReveal}
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
     And The responses are passback
