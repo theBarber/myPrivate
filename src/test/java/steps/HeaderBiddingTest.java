@@ -8,6 +8,7 @@ import org.apache.http.HttpResponse;
 import org.junit.Assert;
 import org.junit.AssumptionViolatedException;
 import org.junit.runner.RunWith;
+import ramp.lift.uas.automation.RampAppRequestModule;
 import ramp.lift.uas.automation.UASRequestModule;
 
 import java.io.UnsupportedEncodingException;
@@ -67,6 +68,16 @@ public class HeaderBiddingTest extends BaseTest {
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi bids. first bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+), sec bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+) with domain \\{(.*)\\} and extra params \\{(.*)\\}",this::sendHBSecurePostRequestMultibid);
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{(.*)\\} and placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendHBSecurePostRequestMultiSized);
         Given("i send 1 basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendBasicHBSecurePostRequest);
+
+        And("^I set the whole placement group id (\\d+) for publisher (\\d+) to (active|inactive)$", (Long pgroupid, Long publisherId, String status) -> {
+            RampAppRequestModule appReqModule = new RampAppRequestModule();
+            appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/placement-groups/" + publisherId + "/" + pgroupid + "/status/" + status);
+        });
+
+        And("^I set throttling (\\d+)% for placement group id (\\d+) of publisher (\\d+)$", (Integer throttling, Long pgroupid, Long publisherId) -> {
+            RampAppRequestModule appReqModule = new RampAppRequestModule();
+            appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/placement-groups/"+ publisherId + "/" + pgroupid + "/throttling/" + throttling);
+        });
 
     }
 

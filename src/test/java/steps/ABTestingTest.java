@@ -83,18 +83,6 @@ public class ABTestingTest extends BaseTest {
 		  appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/experiments?active=true");
 		});
 
-		And("^I set the whole placement group id (\\d+) for publisher (\\d+) to (active|inactive)$", (Long pgroupid, Long publisherId, String status) -> {
-			RampAppRequestModule appReqModule = new RampAppRequestModule();
-			appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/placement-groups/" + publisherId + "/" + pgroupid + "/status/" + status);
-		});
-
-		And("^I set throttling (\\d+)% for placement group id (\\d+) of publisher (\\d+)$", (Integer throttling, Long pgroupid, Long publisherId) -> {
-			RampAppRequestModule appReqModule = new RampAppRequestModule();
-			appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/placement-groups/"+ publisherId + "/" + pgroupid + "/throttling/" + throttling);
-		});
-
-
-
 //		After(1,scenario -> {
 ////		  inactive the test experiment groups and experiments
 //			  SqlRampAdminUtils.unableAllExperimentGroups();
