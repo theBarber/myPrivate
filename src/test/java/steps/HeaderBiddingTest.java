@@ -69,12 +69,12 @@ public class HeaderBiddingTest extends BaseTest {
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{(.*)\\} and placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendHBSecurePostRequestMultiSized);
         Given("i send 1 basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendBasicHBSecurePostRequest);
 
-        And("^I set the whole placement group id (\\d+) for publisher (\\d+) to (active|inactive)$", (Long pgroupid, Long publisherId, String status) -> {
+        And("^I set the whole placement group id (\\d+) for publisher (\\d+) to (active|inactive)$", (Integer pgroupid, Integer publisherId, String status) -> {
             RampAppRequestModule appReqModule = new RampAppRequestModule();
             appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/placement-groups/" + publisherId + "/" + pgroupid + "/status/" + status);
         });
 
-        And("^I set throttling (\\d+)% for placement group id (\\d+) of publisher (\\d+)$", (Integer throttling, Long pgroupid, Long publisherId) -> {
+        And("^I set throttling (\\d+)% for placement group id (\\d+) of publisher (\\d+)$", (Integer throttling, Integer pgroupid, Integer publisherId) -> {
             RampAppRequestModule appReqModule = new RampAppRequestModule();
             appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/placement-groups/"+ publisherId + "/" + pgroupid + "/throttling/" + throttling);
         });
