@@ -1,7 +1,4 @@
 package entities.ramp.app.api;
-
-import java.beans.IntrospectionException;
-
 public class ThrottlingRequest {
 
     private Integer publisherId;
