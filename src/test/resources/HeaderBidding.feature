@@ -1027,8 +1027,7 @@ Feature: Header Bidding flow support
   Scenario: send HB basic request with placement group id, throttling 0%, delivery 100% of the time
     #set throttling 0%
     Given I Delete hbl logs
-    Given I set the whole placement group id 3728006 for publisher 3728 to active
-    Given I set throttling 0% for placement group id 3728006 of publisher 3728
+    Given I set the whole placement group id 3728006 to active for publisher 3728 with factor 0%
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
@@ -1055,7 +1054,7 @@ Feature: Header Bidding flow support
 
   @throttling
   Scenario: send HB basic request with placement group id, throttling 60%, delivery 40% of the time
-    #set throttling 60%
+    Given I set the whole placement group id 3728006 to active for publisher 3728 with factor 60%
     Given I Delete hbl logs
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
@@ -1085,15 +1084,14 @@ Feature: Header Bidding flow support
   Scenario: send HB basic request with placement group id, throttling 100%, delivery is passback
     #set throttling 100%
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given I set the whole placement group id 3728006 for publisher 3728 to active
-    Given I set throttling 100% for placement group id 3728006 of publisher 3728
+    Given I set the whole placement group id 3728006 to active for publisher 3728 with factor 100%
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 204
 
   @throttling
   Scenario: send HB basic request with placement group id, disable the whole placement group, delivery is passback
     #disable the whole placement group
-    Given I set the whole placement group id 3728006 for publisher 3728 to inactive
+    Given I set the whole placement group id 3728006 to inactive for publisher 3728 with factor 0%
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 204

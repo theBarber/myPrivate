@@ -3,16 +3,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import entities.ramp.app.api.ThrottlingRequest;
 import io.qameta.allure.Attachment;
 import org.apache.http.HttpResponse;
 import org.junit.Assert;
-import org.junit.AssumptionViolatedException;
 import org.junit.runner.RunWith;
-import ramp.lift.uas.automation.RampAppRequestModule;
+import ramp.lift.uas.automation.RampAppPublisherRequestModule;
 import ramp.lift.uas.automation.UASRequestModule;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -69,16 +68,10 @@ public class HeaderBiddingTest extends BaseTest {
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{(.*)\\} and placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendHBSecurePostRequestMultiSized);
         Given("i send 1 basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendBasicHBSecurePostRequest);
 
-        And("^I set the whole placement group id (\\d+) for publisher (\\d+) to (active|inactive)$", (Integer pgroupid, Integer publisherId, String status) -> {
-            RampAppRequestModule appReqModule = new RampAppRequestModule();
-            appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/placement-groups/" + publisherId + "/" + pgroupid + "/status/" + status);
+        And("^I set the whole placement group id (\\d+) to (active|inactive) for publisher (\\d+) with factor (\\d+)%$", (Integer pgroupid, String status, Integer publisherId, Integer factor) -> {
+            ThrottlingRequest tr = new ThrottlingRequest(publisherId, pgroupid, status, factor);
+            sut.getRampAppPublisherRequestModule().updateThrottling(tr);
         });
-
-        And("^I set throttling (\\d+)% for placement group id (\\d+) of publisher (\\d+)$", (Integer throttling, Integer pgroupid, Integer publisherId) -> {
-            RampAppRequestModule appReqModule = new RampAppRequestModule();
-            appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/placement-groups/"+ publisherId + "/" + pgroupid + "/throttling/" + throttling);
-        });
-
     }
 
     private void sendBasicHBSecurePostRequest (Integer publisherID, Integer h1, Integer w1, String domain, String placmentID, String extraParams){
