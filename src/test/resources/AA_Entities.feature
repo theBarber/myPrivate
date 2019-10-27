@@ -1279,7 +1279,7 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name       | factor | units | goal_type   |
-      | NDQfilteringTL-ST-1 | 0.1    | 1000   | impressions |
+      | NDQfilteringTL-ST-1 | 0.0    | 1000   | impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
