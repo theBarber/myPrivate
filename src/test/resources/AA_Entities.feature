@@ -1320,28 +1320,28 @@ Feature: Entities for tests
   @append
   Scenario: Create Entities for throttling feature
     Given i disable campaigns by name on db
-      | Campaign Name                         |
-      | Throttling-BR-No-Placement-Id         |
-      | Throttling-BR-T0-D100                 |
-      | Throttling-BR-T60-D40                 |
+      | Campaign Name                 |
+      | Throttling-BR-No-Placement-Id |
+      | Throttling-BR-T0-D100         |
+      | Throttling-BR-T60-D40         |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                         | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | Throttling-BR-No-Placement-Id         | 407981 | 253287   | true                  | 1653          | {zone-zoneset-Throttling-BR-No-Placement-Id}         | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
-      | Throttling-BR-T0-D100                 | 407981 | 253285   | true                  | 1653          | {zone-zoneset-Throttling-BR-T0-D100}                 | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
-      | Throttling-BR-T60-D40                 | 407981 | 254693   | true                  | 1653          | {zone-zoneset-Throttling-BR-T60-D40}                 | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
+      | Campaign Name                 | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                          | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | Throttling-BR-No-Placement-Id | 407981 | 253287   | true                  | 1653          | {zone-zoneset-Throttling-BR-No-Placement-Id} | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
+      | Throttling-BR-T0-D100         | 407981 | 253285   | true                  | 1653          | {zone-zoneset-Throttling-BR-T0-D100}         | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
+      | Throttling-BR-T60-D40         | 407981 | 254693   | true                  | 1653          | {zone-zoneset-Throttling-BR-T60-D40}         | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
 
     And i update campaign data by name
-      | Campaign Name                         | units | goal_type   |
-      | Throttling-BR-No-Placement-Id         | -1    | impressions |
-      | Throttling-BR-T0-D100                 | -1    | impressions |
-      | Throttling-BR-T60-D40                 | -1    | impressions |
+      | Campaign Name                 | units | goal_type   |
+      | Throttling-BR-No-Placement-Id | -1    | impressions |
+      | Throttling-BR-T0-D100         | -1    | impressions |
+      | Throttling-BR-T60-D40         | -1    | impressions |
 
     And i update zone data by name
-      | Zone Name                                          | is_secure |
-      | zone-zoneset- Throttling-BR-No-Placement-Id        | 1         |
-      | zone-zoneset-Throttling-BR-T0-D100                 | 1         |
-      | zone-zoneset-Throttling-BR-T60-D40                 | 1         |
+      | Zone Name                                  | is_secure |
+      | zone-zoneset-Throttling-BR-No-Placement-Id | 1         |
+      | zone-zoneset-Throttling-BR-T0-D100         | 1         |
+      | zone-zoneset-Throttling-BR-T60-D40         | 1         |
 
 
   @DynamicPricing
