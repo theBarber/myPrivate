@@ -1003,17 +1003,17 @@ Feature: Header Bidding flow support
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/o placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
     And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
-    And all HB responses contains adId with id of entity named {Throttling-BR-PROG-NonGuaranteed-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains campaignId with id of entity named {Throttling-BR-No-Placement-Id}
+    And all HB responses contains adId with id of entity named {Throttling-BR-No-Placement-Id-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-No-Placement-Id}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-PROG-NonGuaranteed-banner-1} 100% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-PROG-NonGuaranteed} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-No-Placement-Id-banner-1} 100% of the time
+    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-No-Placement-Id} 100% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-No-Placement-Id} 100% of the time
     And I read the latest hbl log file from uas
     And The field bannerid in the 12 column of the hbl log is the same as in impression-url
     And The field campaignid in the 13 column of the hbl log is the same as in impression-url
@@ -1032,17 +1032,17 @@ Feature: Header Bidding flow support
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
     And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
-    And all HB responses contains adId with id of entity named {Throttling-BR-PROG-NonGuaranteed-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains campaignId with id of entity named {Throttling-BR-T0-D100}
+    And all HB responses contains adId with id of entity named {Throttling-BR-T0-D100-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-T0-D100}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-PROG-NonGuaranteed-banner-1} 100% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-PROG-NonGuaranteed} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-T0-D100-banner-1} 100% of the time
+    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-T0-D100} 100% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-T0-D100} 100% of the time
     And I read the latest hbl log file from uas
     And The field bannerid in the 12 column of the hbl log is the same as in impression-url
     And The field campaignid in the 13 column of the hbl log is the same as in impression-url
@@ -1060,17 +1060,17 @@ Feature: Header Bidding flow support
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
     And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {Throttling-BR-PROG-NonGuaranteed}
-    And all HB responses contains adId with id of entity named {Throttling-BR-PROG-NonGuaranteed-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed}
+    And all HB responses contains campaignId with id of entity named {Throttling-BR-T60-D40}
+    And all HB responses contains adId with id of entity named {Throttling-BR-T60-D40-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-T60-D40}
     And all HB responses contains cpm with id 1
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-PROG-NonGuaranteed-banner-1} 40% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-PROG-NonGuaranteed} 40% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-PROG-NonGuaranteed} 40% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-T60-D40-banner-1} 40% of the time
+    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-T60-D40} 40% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-T60-D40} 40% of the time
     And I read the latest hbl log file from uas
     And The field bannerid in the 12 column of the hbl log is the same as in impression-url
     And The field campaignid in the 13 column of the hbl log is the same as in impression-url
