@@ -3,15 +3,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import entities.ramp.app.api.ThrottlingRequest;
 import io.qameta.allure.Attachment;
 import org.apache.http.HttpResponse;
 import org.junit.Assert;
-import org.junit.AssumptionViolatedException;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -28,7 +27,7 @@ import static org.junit.Assert.assertTrue;
 @CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",})
 //        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
 public class HeaderBiddingTest extends BaseTest {
-    final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/headerBiddingPostRequests.json";
+    final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/requestBodies.json";
     final private Integer NO_UT_INDEX = 3;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode headerBiddingPostRequests;
@@ -68,7 +67,11 @@ public class HeaderBiddingTest extends BaseTest {
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{(.*)\\} and placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendHBSecurePostRequestMultiSized);
         Given("i send 1 basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendBasicHBSecurePostRequest);
 
+        And("^I setup throttling for publisher (\\d+) by scenario \\{(.*)\\}$", (Integer publisherId, String scenario) -> {
+            sut.getRampAppPublisherRequestModule().setupThrottling(publisherId, scenario);
+        });
     }
+
 
     private void sendBasicHBSecurePostRequest (Integer publisherID, Integer h1, Integer w1, String domain, String placmentID, String extraParams){
         String body = getJsonForBasicReq(publisherID, h1,w1,domain, placmentID);

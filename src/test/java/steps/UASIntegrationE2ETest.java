@@ -5,9 +5,8 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 import entities.Campaign;
-import entities.RampAppRequestModule;
-
 import org.junit.runner.RunWith;
+import ramp.lift.uas.automation.RampAppRequestModule;
 
 @CucumberOptions(features = {
         "classpath:UASIntegrationE2E.feature",
