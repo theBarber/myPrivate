@@ -1148,5 +1148,39 @@
       "params": {"placementId": "",
         "publisherId" : 3728
       }
-    }]}
+    }]},
+  "Setup throttling 0% for groupId 3728006":
+  {
+    "id": 3728006,
+    "name": "Setup throttling 0% for groupId 3728006",
+    "type": "bidding",
+    "isActive": true,
+    "throttling": 0
+  },
+  "Setup throttling 60% for groupId 3728006":
+  {
+    "id": 3728006,
+    "name": "Setup throttling 60% for groupId 3728006",
+    "type": "bidding",
+    "isActive": true,
+    "throttling": 60
+  },
+
+  "Setup throttling 100% for groupId 3728006":
+  {
+    "id": 3728006,
+    "name": "Setup throttling 100% for groupId 3728006",
+    "type": "bidding",
+    "isActive": true,
+    "throttling": 100
+  },
+
+  "Disable throttling for groupId 3728006":
+  {
+    "id": 3728006,
+    "name": "Disable throttling for groupId 3728006",
+    "type": "bidding",
+    "isActive": false,
+    "throttling": 100
+  }
 }
