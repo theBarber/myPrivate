@@ -997,37 +997,9 @@ Feature: Header Bidding flow support
 
 
   @throttling
-  Scenario: send HB basic request without placement group id, delivery 100% of the time
-    Given I Delete hbl logs
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/o placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
-    And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {Throttling-BR-No-Placement-Id}
-    And all HB responses contains adId with id of entity named {Throttling-BR-No-Placement-Id-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-No-Placement-Id}
-    And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains {script}
-    And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-No-Placement-Id-banner-1} 100% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-No-Placement-Id} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-No-Placement-Id} 100% of the time
-    And I read the latest hbl log file from uas
-    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
-    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
-    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
-    And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
-    And The field Bid_price in the 15 column of the hbl log is: 1.00
-    And The field Publisher_id in the 3 column of the hbl log is: 3728
-    And The field Domain in the 5 column of the hbl log is: slader.com
-
-  @throttling
   Scenario: send HB basic request with placement group id, throttling 0%, delivery 100% of the time
     #set throttling 0%
     Given I Delete hbl logs
-    Given I setup throttling for publisher 3728 by scenario {Setup throttling 0% for groupId 3728006}
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 200
@@ -1054,7 +1026,6 @@ Feature: Header Bidding flow support
 
   @throttling
   Scenario: send HB basic request with placement group id, throttling 60%, delivery 40% of the time
-    Given I setup throttling for publisher 3728 by scenario {Setup throttling 60% for groupId 3728006}
     Given I Delete hbl logs
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
@@ -1083,15 +1054,13 @@ Feature: Header Bidding flow support
   @throttling
   Scenario: send HB basic request with placement group id, throttling 100%, delivery is passback
     #set throttling 100%
-    Given I setup throttling for publisher 3728 by scenario {Setup throttling 100% for groupId 3728006}
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId 3728008 for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 204
 
   @throttling
   Scenario: send HB basic request with placement group id, disable the whole placement group, delivery is passback
     #disable the whole placement group
-    Given I setup throttling for publisher 3728 by scenario {Disable throttling for groupId 3728006}
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
+    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId 3728009 for publisher 3728} for publisher 3728 with domain {slader.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
     And The response code is 204
