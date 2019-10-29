@@ -13,7 +13,7 @@ Feature: Persona level targeting
 #UTID=a2b3c8faf45446dcbba3248ce123c2bb is encoded to=9mrjt7trg1a57yd4pv1e7zxdn
 
   Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
-    Then I inject profile doc for scenario {Scenario 3} to users bucket
+    Then I inject profile doc for scenario {Scenario 1} to users bucket
     And I sleep for 3 seconds
     Given I Delete req logs
     Given I clear all cookies from uas requests
@@ -33,7 +33,7 @@ Feature: Persona level targeting
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
 
   Scenario: 1.1 PLPT is active, zone req. 1 users - 2 devices - one app one web.
-    Then I inject profile doc for scenario {Scenario 3.1} to users bucket
+    Then I inject profile doc for scenario {Scenario 1.1} to users bucket
     And I sleep for 3 seconds
     Given I Delete req logs
     Given I clear all cookies from uas requests
@@ -73,7 +73,7 @@ Feature: Persona level targeting
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
 
   Scenario: 3. PLPT is not active, zone req. 1 users - 2 devices - one app one web.
-    Then I inject profile doc for scenario {Scenario 3} to users bucket
+    Then I inject profile doc for scenario {Scenario 1} to users bucket
     And I sleep for 3 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12300000-0000-0000-0000-000000000123} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
@@ -87,7 +87,7 @@ Feature: Persona level targeting
     And The responses are passback
 
   Scenario: 3.1 PLPT is not active, zone req. 1 users - 2 devices - one app one web.
-    Then I inject profile doc for scenario {Scenario 3.1} to users bucket
+    Then I inject profile doc for scenario {Scenario 1.1} to users bucket
     And I sleep for 3 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12300000-0000-0000-0000-000000000123} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
