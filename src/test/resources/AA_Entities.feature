@@ -1343,10 +1343,10 @@ Feature: Entities for tests
       | zone-zoneset-Throttling-BR-T0-D100         | 1         |
       | zone-zoneset-Throttling-BR-T60-D40         | 1         |
 
-#    And I setup throttling for publisher 3728 by scenario {Setup throttling 0% for groupId 3728007}
-#    And I setup throttling for publisher 3728 by scenario {Setup throttling 60% for groupId 3728006}
-#    And I setup throttling for publisher 3728 by scenario {Setup throttling 100% for groupId 3728008}
-#    And I setup throttling for publisher 3728 by scenario {Disable throttling for groupId 3728009}
+    And I setup throttling for publisher 3728 by scenario {Setup throttling 0% for groupId 3728007}
+    And I setup throttling for publisher 3728 by scenario {Setup throttling 60% for groupId 3728006}
+    And I setup throttling for publisher 3728 by scenario {Setup throttling 100% for groupId 3728008}
+    And I setup throttling for publisher 3728 by scenario {Disable throttling for groupId 3728009}
 
 
 
