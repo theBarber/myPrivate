@@ -9,10 +9,12 @@ import entities.ZoneSet;
 import entities.ramp.app.api.*;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.config.SocketConfig;
+import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
@@ -29,6 +31,7 @@ import java.io.UncheckedIOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -45,6 +48,12 @@ public class RampAppRequestModule extends UASRequestModule implements AutoClosea
 	private String host;
 	private String port;
 
+	public RampAppRequestModule() {
+		setActual(CompletableFuture.completedFuture(null));
+		httpclient = HttpClients.custom()
+				.setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build())
+				.build();
+	}
 
 	public RampAppRequestModule(String host, String port) {
 		this.host = host;
@@ -348,5 +357,28 @@ public class RampAppRequestModule extends UASRequestModule implements AutoClosea
 	@Override
 	public void close() throws Exception {
 		this.httpclient.close();
+	}
+
+	public void requestToRampApp(String url) {
+		setActual(CompletableFuture.supplyAsync(() -> {
+			try {
+				HttpGet get = new HttpGet(url);
+				get.setHeader("Accept", "application/json-object");
+				get.setHeader("rampinternal", "true");
+				get.setHeader("X-Forwarded-For", "s3://ramp-optimization/entities_data/experiments_meta_data.json");
+				HttpResponse response = httpclient.execute(get);
+				if (response.getEntity() != null) {
+					response.setEntity(new BufferedHttpEntity(response.getEntity()));
+				} else {
+					response.setEntity(new StringEntity(""));
+				}
+
+				return response;
+
+
+			} catch (IOException e) {
+				throw new UncheckedIOException("failed to send request (" + url + ") ", e);
+			}
+		}));
 	}
 }
