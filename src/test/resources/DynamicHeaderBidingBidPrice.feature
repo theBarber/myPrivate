@@ -207,10 +207,8 @@ Feature: Dynamic HB bid price
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved fixed bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin4.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=0&sim_geo=1&country=us}
     And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-fixed-margin-BB-ES}
-    And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-fixed-margin-BB-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And The responses are passback
+
 
   Scenario: Publisher with non reserved fixed bid price for BB, Campaign with no margin
 #  Set fixed HB
@@ -239,6 +237,22 @@ Feature: Dynamic HB bid price
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {2}
+
+  Scenario: zonetag - po price < max price, Campaign with margin
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-dpm-direct-fixed-margin-BB-ES} to UAS
+    And The response code is 200
+    And The response contains {script}
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-dpm-direct-fixed-margin-BB-ES-banner-1} 100% of the time
+    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-dpm-direct-fixed-margin-BB-ES} 100% of the time
+    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-dpm-direct-fixed-margin-BB-ES} 100% of the time
+
+   Scenario: zonetag - po price > max price, Campaign with margin
+     Given I add header of {x-forwarded-for} with value {207.246.116.162}
+     When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES} to UAS
+     And The response code is 200
+     And The responses are passback
 
   Scenario: Publisher with non reserved dynamic bid price for MR, Campaign with no margin
 #  Set fixed HB
