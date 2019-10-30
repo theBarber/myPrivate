@@ -1348,7 +1348,6 @@ Feature: Entities for tests
     And I setup throttling for publisher 3728 by scenario {Disable throttling for groupId 3728009}
 
 
-
   @DynamicPricing
   @InAppBlackWhiteList
   @OpenX
