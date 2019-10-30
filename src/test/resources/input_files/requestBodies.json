@@ -1186,6 +1186,6 @@
     "name": "Disable throttling for groupId 3728009",
     "type": "bidding",
     "isActive": false,
-    "throttling": 100
+    "throttling": 0
   }
 }
