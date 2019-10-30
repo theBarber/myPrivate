@@ -1173,7 +1173,7 @@
   },
   "Setup throttling 60% for groupId 3728006":
   {
-    "id": 3728008,
+    "id": 3728006,
     "name": "Setup throttling 60% for groupId 3728008",
     "type": "bidding",
     "isActive": true,
