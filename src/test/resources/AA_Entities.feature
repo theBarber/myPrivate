@@ -1345,7 +1345,6 @@ Feature: Entities for tests
 
     And I setup throttling for publisher 3728 by scenario {Setup throttling 0% for groupId 3728007}
     And I setup throttling for publisher 3728 by scenario {Setup throttling 60% for groupId 3728006}
-    And I setup throttling for publisher 3728 by scenario {Setup throttling 100% for groupId 3728008}
     And I setup throttling for publisher 3728 by scenario {Disable throttling for groupId 3728009}
 
 
