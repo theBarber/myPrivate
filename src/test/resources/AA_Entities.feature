@@ -6,7 +6,7 @@
 Feature: Entities for tests
 
   Scenario: entities end-date update
-    And i update po_line_item end date by id {69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
+    And i update po_line_item end date by id {69725,69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,68927,67163,67162,67166,69089,69134,66832,69158,69213}
     And i update io_line_item end date by id {251644,253288,253747,245653,210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
@@ -1294,9 +1294,9 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                               | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253287   | true                  | 1653          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3728         | 69822           | []             | []             |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253748   | true                  | 1652          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3728         | 69822           | []             | []             |
-      | NewBrandReveal-BR-Direct                    | 407981 | 253288   | false                 | 28428         | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3728         | 69822           | []             | []             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253287   | true                  | 1653          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3728         | 69725           | []             | []             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253748   | true                  | 1652          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3728         | 69725           | []             | []             |
+      | NewBrandReveal-BR-Direct                    | 407981 | 253288   | false                 | 28428         | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3728         | 69725           | []             | []             |
 
     And i update campaign data by name
       | Campaign Name                               | units | goal_type   |
@@ -1327,15 +1327,16 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                 | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                          | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | Throttling-BR-No-Placement-Id | 407981 | 253287   | true                  | 1653          | {zone-zoneset-Throttling-BR-No-Placement-Id} | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
-      | Throttling-BR-T0-D100         | 407981 | 253285   | true                  | 1653          | {zone-zoneset-Throttling-BR-T0-D100}         | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
-      | Throttling-BR-T60-D40         | 407981 | 254693   | true                  | 1653          | {zone-zoneset-Throttling-BR-T60-D40}         | []         | 95       | 15227          | 3728         | 69822           | []             | []             |
+      | Throttling-BR-No-Placement-Id | 407981 | 253287   | true                  | 1653          | {zone-zoneset-Throttling-BR-No-Placement-Id} | []         | 95       | 15553          | 3728         | 69723           | []             | []             |
+      | Throttling-BR-T0-D100         | 407981 | 253285   | true                  | 1653          | {zone-zoneset-Throttling-BR-T0-D100}         | []         | 95       | 15553          | 3728         | 69723           | []             | []             |
+#      | Throttling-BR-T60-D40         | 407981 | 254693   | true                  | 1653          | {zone-zoneset-Throttling-BR-T60-D40}         | []         | 95       | 15269          | 3728         | 69723           | []             | []             |
+      | Throttling-BR-T60-D40         | 407981 | 254693   | true                  | 1653          | {zone-zoneset-Throttling-BR-T60-D40}         | []         | 95       | 15553          | 3728         | 69723           | []             | []             |
 
     And i update campaign data by name
-      | Campaign Name                 | units | goal_type   |
-      | Throttling-BR-No-Placement-Id | -1    | impressions |
-      | Throttling-BR-T0-D100         | -1    | impressions |
-      | Throttling-BR-T60-D40         | -1    | impressions |
+      | Campaign Name                 | units | goal_type   | priority |
+      | Throttling-BR-No-Placement-Id | -1    | impressions | -2       |
+      | Throttling-BR-T0-D100         | -1    | impressions | -2       |
+      | Throttling-BR-T60-D40         | -1    | impressions | -2       |
 
     And i update zone data by name
       | Zone Name                                  | is_secure |
