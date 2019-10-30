@@ -1329,7 +1329,6 @@ Feature: Entities for tests
       | Campaign Name                 | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                          | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | Throttling-BR-No-Placement-Id | 407981 | 253287   | true                  | 1653          | {zone-zoneset-Throttling-BR-No-Placement-Id} | []         | 95       | 15553          | 3728         | 69723           | []             | []             |
       | Throttling-BR-T0-D100         | 407981 | 253285   | true                  | 1653          | {zone-zoneset-Throttling-BR-T0-D100}         | []         | 95       | 15553          | 3728         | 69723           | []             | []             |
-#      | Throttling-BR-T60-D40         | 407981 | 254693   | true                  | 1653          | {zone-zoneset-Throttling-BR-T60-D40}         | []         | 95       | 15269          | 3728         | 69723           | []             | []             |
       | Throttling-BR-T60-D40         | 407981 | 254693   | true                  | 1653          | {zone-zoneset-Throttling-BR-T60-D40}         | []         | 95       | 15553          | 3728         | 69723           | []             | []             |
 
     And i update campaign data by name
