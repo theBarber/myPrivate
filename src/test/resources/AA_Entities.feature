@@ -222,10 +222,10 @@ Feature: Entities for tests
       | campaign-DeviceCappingMultipleCampaigns-ST-6    | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5}    | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceCappingMultipleCampaigns-ST-7    | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceCappingMultipleCampaigns-ST-5}    | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceLiCapping-ST-8                   | 75396 | 244895   | false                 | 8290          | {INT3708-zone-zoneset-DeviceLiCapping-ST-8}                   | []         | 93       | 14892          | 3708         | 27807           |
-      | campaign-DeviceSessionCapping-Inapp-ST-9        | 75396 | 241783   | false                 | 14619          | {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9}        | []         | 80       | 14892          | 3708         | 27807           |
-      | campaign-CrossDeviceSessionCapping-Inapp-ST-10  | 75396 | 241783   | false                 | 14619          | {INT3708-zone-zoneset-CrossDeviceSessionCapping-Inapp-ST-10}  | []         | 80       | 14892          | 3708         | 27807           |
-      | campaign-DeviceLifetimeCapping-Inapp-ST-11      | 75396 | 241783   | false                 | 14619          | {INT3708-zone-zoneset-DeviceLifetimeCapping-Inapp-ST-11}      | []         | 80       | 14892          | 3708         | 27807           |
-      | campaign-CrossDeviceLifetimeCapping-Inapp-ST-12 | 75396 | 241783   | false                 | 14619          | {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-Inapp-ST-12} | []         | 80       | 14892          | 3708         | 27807           |
+      | campaign-DeviceSessionCapping-Inapp-ST-9        | 75396 | 241783   | false                 | 14619         | {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9}        | []         | 80       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceSessionCapping-Inapp-ST-10  | 75396 | 241783   | false                 | 14619         | {INT3708-zone-zoneset-CrossDeviceSessionCapping-Inapp-ST-10}  | []         | 80       | 14892          | 3708         | 27807           |
+      | campaign-DeviceLifetimeCapping-Inapp-ST-11      | 75396 | 241783   | false                 | 14619         | {INT3708-zone-zoneset-DeviceLifetimeCapping-Inapp-ST-11}      | []         | 80       | 14892          | 3708         | 27807           |
+      | campaign-CrossDeviceLifetimeCapping-Inapp-ST-12 | 75396 | 241783   | false                 | 14619         | {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-Inapp-ST-12} | []         | 80       | 14892          | 3708         | 27807           |
 
     And i update zone data by name
       | Zone Name                                                   | is_mraid | is_secure |
@@ -1279,7 +1279,7 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name       | factor | units | goal_type   |
-      | NDQfilteringTL-ST-1 | 0.0    | 1000   | impressions |
+      | NDQfilteringTL-ST-1 | 0.0    | 1000  | impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
