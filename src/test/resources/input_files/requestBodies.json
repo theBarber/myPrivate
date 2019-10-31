@@ -1120,5 +1120,72 @@
       "params": {
         "publisherId" : "3843"
       }
-    }]}
+    }]},
+  "Send HB basic request w/ placementId 3728006 for publisher 3728":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46gfd59b33",
+      "domain": "throttling.com",
+      "placementId": "415",
+      "publisherId": 3728,
+      "sizes": [1,2],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "415",
+        "publisherId" : 3728
+      }
+    }]},
+  "Send HB basic request w/ placementId 3728007 for publisher 3728":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46gfd59b33",
+      "domain": "throttling.com",
+      "placementId": "466",
+      "publisherId": 3728,
+      "sizes": [1,2],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "466",
+        "publisherId" : 3728
+      }
+    }]},
+  "Send HB basic request w/ placementId 3728009 for publisher 3728":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46gfd59b33",
+      "domain": "throttling.com",
+      "placementId": "468",
+      "publisherId": 3728,
+      "sizes": [1,2],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "468",
+        "publisherId" : 3728
+      }
+    }]},
+  "Setup throttling 0% for groupId 3728007":
+  {
+    "id": 3728007,
+    "name": "Setup throttling 0% for groupId 3728007",
+    "type": "bidding",
+    "isActive": true,
+    "throttling": 0
+  },
+  "Setup throttling 60% for groupId 3728006":
+  {
+    "id": 3728006,
+    "name": "Setup throttling 60% for groupId 3728006",
+    "type": "bidding",
+    "isActive": true,
+    "throttling": 60
+  },
+
+  "Disable throttling for groupId 3728009":
+  {
+    "id": 3728009,
+    "name": "Disable throttling for groupId 3728009",
+    "type": "bidding",
+    "isActive": false,
+    "throttling": 0
+  }
 }

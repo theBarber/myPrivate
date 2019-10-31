@@ -302,7 +302,7 @@ public class UASIntegrationTest extends BaseTest {
                     .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
                     .map(impurl -> CompletableFuture.supplyAsync(() -> {
                         try {
-                            System.out.println(" /n impression to send = " + impurl);
+                            System.out.println("impression to send = " + impurl);
                             HttpGet httpGet = new HttpGet(impurl.toString());
                             List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                             httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));

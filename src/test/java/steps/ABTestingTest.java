@@ -19,73 +19,73 @@ import java.util.List;
 //		"infra.RotatingJSONFormatter:target/cucumber/solver_plan_handler_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 public class ABTestingTest extends BaseTest {
-	List<Integer> createdExperimentGroupIds = new ArrayList<>();
-	List<Integer> createdExperimentIds = new ArrayList<>();
-	int latestExperimentIdBeforeTest = 0;
-	int latestExperimentGroupIdBeforeTest = 0;
+    List<Integer> createdExperimentGroupIds = new ArrayList<>();
+    List<Integer> createdExperimentIds = new ArrayList<>();
+    int latestExperimentIdBeforeTest = 0;
+    int latestExperimentGroupIdBeforeTest = 0;
 
-	public ABTestingTest() {
-		super();
-		Given("^I set the activation status of experiment group named \\{(.*)\\} and his experiments to \\{(.*)\\}$",
-            (String experimentGroupName, String activationStatus) -> {
-              int status = 0;
-              if (activationStatus.equals("active")) {
-                status = 1;
-              } 
-              
-              SqlRampAdminUtils.setActivationStatusHierarchy(experimentGroupName, status);
+    public ABTestingTest() {
+        super();
+        Given("^I set the activation status of experiment group named \\{(.*)\\} and his experiments to \\{(.*)\\}$",
+                (String experimentGroupName, String activationStatus) -> {
+                    int status = 0;
+                    if (activationStatus.equals("active")) {
+                        status = 1;
+                    }
 
-            });
+                    SqlRampAdminUtils.setActivationStatusHierarchy(experimentGroupName, status);
+
+                });
 
 
-		Given("^Unable all experiment groups$", () -> {
-              SqlRampAdminUtils.unableAllExperimentGroups();
-            });
+        Given("^Unable all experiment groups$", () -> {
+            SqlRampAdminUtils.unableAllExperimentGroups();
+        });
 
-		Given("^Unable all experiment groups except experimentID (\\d+)", (Integer experimentID) -> {
-			SqlRampAdminUtils.unableAllExperimentGroupsExcept(experimentID);
-		});
-		//TESTS
-		Given("^i disable all tests except (\\d+)$", (Integer Id) -> {
-			SqlRampAdminUtils.disableAllTestsExcept(Id);
-		});
+        Given("^Unable all experiment groups except experimentID (\\d+)", (Integer experimentID) -> {
+            SqlRampAdminUtils.unableAllExperimentGroupsExcept(experimentID);
+        });
+        //TESTS
+        Given("^i disable all tests except (\\d+)$", (Integer Id) -> {
+            SqlRampAdminUtils.disableAllTestsExcept(Id);
+        });
 
-		Given("^i set test (\\d+) status to (\\d+)$", (Integer Id, Integer status) -> {
-			SqlRampAdminUtils.setTestStatus(Id, status);
-		});
+        Given("^i set test (\\d+) status to (\\d+)$", (Integer Id, Integer status) -> {
+            SqlRampAdminUtils.setTestStatus(Id, status);
+        });
 
 //tests - (experiment groups)
-		Given("^I create new test with the following fields$", (DataTable experimentGroupsTable) -> {
-			List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
-			latestExperimentGroupIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment_group");
-			SqlRampAdminUtils.createNewExperimentGroup(experimentGroupsList);
-		});
+        Given("^I create new test with the following fields$", (DataTable experimentGroupsTable) -> {
+            List<ExperimentGroup> experimentGroupsList = experimentGroupsTable.asList(ExperimentGroup.class);
+            latestExperimentGroupIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment_group");
+            SqlRampAdminUtils.createNewExperimentGroup(experimentGroupsList);
+        });
 
-		And("^I create new test named \\{(.*)\\} with the following fields$",
-				(String experimentGroupName, DataTable experimentsTable) -> {
-					List<Experiment> experiments = experimentsTable.asList(Experiment.class);
-					latestExperimentIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment");
-					int experimentGroupId = SqlRampAdminUtils.getIdFromTableByName(experimentGroupName,
-							"test");
-					SqlRampAdminUtils.createNewExperimentForGroupId(experimentGroupId, experiments);
-				});
+        And("^I create new test named \\{(.*)\\} with the following fields$",
+                (String experimentGroupName, DataTable experimentsTable) -> {
+                    List<Experiment> experiments = experimentsTable.asList(Experiment.class);
+                    latestExperimentIdBeforeTest = SqlRampAdminUtils.getMaxIdFromTable("experiment");
+                    int experimentGroupId = SqlRampAdminUtils.getIdFromTableByName(experimentGroupName,
+                            "test");
+                    SqlRampAdminUtils.createNewExperimentForGroupId(experimentGroupId, experiments);
+                });
 
-		And("^I set the activation status of tests named \\{(.*)\\} to \\{(\\d+)\\}$",
-				(String experimentName, Integer activationStatus) -> {
-					SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "test");
-				});
+        And("^I set the activation status of tests named \\{(.*)\\} to \\{(\\d+)\\}$",
+                (String experimentName, Integer activationStatus) -> {
+                    SqlRampAdminUtils.setActivationStatusinTable(experimentName, activationStatus, "test");
+                });
 //srategy
-		And("^I set test id of test_strategy named \\{(.*)\\} to \\{(\\d+)\\}$",
-				SqlRampAdminUtils::setTestStrategyToTestIdGroup);
+        And("^I set test id of test_strategy named \\{(.*)\\} to \\{(\\d+)\\}$",
+                SqlRampAdminUtils::setTestStrategyToTestIdGroup);
 
-		And("^I update the s3 experiment data$", () -> {
-		  RampAppRequestModule appReqModule = new RampAppRequestModule();
-		  appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/experiments?active=true");
-		});
+        And("^I update the s3 experiment data$", () -> {
+            RampAppRequestModule appReqModule = new RampAppRequestModule();
+            appReqModule.requestToRampApp("https://" + config.get("ramp.admin.host") + "/api/v1/experiments?active=true");
+        });
 
 //		After(1,scenario -> {
 ////		  inactive the test experiment groups and experiments
 //			  SqlRampAdminUtils.unableAllExperimentGroups();
 //		});
-	}
+    }
 }
