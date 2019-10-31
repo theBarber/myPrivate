@@ -11,8 +11,10 @@ import ramp.lift.uas.automation.UASRequestModule;
 import util.ResponseVerifier;
 import util.TestsRoutines;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.not;
 
@@ -30,6 +32,7 @@ public class HealthCheckTest extends BaseTest {
 		When("^Sending a healthcheck request to (.*)$", this::healthCheckRequest);
 		Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
 		Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
+		Then("^The synchronized response code is (\\d+) (\\d+) of the times", this::allSynchronizedResponsesHaveCodePartially);
 		Then("^All requests are sent$", this::allResponsesFinished);
 		Then("^The response contains \\{(.*)\\}$", this::healthCheckResponseContains);
 		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
@@ -93,6 +96,18 @@ public class HealthCheckTest extends BaseTest {
 	public void allSynchronizedResponsesHaveCode(Integer expectedResponseCode) {
 		sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
 				.map(StatusLine::getStatusCode).forEach(statusCode->Assert.assertThat(statusCode, Matchers.is(expectedResponseCode)));
+	}
+
+	public void allSynchronizedResponsesHaveCodePartially(Integer expectedResponseCode,Integer expected) {
+		int count = 0;
+		List<Integer> aa =  sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
+				.map(StatusLine::getStatusCode).collect(Collectors.toList());
+		for(int statuscode: aa){
+			if (statuscode == expectedResponseCode)
+				count++;
+		}
+		Assert.assertThat(count, Matchers.greaterThanOrEqualTo(expected));
+
 	}
 
 	public void allResponsesFinished() {
