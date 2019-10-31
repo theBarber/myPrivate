@@ -997,64 +997,19 @@ Feature: Header Bidding flow support
 
 
   @throttling
-  Scenario: send HB basic request with placement group id, throttling 0%, delivery 100% of the time
-    #set throttling 0%
-    Given I Delete hbl logs
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId 3728007 for publisher 3728} for publisher 3728 with domain {throttling.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
-    And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {Throttling-BR-T0-D100}
-    And all HB responses contains adId with id of entity named {Throttling-BR-T0-D100-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-T0-D100}
-    And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains {script}
-    And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-T0-D100-banner-1} 100% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-T0-D100} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-T0-D100} 100% of the time
-    And I read the latest hbl log file from uas
-    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
-    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
-    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
-    And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
-    And The field Bid_price in the 15 column of the hbl log is: 1.00
-    And The field Publisher_id in the 3 column of the hbl log is: 3728
-    And The field Domain in the 5 column of the hbl log is: throttling.com
+  Scenario: 2. 1 size 1*1 SS, 1 placement with SS adunit, SS banner expected - throttling 60%
+    Given I clear all cookies from uas requests
+    Given i send 20 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {415} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
+    Then The passback ratio should be 60%
 
   @throttling
-  Scenario: send HB basic request with placement group id, throttling 60%, delivery 40% of the time
-    Given I Delete hbl logs
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId 3728006 for publisher 3728} for publisher 3728 with domain {throttling.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
-    And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {Throttling-BR-T60-D40}
-    And all HB responses contains adId with id of entity named {Throttling-BR-T60-D40-banner-1}
-    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-Throttling-BR-T60-D40}
-    And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
-    And The response code is 200
-    And The response contains {script}
-    And I send impression requests to UAS
-    And The impressionUrl has bannerid field matching the id of the banner named {Throttling-BR-T60-D40-banner-1} 40% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {Throttling-BR-T60-D40} 40% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-Throttling-BR-T60-D40} 40% of the time
-    And I read the latest hbl log file from uas
-    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
-    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
-    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
-    And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
-    And The field Bid_price in the 15 column of the hbl log is: 1.00
-    And The field Publisher_id in the 3 column of the hbl log is: 3728
-    And The field Domain in the 5 column of the hbl log is: throttling.com
-
+  Scenario: 2. 1 size 1*1 SS, 1 placement with SS adunit, SS banner expected - throttling 0%
+    Given I clear all cookies from uas requests
+    Given i send 20 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {466} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
+    Then The passback ratio should be 0%
 
   @throttling
-  Scenario: send HB basic request with placement group id, disable the whole placement group, delivery is passback
-    #disable the whole placement group
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 20 headerBidding post request for scenario {Send HB basic request w/ placementId 3728009 for publisher 3728} for publisher 3728 with domain {throttling.com} with extra params {&unlimited=1&optimize=0&requestid=OX_BrandReveal}
-    And The response code is 204
+  Scenario: 2. 1 size 1*1 SS, 1 placement with SS adunit, SS banner expected - disable the whole placement group
+    Given I clear all cookies from uas requests
+    Given i send 20 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {468} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
+    Then The passback ratio should be 100%

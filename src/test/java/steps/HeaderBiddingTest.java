@@ -65,7 +65,7 @@ public class HeaderBiddingTest extends BaseTest {
         Given("i send (\\d+) headerBidding secure post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), bidreq = (\\d+), empty domain, and extra params \\{(.*)\\}",this::sendHBPostRequestBidIDcount);
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi bids. first bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+), sec bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+) with domain \\{(.*)\\} and extra params \\{(.*)\\}",this::sendHBSecurePostRequestMultibid);
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{(.*)\\} and placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendHBSecurePostRequestMultiSized);
-        Given("i send 1 basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendBasicHBSecurePostRequest);
+        Given("i send (\\d+) basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params  \\{(.*)\\}" ,this::sendBasicHBSecurePostRequest);
 
         And("^I setup throttling for publisher (\\d+) by scenario \\{(.*)\\}$", (Integer publisherId, String scenario) -> {
             sut.getRampAppPublisherRequestModule().setupThrottling(publisherId, scenario);
@@ -73,9 +73,9 @@ public class HeaderBiddingTest extends BaseTest {
     }
 
 
-    private void sendBasicHBSecurePostRequest (Integer publisherID, Integer h1, Integer w1, String domain, String placmentID, String extraParams){
+    private void sendBasicHBSecurePostRequest (Integer times, Integer publisherID, Integer h1, Integer w1, String domain, String placmentID, String extraParams){
         String body = getJsonForBasicReq(publisherID, h1,w1,domain, placmentID);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1,body,publisherID,domain, extraParams,true,false);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times,body,publisherID,domain, extraParams,true,false);
     }
 
 
@@ -171,7 +171,7 @@ public class HeaderBiddingTest extends BaseTest {
                         "[" + h1 + "," + w1 + "],["+ h2 + "," + w2  + "]],\n" +
                         " \"timeout\": 700,\n" +
                         " \"hbadaptor\": \"prebid\",\n" +
-                        " \"params\": {\"placementId\" : \"10433394\",\n" +
+                        " \"params\": {\"placementId\" : \"" + placementId + "\",\n" +
                         " \"publisherId\" : \""+ publisherID +"\"\n" +
                         " }\n" +
                         "}]}";
@@ -192,7 +192,7 @@ public class HeaderBiddingTest extends BaseTest {
                         "    ],\n" +
                         " \"timeout\": 700,\n" +
                         " \"hbadaptor\": \"prebid\",\n" +
-                        " \"params\": {\"placementId\" : \"10433394\",\n" +
+                        " \"params\": {\"placementId\": \"" + placementId + "\",\n" +
                         " \"publisherId\" : \""+ publisherID +"\"\n" +
                         "  }}]\n" +
                         "}" ;
