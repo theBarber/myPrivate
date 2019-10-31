@@ -813,10 +813,10 @@ Feature: Entities for tests
       | campaign-PLT-YesPersonaL-ST-1 | 1                    |
       | campaign-PLT-YesPersonaL-ST-2 | 1                    |
     And i update banner data by name
-      | Banner Name                            | limitation                            |
-      | campaign-PLT-NotPersonaL-ST-1-banner-1 | [[[4,"==",1,1,456],[4,"==",1,1,123]]] |
-      | campaign-PLT-YesPersonaL-ST-1-banner-1 | [[[4,"==",1,1,456],[4,"==",1,1,123]]] |
-      | campaign-PLT-YesPersonaL-ST-2-banner-1 | [[[4,"==",1,1,123]]]                  |
+      | Banner Name                            | limitation                              |
+      | campaign-PLT-NotPersonaL-ST-1-banner-1 | [[[4,"==",90,1,456],[4,"==",90,1,123]]] |
+      | campaign-PLT-YesPersonaL-ST-1-banner-1 | [[[4,"==",90,1,456],[4,"==",90,1,123]]] |
+      | campaign-PLT-YesPersonaL-ST-2-banner-1 | [[[4,"==",90,1,123]]]                   |
     And i update zone data by name
       | Zone Name                         | is_secure |
       | zone-zoneset-PLT-NotPersonaL-ST-1 | 1         |
@@ -1279,7 +1279,7 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name       | factor | units | goal_type   |
-      | NDQfilteringTL-ST-1 | 0.1    | 1000  | impressions |
+      | NDQfilteringTL-ST-1 | 0.0    | 1000  | impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
@@ -1294,9 +1294,9 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                               | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253287   | true                  | 1653          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3728         | 69725           | []             | []             |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253748   | true                  | 1652          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3728         | 69725           | []             | []             |
-      | NewBrandReveal-BR-Direct                    | 407981 | 253288   | false                 | 28428         | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3728         | 69725           | []             | []             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253287   | true                  | 1653          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253748   | true                  | 1652          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
+      | NewBrandReveal-BR-Direct                    | 407981 | 253288   | false                 | 28428         | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
 
     And i update campaign data by name
       | Campaign Name                               | units | goal_type   |
