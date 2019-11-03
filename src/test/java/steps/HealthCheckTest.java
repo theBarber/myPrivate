@@ -102,8 +102,8 @@ public class HealthCheckTest extends BaseTest {
 		int count = 0;
 		List<Integer> aa =  sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
 				.map(StatusLine::getStatusCode).collect(Collectors.toList());
-		for(int statuscode: aa){
-			if (statuscode == expectedResponseCode)
+		for(int status_code : aa){
+			if (status_code == expectedResponseCode)
 				count++;
 		}
 		Assert.assertThat(count, Matchers.greaterThanOrEqualTo(expected));
