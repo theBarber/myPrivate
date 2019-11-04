@@ -996,32 +996,23 @@ Feature: Header Bidding flow support
     And all HB responses contains cpm with id 3
 
 
-#  @throttling
-#  Scenario: 2. 1 size 1*1 SS, 1 placement with SS adunit, SS banner expected - throttling 60%
-#    Given I clear all cookies from uas requests
-#    Given i send synchronized 100 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728006} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
-#    Then The synchronized response code is 200 40 of the times
-#
-#
-#  @throttling
-#  Scenario: 2. 1 size 1*1 SS, 1 placement with SS adunit, SS banner expected - throttling 0%
-#    Given I clear all cookies from uas requests
-#    Given i send synchronized 100 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728007} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
-#    Then The synchronized response code is 200 100 of the times
-#
-#
-#  @throttling
-#  Scenario: 2. 1 size 1*1 SS, 1 placement with SS adunit, SS banner expected - disable the whole placement group
-#    Given I clear all cookies from uas requests
-#    Given i send synchronized 20 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728009} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
-#    And The response code is 200
-#    And The response contains {script}
-#    And i read all HB responses and map their bidId by adId
-#    And in HB responses bidid bidRequestId has value 123 0% of the times
+  @throttling
+    #   header bidding placment group test - throttling 60%
+  Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 60%
+    Given I clear all cookies from uas requests
+    Given i send synchronized 1000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
+    Then The synchronized response code is 200 500 of the times
 
   @throttling
-    #   header bidding placment group test
-  Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected
+    #   header bidding placment group test - pg disabled throttling 0%
+  Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - pg disabled throttling 0%
     Given I clear all cookies from uas requests
-    Given i send synchronized 100 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
-    Then The synchronized response code is 200 40 of the times
+    Given i send synchronized 100 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728010} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
+    Then The synchronized response code is 200 100 of the times
+
+  @throttling
+    #   header bidding placment group test - throttling 0%
+  Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 0%
+    Given I clear all cookies from uas requests
+    Given i send synchronized 100 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728011} and extra params  {&optimize=0&unlimited=1&sim_geo=1&country=us}
+    Then The synchronized response code is 200 100 of the times
