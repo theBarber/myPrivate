@@ -24,17 +24,17 @@ Feature: Persona level targeting
     And I sleep for 3 seconds
 
 
-  Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
-    Then I inject profile doc for scenario {Scenario 1} to users bucket
-    And I sleep for 3 seconds
-    Given I Delete req logs
-    Given I clear all cookies from uas requests
-    And I sleep for 1 seconds
-  @@ -39,37 +31,90 @@ Feature: Persona level targeting
-    Then The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
+#  Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
+#    Then I inject profile doc for scenario {Scenario 1} to users bucket
+#    And I sleep for 3 seconds
+#    Given I Delete req logs
+#    Given I clear all cookies from uas requests
+#    And I sleep for 1 seconds
+#  @@ -39,37 +31,90 @@ Feature: Persona level targeting
+#    Then The response code is 200
+#    And The response contains {script}
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
 
 
   Scenario: 2. PLPT is active, zone req. 1 users, 1 device that has both profiles
