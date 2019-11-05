@@ -9,7 +9,7 @@ Feature: NDQ Filtering Campaign Level
 
   Scenario Outline: try to consume all impressions
     Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-    And I send 1 times an ad request with query parameters for zone named <zone> to UAS
+    And I send 1 additional ad requests for zone named <zone> to UAS
     And The response code is 200
     Then The response contains {script}
     And I send impression requests to UAS immediately!
@@ -121,7 +121,7 @@ Feature: NDQ Filtering Campaign Level
   Scenario Outline: try to consume all impressions with HB
     Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for publisher 3843 with size1 = 1 size2 = 2, with domain <url> and extra params {&unlimited=1&optimize=0}
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3843 with size - h1:1 w1:2, with domain <url>, placmentID group = {3843001} and extra params  {&unlimited=1&optimize=0}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains {script}
@@ -129,107 +129,107 @@ Feature: NDQ Filtering Campaign Level
 
     Examples:
       | url                      |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
-      | {publisherblocklist.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
 
   Scenario: check
     Then The synchronized response code is 200 50 of the times
