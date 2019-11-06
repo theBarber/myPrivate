@@ -121,7 +121,7 @@ Feature: NDQ Filtering Campaign Level
   Scenario Outline: try to consume all impressions with HB
     Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send synchronized 1 basic headerBidding secure post request for publisher 3843 with size - h1:1 w1:2, with domain <url>, placmentID group = {3843001} and extra params  {&unlimited=1&optimize=0}
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3843 with size - h1:1 w1:2, with domain <url>, placmentID group = {3843001} and extra params {&unlimited=1&optimize=0}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains {script}
