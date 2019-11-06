@@ -1270,20 +1270,24 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name       |
       | NDQfilteringTL-ST-1 |
+      | NDQfilteringTL-ST-2 |
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | NDQfilteringTL-ST-1 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-NDQfilteringTL-ST-1} | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
+      | NDQfilteringTL-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-NDQfilteringTL-ST-2} | []         | 93       | 15556          | 3843         | 69625           | []          | []          |
 
     Given I set campaign NDQfilteringTL-ST-1 for 10 days
 
     And i update campaign data by name
       | Campaign Name       | factor | units | goal_type   |
       | NDQfilteringTL-ST-1 | 0.0    | 1000  | impressions |
+      | NDQfilteringTL-ST-2 | 0.0    | 1000  | impressions |
 
     And i update zone data by name
       | Zone Name                        | is_secure |
       | zone-zoneset-NDQfilteringTL-ST-1 | 1         |
+      | zone-zoneset-NDQfilteringTL-ST-2 | 1         |
 
   Scenario: Create Entities for brand reveal 300*600
     Given i disable campaigns by name on db
