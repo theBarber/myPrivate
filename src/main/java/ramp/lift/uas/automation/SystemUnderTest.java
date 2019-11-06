@@ -16,6 +16,7 @@ import infra.cli.process.CliCommandExecution;
 import infra.module.AbstractModuleImpl;
 import infra.support.StringUtils;
 import infra.utils.CouchBaseUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.junit.Assume;
 import ramp.lift.uas.automation.UAScontainer.Builder;
@@ -32,6 +33,7 @@ import java.util.stream.Stream;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
+@Slf4j
 public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> implements Scenario {
     final int _o;
     private RampAppRequestModule rampAppCreateEntitiesManager;
@@ -660,8 +662,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
     @Override
     public synchronized void write(String text) {
-        scenarioWriter.write(text);
-
+        log.info(text);
     }
 
     @Override
