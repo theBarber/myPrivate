@@ -29,7 +29,7 @@
 #
 #  Scenario 3: Strategy level, HB request, make sure ndq feature navigates requests according to strategy traffic portion
 #    Given I use {http://NDQfiltering} as referer string to send my requests to uas
-#    Given i send 100 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {NDQfiltering} with extra params {&unlimited=1&optimize=0}
+#    Given i send 100 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {NDQfiltering} with extra params {&unlimited=1&optimize=1}
 #    And The response code is 200
 #    And The response contains {script}
 #    And The responses has impression-urls

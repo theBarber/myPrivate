@@ -29,7 +29,7 @@ Feature: InApp testing
 
 
 #  Scenario: Image and iframe - HB request (viewableChange)
-#    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 2546} for publisher 2546 with domain {Tradewindsnews.com} with extra params {&unlimited=1&optimize=0&deviceid=sahar}
+#    Given i send 1 headerBidding post request for scenario {Send HB basic request for publisher 2546} for publisher 2546 with domain {Tradewindsnews.com} with extra params {&unlimited=1&optimize=1&deviceid=sahar}
 #    Then The response code is 200
 #    And The response contains {script}
 #    And all HB responses contains campaignId with id of entity named {campaign-Inapp-SI-1}
@@ -51,7 +51,7 @@ Feature: InApp testing
 
 
  # Scenario: Image and iframe - DT request (viewableChange)
- #   Then i send 1 times Dynamic Tag ad request to UAS for publisher 2546 with extra params {Tradewindsnews.com&unlimited=1&optimize=0&tagid=297&deviceid=sahar}
+ #   Then i send 1 times Dynamic Tag ad request to UAS for publisher 2546 with extra params {Tradewindsnews.com&unlimited=1&optimize=1&tagid=297&deviceid=sahar}
  #   Then The response code is 200
  #   And The response contains {script}
  #   And The responses has impression-urls
