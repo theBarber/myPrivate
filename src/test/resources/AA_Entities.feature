@@ -1232,7 +1232,7 @@ Feature: Entities for tests
     And i update campaign data by name
       | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority |
       | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              | -1       |
-      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 50                              | 0                              | -1       |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 0                              | -1       |
       | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              | -2       |
       | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       |
       | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              | -2       |
