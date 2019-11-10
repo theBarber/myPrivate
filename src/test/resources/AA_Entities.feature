@@ -827,7 +827,6 @@ Feature: Entities for tests
       | campaign-CT-ST-2-banner-1 | [[[64,"=~","1_7541"],[64,"=~","1_7531"]]] |
       | campaign-WL-ST-2-banner-1 | [[[39,"=~","Windows"],[41,"=~","Chrome"]  |
 
-  @append
   Scenario:  create entites for vidAd
     Given i disable campaigns by name on db
       | Campaign Name     |
