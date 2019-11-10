@@ -7,16 +7,9 @@ Feature: NDQ Filtering Campaign Level
     Given i disable all tests except 100
     Given i set test 100 status to 1
 
-#  Scenario: try to consume all impressions
-#    Given I set campaign NDQfilteringTL-ST-1 for 100 days
-#    And I send zone request 10 times for zone zone-zoneset-NDQfilteringTL-ST-1 until I get strategy random and I expect 55 impressions till I get NDQ passback
-#    And I send 1 times an ad request for zone named {zone-zoneset-NDQfilteringTL-ST-1} to UAS
-#    And The response code is 200
-#    And The responses are passback
-
   Scenario Outline: try to consume all impressions
     Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-    And I send 1 times an ad request with query parameters for zone named <zone> to UAS
+    And I send 1 additional ad requests for zone named <zone> to UAS
     And The response code is 200
     Then The response contains {script}
     And I send impression requests to UAS immediately!
@@ -124,126 +117,122 @@ Feature: NDQ Filtering Campaign Level
       | {zone-zoneset-NDQfilteringTL-ST-1} |
       | {zone-zoneset-NDQfilteringTL-ST-1} |
       | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
-      | {zone-zoneset-NDQfilteringTL-ST-1} |
 
+  Scenario Outline: try to consume all impressions with HB
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3843 with size - h1:1 w1:2, with domain <url>, placmentID group = {3843001} and extra params {&unlimited=1&optimize=0}
+    And for all HB responses i simulate winning, and send their zone tag
+    And The response code is 200
+    And The response contains {script}
+    And I send impression requests to UAS
+
+    Examples:
+      | url                      |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+      | {100directions.com} |
+
+  Scenario: check
+    Then The synchronized response code is 200 50 of the times
 
   Scenario: Set strategy to common one
     Given i disable all tests except 53
