@@ -89,8 +89,10 @@ public class CrossDeviceCappingTest extends BaseTest {
 //for single profile type, and single profile. optional epoc time for this single profile
         Then("i create new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, profile type = \\{(.*)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp", (String udId, String platform, String profileType, Integer profileNum, Integer daysToReduce) -> {
             CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+            CouchbaseBucketModule usersLogBucket = sut.getUsersLogsBucket();
             try {
                 usersBucket.deleteDocument(udId);
+                usersLogBucket.deleteDocument(udId);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
@@ -107,8 +109,10 @@ public class CrossDeviceCappingTest extends BaseTest {
 
         Then("i inject new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, profile type = \\{(.*)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp and extra devices string = (.*)$", (String udId, String platform, String profileType, Integer profileNum, Integer daysToReduce, String otherDevices) -> {
             CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+            CouchbaseBucketModule usersLogBucket = sut.getUsersLogsBucket();
             try {
                 usersBucket.deleteDocument(udId);
+                usersLogBucket.deleteDocument(udId);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
@@ -132,8 +136,10 @@ public class CrossDeviceCappingTest extends BaseTest {
         //one user with one empty optional profile type filed
         Then("i inject new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, empty profile type = \\{(.*)\\}, non-empty profile type = \\{(.*)\\}", (String udId, String platform, String emptyProfileType, String nonEmptyProfileType) -> {
             CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+            CouchbaseBucketModule usersLogBucket = sut.getUsersLogsBucket();
             try {
                 usersBucket.deleteDocument(udId);
+                usersLogBucket.deleteDocument(udId);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
@@ -171,8 +177,10 @@ public class CrossDeviceCappingTest extends BaseTest {
 //one profile for each profile type. optional days reduce from epoch time for both profiles types.
         Then("i inject new profile for udId \\{(.*)\\} on users bucket, platform = \\{(.*)\\}, single udmp_p profile is \\{(.*)\\} with (\\d+) days reduce and one sqmsg_p profile = \\{(.*)\\} with (\\d+) days reduce ", (String udId, String platform, String udmp_pString, Integer daysToReduceFromUdmp, String sqmsg_pString, Integer daysToReduceFromSqmg) -> {
             CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+            CouchbaseBucketModule usersLogBucket = sut.getUsersLogsBucket();
             try {
                 usersBucket.deleteDocument(udId);
+                usersLogBucket.deleteDocument(udId);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
@@ -191,8 +199,10 @@ public class CrossDeviceCappingTest extends BaseTest {
 //one profile for each profile type. optional days reduce from epoch time for both profiles types.
         Then("i inject new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, with one udmp_p profile = \\{(.*)\\} with (\\d+) days reduce and one sqmsg_p profile = \\{(.*)\\} with (\\d+) days reduce", (String udId, String platform, String udmp_pString, Integer daysToReduceFromUdmp, String sqmsg_pString, Integer daysToReduceFromSqmg) -> {
             CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+            CouchbaseBucketModule usersLogBucket = sut.getUsersLogsBucket();
             try {
                 usersBucket.deleteDocument(udId);
+                usersLogBucket.deleteDocument(udId);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
@@ -212,8 +222,10 @@ public class CrossDeviceCappingTest extends BaseTest {
 //one profile for each profile type. optional days reduce from epoch time for both profiles types.
         Then("i inject new profile doc with two udmp_p profiles with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}. First p = (\\d+) with (\\d+) days reduce. Second profile = (\\d+) with (\\d+) days reduce", (String udId, String platform, Integer profile1, Integer daysToReduceFromProfile1, Integer profile2, Integer daysToReduceFromProfile2) -> {
             CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+            CouchbaseBucketModule usersLogBucket = sut.getUsersLogsBucket();
             try {
                 usersBucket.deleteDocument(udId);
+                usersLogBucket.deleteDocument(udId);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
@@ -249,8 +261,10 @@ public class CrossDeviceCappingTest extends BaseTest {
         // for multiple profiles, end
         Then("i end adding profiles to user with udId  \\{(.*)\\}  on users bucket, platform was = \\{(.*)\\},and finally inject it", (String udId, String platform) -> {
             CouchbaseBucketModule usersBucket = sut.getUsersBucket();
+            CouchbaseBucketModule usersLogBucket = sut.getUsersLogsBucket();
             try {
                 usersBucket.deleteDocument(udId);
+                usersLogBucket.deleteDocument(udId);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
