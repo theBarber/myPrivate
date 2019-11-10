@@ -749,52 +749,6 @@ Feature: Entities for tests
       | zone-zoneset-InappBlackWhiteList-SI-6 | 1         |
       | zone-zoneset-InappBlackWhiteList-SI-7 | 1         |
 
-
-  @DynamicPricing
-  Scenario: create entities for dynamic pricing
-    Given i disable campaigns by name on db
-      | Campaign Name                      |
-      | campaign-DP-Direct-300X250-2       |
-      | campaign-DP-Direct-300X250-1       |
-      | campaign-DP-ProgG-SS-1X1-2         |
-      | campaign-DP-ProgG-SS-1X1-1         |
-      | campaign-DP-ProgNG-ST-1X2-2        |
-      | campaign-DP-ProgNG-ST-1X2-1        |
-      | campaign-DP-ClientProg-970X250-P-2 |
-      | campaign-DP-ClientProg-970X250-P-1 |
-      | campaign-DP-ClientProg-970X250-D   |
-    Given i create new campaigns with new zoneset
-      | Campaign Name                      | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                      | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-DP-Direct-300X250-1       | 75396  | 234550   | false                 | 85            | {zone-zoneset-DP-Direct-300X250-1}       | []         | 10       | 14862          | 3728         | 66833           |
-#PROD |campaign-DP-Direct-300X250-1       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-1}        |[]          |10        |14877              |3728           |66833            |
-      | campaign-DP-Direct-300X250-2       | 75396  | 234550   | false                 | 85            | {zone-zoneset-DP-Direct-300X250-2}       | []         | 10       | 14862          | 3728         | 66833           |
-#PROD |campaign-DP-Direct-300X250-2       |75396         |234656     |false                  |85                |{zone-zoneset-DP-Direct-300X250-2}        |[]          |10        |14877              |3728           |66833            |
-      | campaign-DP-ProgG-SS-1X1-1         | 407981 | 228962   | true                  | 17            | {zone-zoneset-DP-ProgG-SS-1X1-1}         | []         | 69       | 14862          | 3728         | 66831           |
-#PROD  |campaign-DP-ProgG-SS-1X1-1         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-1}          |[]          |69        |14877              |3728           |66831            |
-      | campaign-DP-ProgG-SS-1X1-2         | 407981 | 228962   | true                  | 17            | {zone-zoneset-DP-ProgG-SS-1X1-2}         | []         | 69       | 14862          | 3728         | 66831           |
-#PROD  |campaign-DP-ProgG-SS-1X1-2         |407981        |228962     |true                   |17                |{zone-zoneset-DP-ProgG-SS-1X1-2}          |[]          |69        |14877              |3728           |66831            |
-      | campaign-DP-ProgNG-ST-1X2-1        | 407981 | 224533   | true                  | 33            | {zone-zoneset-DP-ProgNG-ST-1X2-1}        | []         | 83       | 14862          | 3728         | 66830           |
-#PROD  |campaign-DP-ProgNG-ST-1X2-1        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-1}         |[]          |83        |14877              |3728           |66830            |
-      | campaign-DP-ProgNG-ST-1X2-2        | 407981 | 224533   | true                  | 33            | {zone-zoneset-DP-ProgNG-ST-1X2-2}        | []         | 83       | 14862          | 3728         | 66830           |
-#PROD  |campaign-DP-ProgNG-ST-1X2-2        |407981        |224533     |true                   |33                |{zone-zoneset-DP-ProgNG-ST-1X2-2}         |[]          |83        |14877              |3728           |66830            |
-      | campaign-DP-ClientProg-970X250-P-1 | 407981 | 224539   | false                 | 7143          | {zone-zoneset-DP-ClientProg-970X250-P-1} | []         | 58       | 14862          | 3728         | 67182           |
-#PROD |campaign-DP-ClientProg-970X250-P-1 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-1}  |[]          |58        |14877              |3728           |67231            |
-      | campaign-DP-ClientProg-970X250-P-2 | 407981 | 224539   | false                 | 7143          | {zone-zoneset-DP-ClientProg-970X250-P-2} | []         | 58       | 14862          | 3728         | 67182           |
-#PROD |campaign-DP-ClientProg-970X250-P-2 |407981        |224539     |false                  |7143              |{zone-zoneset-DP-ClientProg-970X250-P-2}  |[]          |58        |14877              |3728           |67231            |
-      | campaign-DP-ClientProg-970X250-D   | 75396  | 198082   | false                 | 64            | {zone-zoneset-DP-ClientProg-970X250-D}   | []         | 58       | 14862          | 3728         | 67182           |
-#PROD |campaign-DP-ClientProg-970X250-D   |75396         |198082     |false                  |64                |{zone-zoneset-DP-ClientProg-970X250-D}    |[]          |58        |14877              |3728           |67231            |
-    And i update campaign data by name
-      | Campaign Name                      | Priority | campaign_delivery_method | delivery_algorithm |
-      | campaign-DP-Direct-300X250-2       | -2       | 1                        | 4                  |
-      | campaign-DP-Direct-300X250-1       | -1       | 2                        | 3                  |
-      | campaign-DP-ProgG-SS-1X1-2         | -2       | 1                        | 4                  |
-      | campaign-DP-ProgG-SS-1X1-1         | -1       | 2                        | 3                  |
-      | campaign-DP-ProgNG-ST-1X2-2        | -2       | 1                        | 4                  |
-      | campaign-DP-ProgNG-ST-1X2-1        | -1       | 2                        | 3                  |
-      | campaign-DP-ClientProg-970X250-P-2 | -2       | 1                        | 4                  |
-      | campaign-DP-ClientProg-970X250-P-1 | -1       | 2                        | 3                  |
-      | campaign-DP-ClientProg-970X250-D   | 1        | 4                        | 2                  |
-
   @PLT
   Scenario: create entities for Persona Level Targeting test
     Given i disable campaigns by name on db
@@ -873,7 +827,6 @@ Feature: Entities for tests
       | campaign-CT-ST-2-banner-1 | [[[64,"=~","1_7541"],[64,"=~","1_7531"]]] |
       | campaign-WL-ST-2-banner-1 | [[[39,"=~","Windows"],[41,"=~","Chrome"]  |
 
-
   Scenario:  create entites for vidAd
     Given i disable campaigns by name on db
       | Campaign Name     |
@@ -882,7 +835,7 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name     | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-TN       | 75396  | 243707   | false                 | 21638         | {zone-zoneset-TN}       | []         | 97       | 15196          | 3708         | 69992           | []             | []             |
-      | campaign-vidAd-SP | 407981 | 243711   | true                  | 568           | {zone-zoneset-vidAd-SP} | []         | 97       | 15292          | 3708         | 69992           | []             | []             |
+      | campaign-vidAd-SP | 407981 | 243710   | true                  | 568           | {zone-zoneset-vidAd-SP} | []         | 97       | 15292          | 3708         | 69992           | []             | []             |
     And i update campaign data by name
       | Campaign Name     | Priority |
       | campaign-TN       | -1       |

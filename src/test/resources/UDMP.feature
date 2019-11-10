@@ -43,36 +43,36 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
   Scenario: cross device capping for udmp,zone req when capping = 2, cross device capping = true
     Given I clear all cookies from uas requests
-    When I send 1 times an ad request with parameter {deviceid=11000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=11000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCappingUDMP-ST-1-banner-1} 100% of the time
     And I sleep for 2 seconds
     Given I clear all cookies from uas requests
-    When I send 1 times an ad request with parameter {deviceid=12000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=12000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCappingUDMP-ST-1-banner-1} 100% of the time
     And I sleep for 2 seconds
     Given I clear all cookies from uas requests
-    When I send 1 times an ad request with parameter {deviceid=13000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=13000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
     And The responses are passback
 
   Scenario: profile targeting for udmp, zone req, from app
     Given I clear all cookies from uas requests
-    When I send 1 times an ad request with parameter {deviceid=66600000-6660-6660-6660-666000000000&optimize=0&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=66600000-6660-6660-6660-666000000000&optimize=1&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
-    When I send 1 times an ad request with parameter {deviceid=00000000-0000-0000-0000-000000000000&optimize=0&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=00000000-0000-0000-0000-000000000000&optimize=1&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPforApp-ST-1-banner-1} 100% of the time
     Given I clear all cookies from uas requests
-    When I send 1 times an ad request with parameter {deviceid=61000000-6100-6100-6100-610000000000&optimize=0&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=61000000-6100-6100-6100-610000000000&optimize=1&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
@@ -82,7 +82,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
   Scenario: profile targeting for udmp, zone req, with cookie
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a7b8c8faf42446dcbba3248cef7dc7bb} to my requests to uas
-    When I send 1 times an ad request with parameter {optimize=0&domain=udmp_seq_profile_web} for zone named {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&domain=udmp_seq_profile_web} for zone named {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
@@ -93,7 +93,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a1b2c8faf42446dcbba3248cef1dc2bb} to my requests to uas
-    When I send 1 times an ad request with parameter {optimize=0&domain=udmp_seq_profile_web} for zone named {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&domain=udmp_seq_profile_web} for zone named {zone-zoneset-ProfileTargetingUDMPforWeb-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
@@ -163,26 +163,26 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 ##  78000000-0000-0000-0000-000000000000
     #  step 1: 2 req from device 78
     Given I clear all cookies from uas requests
-    When I send 2 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
+    When I send 2 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-1-banner-1} 100% of the time
     And I sleep for 2 seconds
 #   step 2: 1 req from device 67
-    When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
+    When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-2-banner-1} 100% of the time
 #    step 3: 1 req from 67, should return pb cause capping = 3
-    When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
+    When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
     And The response code is 200
     And The responses are passback
 #  step 4: renewal after 4 mins
     And I sleep for 250 seconds
     Given I clear all cookies from uas requests
-    When I send 1 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
+    When I send 1 times an ad request with parameter {deviceid=78000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -192,7 +192,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #  step 1: 3 req from device 89
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 3 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    Given i send 3 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
@@ -203,7 +203,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #  step 2: 2 req from device 90
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
     And for all HB responses i simulate winning, and send their zone tag
@@ -214,12 +214,12 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     #  step 3: 2 req from device 89. should return passback since capping = 5;
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And The responses are passback
     Given I sleep for 3 seconds
 #  step 4: renewal after 4 mins
     And I sleep for 250 seconds
-    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=0&bundleid=app1}
+    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}

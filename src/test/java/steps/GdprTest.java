@@ -26,7 +26,7 @@ import util.gdpr.ConsentStringBuilder;
 public class GdprTest extends BaseTest {
     private static final Integer ZONE_ID = 2;
     private static final Integer PUBLISHER_ID = 3711;
-    private static final String PUBLISHER_PARAMS = "&domain=test.com&requestid=systemTestC&unlimited=1&optimize=0&tagid=198";
+    private static final String PUBLISHER_PARAMS = "&domain=test.com&requestid=systemTestC&unlimited=1&optimize=1&tagid=198";
 
     private static final String HB_REQ_BODY = getGdprHbReqBody();
     private static final String HB_REQ_DOMAIN = "DynamicPricingWithMargin.com";
