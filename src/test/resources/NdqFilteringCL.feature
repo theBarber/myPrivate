@@ -121,7 +121,7 @@ Feature: NDQ Filtering Campaign Level
   Scenario Outline: try to consume all impressions with HB
     Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send synchronized 1 basic headerBidding secure post request for publisher 3843 with size - h1:1 w1:2, with domain <url>, placmentID group = {3843001} and extra params {&unlimited=1&optimize=0}
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3843 with size - h1:1 w1:2, with domain <url>, placmentID group = {3843001} and extra params {&unlimited=1&optimize=1}
     And for all HB responses i simulate winning, and send their zone tag
     And The response code is 200
     And The response contains {script}
@@ -268,7 +268,7 @@ Feature: NDQ Filtering Campaign Level
 #
 #  Scenario: 3 Campaign level, HB request, verify NDQ filtering obeys to skip daily goal flag when flag = false
 #    Given I use {http://NDQfiltering} as referer string to send my requests to uas
-#    Given i send 100 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {NDQfiltering} with extra params {&unlimited=1&optimize=0}
+#    Given i send 100 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {NDQfiltering} with extra params {&unlimited=1&optimize=1}
 #    And The response code is 200
 #    And The response contains {script}
 #    And all HB responses contains adId with id of entity named {campaign-NDQfilteringCL-ST-3-banner-1}
@@ -290,7 +290,7 @@ Feature: NDQ Filtering Campaign Level
 #
 #  Scenario: 6 Campaign level, HB request, verify NDQ filtering obeys to skip daily goal flag when flag = false
 #    Given I use {http://NDQfiltering} as referer string to send my requests to uas
-#    Given i send 110 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {NDQfiltering} with extra params {&unlimited=1&optimize=0}
+#    Given i send 110 headerBidding post request for scenario {Send HB basic request for publisher 3708} for publisher 3708 with domain {NDQfiltering} with extra params {&unlimited=1&optimize=1}
 #    And The response code is 200
 #    And The response contains {script}
 #    And all HB responses contains adId with id of entity named {campaign-NDQfilteringCL-ST-6-banner-1}

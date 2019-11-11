@@ -78,10 +78,9 @@ public class LineItem implements WithId<Integer> {
         campaigns.add(campaign);
     }
 
-    public void removeCampaign(Campaign campaign){
-        for (Campaign cmp : campaigns)
-        {
-            if(cmp.getName().equals(campaign.getName())){
+    public void removeCampaign(Campaign campaign) {
+        for (Campaign cmp : campaigns) {
+            if (cmp.getName().equals(campaign.getName())) {
                 campaigns.remove(campaign);
             }
         }
