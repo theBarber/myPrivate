@@ -1323,7 +1323,7 @@ Feature: Entities for tests
   @append
   @NDQFilteringTest
   Scenario: refresh caches
-    And I refresh banner cache
+#    And I refresh banner cache
     And I refresh zone cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
