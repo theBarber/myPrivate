@@ -182,9 +182,3 @@ Feature: Programmatic flow support
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
-
-  @appnexusUnifiedVidDisplay
-  Scenario: programmatic display & video banners are merged to one request for appnexus - zone request
-    Given I send 1 times an ad request with parameter {requestid=NGDeal_VidDisplay&optimize=1&unlimited=1&domain=remove} for zone named {zone-zoneset-server-prog-PGC} to UAS
-    Then The response code is 200
-    And i print the responses
