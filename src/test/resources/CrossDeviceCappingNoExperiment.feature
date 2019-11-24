@@ -1,9 +1,9 @@
-@Sanity
-@CrossDeviceCapping
-@userinfo
-@userhistory
-@uas
-Feature: Cross Device Capping No Experiment
+#@Sanity
+#@CrossDeviceCapping
+#@userinfo
+#@userhistory
+#@uas
+#Feature: Cross Device Capping No Experiment
 #  Background:
 #    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
 #    Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket

@@ -195,7 +195,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given i send 3 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -206,7 +206,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS

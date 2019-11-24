@@ -34,7 +34,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -57,7 +57,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
@@ -136,7 +136,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
     And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
 
@@ -151,7 +151,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-Billboard-970X250-D}
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
     And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Prog-Billboard-970X250-D-banner-1} 100% of the time
@@ -166,7 +166,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Billboard-970X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
     And all HB responses contains cpm with value {0.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
@@ -178,7 +178,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
@@ -190,7 +190,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
@@ -234,7 +234,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-1-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-1-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -251,7 +251,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {See-Through-1X2-D-2-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-See-Through-1X2-D-2-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -269,7 +269,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-3-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-3-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -286,7 +286,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {See-Through-1X2-D-4-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-See-Through-1X2-D-4-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -399,7 +399,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -423,7 +423,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
@@ -536,7 +536,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Billboard-970X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
     And all HB responses contains cpm with value {0.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
@@ -549,7 +549,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
@@ -562,7 +562,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
@@ -607,7 +607,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-1-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-1-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -624,7 +624,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {See-Through-1X2-D-2-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-See-Through-1X2-D-2-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -642,7 +642,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-3-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-3-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -659,7 +659,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {See-Through-1X2-D-4-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-See-Through-1X2-D-4-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -699,7 +699,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -723,7 +723,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
@@ -838,7 +838,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Billboard-970X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
     And all HB responses contains cpm with value {0.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
@@ -851,7 +851,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
@@ -864,7 +864,7 @@ Feature: Header Bidding flow support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
@@ -911,7 +911,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-1-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-1-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -929,7 +929,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-2-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-2-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -947,7 +947,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-3-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-3-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -965,7 +965,7 @@ Feature: Header Bidding flow support
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-4-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-4-a}
     And all HB responses contains cpm with id 1
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS

@@ -10,6 +10,8 @@
 Feature: Cross Device Capping Experiment
 
   Background:
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
     Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
     Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket
     Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from users bucket

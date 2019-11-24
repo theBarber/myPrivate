@@ -15,13 +15,13 @@ Feature: UAS buy at most
 			When  I send ad requests I sleep 150 millis
 			And I add optimize query parameter with value {1} to send my requests to uas
 		When I send 500 times an ad request with query parameters for zone named {Uas-by-at-most-zone-1} to UAS
-		And I send impression requests to UAS immediately!
+		And I send impression requests to UAS
 		Then The response code is 200
 		And The impressionUrl has bannerid field matching the id of the banner named {UAS-by-at-most-1-banner} 50% of the time
 		And The impressionUrl has bannerid field matching the id of the banner named {UAS-by-at-most-2-banner} 50% of the time
 		And I sleep for 20 seconds
 		When I send 20 times an ad request with query parameters for zone named {Uas-by-at-most-zone-1} to UAS
-		And I send impression requests to UAS immediately!
+		And I send impression requests to UAS
 		And I sleep for 60 seconds
 		When I send 100 times an ad request with query parameters for zone named {Uas-by-at-most-zone-1} to UAS
 		Then The response code is 200

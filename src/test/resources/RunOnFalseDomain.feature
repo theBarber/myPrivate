@@ -39,7 +39,7 @@ Feature: ROFD
 #      And all HB responses contains campaignId with id of entity named {campaign-HB-DynamicPrice-3}
 #      And all HB responses contains adId with id of entity named {campaign-HB-DynamicPrice-3-banner-1}
 #      And all HB responses contains cpm with value {7}
-#      And for all HB responses i simulate winning, and send their zone tag
+#      And I send impression requests to UAS
 #      And The response code is 200
 #      And The response contains {script}
 #      And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-DynamicPrice-3-banner-1} 100% of the time

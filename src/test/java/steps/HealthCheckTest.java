@@ -67,9 +67,6 @@ public class HealthCheckTest extends BaseTest {
 				sut.getRampAppRequestModule().healthCheckRequest();
                 svc_ut = "RAMP-IO";
 				break;
-			default:
-				System.out.println("Invalid service " + svc);
-
 		}
 
 
@@ -87,9 +84,6 @@ public class HealthCheckTest extends BaseTest {
 						.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
 						.forEach(CompletableFuture::join);
 				break;
-			default:
-				System.out.println("Invalid service "+svc_ut);
-
 		}
 	}
 

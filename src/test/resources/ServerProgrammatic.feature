@@ -36,7 +36,7 @@ Feature: Programmatic flow support
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
     And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
@@ -80,7 +80,7 @@ Feature: Programmatic flow support
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-ST-3-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
@@ -130,7 +130,7 @@ Feature: Programmatic flow support
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
@@ -178,7 +178,7 @@ Feature: Programmatic flow support
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-ST-3-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time

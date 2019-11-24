@@ -6,11 +6,11 @@
         "bidRequestId": "21b46f0d859b47",
         "domain": "ranker.com",
         "placementId": "10433394",
-        "publisherId": 3470,
+        "publisherId": 3843,
         "sizes": [
           [
             1,
-            1
+            2
           ]
         ],
         "timeout": 700,
@@ -1181,6 +1181,15 @@
   },
 
   "Disable throttling for groupId 3728009":
+  {
+    "id": 3728009,
+    "name": "Disable throttling for groupId 3728009",
+    "type": "bidding",
+    "isActive": false,
+    "throttling": 0
+  },
+
+  "Ndq filter test":
   {
     "id": 3728009,
     "name": "Disable throttling for groupId 3728009",

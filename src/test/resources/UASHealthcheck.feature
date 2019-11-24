@@ -54,7 +54,7 @@ Feature: UAS connectivity to other components
 	#	Then The response code is 200
 	#	And The response contains {script}
 	#	And The responses has impression-urls
-	#	And I send impression requests to UAS immediately!
+	#	And I send impression requests to UAS
 	#	And The response has click-url
 
 	#@campaign

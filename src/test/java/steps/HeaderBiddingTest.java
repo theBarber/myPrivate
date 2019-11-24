@@ -342,29 +342,29 @@ public class HeaderBiddingTest extends BaseTest {
     }
 
 
-    public void sendZoneTagFromHBWithoutParam()
-    {
-        sendZoneTagFromHBWithParam(null);
-    }
+//    public void sendZoneTagFromHBWithoutParam()
+//    {
+//        sendZoneTagFromHBWithParam(null);
+//    }
 
-    public void sendZoneTagFromHBWithParam(String extraParam) {
-        List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
-        sut.getUASRquestModule().reset();
-        response.stream().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-            JsonNode responseInJson = null;
-            try
-            {
-                responseInJson = mapper.readTree(content);
-                String htmlWithQuery = responseInJson.get(0).get("ad").asText();
-                String url = getUrlFromAd(htmlWithQuery) + Optional.ofNullable(extraParam).orElse("");
-                System.out.println(url);
-                sut.getUASRquestModule().sendGetRequestsAsync(1,url,false);
-            }catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        });
-    }
+//    public void sendZoneTagFromHBWithParam(String extraParam) {
+//        List<CompletableFuture<HttpResponse>> response = new ArrayList<>(sut.getUASRquestModule().responsesAsList());
+//        sut.getUASRquestModule().reset();
+//        response.stream().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+//            JsonNode responseInJson = null;
+//            try
+//            {
+//                responseInJson = mapper.readTree(content);
+//                String htmlWithQuery = responseInJson.get(0).get("ad").asText();
+//                String url = getUrlFromAd(htmlWithQuery) + Optional.ofNullable(extraParam).orElse("");
+//                System.out.println(url);
+//                sut.getUASRquestModule().sendGetRequestsAsync(1,url,false);
+//            }catch (Exception e)
+//            {
+//                e.printStackTrace();
+//            }
+//        });
+//    }
 
     @Attachment(value = "URL from ad: ", type = "text/plain")
     private String getUrlFromAd(String htmlWithQuery) {
@@ -411,7 +411,7 @@ public class HeaderBiddingTest extends BaseTest {
                 responseInJson = mapper.readTree(content);
                 Assert.assertNotNull("response not contains entity named: " + entity, responseInJson.get(0).get("ad"));
                 assertTrue("responses not contains "+entity+" with value: "+ value+", response has ad: "+responseInJson.get(0).get("ad").toString() ,
-                        responseInJson.get(0).get("ad").toString().contains("ut."+entity.toLowerCase()+"='"+value+"'"));
+                        responseInJson.get("ad").toString().contains(entity.toLowerCase()+"='"+value+"'"));
             }catch (Exception e)
             {
                 e.printStackTrace();
