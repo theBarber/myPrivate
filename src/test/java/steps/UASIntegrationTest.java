@@ -298,7 +298,8 @@ public class UASIntegrationTest extends BaseTest {
             System.out.println(ctx.getCookieStore());
             HttpClient httpclient = HttpClients.custom()
                     .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(1000).build()).build();
-            sut.getUASRquestModule().responses().map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
+            sut.getUASRquestModule().responses()
+                    .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
                     .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
                     .map(impurl -> CompletableFuture.supplyAsync(() -> {
                         try {
