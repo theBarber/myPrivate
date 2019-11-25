@@ -302,14 +302,9 @@ public class UASIntegrationTest extends BaseTest {
                     .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
                     .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
                     .map(impurl -> CompletableFuture.supplyAsync(() -> {
-                        String imp_url = "";
                         try {
-                            imp_url = impurl.toString()
-                                    .replace("\\", "")
-                                    .replace(" ", "%20")
-                                    .replace("|", "%7C");
-                            System.out.println("impression to send = " + imp_url);
-                            HttpGet httpGet = new HttpGet(imp_url);
+                            sut.write("impression to send = " + impurl.toString());
+                            HttpGet httpGet = new HttpGet(impurl.toString());
                             List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                             httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
                             HttpResponse response = httpclient.execute(httpGet, ctx);
@@ -318,11 +313,11 @@ public class UASIntegrationTest extends BaseTest {
                                 InputStream is = response.getEntity().getContent();
                                 BufferedReader buffer = new BufferedReader(new InputStreamReader(is));
                                 String str = buffer.lines().collect(Collectors.joining("\n"));
-                                System.out.println("req: " + impurl.toString() + " response : \n" + str);
+                                sut.write("req: " + impurl.toString() + " response : \n" + str);
                             }
                             return response;
                         } catch (IOException e) {
-                            throw new UncheckedIOException("failed to send request (" + imp_url + ") ", e);
+                            throw new UncheckedIOException("failed to send request (" + impurl.toString() + ") ", e);
                         }
 
                     })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
