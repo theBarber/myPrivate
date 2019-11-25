@@ -304,10 +304,7 @@ public class UASIntegrationTest extends BaseTest {
                     .map(impurl -> CompletableFuture.supplyAsync(() -> {
                         String imp_url = "";
                         try {
-                            imp_url = impurl.toString()
-                                    .replace("\\", "")
-                                    .replace(" ", "%20")
-                                    .replace("|", "%7C");
+                            imp_url = impurl.toString();
                             System.out.println("impression to send = " + imp_url);
                             HttpGet httpGet = new HttpGet(imp_url);
                             List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
