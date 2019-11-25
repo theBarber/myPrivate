@@ -4,16 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import entities.ramp.app.api.ThrottlingRequest;
-import io.qameta.allure.Attachment;
-import org.apache.http.HttpResponse;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -26,7 +20,6 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",})
-//        "infra.RotatingJSONFormatter:target/cucumber/HeaderBidding_$TIMESTAMP$.json"})
 public class HeaderBiddingTest extends BaseTest {
     final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/requestBodies.json";
     final private Integer NO_UT_INDEX = 3;
@@ -315,10 +308,6 @@ public class HeaderBiddingTest extends BaseTest {
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, jsonNode.toString(), publisherID, domain, extraParams, true, false);
     }
 
-    private void sendHeaderBiddingPostRequestWithoutExtraParams(Integer times, String scenario, Integer publisherID, String domain) {
-        sendHeaderBiddingPostRequest(times, scenario, publisherID, domain, null);
-    }
-
     public void responsesContainEntityWithId(String entity, Integer id) {
 
         responsesContainEntityWithValue(entity, String.valueOf(id));
@@ -333,12 +322,10 @@ public class HeaderBiddingTest extends BaseTest {
 
     public void responsesAdsContainEntityWithId(String entity, String value) {
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-            JsonNode responseInJson = null;
             try {
-                responseInJson = mapper.readTree(content);
-                Assert.assertNotNull("response not contains entity named: " + entity.toLowerCase(), responseInJson.get("ad"));
-                assertTrue("responses not contains " + entity + " with value: " + value + ", response has ad: " + responseInJson.get("ad").toString(),
-                        responseInJson.get("ad").toString().contains(entity.toLowerCase() + "='" + value + "'"));
+                Assert.assertNotNull("response not contains entity named: " + entity.toLowerCase(), content);
+                assertTrue("responses not contains " + entity + " with value: " + value + ", response has ad: " + content,
+                        content.contains(entity.toLowerCase() + "=" + value));
             } catch (Exception e) {
                 e.printStackTrace();
             }

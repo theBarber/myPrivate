@@ -302,8 +302,9 @@ public class UASIntegrationTest extends BaseTest {
                     .map(UASIntegrationTest::getImpressionUrl).map(CompletableFuture::join)
                     .map(UASIntegrationTest::toURL).filter(Optional::isPresent).map(Optional::get)
                     .map(impurl -> CompletableFuture.supplyAsync(() -> {
+                        String imp_url = "";
                         try {
-                            String imp_url = impurl.toString().replace("\\", "").replace(" ", "%20");
+                            imp_url = impurl.toString().replace("\\", "").replace(" ", "%20");
                             System.out.println("impression to send = " + imp_url);
                             HttpGet httpGet = new HttpGet(imp_url);
                             List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
@@ -318,7 +319,7 @@ public class UASIntegrationTest extends BaseTest {
                             }
                             return response;
                         } catch (IOException e) {
-                            throw new UncheckedIOException("failed to send request (" + impurl + ") ", e);
+                            throw new UncheckedIOException("failed to send request (" + imp_url + ") ", e);
                         }
 
                     })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
