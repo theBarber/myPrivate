@@ -33,7 +33,7 @@ import static steps.HeaderBiddingTest.*;
  * Created by kereng on 5/23/2017.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"classpath:CrossDeviceCappingExperiment.feature", "classpath:CrossDeviceCappingNoExperiment.feature"}, plugin = {"pretty",})
+@CucumberOptions(features = {"classpath:CrossDeviceCappingExperiment.feature"}, plugin = {"pretty",})
 //    "infra.RotatingJSONFormatter:target/cucumber/crossDevice_$TIMESTAMP$.json" })
 
 public class CrossDeviceCappingTest extends BaseTest {
