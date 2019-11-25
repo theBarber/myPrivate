@@ -1187,5 +1187,14 @@
     "type": "bidding",
     "isActive": false,
     "throttling": 0
+  },
+
+  "Ndq filter test":
+  {
+    "id": 3728009,
+    "name": "Disable throttling for groupId 3728009",
+    "type": "bidding",
+    "isActive": false,
+    "throttling": 0
   }
 }

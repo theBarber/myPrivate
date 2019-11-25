@@ -33,7 +33,7 @@ Feature: PGX - triggering ads tests
   #  Then The response code is 200
   #  And The response contains {script}
   #  And all HB responses contains adId with id of entity named {campaign-PGX-PG-1-a-banner-1}
-  #  And for all HB responses i simulate winning, and send their zone tag
+  #  And I send impression requests to UAS
   #  Then The response code is 200
   #  And The responses has impression-urls
   #  And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-PG-1-a-banner-1} 100% of the time
@@ -45,7 +45,7 @@ Feature: PGX - triggering ads tests
     Then The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-PGX-ST-1-a-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-ST-1-a-banner-1} 100% of the time
     And The response not contains window.ut_renderTriggers=[3,2,1]
 
@@ -108,7 +108,7 @@ Feature: PGX - triggering ads tests
     Then The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-PGX-PG-1-a-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     Then The response code is 200
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-PG-1-a-banner-1} 100% of the time
@@ -121,7 +121,7 @@ Feature: PGX - triggering ads tests
     Then The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-PGX-ST-1-a-banner-1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PGX-ST-1-a-banner-1} 100% of the time
     And The response not contains window.ut_renderTriggers=[3,2,1]
 

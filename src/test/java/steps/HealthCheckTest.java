@@ -18,109 +18,107 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.not;
 
-@CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = { "pretty",})
+@CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = {"pretty",})
 //		"infra.RotatingJSONFormatter:target/cucumber/uas_healthcheck_$TIMESTAMP$.json" })
 @RunWith(Cucumber.class)
 public class HealthCheckTest extends BaseTest {
 
     protected String svc_ut = "";
-	public HealthCheckTest() {
-		super();
-		// ThenResposeCodeIs();
-		When("^Sending a healthcheck request of (RabbitMQ|Couchbase|Redis|Workflow) to UAS$",
-				this::healthCheckRequestSkip);
-		When("^Sending a healthcheck request to (.*)$", this::healthCheckRequest);
-		Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
-		Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
-		Then("^The synchronized response code is (\\d+) (\\d+) of the times", this::allSynchronizedResponsesHaveCodePartially);
-		Then("^All requests are sent$", this::allResponsesFinished);
-		Then("^The response contains \\{(.*)\\}$", this::healthCheckResponseContains);
-		Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
 
-	}
+    public HealthCheckTest() {
+        super();
+        // ThenResposeCodeIs();
+        When("^Sending a healthcheck request of (RabbitMQ|Couchbase|Redis|Workflow) to UAS$",
+                this::healthCheckRequestSkip);
+        When("^Sending a healthcheck request to (.*)$", this::healthCheckRequest);
+        Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
+        Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
+        Then("^The synchronized response code is (\\d+) (\\d+) of the times", this::allSynchronizedResponsesHaveCodePartially);
+        Then("^All requests are sent$", this::allResponsesFinished);
+        Then("^The response contains \\{(.*)\\}$", this::healthCheckResponseContains);
+        Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
 
-	public void healthCheckResponseNotContains(String something) {
-		sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-			//System.out.println(content); // for checks only
-			Assert.assertThat(content, not(Matchers.containsString(something)));
-		});
-	}
+    }
 
-	public void healthCheckResponseContains(String something) {
-		ResponseVerifier.getInstance().verifyContains(something);
-	}
+    public void healthCheckResponseNotContains(String something) {
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            //System.out.println(content); // for checks only
+            Assert.assertThat(content, not(Matchers.containsString(something)));
+        });
+    }
 
-
-
-	public void healthCheckRequestSkip(String servicenameToSkip) {
-		sut.getUASRquestModule().healthCheckRequestSkip(servicenameToSkip);
-	}
+    public void healthCheckResponseContains(String something) {
+        ResponseVerifier.getInstance().verifyContains(something);
+    }
 
 
-	public void healthCheckRequest(String svc) {
-		switch (svc){
-			case "UAS":
-				sut.getUASRquestModule().healthCheckRequest();
-				svc_ut = "UAS";
-				break;
-			case "RAMP-IO":
-				sut.getRampAppRequestModule().healthCheckRequest();
+    public void healthCheckRequestSkip(String servicenameToSkip) {
+        sut.getUASRquestModule().healthCheckRequestSkip(servicenameToSkip);
+    }
+
+
+    public void healthCheckRequest(String svc) {
+        switch (svc) {
+            case "UAS":
+                sut.getUASRquestModule().healthCheckRequest();
+                svc_ut = "UAS";
+                break;
+            case "RAMP-IO":
+                sut.getRampAppRequestModule().healthCheckRequest();
                 svc_ut = "RAMP-IO";
-				break;
-			default:
-				System.out.println("Invalid service " + svc);
+                break;
+            default:
+                System.out.println("Invalid service " + svc + ". Wasn't initialized.");
+        }
 
-		}
 
+    }
 
-	}
+    public synchronized void allResponsesHaveCode(Integer expectedResponseCode) {
+        switch (svc_ut) {
+            case "UAS":
+                sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+                        .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
+                        .forEach(CompletableFuture::join);
+                break;
+            case "RAMP-IO":
+                sut.getRampAppRequestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+                        .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
+                        .forEach(CompletableFuture::join);
+                break;
+            default:
+                System.out.println("You must run health check to service before verifying responses' code!");
+        }
+    }
 
-	public synchronized void allResponsesHaveCode(Integer expectedResponseCode) {
-		switch (svc_ut){
-			case "UAS":
-				sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
-						.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
-						.forEach(CompletableFuture::join);
-				break;
-			case "RAMP-IO":
-				sut.getRampAppRequestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
-						.thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(expectedResponseCode)))
-						.forEach(CompletableFuture::join);
-				break;
-			default:
-				System.out.println("Invalid service "+svc_ut);
+    public void allSynchronizedResponsesHaveCode(Integer expectedResponseCode) {
+        sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
+                .map(StatusLine::getStatusCode).forEach(statusCode -> Assert.assertThat(statusCode, Matchers.is(expectedResponseCode)));
+    }
 
-		}
-	}
+    public void allSynchronizedResponsesHaveCodePartially(Integer expectedResponseCode, Integer expected) {
+        int count = 0;
+        List<Integer> aa = sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
+                .map(StatusLine::getStatusCode).collect(Collectors.toList());
+        for (int status_code : aa) {
+            if (status_code == expectedResponseCode)
+                count++;
+        }
+        Assert.assertThat(count, Matchers.lessThanOrEqualTo(expected + 10));
 
-	public void allSynchronizedResponsesHaveCode(Integer expectedResponseCode) {
-		sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
-				.map(StatusLine::getStatusCode).forEach(statusCode->Assert.assertThat(statusCode, Matchers.is(expectedResponseCode)));
-	}
+    }
 
-	public void allSynchronizedResponsesHaveCodePartially(Integer expectedResponseCode,Integer expected) {
-		int count = 0;
-		List<Integer> aa =  sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
-				.map(StatusLine::getStatusCode).collect(Collectors.toList());
-		for(int status_code : aa){
-			if (status_code == expectedResponseCode)
-				count++;
-		}
-		Assert.assertThat(count, Matchers.lessThanOrEqualTo(expected + 10));
+    public void allResponsesFinished() {
+        sut.getUASRquestModule().responses().forEach(CompletableFuture::join);
+    }
 
-	}
-
-	public void allResponsesFinished() {
-		sut.getUASRquestModule().responses().forEach(CompletableFuture::join);
-	}
-
-	public BiConsumer<Integer, Throwable> assertThatResponseCodeIs(int expected) {
-		return (statuscode, failure) -> {
-			if (failure != null) {
-				Assert.fail("unable to get response");
-				return;
-			}
-			Assert.assertThat(statuscode, Matchers.is(expected));
-		};
-	}
+    public BiConsumer<Integer, Throwable> assertThatResponseCodeIs(int expected) {
+        return (statuscode, failure) -> {
+            if (failure != null) {
+                Assert.fail("unable to get response");
+                return;
+            }
+            Assert.assertThat(statuscode, Matchers.is(expected));
+        };
+    }
 }

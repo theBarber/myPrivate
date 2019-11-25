@@ -96,7 +96,7 @@ Feature: Dynamic HB bid price
     And all HB responses contains adId with id of entity named {campaign-dpm-direct-fixed-margin-BB-ES-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-dpm-direct-fixed-margin-BB-ES}
     And all HB responses contains cpm with value {1}
-    And for all HB responses i simulate winning, and send their zone tag
+    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
@@ -307,7 +307,7 @@ Feature: Dynamic HB bid price
 #    And all HB responses contains campaignId with id of entity named {campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a}
 #    And all HB responses contains adId with id of entity named {campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a-banner-1}
 #    And all HB responses contains cpm with value {0.6}
-#    And for all HB responses i simulate winning, and send their zone tag
+#    And I send impression requests to UAS
 #    And The response code is 200
 #    And The response contains {script}
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a-banner-1} 100% of the time
@@ -319,7 +319,7 @@ Feature: Dynamic HB bid price
 #    And all HB responses contains campaignId with id of entity named {campaign-HB-DP-ServerPr-PGC-6b}
 #    And all HB responses contains adId with id of entity named {campaign-HB-DP-ServerPr-PGC-6b-banner-1}
 #    And all HB responses contains cpm with value {0.2}
-#    And for all HB responses i simulate winning, and send their zone tag
+#    And I send impression requests to UAS
 #    And The response code is 200
 #    And The response contains {script}
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-DP-ServerPr-PGC-6b-banner-1} 100% of the time
