@@ -48,7 +48,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private ExecutorService requestSubmitter;
     private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_,%/=()]";
     protected static final Pattern impressionURLPattern = Pattern
-//            .compile("(https?:\\?/\\?/([^:/?#]*(?::[0-9]+)?)?\\/l\\?([^\\\"]*))");
             .compile("(https?:\\\\?/\\\\?/[^:/?#]*(?::[0-9]+)?\\/l\\?[^\'\\\"]*)[\'\\\"]");
 
     protected static final Pattern eventCompleteURLPattern = Pattern
@@ -66,7 +65,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private List<HttpResponse> synchronizedResponses;
 
     protected static final String getGroup1(Matcher from) {
-//        return from.group(1).substring(0, from.group(1).length() - 1);
         return from.group(1);
     }
 
