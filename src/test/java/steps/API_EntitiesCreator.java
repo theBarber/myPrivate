@@ -412,13 +412,21 @@ public class API_EntitiesCreator extends BaseTest {
     private void updateEndDateEntityDataByID(String entity, String idsStr) {
         String[] idsArr = idsStr.split(",");
         for (int i = 0; i < idsArr.length; i++) {
-            SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id", idsArr[i], "end_date", endDateVal);
-            SqlWorkflowUtils.setColumnInWorkflow(entity + 's', "id", idsArr[i], "start_date", startDateVal);
-
+            updateLineItemEndDate(entity, 365, idsArr[i]);
         }
 
     }
 
+    private void updateLineItemEndDate(String entity, Integer days, String id) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String currentDate = formatter.format(date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days);
+        String endDate = formatter.format(cal.getTime());
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`"+ entity +"s` SET `end_date` = '" + endDate + "', `start_date` = '" + currentDate + "' WHERE `id`=" + id + ";");
+    }
 
     private void updateCampaignEndDate(String campaign_name, Integer days) {
 
