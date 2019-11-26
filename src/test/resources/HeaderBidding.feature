@@ -15,16 +15,6 @@ Feature: Header Bidding flow support
     When Sending a healthcheck request to UAS
     Then The response code is 200
 
-  @HBFilterNoPoPrice
-  Scenario: send HB request mapped to two campaigns one with no po price and one with po price
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    And i send 10 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 2, with domain {hb-po-price-filter.com} and extra params {&unlimited=1&optimize=1}
-    Then The response code is 200
-    And The response contains {script}
-    And i print the responses
-    And all HB responses contains campaignId with id of entity named {campaign-HB-PO-Price}
-    And all HB responses contains adId with id of entity named {campaign-HB-PO-Price-banner-1}
-
   Scenario: send HB basic request
     Given I Delete hbl logs
     Given i send 20 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}

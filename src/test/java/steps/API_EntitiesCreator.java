@@ -33,8 +33,8 @@ public class API_EntitiesCreator extends BaseTest {
     final private String CREATIVES_SOURCE_FILE_PATH = "/input_files/creativesTemplates.json";
     final private String CAMPAIGN_PATTERN_SOURCE_FILE_PATH = "/input_files/Templates.json";
     private ObjectMapper mapper = new ObjectMapper();
-    public String endDateVal = "2020-03-03";
-    public String startDateVal = "2019-04-04";
+    public String endDateVal = "2020-11-03";
+    public String startDateVal = "2019-11-04";
 
     public API_EntitiesCreator() {
         super();
