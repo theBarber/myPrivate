@@ -366,6 +366,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         BasicClientCookie cookie = new BasicClientCookie(key, value);
         cookie.setDomain(domain);
         cookie.setPath("/");
+
         context.getCookieStore().addCookie(cookie);
     }
 

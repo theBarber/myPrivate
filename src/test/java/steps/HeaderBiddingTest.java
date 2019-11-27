@@ -11,6 +11,7 @@ import ramp.lift.uas.automation.UASRequestModule;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.isIn;
@@ -43,6 +44,7 @@ public class HeaderBiddingTest extends BaseTest {
 
         Given("i send (\\d+) headerBidding post request for scenario \\{(.*)\\} for publisher (\\d+) with domain \\{(.*)\\} with extra params \\{(.*)\\}", this::sendHeaderBiddingPostRequest);
         Given("i send (\\d+) headerBidding secure post request for scenario \\{(.*)\\} for publisher (\\d+) with domain \\{(.*)\\} with extra params \\{(.*)\\}", this::sendHeaderBiddingSecurePostRequest);
+//        Given("i send (\\d+) headerBidding secure post request and immediately impression for scenario \\\\{(.*)\\\\} for publisher (\\\\d+) with domain \\\\{(.*)\\\\} with extra params \\\\{(.*)\\\\}", this::sendHeaderBiddingSecurePostRequestAndImpression);
         And("all HB responses contains? (.*) with id (\\d+)", this::responsesContainEntityWithId);
         And("all HB responses contains (\\w+) with value \\{(.*)\\}", this::responsesContainEntityWithValue);
         And("all HB responses contains (campaignId|adId) with id of entity named? \\{(.*)\\}$", this::responsesContainEntityWithName);
@@ -293,6 +295,25 @@ public class HeaderBiddingTest extends BaseTest {
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, jsonNode.toString(), publisherID, domain, extraParams, true, true);
     }
 
+
+//    private void sendHeaderBiddingSecurePostRequestAndImpression(Integer times, String scenario, Integer publisherID, String domain, String extraParams) {
+//        if (headerBiddingPostRequests == null) {
+//            try {
+//                headerBiddingPostRequests = mapper.readTree(this.getClass().getResourceAsStream(HEADER_BIDDING_SOURCE_FILE_PATH));
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            //throw new AssumptionViolatedException("you must initialize the mapper, verify tag @headerBidding is in your feature file");
+//        }
+//        JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
+//        Assert.assertNotNull("There is no suitable scenario for scenario: " + scenario, jsonNode);
+//        for (; times > 0 ; times--) {
+//            sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1, jsonNode.toString(), publisherID, domain, extraParams, true, true);
+//            LongAdder impressionsSent = UASIntegrationTest.sendImpressionRequestsToUASImmediately();
+//            assertEquals("Number of impression urls sent", sut.getUASRquestModule().responses().count(),
+//                    impressionsSent.longValue(), 10d);
+//        }
+//    }
 
     public void sendHeaderBiddingPostRequest(Integer times, String scenario, Integer publisherID, String domain, String extraParams) {
         if (headerBiddingPostRequests == null) {
