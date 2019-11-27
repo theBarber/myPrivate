@@ -146,8 +146,8 @@
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
-<!--							<parallel>classes</parallel>-->
-<!--							<useUnlimitedThreads>true</useUnlimitedThreads>-->
+				<forkCount>10</forkCount>
+				<reuseForks>false</reuseForks>
                         </configuration>
                     </execution>
                 </executions>
