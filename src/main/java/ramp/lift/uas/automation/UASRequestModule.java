@@ -68,7 +68,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         return from.group(1)
                 .replace("\\", "")
                 .replace(" ", "%20")
-                .replace("|", "%7C");
+                .replace("|", "%7C")
+                .split("]")[0];
     }
 
     protected static final String getGroup2(Matcher from) {
