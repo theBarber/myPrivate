@@ -2,7 +2,7 @@
 @UtConsent
 @DynTagBothGdprParams
 @parallel
-Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
+Feature: GDPR - DynTag - Europe Delivery Logic - Both Params Are Specified
 
   @gdprgdprstr
   Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - dyntag request from eu

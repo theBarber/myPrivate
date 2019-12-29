@@ -2,7 +2,7 @@
 @UtConsent
 @DynTagSingleGdprParam
 @parallel
-Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specified In URL
+Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified In URL
 
   @gdpr
   @DynTagGdprTrueParamEu
