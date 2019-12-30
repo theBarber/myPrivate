@@ -73,7 +73,7 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   @DynTagGdprStrUtIdExcludedUtPurposeIdsIncludedNotEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - dyntag request not from eu
     Given I reset the http headers sent to uas
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and includes ut purpose ids
+    And I send 1 times Dynamic Tag ad request to UAS for gdpr publisher's entities with gdprstr which excludes ut vendor id and includes ut purpose ids
     Then I expect delivery
 
 
