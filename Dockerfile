@@ -13,4 +13,4 @@ ADD . /ramp-lift-automation
 WORKDIR /ramp-lift-automation
 
 
-RUN mvn clean install test -Dcucumber.options="--tags $TAGS_TO_RUN" -P remote,$ENVIRONMENT; exit 0
+RUN mvn clean install test -Dcucumber.options="--tags $TAGS_TO_RUN" -P $ENVIRONMENT; exit 0

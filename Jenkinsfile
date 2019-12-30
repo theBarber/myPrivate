@@ -6,15 +6,18 @@ pipeline {
                 script {
                     try {
                         sh '''#!/bin/bash
-                    if [ ${CREATE_ENTITIES} = 'true' ]; then
-                    docker build -t ${ENVIRONMENT}-entities-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=@preconditions --build-arg ENVIRONMENT=${ENVIRONMENT}
-                    docker create --name temporary-entities-container ${ENVIRONMENT}-entities-${BUILD_NUMBER}
-                    docker cp temporary-entities-container:/target/ ./entities/
-                    docker rm temporary-entities-container
-                    docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
-                    fi'''
+                        if [ ${CREATE_ENTITIES} = 'true' ]; then
+                        docker build -t ${ENVIRONMENT}-entities-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=@preconditions --build-arg ENVIRONMENT=${ENVIRONMENT}
+                        docker create --name temporary-entities-container ${ENVIRONMENT}-entities-${BUILD_NUMBER}
+                        docker cp temporary-entities-container:/target/ ./entities/
+                        fi'''
                     } catch (exc) {
                         throw new Exception("Error creating entities!")
+                    }finally{
+                        sh '''#!/bin/bash
+                        docker rm temporary-entities-container
+                        docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
+                        '''
                     }
                 }
             }
