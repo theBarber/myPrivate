@@ -2,8 +2,10 @@ pipeline {
     agent any
     stages {
         stage('Get credentials'){
-            dir('perion-automation') {
-                git url: 'https://github.com/PerionNet/perion-automation.git'
+            steps{
+                dir('perion-automation') {
+                    git url: 'https://github.com/PerionNet/perion-automation.git'
+                }
             }
         }
         stage('Create Entities') {
