@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Create Entities') {
             steps {
+                try{
                 sh '''#!/bin/bash
                     if [ ${CREATE_ENTITIES} = 'true' ]; then
                     docker build -t ${ENVIRONMENT}-entities-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=@preconditions --build-arg ENVIRONMENT=${ENVIRONMENT}
@@ -11,6 +12,9 @@ pipeline {
                     docker rm temporary-entities-container
                     docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
                     fi'''
+                }catch (exc) {
+                    throw new Exception("Error creating entities!")
+                }
             }
         }
         stage('Test') {
