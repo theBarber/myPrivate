@@ -1,10 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Get credentials'){
-            steps{
+        stage('Get credentials') {
+            steps {
                 dir('perion-automation') {
-                    git url: 'https://github.com/PerionNet/perion-automation.git'
+                    git(
+                        credentialsId: 'ut-israel-devops',
+                        url: 'https://github.com/PerionNet/perion-automation.git'
+                    )
                 }
             }
         }
@@ -20,7 +23,7 @@ pipeline {
                         fi'''
                     } catch (exc) {
                         throw new Exception("Error creating entities!")
-                    }finally{
+                    } finally {
                         sh '''#!/bin/bash
                         docker rm temporary-entities-container-${BUILD_NUMBER}
                         docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
