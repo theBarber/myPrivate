@@ -6,7 +6,7 @@ pipeline {
                 sh '''#!/bin/bash
                     if [ ${CREATE_ENTITIES} = 'true' ]; then
                     docker build -t ${ENVIRONMENT}-entities-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=@preconditions --build-arg ENVIRONMENT=${ENVIRONMENT}
-                    create --name temporary-entities-container ${ENVIRONMENT}-entities-${BUILD_NUMBER}
+                    docker create --name temporary-entities-container ${ENVIRONMENT}-entities-${BUILD_NUMBER}
                     docker cp temporary-entities-container:/target/ ./entities/
                     docker rm temporary-entities-container
                     docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
