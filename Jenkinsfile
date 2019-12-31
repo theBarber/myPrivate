@@ -18,16 +18,13 @@ pipeline {
                         sh '''#!/bin/bash
                         if [ ${CREATE_ENTITIES} = 'true' ]; then
                         docker build -t ${ENVIRONMENT}-entities-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=@preconditions --build-arg ENVIRONMENT=${ENVIRONMENT}
-                        docker create --name temporary-entities-container ${ENVIRONMENT}-entities-${BUILD_NUMBER}
-                        docker cp temporary-entities-container:/target/ ./entities/
+                        docker create --name temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER} ${ENVIRONMENT}-entities-${BUILD_NUMBER}
+                        docker cp temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER}:/target/ ./entities/
+                        docker rm temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER}
+                        docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
                         fi'''
                     } catch (exc) {
                         throw new Exception("Error creating entities!")
-                    } finally {
-                        sh '''#!/bin/bash
-                        docker rm temporary-entities-container-${BUILD_NUMBER}
-                        docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
-                        '''
                     }
                 }
             }
