@@ -35,13 +35,13 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'docker build -t ${ENVIRONMENT}-suite-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=${TAGS_TO_RUN} --build-arg SUITE_NAME=${SUITE_NAME} --build-arg ENVIRONMENT=${ENVIRONMENT}'
-                sh 'docker create --name temporary-container-${BUILD_NUMBER} ${ENVIRONMENT}-suite-${BUILD_NUMBER}'
-                sh 'docker cp temporary-container-${BUILD_NUMBER}:/target/ ./target/'
+                sh 'docker create --name temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER} ${ENVIRONMENT}-suite-${BUILD_NUMBER}'
+                sh 'docker cp temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER}:/target/ ./target/'
                 sh '''#!/bin/bash
                     if [ ${CREATE_ENTITIES} = 'true' ]; then
                     rsync -a ./entities/ ./target/
                     fi'''
-                sh 'docker rm temporary-container-${BUILD_NUMBER}'
+                sh 'docker rm temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER}'
                 sh 'docker rmi ${ENVIRONMENT}-suite-${BUILD_NUMBER}'
             }
         }
