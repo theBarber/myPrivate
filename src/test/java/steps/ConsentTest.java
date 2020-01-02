@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import util.TestsRoutines;
 import util.api.UasApi;
 import util.consent.CcpaCharacter;
-import util.consent.CcpaString;
 import util.consent.GdprConsentStringBuilder;
 import util.consent.UtCcpaGenerator;
 
@@ -173,7 +172,7 @@ public class ConsentTest extends BaseTest {
     }
 
     private String utCcpaStr(Character optoutChr) {
-        final CcpaCharacter optoutCcpaChr = CcpaCharacter.chrToCcpaCharacter(optoutChr);
+        final CcpaCharacter optoutCcpaChr = CcpaCharacter.parse(optoutChr);
         return UtCcpaGenerator.getInstance().getUtDefaultUsPrivacyString(optoutCcpaChr);
     }
 }

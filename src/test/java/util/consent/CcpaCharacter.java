@@ -16,12 +16,12 @@ public enum CcpaCharacter {
     }
 
     static final Map<Character, CcpaCharacter> CHR_TO_CCPA_CHR_MAP = ImmutableMap.of(
-            Y.getchr(), Y,
-            N.getchr(), N,
-            MINUS.getchr(), MINUS
+            Y.getchr(), CcpaCharacter.Y,
+            N.getchr(), CcpaCharacter.N,
+            MINUS.getchr(), CcpaCharacter.MINUS
     );
 
-    public static CcpaCharacter chrToCcpaCharacter(Character chr) {
+    public static CcpaCharacter parse(Character chr) {
         return CHR_TO_CCPA_CHR_MAP.get(chr);
     }
 
