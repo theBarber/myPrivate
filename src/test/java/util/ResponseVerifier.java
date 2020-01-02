@@ -67,7 +67,7 @@ public class ResponseVerifier {
         }
     }
 
-    public void verifyGdprPassback() {
+    public void verifyConsentPassback() {
         if (!sut.getUASRquestModule().isSynchronizedResponsesEmpty()) {
             verifyUasResponseCode(204);
             verifyNoHeaders("Set-Cookie");
@@ -133,8 +133,8 @@ public class ResponseVerifier {
             case PASSBACK:
                 verifyPassback();
                 break;
-            case GDPR_PASSBACK:
-                verifyGdprPassback();
+            case CONSENT_PASSBACK:
+                verifyConsentPassback();
                 break;
             default:
                 throw new IllegalArgumentException(UNSUPPORTED_RESPONSE_PREFIX + responseType);

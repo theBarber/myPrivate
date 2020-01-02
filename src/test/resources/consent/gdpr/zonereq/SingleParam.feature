@@ -9,71 +9,71 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @GdprTrueParamEu
   Scenario: gdpr=1 - zone request from Eu
     Given I add {UK} ip header
-    And I send 1 times an ad request for gdpr entities to UAS with gdpr=1
-    Then I expect req gdpr passback
+    And I send 1 times an ad request for consent entities to UAS with gdpr=1
+    Then I expect req consent passback
 
   @gdpr
   @GdprTrueParamNotEu
   Scenario: gdpr=1 - zone request not from Eu
     Given I reset the http headers sent to uas
-    And I send 1 times an ad request for gdpr entities to UAS with gdpr=1
-    Then I expect req gdpr passback
+    And I send 1 times an ad request for consent entities to UAS with gdpr=1
+    Then I expect req consent passback
 
   @gdpr
   @GdprFalseParamEu
   Scenario: gdpr=0 - zone request from Eu
     Given I add {UK} ip header
-    And I send 1 times an ad request for gdpr entities to UAS with gdpr=0
+    And I send 1 times an ad request for consent entities to UAS with gdpr=0
     Then I expect delivery
 
   @gdpr
   @GdprFalseParamNotEu
   Scenario: gdpr=0 - zone request not from Eu
     Given I reset the http headers sent to uas
-    And I send 1 times an ad request for gdpr entities to UAS with gdpr=0
+    And I send 1 times an ad request for consent entities to UAS with gdpr=0
     Then I expect delivery
 
   @gdprstr
   @ZoneReqGdprStrUtIdUtPurposesIncludedEu
   Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - zone request from eu
     Given I add {UK} ip header
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which includes ut vendor id and includes ut purpose ids
+    And I send 1 times an ad request for consent entities to UAS with gdprstr which includes ut vendor id and includes ut purpose ids
     Then I expect delivery
 
   @gdprstr
   @ZoneReqGdprStrUtIdUtPurposesIncludedNotEu
   Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - zone request not from eu
     Given I reset the http headers sent to uas
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which includes ut vendor id and includes ut purpose ids
+    And I send 1 times an ad request for consent entities to UAS with gdprstr which includes ut vendor id and includes ut purpose ids
     Then I expect delivery
 
   @gdprstr
   @ZoneReqGdprStrUtIdIncludedUtPurposeIdsExcludedEu
   Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - zone request from eu
     Given I add {UK} ip header
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which includes ut vendor id and excludes ut purpose ids
-    Then I expect req gdpr passback
+    And I send 1 times an ad request for consent entities to UAS with gdprstr which includes ut vendor id and excludes ut purpose ids
+    Then I expect req consent passback
 
   @gdprstr
   @ZoneReqGdprStrUtIdIncludedUtPurposeIdsExcludedNotEu
   Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - zone request not from eu
     Given I reset the http headers sent to uas
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which includes ut vendor id and excludes ut purpose ids
+    And I send 1 times an ad request for consent entities to UAS with gdprstr which includes ut vendor id and excludes ut purpose ids
     Then I expect delivery
 
   @gdprstr
   @ZoneReqGdprStrUtIdExcludedUtPurposeIdsIncludedEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - zone request from eu
     Given I add {UK} ip header
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and includes ut purpose ids
-    Then I expect req gdpr passback
+    And I send 1 times an ad request for consent entities to UAS with gdprstr which excludes ut vendor id and includes ut purpose ids
+    Then I expect req consent passback
 
 
   @gdprstr
   @ZoneReqGdprStrUtIdExcludedUtPurposeIdsIncludedNotEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - zone request not from eu
     Given I reset the http headers sent to uas
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and includes ut purpose ids
+    And I send 1 times an ad request for consent entities to UAS with gdprstr which excludes ut vendor id and includes ut purpose ids
     Then I expect delivery
 
 
@@ -81,26 +81,26 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
   @ZoneReqGdprStrUtIdExcludedUtPurposeIdsExcludedEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - zone request from eu
     Given I add {UK} ip header
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and excludes ut purpose ids
-    Then I expect req gdpr passback
+    And I send 1 times an ad request for consent entities to UAS with gdprstr which excludes ut vendor id and excludes ut purpose ids
+    Then I expect req consent passback
 
   @gdprstr
   @ZoneReqGdprStrUtIdExcludedUtPurposeIdsExcludedNotEu
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - zone request not from eu
     Given I reset the http headers sent to uas
-    And I send 1 times an ad request for gdpr entities to UAS with gdprstr which excludes ut vendor id and excludes ut purpose ids
+    And I send 1 times an ad request for consent entities to UAS with gdprstr which excludes ut vendor id and excludes ut purpose ids
     Then I expect delivery
 
   @gdprstr
   @ZoneReqGdprStrEmptyStringEu
   Scenario: gdprstr=empty_string - zone request from eu
     Given I add {UK} ip header
-    And I send 1 times an ad request for gdpr entities to UAS with an empty gdprstr
-    Then I expect req gdpr passback
+    And I send 1 times an ad request for consent entities to UAS with an empty gdprstr
+    Then I expect req consent passback
 
   @gdprstr
   @ZoneReqGdprStrEmptyStringNotEu
   Scenario: gdprstr=empty_string - zone request not from eu
     Given I reset the http headers sent to uas
-    And I send 1 times an ad request for gdpr entities to UAS with an empty gdprstr
+    And I send 1 times an ad request for consent entities to UAS with an empty gdprstr
     Then I expect delivery
