@@ -23,7 +23,9 @@ import util.consent.UtCcpaGenerator;
                 "classpath:consent/gdpr/dyntag/Params.feature",
                 "classpath:consent/gdpr/hb/NoParam.feature",
                 "classpath:consent/gdpr/hb/SingleParam.feature",
-                "classpath:consent/gdpr/hb/Params.feature"
+                "classpath:consent/gdpr/hb/Params.feature",
+                "classpath:consent/ccpa/zonereq/NoParam.feature",
+                "classpath:consent/ccpa/zonereq/SingleParam.feature"
         },
         plugin = {"pretty",})
 public class ConsentTest extends BaseTest {
