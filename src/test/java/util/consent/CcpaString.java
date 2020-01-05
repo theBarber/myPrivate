@@ -15,8 +15,8 @@ public class CcpaString {
 
     public String getUsPrivacyString() {
         return String.valueOf(version)
-                .concat(String.valueOf(explicitNotice))
-                .concat(String.valueOf(optOut))
-                .concat(String.valueOf(lspact));
+                .concat(String.valueOf(explicitNotice.getchr()))
+                .concat(String.valueOf(optOut.getchr()))
+                .concat(String.valueOf(lspact.getchr()));
     }
 }
