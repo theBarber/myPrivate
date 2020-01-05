@@ -72,7 +72,7 @@ public class ResponseVerifier {
                 .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(204)))
                 .forEach(CompletableFuture::join);
 
-        verifyNoHeaders("Set-Cookie");
+        //verifyNoHeaders("Set-Cookie");
     }
 
     public void verifyImpressions() {
