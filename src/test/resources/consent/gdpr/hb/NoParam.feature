@@ -10,7 +10,8 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - No Param Is Specif
   Scenario: hb req - no params are specified - request from Eu
     Given I add {UK} ip header
     And I send 1 times Header Bidding request for consent entities
-    Then I expect hbl consent passback
+#    Then I expect hbl consent passback
+    Then The synchronized response code is 204
 
   @hbNoGdprParamNotEu
   Scenario: hb req - no params are specified - request not from Eu
