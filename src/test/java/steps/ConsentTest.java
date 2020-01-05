@@ -56,7 +56,7 @@ public class ConsentTest extends BaseTest {
 
         /* zone reqs */
         Given("I send (\\d+) times an ad request for consent entities to UAS", this::sendConsentZoneReq);
-        Given("^I send (\\d+) times an ad request for consent entities to UAS with us privacy string containing opt-out=(Y|N|-)$", (Integer times, Character optOutChr) -> {
+        Given("^I send (\\d+) times an ad request for consent entities to UAS with us privacy string containing opt-out=(Y|N|NOT_APPLICABLE)$", (Integer times, CcpaCharacter optOutChr) -> {
             sendParameteredConsentZoneReq(times, "ccpa=" + utCcpaStr(optOutChr));
         });
         Given("^I send (\\d+) times an ad request for consent entities to UAS with gdpr=(0|1)$", (Integer times, Integer gdpr) -> {
@@ -171,8 +171,7 @@ public class ConsentTest extends BaseTest {
         return new GdprConsentStringBuilder(isUtVendorIdIncluded, isUtPurposeIdsIncluded).build();
     }
 
-    private String utCcpaStr(Character optoutChr) {
-        final CcpaCharacter optoutCcpaChr = CcpaCharacter.parse(optoutChr);
-        return UtCcpaGenerator.getInstance().getUtDefaultUsPrivacyString(optoutCcpaChr);
+    private String utCcpaStr(CcpaCharacter optoutChr) {
+        return UtCcpaGenerator.getInstance().getUtDefaultUsPrivacyString(optoutChr);
     }
 }
