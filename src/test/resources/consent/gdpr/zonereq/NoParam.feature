@@ -10,7 +10,6 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - No Param Is Specified In URL
   Scenario: zone req - no params are specified - request from Eu
     Given I add {UK} ip header
     And I send 1 times an ad request for consent entities to UAS
-#    Then I expect req consent passback
     Then The synchronized response code is 204
 
   @ZoneReqNoGdprParamNotEu

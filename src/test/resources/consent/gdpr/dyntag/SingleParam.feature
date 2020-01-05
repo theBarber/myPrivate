@@ -9,7 +9,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   Scenario: gdpr=1 - dyntag request from Eu
     Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=1
-#    Then I expect req consent passback
     Then The synchronized response code is 204
 
   @gdpr
@@ -17,7 +16,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   Scenario: gdpr=1 - dyntag request not from Eu
     Given I reset the http headers sent to uas
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=1
-#    Then I expect req consent passback
     Then The synchronized response code is 204
 
 #  @gdpr
@@ -54,7 +52,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - dyntag request from eu
     Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which includes ut vendor id and excludes ut purpose ids
-#    Then I expect req consent passback
     Then The synchronized response code is 204
 
   @gdprstr
@@ -69,7 +66,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - dyntag request from eu
     Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which excludes ut vendor id and includes ut purpose ids
-#    Then I expect req consent passback
     Then The synchronized response code is 204
 
 
@@ -86,7 +82,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - dyntag request from eu
     Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which excludes ut vendor id and excludes ut purpose ids
-#    Then I expect req consent passback
     Then The synchronized response code is 204
 
   @gdprstr
@@ -101,7 +96,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   Scenario: gdprstr=empty_string - dyntag request from eu
     Given I add {UK} ip header
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with an empty gdprstr
-#    Then I expect req consent passback
     Then The synchronized response code is 204
 
   @gdprstr
