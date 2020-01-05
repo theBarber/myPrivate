@@ -70,11 +70,11 @@ public class ConsentTest extends BaseTest {
             UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=", ZONE_ID, true);
         });
         Given("^I send (\\d+) times an ad request for consent entities to UAS with gdpr=(0|1) and with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
-            final String params = "consent=" + gdpr + "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            final String params = "gdpr=" + gdpr + "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             sendParameteredConsentZoneReq(times, params);
         });
         Given("^I send (\\d+) times an ad request for consent entities to UAS with gdpr=(0|1) and with an empty gdprstr$", (Integer times, Integer gdpr) -> {
-            final String params = "consent=" + gdpr + "&gdprstr=";
+            final String params = "gdpr=" + gdpr + "&gdprstr=";
             sendParameteredConsentZoneReq(times, params);
         });
 
@@ -90,15 +90,15 @@ public class ConsentTest extends BaseTest {
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams("gdprstr="));
         });
         Given("^I send (\\d+) times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=(0|1) and with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
-            final String params = "consent=" + gdpr + "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            final String params = "gdpr=" + gdpr + "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(params));
         });
         Given("^I send (\\d+) times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=(0|1) and with an empty gdprstr$", (Integer times, Integer gdpr) -> {
-            final String params = "consent=" + gdpr + "&gdprstr=";
+            final String params = "gdpr=" + gdpr + "&gdprstr=";
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(params));
         });
         Given("^I send (\\d+) times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=(0|1)$", (Integer times, Integer gdpr) -> {
-           final String gdprParam = "consent=" + gdpr;
+           final String gdprParam = "gdpr=" + gdpr;
            UasApi.sendDynamicTagRequestsToUAS(times, PUBLISHER_ID.toString(), getExtendedPubParams(gdprParam));
         });
 
@@ -107,7 +107,7 @@ public class ConsentTest extends BaseTest {
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, HB_EXTRA_URL_PARAMS, true, false);
         });
         Given("^I send (\\d+) times Header Bidding request for consent entities with gdpr=(0|1)$", (Integer times, Integer gdpr) -> {
-            final String hbGdprParams = HB_EXTRA_URL_PARAMS + "&consent=" + gdpr;
+            final String hbGdprParams = HB_EXTRA_URL_PARAMS + "&gdpr=" + gdpr;
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprParams, true, false);
         });
         Given("I send (\\d+) times Header Bidding request for consent entities with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids", (Integer times, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
@@ -121,11 +121,11 @@ public class ConsentTest extends BaseTest {
         });
         Given("^I send (\\d+) times Header Bidding request for consent entities with gdpr=(0|1) and gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
             final String gdprstr = utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
-            final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&consent=" + gdpr + "&gdprstr=" + gdprstr;
+            final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&gdpr=" + gdpr + "&gdprstr=" + gdprstr;
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprGdprstrParams, true, false);
         });
         Given("^I send (\\d+) times Header Bidding request for consent entities with gdpr=(0|1) and an empty gdprstr$", (Integer times, Integer gdpr) -> {
-            final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&consent=" + gdpr + "&gdprstr=";
+            final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&gdpr=" + gdpr + "&gdprstr=";
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprGdprstrParams, true, false);
         });
 

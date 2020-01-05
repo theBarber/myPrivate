@@ -71,7 +71,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param 
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request from eu
     Given I add {UK} ip header
     And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and includes ut purpose ids
-    Then I expect hbl gdpr passback
+    Then I expect hbl consent passback
 
 
   @gdprstr
@@ -87,7 +87,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param 
   Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request from eu
     Given I add {UK} ip header
     And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and excludes ut purpose ids
-    Then I expect hbl gdpr passback
+    Then I expect hbl consent passback
 
   @gdprstr
   @hbGdprStrUtIdExcludedUtPurposeIdsExcludedNotEu
