@@ -24,7 +24,9 @@ import util.consent.UtCcpaGenerator;
                 "classpath:consent/gdpr/hb/SingleParam.feature",
                 "classpath:consent/gdpr/hb/Params.feature",
                 "classpath:consent/ccpa/zonereq/NoParam.feature",
-                "classpath:consent/ccpa/zonereq/SingleParam.feature"
+                "classpath:consent/ccpa/zonereq/SingleParam.feature",
+                "classpath:consent/ccpa/hb/NoParam.feature",
+                "classpath:consent/ccpa/hb/SingleParam.feature"
         },
         plugin = {"pretty",})
 public class ConsentTest extends BaseTest {
