@@ -68,10 +68,11 @@ public class ResponseVerifier {
     }
 
     public void verifyConsentPassback() {
-        if (!sut.getUASRquestModule().isSynchronizedResponsesEmpty()) {
-            verifyUasResponseCode(204);
-            verifyNoHeaders("Set-Cookie");
-        }
+        sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+                .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(204)))
+                .forEach(CompletableFuture::join);
+
+        verifyNoHeaders("Set-Cookie");
     }
 
     public void verifyImpressions() {
@@ -112,7 +113,7 @@ public class ResponseVerifier {
     public BiConsumer<Integer, Throwable> assertThatResponseCodeIs(int expected) {
         return (statuscode, failure) -> {
             if (failure != null) {
-                Assert.fail("unable to get response");
+                Assert.fail("unable to get response, failure=: " + failure.toString());
                 return;
             }
             Assert.assertThat(statuscode, Matchers.is(expected));
