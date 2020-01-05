@@ -6,11 +6,15 @@
 @parallel
 Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - No Param Is Specified In URL
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
   @hbNoGdprParamEu
   Scenario: hb req - no params are specified - request from Eu
     Given I add {UK} ip header
     And I send 1 times Header Bidding request for consent entities
-    Then The synchronized response code is 204
+    Then The response code is 204
 
   @hbNoGdprParamNotEu
   Scenario: hb req - no params are specified - request not from Eu
