@@ -2,8 +2,8 @@
 @uas
 @RampAppCreateCampaign
 @scheduled
-@parallel
 @noAA
+#@parallel
 
 
 Feature: UAS E2E Ad request flow - with new entities
