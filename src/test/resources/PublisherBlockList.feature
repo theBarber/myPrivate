@@ -27,7 +27,6 @@ Feature: Publisher blacklist tests
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND2-PGX-banner-1} 100% of the time
 
-
   Scenario: For a publisher 3843 block advertiser 3112 by categories - zone tag request
     Given I send 1 times an ad request with parameter {unlimited=1&domain=kids.com} for zone named {zone-zoneset-campaign-pbl-BRAND2-PGX} to UAS
     Then The response code is 200
