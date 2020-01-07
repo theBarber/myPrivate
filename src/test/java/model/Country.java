@@ -5,10 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Mainly used in gdpr\eu\country-based tests.
+ * Mainly used in consent\eu\country-based tests.
  */
 public enum Country {
-    UK("193.117.138.126");
+    UK("193.117.138.126"),
+    CA("174.66.137.222");
 
     private final Set<String> ips;
 

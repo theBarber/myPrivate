@@ -1,4 +1,4 @@
-package util.gdpr;
+package util.consent;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.iab.gdpr.consent.VendorConsent;
@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ConsentStringBuilder {
+public class GdprConsentStringBuilder {
 
     private final Boolean isUtVendorIdIncluded;
     private final Boolean isUtPurposeIdsIncluded;
@@ -20,7 +20,7 @@ public class ConsentStringBuilder {
     private final int vendorListVersion = 165;
     private final int maxVendorId = 677;
 
-    public ConsentStringBuilder(Boolean isUtVendorIdIncluded, Boolean isUtPurposeIdsIncluded) {
+    public GdprConsentStringBuilder(Boolean isUtVendorIdIncluded, Boolean isUtPurposeIdsIncluded) {
         this.isUtVendorIdIncluded = isUtVendorIdIncluded;
         this.isUtPurposeIdsIncluded = isUtPurposeIdsIncluded;
     }
