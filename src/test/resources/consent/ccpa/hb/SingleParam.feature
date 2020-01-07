@@ -39,8 +39,7 @@ Feature: CCPA - Header Bidding Reqs - California Delivery Logic - Us Privacy Str
     Given I add {CA} ip header
     And I send 1 times Header Bidding request for consent entities with us privacy string containing opt-out=N
     Then The response code is 200
-    And all HB responses contains bidRequestId with value {"21b46f0d859b35"}
-    And all HB responses contains publisherId with value {3836}
+    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
 
   @ccpa
   @ccpaUtValid
@@ -51,8 +50,7 @@ Feature: CCPA - Header Bidding Reqs - California Delivery Logic - Us Privacy Str
     Given I reset the http headers sent to uas
     And I send 1 times Header Bidding request for consent entities with us privacy string containing opt-out=N
     Then The response code is 200
-    And all HB responses contains bidRequestId with value {"21b46f0d859b35"}
-    And all HB responses contains publisherId with value {3836}
+    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
 
   @ccpa
   @ccpaUtInvalid
@@ -62,8 +60,7 @@ Feature: CCPA - Header Bidding Reqs - California Delivery Logic - Us Privacy Str
     Given I add {CA} ip header
     And I send 1 times Header Bidding request for consent entities with us privacy string containing opt-out=NOT_APPLICABLE
     Then The response code is 200
-    And all HB responses contains bidRequestId with value {"21b46f0d859b35"}
-    And all HB responses contains publisherId with value {3836}
+    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
 
   @ccpa
   @ccpaUtInvalid
@@ -73,5 +70,4 @@ Feature: CCPA - Header Bidding Reqs - California Delivery Logic - Us Privacy Str
     Given I reset the http headers sent to uas
     And I send 1 times Header Bidding request for consent entities with us privacy string containing opt-out=NOT_APPLICABLE
     Then The response code is 200
-    And all HB responses contains bidRequestId with value {"21b46f0d859b35"}
-    And all HB responses contains publisherId with value {3836}
+    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}

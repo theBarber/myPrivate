@@ -20,5 +20,5 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - No Param Is Specif
   Scenario: hb req - no params are specified - request not from Eu
     Given I reset the http headers sent to uas
     And I send 1 times Header Bidding request for consent entities
-    Then all HB responses contains bidRequestId with value {"21b46f0d859b35"}
-    And all HB responses contains publisherId with value {3836}
+    Then The response code is 200
+    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
