@@ -59,7 +59,7 @@ Feature: CCPA - Zone Reqs - California Delivery Logic - Us Privacy String Param 
   Scenario: Ccpa Opt-Out={-} - zone request from Ca
     Given I add {CA} ip header
     And I send 1 times an ad request for consent entities to UAS with us privacy string containing opt-out=NOT_APPLICABLE
-    Then The response code is 204
+    Then I expect delivery
 
 
   @ccpa
