@@ -14,7 +14,9 @@ Feature: CCPA - Header Bidding Reqs - California Delivery Logic - No Param Is Sp
   Scenario: HB req - no params are specified - from Ca
     Given I add {CA} ip header
     And I send 1 times Header Bidding request for consent entities
-    Then The response code is 204
+    Then The response code is 200
+    And all HB responses contains bidRequestId with value {"21b46f0d859b35"}
+    And all HB responses contains publisherId with value {3836}
 
   @hbNoCcpaParamNotCa
   Scenario: HB req - no params are specified - not from Ca
