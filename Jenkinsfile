@@ -48,7 +48,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'docker build -t ${ENVIRONMENT}-suite-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=${TAGS_TO_RUN} --build-arg SUITE_NAME=${SUITE_NAME} --build-arg ENVIRONMENT=${ENVIRONMENT}'
+                        sh 'docker build -m 2g -t ${ENVIRONMENT}-suite-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=${TAGS_TO_RUN} --build-arg SUITE_NAME=${SUITE_NAME} --build-arg ENVIRONMENT=${ENVIRONMENT}'
                         sh 'docker create --name temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER} ${ENVIRONMENT}-suite-${BUILD_NUMBER}'
                         sh 'docker cp temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER}:/ramp-lift-automation/target/ ./target/'
                         sh '''#!/bin/bash
