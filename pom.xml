@@ -126,7 +126,7 @@
                         </goals>
                         <configuration>
                             <argLine>${argLine} -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                                -Xmx1024m -XX:MaxPermSize=256m
+                                -Xmx2048m -XX:MaxPermSize=256m
                             </argLine>
                             <properties>
                                 <property>
