@@ -126,7 +126,7 @@
                         </goals>
                         <configuration>
                             <argLine>${argLine} -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                                -Xmx2048m -XX:MaxPermSize=256m
+                                -Xmx1024m -XX:MaxPermSize=256m
                             </argLine>
                             <properties>
                                 <property>
@@ -145,7 +145,7 @@
                             <includes>
                                 <include>**/*Test.class</include>
                             </includes>
-                            <forkCount>10</forkCount>
+                            <forkCount>5</forkCount>
                             <reuseForks>true</reuseForks>
                             <useSystemClassLoader>false</useSystemClassLoader>
                         </configuration>
