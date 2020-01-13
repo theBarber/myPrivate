@@ -22,4 +22,4 @@ Feature: Brand reveal support new size 300X600
     And I send 1 times an ad request with parameter {unlimited=1&requestid=OX_BrandReveal} for zone named {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} to UAS
     Then The response code is 200
     And The response contains {script}
-    And The responses has impression-urls
+    And The responses has impression-urls`
