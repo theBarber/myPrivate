@@ -67,11 +67,12 @@ public class ResponseVerifier {
         }
     }
 
-    public void verifyGdprPassback() {
-        if (!sut.getUASRquestModule().isSynchronizedResponsesEmpty()) {
-            verifyUasResponseCode(204);
-            verifyNoHeaders("Set-Cookie");
-        }
+    public void verifyConsentPassback() {
+        sut.getUASRquestModule().responses().map(f -> f.thenApply(HttpResponse::getStatusLine)
+                .thenApply(StatusLine::getStatusCode).whenComplete(assertThatResponseCodeIs(204)))
+                .forEach(CompletableFuture::join);
+
+        //verifyNoHeaders("Set-Cookie");
     }
 
     public void verifyImpressions() {
@@ -112,7 +113,7 @@ public class ResponseVerifier {
     public BiConsumer<Integer, Throwable> assertThatResponseCodeIs(int expected) {
         return (statuscode, failure) -> {
             if (failure != null) {
-                Assert.fail("unable to get response");
+                Assert.fail("unable to get response, failure=: " + failure.toString());
                 return;
             }
             Assert.assertThat(statuscode, Matchers.is(expected));
@@ -133,8 +134,8 @@ public class ResponseVerifier {
             case PASSBACK:
                 verifyPassback();
                 break;
-            case GDPR_PASSBACK:
-                verifyGdprPassback();
+            case CONSENT_PASSBACK:
+                verifyConsentPassback();
                 break;
             default:
                 throw new IllegalArgumentException(UNSUPPORTED_RESPONSE_PREFIX + responseType);
