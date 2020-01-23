@@ -2,7 +2,6 @@ package model;
 
 import com.google.common.collect.ImmutableMap;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public enum ResponseType {
@@ -10,7 +9,7 @@ public enum ResponseType {
     CLICKS("clicks"),
     DELIVERY("delivery"),
     PASSBACK("passback"),
-    GDPR_PASSBACK("gdpr passback");
+    CONSENT_PASSBACK("consent passback");
 
     final String text;
 
@@ -19,7 +18,7 @@ public enum ResponseType {
             CLICKS.getText(), CLICKS,
             DELIVERY.getText(), DELIVERY,
             PASSBACK.getText(), PASSBACK,
-            GDPR_PASSBACK.getText(), GDPR_PASSBACK
+            CONSENT_PASSBACK.getText(), CONSENT_PASSBACK
     );
 
     ResponseType(String text) {
