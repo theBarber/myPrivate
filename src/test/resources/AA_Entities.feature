@@ -7,7 +7,7 @@ Feature: Entities for tests
 
   Scenario: entities end-date update
     And i update po_line_item end date by id {4584,67001,67002,69725,69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,69992,67163,67162,67166,69089,69134,66832,69158,69213}
-    And i update io_line_item end date by id {243710,251644,253288,253747,245653,210722,241783,223539,240827,198082,197418,224812,222908,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
+    And i update io_line_item end date by id {243710,251644,253288,253747,245653,210722,241783,223539,240827,198082,197418,224812,222908,234810,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
@@ -821,7 +821,7 @@ Feature: Entities for tests
       | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name    | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-CT-ST-1 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-1} | []                   | 93       | 15182          | 3708         | 65991           | []             | []             |
       | campaign-CT-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-2} | []                   | 93       | 15182          | 3708         | 65991           | []             | []             |
-      | campaign-WL-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-2} | [[[32,"==",201211]]] | 93       | 15183          | 3708         | 65991           | []             | []             |
+      | campaign-WL-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-2} | [[[32,">=",201211]]] | 93       | 15183          | 3708         | 65991           | []             | []             |
       | campaign-WL-ST-3 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-3} | []                   | 93       | 15183          | 3708         | 65991           | []             | []             |
     And i update banner data by name
       | Banner Name               | limitation                                |
@@ -1142,14 +1142,17 @@ Feature: Entities for tests
       | Campaign Name           |
       | campaign-pbl-BRAND1-ST  |
       | campaign-pbl-BRAND2-PGX |
+      | campaign-pbl-BRAND3-PGX |
     Given i create new campaigns, new zoneset with domains
       | Campaign Name           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-pbl-BRAND1-ST  | 574531 | 251644   | false                 | 26778         | {zone-zoneset-campaign-pbl-BRAND1-ST}  | []         | 93       | 15376          | 3843         | 69625           | []          | []          |
       | campaign-pbl-BRAND2-PGX | 75396  | 222908   | false                 | 11958         | {zone-zoneset-campaign-pbl-BRAND2-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
+      | campaign-pbl-BRAND3-PGX | 372125 | 234550   | false                 | 11958         | {zone-zoneset-campaign-pbl-BRAND3-PGX} | []         | 92       | 15376          | 3843         | 69608           | []          | []          |
     And i update zone data by name
       | Zone Name                            | is_secure |
       | zone-zoneset-campaign-pbl-BRAND1-ST  | 1         |
       | zone-zoneset-campaign-pbl-BRAND2-PGX | 1         |
+      | zone-zoneset-campaign-pbl-BRAND3-PGX | 1         |
 
   @HB
   @yaniv
