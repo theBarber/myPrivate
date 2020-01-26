@@ -404,14 +404,14 @@ Feature: Header Bidding flow support
     Then The synchronized response code is 204 10 of the times
 
   @throttling
-    #   header bidding placment group test - throttling 0%
+    #   header bidding placment group test - throttling 0%   --> new_user = 1   device_type_id = 1
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 0%
     Given I clear all cookies from uas requests
-    Given i send synchronized 10 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728011} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us}
+    Given i send synchronized 10 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us}
     Then The synchronized response code is 200 10 of the times
 
   @throttling
-    #   header bidding placment group test - throttling 60%  --> new_user = 1   device_type_id = 1
+    #   header bidding placment group test - throttling 60%  --> new_user = 1   device_type_id = 1 (3728001)
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 60%
     Given I clear all cookies from uas requests
     Given i send synchronized 100 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us}
