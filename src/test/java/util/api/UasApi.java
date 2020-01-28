@@ -9,7 +9,7 @@ public class UasApi {
     }
 
     public static void sendHbReq(Integer times, String hbReqBody, Integer publisherID, String domain, String extraParams) {
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, hbReqBody, publisherID, domain, extraParams,true,false);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, hbReqBody, publisherID, domain, extraParams,true,false,false);
     }
 
     public static void sendZoneReq(Integer zoneId, Integer times, boolean toReset) {
@@ -28,7 +28,7 @@ public class UasApi {
         sut.getUASRquestModule().sendMultipleDynamicTagGetRequests(times, null, publisherId, null, extraParams, true, false);
     }
 
-    public static void sendHbPostReq(Integer times, String body, Integer publisherID, String domainParam, String extraParams, boolean isAsync, boolean isSecure) {
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domainParam, extraParams, isAsync, isSecure);
+    public static void sendHbPostReq(Integer times, String body, Integer publisherID, String domainParam, String extraParams, boolean isAsync, boolean isSecure, boolean clearCookies) {
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domainParam, extraParams, isAsync, isSecure, clearCookies);
     }
 }

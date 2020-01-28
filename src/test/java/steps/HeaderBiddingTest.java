@@ -56,7 +56,7 @@ public class HeaderBiddingTest extends BaseTest {
         Given("i send (\\d+) headerBidding secure post request for publisher (\\d+) with size1 = (\\d+) size2 = (\\d+), bidreq = (\\d+), empty domain, and extra params \\{(.*)\\}", this::sendHBPostRequestBidIDcount);
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi bids. first bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+), sec bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+) with domain \\{(.*)\\} and extra params \\{(.*)\\}", this::sendHBSecurePostRequestMultibid);
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{(.*)\\} and placmentID group = \\{(.*)\\} and extra params \\{(.*)\\}", this::sendHBSecurePostRequestMultiSized);
-        Given("i send synchronized (\\d+) basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params \\{(.*)\\}", this::sendBasicHBSecurePostRequest);
+        Given("i send synchronized (\\d+) basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params \\{(.*)\\} cookies (true|false)", this::sendBasicHBSecurePostRequest);
 
         And("^I setup throttling for publisher (\\d+) by scenario \\{(.*)\\}$", (Integer publisherId, String scenario) -> {
             sut.getRampAppPublisherRequestModule().setupThrottling(publisherId, scenario);
@@ -64,22 +64,22 @@ public class HeaderBiddingTest extends BaseTest {
     }
 
 
-    private void sendBasicHBSecurePostRequest(Integer times, Integer publisherID, Integer h1, Integer w1, String domain, String placmentID, String extraParams) {
+    private void sendBasicHBSecurePostRequest(Integer times, Integer publisherID, Integer h1, Integer w1, String domain, String placmentID, String extraParams,String sendCookies) {
         String body = getJsonForBasicReq(publisherID, h1, w1, domain, placmentID);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, false, false);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, false, false,Boolean.parseBoolean(sendCookies));
     }
 
 
     private void sendHBSecurePostRequestMultiSized(Integer publisherID, Integer h1, Integer w1, Integer h2, Integer w2, String domain, String placmentID, String extraParams) {
         String body = getJsonForMultisizes(publisherID, h1, w1, h2, w2, domain, placmentID);
 
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1, body, publisherID, domain, extraParams, true, false);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1, body, publisherID, domain, extraParams, true, false,false);
     }
 
 
     private void sendHBSecurePostRequestMultibid(Integer publisherID, String firstBidReqId, Integer h1, Integer w1, String secBidReqId, Integer h2, Integer w2, String domain, String extraParams) {
         String body = getJsonForMultiJsonBidreqID(publisherID, firstBidReqId, h1, w1, secBidReqId, h2, w2, domain);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1, body, publisherID, domain, extraParams, true, true);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(1, body, publisherID, domain, extraParams, true, true,false);
 
     }
 
@@ -92,7 +92,7 @@ public class HeaderBiddingTest extends BaseTest {
             domain = "";
         }
         String body = getJsonForPublisher3708WithBidID(domain, size1, size2, publisherID);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, true, false);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, true, false,false);
     }
 
     private String getJsonForPublisher3708WithBidID(String domain, Integer size1, Integer size2, Integer pubID) {
@@ -290,7 +290,7 @@ public class HeaderBiddingTest extends BaseTest {
         }
         JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
         Assert.assertNotNull("There is no suitable scenario for scenario: " + scenario, jsonNode);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, jsonNode.toString(), publisherID, domain, extraParams, true, true);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, jsonNode.toString(), publisherID, domain, extraParams, true, true , false);
     }
 
 
@@ -305,7 +305,7 @@ public class HeaderBiddingTest extends BaseTest {
         }
         JsonNode jsonNode = headerBiddingPostRequests.get(scenario);
         Assert.assertNotNull("There is no suitable scenario for scenario: " + scenario, jsonNode);
-        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, jsonNode.toString(), publisherID, domain, extraParams, true, false);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, jsonNode.toString(), publisherID, domain, extraParams, true, false , false);
     }
 
     public void responsesContainEntityWithId(String entity, Integer id) {
