@@ -46,38 +46,66 @@ pipeline {
         }
         stage('Test') {
             steps {
-                script {
-                    try {
-                        sh 'docker build -t ${ENVIRONMENT}-suite-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=${TAGS_TO_RUN} --build-arg SUITE_NAME=${SUITE_NAME} --build-arg ENVIRONMENT=${ENVIRONMENT}'
-                        sh 'docker create --name temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER} ${ENVIRONMENT}-suite-${BUILD_NUMBER}'
-                        sh 'docker cp temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER}:/ramp-lift-automation/target/ ./target/'
-                        sh '''#!/bin/bash
-                            if [ ${CREATE_ENTITIES} = 'true' ]; then
-                            rsync -a ./entities/ ./target/
-                            fi'''
-                        sh 'docker rm temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER}'
-                        sh 'docker rmi ${ENVIRONMENT}-suite-${BUILD_NUMBER}'
-                    } catch (exc) {
-                        currentBuild.currentResult = 'FAILURE'
-                        throw new Exception(exc)
+                dir('ramp-lift-automation') {
+                    script {
+                        try {
+                            sh 'docker build -t ${ENVIRONMENT}-suite-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=${TAGS_TO_RUN} --build-arg SUITE_NAME=${SUITE_NAME} --build-arg ENVIRONMENT=${ENVIRONMENT}'
+                            sh 'docker images'
+                            sh 'docker run --privileged -d ${ENVIRONMENT}-suite-${BUILD_NUMBER}:latest tail -f /dev/null'
+                            sh 'docker exec `docker ps | grep -w ${ENVIRONMENT}-suite-${BUILD_NUMBER} | awk {\'print \$1\'}` mvn clean install test -Dcucumber.options="--tags $TAGS_TO_RUN" -P remote,$ENVIRONMENT'
+                            //sh 'docker create --name temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER} ${ENVIRONMENT}-suite-${BUILD_NUMBER}'
+                            //sh 'docker cp temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER}:/ramp-lift-automation/target/ ./target/'
+                            //sh '''#!/bin/bash
+                            //    if [ ${CREATE_ENTITIES} = 'true' ]; then
+                            //    rsync -a ./entities/ ./target/
+                            //    fi'''
+                            //sh 'docker rm temporary-container-${ENVIRONMENT}-suite-${BUILD_NUMBER}'
+                            //sh 'docker rmi ${ENVIRONMENT}-suite-${BUILD_NUMBER}'
+                        } catch (exc) {
+                            currentBuild.currentResult = 'FAILURE'
+                            throw new Exception(exc)
+                        }
                     }
                 }
             }
         }
-        stage('Publish') {
-            steps {
-                sh '''#!/bin/bash
-                    if [ ${JIRA_REPORT} = 'true' ]; then
-                    for f in ./target/surefire-reports/*.xml; do
-                    curl -H "Content-Type: multipart/form-data" -u jiraservice:!qaz2wsX -F "file=@$f" "https://dev.perion.com/rest/raven/1.0/import/execution/junit?projectKey=Undertone&testExecKey=${TEST_EXEC_KEY}&revision=v1.0.0&testEnvironments=${ENVIRONMENT}"
-                    done
-                    fi'''
-            }
-        }
-    }
+//        stage('Publish') {
+//           steps {
+//                sh '''#!/bin/bash
+//                    if [ ${JIRA_REPORT} = 'true' ]; then
+//                    for f in ./target/surefire-reports/*.xml; do
+//                    curl -H "Content-Type: multipart/form-data" -u jiraservice:!qaz2wsX -F "file=@$f" "https://dev.perion.com/rest/raven/1.0/import/execution/junit?projectKey=Undertone&testExecKey=${TEST_EXEC_KEY}&revision=v1.0.0&testEnvironments=${ENVIRONMENT}"
+//                    done
+//                    fi'''
+//            }
+//        }
+//    }
     post {
         always {
-            junit 'target/surefire-reports/*.xml'
+                echo "Print docker ls"
+                sh 'docker exec `docker ps | grep -w ${ENVIRONMENT}-suite-${BUILD_NUMBER} | awk {\'print \$1\'}` ls /ramp-lift-automation/'
+                echo "Copy target directory from Docker"
+                sh 'docker cp `docker ps | grep -w ${ENVIRONMENT}-suite-${BUILD_NUMBER} | awk {\'print \$1\'}`:/ramp-lift-automation/target ./ramp-lift-automation/'
+                sh 'docker stop `docker ps | grep -w ${ENVIRONMENT}-suite-${BUILD_NUMBER} | awk {\'print \$1\'}`'
+                dir('ramp-lift-automation'){
+                                            script {
+                                                    allure([
+                                                    includeProperties: false,
+                                                    jdk: '',
+                                                    properties: [],
+                                                    reportBuildPolicy: 'ALWAYS',
+                                                    results: [[path: 'target/allure-results']]
+                                                    ])
+                                            }
+                }
+                sh '''#!/bin/bash
+                        if [ ${JIRA_REPORT} = 'true' ]; then
+                        for f in ./ramp-lift-automation/target/surefire-reports/junitreports/*.xml; do
+                        curl -H "Content-Type: multipart/form-data" -u jiraservice:!qaz2wsX -F "file=@$f" "https://dev.perion.com/rest/raven/1.0/import/execution/junit?projectKey=Undertone&testExecKey=${TEST_EXEC_KEY}&revision=v1.0.0&testEnvironments=${ENVIRONMENT}"
+                        done
+                fi'''
+            junit 'ramp-lift-automation/target/surefire-reports/*.xml'
+        sh 'echo OK'
         }
         changed {
             script {
