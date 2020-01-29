@@ -389,13 +389,14 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     @Attachment(value = "Post request: ", type = "text/plain")
-    private String sendMultiplePostRequestsToUAS(Integer times, String url, String body, boolean isAsync) {
+    private String sendMultiplePostRequestsToUAS(Integer times, String url, String body, boolean isAsync,boolean sendCookies) {
         String post = "req sent = " + url + " body = " + body;
         System.out.println(post);
         if (isAsync)
             sendPostRequestsAsync(times, url, body);
-        else
-            sendPostRequestSync(times, url, body);
+        else {
+            sendPostRequestSync(times, url, body,sendCookies);
+        }
         return post;
     }
 
@@ -404,9 +405,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         sendMultipleGetRequestsToUAS(times, url, isAsync);
     }
 
-    public void sendMultipleTypePostRequestWithParameter(String requestTypes,String body, Integer times, String parameters, boolean isAsync, boolean isSecure) {
+    public void sendMultipleTypePostRequestWithParameter(String requestTypes,String body, Integer times, String parameters, boolean isAsync, boolean isSecure, boolean sendCookies) {
         String url = getURL(requestTypes, parameters, false);
-        sendMultiplePostRequestsToUAS(times, url, body, isAsync);
+        sendMultiplePostRequestsToUAS(times, url, body, isAsync,sendCookies);
     }
 
     public void sendMultipleDynamicTagGetRequests(Integer times, String tagID, String publisherId, String domainParam, String extraParams, boolean isAsync, boolean isSecure) {
@@ -415,16 +416,16 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         sendMultipleGetRequestsToUAS(times, url, isAsync);
     }
 
-    public void sendMultipleHeaderBiddingPostRequests(Integer times, String body, Integer publisherID, String domainParam, String extraParams, boolean isAsync, boolean isSecure) {
+    public void sendMultipleHeaderBiddingPostRequests(Integer times, String body, Integer publisherID, String domainParam, String extraParams, boolean isAsync, boolean isSecure, boolean sendCookies) {
         String params = "pid=" + publisherID + Optional.ofNullable(domainParam).map(s -> "&domain=" + s).orElse("") + Optional.ofNullable(extraParams).orElse("");
         String url = getURL("headerBidding", params, isSecure);
-        sendMultiplePostRequestsToUAS(times, url, body, isAsync);
+        sendMultiplePostRequestsToUAS(times, url, body, isAsync, sendCookies);
     }
 
     public void sendHBSecurePostRequestBidIDcountEmptyDomain(Integer times, String body ,Integer publisherID, String extraParams, boolean isAsync, boolean isSecure) {
         String params = "pid=" + publisherID +  Optional.ofNullable(extraParams).orElse("");
         String url = getURL("headerBidding", params, isSecure);
-        sendMultiplePostRequestsToUAS(times, url, body, isAsync);
+        sendMultiplePostRequestsToUAS(times, url, body, isAsync,false);
     }
 
     private String getURL(String RequestType, String params, boolean isSecure) {
@@ -479,9 +480,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
     }
 
-    private void sendPostRequestSync(Integer times, String url, String body) {
+    private void sendPostRequestSync(Integer times, String url, String body, boolean sendCookies) {
         reset();
         for (; times > 0; times--) {
+            if (!sendCookies)
+                sut.getUASRquestModule().clearCookies();
             synchronizedResponses.add(postRequest(url, body));
             try {
                 TimeUnit.MILLISECONDS.sleep(400);
