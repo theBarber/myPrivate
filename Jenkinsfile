@@ -79,7 +79,7 @@ pipeline {
 //                    fi'''
 //            }
 //        }
-//    }
+    }
     post {
         always {
                 echo "Print docker ls"
