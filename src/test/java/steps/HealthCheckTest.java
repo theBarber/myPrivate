@@ -104,8 +104,8 @@ public class HealthCheckTest extends BaseTest {
             if (status_code == expectedResponseCode)
                 count++;
         }
-        System.out.println("total equests with status code : " + expectedResponseCode + " are : " + count + " expected values : " + (expected + 8) + "-" + (expected - 8));
-        Assert.assertTrue((count <= expected + 8) && (count > expected - 8));
+        System.out.println("total equests with status code : " + expectedResponseCode + " are : " + count + " expected values : " + (expected + expected * 8/100) + "-" + (expected - expected * 8/100));
+        Assert.assertTrue((count <= (expected + expected * 8/100)) && (count > (expected - expected * 8/100)));
     }
 
     public void allResponsesFinished() {
