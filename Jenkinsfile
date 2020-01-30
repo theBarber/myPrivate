@@ -3,12 +3,10 @@ pipeline {
     stages {
         stage('Get credentials') {
             steps {
-                dir('../') {
                     git(
                         credentialsId: 'ut-israel-devops',
                         url: 'https://github.com/PerionNet/perion-automation.git'
                     )
-                }
             }
         }
 //        stage('Restart Mock Server'){
@@ -29,6 +27,8 @@ pipeline {
             steps {
                 dir("../ramp-lift-automation"){
                     script {
+                        sh("ls -al .")
+                        sh("echo $PWD")
                         try {
                             sh '''#!/bin/bash
                             if [ ${CREATE_ENTITIES} = 'true' ]; then
@@ -48,8 +48,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                dir('ramp-lift-automation') {
+                dir('../ramp-lift-automation') {
                     script {
+                        sh("ls -al .")
+                        sh("echo $PWD")
                         try {
                             sh 'docker build -t ${ENVIRONMENT}-suite-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=${TAGS_TO_RUN} --build-arg SUITE_NAME=${SUITE_NAME} --build-arg ENVIRONMENT=${ENVIRONMENT}'
                             sh 'docker images'
