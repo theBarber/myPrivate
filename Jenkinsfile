@@ -13,6 +13,7 @@ pipeline {
                     sh("echo $PWD")
                 }
             }
+            }
         }
 //        stage('Restart Mock Server'){
 //            steps{
@@ -78,7 +79,6 @@ pipeline {
                 }
             }
         }
-    }
 //        stage('Publish') {
 //           steps {
 //                sh '''#!/bin/bash
