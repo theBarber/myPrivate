@@ -78,6 +78,7 @@ pipeline {
                 }
             }
         }
+    }
 //        stage('Publish') {
 //           steps {
 //                sh '''#!/bin/bash
