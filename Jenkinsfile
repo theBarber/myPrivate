@@ -54,7 +54,6 @@ pipeline {
         }
         stage('Test') {
             steps {
-                dir('ramp-lift-automation') {
                     script {
                         sh("ls -al .")
                         sh("echo $PWD")
@@ -76,7 +75,7 @@ pipeline {
                             throw new Exception(exc)
                         }
                     }
-                }
+
             }
         }
 //        stage('Publish') {
