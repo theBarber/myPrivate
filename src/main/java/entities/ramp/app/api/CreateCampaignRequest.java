@@ -1,26 +1,45 @@
 package entities.ramp.app.api;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public class CreateCampaignRequest {
 
+    @JsonProperty("campaignName")
     private String campaignName;
+    @JsonProperty("lineItemId")
     private String lineItemId;
+    @JsonProperty("Zonesets")
     private Zonesets zonesets;
+    @JsonProperty("selectedCreativeIds")
     private List<Integer> selectedCreativeId;
+    @JsonProperty("PlayerSizes")
+    private List<Integer> playerSizesIDs;
+    @JsonProperty("PlaybackMethods")
+    private List<Integer> playbackMethodsIDs;
+    @JsonProperty("selectedDealId")
     private Integer selectedDealId;
+    @JsonProperty("priority")
     private String priority;
+    @JsonProperty("startDateTime")
     private String startDateTime;
+    @JsonProperty("endDateTime")
     private String endDateTime;
+    @JsonProperty("RawSupplySources")
     private SupplySources supplySources;
+    @JsonProperty("avThreshold")
     private String avThreshold;
+    @JsonProperty("avEnabled")
     private Boolean avEnabled;
+    @JsonProperty("avVendor")
     private String avVendor;
+    @JsonProperty("trafficType")
     private Integer trafficType;
+    @JsonProperty("CampaignPassBacks")
     private List<Integer> CampaignPassBacks;
 
 
@@ -38,7 +57,7 @@ public class CreateCampaignRequest {
     String limitation = "[]";
 
 
-    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeId,Integer selectedDealId, String startDateTime, String endDateTime)
+    public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeId,Integer selectedDealId, String startDateTime, String endDateTime,List<Integer> playerSizesIDs,List<Integer> playbackMethodsIDs)
     {
         this.campaignName = campaignName;
         this.lineItemId = lineItemId;
@@ -50,6 +69,8 @@ public class CreateCampaignRequest {
         this.CampaignPassBacks = new ArrayList<>();
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        this.playerSizesIDs = playerSizesIDs;
+        this.playbackMethodsIDs = playbackMethodsIDs;
     }
 
     @JsonProperty("priority")
@@ -57,28 +78,14 @@ public class CreateCampaignRequest {
         return priority;
     }
 
-    @JsonProperty("priority")
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
-
     @JsonProperty("RawSupplySources")
     public SupplySources getSupplySources() {
         return supplySources;
     }
 
-    @JsonProperty("RawSupplySources")
-    public void setSupplySources(SupplySources supplySources) {
-        this.supplySources = supplySources;
-    }
-
-   @JsonProperty("selectedDealId")
+    @JsonProperty("selectedDealId")
     public Integer getSelectedDealId() {
         return selectedDealId;
-    }
-    @JsonProperty("selectedDealId")
-    public void setSelectedDealId(Integer selectedDealId) {
-        this.selectedDealId = selectedDealId;
     }
 
     @JsonProperty("campaignName")
@@ -86,28 +93,14 @@ public class CreateCampaignRequest {
         return campaignName;
     }
 
-    @JsonProperty("campaignName")
-    public void setCampaignName(String campaignName) {
-        this.campaignName = campaignName;
-    }
-
     @JsonProperty("lineItemId")
     public String getLineItemId() {
         return lineItemId;
-    }
-    @JsonProperty("lineItemId")
-    public void setLineItemId(String lineItemId) {
-        this.lineItemId = lineItemId;
     }
 
     @JsonProperty("Zonesets")
     public Zonesets getZonesets() {
         return zonesets;
-    }
-
-    @JsonProperty("Zonesets")
-    public void setZonesets(Zonesets zonesets) {
-        this.zonesets = zonesets;
     }
 
     @JsonProperty("selectedCreativeIds")
@@ -135,45 +128,24 @@ public class CreateCampaignRequest {
         return startDateTime;
     }
 
-    public void setStartDateTime(String startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
     @JsonProperty("endDateTime")
     public String getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(String endDateTime) {
-        this.endDateTime = endDateTime;
-    }
-
-
     @JsonProperty("avThreshold")
     public String getAvThreshold() {
         return avThreshold;
     }
-    @JsonProperty("avThreshold")
-    public void setAvThreshold(String avThreshold) {
-        this.avThreshold = avThreshold;
-    }
+
     @JsonProperty("avEnabled")
     public Boolean getAvEnabled() {
         return avEnabled;
-    }
-    @JsonProperty("avEnabled")
-    public void setAvEnabled(Boolean avEnabled) {
-        this.avEnabled = avEnabled;
     }
 
     @JsonProperty("avVendor")
     public String getAvVendor() {
         return avVendor;
-    }
-
-    @JsonProperty("avVendor")
-    public void setAvVendor(String avVendor) {
-        this.avVendor = avVendor;
     }
 
 
@@ -190,5 +162,85 @@ public class CreateCampaignRequest {
     public Integer gettrafficType()
     {
         return trafficType;
+    }
+
+    @JsonProperty("PlayerSizes")
+    public void setPlayerSizesIDs(List<Integer> playerSizesIDs) {
+        this.playerSizesIDs = playerSizesIDs;
+    }
+
+    @JsonProperty("PlaybackMethods")
+    public void setPlaybackMethodsIDs(List<Integer> playbackMethodsIDs) {
+        this.playbackMethodsIDs = playbackMethodsIDs;
+    }
+
+    @JsonProperty("selectedDealId")
+    public void setSelectedDealId(Integer selectedDealId) {
+        this.selectedDealId = selectedDealId;
+    }
+
+    @JsonProperty("priority")
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    @JsonProperty("startDateTime")
+    public void setStartDateTime(String startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    @JsonProperty("endDateTime")
+    public void setEndDateTime(String endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    @JsonProperty("RawSupplySources")
+    public void setSupplySources(SupplySources supplySources) {
+        this.supplySources = supplySources;
+    }
+
+    @JsonProperty("avThreshold")
+    public void setAvThreshold(String avThreshold) {
+        this.avThreshold = avThreshold;
+    }
+
+    @JsonProperty("avEnabled")
+    public void setAvEnabled(Boolean avEnabled) {
+        this.avEnabled = avEnabled;
+    }
+
+    @JsonProperty("avVendor")
+    public void setAvVendor(String avVendor) {
+        this.avVendor = avVendor;
+    }
+
+    @JsonProperty("optimizeReason")
+    public void setOptimizeReason(String optimizeReason) {
+        this.optimizeReason = optimizeReason;
+    }
+
+    @JsonProperty("campaignType")
+    public void setCampaignType(String campaignType) {
+        this.campaignType = campaignType;
+    }
+
+    @JsonProperty("pacing")
+    public void setPacing(String pacing) {
+        this.pacing = pacing;
+    }
+
+    @JsonProperty("deliveryMethod")
+    public void setDeliveryMethod(String deliveryMethod) {
+        this.deliveryMethod = deliveryMethod;
+    }
+
+    @JsonProperty("isUnlimited")
+    public void setIsUnlimited(Boolean isUnlimited) {
+        this.isUnlimited = isUnlimited;
+    }
+
+    @JsonProperty("limitation")
+    public void setLimitation(String limitation) {
+        this.limitation = limitation;
     }
 }

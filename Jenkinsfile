@@ -24,7 +24,7 @@ pipeline {
 //                        sudo ssh -o StrictHostKeyChecking=no -t -i pems/undertone-dev.pem ubuntu@auto-mock.ramp-ut.io "sudo service mockserver1 restart"
 //                        sudo ssh -o StrictHostKeyChecking=no -t -i pems/undertone-dev.pem ubuntu@auto-mock.ramp-ut.io "sudo service mockserver2 restart"
 //                        sudo ssh -o StrictHostKeyChecking=no -t -i pems/undertone-dev.pem ubuntu@auto-mock.ramp-ut.io "sudo service mockserver3 restart"
-//                        sudo ssh -o StrictHostKeyChecking=no -t -i pems/undertone-dev.pem ubuntu@auto-mock.ramp-ut.io "sudo service hubmockserver restart"
+//                         sudo ssh -o StrictHostKeyChecking=no -t -i pems/undertone-dev.pem ubuntu@auto-mock.ramp-ut.io "sudo service hubmockserver restart"
 //                    '''
 //                }
 //            }
@@ -109,7 +109,7 @@ pipeline {
                 }
                 sh '''#!/bin/bash
                         if [ ${JIRA_REPORT} = 'true' ]; then
-                        for f in ./ramp-lift-automation/target/surefire-reports/junitreports/*.xml; do
+                        for f in ./ramp-lift-automation/target/surefire-reports/*.xml; do
                         curl -H "Content-Type: multipart/form-data" -u jiraservice:!qaz2wsX -F "file=@$f" "https://dev.perion.com/rest/raven/1.0/import/execution/junit?projectKey=Undertone&testExecKey=${TEST_EXEC_KEY}&revision=v1.0.0&testEnvironments=${ENVIRONMENT}"
                         done
                 fi'''
