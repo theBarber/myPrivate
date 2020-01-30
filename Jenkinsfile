@@ -4,6 +4,7 @@ pipeline {
         stage('Get credentials') {
             steps {
             script{
+                dir("perion-automation") {
                     git(
                         credentialsId: 'ut-israel-devops',
                         url: 'https://github.com/PerionNet/perion-automation.git'
@@ -29,7 +30,7 @@ pipeline {
 //        }
         stage('Create Entities') {
             steps {
-                dir("../ramp-lift-automation"){
+                dir("ramp-lift-automation"){
                     script {
                         sh("ls -al .")
                         sh("echo $PWD")
@@ -52,7 +53,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                dir('../ramp-lift-automation') {
+                dir('ramp-lift-automation') {
                     script {
                         sh("ls -al .")
                         sh("echo $PWD")
