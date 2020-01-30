@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Get credentials') {
             steps {
-                dir('perion-automation') {
+                dir('../') {
                     git(
                         credentialsId: 'ut-israel-devops',
                         url: 'https://github.com/PerionNet/perion-automation.git'
@@ -27,19 +27,21 @@ pipeline {
 //        }
         stage('Create Entities') {
             steps {
-                script {
-                    try {
-                        sh '''#!/bin/bash
-                        if [ ${CREATE_ENTITIES} = 'true' ]; then
-                        docker build -t ${ENVIRONMENT}-entities-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=@preconditions --build-arg ENVIRONMENT=${ENVIRONMENT}
-                        docker create --name temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER} ${ENVIRONMENT}-entities-${BUILD_NUMBER}
-                        docker cp temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER}:/ramp-lift-automation/target/ ./entities/
-                        docker rm temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER}
-                        docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
-                        fi'''
-                    } catch (exc) {
-                        currentBuild.currentResult = 'FAILURE'
-                        throw new Exception("Error creating entities!")
+                dir("../ramp-lift-automation"){
+                    script {
+                        try {
+                            sh '''#!/bin/bash
+                            if [ ${CREATE_ENTITIES} = 'true' ]; then
+                            docker build -t ${ENVIRONMENT}-entities-${BUILD_NUMBER} . --build-arg TAGS_TO_RUN=@preconditions --build-arg ENVIRONMENT=${ENVIRONMENT}
+                            docker create --name temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER} ${ENVIRONMENT}-entities-${BUILD_NUMBER}
+                            docker cp temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER}:/ramp-lift-automation/target/ ./entities/
+                            docker rm temporary-container-${ENVIRONMENT}-entities-${BUILD_NUMBER}
+                            docker rmi ${ENVIRONMENT}-entities-${BUILD_NUMBER}
+                            fi'''
+                        } catch (exc) {
+                            currentBuild.currentResult = 'FAILURE'
+                            throw new Exception("Error creating entities!")
+                        }
                     }
                 }
             }
