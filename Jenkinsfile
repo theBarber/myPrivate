@@ -31,7 +31,6 @@ pipeline {
 //        }
         stage('Create Entities') {
             steps {
-                dir("ramp-lift-automation"){
                     script {
                         sh("ls -al .")
                         sh("echo $PWD")
@@ -49,7 +48,6 @@ pipeline {
                             throw new Exception("Error creating entities!")
                         }
                     }
-                }
             }
         }
         stage('Test') {
