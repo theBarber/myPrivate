@@ -1283,6 +1283,29 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
 
+  @LinearVidFiltering
+  Scenario: create entities for linear video filtering
+    Given i disable campaigns by name on db
+      | Campaign Name                   |
+      | campaign-LinearVideoFiltering-1 |
+      | campaign-LinearVideoFiltering-2 |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                   | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                   | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-LinearVideoFiltering-1 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-1} | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-LinearVideoFiltering-2 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-2} | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+
+    And i update campaign data by name
+      | Campaign Name                   | units | goal_type   |
+      | campaign-LinearVideoFiltering-1 | -1    | impressions |
+      | campaign-LinearVideoFiltering-2 | -1    | impressions |
+
+    And i update zone data by name
+      | Zone Name                           | is_secure |
+      | zone-zoneset-LinearVideoFiltering-1 | 1         |
+      | zone-zoneset-LinearVideoFiltering-2 | 1         |
+
+
   @DynamicPricing
   @InAppBlackWhiteList
   @OpenX
