@@ -3,10 +3,13 @@ pipeline {
     stages {
         stage('Get credentials') {
             steps {
+            script{sh("ls -al .")
+                   sh("echo $PWD")
                     git(
                         credentialsId: 'ut-israel-devops',
                         url: 'https://github.com/PerionNet/perion-automation.git'
                     )
+                }
             }
         }
 //        stage('Restart Mock Server'){
