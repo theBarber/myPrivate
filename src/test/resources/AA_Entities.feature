@@ -1314,10 +1314,6 @@ Feature: Entities for tests
       | campaign-pub2-level-small-D-skip-Y | 75396 | 259848   | false                 | XXXX2         | {zone-zoneset-pub2-level-small-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-large-D-skip-N | 75396 | 259848   | false                 | XXXX3         | {zone-zoneset-pub2-level-large-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-small-D-skip-N | 75396 | 259848   | false                 | XXXX4         | {zone-zoneset-pub2-level-small-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
-
-
-
-
     And i update zone data by name
       | Zone Name                                       | is_secure |
       | zone-zoneset-large-D-skip-Y-CS-Video            | 1         |
