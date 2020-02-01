@@ -6,8 +6,8 @@
 Feature: Entities for tests
 
   Scenario: entities end-date update
-    And i update po_line_item end date by id {4584,67001,67002,69725,69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,69992,67163,67162,67166,69089,69134,66832,69158,69213}
-    And i update io_line_item end date by id {243710,251644,253288,253747,245653,210722,241783,223539,240827,198082,197418,224812,222908,234810,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
+    And i update po_line_item end date by id {4584,67001,67002,69725,69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,69992,67163,67162,67166,69089,69134,66832,69158,69213,70473,70474}
+    And i update io_line_item end date by id {243710,251644,253288,253747,245653,210722,241783,223539,240827,198082,197418,224812,222908,259848,234810,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
@@ -1138,7 +1138,6 @@ Feature: Entities for tests
       | campaign-state-screenShift-ST-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]] |
 
 
-
   Scenario: create entites for new publisher block list
     Given i disable campaigns by name on db
       | Campaign Name           |
@@ -1283,6 +1282,56 @@ Feature: Entities for tests
       | NewBrandReveal-BR-Direct-banner-1                    | []         |
       | NewBrandReveal-BR-PROG-NonGuaranteed-banner-1        | []         |
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
+
+
+  @VideoDuration
+  Scenario: create entities for Linear Video Duration
+    Given i disable campaigns by name on db
+      | Campaign Name                      |
+      | campaign-large-D-skip-Y            |
+      | campaign-small-D-skip-Y            |
+      | campaign-large-D-skip-N            |
+      | campaign-small-D-skip-N            |
+      | campaign-pub1-level-large-D-skip-Y |
+      | campaign-pub1-level-small-D-skip-Y |
+      | campaign-pub1-level-large-D-skip-N |
+      | campaign-pub1-level-small-D-skip-N |
+      | campaign-pub2-level-large-D-skip-Y |
+      | campaign-pub2-level-small-D-skip-Y |
+      | campaign-pub2-level-large-D-skip-N |
+      | campaign-pub2-level-small-D-skip-N |
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                      | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-large-D-skip-Y            | 75396 | 259848   | false                 | XXXX1         | {zone-zoneset-large-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-small-D-skip-Y            | 75396 | 259848   | false                 | XXXX2         | {zone-zoneset-small-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-large-D-skip-N            | 75396 | 259848   | false                 | XXXX3         | {zone-zoneset-small-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-small-D-skip-N            | 75396 | 259848   | false                 | XXXX4         | {zone-zoneset-small-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-pub1-level-large-D-skip-Y | 75396 | 259848   | false                 | XXXX1         | {zone-zoneset-pub1-level-large-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-small-D-skip-Y | 75396 | 259848   | false                 | XXXX2         | {zone-zoneset-pub1-level-small-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-large-D-skip-N | 75396 | 259848   | false                 | XXXX3         | {zone-zoneset-pub1-level-large-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-small-D-skip-N | 75396 | 259848   | false                 | XXXX4         | {zone-zoneset-pub1-level-small-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub2-level-large-D-skip-Y | 75396 | 259848   | false                 | XXXX1         | {zone-zoneset-pub2-level-large-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-small-D-skip-Y | 75396 | 259848   | false                 | XXXX2         | {zone-zoneset-pub2-level-small-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-large-D-skip-N | 75396 | 259848   | false                 | XXXX3         | {zone-zoneset-pub2-level-large-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-small-D-skip-N | 75396 | 259848   | false                 | XXXX4         | {zone-zoneset-pub2-level-small-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+
+
+
+
+    And i update zone data by name
+      | Zone Name                                       | is_secure |
+      | zone-zoneset-large-D-skip-Y-CS-Video            | 1         |
+      | zone-zoneset-small-D-skip-Y-CS-Video            | 1         |
+      | zone-zoneset-small-D-skip-Y-CS-Video            | 1         |
+      | zone-zoneset-small-D-skip-Y-CS-Video            | 1         |
+      | zone-zoneset-pub1-level-large-D-skip-Y-CS-Video | 1         |
+      | zone-zoneset-pub1-level-small-D-skip-Y-CS-Video | 1         |
+      | zone-zoneset-pub1-level-large-D-skip-N-CS-Video | 1         |
+      | zone-zoneset-pub1-level-small-D-skip-N-CS-Video | 1         |
+      | zone-zoneset-pub2-level-large-D-skip-Y-CS-Video | 1         |
+      | zone-zoneset-pub2-level-small-D-skip-Y-CS-Video | 1         |
+      | zone-zoneset-pub2-level-large-D-skip-N-CS-Video | 1         |
+      | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1         |
 
 
   @DynamicPricing
