@@ -1139,15 +1139,6 @@ Feature: Entities for tests
 
 
 
-
-
-
-
-
-
-
-
-
   Scenario: create entites for new publisher block list
     Given i disable campaigns by name on db
       | Campaign Name           |
