@@ -46,6 +46,7 @@ public class API_EntitiesCreator extends BaseTest {
         And("i create new campaigns with viewability", this::createCampaignsWithViewability);
         And("i create new campaigns with Supply type", this::createCampaignsWithSupplyType);
         Given("i create new campaigns, new zoneset with domains", this::createMultipleCampaignsWithNewZonesetWithDomains);
+        Given("i create new campaigns, new zoneset with video params", this::createMultipleCampaignsWithNewZonesetWithVideo);
         And("i update? (.*) end date by id \\{(.*)\\}", this::updateEndDateEntityDataByID);
         And("i update? (.*) with id \\{(.*)\\} filed \\{(.*)\\} to be \\{(.*)\\}", this::updateEntityFiledByID);
         And("i update? (.*) data by? (.*)", this::updateEntityDataByID);
@@ -109,7 +110,8 @@ public class API_EntitiesCreator extends BaseTest {
         List<Integer> creativeAsInt = new ArrayList<>();
         List<String> campaign;
         List<Integer> zonesetsId;
-
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
         for (int i = 1; i < campaignsList.size(); i++) {
             Zonesets zonesets = new Zonesets();
             campaign = campaignsList.get(i);
@@ -117,7 +119,7 @@ public class API_EntitiesCreator extends BaseTest {
             zonesets.setInclude(zonesetsId);
             List<String> creatives = Arrays.asList(campaign.get(4).split(","));
             for (String s : creatives) creativeAsInt.add(Integer.valueOf(s));
-            CreateCampaignRequest createCampaignRequest = new CreateCampaignRequest(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2), zonesets, creativeAsInt, null, dateFromNow(-1), dateFromNow(1));
+            CreateCampaignRequest createCampaignRequest = new CreateCampaignRequest(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2), zonesets, creativeAsInt, null, dateFromNow(-1), dateFromNow(1),playerSizes,playbackMethods);
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
@@ -135,11 +137,13 @@ public class API_EntitiesCreator extends BaseTest {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
         List<Integer> zonesetsId;
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
         for (int i = 1; i < campaignsList.size(); i++) {
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
             Integer creativeOrDealID = Boolean.valueOf(campaign.get(3)) ? getDealId(campaign.get(4)) : getCreativeId(campaign.get(4));
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/creativeOrDealID, zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/creativeOrDealID, zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)),playerSizes,playbackMethods);
             createCampaignRequest.setPriority(campaign.get(11));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
@@ -149,10 +153,12 @@ public class API_EntitiesCreator extends BaseTest {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
         List<Integer> zonesetsId;
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
         for (int i = 1; i < campaignsList.size(); i++) {
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)),playerSizes,playbackMethods);
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
@@ -161,10 +167,12 @@ public class API_EntitiesCreator extends BaseTest {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
         List<Integer> zonesetsId;
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
         for (int i = 1; i < campaignsList.size(); i++) {
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)),playerSizes,playbackMethods);
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
@@ -173,11 +181,13 @@ public class API_EntitiesCreator extends BaseTest {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
         List<Integer> zonesetsId;
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
         for (int i = 1; i < campaignsList.size(); i++) {
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
             Integer creativeOrDealID = Boolean.valueOf(campaign.get(3)) ? getDealId(campaign.get(4)) : getCreativeId(campaign.get(4));
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/creativeOrDealID, zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/creativeOrDealID, zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)),playerSizes,playbackMethods);
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
     }
@@ -211,10 +221,12 @@ public class API_EntitiesCreator extends BaseTest {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
         List<Integer> zonesetsId;
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
         for (int i = 1; i < campaignsList.size(); i++) {
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)),playerSizes,playbackMethods);
             createCampaignRequest.setViewability(campaign.get(11), campaign.get(12), true);
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
@@ -224,10 +236,12 @@ public class API_EntitiesCreator extends BaseTest {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
         List<Integer> zonesetsId;
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
         for (int i = 1; i < campaignsList.size(); i++) {
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)),playerSizes,playbackMethods);
             createCampaignRequest.settrafficType(getTypeCode(campaign.get(11)));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
@@ -256,13 +270,58 @@ public class API_EntitiesCreator extends BaseTest {
         List<List<String>> campaignsList = campaigns.asLists(String.class);
         List<String> campaign;
         List<Integer> zonesetsId;
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
         for (int i = 1; i < campaignsList.size(); i++) {
             campaign = campaignsList.get(i);
             zonesetsId = getZonesetsIds(campaign);
-            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)),playerSizes,playbackMethods);
             createCampaignRequest.setSupplySources(getSupplySources(campaign.get(11), campaign.get(12)));
             createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
         }
+    }
+
+    private void createMultipleCampaignsWithNewZonesetWithVideo(DataTable campaigns) {
+        List<List<String>> campaignsList = campaigns.asLists(String.class);
+        List<String> campaign;
+        List<Integer> zonesetsId;
+        List<Integer> playerSizes = new ArrayList<>();
+        List<Integer> playbackMethods = new ArrayList<>();
+        for (int i = 1; i < campaignsList.size(); i++) {
+            campaign = campaignsList.get(i);
+            zonesetsId = getZonesetsIds(campaign);
+            playerSizes = getPlayerSizes(campaign);
+            playbackMethods = getPlaybackMethods(campaign);
+            CreateCampaignRequest createCampaignRequest = getCreateCampaignRequestEntity(/*campaignName*/campaign.get(0), /*lineItemId*/campaign.get(2),/*creativeID_Or_DealID*/Integer.valueOf(campaign.get(4)), zonesetsId, /*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)),playerSizes,playbackMethods);
+            createCampaignRequest.setSupplySources(getSupplySources(campaign.get(11), campaign.get(12)));
+            createCampaign(createCampaignRequest,/*IO_id*/Integer.valueOf(campaign.get(1)),/*isServerProgrammatic*/Boolean.valueOf(campaign.get(3)));
+        }
+    }
+
+    private List<Integer> getPlaybackMethods(List<String> campaignDataTable) {
+        String playbackMethodsList = campaignDataTable.get(14);
+        List<String> playbackMethods;
+        List<Integer> playbackMethodsIDs = new ArrayList<>();
+        if (!playbackMethodsList.isEmpty()) {
+            playbackMethods = Arrays.asList(playbackMethodsList.split(","));
+            for (String s : playbackMethods) {
+                playbackMethodsIDs.add(Integer.valueOf(s));
+            }
+        }
+        return playbackMethodsIDs;
+    }
+
+    private List<Integer> getPlayerSizes(List<String> campaignDataTable) {
+        String playerSizesList = campaignDataTable.get(13);
+        List<String> playerSizes;
+        List<Integer> playerSizesIDs = new ArrayList<>();
+        if (!playerSizesList.isEmpty()) {
+            playerSizes = Arrays.asList(playerSizesList.split(","));
+            for (String s : playerSizes) {
+                playerSizesIDs.add(Integer.valueOf(s));
+            }
+        }
+        return playerSizesIDs;
     }
 
 
@@ -500,19 +559,25 @@ public class API_EntitiesCreator extends BaseTest {
         }
     }
 
-    private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName, String lineItemId, Integer creativeID_Or_DealID, List<Integer> zonesetsIDs, Boolean isServerProgrammatic) {
+    private CreateCampaignRequest getCreateCampaignRequestEntity(String campaignName, String lineItemId, Integer creativeID_Or_DealID, List<Integer> zonesetsIDs, Boolean isServerProgrammatic,List<Integer> playerSizeID, List<Integer> playbackMethodID) {
         List<Integer> creatives = new ArrayList<>();
+        List<Integer> playerSizeIDs = new ArrayList<>();
+        List<Integer> playbackMethodIDs = new ArrayList<>();
         Integer dealID = null;
         Zonesets zonesets = new Zonesets();
         zonesets.setInclude(zonesetsIDs);
         if (isServerProgrammatic)
             dealID = creativeID_Or_DealID;
-        else
+        else {
             creatives.add(creativeID_Or_DealID);
-
+            if (playerSizeID.size() != 0)
+                playerSizeIDs.addAll(playerSizeID);
+            if (playbackMethodID.size() != 0)
+                playbackMethodIDs.addAll(playbackMethodID);
+        }
         return new CreateCampaignRequest(campaignName, lineItemId,
                 zonesets, creatives, dealID,
-                dateFromNow(0), dateFromNow(365));
+                dateFromNow(0), dateFromNow(365),playerSizeIDs,playbackMethodIDs);
     }
 
     private String dateFromNow(Integer daysToAdd) {
