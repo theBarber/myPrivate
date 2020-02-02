@@ -1332,30 +1332,52 @@ Feature: Entities for tests
   @LinearVidFiltering
   Scenario: create entities for linear video filtering
     Given i disable campaigns by name on db
-      | Campaign Name                   |
-      | campaign-LinearVideoFiltering-1 |
-      | campaign-LinearVideoFiltering-2 |
+      | Campaign Name                                      |
+      | campaign-LinearVideoFiltering-playbackAll-noSize   |
+      | campaign-LinearVideoFiltering-playback1-size1      |
+      | campaign-LinearVideoFiltering-playback2-size2      |
+      | campaign-LinearVideoFiltering-playback3-size3      |
+      | campaign-LinearVideoFiltering-playback4-allsizes   |
+      | campaign-LinearVideoFiltering-playbackAll-size3    |
+      | campaign-LinearVideoFiltering-playbackall-allsizes |
+      | campaign-LinearVideoFiltering-noPlayback-allsizes  |
+      | campaign-LinearVideoFiltering-noPlayback-noSize    |
 
     Given i create new campaigns, new zoneset with video params
-      | Campaign Name                   | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                   | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude | player_size_id | playback_method_id |
-      | campaign-LinearVideoFiltering-1 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-1} | []         | 35       | 15196          | 3708         | 69158           | []          | []          |                |                    |
-      | campaign-LinearVideoFiltering-2 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-2} | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 1              | 3                  |
-      | campaign-LinearVideoFiltering-3 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-3} | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 2              | 4                  |
-      | campaign-LinearVideoFiltering-4 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-4} | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 3              | 2                  |
+      | Campaign Name                                      | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                      | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude | player_size_id | playback_method_id |
+      | campaign-LinearVideoFiltering-playbackAll-noSize   | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackAll-noSize}   | []         | 35       | 15196          | 3708         | 69158           | []          | []          |                | 1,2,3,4            |
+      | campaign-LinearVideoFiltering-playback1-size1      | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback1-size1}      | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 1              | 1                  |
+      | campaign-LinearVideoFiltering-playback2-size2      | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback2-size2}      | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 2              | 2                  |
+      | campaign-LinearVideoFiltering-playback3-size3      | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback3-size3}      | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 3              | 3                  |
+      | campaign-LinearVideoFiltering-playback4-allsizes   | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback4-allsizes}   | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 1,2,3          | 4                  |
+      | campaign-LinearVideoFiltering-playbackAll-size3    | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackAll-size3}    | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 3              | 1,2,3,4            |
+      | campaign-LinearVideoFiltering-playbackall-allsizes | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackall-allsizes} | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 1,2,3          | 1,2,3,4            |
+      | campaign-LinearVideoFiltering-noPlayback-allsizes  | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-allsizes}  | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 1,2,3          |                    |
+      | campaign-LinearVideoFiltering-noPlayback-noSize    | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-noSize}    | []         | 35       | 15196          | 3708         | 69158           | []          | []          |                |                    |
 
     And i update campaign data by name
-      | Campaign Name                   | units | goal_type   |
-      | campaign-LinearVideoFiltering-1 | -1    | impressions |
-      | campaign-LinearVideoFiltering-2 | -1    | impressions |
-      | campaign-LinearVideoFiltering-3 | -1    | impressions |
-      | campaign-LinearVideoFiltering-4 | -1    | impressions |
+      | Campaign Name                                      | units | goal_type   |
+      | campaign-LinearVideoFiltering-playbackAll-noSize   | -1    | impressions |
+      | campaign-LinearVideoFiltering-playback1-size1      | -1    | impressions |
+      | campaign-LinearVideoFiltering-playback2-size2      | -1    | impressions |
+      | campaign-LinearVideoFiltering-playback3-size3      | -1    | impressions |
+      | campaign-LinearVideoFiltering-playback4-allsizes   | -1    | impressions |
+      | campaign-LinearVideoFiltering-playbackAll-size3    | -1    | impressions |
+      | campaign-LinearVideoFiltering-playbackall-allsizes | -1    | impressions |
+      | campaign-LinearVideoFiltering-noPlayback-allsizes  | -1    | impressions |
+      | campaign-LinearVideoFiltering-noPlayback-noSize    | -1    | impressions |
 
     And i update zone data by name
-      | Zone Name                           | is_secure |
-      | zone-zoneset-LinearVideoFiltering-1 | 1         |
-      | zone-zoneset-LinearVideoFiltering-2 | 1         |
-      | zone-zoneset-LinearVideoFiltering-3 | 1         |
-      | zone-zoneset-LinearVideoFiltering-4 | 1         |
+      | Zone Name                                              | is_secure |
+      | zone-zoneset-LinearVideoFiltering-playbackAll-noSize   | 1         |
+      | zone-zoneset-LinearVideoFiltering-playback1-size1      | 1         |
+      | zone-zoneset-LinearVideoFiltering-playback2-size2      | 1         |
+      | zone-zoneset-LinearVideoFiltering-playback3-size3      | 1         |
+      | zone-zoneset-LinearVideoFiltering-playback4-allsizes   | 1         |
+      | zone-zoneset-LinearVideoFiltering-playbackAll-size3    | 1         |
+      | zone-zoneset-LinearVideoFiltering-playbackall-allsizes | 1         |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-allsizes  | 1         |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-noSize    | 1         |
 
 
   @DynamicPricing
