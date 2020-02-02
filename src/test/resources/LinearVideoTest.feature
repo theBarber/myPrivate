@@ -1,4 +1,5 @@
 @parallel
+@VideoDuration
 
 Feature: Duration Video tests
 
