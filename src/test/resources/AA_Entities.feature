@@ -1291,42 +1291,67 @@ Feature: Entities for tests
       | campaign-small-D-skip-Y            |
       | campaign-large-D-skip-N            |
       | campaign-small-D-skip-N            |
+
+      | campaign-equal-D-skip-Y            |
+      | campaign-equal-D-skip-N            |
+
       | campaign-pub1-level-large-D-skip-Y |
       | campaign-pub1-level-small-D-skip-Y |
       | campaign-pub1-level-large-D-skip-N |
       | campaign-pub1-level-small-D-skip-N |
+
+      | campaign-pub1-level-equal-D-skip-Y |
+      | campaign-pub1-level-equal-D-skip-N |
+
       | campaign-pub2-level-large-D-skip-Y |
       | campaign-pub2-level-small-D-skip-Y |
       | campaign-pub2-level-large-D-skip-N |
       | campaign-pub2-level-small-D-skip-N |
+
+      | campaign-pub2-level-equal-D-skip-Y |
+      | campaign-pub2-level-equal-D-skip-N |
+
+
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                      | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-large-D-skip-Y            | 75396 | 259848   | false                 | 31546         | {zone-zoneset-large-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
       | campaign-small-D-skip-Y            | 75396 | 259848   | false                 | 31544         | {zone-zoneset-small-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
       | campaign-large-D-skip-N            | 75396 | 259848   | false                 | 31547         | {zone-zoneset-large-D-skip-N-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
       | campaign-small-D-skip-N            | 75396 | 259848   | false                 | 31545         | {zone-zoneset-small-D-skip-N-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-equal-D-skip-Y            | 75396 | 259848   | false                 | XX15Y         | {zone-zoneset-equal-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-equal-D-skip-N            | 75396 | 259848   | false                 | XX15N         | {zone-zoneset-equal-D-skip-N-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
       | campaign-pub1-level-large-D-skip-Y | 75396 | 259848   | false                 | 31546         | {zone-zoneset-pub1-level-large-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
       | campaign-pub1-level-small-D-skip-Y | 75396 | 259848   | false                 | 31544         | {zone-zoneset-pub1-level-small-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
       | campaign-pub1-level-large-D-skip-N | 75396 | 259848   | false                 | 31547         | {zone-zoneset-pub1-level-large-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
       | campaign-pub1-level-small-D-skip-N | 75396 | 259848   | false                 | 31545         | {zone-zoneset-pub1-level-small-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-equal-D-skip-Y | 75396 | 259848   | false                 | XX15Y         | {zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-equal-D-skip-N | 75396 | 259848   | false                 | XX15N         | {zone-zoneset-pub1-level-equal-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
       | campaign-pub2-level-large-D-skip-Y | 75396 | 259848   | false                 | 31546         | {zone-zoneset-pub2-level-large-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-small-D-skip-Y | 75396 | 259848   | false                 | 31544         | {zone-zoneset-pub2-level-small-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-large-D-skip-N | 75396 | 259848   | false                 | 31547         | {zone-zoneset-pub2-level-large-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-small-D-skip-N | 75396 | 259848   | false                 | 31545         | {zone-zoneset-pub2-level-small-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-equal-D-skip-Y | 75396 | 259848   | false                 | XX15Y         | {zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-equal-D-skip-N | 75396 | 259848   | false                 | XX15N         | {zone-zoneset-pub2-level-equal-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
     And i update zone data by name
       | Zone Name                                       | is_secure |
       | zone-zoneset-large-D-skip-Y-CS-Video            | 1         |
       | zone-zoneset-small-D-skip-Y-CS-Video            | 1         |
       | zone-zoneset-large-D-skip-N-CS-Video            | 1         |
       | zone-zoneset-small-D-skip-N-CS-Video            | 1         |
+      | zone-zoneset-equal-D-skip-Y-CS-Video            | 1         |
+      | zone-zoneset-equal-D-skip-N-CS-Video            | 1         |
       | zone-zoneset-pub1-level-large-D-skip-Y-CS-Video | 1         |
       | zone-zoneset-pub1-level-small-D-skip-Y-CS-Video | 1         |
       | zone-zoneset-pub1-level-large-D-skip-N-CS-Video | 1         |
       | zone-zoneset-pub1-level-small-D-skip-N-CS-Video | 1         |
+      | zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video | 1         |
+      | zone-zoneset-pub1-level-equal-D-skip-N-CS-Video | 1         |
       | zone-zoneset-pub2-level-large-D-skip-Y-CS-Video | 1         |
       | zone-zoneset-pub2-level-small-D-skip-Y-CS-Video | 1         |
       | zone-zoneset-pub2-level-large-D-skip-N-CS-Video | 1         |
       | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1         |
+      | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1         |
+      | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1         |
 
 
   @LinearVidFiltering
