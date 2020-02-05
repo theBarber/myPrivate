@@ -1,9 +1,1312 @@
-[
+[{
+  "ioId": 75396,
+  "name": "RAMP Test IO",
+  "advertiserId": 20116,
+  "LI":
+  [
+    {
+      "ioLineItemId": 223755,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 120,
+        "name": "Screen shift"
+      },
+      "Campaigns":
+      [
+      ]
+    },
+    {
+      "ioLineItemId": 223757,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 120,
+        "name": "Screen shift"
+      },
+      "Campaigns":
+      [
+      ]
+    },
+
+    {
+      "ioLineItemId": 197418,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 120,
+        "name": "Screen shift"
+      },
+      "Campaigns":
+      [
+        {
+          "campaignId": 302583,
+          "campaignName": "UAS-by-at-most-1-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              67657
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1224809,
+              "bannerName": "UAS-by-at-most-1-banner"
+            },
+            {
+              "bannerId": 1243360,
+              "bannerName":"campaign-server-prog-SS-1-banner-1-NOT-API"
+            },
+            {
+              "bannerId": 1298061,
+              "bannerName":"campaign-InappBlackWhiteList-SI-7-banner-1-NOT-API"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+        {
+          "campaignId": 302584,
+          "campaignName": "UAS-by-at-most-2-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              67657
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1252714,
+              "bannerName": "campaign-API-1-a-GDPR-banner-1-not-api"
+            },
+
+            {
+              "bannerId": 1253028,
+              "bannerName": "server-prog-SS-1-banner-1"
+            },
+            {
+              "bannerId": 1253028,
+              "bannerName": "UAS-by-at-most-2-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+        {
+          "campaignId": 301515 ,
+          "campaignName": "Screen shift-DT-inline-3-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67603
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1220891,
+              "bannerName": "Screen shift-DT-inline-3-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 1
+        },
+        {
+          "campaignId": 301514 ,
+          "campaignName": "Screen shift-DT-inline-2-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67603
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1220893,
+              "bannerName": "Screen shift-DT-inline-2-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 1
+        },
+        {
+          "campaignId": 301513,
+          "campaignName": "Screen shift-DT-inline-1-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67603
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1220889,
+              "bannerName": "Screen shift-DT-inline-1-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 1
+        },
+        {
+          "campaignId": 291514,
+          "campaignName": "DT-SS-Test-1-campaign-high-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67603
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1200036 ,
+              "bannerName": "DT-SS-Test-1-campaign-high-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 1
+        },
+        {
+          "campaignId": 291570,
+          "campaignName": "DT-SS-Test-1-campaign-low-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67603
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157158,
+              "bannerName": "DT-SS-Test-1-campaign-low-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291602,
+          "campaignName": "DT-SS-Test-2-campaign-high-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67725
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157197,
+              "bannerName": "DT-SS-Test-2-campaign-high-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291603,
+          "campaignName": "DT-SS-Test-2-campaign-low-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67725
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157198,
+              "bannerName": "DT-SS-Test-2-campaign-low-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291608,
+          "campaignName": "DT-SS-Test-3-campaign-first-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67728
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1200038,
+              "bannerName": "DT-SS-Test-3-campaign-first-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 1
+        }
+      ]
+    },
+    {
+      "ioLineItemId": 211456,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 124,
+        "name": "Page Grabber Mobile"
+      },
+      "Campaigns":
+      [
+        {
+          "campaignId": 291521,
+          "campaignName": "DT-PGM-Test-1-campaign-high-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67604
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1200039,
+              "bannerName": "DT-PGM-Test-1-campaign-high-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 1
+        },
+        {
+          "campaignId": 291572,
+          "campaignName": "DT-PGM-Test-1-campaign-low-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67604
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157160,
+              "bannerName": "DT-PGM-Test-1-campaign-low-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291604,
+          "campaignName": "DT-PGM-Test-2-campaign-high-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67726
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157199,
+              "bannerName": "DT-PGM-Test-2-campaign-high-priority-banner-1-notActive"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291605,
+          "campaignName": "DT-PGM-Test-2-campaign-low-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67726
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1200042,
+              "bannerName": "DT-PGM-Test-2-campaign-low-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291609,
+          "campaignName": "DT-PGM-Test-3-campaign-second-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67726
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1200041,
+              "bannerName": "DT-PGM-Test-3-campaign-second-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291619,
+          "campaignName": "DT-PGM-Test-2-campaign-high-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67745
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1200043,
+              "bannerName": "DT-PGM-Test-2-campaign-high-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        }
+      ]
+    },
+    {
+      "ioLineItemId": 215982,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 151,
+        "name": "Page Grabber (Cross Screen)"
+      },
+      "Campaigns":
+      [
+        {
+          "campaignId": 291542,
+          "campaignName": "DT-PGC-Test-1-campaign-high-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67627
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157136,
+              "bannerName": "DT-PGC-Test-1-campaign-high-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 1
+        },
+        {
+          "campaignId": 291573,
+          "campaignName": "DT-PGC-Test-1-campaign-low-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67627
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1200045,
+              "bannerName": "DT-PGC-Test-1-campaign-low-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291606,
+          "campaignName": "DT-PGC-Test-2-campaign-high-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67727
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157201,
+              "bannerName": "DT-PGC-Test-2-campaign-high-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291607,
+          "campaignName": "DT-PGC-Test-2-campaign-low-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67727
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157201,
+              "bannerName": "DT-PGC-Test-2-campaign-low-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        },
+        {
+          "campaignId": 291610,
+          "campaignName": "DT-PGC-Test-3-campaign-third-priority",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              67730
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1157205,
+              "bannerName": "DT-PGC-Test-3-campaign-third-priority-banner-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 2
+        }
+
+      ]
+    },
+    {
+      "ioLineItemId": 197420,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 12,
+        "name": "Desktop In-Page Blend"
+      },
+
+      "Campaigns":
+      [
+        {
+          "campaignId": 301520,
+          "campaignName": "Desktop In-Page Blend-DT-Inline-2-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              62185
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1219337 ,
+              "bannerName": "Desktop In-Page Blend-DT-Inline-2-banner"
+            }
+          ],
+
+          "isUnlimited": false,
+          "CDM": 4
+        },
+        {
+          "campaignId": 270477,
+          "campaignName": "ramp-lift-auto-campaign1-test",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              62185
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1038966,
+              "bannerName": "75396-197420-270477-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
+            }
+          ],
+
+          "isUnlimited": false,
+          "CDM": 4
+        },
+
+        {
+          "campaignId": 270914,
+          "campaignName": "ramp-lift-auto-campaign2-test-2banners",
+          "advertiserId": 20116,
+          "goalType": "impressions",
+          "Zonesets":
+          {
+            "include":
+            [
+              62365
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1040820,
+              "bannerName": "75396-197420-270914-Medium Rectangle 300x250-test"
+            },
+
+            {
+              "bannerId": 1040819,
+              "bannerName": "75396-197420-270914-Medium Rectangle 300x250-ramp-lift-auto-banner1-test"
+            }
+          ],
+
+          "isUnlimited": false,
+          "CDM": 0
+        }
+      ]
+    },
+    {
+      "ioLineItemId": 209943,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 175,
+        "name": "See-Through"
+      },
+
+      "Campaigns":
+      [
+        {
+          "campaignId": 277924,
+          "campaignName": "75396-209943-1-test-2",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              64185
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1079324,
+              "bannerName": "75396-209943-277924-See Through-RampLift-1"
+            }
+          ],
+
+          "isUnlimited": false,
+          "CDM": 4
+        }
+      ]
+    },
+    {
+      "ioLineItemId": 209942,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 175,
+        "name": "See-Through"
+      },
+
+      "Campaigns":
+      [
+        {
+          "campaignId": 277923,
+          "campaignName": "75396-209942-1-Test-3",
+          "goalType": "impressions",
+          "deliveryMethod": 4,
+          "Zonesets":
+          {
+            "include":
+            [
+              64186
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1079323,
+              "bannerName": "75396-209942-277923-See Through-RampLift-1"
+            }
+          ],
+
+          "isUnlimited": false,
+          "CDM": 4
+        }
+      ]
+    },
+    {
+      "ioLineItemId": 208153,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 175,
+        "name": "See Through"
+      },
+
+      "Campaigns":
+      [
+        {
+          "campaignId": 275578,
+          "campaignName": "ramp-lift-ff-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63225
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1067986,
+              "bannerName": "75396-208153-275578-See Through-RampLift-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+
+        {
+          "campaignId": 275579,
+          "campaignName": "ramp-lift-ch-campaign",
+          "advertiserId": 20116,
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63225
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1067987,
+              "bannerName": "75396-208153-275579-See Through-RampLift-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+
+        {
+          "campaignId": 275580,
+          "campaignName": "ramp-lift-ie-campaign",
+          "advertiserId": 20116,
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63225
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1067988,
+              "bannerName": "75396-208153-275580-See Through-RampLift-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+
+        {
+          "campaignId": 275581,
+          "campaignName": "ramp-lift-unlimited-campaign",
+          "advertiserId": 20116,
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63225
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1067989,
+              "bannerName": "75396-208153-275581-See Through-RampLift-1"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        }
+      ]
+    },
+    {
+      "ioLineItemId": 210722,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+      },
+
+      "Campaigns":
+      [
+
+        {
+          "campaignId": 301511,
+          "campaignName": "See Through-DT-inline-1-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63709
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1220887,
+              "bannerName": "See Through-DT-inline-1-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+        {
+          "campaignId": 301512,
+          "campaignName": "See Through-DT-inline-2-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63709
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1220888 ,
+              "bannerName": "See Through-DT-inline-2-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+        {
+          "campaignId": 278956,
+          "campaignName": "75396-210722-ramp-lift-Test 1",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63709
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1353329,
+              "bannerName": "75396-210722-278956-See Through 2.0-Inline DynT Test"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        }
+      ]
+    },
+    {
+      "ioLineItemId": 220833,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 151,
+        "name": "Page Grabber"
+      },
+
+      "Campaigns":
+      [
+        {
+          "campaignId": 301516,
+          "campaignName": "Page Grabber-DT-inline-1-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63225
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1220892,
+              "bannerName": "Page Grabber-DT-inline-1-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+        {
+          "campaignId": 301517,
+          "campaignName": "Page Grabber-DT-inline-2-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63225
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1220893,
+              "bannerName": "Page Grabber-DT-inline-2-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        }
+      ]
+    },
+    {
+      "ioLineItemId": 198082,
+      "pricingConvention": "CPM",
+      "Product":
+      {
+        "productId": 98,
+        "name": "Billboard"
+      },
+
+      "Campaigns":
+      [
+        {
+          "campaignId": 301518,
+          "campaignName": "Billboard-DT-Inline-1-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63225
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1219335,
+              "bannerName": "Billboard-DT-Inline-1-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        },
+        {
+          "campaignId": 301519,
+          "campaignName": "Billboard-DT-inline-2-campaign",
+          "goalType": "impressions",
+          "deliveryMethod": 3,
+          "Zonesets":
+          {
+            "include":
+            [
+              63225
+            ],
+
+            "exclude":
+            [
+
+            ]
+          },
+
+          "Banners":
+          [
+            {
+              "bannerId": 1219336 ,
+              "bannerName": "Billboard-DT-inline-2-banner"
+            }
+          ],
+
+          "isUnlimited": true,
+          "CDM": 3
+        }
+      ]
+    }
+  ]
+},
   {
-    "ioId": 75396,
-    "name": "RAMP Test IO",
+    "ioId": 62355,
+    "name": "RAMP programmatic IO",
     "advertiserId": 20116,
-    "LI": [
+    "LI":
+    [
+      {
+        "ioLineItemId": 216655,
+        "pricingConvention": "CPM",
+        "Product":
+        {
+          "productId": 98,
+          "name": "Billboard"
+        },
+
+        "Campaigns":
+        [
+          {
+            "campaignId": 290505,
+            "campaignName": "62355-216655-4-oded1",
+            "goalType": "impressions",
+            "deliveryMethod": 1,
+            "Zonesets":
+            {
+              "include":
+              [
+                21601
+              ],
+
+              "exclude":
+              [
+
+              ]
+            },
+
+            "Banners":
+            [
+              {
+                "bannerId": 1157881,
+                "bannerName": "290505-10000-59-ramp-lift-programmatic-banner1-test"
+              }
+            ],
+
+            "isUnlimited": true
+          }
+        ]
+      }
     ]
   }
 ]
