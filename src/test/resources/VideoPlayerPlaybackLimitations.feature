@@ -14,7 +14,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
 
 # - - - - - - - - - - - - - - - - - - - - - - 1 - - - - - - - - - - - - - - - - - - - - - -
   
-   Scenario: 1.0       playback_method = all  |  player_size = none
+   Scenario: 1.0      playback_method = all   |  player_size = none
             request:  playback_method = 1     |  player_size = 1
             response: playback_method = CTP   |  player_size = small
     Given I send 1 times an ad request with parameter {cw=300&ch=250&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-noSize} to UAS
@@ -25,7 +25,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
     
    
    #  - - - - - - - - - - - - -
-   Scenario: 1.1       playback_method = all     |  player_size = none
+   Scenario: 1.1      playback_method = all      |  player_size = none
             request:  playback_method = 5        |  player_size = 1
             response: playback_method = default  |  player_size = small
      Given I send 1 times an ad request with parameter {cw=300&ch=250&vpmt=5} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-noSize} to UAS
@@ -37,7 +37,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
 
 # - - - - - - - - - - - - - - - - - - - - - - 2 - - - - - - - - - - - - - - - - - - - - - -
   
-   Scenario: 2.0       playback_method = 1   |  player_size = 1
+   Scenario: 2.0      playback_method = 1    |  player_size = 1
             request:  playback_method = 1    |  player_size = 1
             response: playback_method = CTP  |  player_size = small
      Given I send 1 times an ad request with parameter {cw=300&ch=250&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playback1-size1} to UAS
@@ -48,7 +48,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
 
    #  - - - - - - - - - - - - -
   
-   Scenario: 2.1       playback_method = 1   |  player_size = 1
+   Scenario: 2.1      playback_method = 1    |  player_size = 1
             request:  playback_method = 1    |  player_size = 2
             response: passback
      Given I send 1 times an ad request with parameter {cw=400&ch=300&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playback1-size1} to UAS
