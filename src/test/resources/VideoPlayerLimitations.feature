@@ -19,7 +19,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = CTP   |  player_size = small
     Given I send 1 times an ad request with parameter {cw=300&ch=250&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-noSize} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-noSize-banner-1} 100% of the time
     
@@ -30,7 +30,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = default  |  player_size = small
      Given I send 1 times an ad request with parameter {cw=300&ch=250&vpmt=5} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-noSize} to UAS
      Then The response code is 200
-     And The response contains {script}
+     And The response contains {VAST}
      And The responses has impression-urls
      And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-noSize-banner-1} 100% of the time
 
@@ -42,7 +42,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = CTP  |  player_size = small
      Given I send 1 times an ad request with parameter {cw=300&ch=250&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playback1-size1} to UAS
      Then The response code is 200
-     And The response contains {script}
+     And The response contains {VAST}
      And The responses has impression-urls
      And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback1-size1-banner-1} 100% of the time
 
@@ -70,7 +70,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = ATP(Sound On) |   player_size = medium
     Given I send 1 times an ad request with parameter {cw=400&ch=300&vpmt=2} for zone named {zone-zoneset-LinearVideoFiltering-playback2-size2} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback2-size2-banner-1} 100% of the time
 
@@ -82,7 +82,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = ATP(Sound Off) |   player_size = large
     Given I send 1 times an ad request with parameter {cw=1280&ch=720&vpmt=3} for zone named {zone-zoneset-LinearVideoFiltering-playback3-size3} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback3-size3-banner-1} 100% of the time
 
@@ -94,7 +94,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = ATP(MouseHover) |   player_size = large
     Given I send 1 times an ad request with parameter {cw=1280&ch=720&vpmt=4} for zone named {zone-zoneset-LinearVideoFiltering-playback4-allsizes} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback4-allsizes-banner-1} 100% of the time
 
@@ -105,7 +105,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = ATP(MouseHover)   |   player_size = large
     Given I send 1 times an ad request with parameter {cw=1280&ch=720&vpmt=4} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-size3} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-size3-banner-1} 100% of the time
 
@@ -125,7 +125,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = CTP   |   player_size = medium
     Given I send 1 times an ad request with parameter {cw=400&ch=300&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackall-allsizes} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackall-allsizes-banner-1} 100% of the time
 
@@ -136,7 +136,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = default   |   player_size = medium
     Given I send 1 times an ad request with parameter {cw=400&ch=300&vpmt=0} for zone named {zone-zoneset-LinearVideoFiltering-playbackall-allsizes} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackall-allsizes-banner-1} 100% of the time
 
@@ -147,7 +147,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = default     |   player_size = medium
     Given I send 1 times an ad request with parameter {cw=600&ch=300&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-noPlayback-allsizes} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-allsizes-banner-1} 100% of the time
 
@@ -158,6 +158,6 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
             response: playback_method = default     |   player_size = medium
     Given I send 1 times an ad request with parameter {cw=400&ch=300&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-noPlayback-noSize} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {VAST}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-noSize-banner-1} 100% of the time
