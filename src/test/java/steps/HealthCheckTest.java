@@ -33,7 +33,7 @@ public class HealthCheckTest extends BaseTest {
         When("^Sending a healthcheck request to (.*)$", this::healthCheckRequest);
         Then("^The response code is (\\d+)$", this::allResponsesHaveCode);
         Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
-        Then("^The synchronized response code is (\\d+) (\\d+) of the times", this::allSynchronizedResponsesHaveCodePartially);
+        Then("^The synchronized response code is (\\d+) (\\d+) responses from (\\d+) of the times", this::allSynchronizedResponsesHaveCodePartially);
         Then("^All requests are sent$", this::allResponsesFinished);
         Then("^The response contains \\{(.*)\\}$", this::healthCheckResponseContains);
         Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
@@ -96,7 +96,7 @@ public class HealthCheckTest extends BaseTest {
                 .map(StatusLine::getStatusCode).forEach(statusCode -> Assert.assertThat(statusCode, Matchers.is(expectedResponseCode)));
     }
 
-    public void allSynchronizedResponsesHaveCodePartially(Integer expectedResponseCode, Integer expected) {
+    public void allSynchronizedResponsesHaveCodePartially(Integer expectedResponseCode, Integer expected,Integer requestSent) {
         int count = 0;
         List<Integer> aa = sut.getUASRquestModule().getSynchronizedResponses().stream().map(HttpResponse::getStatusLine)
                 .map(StatusLine::getStatusCode).collect(Collectors.toList());
@@ -104,8 +104,13 @@ public class HealthCheckTest extends BaseTest {
             if (status_code == expectedResponseCode)
                 count++;
         }
-        System.out.println("total equests with status code : " + expectedResponseCode + " are : " + count + " expected values : " + (expected + expected * 8/100) + "-" + (expected - expected * 8/100));
-        Assert.assertTrue((count <= (expected + expected * 8/100)) && (count > (expected - expected * 8/100)));
+
+        int throttlingRequests =  requestSent - expected;
+        int tolerancePercentages = 6;
+        int minValue =  (int) (requestSent - (throttlingRequests * (1 + (double)tolerancePercentages / 100)));
+        int maxValue = (int) (requestSent - (throttlingRequests * (1 - (double)tolerancePercentages / 100)));
+        System.out.println("total equests with status code : " + expectedResponseCode + " are ==>  " + count + " ... while the expected values are : " + (minValue) + "-" + (maxValue));
+        Assert.assertTrue((count <= (maxValue)) && (count >= (minValue)));
     }
 
     public void allResponsesFinished() {
