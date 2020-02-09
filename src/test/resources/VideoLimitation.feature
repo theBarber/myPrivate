@@ -133,7 +133,10 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation
   response: playback_method = default   |   player_size = medium
     Given I send 1 times an ad video request with parameter {cw=400&ch=300&vpmt=0} for zone named {zone-zoneset-LinearVideoFiltering-playbackall-allsizes} to UAS
     Then The response code is 200
-    And The responses are passback
+    And The response contains {VASTAdTagURI}
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackall-allsizes-banner-1} 100% of the time
+
 #  - - - - - - - - - - - - - - - - - - - - - - 8 - - - - - - - - - - - - - - - - - - - - - -
 
   Scenario: 8.0       playback_method = none        |   player_size = all
