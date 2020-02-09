@@ -5,10 +5,10 @@ import cucumber.api.java8.En;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
-@CucumberOptions(features = "classpath:EitanTest.feature", plugin = { "pretty"})
+@CucumberOptions(features = "classpath:VideoLimitation.feature", plugin = { "pretty"})
 @RunWith(Cucumber.class)
-public class EitanTest extends BaseTest {
-    public EitanTest() {
+public class VideoLimitationTest extends BaseTest {
+    public VideoLimitationTest() {
 //        Given("my name is Eitan", () -> {
 //            System.out.println("this is Eitan Test feature");
 //        });
