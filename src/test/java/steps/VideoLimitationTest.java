@@ -9,8 +9,5 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 public class VideoLimitationTest extends BaseTest {
     public VideoLimitationTest() {
-//        Given("my name is Eitan", () -> {
-//            System.out.println("this is Eitan Test feature");
-//        });
     }
 }
