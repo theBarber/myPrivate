@@ -179,6 +179,25 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
     }
 
+    public void zoneRequestsWithParameterAndRoute(Integer forZone, String parameter, String route, int times, boolean toReset) {
+        if (toReset) {
+            reset();
+        }
+
+        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/" + route + "?zoneid=" + forZone + "&ct=1&stid=999" + "&" + parameter;
+        System.out.println(url);
+        for (; times > 0; times--) {
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                fail(e.getMessage());
+            }
+            request(url, false);
+
+
+        }
+    }
+
     public void zoneRequestsWithGeo(Integer forZone, int times, String params) {
         reset();
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999" + "&sim_geo=1&" + params;
