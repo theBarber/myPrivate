@@ -106,7 +106,7 @@ public class HealthCheckTest extends BaseTest {
         }
 
         int throttlingRequests =  requestSent - expected;
-        int tolerancePercentages = 6;
+        int tolerancePercentages = 8;
         int minValue =  (int) (requestSent - (throttlingRequests * (1 + (double)tolerancePercentages / 100)));
         int maxValue = (int) (requestSent - (throttlingRequests * (1 - (double)tolerancePercentages / 100)));
         System.out.println("total equests with status code : " + expectedResponseCode + " are ==>  " + count + " ... while the expected values are : " + (minValue) + "-" + (maxValue));
