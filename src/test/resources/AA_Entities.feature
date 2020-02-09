@@ -1283,8 +1283,7 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
 
-
-  @VideoDuration
+ ##  &&&&&&&&&&&&&&&&&    VideoDuration    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Scenario: create entities for Linear Video Duration
     Given i disable campaigns by name on db
       | Campaign Name                      |
@@ -1355,7 +1354,8 @@ Feature: Entities for tests
       | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1         |
       | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1         |
 
-  @LinearVidFiltering
+
+  ##  &&&&&&&&&&&&&&&&&    LinearVidFiltering    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Scenario: create entities for linear video filtering
     Given i disable campaigns by name on db
       | Campaign Name                                      |

@@ -6,14 +6,11 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {
-        "classpath:VideoPlayerPlaybackLimitations.feature",
-}, plugin = {"pretty",})
+@CucumberOptions(features = "classpath:VideoPlayerLimitations.feature", plugin = {"pretty"})
 public class VideoPlayerLimitations extends BaseTest {
     public VideoPlayerLimitations() {
         super();
     }
-
 }
 
 
