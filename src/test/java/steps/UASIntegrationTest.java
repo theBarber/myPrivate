@@ -88,6 +88,11 @@ public class UASIntegrationTest extends BaseTest {
                     sendMultipleAdRequestsWithParameter(times, parameter, zoneByName, true);
                 });
 
+        When("I send (\\d+) times an ad video request with parameter? \\{(.*)\\} for zone named? \\{(.*)\\} to UAS$",
+                (Integer times, String parameter, String zoneByName) -> {
+                    sendMultipleAdRequestsWithParameterAndRoute(times, parameter, zoneByName, "ax", true);
+                });
+
         When("I send a req to ramp api for creating a placment group for publisher \\{(\\d+)\\} with ad units = \\{(.*)\\} where placement ID = \\{(.*)\\}",
                 this::sendPlacementGroupReqToRampAPI);
 
@@ -546,6 +551,12 @@ public class UASIntegrationTest extends BaseTest {
         Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
                 .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
         sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(), parameter, times, toReset);
+    }
+
+    private void sendMultipleAdRequestsWithParameterAndRoute(Integer times, String parameter, String zoneByName, String route, boolean toReset) {
+        Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
+                .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+        sut.getUASRquestModule().zoneRequestsWithParameterAndRoute(zone.getId(), parameter, route, times, toReset);
     }
 
 
