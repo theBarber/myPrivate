@@ -256,7 +256,7 @@ Feature: Header Bidding flow support
 #   header bidding placment group test
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected
     Given I clear all cookies from uas requests
-    Given i send 1 headerBidding secure post request for publisher 3728 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {slader.com} and placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for publisher 3728 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {slader.com} and placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -272,7 +272,7 @@ Feature: Header Bidding flow support
 
   Scenario: 3. 1 size 1*2 (ST), 1 placement (PG), PG banner expected
     Given I clear all cookies from uas requests
-    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -285,7 +285,7 @@ Feature: Header Bidding flow support
 
   Scenario: 5. wrong size, 1 placement group (PG), PG banner expected
     Given I clear all cookies from uas requests
-    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 200
     And The response contains {script}
     And The response contains {campaignId}
@@ -294,7 +294,7 @@ Feature: Header Bidding flow support
 
   Scenario: 6. size doesn't belong to placement group, banner from placement group expected
     Given I clear all cookies from uas requests
-    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
