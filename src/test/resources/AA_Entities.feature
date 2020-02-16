@@ -768,9 +768,9 @@ Feature: Entities for tests
       | campaign-PLT-YesPersonaL-ST-2 | 1                    |
     And i update banner data by name
       | Banner Name                            | limitation                              |
-      | campaign-PLT-NotPersonaL-ST-1-banner-1 | [[[4,"==",90,1,456],[4,"==",90,1,123]]] |
-      | campaign-PLT-YesPersonaL-ST-1-banner-1 | [[[4,"==",90,1,456],[4,"==",90,1,123]]] |
-      | campaign-PLT-YesPersonaL-ST-2-banner-1 | [[[4,"==",90,1,123]]]                   |
+      | campaign-PLT-NotPersonaL-ST-1-banner-1 | [[[4,"==",365,1,456],[4,"==",365,1,123]]] |
+      | campaign-PLT-YesPersonaL-ST-1-banner-1 | [[[4,"==",365,1,456],[4,"==",365,1,123]]] |
+      | campaign-PLT-YesPersonaL-ST-2-banner-1 | [[[4,"==",365,1,123]]]                   |
     And i update zone data by name
       | Zone Name                         | is_secure |
       | zone-zoneset-PLT-NotPersonaL-ST-1 | 1         |
