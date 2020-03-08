@@ -3,6 +3,7 @@
 @uas
 @parallel
 @noAA
+@blackAndWhite1
 
 Feature: Black and White testing
 
