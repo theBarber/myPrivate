@@ -187,7 +187,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 10.1    |   Negative  test |   player_size = 1       |  player_size = small
   request:             player_size = medium  |  resolution = 250 X 350  |   calculated site = 37.9%
   response:            passback
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=250&ch=350&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playback1-size1} to UAS
     Then The response code is 200
     And The responses are passback
@@ -196,7 +196,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 11.0      |   Positive  test    |     player_size = 2        |  player_size = medium
   request:           player_size = medium   |  resolution = 250 X 350    |   calculated site = 37.9%
   response:          player_size = medium
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=250&ch=350&vpmt=2} for zone named {zone-zoneset-LinearVideoFiltering-playback2-size2} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -206,7 +206,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 11.1    |   Negative  test      |   player_size = 2            |   player_size = medium
   request:          player_size = small     |  resolution = 150 X 200      |   calculated site = 13%
   response:            passback
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=150&ch=200&vpmt=2} for zone named {zone-zoneset-LinearVideoFiltering-playback2-size2} to UAS
     Then The response code is 200
     And The responses are passback
@@ -214,7 +214,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 11.2    |   Negative  test      |   player_size = 2            |   player_size = medium
   request:             player_size = large  |   resolution = 450 X 500     |   calculated site = 97.6%
   response:            passback
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=450&ch=500&vpmt=2} for zone named {zone-zoneset-LinearVideoFiltering-playback2-size2} to UAS
     Then The response code is 200
     And The responses are passback
@@ -222,7 +222,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 12.0       |   Positive  test    |   player_size = 3
   request:              player_size = large  |   resolution = 450 X 500     |   calculated site = 97.6%
   response:             player_size = large
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=450&ch=500&vpmt=3} for zone named {zone-zoneset-LinearVideoFiltering-playback3-size3} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -232,7 +232,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 12.1     |   Negative  test      |   player_size = 3            |   player_size = large
   request:            player_size = medium   |  resolution = 250 X 350    |   calculated site = 37.9%
   response:            passback
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=250&ch=350&vpmt=3} for zone named {zone-zoneset-LinearVideoFiltering-playback3-size3} to UAS
     Then The response code is 200
     And The responses are passback
@@ -241,7 +241,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 13.0        |   Positive  test    |   player_size = all
   request:      player_size = small           |  resolution = 150 X 200  |   calculated site = 13%
   response:     player_size = small
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=150&ch=200&vpmt=4} for zone named {zone-zoneset-LinearVideoFiltering-playback4-allsizes} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -252,7 +252,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 13.1        |   Positive  test    |   player_size = all
   request:      player_size = medium  |  resolution = 250 X 350  |   calculated site = 37.9%
   response:     player_size = medium
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=250&ch=350&vpmt=4} for zone named {zone-zoneset-LinearVideoFiltering-playback4-allsizes} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -262,7 +262,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 13.2        |   Positive  test    |   player_size = all
   request:              player_size = large  |   resolution = 450 X 500     |   calculated site = 97.6%
   response:             player_size = large
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=450&ch=500&vpmt=4} for zone named {zone-zoneset-LinearVideoFiltering-playback4-allsizes} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -273,7 +273,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 14.0        |   Positive  test    |   player_size = 1 & 2  (small & medium)
   request:      player_size = small           |  resolution = 150 X 200  |   calculated site = 13%
   response:     player_size = small
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=150&ch=200} for zone named {zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -284,7 +284,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 14.1        |   Positive  test    |   player_size = 1 & 2  (small & medium)
   request:      player_size = medium  |  resolution = 250 X 350  |   calculated site = 37.9%
   response:     player_size = medium
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=250&ch=350} for zone named {zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -295,7 +295,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 14.2        |   Negative  test    |   player_size = 1 & 2  (small & medium)
   request:              player_size = large  |   resolution = 450 X 500     |   calculated site = 97.6%
   response:             passback
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=450&ch=500} for zone named {zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2} to UAS
     Then The response code is 200
     And The responses are passback
@@ -304,7 +304,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 15.0        |   Positive  test    |   player_size = no size
   request:      player_size = small           |  resolution = 150 X 200  |   calculated site = 13%
   response:     player_size = small
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=150&ch=200} for zone named {zone-zoneset-LinearVideoFiltering-noPlayback-noSize} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -314,7 +314,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 15.1        |   Positive  test    |   player_size = no size
   request:      player_size = medium  |  resolution = 250 X 350  |   calculated site = 37.9%
   response:     player_size = medium
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=250&ch=350} for zone named {zone-zoneset-LinearVideoFiltering-noPlayback-noSize} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -325,7 +325,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   Scenario: 15.2        |   Positive  test    |   player_size = no size
   request:              player_size = large  |   resolution = 450 X 500     |   calculated site = 97.6%
   response:             player_size = large
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=450&ch=500} for zone named {zone-zoneset-LinearVideoFiltering-noPlayback-noSize} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
