@@ -197,24 +197,24 @@ Feature: Header Bidding flow support
     And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
     And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
     And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
-    And I sleep for 5 seconds
-    Given I read the latest hbl log file from uas
-    And For bidID bid1 The field bid_request_id in the 30 column of the hbl log is: bid1
-    And For bidID bid1 The field Selected_Ad_Size in the 6 column of the hbl log is: [[1,2],[160,600]]
-    And For bidID bid1 The field Bid_price in the 15 column of the hbl log is: 1.00
-    And For bidID bid1 The field Publisher_id in the 3 column of the hbl log is: 3673
-    And For bidID bid1 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-    And For bidID bid2 The field bid_request_id in the 30 column of the hbl log is: bid2
-    And For bidID bid2 The field Selected_Ad_Size in the 6 column of the hbl log is: [[970,250]]
-    And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 0.50
-    And For bidID bid2 The field Publisher_id in the 3 column of the hbl log is: 3673
-    And For bidID bid2 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-    And For bidID bid3 The field bid_request_id in the 30 column of the hbl log is: bid3
-    And For bidID bid3 The field Selected_Ad_Size in the 6 column of the hbl log is: [[300,250]]
-    And For bidID bid3 The field Bid_price in the 15 column of the hbl log is: 2.50
-    And For bidID bid3 The field Publisher_id in the 3 column of the hbl log is: 3673
-    And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-    And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
+## Eitan commented      And I sleep for 5 seconds
+## Eitan commented      Given I read the latest hbl log file from uas
+## Eitan commented      And For bidID bid1 The field bid_request_id in the 30 column of the hbl log is: bid1
+## Eitan commented      And For bidID bid1 The field Selected_Ad_Size in the 6 column of the hbl log is: [[1,2],[160,600]]
+## Eitan commented      And For bidID bid1 The field Bid_price in the 15 column of the hbl log is: 1.00
+## Eitan commented      And For bidID bid1 The field Publisher_id in the 3 column of the hbl log is: 3673
+## Eitan commented      And For bidID bid1 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+## Eitan commented      And For bidID bid2 The field bid_request_id in the 30 column of the hbl log is: bid2
+## Eitan commented      And For bidID bid2 The field Selected_Ad_Size in the 6 column of the hbl log is: [[970,250]]
+## Eitan commented      And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 0.50
+## Eitan commented      And For bidID bid2 The field Publisher_id in the 3 column of the hbl log is: 3673
+## Eitan commented      And For bidID bid2 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+## Eitan commented      And For bidID bid3 The field bid_request_id in the 30 column of the hbl log is: bid3
+## Eitan commented      And For bidID bid3 The field Selected_Ad_Size in the 6 column of the hbl log is: [[300,250]]
+## Eitan commented      And For bidID bid3 The field Bid_price in the 15 column of the hbl log is: 2.50
+## Eitan commented      And For bidID bid3 The field Publisher_id in the 3 column of the hbl log is: 3673
+## Eitan commented      And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+## Eitan commented      And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
 
 #   header bidding multiple domains tests
   Scenario: header bidding multiple domains - domain1
