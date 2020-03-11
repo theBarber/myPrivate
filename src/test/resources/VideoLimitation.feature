@@ -18,7 +18,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
 
   Scenario: 1.0      playback_method = all   |  player_size = none
   request:  playback_method = 1     |  player_size = 1
-  response: playback_method = CTP   |  player_size = small
+  response: playback_method = ATP(No sound) |  player_size = small
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=300&ch=250&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-noSize} to UAS
     Then The response code is 200
@@ -39,7 +39,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
 
   Scenario: 2.0      playback_method = 1    |  player_size = 1
   request:  playback_method = 1    |  player_size = 1
-  response: playback_method = CTP  |  player_size = small
+  response: playback_method = ATP  |  player_size = small
     Given I send 1 times an ad video request with parameter {cw=300&ch=250&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playback1-size1} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
@@ -68,7 +68,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
 
   Scenario: 3.0       playback_method = 2             |   player_size = 2
   request:  playback_method = 2             |   player_size = 2
-  response: playback_method = ATP(Sound On) |   player_size = medium
+  response: playback_method = ATP(Sound off) |   player_size = medium
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=400&ch=300&vpmt=2} for zone named {zone-zoneset-LinearVideoFiltering-playback2-size2} to UAS
     Then The response code is 200
@@ -81,7 +81,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
 
   Scenario: 4.0       playback_method = 3              |   player_size = 3
   request:  playback_method = 3              |   player_size = 3
-  response: playback_method = ATP(Sound Off) |   player_size = large
+  response: playback_method = CTP |   player_size = large
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=1280&ch=720&vpmt=3} for zone named {zone-zoneset-LinearVideoFiltering-playback3-size3} to UAS
     Then The response code is 200
@@ -128,7 +128,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
 
   Scenario: 7.0       playback_method = all   |   player_size = all
   request:  playback_method = 1     |   player_size = 2
-  response: playback_method = CTP   |   player_size = medium
+  response: playback_method = all   |   player_size = medium
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I send 1 times an ad video request with parameter {cw=300&ch=300&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackall-allsizes} to UAS
     Then The response code is 200
