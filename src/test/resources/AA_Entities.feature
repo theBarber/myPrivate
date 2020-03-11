@@ -1409,6 +1409,38 @@ Feature: Entities for tests
       | zone-zoneset-LinearVideoFiltering-noPlayback-noSize     | 1         |
       | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1         |
 
+  @AbishekExercise
+  Scenario: Create entities for programmatic and direct campaign
+    Given i disable campaigns by name on db
+      |Campaign Name                    |
+      |Direct-Campaign-Test-Zone        |
+      |Direct-Campaign-Test-HB          |
+      |Direct-Campaign-Test-DT          |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                      | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | Direct-Campaign-Test-Zone          | 407981 | 253288   | false                 | 27534         | {zone-zoneset-Abishek-Exercise-Direct} | []         | 95       | 2080           | 3728         | 69822           | []          | []          |
+      | Direct-Campaign-Test-HB            | 407981 | 253288   | false                 | 27534         | {zone-zoneset-Abishek-Exercise-HB}     | []         | 95       | 2080           | 3728         | 69822           | []          | []          |
+      | Direct-Campaign-Test-DT            | 407981 | 253288   | false                 | 27534         | {zone-zoneset-Abishek-Exercise-DT}     | []         | 95       | 2080           | 3728         | 69822           | []          | []          |
+
+    And i update zone data in db by name
+#        And i update zone data by name
+      | Zone Name                              | is_secure |
+      | {zone-zoneset-Abishek-Exercise-Direct} | 1         |
+      | {zone-zoneset-Abishek-Exercise-HB}     | 1         |
+      | {zone-zoneset-Abishek-Exercise-DT}     | 1         |
+
+    And i update campaign data by name
+      | Campaign Name               | units | goal_type   |
+      | Direct-Campaign-Test-Zone   | -1    | impressions |
+      | Direct-Campaign-Test-HB     | -1    | impressions |
+      | Direct-Campaign-Test-DT     | -1    | impressions |
+
+    And i update banner data by name
+      | Banner Name                       | limitation |
+      | Direct-Banner-Test-Zone-Banner-1  | []         |
+      | Direct-Banner-Test-HB-Banner-1    | []         |
+      | Direct-Banner-Test-DT-Banner-1    | []         |
 
   @DynamicPricing
   @InAppBlackWhiteList
@@ -1474,3 +1506,4 @@ Feature: Entities for tests
   @refresh
   Scenario: save entities to file
     And save all entities to json file
+
