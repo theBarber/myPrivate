@@ -1425,10 +1425,10 @@ Feature: Entities for tests
 
     And i update zone data in db by name
 #        And i update zone data by name
-      | Zone Name                              | is_secure |
-      | {zone-zoneset-Abishek-Exercise-Direct} | 1         |
-      | {zone-zoneset-Abishek-Exercise-HB}     | 1         |
-      | {zone-zoneset-Abishek-Exercise-DT}     | 1         |
+      | Zone Name                            | is_secure |
+      | zone-zoneset-Abishek-Exercise-Direct | 1         |
+      | zone-zoneset-Abishek-Exercise-HB     | 1         |
+      | zone-zoneset-Abishek-Exercise-DT     | 1         |
 
     And i update campaign data by name
       | Campaign Name               | units | goal_type   |
@@ -1493,26 +1493,26 @@ Feature: Entities for tests
       | campaign-NewRenderTest-web-programmatic-HB-video    | 75396 | 234808   | false                 | 24176         | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}    | []         | 35       | 15196          | 3708         | 69158           | []          | []          |                | 1,2,3,4            |
 
     And i update zone data by name
-      | Zone Name                                                 | is_secure |
-      | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}          |   1       |
-      | {zone-zoneset-NewRenderTest-Direct-DT-Regular}            |   1       |
-      | {zone-zoneset-NewRenderTest-Direct-HB-Regular}            |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-Direct}                  |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-HB}                      |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-DT}                      |   1       |
-      | {zone-zoneset-NewRenderTest-Zone-PGAction}                |   1       |
-      | {zone-zoneset-NewRenderTest-DT-PGAction}                  |   1       |
-      | {zone-zoneset-NewRenderTest-HB-PGAction}                  |   1       |
-      | {zone-zoneset-Abishek-Prog-Exercise-Direct}               |   1       |
-      | {zone-zoneset-Abishek-Prog-Exercise-HB}                   |   1       |
-      | {zone-zoneset-Abishek-Prog-Exercise-DT}                   |   1       |
-      | {zone-zoneset-NewRenderTest-InApp-Direct}                 |   1       |
-      | {zone-zoneset-NewRenderTest-web-direct-zone-video}        |   1       |
-      | {zone-zoneset-NewRenderTest-web-direct-DT-video}          |   1       |
-      | {zone-zoneset-NewRenderTest-web-direct-HB-video}          |   1       |
-      | {zone-zoneset-NewRenderTest-web-programmatic-zone-video}  |   1       |
-      | {zone-zoneset-NewRenderTest-web-programmatic-DT-video}    |   1       |
-      | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}    |   1       |
+      | Zone Name                                               | is_secure |
+      | zone-zoneset-NewRenderTest-Direct-Zone-Regular          |   1       |
+      | zone-zoneset-NewRenderTest-Direct-DT-Regular            |   1       |
+      | zone-zoneset-NewRenderTest-Direct-HB-Regular            |   1       |
+      | zone-zoneset-NewRenderTest-Prog-Direct                  |   1       |
+      | zone-zoneset-NewRenderTest-Prog-HB                      |   1       |
+      | zone-zoneset-NewRenderTest-Prog-DT                      |   1       |
+      | zone-zoneset-NewRenderTest-Zone-PGAction                |   1       |
+      | zone-zoneset-NewRenderTest-DT-PGAction                  |   1       |
+      | zone-zoneset-NewRenderTest-HB-PGAction                  |   1       |
+      | zone-zoneset-Abishek-Prog-Exercise-Direct               |   1       |
+      | zone-zoneset-Abishek-Prog-Exercise-HB                   |   1       |
+      | zone-zoneset-Abishek-Prog-Exercise-DT                   |   1       |
+      | zone-zoneset-NewRenderTest-InApp-Direct                 |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-zone-video        |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-DT-video          |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-HB-video          |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-zone-video  |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-DT-video    |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-HB-video    |   1       |
 
     And i update campaign data by name
       | Campaign Name                                         | units | goal_type   |
