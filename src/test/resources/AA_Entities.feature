@@ -1497,27 +1497,27 @@ Feature: Entities for tests
       | campaign-NewRenderTest-web-programmatic-HB-video        | 75396 | 234808   | false                 | 24176         | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}    | []         | 35       | 15196          | 3708         | 69158           | []          | []          |                | 1,2,3,4            |
 
     And i update zone data by name
-      | Zone Name                                                 | is_secure |
-      | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}          |   1       |
-      | {zone-zoneset-NewRenderTest-Direct-DT-Regular}            |   1       |
-      | {zone-zoneset-NewRenderTest-Direct-HB-Regular}            |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-Zone}                    |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-HB}                      |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-DT}                      |   1       |
-      | {zone-zoneset-NewRenderTest-Direct-Zone-PGAction}         |   1       |
-      | {zone-zoneset-NewRenderTest-Direct-DT-PGAction}           |   1       |
-      | {zone-zoneset-NewRenderTest-Direct-HB-PGAction}           |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-Zone-PGAction}           |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-HB-PGAction}             |   1       |
-      | {zone-zoneset-NewRenderTest-Prog-DT-PGAction}             |   1       |
-      | {zone-zoneset-NewRenderTest-InApp-Direct}                 |   1       |
-      | {zone-zoneset-NewRenderTest-InApp-Programmatic}           |   1       |
-      | {zone-zoneset-NewRenderTest-web-direct-zone-video}        |   1       |
-      | {zone-zoneset-NewRenderTest-web-direct-DT-video}          |   1       |
-      | {zone-zoneset-NewRenderTest-web-direct-HB-video}          |   1       |
-      | {zone-zoneset-NewRenderTest-web-programmatic-zone-video}  |   1       |
-      | {zone-zoneset-NewRenderTest-web-programmatic-DT-video}    |   1       |
-      | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}    |   1       |
+      | Zone Name                                               | is_secure |
+      | zone-zoneset-NewRenderTest-Direct-Zone-Regular          |   1       |
+      | zone-zoneset-NewRenderTest-Direct-DT-Regular            |   1       |
+      | zone-zoneset-NewRenderTest-Direct-HB-Regular            |   1       |
+      | zone-zoneset-NewRenderTest-Prog-Zone                    |   1       |
+      | zone-zoneset-NewRenderTest-Prog-HB                      |   1       |
+      | zone-zoneset-NewRenderTest-Prog-DT                      |   1       |
+      | zone-zoneset-NewRenderTest-Direct-Zone-PGAction         |   1       |
+      | zone-zoneset-NewRenderTest-Direct-DT-PGAction           |   1       |
+      | zone-zoneset-NewRenderTest-Direct-HB-PGAction           |   1       |
+      | zone-zoneset-NewRenderTest-Prog-Zone-PGAction           |   1       |
+      | zone-zoneset-NewRenderTest-Prog-HB-PGAction             |   1       |
+      | zone-zoneset-NewRenderTest-Prog-DT-PGAction             |   1       |
+      | zone-zoneset-NewRenderTest-InApp-Direct                 |   1       |
+      | zone-zoneset-NewRenderTest-InApp-Programmatic           |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-zone-video        |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-DT-video          |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-HB-video          |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-zone-video  |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-DT-video    |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-HB-video    |   1       |
 
 
     And i update campaign data by name
