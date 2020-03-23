@@ -1468,7 +1468,7 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-SP                 |
       | campaign-NewRenderTest-InApp-Direct                     |
       | campaign-NewRenderTest-InApp-Programmatic               |
-      | campaign-NewRenderTest-web-direct-event-trackers        |
+#      | campaign-NewRenderTest-web-direct-event-trackers        |
 
 
     Given i create new campaigns, new zoneset with domains
@@ -1493,7 +1493,7 @@ Feature: Entities for tests
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 407981 | 265067   | true                  | 2496          | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P}  | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
       | campaign-NewRenderTest-Instream-View-zone               | 75396  | 234808   | false                 | 24176         | {zone-zoneset-NewRenderTest-Instream-View-direct}           | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
       | campaign-NewRenderTest-Instream-View-SP                 | 407981 | 265079   | true                  | 2503          | {zone-zoneset-NewRenderTest-Instream-View-programmatic}     | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 32967         | {zone-zoneset-NewRenderTest-Direct-event-trackers}          | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
+#      | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 32967         | {zone-zoneset-NewRenderTest-Direct-event-trackers}          | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
 
 
 
@@ -1527,7 +1527,7 @@ Feature: Entities for tests
       | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P  |   1       |
       | zone-zoneset-NewRenderTest-Instream-View-direct           |   1       |
       | zone-zoneset-NewRenderTest-Instream-View-programmatic     |   1       |
-      | zone-zoneset-NewRenderTest-Direct-event-trackers          |   1       |
+#      | zone-zoneset-NewRenderTest-Direct-event-trackers          |   1       |
 
 
     And i update campaign data by name
@@ -1554,7 +1554,7 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-SP                 | -1    | impressions |
       | campaign-NewRenderTest-InApp-Direct                     | -1    | impressions |
       | campaign-NewRenderTest-InApp-Programmatic               | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-event-trackers        | -1    | impressions |
+#      | campaign-NewRenderTest-web-direct-event-trackers        | -1    | impressions |
 
     And i update campaign data by name
       | Campaign Name                                           | viewability_wrapper_enabled | viewability_wrapper_vendor |
@@ -1593,7 +1593,7 @@ Feature: Entities for tests
       | banner-NewRenderTest-Instream-View-SP                 | []         |
       | banner-NewRenderTest-InApp-Direct                     | []         |
       | banner-NewRenderTest-InApp-Programmatic               | []         |
-      | banner-NewRenderTest-web-direct-event-trackers        | []         |
+#      | banner-NewRenderTest-web-direct-event-trackers        | []         |
 
 
 
