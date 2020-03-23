@@ -1552,7 +1552,18 @@ Feature: Entities for tests
       | campaign-NewRenderTest-InApp-Direct                     | -1    | impressions |
       | campaign-NewRenderTest-InApp-Programmatic               | -1    | impressions |
 
-
+    And i update campaign data by name
+      | Campaign Name                                           | viewability_wrapper_enabled | viewability_wrapper_vendor |
+      | campaign-NewRenderTest-web-direct-zone-video            | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-direct-DT-video              | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-direct-HB-video              | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-programmatic-zone-video      | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-programmatic-DT-video        | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-programmatic-HB-video        | 1                           | IAS                        |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 1                           | IAS                        |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 1                           | IAS                        |
+      | campaign-NewRenderTest-Instream-View-zone               | 1                           | IAS                        |
+      | campaign-NewRenderTest-Instream-View-SP                 | 1                           | IAS                        |
 
 
   @DynamicPricing
