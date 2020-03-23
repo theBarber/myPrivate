@@ -1466,6 +1466,8 @@ Feature: Entities for tests
       | campaign-NewRenderTest-InApp-Programmatic               |
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      |
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog |
+      | campaign-NewRenderTest-Instream-View-zone               |
+      | campaign-NewRenderTest-Instream-View-SP                 |
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                         | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
@@ -1487,6 +1489,9 @@ Feature: Entities for tests
       | campaign-NewRenderTest-web-programmatic-HB-video        | 407981 | 243710   | true                  | 568           | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}      | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 407981 | 248986   | false                 | 25108         | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone}    | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 407981 | 265067   | true                  | 2496          | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P}  | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
+      | campaign-NewRenderTest-Instream-View-zone               | 75396  | 234808   | false                 | 24176         | {zone-zoneset-NewRenderTest-Instream-View-direct}           | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-NewRenderTest-Instream-View-SP                 | 407981 | 265079   | true                  | 2503          | {zone-zoneset-NewRenderTest-Instream-View-programmatic}     | []         | 35       | 15196          | 3708         | 69158           | []          | []             |
+
 
 
     And i create new campaigns with new zoneset
@@ -1517,6 +1522,8 @@ Feature: Entities for tests
       | zone-zoneset-NewRenderTest-InApp-Programmatic             |   1       |
       | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone    |   1       |
       | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P  |   1       |
+      | zone-zoneset-NewRenderTest-Instream-View-direct           |   1       |
+      | zone-zoneset-NewRenderTest-Instream-View-programmatic     |   1       |
 
 
     And i update campaign data by name
@@ -1541,6 +1548,8 @@ Feature: Entities for tests
       | campaign-NewRenderTest-InApp-Programmatic               | -1    | impressions |
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | -1    | impressions |
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | -1    | impressions |
+      | campaign-NewRenderTest-Instream-View-zone               | -1    | impressions |
+      | campaign-NewRenderTest-Instream-View-SP                 | -1    | impressions |
 
 
 
