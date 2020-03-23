@@ -1291,26 +1291,23 @@ Feature: Entities for tests
       | campaign-small-D-skip-Y            |
       | campaign-large-D-skip-N            |
       | campaign-small-D-skip-N            |
-
       | campaign-equal-D-skip-Y            |
       | campaign-equal-D-skip-N            |
-
       | campaign-pub1-level-large-D-skip-Y |
       | campaign-pub1-level-small-D-skip-Y |
       | campaign-pub1-level-large-D-skip-N |
       | campaign-pub1-level-small-D-skip-N |
-
       | campaign-pub1-level-equal-D-skip-Y |
       | campaign-pub1-level-equal-D-skip-N |
-
       | campaign-pub2-level-large-D-skip-Y |
       | campaign-pub2-level-small-D-skip-Y |
       | campaign-pub2-level-large-D-skip-N |
       | campaign-pub2-level-small-D-skip-N |
-
       | campaign-pub2-level-equal-D-skip-Y |
       | campaign-pub2-level-equal-D-skip-N |
-
+    #*************  Video Adhesion duration filter *************
+      | video-adhesion-campaign-30-skip-Y  |
+      | video-adhesion-campaign-30-skip-N  |
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                      | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
@@ -1332,6 +1329,9 @@ Feature: Entities for tests
       | campaign-pub2-level-small-D-skip-N | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub2-level-small-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-equal-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+ #*************  Video Adhesion duration filter *************
+      | video-adhesion-campaign-30-skip-Y  | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | video-adhesion-campaign-30-skip-N  | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
 
     And i update zone data by name
       | Zone Name                                       | is_secure |
@@ -1353,6 +1353,9 @@ Feature: Entities for tests
       | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1         |
       | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1         |
       | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1         |
+     #*************  Video Adhesion duration filter *************
+      | zone-zoneset-video-adhesion-campaign-30-skip-Y | 1         |
+      | zone-zoneset-video-adhesion-campaign-30-skip-N | 1         |
 
 
   ##  &&&&&&&&&&&&&&&&&    LinearVidFiltering    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
