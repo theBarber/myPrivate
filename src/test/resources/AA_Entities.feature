@@ -1349,8 +1349,8 @@ Feature: Entities for tests
       | campaign-pub2-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-equal-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
  #*************  Video Adhesion duration filter *************
-      | video-adhesion-campaign-30-skip-Y  | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
-      | video-adhesion-campaign-30-skip-N  | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-vid-adhesion-30-skip-Y    | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-vid-adhesion-30-skip-N    | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
 # ****  update is_sync=1 & is_secure=1 parameters of the zone ***
     And i update zone data by name
       | Zone Name                                       | is_secure | is_sync |
@@ -1459,7 +1459,7 @@ Feature: Entities for tests
 
     # ****  update is_sync=1 & is_video=1 parameters of the zoneset ***
     And i update zoneset data by name
-      | Zoneset Name                                            | is_secure | is_video |
+      | Zoneset Name                                            | is_sync | is_video |
       | zone-zoneset-LinearVideoFiltering-playbackAll-noSize    | 1         | 1        |
       | zone-zoneset-LinearVideoFiltering-playback1-size1       | 1         | 1        |
       | zone-zoneset-LinearVideoFiltering-playback2-size2       | 1         | 1        |
