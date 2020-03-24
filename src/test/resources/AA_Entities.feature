@@ -1569,32 +1569,6 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-zone               | 1                           | IAS                        |
 #      | campaign-NewRenderTest-Instream-View-SP                 | 1                           | IAS                        |
 
-    And i update banner data by name
-      | Banner Name                                           | limitation |
-      | banner-NewRenderTest-web-direct-zone-banner           | []         |
-      | banner-NewRenderTest-web-direct-DT-banner             | []         |
-      | banner-NewRenderTest-web-direct-HB-banner             | []         |
-#      | banner-NewRenderTest-web-programmatic-zone-banner     | []         |
-#      | banner-NewRenderTest-web-programmatic-HB-banner       | []         |
-#      | banner-NewRenderTest-web-programmatic-DT-banner       | []         |
-      | banner-NewRenderTest-web-direct-zone-PGAction         | []         |
-      | banner-NewRenderTest-web-direct-DT-PGAction           | []         |
-#      | banner-NewRenderTest-web-programmatic-zone-PGAction   | []         |
-#      | banner-NewRenderTest-web-programmatic-DT-PGAction     | []         |
-      | banner-NewRenderTest-web-direct-zone-video            | []         |
-      | banner-NewRenderTest-web-direct-DT-video              | []         |
-      | banner-NewRenderTest-web-direct-HB-video              | []         |
-#      | banner-NewRenderTest-web-programmatic-zone-video      | []         |
-#      | banner-NewRenderTest-web-programmatic-DT-video        | []         |
-#      | banner-NewRenderTest-web-programmatic-HB-video        | []         |
-      | banner-NewRenderTest-VidAd-w/o-leave-behind-zone      | []         |
-#      | banner-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | []         |
-      | banner-NewRenderTest-Instream-View-zone               | []         |
-#      | banner-NewRenderTest-Instream-View-SP                 | []         |
-      | banner-NewRenderTest-InApp-Direct                     | []         |
-#      | banner-NewRenderTest-InApp-Programmatic               | []         |
-      | banner-NewRenderTest-web-direct-event-trackers        | []         |
-
 
 
 
