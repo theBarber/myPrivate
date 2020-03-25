@@ -846,6 +846,11 @@ Feature: Entities for tests
       | Campaign Name     | Priority |
       | campaign-TN       | -1       |
       | campaign-vidAd-SP | -2       |
+     # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
+    And i update campaign data by name
+      | Campaign Name     | is_sync | is_video |
+      | campaign-TN       | 1       | 1        |
+      | campaign-vidAd-SP | 1       | 1        |
     # ****  update is_sync=1 parameter of the zone ***
     And i update zone data by name
       | Zone Name             | is_sync |
@@ -976,6 +981,11 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-InstreamVid-View-SP | 407981 | 244699   | true                  | 816           | {zone-zoneset-InstreamVid-View-SP} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+     # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
+    And i update campaign data by name
+      | Campaign Name                | is_sync | is_video |
+      | campaign-InstreamVid-View-SP | 1       | 1        |
+
 #    And i update campaign data by name
 #      | Campaign Name                | viewability_wrapper_enabled | viewability_wrapper_vendor |
 #      | campaign-InstreamVid-View-SP | 1                           | MOAT                       |
@@ -1351,6 +1361,31 @@ Feature: Entities for tests
  #*************  Video Adhesion duration filter *************
       | campaign-vid-adhesion-30-skip-Y    | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
       | campaign-vid-adhesion-30-skip-N    | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+
+         # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
+    And i update campaign data by name
+      | Campaign Name                               | is_sync | is_video | goal_type |
+      | campaign-large-D-skip-Y                     | 1       | 1        |impressions|
+      | campaign-small-D-skip-Y                     | 1       | 1        |impressions|
+      | campaign-large-D-skip-N                     | 1       | 1        |impressions|
+      | campaign-small-D-skip-N                     | 1       | 1        |impressions|
+      | campaign-equal-D-skip-Y                     | 1       | 1        |impressions|
+      | campaign-equal-D-skip-N                     | 1       | 1        |impressions|
+      | campaign-pub1-level-large-D-skip-Y S-Video} | 1       | 1        |impressions|
+      | campaign-pub1-level-small-D-skip-Y S-Video} | 1       | 1        |impressions|
+      | campaign-pub1-level-large-D-skip-N S-Video} | 1       | 1        |impressions|
+      | campaign-pub1-level-small-D-skip-N S-Video} | 1       | 1        |impressions|
+      | campaign-pub1-level-equal-D-skip-Y S-Video} | 1       | 1        |impressions|
+      | campaign-pub1-level-equal-D-skip-N S-Video} | 1       | 1        |impressions|
+      | campaign-pub2-level-large-D-skip-Y S-Video} | 1       | 1        |impressions|
+      | campaign-pub2-level-small-D-skip-Y S-Video} | 1       | 1        |impressions|
+      | campaign-pub2-level-large-D-skip-N S-Video} | 1       | 1        |impressions|
+      | campaign-pub2-level-small-D-skip-N S-Video} | 1       | 1        |impressions|
+      | campaign-pub2-level-equal-D-skip-Y S-Video} | 1       | 1        |impressions|
+      | campaign-pub2-level-equal-D-skip-N S-Video} | 1       | 1        |impressions|
+      | campaign-vid-adhesion-30-skip-Y    skip-Y}  | 1       | 1        |impressions|
+      | campaign-vid-adhesion-30-skip-N    skip-N}  | 1       | 1        |impressions|
+
 # ****  update is_sync=1 & is_secure=1 parameters of the zone ***
     And i update zone data by name
       | Zone Name                                       | is_secure | is_sync |
@@ -1432,17 +1467,17 @@ Feature: Entities for tests
       | campaign-LinearVideoFiltering-noPlayback-sizes1And2 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2} | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 1,2            |                    |
 
     And i update campaign data by name
-      | Campaign Name                                       | units | goal_type   |
-      | campaign-LinearVideoFiltering-playbackAll-noSize    | -1    | impressions |
-      | campaign-LinearVideoFiltering-playback1-size1       | -1    | impressions |
-      | campaign-LinearVideoFiltering-playback2-size2       | -1    | impressions |
-      | campaign-LinearVideoFiltering-playback3-size3       | -1    | impressions |
-      | campaign-LinearVideoFiltering-playback4-allsizes    | -1    | impressions |
-      | campaign-LinearVideoFiltering-playbackAll-size3     | -1    | impressions |
-      | campaign-LinearVideoFiltering-playbackall-allsizes  | -1    | impressions |
-      | campaign-LinearVideoFiltering-noPlayback-allsizes   | -1    | impressions |
-      | campaign-LinearVideoFiltering-noPlayback-noSize     | -1    | impressions |
-      | campaign-LinearVideoFiltering-noPlayback-sizes1And2 | -1    | impressions |
+      | Campaign Name                                       | units | goal_type   | is_sync | is_video |
+      | campaign-LinearVideoFiltering-playbackAll-noSize    | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playback1-size1       | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playback2-size2       | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playback3-size3       | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playback4-allsizes    | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playbackAll-size3     | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playbackall-allsizes  | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-noPlayback-allsizes   | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-noPlayback-noSize     | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-noPlayback-sizes1And2 | -1    | impressions | 1       | 1        |
 # ****  update is_sync=1 & is_secure=1 parameters of the zone ***
     And i update zone data by name
       | Zone Name                                               | is_secure | is_sync |
@@ -1460,16 +1495,16 @@ Feature: Entities for tests
     # ****  update is_sync=1 & is_video=1 parameters of the zoneset ***
     And i update zoneset data by name
       | Zoneset Name                                            | is_sync | is_video |
-      | zone-zoneset-LinearVideoFiltering-playbackAll-noSize    | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-playback1-size1       | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-playback2-size2       | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-playback3-size3       | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-playback4-allsizes    | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-playbackAll-size3     | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-playbackall-allsizes  | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-noPlayback-allsizes   | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-noPlayback-noSize     | 1         | 1        |
-      | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1         | 1        |
+      | zone-zoneset-LinearVideoFiltering-playbackAll-noSize    | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playback1-size1       | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playback2-size2       | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playback3-size3       | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playback4-allsizes    | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playbackAll-size3     | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playbackall-allsizes  | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-allsizes   | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-noSize     | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1       | 1        |
 
   @DynamicPricing
   @InAppBlackWhiteList
