@@ -842,15 +842,13 @@ Feature: Entities for tests
       | Campaign Name     | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-TN       | 75396  | 243707   | false                 | 21638         | {zone-zoneset-TN}       | []         | 97       | 15196          | 3708         | 69992           | []             | []             |
       | campaign-vidAd-SP | 407981 | 243710   | true                  | 568           | {zone-zoneset-vidAd-SP} | []         | 97       | 15292          | 3708         | 69992           | []             | []             |
+
+    # ****  update also is_sync=1 & is_video=1 parameters of the campaign ***
     And i update campaign data by name
-      | Campaign Name     | Priority |
-      | campaign-TN       | -1       |
-      | campaign-vidAd-SP | -2       |
-     # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
-    And i update campaign data by name
-      | Campaign Name     | is_sync | is_video |
-      | campaign-TN       | 1       | 1        |
-      | campaign-vidAd-SP | 1       | 1        |
+      | Campaign Name     | Priority | is_sync | is_video |
+      | campaign-TN       | -1       | 1       | 1        |
+      | campaign-vidAd-SP | -2       | 1       | 1        |
+
     # ****  update is_sync=1 parameter of the zone ***
     And i update zone data by name
       | Zone Name             | is_sync |
