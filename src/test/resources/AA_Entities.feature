@@ -1531,8 +1531,8 @@ Feature: Entities for tests
       | zone-zoneset-NewRenderTest-Passback                       |   1       |
 
     And i update zone data by name
-      | Zone Name                                                 | passback                                                                                                                                                                                                                                                                                    |
-      | zone-zoneset-NewRenderTest-Passback                       | <script language="javascript" type="text/javascript">document.write('<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"><\/scr' + 'ipt>');</script>   |
+      | Zone Name                                                 | passback                                                                                                                                                                                                                                                                                        |
+      | zone-zoneset-NewRenderTest-Passback                       | <script language="javascript" type="text/javascript">document.write(''<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"></scr'' + ''ipt>'');</script>    |
 
 
     And i update campaign data by name
