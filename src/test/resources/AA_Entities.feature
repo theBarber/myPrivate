@@ -1383,8 +1383,8 @@ Feature: Entities for tests
       | campaign-pub2-level-small-D-skip-N S-Video | 1       | 1        | impressions |
       | campaign-pub2-level-equal-D-skip-Y S-Video | 1       | 1        | impressions |
       | campaign-pub2-level-equal-D-skip-N S-Video | 1       | 1        | impressions |
-      | campaign-vid-adhesion-30-skip-Y    skip-Y  | 1       | 1        | impressions |
-      | campaign-vid-adhesion-30-skip-N    skip-N  | 1       | 1        | impressions |
+      | campaign-vid-adhesion-30-skip-Y            | 1       | 1        | impressions |
+      | campaign-vid-adhesion-30-skip-N            | 1       | 1        | impressions |
 
 # ****  update is_sync=1 & is_secure=1 parameters of the zone ***
     And i update zone data by name
