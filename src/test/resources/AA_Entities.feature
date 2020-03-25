@@ -1473,7 +1473,7 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                         | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-NewRenderTest-web-direct-zone-banner           | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}            | []         | 75       | 2080           | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-direct-zone-banner           | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}            | []         | 75       | 5893           | 3728         | 66832           | []          | []          |
       | campaign-NewRenderTest-web-direct-DT-banner             | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-DT-Regular}              | []         | 75       | 2080           | 3728         | 66832           | []          | []          |
       | campaign-NewRenderTest-web-direct-HB-banner             | 75396  | 249737   | false                 | 22986         | {zone-zoneset-NewRenderTest-Direct-HB-Regular}              | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
       | campaign-NewRenderTest-web-programmatic-zone-banner     | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-Zone}                      | []         | 75       | 2080           | 3728         | 66832           | []          | []          |
@@ -1496,12 +1496,12 @@ Feature: Entities for tests
       | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}          | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
 
 
-
     And i create new campaigns with new zoneset
       | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 5164           | 2546         | 67259           |
       | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 5164           | 2546         | 67259           |
 
+    And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
 
     And i update zone data by name
       | Zone Name                                                 | is_secure |
@@ -1528,6 +1528,11 @@ Feature: Entities for tests
       | zone-zoneset-NewRenderTest-Instream-View-direct           |   1       |
       | zone-zoneset-NewRenderTest-Instream-View-programmatic     |   1       |
       | zone-zoneset-NewRenderTest-Direct-event-trackers          |   1       |
+      | zone-zoneset-NewRenderTest-Passback                       |   1       |
+
+    And i update zone data by name
+      | Zone Name                                                 | passback                                                                                                                                                                                                                                                                                    |
+      | zone-zoneset-NewRenderTest-Passback                       | <script language="javascript" type="text/javascript">document.write('<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"><\/scr' + 'ipt>');</script>   |
 
 
     And i update campaign data by name
@@ -1563,11 +1568,11 @@ Feature: Entities for tests
       | campaign-NewRenderTest-web-direct-HB-video              | 1                           | IAS                        |
       | campaign-NewRenderTest-web-programmatic-zone-video      | 1                           | IAS                        |
       | campaign-NewRenderTest-web-programmatic-DT-video        | 1                           | IAS                        |
-      | campaign-NewRenderTest-web-programmatic-HB-video        | 1                           | IAS                        |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 1                           | IAS                        |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 1                           | IAS                        |
-      | campaign-NewRenderTest-Instream-View-zone               | 1                           | IAS                        |
-      | campaign-NewRenderTest-Instream-View-SP                 | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-programmatic-HB-video        | 1                           | DV                         |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 1                           | DV                         |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 1                           | DV                         |
+      | campaign-NewRenderTest-Instream-View-zone               | 1                           | DV                         |
+      | campaign-NewRenderTest-Instream-View-SP                 | 1                           | DV                         |
 
 
 
