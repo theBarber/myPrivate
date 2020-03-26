@@ -69,7 +69,8 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
         }
     }
 
-    public Optional<LineItem> getLineItem(Integer LineItemID) {
+    public Optional<LineItem> getLineItem(Integer LineItemID)
+	{
         return io.stream().flatMap(x -> x.lineItems()).filter(WithId.idIs(LineItemID)).findFirst();
     }
 
@@ -86,7 +87,8 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
         return io.stream().flatMap(x -> x.lineItems()).flatMap(li -> li.campaigns.stream().flatMap(Campaign::banners).filter(Named.nameIs(byName))).findFirst();
     }
 
-    public List<ZoneSet> getZonesets() {
+	public List<ZoneSet> getZonesets()
+	{
         return zonesets;
     }
 
@@ -98,7 +100,8 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
         return zonesets.stream().filter(Named.nameIs(byName)).findFirst();
     }
 
-    public Optional<IO> getIO(Integer byId) {
+	public Optional<IO> getIO(Integer byId)
+	{
         return io.stream().filter(WithId.idIs(byId)).findFirst();
     }
 
@@ -111,7 +114,8 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
             throw new AssertionError("campaign is already exist!");
         else if ((li_O = getLineItem(lineItemID)).isPresent())
             li_O.get().addCampaign(campaign);
-        else {
+    	else
+    	{
             LineItem li = new LineItem(lineItemID);
             li.addCampaign(campaign);
             if ((io_O = getIO(io_id)).isPresent())
