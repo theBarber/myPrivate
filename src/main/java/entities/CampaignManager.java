@@ -187,6 +187,10 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
                 return this::getCampaign;
             case "zone":
                 return this::getZone;
+            //****** change data for zoneset too *******
+            case "zoneset":
+                return this::getZoneset;
+            //*********************************
             default:
                 return noSuchEntity -> Optional.empty();
         }
