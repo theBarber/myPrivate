@@ -706,14 +706,7 @@ public class UASIntegrationTest extends BaseTest {
         Banner banner = sut.getExecutorCampaignManager().getBanner(bannername).orElseThrow(() -> new AssertionError("The banner " + bannername + " does not exist!"));
         Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName).orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
         Campaign campaign = sut.getExecutorCampaignManager().getCampaign(campaignname).orElseThrow(() -> new AssertionError("The campaign " + campaignname + " does not exist!"));
-        toCheck = "https://svastx.moatads.com/undertonevpaid8571606/template.xml?tmode=1&vast_url=https%3A%2F%2Fstorage.googleapis.com%2Fgvabox%2Fexternal_sample%2Fvpaid2jslinear.xml&"
-                + "level1=" + advertiserid + "&"
-                + "level2=" + ioid + "&"
-                + "level3=" + iolineitemid + "&"
-                + "level4=" + banner.getId() + "&"
-                + "slicer1=" + campaign.getId() + "&"
-                + "slicer2=" + zone.getId() + "&"
-                + "zMoatWEBID=" + publisherid + "&";
+        toCheck = "https://svastx.moatads.com/undertonevpaid8571606/template.xml";
         System.out.print("String expected string is =" + toCheck);
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             Assert.assertThat(content, Matchers.containsString(toCheck));
