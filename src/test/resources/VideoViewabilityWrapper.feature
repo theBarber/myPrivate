@@ -12,4 +12,5 @@ Feature: video viewability wrapper tests on cross screen video blend product
     When I send 1 times an ad video request with parameter {optimize=1&unlimited=1&domain=dnu-tt} for zone named {zone-zoneset-IAS-wrapper-CSVB} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
+    And The response contains {zone-zoneset-IAS-wrapper-CSVB-banner-1}
     And The response contains {https://vast.adsafeprotected.com/vast?anId=927944}
