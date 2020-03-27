@@ -1310,7 +1310,7 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
 
- ##  &&&&&&&&&&&&&&&&&    VideoDuration    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ ##  &&&&&&&&&&&&&&&&&&&&&    Video Duration Filter --> duration & skip  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Scenario: create entities for Linear Video Duration
     Given i disable campaigns by name on db
       | Campaign Name                      |
@@ -1436,7 +1436,8 @@ Feature: Entities for tests
 
 
 
-  ##  &&&&&&&&&&&&&&&&&    LinearVidFiltering    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  ##  &&&&&&&&&&&&&&&&&    Video limitation Filtering --> size & method    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
   Scenario: create entities for linear video filtering
     Given i disable campaigns by name on db
       | Campaign Name                                       |
@@ -1505,7 +1506,7 @@ Feature: Entities for tests
       | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1       | 1        |
 
 
-     ##  &&&&&&&&&&&&&&&&&    VIDEO Wrapper IAS, MOAT , DV    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+   ##  &&&&&&&&&&&&&&&&&    VIDEO Wrapper IAS, MOAT , DV    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
   Scenario:  create entites for instream_video viewbility
     Given i disable campaigns by name on db
