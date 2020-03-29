@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:VideoDurationFilter.feature", plugin = { "pretty"})
-public class VideoDurationFilter extends BaseTest {
-    public VideoDurationFilter() {
+public class VideoDurationFilterTest extends BaseTest {
+    public VideoDurationFilterTest() {
     }
 }
 

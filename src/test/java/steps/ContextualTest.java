@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @CucumberOptions(features = "classpath:Contextual.feature", plugin = { "pretty"})
 @RunWith(Cucumber.class)
-public class Contextual extends BaseTest {
-    public Contextual() {
+public class ContextualTest extends BaseTest {
+    public ContextualTest() {
     }
 }
