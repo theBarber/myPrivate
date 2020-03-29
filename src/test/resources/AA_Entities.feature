@@ -1310,7 +1310,7 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
 
- ##  &&&&&&&&&&&&&&&&&    VideoDuration    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ ##  &&&&&&&&&&&&&&&&&&&&&    Video Duration Filter --> duration & skip  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Scenario: create entities for Linear Video Duration
     Given i disable campaigns by name on db
       | Campaign Name                      |
@@ -1436,7 +1436,8 @@ Feature: Entities for tests
 
 
 
-  ##  &&&&&&&&&&&&&&&&&    LinearVidFiltering    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+  ##  &&&&&&&&&&&&&&&&&    Video limitation Filtering --> size & method    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
   Scenario: create entities for linear video filtering
     Given i disable campaigns by name on db
       | Campaign Name                                       |
@@ -1503,6 +1504,40 @@ Feature: Entities for tests
       | zone-zoneset-LinearVideoFiltering-noPlayback-allsizes   | 1       | 1        |
       | zone-zoneset-LinearVideoFiltering-noPlayback-noSize     | 1       | 1        |
       | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1       | 1        |
+
+
+   ##  &&&&&&&&&&&&&&&&&    VIDEO Wrapper IAS, MOAT , DV    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+  Scenario:  create entites for instream_video viewbility
+    Given i disable campaigns by name on db
+      | Campaign Name              |
+      | campaign-IAS-wrapper-CSVB  |
+      | campaign-MOAT-wrapper-CSVB |
+      | campaign-DV-wrapper-CSVB   |
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name              | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | campaign-IAS-wrapper-CSVB  | 75396 | 259848   | false                 | 31797         | {zone-zoneset-IAS-wrapper-CSVB}  | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+      | campaign-MOAT-wrapper-CSVB | 75396 | 259848   | false                 | 31797         | {zone-zoneset-MOAT-wrapper-CSVB} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+      | campaign-DV-wrapper-CSVB   | 75396 | 259848   | false                 | 31797         | {zone-zoneset-DV-wrapper-CSVB}   | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+     # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
+    And i update campaign data by name
+      | Campaign Name              | is_sync | is_video | viewability_wrapper_enabled | viewability_wrapper_vendor |
+      | campaign-IAS-wrapper-CSVB  | 1       | 1        | 1                           | IAS                        |
+      | campaign-MOAT-wrapper-CSVB | 1       | 1        | 1                           | MOAT                       |
+      | campaign-DV-wrapper-CSVB   | 1       | 1        | 1                           | DV                         |
+
+    And i update zone data by name
+      | Zone Name                      | is_sync |
+      | zone-zoneset-IAS-wrapper-CSVB  | 1       |
+      | zone-zoneset-MOAT-wrapper-CSVB | 1       |
+      | zone-zoneset-DV-wrapper-CSVB   | 1       |
+     # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name                   | is_sync | is_video |
+      | zone-zoneset-IAS-wrapper-CSVB  | 1       | 1        |
+      | zone-zoneset-MOAT-wrapper-CSVB | 1       | 1        |
+      | zone-zoneset-DV-wrapper-CSVB   | 1       | 1        |
+
 
   @DynamicPricing
   @InAppBlackWhiteList
