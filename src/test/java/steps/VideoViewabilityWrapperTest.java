@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:VideoViewabilityWrapper.feature", plugin = { "pretty"})
-public class VideoViewabilityWrapper extends BaseTest {
-    public VideoViewabilityWrapper() {
+public class VideoViewabilityWrapperTest extends BaseTest {
+    public VideoViewabilityWrapperTest() {
     }
 }
