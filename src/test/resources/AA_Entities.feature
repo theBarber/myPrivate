@@ -1466,8 +1466,8 @@ Feature: Entities for tests
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog |
       | campaign-NewRenderTest-Instream-View-zone               |
       | campaign-NewRenderTest-Instream-View-SP                 |
-#      | campaign-NewRenderTest-InApp-Direct                     |
-#      | campaign-NewRenderTest-InApp-Programmatic               |
+      | campaign-NewRenderTest-InApp-Direct                     |
+      | campaign-NewRenderTest-InApp-Programmatic               |
       | campaign-NewRenderTest-web-direct-event-trackers        |
 
 
@@ -1496,10 +1496,10 @@ Feature: Entities for tests
       | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}          | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
 
 
-#    And i create new campaigns with new zoneset
-#      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-#      | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 5164           | 3728         | 70878           |
-#      | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 5164           | 3728         | 70878           |
+    And i create new campaigns with new zoneset
+      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 5164           | 3728         | 70878           |
+      | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 5164           | 3728         | 70878           |
 
     And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
 
@@ -1521,8 +1521,8 @@ Feature: Entities for tests
       | zone-zoneset-NewRenderTest-web-programmatic-zone-video    |   1       |
       | zone-zoneset-NewRenderTest-web-programmatic-DT-video      |   1       |
       | zone-zoneset-NewRenderTest-web-programmatic-HB-video      |   1       |
-#      | zone-zoneset-NewRenderTest-InApp-Direct                   |   1       |
-#      | zone-zoneset-NewRenderTest-InApp-Programmatic             |   1       |
+      | zone-zoneset-NewRenderTest-InApp-Direct                   |   1       |
+      | zone-zoneset-NewRenderTest-InApp-Programmatic             |   1       |
       | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone    |   1       |
       | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P  |   1       |
       | zone-zoneset-NewRenderTest-Instream-View-direct           |   1       |
@@ -1557,8 +1557,8 @@ Feature: Entities for tests
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | -1    | impressions |
       | campaign-NewRenderTest-Instream-View-zone               | -1    | impressions |
       | campaign-NewRenderTest-Instream-View-SP                 | -1    | impressions |
-#      | campaign-NewRenderTest-InApp-Direct                     | -1    | impressions |
-#      | campaign-NewRenderTest-InApp-Programmatic               | -1    | impressions |
+      | campaign-NewRenderTest-InApp-Direct                     | -1    | impressions |
+      | campaign-NewRenderTest-InApp-Programmatic               | -1    | impressions |
       | campaign-NewRenderTest-web-direct-event-trackers        | -1    | impressions |
 
     And i update campaign data by name
