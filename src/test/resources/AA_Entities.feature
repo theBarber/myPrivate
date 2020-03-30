@@ -1496,7 +1496,7 @@ Feature: Entities for tests
       | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}          | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
 
 
-    And i create new campaigns with new zoneset
+#    And i create new campaigns with new zoneset
 #      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
 #      | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 5164           | 3728         | 70878           |
 #      | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 5164           | 3728         | 70878           |
