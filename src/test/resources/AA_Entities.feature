@@ -1501,6 +1501,7 @@ Feature: Entities for tests
       | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 5164           | 2546         | 67259           |
       | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 5164           | 2546         | 67259           |
 
+
     And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
 
     And i update zone data by name
