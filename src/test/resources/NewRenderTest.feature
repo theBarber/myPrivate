@@ -65,7 +65,7 @@ Feature: Validate New Render Service
 #    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
-    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
+#    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
     And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
@@ -102,8 +102,9 @@ Feature: Validate New Render Service
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1}
-    And all HB responses contains cpm with value {99999}
-    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
+    And all HB responses contains cpm with value {1}
+    And The response contains {&e=render}
+#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
@@ -403,8 +404,8 @@ Feature: Validate New Render Service
     And The response contains {&e=start}
     And The response contains {&e=unmute}
     And The response contains {&e=render}
-    And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
-    And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
+    And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus&uid=}
+    And The response contains {usr.undertone.com\/userPixel\/sync?partnerId=39}
     And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
@@ -433,7 +434,7 @@ Feature: Validate New Render Service
     And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
     And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
-    And The response contains {http://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
+    And The response contains {usr.undertone.com/userPixel/sync?partnerId=39&uid=}
     And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
@@ -489,7 +490,7 @@ Feature: Validate New Render Service
     And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
-    And The response contains {http://usr.undertone.com/userPixel/sync?partnerId=39}
+    And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
@@ -514,9 +515,9 @@ Feature: Validate New Render Service
     And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
     And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
     And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
+#    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
-    And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
+    And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://dpm.demdex.net/ibs:dpid=152416&dpuuid=}
@@ -548,25 +549,53 @@ Feature: Validate New Render Service
 
 
 #  Scenario: Send an InApp request and validate the banner response (Viewable Change)
-#    When I send 1 times an ad request with parameter {unlimited=1&deviceid=appdevice} for zone named {zone-zoneset-NewRenderTest-InApp-Direct} to UAS
+#    When I send 1 times an ad request with parameter {unlimited=1&deviceid=appdevice} for zone named {zone-zoneset-Inapp-SI-3} to UAS
 #    Then The response code is 200
-##    And The response contains {script}
-#    And The response contains {sf_tag}
+#    And The response contains {script}
 #    And The responses has impression-urls
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-InApp-Direct-banner-1} 100% of the time
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
 #    And The response contains {var ut_pixels}
-#    And The response contains {ut_clickurl}
-#    And The response contains {ut_udms}
-#    And The response contains {ut_scripts}
-#    And The response contains {var ut_scripts = ["https://pixel.adsafeprotected.com/jload?anId=}
-#    And The response contains {https://cdn.doubleverify.com/dvtp_src.js}
+#    And The response contains {type:'image', url:'https://www.example.com/1'}
+#    And The response contains {type:'markup', url:'PElNRyBTUkM9Imh0dHBzOi8vYWQuZG91YmxlY2xpY2submV0L2RkbS90cmFja2ltcC9ONDEwMDAxLjEyNDU0MVVOREVSVE9ORU5FVFdPUktTL0IyMTEyNjcyNC4yMjE1NDc2MDA7ZGNfdHJrX2FpZD00MjAwMzAxMDg7ZGNfdHJrX2NpZD0xMDE4OTEzMDA7b3JkPXRlc3Q7ZGNfbGF0PTtkY19yZGlkPTt0YWdfZm9yX2NoaWxkX2RpcmVjdGVkX3RyZWF0bWVudD0/IiBCT1JERVI9IjAiIEhFSUdIVD0iMSIgV0lEVEg9IjEiIEFMVD0iQWR2ZXJ0aXNlbWVudCI+'}
+#    And The response contains {type:'markup', url:'PHNjcmlwdCBzcmM9Imh0dHBzOi8vei5tb2F0YWRzLmNvbS9zcGFya3VzZGlzY292ZXJkY203ODE3NDQzNDk0OTEvbW9hdGFkLmpzI21vYXRDbGllbnRMZXZlbDE9MjA0ODgyNTgmbW9hdENsaWVudExldmVsMj0yNzgwNzYxJm1vYXRDbGllbnRMZXZlbDM9MjA5MjQwNDY2Jm1vYXRDbGllbnRMZXZlbDQ9MXgxX1NpdGVfU2VydmVkX1VuaXQmbW9hdENsaWVudFNsaWNlcjE9LSZtb2F0Q2xpZW50U2xpY2VyMj0tJnNraW49MCZ6TW9hdERDTUlNUD0lJVRURF9DQUNIRUJVU1RFUiUlIiB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPjwvc2NyaXB0Pg=='}
 #    And The response contains {var ut_pixel_event = 'viewableChange';}
 #    And The response contains {https://creative-p.undertone.com/inapp/ut_pixels.min.js}
-#    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-InApp-Direct-banner-1} 100% of the time
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-InApp-Direct-banner-1} 100% of the time
+#    And The clickUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+#    And The renderUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
 #
+#
+#  Scenario: Send an InApp request and validate the banner response (Viewable Change) (render)
+#    When I send 1 times an ad request with parameter {unlimited=1&deviceid=appdevice} for zone named {zone-zoneset-Inapp-SI-5} to UAS
+#    Then The response code is 200
+#    And The response contains {script}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-5-banner-1} 100% of the time
+#    And The response contains {var ut_pixels}
+#    And The response contains {var ut_pixel_event = 'render';}
+#    And The response contains {type:'image', url:'https://www.example.com/1'}
+#    And The response contains {type:'markup', url:'PElNRyBTUkM9Imh0dHBzOi8vYWQuZG91YmxlY2xpY2submV0L2RkbS90cmFja2ltcC9ONDEwMDAxLjEyNDU0MVVOREVSVE9ORU5FVFdPUktTL0IyMTEyNjcyNC4yMjE1NDc2MDA7ZGNfdHJrX2FpZD00MjAwMzAxMDg7ZGNfdHJrX2NpZD0xMDE4OTEzMDA7b3JkPXRlc3Q7ZGNfbGF0PTtkY19yZGlkPTt0YWdfZm9yX2NoaWxkX2RpcmVjdGVkX3RyZWF0bWVudD0/IiBCT1JERVI9IjAiIEhFSUdIVD0iMSIgV0lEVEg9IjEiIEFMVD0iQWR2ZXJ0aXNlbWVudCI+'}
+#    And The response contains {type:'markup', url:'PHNjcmlwdCBzcmM9Imh0dHBzOi8vei5tb2F0YWRzLmNvbS9zcGFya3VzZGlzY292ZXJkY203ODE3NDQzNDk0OTEvbW9hdGFkLmpzI21vYXRDbGllbnRMZXZlbDE9MjA0ODgyNTgmbW9hdENsaWVudExldmVsMj0yNzgwNzYxJm1vYXRDbGllbnRMZXZlbDM9MjA5MjQwNDY2Jm1vYXRDbGllbnRMZXZlbDQ9MXgxX1NpdGVfU2VydmVkX1VuaXQmbW9hdENsaWVudFNsaWNlcjE9LSZtb2F0Q2xpZW50U2xpY2VyMj0tJnNraW49MCZ6TW9hdERDTUlNUD0lJVRURF9DQUNIRUJVU1RFUiUlIiB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPjwvc2NyaXB0Pg=='}
+#    And The response contains {https://creative-p.undertone.com/inapp/ut_pixels.min.js}
+#    And The clickUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+#    And The renderUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+#
+#  Scenario: image, markup and iframe - Zone request (ready)
+#    When I send 1 times an ad request with parameter {unlimited=1&deviceid=appdevice} for zone named {zone-zoneset-Inapp-SI-6} to UAS
+#    Then The response code is 200
+#    And The response contains {script}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-6-banner-1} 100% of the time
+#    And The response contains {var ut_pixels}
+#    And The response contains {var ut_pixel_event = 'ready';}
+#    And The response contains {type:'image', url:'https://www.example.com/1'}
+#    And The response contains {type:'markup', url:'PElNRyBTUkM9Imh0dHBzOi8vYWQuZG91YmxlY2xpY2submV0L2RkbS90cmFja2ltcC9ONDEwMDAxLjEyNDU0MVVOREVSVE9ORU5FVFdPUktTL0IyMTEyNjcyNC4yMjE1NDc2MDA7ZGNfdHJrX2FpZD00MjAwMzAxMDg7ZGNfdHJrX2NpZD0xMDE4OTEzMDA7b3JkPXRlc3Q7ZGNfbGF0PTtkY19yZGlkPTt0YWdfZm9yX2NoaWxkX2RpcmVjdGVkX3RyZWF0bWVudD0/IiBCT1JERVI9IjAiIEhFSUdIVD0iMSIgV0lEVEg9IjEiIEFMVD0iQWR2ZXJ0aXNlbWVudCI+'}
+#    And The response contains {type:'markup', url:'PHNjcmlwdCBzcmM9Imh0dHBzOi8vei5tb2F0YWRzLmNvbS9zcGFya3VzZGlzY292ZXJkY203ODE3NDQzNDk0OTEvbW9hdGFkLmpzI21vYXRDbGllbnRMZXZlbDE9MjA0ODgyNTgmbW9hdENsaWVudExldmVsMj0yNzgwNzYxJm1vYXRDbGllbnRMZXZlbDM9MjA5MjQwNDY2Jm1vYXRDbGllbnRMZXZlbDQ9MXgxX1NpdGVfU2VydmVkX1VuaXQmbW9hdENsaWVudFNsaWNlcjE9LSZtb2F0Q2xpZW50U2xpY2VyMj0tJnNraW49MCZ6TW9hdERDTUlNUD0lJVRURF9DQUNIRUJVU1RFUiUlIiB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPjwvc2NyaXB0Pg=='}
+#    And The response contains {https://creative-p.undertone.com/inapp/ut_pixels.min.js}
+#    And The clickUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+#    And The renderUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
+
 #  Scenario: Send an InApp request and validate the programmatic banner response (Viewable Change)
-#    When I send 1 times an ad request with parameter {requestid=OX-App_Render&optimize=1unlimited=1&deviceid=appdevice} for zone named {zone-zoneset-NewRenderTest-InApp-Programmatic} to UAS
+#    When I send 1 times an ad request with parameter {requestid=OXAppRender&unlimited=1&deviceid=appdevice} for zone named {zone-zoneset-NewRenderTest-InApp-Programmatic} to UAS
 #    Then The response code is 200
 #    And The response contains {script}
 #    And The response contains {sf_tag}
@@ -583,6 +612,15 @@ Feature: Validate New Render Service
 #    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-InApp-Programmatic-banner-1} 100% of the time
 #    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-InApp-Programmatic-banner-1} 100% of the time
 
+#
+#  Scenario: Send an InApp request and validate the programmatic banner response (Viewable Change)
+#    Then I sleep for 1 seconds
+#    When I send 1 times an ad request with parameter {requestid=BUrlTestInApp&unlimited=1&bundleid=app1} for zone named {zone-zoneset-server-prog-inApp-ST} to UAS
+#    And The response code is 200
+#    And The response contains {script}
+#    And The response contains {<script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com/burl"</script>}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-inApp-ST-1-banner-1} 100% of the time
 
 
   Scenario: Send a web zone request and validate the response of a direct PG banner with Pub fix
@@ -603,66 +641,3 @@ Feature: Validate New Render Service
     And The response contains {https://tags.bluekai.com/site/15597?id=}
     And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
-
-
-
-
-
-
-
-
-
-
-
-
-#
-#  Scenario: Send a web zone request and validate the response of a programmatic PG banner
-#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-#    When I send 1 times an ad request with parameter {requestid=PGZoneRender&optimize=1&unlimited=1} for zone named {zone-zoneset-NewRenderTest-Prog-Zone} to UAS
-#    Then The response code is 200
-##    And The response contains {sf_tag}
-##    And The response contains {ut_udms}
-##    And The response contains {ut_scripts}
-##    And The response contains {var ut_scripts = ["https://pixel.adsafeprotected.com/jload?anId=}
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
-#    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
-#    And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
-#    And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-#    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
-#    And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
-#    And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
-#    And The response contains {https://tags.bluekai.com/site/15597?id=}
-#    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
-#    And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
-#
-#
-#  Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
-#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-#    And I send 1 times an ad request with parameter {requestid=OX-VA-Render&optimize=1&unlimited=1} for zone named {zone-zoneset-NewRenderTest-web-programmatic-zone-video} to UAS
-#    Then The response code is 200
-#    And The response contains {var ut_aniview={publisherId:'5912cb1028a06142db67f38a',channelId:'5b7d30c4073ef454a07d4d64'}}
-#    And The response contains {VASTAdTagURI}
-##    And The response contains {ut_udms}
-#    And The response contains {[CDATA[https://vast.adsafeprotected.com/vast?}
-#    And The response contains {&originalVast=https%3A%2F%2Fnym1-ib.adnxs.com}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
-#    And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-#    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
-#    And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
-#    And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
-#    And The response contains {https://tags.bluekai.com/site/15597?id=}
-#    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
-#    And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
-
