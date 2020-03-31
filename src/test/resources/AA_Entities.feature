@@ -1498,8 +1498,8 @@ Feature: Entities for tests
 
     And i create new campaigns with new zoneset
       | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 5164           | 2546         | 67259           |
-      | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 5164           | 2546         | 67259           |
+      | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 8803           | 3586         | 67260           |
+      | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 8803           | 3586         | 67260           |
 
 
     And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
@@ -1534,6 +1534,11 @@ Feature: Entities for tests
     And i update zone data by name
       | Zone Name                                                 | passback                                                                                                                                                                                                                                                                                        |
       | zone-zoneset-NewRenderTest-Passback                       | <script language="javascript" type="text/javascript">document.write(''<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"></scr'' + ''ipt>'');</script>    |
+
+    And i update zone data by name
+      | Zone Name                                     | is_mraid |
+      | zone-zoneset-NewRenderTest-InApp-Direct       | 1        |
+      | zone-zoneset-NewRenderTest-InApp-Programmatic | 1        |
 
 
     And i update campaign data by name
