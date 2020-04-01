@@ -23,7 +23,6 @@ Feature: Pii
     When I send 1 times an ad request with parameter {domain=PLT-YesPersonaL&gdpr=1} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
 
   Scenario: 1.1 PLPT is active, zone req. 1 users - 2 devices - one app one web - ccpa forbidden.
     Then I inject profile doc for scenario {1.1 PLPT is active, zone req. 1 users - 2 devices - one app one web} to users bucket
