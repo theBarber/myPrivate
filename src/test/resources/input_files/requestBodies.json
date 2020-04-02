@@ -486,6 +486,22 @@
           "publisherId" : 3673
         }
       }]},
+  "Send HB PPP request for publisher 3728 with 300X250":
+  {"x-ut-hb-params":[
+    {
+      "bidRequestId": "21b46f0d8459b33",
+      "domain": "testing.com",
+      "placementId": "10433394",
+      "publisherId": 3728,
+      "sizes": [
+        [300,250]
+      ],
+      "timeout": 700,
+      "hbadaptor": "prebid",
+      "params": {"placementId" : "10433394",
+        "publisherId" : 3728
+      }
+    }]},
   "Send HB PPP request for publisher 3673 with [970:250],[300:250]":
   {"x-ut-hb-params":[
     {
@@ -1196,5 +1212,28 @@
     "type": "bidding",
     "isActive": false,
     "throttling": 0
+  },
+
+  "Send HB request for publisher 3708 with 320X50":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "dnu-tt",
+        "publisherId": 3708,
+        "sizes": [
+          [
+            320,
+            50
+          ]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 3708
+        }
+      }
+    ]
   }
 }
+
