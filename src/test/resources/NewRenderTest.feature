@@ -42,7 +42,6 @@ Feature: Validate New Render Service
     And The response contains {sf_tag}
     And The response contains {ut_udms}
     And The responses has impression-urls
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-banner-banner-1} 100% of the time
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-banner-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-banner-banner-1} 100% of the time
@@ -65,7 +64,6 @@ Feature: Validate New Render Service
     And all HB responses contains cpm with value {2.5}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
-#    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
     And The response contains {ads-s-us-east-1.undertone.com\/c?}
     And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus}
     And The response contains {usr.undertone.com\/userPixel\/sync?partnerId=39}
@@ -80,10 +78,6 @@ Feature: Validate New Render Service
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {requestid=PGZoneRender&newrender=1&unlimited=1} for zone named {zone-zoneset-NewRenderTest-Prog-Zone} to UAS
     Then The response code is 200
-#    And The response contains {sf_tag}
-#    And The response contains {ut_udms}
-#    And The response contains {ut_scripts}
-#    And The response contains {var ut_scripts = ["https://pixel.adsafeprotected.com/jload?anId=}
     And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
@@ -106,7 +100,6 @@ Feature: Validate New Render Service
     And all HB responses contains cpm with value {1}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
-#    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
     And The response contains {ads-s-us-east-1.undertone.com\/c?}
     And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus}
     And The response contains {usr.undertone.com\/userPixel\/sync?partnerId=39}
@@ -123,7 +116,6 @@ Feature: Validate New Render Service
     And The response code is 200
     And The response contains {ut_udms}
     And The responses has impression-urls
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-banner-banner-1} 100% of the time
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-banner-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-banner-banner-1} 100% of the time
@@ -144,7 +136,6 @@ Feature: Validate New Render Service
     And The response contains {"https://pixel.adsafeprotected.com/jload?anId=}
     And The response contains {renderTriggers}
     And The response contains {'exit_viewport\', \'back_button\'}
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-PGAction-banner-1} 100% of the time
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-PGAction-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-PGAction-banner-1} 100% of the time
@@ -166,7 +157,6 @@ Feature: Validate New Render Service
     And The response contains {renderTriggers}
     And The response contains {'exit_viewport\', \'back_button\'}
     And The responses has impression-urls
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-PGAction-banner-1} 100% of the time
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-PGAction-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-PGAction-banner-1} 100% of the time
@@ -184,7 +174,6 @@ Feature: Validate New Render Service
     When I send 1 times an ad request with parameter {requestid=AN-PGA-Render&unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Prog-Zone-PGAction} to UAS
     Then The response code is 200
     And The response contains {window.ut_renderTriggers=[1]}
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-PGAction-banner-1} 100% of the time
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-PGAction-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-PGAction-banner-1} 100% of the time
@@ -203,7 +192,6 @@ Feature: Validate New Render Service
     And The response code is 200
     And The response contains {window.ut_renderTriggers=[1]}
     And The responses has impression-urls
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-PGAction-banner-1} 100% of the time
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-PGAction-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-PGAction-banner-1} 100% of the time
@@ -226,16 +214,6 @@ Feature: Validate New Render Service
     And The response contains {[CDATA[https://vast.adsafeprotected.com/vast?}
     And The response contains {&originalVast=https%3A%2F%2Fads.sparkflow.net%2Fvast%2F%3Fg%3D38662}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-video-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
     And The response contains {&e=thirdQuartile}
@@ -265,16 +243,6 @@ Feature: Validate New Render Service
     And The response contains {[CDATA[https://vast.adsafeprotected.com/vast?}
     And The response contains {&originalVast=https%3A%2F%2Fads.sparkflow.net%2Fvast%2F%3Fg%3D38662}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-video-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
     And The response contains {&e=thirdQuartile}
@@ -313,7 +281,6 @@ Feature: Validate New Render Service
     And The response contains {&e=start}
     And The response contains {&e=unmute}
     And The response contains {&e=render}
-#    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-video-banner-1} 100% of the time
     And The response contains {ads-s-us-east-1.undertone.com\/c?}
     And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus&uid=}
     And The response contains {https:\/\/us-u.openx.net\/w\/1.0\/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https:\/\/usr.undertone.com\/userPixel\/sync?partnerId=39}
@@ -334,16 +301,6 @@ Feature: Validate New Render Service
     And The response contains {[CDATA[https://vast.adsafeprotected.com/vast?}
     And The response contains {&originalVast=https%3A%2F%2Fnym1-ib.adnxs.com}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-video-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
     And The response contains {&e=thirdQuartile}
@@ -373,16 +330,6 @@ Feature: Validate New Render Service
     And The response contains {[CDATA[https://vast.adsafeprotected.com/vast?}
     And The response contains {&originalVast=https%3A%2F%2Fnym1-ib.adnxs.com}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-video-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
     And The response contains {&e=thirdQuartile}
@@ -446,16 +393,6 @@ Feature: Validate New Render Service
     And The response contains {https://vast.doubleverify.com/v3/vast?}
     And The response contains {_vast=https%3A%2F%2Fads.sparkflow.net%2Fvast}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
     And The response contains {&e=thirdQuartile}
@@ -485,16 +422,6 @@ Feature: Validate New Render Service
     And The response contains {https://vast.doubleverify.com/v3/vast?}
     And The response contains {_vast=https%3A%2F%2Fnym1-ib.adnxs.com}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
     And The response contains {&e=thirdQuartile}
@@ -522,15 +449,6 @@ Feature: Validate New Render Service
     And The response contains {[CDATA[https://vast.doubleverify.com/v3/vast?}
     And The response contains {ads.sparkflow.net%252Fvast%252F%253Fg%253D39636}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
     And The response contains {&e=thirdQuartile}
@@ -540,7 +458,6 @@ Feature: Validate New Render Service
     And The response contains {&e=close}
     And The response contains {&e=start}
     And The response contains {&e=unmute}
-    And The response contains {&e=render}
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-zone-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
@@ -556,15 +473,6 @@ Feature: Validate New Render Service
     And The response contains {[CDATA[https://vast.doubleverify.com/v3/vast?}
     And The response contains {_vast=https%3A%2F%2Fnym1-ib.adnxs.com}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The firstQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The midpointUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The thirdQuartileUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The completeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The pauseUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The muteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The closeUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The startUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
-#    And The unmuteUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
     And The response contains {&e=thirdQuartile}
@@ -574,8 +482,7 @@ Feature: Validate New Render Service
     And The response contains {&e=close}
     And The response contains {&e=start}
     And The response contains {&e=unmute}
-    And The response contains {&e=render}
-    And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-Instream-View-SP-banner-1} 100% of the time
+    And The response contains {https://ads-s-us-east-1.undertone.com/c?}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
@@ -586,8 +493,6 @@ Feature: Validate New Render Service
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Direct-event-trackers} to UAS
     Then The response code is 200
-#    And The response contains {ut_scripts}
-#    And The response contains {var ut_scripts = ["https://pixel.adsafeprotected.com/jload?anId=}
     And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-event-trackers-banner-1} 100% of the time
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-event-trackers-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-event-trackers-banner-1} 100% of the time
