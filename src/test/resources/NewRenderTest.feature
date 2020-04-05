@@ -78,7 +78,8 @@ Feature: Validate New Render Service
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {requestid=PGZoneRender&newrender=1&unlimited=1} for zone named {zone-zoneset-NewRenderTest-Prog-Zone} to UAS
     Then The response code is 200
-    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
+    And The response contains {&e=render}
+#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
