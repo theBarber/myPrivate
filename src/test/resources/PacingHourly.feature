@@ -10,6 +10,8 @@ Feature: Pacing Hourly Test
   Background: health check
     When Sending a healthcheck request to UAS
     Then The response code is 200
+    When I send 2 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    And The response code is 200
 
 # check what happens at the next day???
 #  Scenario: 1. Hourly Pacing.
