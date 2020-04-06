@@ -496,7 +496,7 @@ public class API_EntitiesCreator extends BaseTest {
         String currentDate = formatter.format(date);
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(Calendar.DATE, days);
+        cal.add(Calendar.DATE, actualDays);
         String endDate = formatter.format(cal.getTime());
         SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '" + currentDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status` = 0;");
     }
