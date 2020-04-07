@@ -341,6 +341,7 @@ public class UASIntegrationTest extends BaseTest {
 
                     })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
                     .forEach(statusCode -> {
+                        System.out.println("the status code is ---> " + statusCode);
                         assertThat("Status code of impression request", statusCode, is(204));
                     });
         });
