@@ -8,6 +8,7 @@
 @parallel
 @noAA
 @eitan12
+@HeaderBiddingFlowSupport
 
 Feature: Header Bidding flow support
 
