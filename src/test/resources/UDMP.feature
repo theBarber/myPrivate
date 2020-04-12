@@ -2,7 +2,7 @@
 @parallel
 @scheduled
 @noAA
-@ProfileTargetingFeature
+@UDMPFeature
 Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
   Background: health check
