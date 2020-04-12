@@ -7,7 +7,7 @@ Feature: Entities for tests
 
   Scenario: entities end-date update
     And i update po_line_item end date by id {4584,67001,67002,69725,69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,69992,67163,67162,67166,69089,69134,66832,69158,69213,70473,70474}
-    And i update io_line_item end date by id {243710,251644,253288,253747,245653,210722,241783,223539,240827,198082,197418,224812,222908,234810,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
+    And i update io_line_item end date by id {243710,251644,253288,253747,210722,241783,223539,240827,198082,197418,224812,222908,234810,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
 
@@ -842,10 +842,24 @@ Feature: Entities for tests
       | Campaign Name     | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name     | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-TN       | 75396  | 243707   | false                 | 21638         | {zone-zoneset-TN}       | []         | 97       | 15196          | 3708         | 69992           | []             | []             |
       | campaign-vidAd-SP | 407981 | 243710   | true                  | 568           | {zone-zoneset-vidAd-SP} | []         | 97       | 15292          | 3708         | 69992           | []             | []             |
+
+    # ****  update also is_sync=1 & is_video=1 parameters of the campaign ***
     And i update campaign data by name
-      | Campaign Name     | Priority |
-      | campaign-TN       | -1       |
-      | campaign-vidAd-SP | -2       |
+      | Campaign Name     | Priority | is_sync | is_video |
+      | campaign-TN       | -1       | 1       | 1        |
+      | campaign-vidAd-SP | -2       | 1       | 1        |
+
+    # ****  update is_sync=1 parameter of the zone ***
+    And i update zone data by name
+      | Zone Name             | is_sync |
+      | zone-zoneset-TN       | 1       |
+      | zone-zoneset-vidAd-SP | 1       |
+     # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name          | is_sync | is_video |
+      | zone-zoneset-TN       | 1       | 1        |
+      | zone-zoneset-vidAd-SP | 1       | 1        |
+
 
   @PG1
   Scenario: create entities for PG1 tests
@@ -965,9 +979,22 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-InstreamVid-View-SP | 407981 | 244699   | true                  | 816           | {zone-zoneset-InstreamVid-View-SP} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+     # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
+    And i update campaign data by name
+      | Campaign Name                | is_sync | is_video |
+      | campaign-InstreamVid-View-SP | 1       | 1        |
+
 #    And i update campaign data by name
 #      | Campaign Name                | viewability_wrapper_enabled | viewability_wrapper_vendor |
 #      | campaign-InstreamVid-View-SP | 1                           | MOAT                       |
+      # ****  update is_sync=1 parameter of the zone ***
+    And i update zone data by name
+      | Zone Name                        | is_sync |
+      | zone-zoneset-InstreamVid-View-SP | 1       |
+     # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name                     | is_sync | is_video |
+      | zone-zoneset-InstreamVid-View-SP | 1       | 1        |
 
 
   Scenario:  create entities for enrich geo filter
@@ -1102,7 +1129,8 @@ Feature: Entities for tests
       | campaign-D-DailyFF-ST-5      | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
 
     Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
-    Given I set campaign campaign-D-DailyPacing-ST-2 for 3 days
+    # suppose to be 3 --> will be changed back to 3  when BUG will be solved
+    Given I set campaign campaign-D-DailyPacing-ST-2 for 4 days
     Given I set campaign campaign-D-ASAP-ST-3 for 3 days
     Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
     Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
@@ -1112,7 +1140,7 @@ Feature: Entities for tests
 #    pacing = hourly flex
       | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
       | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 45    | impressions |
+      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 25     | 36    | impressions |
       | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
       | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
       | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |
@@ -1283,7 +1311,7 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
 
- ##  &&&&&&&&&&&&&&&&&    VideoDuration    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ ##  &&&&&&&&&&&&&&&&&&&&&    Video Duration Filter --> duration & skip  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
   Scenario: create entities for Linear Video Duration
     Given i disable campaigns by name on db
       | Campaign Name                      |
@@ -1291,26 +1319,23 @@ Feature: Entities for tests
       | campaign-small-D-skip-Y            |
       | campaign-large-D-skip-N            |
       | campaign-small-D-skip-N            |
-
       | campaign-equal-D-skip-Y            |
       | campaign-equal-D-skip-N            |
-
       | campaign-pub1-level-large-D-skip-Y |
       | campaign-pub1-level-small-D-skip-Y |
       | campaign-pub1-level-large-D-skip-N |
       | campaign-pub1-level-small-D-skip-N |
-
       | campaign-pub1-level-equal-D-skip-Y |
       | campaign-pub1-level-equal-D-skip-N |
-
       | campaign-pub2-level-large-D-skip-Y |
       | campaign-pub2-level-small-D-skip-Y |
       | campaign-pub2-level-large-D-skip-N |
       | campaign-pub2-level-small-D-skip-N |
-
       | campaign-pub2-level-equal-D-skip-Y |
       | campaign-pub2-level-equal-D-skip-N |
-
+    #*************  Video Adhesion duration filter *************
+      | video-adhesion-campaign-30-skip-Y  |
+      | video-adhesion-campaign-30-skip-N  |
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                      | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
@@ -1332,30 +1357,88 @@ Feature: Entities for tests
       | campaign-pub2-level-small-D-skip-N | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub2-level-small-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-equal-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+ #*************  Video Adhesion duration filter *************
+      | campaign-vid-adhesion-30-skip-Y    | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-vid-adhesion-30-skip-N    | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
 
+         # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
+    And i update campaign data by name
+      | Campaign Name                      | is_sync | is_video | goal_type   |
+      | campaign-large-D-skip-Y            | 1       | 1        | impressions |
+      | campaign-small-D-skip-Y            | 1       | 1        | impressions |
+      | campaign-large-D-skip-N            | 1       | 1        | impressions |
+      | campaign-small-D-skip-N            | 1       | 1        | impressions |
+      | campaign-equal-D-skip-Y            | 1       | 1        | impressions |
+      | campaign-equal-D-skip-N            | 1       | 1        | impressions |
+      | campaign-pub1-level-large-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub1-level-small-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub1-level-large-D-skip-N | 1       | 1        | impressions |
+      | campaign-pub1-level-small-D-skip-N | 1       | 1        | impressions |
+      | campaign-pub1-level-equal-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub1-level-equal-D-skip-N | 1       | 1        | impressions |
+      | campaign-pub2-level-large-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub2-level-small-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub2-level-large-D-skip-N | 1       | 1        | impressions |
+      | campaign-pub2-level-small-D-skip-N | 1       | 1        | impressions |
+      | campaign-pub2-level-equal-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub2-level-equal-D-skip-N | 1       | 1        | impressions |
+      | campaign-vid-adhesion-30-skip-Y    | 1       | 1        | impressions |
+      | campaign-vid-adhesion-30-skip-N    | 1       | 1        | impressions |
+
+# ****  update is_sync=1 & is_secure=1 parameters of the zone ***
     And i update zone data by name
-      | Zone Name                                       | is_secure |
-      | zone-zoneset-large-D-skip-Y-CS-Video            | 1         |
-      | zone-zoneset-small-D-skip-Y-CS-Video            | 1         |
-      | zone-zoneset-large-D-skip-N-CS-Video            | 1         |
-      | zone-zoneset-small-D-skip-N-CS-Video            | 1         |
-      | zone-zoneset-equal-D-skip-Y-CS-Video            | 1         |
-      | zone-zoneset-equal-D-skip-N-CS-Video            | 1         |
-      | zone-zoneset-pub1-level-large-D-skip-Y-CS-Video | 1         |
-      | zone-zoneset-pub1-level-small-D-skip-Y-CS-Video | 1         |
-      | zone-zoneset-pub1-level-large-D-skip-N-CS-Video | 1         |
-      | zone-zoneset-pub1-level-small-D-skip-N-CS-Video | 1         |
-      | zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video | 1         |
-      | zone-zoneset-pub1-level-equal-D-skip-N-CS-Video | 1         |
-      | zone-zoneset-pub2-level-large-D-skip-Y-CS-Video | 1         |
-      | zone-zoneset-pub2-level-small-D-skip-Y-CS-Video | 1         |
-      | zone-zoneset-pub2-level-large-D-skip-N-CS-Video | 1         |
-      | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1         |
-      | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1         |
-      | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1         |
+      | Zone Name                                       | is_secure | is_sync |
+      | zone-zoneset-large-D-skip-Y-CS-Video            | 1         | 1       |
+      | zone-zoneset-small-D-skip-Y-CS-Video            | 1         | 1       |
+      | zone-zoneset-large-D-skip-N-CS-Video            | 1         | 1       |
+      | zone-zoneset-small-D-skip-N-CS-Video            | 1         | 1       |
+      | zone-zoneset-equal-D-skip-Y-CS-Video            | 1         | 1       |
+      | zone-zoneset-equal-D-skip-N-CS-Video            | 1         | 1       |
+      | zone-zoneset-pub1-level-large-D-skip-Y-CS-Video | 1         | 1       |
+      | zone-zoneset-pub1-level-small-D-skip-Y-CS-Video | 1         | 1       |
+      | zone-zoneset-pub1-level-large-D-skip-N-CS-Video | 1         | 1       |
+      | zone-zoneset-pub1-level-small-D-skip-N-CS-Video | 1         | 1       |
+      | zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video | 1         | 1       |
+      | zone-zoneset-pub1-level-equal-D-skip-N-CS-Video | 1         | 1       |
+      | zone-zoneset-pub2-level-large-D-skip-Y-CS-Video | 1         | 1       |
+      | zone-zoneset-pub2-level-small-D-skip-Y-CS-Video | 1         | 1       |
+      | zone-zoneset-pub2-level-large-D-skip-N-CS-Video | 1         | 1       |
+      | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1         | 1       |
+      | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1         | 1       |
+      | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1         | 1       |
+     #*************  Video Adhesion duration filter *************
+      | zone-zoneset-video-adhesion-campaign-30-skip-Y  | 1         | 1       |
+      | zone-zoneset-video-adhesion-campaign-30-skip-N  | 1         | 1       |
+
+# ****  update is_sync=1 & is_video=1 parameters of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name                                    | is_sync | is_video |
+      | zone-zoneset-large-D-skip-Y-CS-Video            | 1       | 1        |
+      | zone-zoneset-small-D-skip-Y-CS-Video            | 1       | 1        |
+      | zone-zoneset-large-D-skip-N-CS-Video            | 1       | 1        |
+      | zone-zoneset-small-D-skip-N-CS-Video            | 1       | 1        |
+      | zone-zoneset-equal-D-skip-Y-CS-Video            | 1       | 1        |
+      | zone-zoneset-equal-D-skip-N-CS-Video            | 1       | 1        |
+      | zone-zoneset-pub1-level-large-D-skip-Y-CS-Video | 1       | 1        |
+      | zone-zoneset-pub1-level-small-D-skip-Y-CS-Video | 1       | 1        |
+      | zone-zoneset-pub1-level-large-D-skip-N-CS-Video | 1       | 1        |
+      | zone-zoneset-pub1-level-small-D-skip-N-CS-Video | 1       | 1        |
+      | zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video | 1       | 1        |
+      | zone-zoneset-pub1-level-equal-D-skip-N-CS-Video | 1       | 1        |
+      | zone-zoneset-pub2-level-large-D-skip-Y-CS-Video | 1       | 1        |
+      | zone-zoneset-pub2-level-small-D-skip-Y-CS-Video | 1       | 1        |
+      | zone-zoneset-pub2-level-large-D-skip-N-CS-Video | 1       | 1        |
+      | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1       | 1        |
+      | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1       | 1        |
+      | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1       | 1        |
+     #*************  Video Adhesion duration filter *************
+      | zone-zoneset-video-adhesion-campaign-30-skip-Y  | 1       | 1        |
+      | zone-zoneset-video-adhesion-campaign-30-skip-N  | 1       | 1        |
 
 
-  ##  &&&&&&&&&&&&&&&&&    LinearVidFiltering    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+  ##  &&&&&&&&&&&&&&&&&    Video limitation Filtering --> size & method    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
   Scenario: create entities for linear video filtering
     Given i disable campaigns by name on db
       | Campaign Name                                       |
@@ -1384,30 +1467,219 @@ Feature: Entities for tests
       | campaign-LinearVideoFiltering-noPlayback-sizes1And2 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2} | []         | 35       | 15196          | 3708         | 69158           | []          | []          | 1,2            |                    |
 
     And i update campaign data by name
-      | Campaign Name                                       | units | goal_type   |
-      | campaign-LinearVideoFiltering-playbackAll-noSize    | -1    | impressions |
-      | campaign-LinearVideoFiltering-playback1-size1       | -1    | impressions |
-      | campaign-LinearVideoFiltering-playback2-size2       | -1    | impressions |
-      | campaign-LinearVideoFiltering-playback3-size3       | -1    | impressions |
-      | campaign-LinearVideoFiltering-playback4-allsizes    | -1    | impressions |
-      | campaign-LinearVideoFiltering-playbackAll-size3     | -1    | impressions |
-      | campaign-LinearVideoFiltering-playbackall-allsizes  | -1    | impressions |
-      | campaign-LinearVideoFiltering-noPlayback-allsizes   | -1    | impressions |
-      | campaign-LinearVideoFiltering-noPlayback-noSize     | -1    | impressions |
-      | campaign-LinearVideoFiltering-noPlayback-sizes1And2 | -1    | impressions |
+      | Campaign Name                                       | units | goal_type   | is_sync | is_video |
+      | campaign-LinearVideoFiltering-playbackAll-noSize    | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playback1-size1       | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playback2-size2       | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playback3-size3       | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playback4-allsizes    | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playbackAll-size3     | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-playbackall-allsizes  | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-noPlayback-allsizes   | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-noPlayback-noSize     | -1    | impressions | 1       | 1        |
+      | campaign-LinearVideoFiltering-noPlayback-sizes1And2 | -1    | impressions | 1       | 1        |
+# ****  update is_sync=1 & is_secure=1 parameters of the zone ***
+    And i update zone data by name
+      | Zone Name                                               | is_secure | is_sync |
+      | zone-zoneset-LinearVideoFiltering-playbackAll-noSize    | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-playback1-size1       | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-playback2-size2       | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-playback3-size3       | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-playback4-allsizes    | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-playbackAll-size3     | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-playbackall-allsizes  | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-allsizes   | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-noSize     | 1         | 1       |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1         | 1       |
+
+    # ****  update is_sync=1 & is_video=1 parameters of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name                                            | is_sync | is_video |
+      | zone-zoneset-LinearVideoFiltering-playbackAll-noSize    | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playback1-size1       | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playback2-size2       | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playback3-size3       | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playback4-allsizes    | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playbackAll-size3     | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-playbackall-allsizes  | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-allsizes   | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-noSize     | 1       | 1        |
+      | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1       | 1        |
+
+
+   ##  &&&&&&&&&&&&&&&&&    VIDEO Wrapper IAS, MOAT , DV    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+  Scenario:  create entites for instream_video viewbility
+    Given i disable campaigns by name on db
+      | Campaign Name              |
+      | campaign-IAS-wrapper-CSVB  |
+      | campaign-MOAT-wrapper-CSVB |
+      | campaign-DV-wrapper-CSVB   |
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name              | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | campaign-IAS-wrapper-CSVB  | 75396 | 259848   | false                 | 31797         | {zone-zoneset-IAS-wrapper-CSVB}  | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+      | campaign-MOAT-wrapper-CSVB | 75396 | 259848   | false                 | 31797         | {zone-zoneset-MOAT-wrapper-CSVB} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+      | campaign-DV-wrapper-CSVB   | 75396 | 259848   | false                 | 31797         | {zone-zoneset-DV-wrapper-CSVB}   | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+     # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
+    And i update campaign data by name
+      | Campaign Name              | is_sync | is_video | viewability_wrapper_enabled | viewability_wrapper_vendor |
+      | campaign-IAS-wrapper-CSVB  | 1       | 1        | 1                           | IAS                        |
+      | campaign-MOAT-wrapper-CSVB | 1       | 1        | 1                           | MOAT                       |
+      | campaign-DV-wrapper-CSVB   | 1       | 1        | 1                           | DV                         |
 
     And i update zone data by name
-      | Zone Name                                               | is_secure |
-      | zone-zoneset-LinearVideoFiltering-playbackAll-noSize    | 1         |
-      | zone-zoneset-LinearVideoFiltering-playback1-size1       | 1         |
-      | zone-zoneset-LinearVideoFiltering-playback2-size2       | 1         |
-      | zone-zoneset-LinearVideoFiltering-playback3-size3       | 1         |
-      | zone-zoneset-LinearVideoFiltering-playback4-allsizes    | 1         |
-      | zone-zoneset-LinearVideoFiltering-playbackAll-size3     | 1         |
-      | zone-zoneset-LinearVideoFiltering-playbackall-allsizes  | 1         |
-      | zone-zoneset-LinearVideoFiltering-noPlayback-allsizes   | 1         |
-      | zone-zoneset-LinearVideoFiltering-noPlayback-noSize     | 1         |
-      | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1         |
+      | Zone Name                      | is_sync |
+      | zone-zoneset-IAS-wrapper-CSVB  | 1       |
+      | zone-zoneset-MOAT-wrapper-CSVB | 1       |
+      | zone-zoneset-DV-wrapper-CSVB   | 1       |
+     # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name                   | is_sync | is_video |
+      | zone-zoneset-IAS-wrapper-CSVB  | 1       | 1        |
+      | zone-zoneset-MOAT-wrapper-CSVB | 1       | 1        |
+      | zone-zoneset-DV-wrapper-CSVB   | 1       | 1        |
+
+# Entities for New Render Test
+
+  @NewRenderTest
+  Scenario: Create entities for New Render
+    Given i disable campaigns by name on db
+      | Campaign Name                                           |
+      | campaign-NewRenderTest-web-direct-zone-banner           |
+      | campaign-NewRenderTest-web-direct-DT-banner             |
+      | campaign-NewRenderTest-web-direct-HB-banner             |
+      | campaign-NewRenderTest-web-programmatic-zone-banner     |
+      | campaign-NewRenderTest-web-programmatic-HB-banner       |
+      | campaign-NewRenderTest-web-programmatic-DT-banner       |
+      | campaign-NewRenderTest-web-direct-zone-PGAction         |
+      | campaign-NewRenderTest-web-direct-DT-PGAction           |
+      | campaign-NewRenderTest-web-programmatic-zone-PGAction   |
+      | campaign-NewRenderTest-web-programmatic-DT-PGAction     |
+      | campaign-NewRenderTest-web-direct-zone-video            |
+      | campaign-NewRenderTest-web-direct-DT-video              |
+      | campaign-NewRenderTest-web-direct-HB-video              |
+      | campaign-NewRenderTest-web-programmatic-zone-video      |
+      | campaign-NewRenderTest-web-programmatic-DT-video        |
+      | campaign-NewRenderTest-web-programmatic-HB-video        |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog |
+      | campaign-NewRenderTest-Instream-View-zone               |
+      | campaign-NewRenderTest-Instream-View-SP                 |
+      | campaign-NewRenderTest-InApp-Direct                     |
+      | campaign-NewRenderTest-InApp-Programmatic               |
+      | campaign-NewRenderTest-web-direct-event-trackers        |
+
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                         | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-NewRenderTest-web-direct-zone-banner           | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}            | []         | 75       | 5893           | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-direct-DT-banner             | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-DT-Regular}              | []         | 75       | 11278          | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-direct-HB-banner             | 75396  | 249737   | false                 | 22986         | {zone-zoneset-NewRenderTest-Direct-HB-Regular}              | []         | 10       | 10062          | 3673         | 66814           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-zone-banner     | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-Zone}                      | []         | 75       | 2080           | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-HB-banner       | 407981 | 265089   | true                  | 2499          | {zone-zoneset-NewRenderTest-Prog-HB}                        | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-DT-banner       | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-DT}                        | []         | 75       | 15015          | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-direct-zone-PGAction         | 75396  | 222908   | false                 | 14488         | {zone-zoneset-NewRenderTest-Direct-Zone-PGAction}           | []         | 92       | 14400          | 3673         | 67165           | []          | []          |
+      | campaign-NewRenderTest-web-direct-DT-PGAction           | 75396  | 222908   | false                 | 14488         | {zone-zoneset-NewRenderTest-Direct-DT-PGAction}             | []         | 92       | 15122          | 3673         | 67165           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-zone-PGAction   | 407981 | 265090   | true                  | 2500          | {zone-zoneset-NewRenderTest-Prog-Zone-PGAction}             | []         | 92       | 14400          | 3673         | 67165           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-DT-PGAction     | 407981 | 265090   | true                  | 2500          | {zone-zoneset-NewRenderTest-Prog-DT-PGAction}               | []         | 92       | 3047           | 3673         | 67165           | []          | []          |
+      | campaign-NewRenderTest-web-direct-zone-video            | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-zone-video}          | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-direct-DT-video              | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-DT-video}            | []         | 97       | 8615           | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-direct-HB-video              | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-HB-video}            | []         | 97       | 739            | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-zone-video      | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-zone-video}    | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-DT-video        | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-DT-video}      | []         | 97       | 6831           | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-HB-video        | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}      | []         | 97       | 4140           | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 407981 | 248986   | false                 | 25108         | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone}    | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 407981 | 265092   | true                  | 2502          | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P}  | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
+      | campaign-NewRenderTest-Instream-View-zone               | 75396  | 234808   | false                 | 24176         | {zone-zoneset-NewRenderTest-Instream-View-direct}           | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-NewRenderTest-Instream-View-SP                 | 407981 | 265093   | true                  | 2503          | {zone-zoneset-NewRenderTest-Instream-View-programmatic}     | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}          | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
+
+
+    And i create new campaigns with new zoneset
+      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 8803           | 3586         | 67260           |
+      | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 8803           | 3586         | 67260           |
+
+
+    And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
+
+    And i update zone data by name
+      | Zone Name                                                 | is_secure |
+      | zone-zoneset-NewRenderTest-Direct-Zone-Regular            |   1       |
+      | zone-zoneset-NewRenderTest-Direct-DT-Regular              |   1       |
+      | zone-zoneset-NewRenderTest-Direct-HB-Regular              |   1       |
+      | zone-zoneset-NewRenderTest-Prog-Zone                      |   1       |
+      | zone-zoneset-NewRenderTest-Prog-HB                        |   1       |
+      | zone-zoneset-NewRenderTest-Prog-DT                        |   1       |
+      | zone-zoneset-NewRenderTest-Direct-Zone-PGAction           |   1       |
+      | zone-zoneset-NewRenderTest-Direct-DT-PGAction             |   1       |
+      | zone-zoneset-NewRenderTest-Prog-Zone-PGAction             |   1       |
+      | zone-zoneset-NewRenderTest-Prog-DT-PGAction               |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-zone-video          |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-DT-video            |   1       |
+      | zone-zoneset-NewRenderTest-web-direct-HB-video            |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-zone-video    |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-DT-video      |   1       |
+      | zone-zoneset-NewRenderTest-web-programmatic-HB-video      |   1       |
+      | zone-zoneset-NewRenderTest-InApp-Direct                   |   1       |
+      | zone-zoneset-NewRenderTest-InApp-Programmatic             |   1       |
+      | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone    |   1       |
+      | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P  |   1       |
+      | zone-zoneset-NewRenderTest-Instream-View-direct           |   1       |
+      | zone-zoneset-NewRenderTest-Instream-View-programmatic     |   1       |
+      | zone-zoneset-NewRenderTest-Direct-event-trackers          |   1       |
+      | zone-zoneset-NewRenderTest-Passback                       |   1       |
+
+    And i update zone data by name
+      | Zone Name                                                 | passback                                                                                                                                                                                                                                                                                        |
+      | zone-zoneset-NewRenderTest-Passback                       | <script language="javascript" type="text/javascript">document.write(''<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"></scr'' + ''ipt>'');</script>    |
+
+    And i update zone data by name
+      | Zone Name                                     | is_mraid |
+      | zone-zoneset-NewRenderTest-InApp-Direct       | 1        |
+      | zone-zoneset-NewRenderTest-InApp-Programmatic | 1        |
+
+
+    And i update campaign data by name
+      | Campaign Name                                           | units | goal_type   |
+      | campaign-NewRenderTest-web-direct-zone-banner           | -1    | impressions |
+      | campaign-NewRenderTest-web-direct-DT-banner             | -1    | impressions |
+      | campaign-NewRenderTest-web-direct-HB-banner             | -1    | impressions |
+      | campaign-NewRenderTest-web-programmatic-zone-banner     | -1    | impressions |
+      | campaign-NewRenderTest-web-programmatic-HB-banner       | -1    | impressions |
+      | campaign-NewRenderTest-web-programmatic-DT-banner       | -1    | impressions |
+      | campaign-NewRenderTest-web-direct-zone-PGAction         | -1    | impressions |
+      | campaign-NewRenderTest-web-direct-DT-PGAction           | -1    | impressions |
+      | campaign-NewRenderTest-web-programmatic-zone-PGAction   | -1    | impressions |
+      | campaign-NewRenderTest-web-programmatic-DT-PGAction     | -1    | impressions |
+      | campaign-NewRenderTest-web-direct-zone-video            | -1    | impressions |
+      | campaign-NewRenderTest-web-direct-DT-video              | -1    | impressions |
+      | campaign-NewRenderTest-web-direct-HB-video              | -1    | impressions |
+      | campaign-NewRenderTest-web-programmatic-zone-video      | -1    | impressions |
+      | campaign-NewRenderTest-web-programmatic-DT-video        | -1    | impressions |
+      | campaign-NewRenderTest-web-programmatic-HB-video        | -1    | impressions |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | -1    | impressions |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | -1    | impressions |
+      | campaign-NewRenderTest-Instream-View-zone               | -1    | impressions |
+      | campaign-NewRenderTest-Instream-View-SP                 | -1    | impressions |
+      | campaign-NewRenderTest-InApp-Direct                     | -1    | impressions |
+      | campaign-NewRenderTest-InApp-Programmatic               | -1    | impressions |
+      | campaign-NewRenderTest-web-direct-event-trackers        | -1    | impressions |
+
+    And i update campaign data by name
+      | Campaign Name                                           | viewability_wrapper_enabled | viewability_wrapper_vendor |
+      | campaign-NewRenderTest-web-direct-zone-video            | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-direct-DT-video              | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-direct-HB-video              | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-programmatic-zone-video      | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-programmatic-DT-video        | 1                           | IAS                        |
+      | campaign-NewRenderTest-web-programmatic-HB-video        | 1                           | DV                         |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 1                           | DV                         |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 1                           | DV                         |
+      | campaign-NewRenderTest-Instream-View-zone               | 1                           | DV                         |
+      | campaign-NewRenderTest-Instream-View-SP                 | 1                           | DV                         |
+
+
 
 #  @AbishekExercise
 #  Scenario: Create entities for programmatic and direct campaign

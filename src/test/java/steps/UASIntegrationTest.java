@@ -104,7 +104,7 @@ public class UASIntegrationTest extends BaseTest {
 
         When("I send (\\d+) times a (profile) post request with parameters \\{(.*)\\} to UAS with body: (.*)$",
                 (Integer times, String requestType, String parameters, String body) -> {
-                    sut.getUASRquestModule().sendMultipleTypePostRequestWithParameter(requestType, body, times, parameters, true, false,false);
+                    sut.getUASRquestModule().sendMultipleTypePostRequestWithParameter(requestType, body, times, parameters, true, false, false);
                 });
 
         When("I send (\\d+) times an ad request with query parameters for zone named \\{(.*)\\} to UAS",
@@ -125,10 +125,26 @@ public class UASIntegrationTest extends BaseTest {
                 (Long millis) -> {
                     sut.getUASRquestModule().thatSleeps(millis);
                 });
-        When("I send (\\d+) times an ad request for zone id \\{(\\d+)\\} to UAS",
+        When("I send (\\d+) times an ad request for zone id (\\d+) to UAS",
                 (Integer times, Integer zoneId) -> {
                     sendMultipleAdRequests(times, zoneId, true);
                 });
+
+        //%%%%%%%%%%%%%%%%%   Testing %%%%%%%%%%%%%%%%
+        When("I send (\\d+) times video ad request with parameter? \\{(.*)\\} for zone id (\\d+) to UAS",
+                (Integer times,String parameter, Integer zoneId) -> {
+            //(Integer times,String parameter, Integer zoneId,String route, boolean toReset)
+                    sendMultipleAdRequestsWithRoute(times, parameter, zoneId,"ax", true);
+                });
+
+
+        When("I send (\\d+) times display ad request with parameter? \\{(.*)\\} for zone id (\\d+) to UAS",
+                (Integer times,String parameter, Integer zoneId) -> {
+                    //(Integer times,String parameter, Integer zoneId,String route, boolean toReset)
+                    sendMultipleAdRequestsWithRoute(times, parameter, zoneId,"af", true);
+                });
+        //%%%%%%%%%%%%%%%%%   Testing %%%%%%%%%%%%%%%%
+
 
         When("I send (\\d+) additional ad requests for zone named \\{(.*)\\} to UAS",
                 (Integer times, String zoneByName) -> {
@@ -326,6 +342,7 @@ public class UASIntegrationTest extends BaseTest {
 
                     })).map(CompletableFuture::join).map(HttpResponse::getStatusLine).map(StatusLine::getStatusCode)
                     .forEach(statusCode -> {
+                        System.out.println("the status code is ---> " + statusCode);
                         assertThat("Status code of impression request", statusCode, is(204));
                     });
         });
@@ -593,7 +610,6 @@ public class UASIntegrationTest extends BaseTest {
         sut.getUASRquestModule().zoneRequestsWithParameterAndRoute(zone.getId(), parameter, route, times, toReset);
     }
 
-
     private void sendPlacementGroupReqToRampAPI(Integer publisher, String aduits, String placementID) {
         String url = placementID + publisher + aduits;
         sut.getUASRquestModule().getRequest(url);
@@ -614,6 +630,11 @@ public class UASIntegrationTest extends BaseTest {
     private void sendMultipleAdRequests(Integer times, Integer zoneId, boolean toReset) {
         sut.getUASRquestModule().zoneRequests(zoneId, times, toReset);
     }
+
+    private void sendMultipleAdRequestsWithRoute(Integer times,String parameter, Integer zoneId,String route, boolean toReset) {
+        sut.getUASRquestModule().zoneRequestsWithParameterAndRoute(zoneId,parameter, route, times, toReset);
+    }
+
 
     public static LongAdder sendImpressionRequestsToUASImmediately() {
         ExecutorService impExecutorService =
@@ -767,14 +788,7 @@ public class UASIntegrationTest extends BaseTest {
         Banner banner = sut.getExecutorCampaignManager().getBanner(bannername).orElseThrow(() -> new AssertionError("The banner " + bannername + " does not exist!"));
         Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName).orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
         Campaign campaign = sut.getExecutorCampaignManager().getCampaign(campaignname).orElseThrow(() -> new AssertionError("The campaign " + campaignname + " does not exist!"));
-        toCheck = "https://svastx.moatads.com/undertonevpaid8571606/template.xml?tmode=1&vast_url=https%3A%2F%2Fstorage.googleapis.com%2Fgvabox%2Fexternal_sample%2Fvpaid2jslinear.xml&"
-                + "level1=" + advertiserid + "&"
-                + "level2=" + ioid + "&"
-                + "level3=" + iolineitemid + "&"
-                + "level4=" + banner.getId() + "&"
-                + "slicer1=" + campaign.getId() + "&"
-                + "slicer2=" + zone.getId() + "&"
-                + "zMoatWEBID=" + publisherid + "&";
+        toCheck = "https://svastx.moatads.com/undertonevpaid8571606/template.xml";
         System.out.print("String expected string is =" + toCheck);
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
             Assert.assertThat(content, Matchers.containsString(toCheck));

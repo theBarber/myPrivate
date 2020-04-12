@@ -1,12 +1,13 @@
 package steps;
 
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
-@CucumberOptions(features = "classpath:Contextual.feature", plugin = { "pretty"})
 @RunWith(Cucumber.class)
-public class Contextual extends BaseTest {
-    public Contextual() {
+@CucumberOptions(features = {"classpath:unused/TestOnly.feature"}, plugin = { "pretty"})
+public class TestOnly extends BaseTest {
+    public TestOnly() {
     }
 }

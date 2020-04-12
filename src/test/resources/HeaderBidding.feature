@@ -327,7 +327,7 @@ Feature: Header Bidding flow support
     And The response code is 204
 
   Scenario: header bidding multiple domains - domain2
-    Given I add cookie UTID with value {d7a8b9faf42446dcbca3248kef7d47bb} to my requests to uas
+    Given I add cookie UTID with value {1112223331114444} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain2 request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
@@ -344,7 +344,7 @@ Feature: Header Bidding flow support
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} 100% of the time
 
   Scenario: header bidding multiple domains - domain3
-    Given I add cookie UTID with value {d7a8b9faf42446dlbca3248eef7d47bb} to my requests to uas
+    Given I add cookie UTID with value {1112226661114444} to my requests to uas
     Given i send 2 headerBidding post request for scenario {Send HB Domain3 request for publisher 3673} for publisher 3673 with domain {HBTest3.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}

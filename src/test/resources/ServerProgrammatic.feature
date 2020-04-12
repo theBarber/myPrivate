@@ -3,6 +3,7 @@
 @HeaderBidding
 @parallel
 @noAA
+@pgwfeature
 
 Feature: Programmatic flow support
 
