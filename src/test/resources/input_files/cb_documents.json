@@ -2,12 +2,11 @@
   "1. PLPT is active, zone req. 1 users - 2 devices - one app one web": {
     "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn",
     "platform": "desktop",
-    "udmp_p": [
-      {
-        "p": "456",
-        "e": 18204
-      }
-    ],
+    "u_p": {
+      "456": [
+        18204
+      ]
+    },
     "user-graph": {
       "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
       "devices": [
@@ -43,12 +42,11 @@
   "2. PLPT is active, zone req. 1 users, 1 device that has both profiles": {
     "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn",
     "platform": "desktop",
-    "udmp_p": [
-      {
-        "p": "456",
-        "e": 18204
-      }
-    ],
+    "u_p": {
+      "456": [
+        18204
+      ]
+    },
     "user-graph": {
       "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
       "devices": [
@@ -84,16 +82,14 @@
   "3. PLPT is not active, zone req. 1 users - 2 devices - one app one web": {
     "udid": "2.12345600-0000-0000-0000-000000000123",
     "platform": "app",
-    "udmp_p": [
-      {
-        "p": "123",
-        "e": 18204
-      },
-      {
-        "p": "456",
-        "e": 18204
-      }
-    ],
+    "u_p": {
+      "123": [
+        18204
+      ],
+      "456": [
+        18204
+      ]
+    },
     "user-graph": {
       "upid": "",
       "devices": [
@@ -124,12 +120,11 @@
   "4. PLPT is not active, zone req. 1 users, 1 device that has both profiles": {
     "udid": "2.12300000-0000-0000-0000-000000000123",
     "platform": "app",
-    "udmp_p": [
-      {
-        "p": "123",
-        "e": 18198
-      }
-    ],
+    "u_p": {
+      "123": [
+        18198
+      ]
+    },
     "user-graph": {
       "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
       "devices": [
