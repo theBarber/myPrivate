@@ -3,7 +3,7 @@
 @scheduled
 @noAA
 @daniellaPLT
-
+@PersonaLevelTargetingFeature
 Feature: Persona level targeting
 
   Background: health check

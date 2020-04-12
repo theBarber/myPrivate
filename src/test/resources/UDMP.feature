@@ -10,6 +10,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And I add {IL} ip header
     Then The response code is 200
 
+  @UDMPFeatureInjectionToCb
   Scenario: injecting to users bucket
     Then i inject new profile doc with udId {2.11000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.11000000-0000-0000-0000-000000000000"},{"udid": "2.12000000-0000-0000-0000-000000000000"},{"udid": "2.13000000-0000-0000-0000-000000000000"}]
     Then i inject new profile doc with udId {2.12000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {udmp_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.11000000-0000-0000-0000-000000000000"},{"udid": "2.12000000-0000-0000-0000-000000000000"},{"udid": "2.13000000-0000-0000-0000-000000000000"}]
