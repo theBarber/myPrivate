@@ -9,11 +9,11 @@
 @noAA
 @eitan12
 @HeaderBiddingFlowSupport
-
 Feature: Header Bidding flow support
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {NY} ip header
     Then The response code is 200
 
 
