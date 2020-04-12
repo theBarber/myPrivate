@@ -7,6 +7,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {IL} ip header
     Then The response code is 200
 
   Scenario: injecting to users bucket

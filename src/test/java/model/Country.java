@@ -9,7 +9,8 @@ import java.util.Set;
  */
 public enum Country {
     UK("193.117.138.126"),
-    CA("174.66.137.222");
+    CA("174.66.137.222"),
+    IL("217.65.47.30");
 
     private final Set<String> ips;
 
