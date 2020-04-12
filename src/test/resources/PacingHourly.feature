@@ -9,8 +9,6 @@ Feature: Pacing Hourly Test
 
   Background: health check
     When Sending a healthcheck request to UAS
-    Then The response code is 200
-    When I send 2 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The response code is 200
 
 # check what happens at the next day???
@@ -26,6 +24,8 @@ Feature: Pacing Hourly Test
   Scenario: 2. Daily Pacing. life time goal - 45, 3 days left , flex = 25% (pacing)  -> NDQ = 15
     When I send 15 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The response contains {script}
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
     And I send impression requests to UAS
     And I sleep for 60 seconds
     When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS

@@ -488,6 +488,7 @@ public class API_EntitiesCreator extends BaseTest {
     }
 
     private void updateCampaignEndDate(String campaign_name, Integer days) {
+        int deFactoDays=days-1;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         TimeZone etTimeZone = TimeZone.getTimeZone("America/New_York");
         formatter.setTimeZone(etTimeZone);
@@ -495,7 +496,7 @@ public class API_EntitiesCreator extends BaseTest {
         String currentDate = formatter.format(date);
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(Calendar.DATE, days);
+        cal.add(Calendar.DATE, deFactoDays);
         String endDate = formatter.format(cal.getTime());
         SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '" + currentDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status` = 0;");
     }
