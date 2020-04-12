@@ -24,7 +24,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-fixed-no-margin-BB-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-direct-fixed-no-margin-BB-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
 
   Scenario: Publisher with fixed bid price for BB, Campaign with margin
     Given I Delete hbl logs
@@ -34,7 +34,7 @@ Feature: Dynamic HB bid price
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-fixed-margin-BB-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-direct-fixed-margin-BB-ES-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-dpm-direct-fixed-margin-BB-ES}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
     And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
@@ -63,7 +63,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-direct-dynamic-no-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-direct-dynamic-no-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {2}
+    And all HB responses contains cpm with value {2.0}
 
   Scenario: Publisher with dynamic bid price for MR, Campaign with margin
 #  Set fixed HB
@@ -92,7 +92,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-fixed-margin-BB-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-reserved-fixed-margin-BB-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
 
   Scenario: Publisher with reserved fixed bid price for BB, Campaign with no margin
 #  Set fixed HB
@@ -106,7 +106,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-fixed-no-margin-BB-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-reserved-fixed-no-margin-BB-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
 
   Scenario: Publisher with reserved dynamic bid price for MR, Campaign with margin
 #  Set fixed HB
@@ -134,7 +134,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {2}
+    And all HB responses contains cpm with value {2.0}
 
 
   Scenario: Publisher with non reserved fixed bid price for BB, Campaign with margin
@@ -149,7 +149,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-fixed-margin-BB-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-fixed-margin-BB-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
 
 
   Scenario: Publisher with non reserved fixed bid price for BB, Campaign with no margin
@@ -164,7 +164,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
 
   Scenario: Publisher with non reserved dynamic bid price for MR, Campaign with margin
 #  Set fixed HB
@@ -178,7 +178,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {2}
+    And all HB responses contains cpm with value {2.0}
 
   Scenario: zonetag - po price < max price, Campaign with margin
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -208,7 +208,7 @@ Feature: Dynamic HB bid price
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {2}
+    And all HB responses contains cpm with value {2.0}
 
 #  Scenario: Publisher with non reserved dynamic bid price for HP, Campaign with margin
 # #  Set fixed HB

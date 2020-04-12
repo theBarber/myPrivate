@@ -36,7 +36,7 @@ Feature: Programmatic flow support
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
     And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
