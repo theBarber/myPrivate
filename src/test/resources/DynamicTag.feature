@@ -9,21 +9,24 @@ Feature: Dynamic Tag flow support
     When Sending a healthcheck request to UAS
     Then The response code is 200
 
-  Scenario: 1. Basic DT flow
+  Scenario: 1. Basic DT flow - PART ONE
       Given I add cookie UTID with random value to my requests to uas
-        Then i send 2 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=1}
+      And I add header of {X-Forwarded-For} with value {78.31.205.183}
+      Then i send 2 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=1}
       And The synchronized response code is 200
       And The response contains {script}
       And The responses has impression-urls
       And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SS-1-t-1-banner-1} 50% of the time
       And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-SI-1-t-1-banner-1} 50% of the time
-      And I sleep for 5 seconds
+
+  Scenario: 1. Basic DT flow - PART TWO
       Then i send 1 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=1}
       And The synchronized response code is 200
       And The response contains {script}
       And The responses has impression-urls
-      And I sleep for 5 seconds
       And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-PGC-2-t-1-banner-1} 100% of the time
+
+  Scenario: 1. Basic DT flow - PART THREE
       Then i send 1 times Dynamic Tag synchronized ad request to UAS for publisher 3674 with domain {dynamic1.com&unlimited=1&optimize=1}
       And The synchronized response code is 200
       And The synchronized responses are passback

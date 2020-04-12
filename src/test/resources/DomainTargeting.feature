@@ -14,7 +14,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://daniref.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {optimize=1&domain=danifalse.com} for zone named {zone-zoneset-EHC-ST-1A} to UAS
     And The response code is 200
     And The response contains {script}
@@ -24,7 +24,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://daniref.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {optimize=1&domain=danifalse.com} for zone named {zone-zoneset-EHC-ST-1B} to UAS
     And The response code is 200
     And The responses are passback
@@ -32,7 +32,7 @@ Feature: Domain Targeting tests
   Scenario: 2B. send zone requests, ex referer is not a false domain + in black list
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {optimize=1&domain=danidom.com} for zone named {zone-zoneset-EHC-ST-2B} to UAS
     And The response code is 200
     And The responses are passback
@@ -41,7 +41,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danifalse.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-EHC-ST-3A} to UAS
     And The response code is 200
     And The response contains {script}
@@ -51,7 +51,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danifalse.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-EHC-ST-3B} to UAS
     And The response code is 200
     And The responses are passback
@@ -60,7 +60,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {domain=danifalse.com&optimize=1} for zone named {zone-zoneset-EHC-ST-4A} to UAS
     And The response code is 200
     And The responses are passback
@@ -69,7 +69,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {domain=danidomInc.com&optimize=1} for zone named {zone-zoneset-EHC-ST-4B} to UAS
     And The response code is 200
     And The responses are passback
@@ -79,7 +79,7 @@ Feature: Domain Targeting tests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-EHC-ST-5A} to UAS
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-EHC-ST-5A-banner-1} 100% of the time
@@ -88,7 +88,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-EHC-ST-5B} to UAS
     And The response code is 200
     And The responses are passback
@@ -97,7 +97,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://news.danidom.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=1}
     And The response code is 200
     And The responses are passback
@@ -106,7 +106,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danidom.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=1}
     And The response code is 200
     And The responses are passback
@@ -115,7 +115,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://danifalse.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {tagid=470&optimize=1}
     And The response code is 200
     And The responses are passback
@@ -124,7 +124,7 @@ Feature: Domain Targeting tests
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I use {https://unknown.com} as referer string to send my requests to uas
-    And I add {NY} ip header
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
     And i send 1 times Dynamic Tag ad request to UAS for publisher 3739 with extra params {danifalse.com&tagid=470&optimize=1}
     Then The response code is 200
     And The responses are passback
