@@ -16,33 +16,6 @@ Feature: Header Bidding flow support
     And I add {NY} ip header
     Then The response code is 200
 
-
-    # &&&&&&&&&&&&&&&&&&&&&&&&  Eitan need to fix 1
-#  Scenario: send HB basic request
-#    Given I Delete hbl logs
-#    Given i send 20 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
-#    And The response code is 200
-#    And The response contains {script}
-#    And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
-#    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
-#    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
-#    And all HB responses contains cpm with id 1
-#    And I send impression requests to UAS
-#    And The response code is 200
-#    And The response contains {script}
-#    And I send impression requests to UAS
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
-#    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-HB-Tablet-160x600} 100% of the time
-#    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600} 100% of the time
-#    And I read the latest hbl log file from uas
-#    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
-#    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
-#    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
-#    And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
-#    And The field Bid_price in the 15 column of the hbl log is: 1.00
-#    And The field Publisher_id in the 3 column of the hbl log is: 3673
-#    And The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-
   Scenario: send HB basic request with domain as array
     Given i send 1 headerBidding post request for scenario {Send HB basic request with domain as array for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
@@ -133,10 +106,7 @@ Feature: Header Bidding flow support
     And The response code is 200
     And The response contains {script}
 
-#  Scenario: Send HBProg request with No D, No response from Pwai
-#    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1&sim_geo=1&country=us}
-#    And The response code is 204
-
+  @HbProgDSelected
   Scenario: Send HBProg request D selected
     Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1&sim_geo=1&country=us}
     And The response code is 200
@@ -198,24 +168,6 @@ Feature: Header Bidding flow support
     And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
     And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
     And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
-## Eitan commented      And I sleep for 5 seconds
-## Eitan commented      Given I read the latest hbl log file from uas
-## Eitan commented      And For bidID bid1 The field bid_request_id in the 30 column of the hbl log is: bid1
-## Eitan commented      And For bidID bid1 The field Selected_Ad_Size in the 6 column of the hbl log is: [[1,2],[160,600]]
-## Eitan commented      And For bidID bid1 The field Bid_price in the 15 column of the hbl log is: 1.00
-## Eitan commented      And For bidID bid1 The field Publisher_id in the 3 column of the hbl log is: 3673
-## Eitan commented      And For bidID bid1 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-## Eitan commented      And For bidID bid2 The field bid_request_id in the 30 column of the hbl log is: bid2
-## Eitan commented      And For bidID bid2 The field Selected_Ad_Size in the 6 column of the hbl log is: [[970,250]]
-## Eitan commented      And For bidID bid2 The field Bid_price in the 15 column of the hbl log is: 0.50
-## Eitan commented      And For bidID bid2 The field Publisher_id in the 3 column of the hbl log is: 3673
-## Eitan commented      And For bidID bid2 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-## Eitan commented      And For bidID bid3 The field bid_request_id in the 30 column of the hbl log is: bid3
-## Eitan commented      And For bidID bid3 The field Selected_Ad_Size in the 6 column of the hbl log is: [[300,250]]
-## Eitan commented      And For bidID bid3 The field Bid_price in the 15 column of the hbl log is: 2.50
-## Eitan commented      And For bidID bid3 The field Publisher_id in the 3 column of the hbl log is: 3673
-## Eitan commented      And For bidID bid3 The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
-## Eitan commented      And For bidID bid4 The field Ad_Size in the 7 column of the hbl log is: 0
 
 #   header bidding multiple domains tests
   Scenario: header bidding multiple domains - domain1
