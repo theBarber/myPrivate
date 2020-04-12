@@ -9,11 +9,9 @@ Feature: Validate New Render Service
     And The response contains {https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request and validate the response of a direct PG banner
@@ -28,11 +26,9 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a direct PG banner
@@ -47,11 +43,9 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web HB request and validate the response of a direct ES banner
@@ -64,14 +58,12 @@ Feature: Validate New Render Service
     And all HB responses contains cpm with value {2.5}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
-    And The response contains {ads-s-us-east-1.undertone.com\/c?}
+    And The response contains {events-s-us-east-1.undertone.com\/c?}
     And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus}
     And The response contains {usr.undertone.com\/userPixel\/sync?partnerId=39}
-    And The response contains {https:\/\/x.bidswitch.net\/sync?ssp=undertone}
     And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46}
     And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi}
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/sync.alphonso.tv\/sync?srcid=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
   Scenario: Send a web zone request and validate the response of a programmatic PG banner
@@ -84,11 +76,9 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web HB request and validate the response of a Programmatic ES banner
@@ -101,14 +91,12 @@ Feature: Validate New Render Service
     And all HB responses contains cpm with value {1}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
-    And The response contains {ads-s-us-east-1.undertone.com\/c?}
+    And The response contains {events-s-us-east-1.undertone.com\/c?}
     And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus}
     And The response contains {usr.undertone.com\/userPixel\/sync?partnerId=39}
-    And The response contains {https:\/\/x.bidswitch.net\/sync?ssp=undertone}
     And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46}
     And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi}
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/sync.alphonso.tv\/sync?srcid=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
   Scenario: Send a web DT request and validate the response of a programmatic PG banner
@@ -122,11 +110,9 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request and validate the response of a direct PG Action banner
@@ -142,11 +128,9 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-PGAction-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a direct PG Action banner
@@ -163,11 +147,9 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-DT-PGAction-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request and validate the response of a programmatic PG Action banner
@@ -180,11 +162,9 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-PGAction-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a programmatic PG Action banner
@@ -198,11 +178,9 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-DT-PGAction-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request from US and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
@@ -227,11 +205,9 @@ Feature: Validate New Render Service
     And The response contains {&e=render}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
@@ -256,11 +232,9 @@ Feature: Validate New Render Service
     And The response contains {&e=render}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web HB request and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
@@ -282,14 +256,12 @@ Feature: Validate New Render Service
     And The response contains {&e=start}
     And The response contains {&e=unmute}
     And The response contains {&e=render}
-    And The response contains {ads-s-us-east-1.undertone.com\/c?}
+    And The response contains {events-s-us-east-1.undertone.com\/c?}
     And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus&uid=}
     And The response contains {https:\/\/us-u.openx.net\/w\/1.0\/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https:\/\/usr.undertone.com\/userPixel\/sync?partnerId=39}
-    And The response contains {https:\/\/x.bidswitch.net\/sync?ssp=undertone}
     And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46&pdid=}
     And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/sync.alphonso.tv\/sync?srcid=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
   Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
@@ -314,11 +286,9 @@ Feature: Validate New Render Service
     And The response contains {&e=render}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
@@ -343,11 +313,9 @@ Feature: Validate New Render Service
     And The response contains {&e=render}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web HB request and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
@@ -374,14 +342,12 @@ Feature: Validate New Render Service
     And The response contains {&e=start}
     And The response contains {&e=unmute}
     And The response contains {&e=render}
-    And The response contains {ads-s-us-east-1.undertone.com\/c?}
+    And The response contains {events-s-us-east-1.undertone.com\/c?}
     And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus}
     And The response contains {usr.undertone.com\/userPixel\/sync?partnerId=39}
-    And The response contains {https:\/\/x.bidswitch.net\/sync?ssp=undertone}
     And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46}
     And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi}
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/sync.alphonso.tv\/sync?srcid=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
   Scenario: Send a web zone request from US and validate the response of a Direct Video Adhesion Ad (Without Leave Behind)
@@ -406,11 +372,9 @@ Feature: Validate New Render Service
     And The response contains {&e=render}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (Without Leave Behind)
@@ -435,11 +399,9 @@ Feature: Validate New Render Service
     And The response contains {&e=render}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request from US and validate the response of a Direct Linear Video Ad
@@ -503,11 +465,9 @@ Feature: Validate New Render Service
     And The response contains {type:'markup', url:'PGltZyBzcmM9Imh0dHBzOi8vd3d3LmV4YW1wbGUuY29tL3RyYWNrZXI/YWRpZD0xMjM0NTY3OCIgaGVpZ2h0PSIxIiB3aWR0aD0iMSIgYWx0PSJBZHZlcnRpc2VtZW50Ij4='}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
 
@@ -579,9 +539,7 @@ Feature: Validate New Render Service
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-zone-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
-    And The response contains {https://x.bidswitch.net/sync?ssp=undertone}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
