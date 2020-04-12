@@ -4,11 +4,12 @@
 @scheduled
 @DT
 @noAA
-
+@DynamicTagInlineFlowSupport
 Feature: Dynamic Tag inline flow support
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {NY} ip header
     Then The response code is 200
 
   Scenario: 1. Dynamic Tag inline Basic - including migrated tags
