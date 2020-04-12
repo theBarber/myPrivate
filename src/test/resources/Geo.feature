@@ -41,7 +41,7 @@ Feature: Geo limitation targeting
   Scenario: 1. zone req sent from the targeted city/region/state, banner ex - PART ONE
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {190.181.32.176}
+    Given I add header of {x-forwarded-for} with value {78.31.205.183}
     When I send 1 times an ad request with parameter {optimize=1&domain=geo1} for zone named {zone-zoneset-city-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains {script}
