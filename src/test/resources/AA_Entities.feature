@@ -1541,7 +1541,8 @@ Feature: Entities for tests
 
 # Entities for New Render Test
 
-  @NewRenderTest
+#  disable re-creating entities @NewRenderTest
+
   Scenario: Create entities for New Render
     Given i disable campaigns by name on db
       | Campaign Name                                           |
@@ -1714,7 +1715,7 @@ Feature: Entities for tests
 #      | Direct-Banner-Test-HB-Banner-1    | []         |
 #      | Direct-Banner-Test-DT-Banner-1    | []         |
 
-  @NewRenderTest
+# disable re-creating entities  @NewRenderTest
     Scenario: Create entities for New Render
     Given i disable campaigns by name on db
       | Campaign Name                                           |
