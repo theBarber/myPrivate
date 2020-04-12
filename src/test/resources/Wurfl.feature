@@ -7,6 +7,7 @@ Feature: wurfl tests - wurfl limitation in campaign and zone level
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {NY} ip header
     Then The response code is 200
 
   Scenario: Wurfl limitations - PART ONE

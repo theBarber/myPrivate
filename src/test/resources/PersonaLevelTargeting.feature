@@ -8,7 +8,7 @@ Feature: Persona level targeting
 
   Background: health check
     When Sending a healthcheck request to UAS
-    And I add {IL} ip header
+    And I add {NY} ip header
     Then The response code is 200
 
   Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
