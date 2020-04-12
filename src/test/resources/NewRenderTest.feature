@@ -445,7 +445,7 @@ Feature: Validate New Render Service
     And The response contains {&e=close}
     And The response contains {&e=start}
     And The response contains {&e=unmute}
-    And The response contains {https://ads-s-us-east-1.undertone.com/c?}
+    And The response contains {https://events-s-us-east-1.undertone.com/c?}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
