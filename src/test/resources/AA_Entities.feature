@@ -1021,6 +1021,8 @@ Feature: Entities for tests
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                |
 
 
+  @contextualEntities
+  @contextual
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                              |
