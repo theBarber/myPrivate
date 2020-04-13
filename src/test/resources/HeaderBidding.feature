@@ -188,6 +188,7 @@ Feature: Header Bidding flow support
 #    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} 100% of the time
 
 #   header bidding profile targeting tests
+  @HBProfileTargeting
   Scenario: Header bidding - profile targeting - Ver1
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&optimize=1&sim_geo=1&country=us}
@@ -331,6 +332,7 @@ Feature: Header Bidding flow support
 #    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} 100% of the time
 
 #   header bidding profile targeting tests
+  @HBProfileTargeting
   Scenario: Header bidding - profile targeting - Ver2
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&optimize=1&sim_geo=1&country=us}
