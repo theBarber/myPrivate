@@ -809,6 +809,7 @@ Feature: Entities for tests
 
 
   @wurfl
+  @wurflEntities
   Scenario: create entities for peer39 and wurfl feature
     Given i disable campaigns by name on db
       | Campaign Name    |
