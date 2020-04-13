@@ -1730,8 +1730,8 @@ Feature: Entities for tests
   @refresh
   @append
   @NDQFilteringTest
+  @refreshCaches
   Scenario: refresh caches
-#    And I refresh banner cache
     And I refresh zone cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
