@@ -51,7 +51,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
 
     private void initLineItemFromS3() {
         try {
-            this.io = Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/" + envname + "/tamar/createdlineItem.json"), IO[].class));
+            this.io = Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/" + envname + "/createdlineItem.json"), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -223,7 +223,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
                 basePath = basePath.substring(1);
             }
-            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_ZONESET_FILE, "qa/ramp-lift-automation/" + env + "/tamar/createdzoneSet.json");
+            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_ZONESET_FILE, "qa/ramp-lift-automation/" + env + "/createdzoneSet.json");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -238,7 +238,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
                 basePath = basePath.substring(1);
             }
-            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_LINEITEM_FILE, "qa/ramp-lift-automation/" + env + "/tamar/createdlineItem.json");
+            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_LINEITEM_FILE, "qa/ramp-lift-automation/" + env + "/createdlineItem.json");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
