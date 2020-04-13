@@ -156,5 +156,22 @@
         }
       ]
     }
+  },
+  "Header bidding - profile targeting": {
+    "udid": "1.crmqc31wdld7y233cq5xaxrjv",
+    "platform": "desktop",
+    "u_p": {
+      "1": [
+        123
+      ]
+    },
+    "user-graph": {
+      "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23",
+      "devices": [
+        {
+          "udid": "1.crmqc31wdld7y233cq5xaxrjv"
+        }
+      ]
+    }
   }
 }
