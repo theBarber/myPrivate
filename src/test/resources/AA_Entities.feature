@@ -1044,12 +1044,12 @@ Feature: Entities for tests
       | Banner Name                                         | limitation                                                                                            |
       | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
       | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
-      | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105","2_80512001"]]] |
+      | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001","2_80012331"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105","2_80512001","2_83051210"]]] |
 
     And i update campaign data by name
-      | Campaign Name                             | limitation                              |
-      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84251001","2_84252026"]]] |
-      | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
+      | Campaign Name                             | limitation |
+      | campaign-dv-campaignLevelLimit-ST         | []         |
+      | campaign-dv-campaignLevelLimit-exclude-ST | []         |
 
     And i update zone data by name
       | Zone Name                                      | limitation |
@@ -1745,5 +1745,6 @@ Feature: Entities for tests
   @optimize
   @append
   @refresh
+  @saveEntitiesToFile
   Scenario: save entities to file
     And save all entities to json file
