@@ -50,7 +50,7 @@ public class ExecutorCampaignManager implements ParameterProvider<WithId<Integer
     private void initLineItemFromS3() {
         sut.write("Initializing IO Line Item from S3...");
         try {
-            this.io = Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/" + envname + "/createdlineItem.json"), IO[].class));
+            this.io = Arrays.asList(m.readValue(S3Client.getInstance(Regions.US_WEST_2).readFile("ramp-delievery-qa/qa/ramp-lift-automation/" + envname + "/tamar/createdlineItem.json"), IO[].class));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
