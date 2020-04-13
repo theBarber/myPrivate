@@ -809,7 +809,6 @@ Feature: Entities for tests
 
 
   @wurfl
-
   Scenario: create entities for peer39 and wurfl feature
     Given i disable campaigns by name on db
       | Campaign Name    |
@@ -1038,13 +1037,13 @@ Feature: Entities for tests
       | campaign-dv-campaignLevelLimit-ST          | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-ST}          | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-exclude-ST  | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-exclude-ST}  | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
       | campaign-dv-zoneLevelLimit-peer-ST         | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-peer-ST}         | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
-      | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | []                                                                            |
+      | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
 
     And i update banner data by name
       | Banner Name                                         | limitation                                                                                            |
       | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
       | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
-      | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012331"],[64,"=~","2_82045105","2_83051210"]]] |
+      | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [] |
 
     And i update campaign data by name
       | Campaign Name                             | limitation |

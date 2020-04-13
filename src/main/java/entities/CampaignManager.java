@@ -223,7 +223,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
                 basePath = basePath.substring(1);
             }
-            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_ZONESET_FILE, "qa/ramp-lift-automation/" + env + "/createdzoneSet.json");
+            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_ZONESET_FILE, "qa/ramp-lift-automation/" + env + "/tamar/createdzoneSet.json");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -238,7 +238,7 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
             if (FileSystems.getDefault().getClass().getSimpleName().equals("WindowsFileSystem")) {
                 basePath = basePath.substring(1);
             }
-            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_LINEITEM_FILE, "qa/ramp-lift-automation/" + env + "/createdlineItem.json");
+            S3Client.getInstance(Regions.US_WEST_2).putObject("ramp-delievery-qa", basePath + CREATED_LINEITEM_FILE, "qa/ramp-lift-automation/" + env + "/tamar/createdlineItem.json");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
