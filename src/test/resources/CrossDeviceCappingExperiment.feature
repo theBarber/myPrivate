@@ -68,14 +68,14 @@ Feature: Cross Device Capping Experiment
 
   Scenario: verify campaign session capping enforced when sending zone requests from user using inapp - in time frame
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
-    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=yanivCappingTest} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=2189F809D99} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
     And I send impression requests to UAS
     Then The response contains {script}
     Then The response contains {has_capping=1}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceSessionCapping-Inapp-ST-9-banner-1} 100% of the time
     And I sleep for 1 seconds
-    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=yanivCappingTest} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=2189F809D99} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
     And I send impression requests to UAS
     Then The response contains {script}
     Then The response contains {has_capping=1}
@@ -84,7 +84,7 @@ Feature: Cross Device Capping Experiment
     Given I sleep for 10 seconds
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
-    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=yanivCappingTest} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=2189F809D99} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
     And I send impression requests to UAS
     Then The response code is 200
     And The responses are passback

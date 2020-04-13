@@ -488,18 +488,16 @@ public class API_EntitiesCreator extends BaseTest {
     }
 
     private void updateCampaignEndDate(String campaign_name, Integer days) {
-
+        int deFactoDays=days-1;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         TimeZone etTimeZone = TimeZone.getTimeZone("America/New_York");
         formatter.setTimeZone(etTimeZone);
-
         Date date = new Date();
         String currentDate = formatter.format(date);
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(Calendar.DATE, days);
+        cal.add(Calendar.DATE, deFactoDays);
         String endDate = formatter.format(cal.getTime());
-
         SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '" + currentDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status` = 0;");
     }
 
@@ -509,11 +507,12 @@ public class API_EntitiesCreator extends BaseTest {
 
         Integer entityID;
         for (int i = 1; i < EntityList.size(); i++) {
+            String suffix = entity.equals("zoneset") ? "_id" : "id";
             List<String> entityData = EntityList.get(i);
             entityID = updateBy.equals("name") ? sut.getCampaignManager()
                     .getterFor(entity).apply(entityData.get(0)).orElseThrow(() -> new AssertionError(entity.toUpperCase() + "entity with the name " + entityData.get(0) + " wasn't found")).getId() : Integer.valueOf(entityData.get(0));
             for (int j = 1; j < entityData.size(); j++) {
-                SqlWorkflowUtils.setColumnInWorkflow(entity + "s", entity + "id", entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
+                SqlWorkflowUtils.setColumnInWorkflow(entity + "s", entity + suffix, entityID.toString(), EntityList.get(0).get(j), entityData.get(j));
             }
         }
     }

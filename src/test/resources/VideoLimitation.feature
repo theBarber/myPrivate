@@ -172,7 +172,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-noSize-banner-1} 100% of the time
 
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%  MOBILE %%%%%%%%%%%%%%%    user-agent --> 640  X 360   %%%%%%%%%%%%%%%%%%%%%%%%
+# %%%%%%%%%%     Story  UN-22187  %%%%%%%%%%%%%%  MOBILE %%%%%%%%%%%%%%%    user-agent --> 640  X 360   %%%%%%%%%%%%%%%%%%%%%%%%
 
   Scenario: 10.0    |   Positive  test   |     player_size = 1       |  player_size = small
   request:          player_size = small   |  resolution = 150 X 200  |   calculated site = 13%

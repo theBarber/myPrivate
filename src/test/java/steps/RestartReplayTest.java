@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:ZZ_Restart_Replay.feature", plugin = { "pretty",})
 //        "infra.RotatingJSONFormatter:target/cucumber/ZZ_Restart_Replay_$TIMESTAMP$.json" })
-public class restartReplayTest extends BaseTest {
-    public restartReplayTest()
+public class RestartReplayTest extends BaseTest {
+    public RestartReplayTest()
     {
         super();
     }
