@@ -1050,10 +1050,10 @@ Feature: Entities for tests
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
-      | Zone Name                                      | limitation                                                     |
-      | zone-zoneset-dv-zoneLevelLimit-ST              | [[[64,"=~","2_84251001","2_84252026"]]]                        |
-      | zone-zoneset-dv-zoneLevelLimit-peer-ST         | [[[64,"=~","2_84251001","2_84252026","1_5261"]]]               |
-      | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | [[[64,"!=","2_80012331"],[64,"=~","2_82045105","2_83051210"]]] |
+      | Zone Name                                      | limitation |
+      | zone-zoneset-dv-zoneLevelLimit-ST              | []         |
+      | zone-zoneset-dv-zoneLevelLimit-peer-ST         | []         |
+      | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | []         |
 
 
   Scenario:  create entites for effctive host choosing
