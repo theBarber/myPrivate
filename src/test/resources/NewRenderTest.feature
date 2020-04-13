@@ -12,7 +12,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request and validate the response of a direct PG banner
@@ -30,7 +29,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a direct PG banner
@@ -48,7 +46,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web HB request and validate the response of a direct ES banner
@@ -67,7 +64,6 @@ Feature: Validate New Render Service
     And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46}
     And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi}
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/sync.alphonso.tv\/sync?srcid=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
   Scenario: Send a web zone request and validate the response of a programmatic PG banner
@@ -83,7 +79,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web HB request and validate the response of a Programmatic ES banner
@@ -102,7 +97,6 @@ Feature: Validate New Render Service
     And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46}
     And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi}
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/sync.alphonso.tv\/sync?srcid=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
   Scenario: Send a web DT request and validate the response of a programmatic PG banner
@@ -119,7 +113,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request and validate the response of a direct PG Action banner
@@ -138,7 +131,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a direct PG Action banner
@@ -158,7 +150,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request and validate the response of a programmatic PG Action banner
@@ -174,7 +165,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a programmatic PG Action banner
@@ -191,7 +181,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request from US and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
@@ -219,7 +208,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
@@ -247,7 +235,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web HB request and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
@@ -275,7 +262,6 @@ Feature: Validate New Render Service
     And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46&pdid=}
     And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/sync.alphonso.tv\/sync?srcid=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
   Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
@@ -303,7 +289,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web DT request and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
@@ -331,7 +316,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web HB request and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
@@ -364,7 +348,6 @@ Feature: Validate New Render Service
     And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46}
     And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi}
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/sync.alphonso.tv\/sync?srcid=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
   Scenario: Send a web zone request from US and validate the response of a Direct Video Adhesion Ad (Without Leave Behind)
@@ -392,7 +375,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (Without Leave Behind)
@@ -420,7 +402,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
   Scenario: Send a web zone request from US and validate the response of a Direct Linear Video Ad
@@ -487,7 +468,6 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
 
@@ -562,5 +542,4 @@ Feature: Validate New Render Service
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
     And The response contains {https://ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi=}
     And The response contains {https://tags.bluekai.com/site/15597?id=}
-    And The response contains {https://sync.alphonso.tv/sync?srcid=1200&puid=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
