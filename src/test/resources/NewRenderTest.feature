@@ -93,7 +93,7 @@ Feature: Validate New Render Service
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {99999}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
     And The response contains {events-s-us-east-1.undertone.com\/c?}
