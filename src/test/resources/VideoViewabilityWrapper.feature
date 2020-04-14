@@ -5,8 +5,8 @@ Feature: video viewability wrapper tests on cross screen video blend product
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {NY} ip header
     Then The response code is 200
-
 
   Scenario: 1.0 Testing IAS wrapper response - video zone request
     When I send 1 times an ad video request with parameter {optimize=1&unlimited=1&domain=dnu-tt} for zone named {zone-zoneset-IAS-wrapper-CSVB} to UAS
