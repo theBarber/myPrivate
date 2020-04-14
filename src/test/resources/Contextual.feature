@@ -21,17 +21,6 @@ Feature: contextual targeting tests
     And The response code is 200
     And The responses are passback
 
-  Scenario:2.0 contextual targeting by dv - zone level limitation brand safety - PART ONE - Delivery Expected
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
-    And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1} 100% of the time
-
-  Scenario:2.0 contextual targeting by dv - zone level limitation brand safety - PART TWO - Passback Expected
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fporn.com} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
-    And The response code is 200
-    And The responses are passback
-
   Scenario:3.0 contextual targeting by dv - campaign level limitation domain exclude - PART ONE - Passback Expected
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-exclude-ST} to UAS
     And The response code is 200
