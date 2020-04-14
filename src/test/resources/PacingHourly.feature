@@ -9,6 +9,7 @@ Feature: Pacing Hourly Test
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {NY} ip header
     And The response code is 200
 
 # check what happens at the next day???
