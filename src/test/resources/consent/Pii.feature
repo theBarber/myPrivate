@@ -14,11 +14,9 @@ Feature: Pii
     And I sleep for 1 seconds
     Given I Delete req logs
     Given I clear all cookies from uas requests
-#    And I sleep for 1 seconds
     When I send 1 times an ad request with parameter {bundleid=PLT-YesPersonaL&deviceid=12300000-0000-0000-0000-000000000123&gdpr=1} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
-#    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb} to my requests to uas
     When I send 1 times an ad request with parameter {domain=PLT-YesPersonaL&gdpr=1} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
@@ -31,11 +29,9 @@ Feature: Pii
     And I sleep for 1 seconds
     Given I Delete req logs
     Given I clear all cookies from uas requests
-#    And I sleep for 1 seconds
     When I send 1 times an ad request with parameter {bundleid=PLT-YesPersonaL&deviceid=12300000-0000-0000-0000-000000000123&ccpa=1YYN} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
-#    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb} to my requests to uas
     When I send 1 times an ad request with parameter {domain=PLT-YesPersonaL&ccpa=1YYN} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
@@ -70,7 +66,6 @@ Feature: Pii
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12300000-0000-0000-0000-000000000123&gdpr=1} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
-#    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb&gdpr=1} to my requests to uas
     When I send 1 times an ad request for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
@@ -85,7 +80,6 @@ Feature: Pii
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12300000-0000-0000-0000-000000000123&ccpa=1YYN} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
-#    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb&ccpa=1YYN} to my requests to uas
     When I send 1 times an ad request for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
@@ -132,7 +126,6 @@ Feature: Pii
     And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-state-zoneLevelLimit-ST-banner-1} 100% of the time
-#    And I sleep for 20 seconds
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {23.17.255.255}
