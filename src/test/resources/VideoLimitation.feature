@@ -9,7 +9,7 @@
 Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation both on Mobile and Desktop
 
   Background: health check
-    When Sending a healthcheck request to {UAS}
+    When Sending a healthcheck request to UAS
     And I add {NY} ip header
     Then The response code is 200
 
