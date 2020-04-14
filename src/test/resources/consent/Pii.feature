@@ -11,7 +11,7 @@ Feature: Pii
   Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web - gdpr = 1.
     Given I add {NY} ip header
     Then I inject profile doc for scenario {1. PLPT is active, zone req. 1 users - 2 devices - one app one web} to users bucket
-    And I sleep for 3 seconds
+    And I sleep for 1 seconds
     Given I Delete req logs
     Given I clear all cookies from uas requests
 #    And I sleep for 1 seconds
@@ -28,7 +28,7 @@ Feature: Pii
   Scenario: 1.1 PLPT is active, zone req. 1 users - 2 devices - one app one web - ccpa forbidden.
     Given I add {NY} ip header
     Then I inject profile doc for scenario {1.1 PLPT is active, zone req. 1 users - 2 devices - one app one web} to users bucket
-    And I sleep for 3 seconds
+    And I sleep for 1 seconds
     Given I Delete req logs
     Given I clear all cookies from uas requests
 #    And I sleep for 1 seconds
@@ -45,7 +45,7 @@ Feature: Pii
   Scenario: 2. PLPT is active, zone req. 1 users, 1 device that has both profiles - gdpr = 1.
     Given I add {NY} ip header
     Then I inject profile doc for scenario {2. PLPT is active, zone req. 1 users, 1 device that has both profiles} to users bucket
-    And I sleep for 3 seconds
+    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     Given I Delete req logs
     When I send 1 times an ad request with parameter {bundleid=daniellaAppPLT&deviceid=12345600-0000-0000-0000-000000000123&gdpr=1} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
@@ -55,7 +55,7 @@ Feature: Pii
   Scenario: 2.1 PLPT is active, zone req. 1 users, 1 device that has both profiles - ccpa forbidden.
     Given I add {NY} ip header
     Then I inject profile doc for scenario {2.1 PLPT is active, zone req. 1 users, 1 device that has both profiles} to users bucket
-    And I sleep for 3 seconds
+    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     Given I Delete req logs
     When I send 1 times an ad request with parameter {bundleid=daniellaAppPLT&deviceid=12345600-0000-0000-0000-000000000123&ccpa=1YYN} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
@@ -65,7 +65,7 @@ Feature: Pii
   Scenario: 3. PLPT is not active, zone req. 1 users - 2 devices - one app one web - gdpr = 1.
     Given I add {NY} ip header
     Then I inject profile doc for scenario {3. PLPT is not active, zone req. 1 users - 2 devices - one app one web} to users bucket
-    And I sleep for 3 seconds
+    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12300000-0000-0000-0000-000000000123&gdpr=1} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
@@ -80,7 +80,7 @@ Feature: Pii
   Scenario: 3.1 PLPT is not active, zone req. 1 users - 2 devices - one app one web - ccpa forbidden.
     Given I add {NY} ip header
     Then I inject profile doc for scenario {3.1 PLPT is not active, zone req. 1 users - 2 devices - one app one web} to users bucket
-    And I sleep for 3 seconds
+    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12300000-0000-0000-0000-000000000123&ccpa=1YYN} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
@@ -95,7 +95,7 @@ Feature: Pii
   Scenario: 4. PLPT is not active, zone req. 1 users, 1 device that has both profiles - gdpr = 1.
     Given I add {NY} ip header
     Then I inject profile doc for scenario {4. PLPT is not active, zone req. 1 users, 1 device that has both profiles} to users bucket
-    And I sleep for 3 seconds
+    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12345600-0000-0000-0000-000000000123&gdpr=1} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
@@ -104,7 +104,7 @@ Feature: Pii
   Scenario: 4.1 PLPT is not active, zone req. 1 users, 1 device that has both profiles - ccpa forbidden
     Given I add {NY} ip header
     Then I inject profile doc for scenario {4.1 PLPT is not active, zone req. 1 users, 1 device that has both profiles} to users bucket
-    And I sleep for 3 seconds
+    And I sleep for 1 seconds
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12345600-0000-0000-0000-000000000123&ccpa=1YYN} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
