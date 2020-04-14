@@ -173,7 +173,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-1-banner-1} 100% of the time
-    And I sleep for 2 seconds
+#    And I sleep for 2 seconds
 #   step 2: 1 req from device 67
     When I send 1 times an ad request with parameter {deviceid=67000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-LI-FC-ST-2} to UAS
     And The response code is 200
