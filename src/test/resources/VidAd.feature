@@ -1,10 +1,11 @@
 @parallel
 @noAA
-
+@videoAdhesionScenarios
 Feature: video Adhision new ad unit tests
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {NY} ip header
     Then The response code is 200
 
   Scenario: vidAd server prog test, zone req
