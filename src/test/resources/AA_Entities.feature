@@ -1130,7 +1130,7 @@ Feature: Entities for tests
 
     Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
     # suppose to be 3 --> will be changed back to 3  when BUG will be solved
-    Given I set campaign campaign-D-DailyPacing-ST-2 for 4 days
+    Given I set campaign campaign-D-DailyPacing-ST-2 for 3 days
     Given I set campaign campaign-D-ASAP-ST-3 for 3 days
     Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
     Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
