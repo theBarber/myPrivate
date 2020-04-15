@@ -1198,6 +1198,7 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          |
       | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     |
       | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     |
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile |
@@ -1215,6 +1216,7 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 407981 | 234810   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES}          | []         | 58       | 15360          | 3836         | 69502           | []          | []          |
       | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 407981 | 234810   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES}       | []         | 58       | 15361          | 3836         | 69502           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES}        | []         | 10       | 15363          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-20-margin-MR-ES}     | []         | 10       | 15811          | 3836         | 69501           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}     | []         | 10       | 15362          | 3836         | 69501           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 407981 | 251116   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES}        | []         | 29       | 15356          | 3836         | 69503           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 251035   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15359          | 3836         | 69501           | []          | []          |
@@ -1227,6 +1229,7 @@ Feature: Entities for tests
       | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       |
       | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | -2       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | -2       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | -2       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
 
@@ -1250,6 +1253,7 @@ Feature: Entities for tests
       | zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES          | 1         |
       | zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 1         |
