@@ -506,7 +506,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 sut.getUASRquestModule().clearCookies();
             synchronizedResponses.add(postRequest(url, body));
             try {
-                TimeUnit.MILLISECONDS.sleep(200);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
                 fail(e.getMessage());
             }
@@ -519,7 +519,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
             synchronizedResponses.add(getRequest(url));
             try {
-                TimeUnit.MILLISECONDS.sleep(400);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
                 fail(e.getMessage());
             }
