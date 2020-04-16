@@ -5,6 +5,7 @@ Feature: Duration Video tests UN-21695 & UN-21696
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {NY} ip header
     Then The response code is 200
 
   Scenario: 1.1 For a publisher 3708 which has single domain with 15s video duration & skippable = Yes - zone tag request
