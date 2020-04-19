@@ -1,4 +1,5 @@
 @parallel
+@BrandReveal
 Feature: Brand reveal support new size 300X600
 
   Scenario: send request expect delivery Direct
