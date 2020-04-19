@@ -1016,9 +1016,9 @@ Feature: Entities for tests
       | campaign-region-bannerLevelLimit-ST-banner-1 | [[[7,"=~","us","co"]]] |
       | campaign-state-bannerLevelLimit-ST-banner-1  | [[[5,"=~","ca"]]]      |
     And i update zone data by name
-      | Zone Name                            | limitation                       |
-      | zone-zoneset-city-zoneLevelLimit-ST  | [[[8,"=~","bo",["l","la paz"]]]] |
-      | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                |
+      | Zone Name                            | limitation                                                                                                                                                                                                   |
+      | zone-zoneset-city-zoneLevelLimit-ST  | [[[8,\"=~\",\"us\",[\"dc\",\"washington\"],[\"ma\",\"boston\"],[\"md\",\"baltimore\"],[\"pa\",\"lehigh valley\",\"philadelphia\"],[\"ri\",\"providence\"]]],[[7,\"=~\",\"us\",\"ct\",\"nh\",\"nj\",\"ny\"]]] |
+      | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                                                                                                                                                                                            |
 
 
   Scenario:  create entities for contextual targeting - double verify
