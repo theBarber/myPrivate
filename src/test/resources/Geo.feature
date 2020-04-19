@@ -137,14 +137,14 @@ Feature: Geo limitation targeting
 
   Scenario: 4. DT req sent not from the targeted city/region/state, pb ex - PART THREE
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {23.17.255.255}
+    Given I add header of {x-forwarded-for} with value {78.31.205.183}
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {geo3&tagid=170&optimize=1}
     And The response code is 200
     And The responses are passback
 
   Scenario: 4. DT req sent not from the targeted city/region/state, pb ex - PART FOUR
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {23.17.255.255}
+    Given I add header of {x-forwarded-for} with value {78.31.205.183}
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {geo4&tagid=170&optimize=1}
     And The response code is 200
     And The responses are passback
