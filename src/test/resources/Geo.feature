@@ -10,24 +10,15 @@ Feature: Geo limitation targeting
     When Sending a healthcheck request to UAS
     Then The response code is 200
 
-  Scenario: 1. zone req sent from the targeted city/region/state, banner ex - PART FOUR
+  Scenario: 1. zone req sent from the targeted city/region/state, banner ex - PART ONE
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {23.17.255.255}
-    When I send 1 times an ad request with parameter {optimize=1&domain=geo4} for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
+    Given I add header of {x-forwarded-for} with value {190.181.32.176}
+    When I send 1 times an ad request with parameter {optimize=1&domain=geo1} for zone named {zone-zoneset-city-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-state-bannerLevelLimit-ST-banner-1} 100% of the time
-
-  Scenario: 1. zone req sent from the targeted city/region/state, banner ex - PART THREE
-    Given I clear all headers from uas requests
-    Given I add header of {x-forwarded-for} with value {23.17.255.255}
-    When I send 1 times an ad request with parameter {optimize=1&domain=geo3} for zone named {zone-zoneset-state-zoneLevelLimit-ST} to UAS
-    And The response code is 200
-    And The response contains {script}
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-state-zoneLevelLimit-ST-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-city-zoneLevelLimit-ST-banner-1} 100% of the time
 
   Scenario: 1. zone req sent from the targeted city/region/state, banner ex - PART TWO
     Given I clear all headers from uas requests
@@ -38,15 +29,25 @@ Feature: Geo limitation targeting
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-region-bannerLevelLimit-ST-banner-1} 100% of the time
 
-  Scenario: 1. zone req sent from the targeted city/region/state, banner ex - PART ONE
+  Scenario: 1. zone req sent from the targeted city/region/state, banner ex - PART THREE
     Given I clear all headers from uas requests
-    Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {78.31.205.183}
-    When I send 1 times an ad request with parameter {optimize=1&domain=geo1} for zone named {zone-zoneset-city-zoneLevelLimit-ST} to UAS
+    Given I add header of {x-forwarded-for} with value {23.17.255.255}
+    When I send 1 times an ad request with parameter {optimize=1&domain=geo3} for zone named {zone-zoneset-state-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-city-zoneLevelLimit-ST-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-state-zoneLevelLimit-ST-banner-1} 100% of the time
+
+  Scenario: 1. zone req sent from the targeted city/region/state, banner ex - PART FOUR
+    Given I clear all headers from uas requests
+    Given I clear all cookies from uas requests
+    Given I add header of {x-forwarded-for} with value {23.17.255.255}
+    When I send 1 times an ad request with parameter {optimize=1&domain=geo4} for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
+    And The response code is 200
+    And The response contains {script}
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-state-bannerLevelLimit-ST-banner-1} 100% of the time
+
 
   Scenario: 2. zone req sent not from the targeted city/region/state, passback ex - PART ONE
     Given I clear all headers from uas requests
