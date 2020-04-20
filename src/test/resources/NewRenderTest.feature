@@ -529,7 +529,7 @@ Feature: Validate New Render Service
 
   Scenario: Send a web zone request and validate the response of a direct PG banner with Pub fix
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Direct-Zone-Regular} to UAS
+    When I send 1 times an ad request with parameter {unlimited=1&newrender=1&loc=http://24wrestling.com/news} for zone named {zone-zoneset-NewRenderTest-Direct-Zone-Regular} to UAS
     Then The response code is 200
     And The response contains {ut_scripts}
     And The response contains {https://pixel.adsafeprotected.com/jload?anId=}
