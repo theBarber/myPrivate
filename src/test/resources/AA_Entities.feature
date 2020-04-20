@@ -754,24 +754,18 @@ Feature: Entities for tests
   Scenario: create entities for peer39 and wurfl feature
     Given i disable campaigns by name on db
       | Campaign Name    |
-      | campaign-CT-ST-1 |
-      | campaign-CT-ST-2 |
       | campaign-WL-ST-2 |
       | campaign-WL-ST-3 |
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name    | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | campaign-CT-ST-1 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-1} | []                   | 93       | 15182          | 3708         | 65991           | []             | []             |
-      | campaign-CT-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-2} | []                   | 93       | 15182          | 3708         | 65991           | []             | []             |
-      | campaign-WL-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-2} | [[[32,">=",201211]]] | 93       | 15183          | 3708         | 65991           | []             | []             |
-      | campaign-WL-ST-3 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-3} | []                   | 93       | 15183          | 3708         | 65991           | []             | []             |
+      | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | campaign-WL-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-2} | []         | 93       | 15183          | 3708         | 65991           | []             | []             |
+      | campaign-WL-ST-3 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-3} | []         | 93       | 15183          | 3708         | 65991           | []             | []             |
     And i update banner data by name
-      | Banner Name               | limitation                                |
-      | campaign-CT-ST-1-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]]         |
-      | campaign-CT-ST-2-banner-1 | [[[64,"=~","1_7541"],[64,"=~","1_7531"]]] |
-      | campaign-WL-ST-2-banner-1 | [[[39,"=~","Windows"],[41,"=~","Chrome"]  |
+      | Banner Name               | limitation                                            |
+      | campaign-WL-ST-2-banner-1 | [[[12,"=~","chrome","firefox","safari"],[50,"==",1]]] |
     And i update zone data by name
-      | zone Name            | limitation                                |
-      | zone-zoneset-WL-ST-3 | [[[39,"=~","Desktop"],[43,"=~","mouse"]]] |
+      | zone Name            | limitation                                            |
+      | zone-zoneset-WL-ST-3 | [[[12,"=~","chrome","firefox","safari"],[50,"==",1]]] |
 
 
   Scenario:  create entites for vidAd
