@@ -442,11 +442,6 @@ public class UASIntegrationTest extends BaseTest {
             sut.getUASRquestModule().addHttpHeader(key, value);
         });
 
-        Given("I add \\{([^\"]*)\\} ip header", (Country country) -> {
-            final String ip = country.getIps().iterator().next();
-            TestsRoutines.addCountryIpHeader(ip);
-        });
-
         Given("I use \\{(.*)\\} as referer string to send my requests to uas", (String referer) -> {
             sut.getUASRquestModule().emptyHttpHeaders();
             sut.getUASRquestModule().addHttpHeader("referer", referer);
