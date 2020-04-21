@@ -153,32 +153,13 @@ public class CrossDeviceCappingTest extends BaseTest {
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
                     "\"" + emptyProfileType + "\": []," +
-                    "\"" + nonEmptyProfileType + "\":{\"" + epocTimeInDays + "\":[123]}" +
+                    "\"" + nonEmptyProfileType + "\":{\"" + epocTimeInDays + "\":[123]}," +
                     "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
 
             System.out.println("\nJson Doc to inject!!\n " + jsonDoc);
             usersBucket.insertDocument(udId, jsonDoc);
             sut.write("doc \n" + jsonDoc + "\ninjected to users bucket");
         });
-
-
-//    //for both profile types. udmp profile with optional time. sqmsg with auto current time stamp
-//    Then("i inject new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, udmp_p profile with time stamp  = \\{(.*)\\}, sqmsg_p profile with auto time stamp = \\{(.*)\\}",  (String udId,String platform ,String udmp_pFull,String sqmsg_p) -> {
-//      CouchbaseBucketModule usersBucket = sut.getUsersBucket();
-//      try{
-//        usersBucket.deleteDocument(udId);
-//      } catch (DocumentDoesNotExistException e) {
-//        System.out.println(e.getMessage());
-//      }
-//      Integer epocTimeInDays = getEpocTimeInDays();
-//      String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-//              "\"platform\": " + platform + ",\n" +
-//              "\"imp\":[]" + "\n" +
-//              "\"udmp_p\":" + udmp_pFull +
-//              "\"sqmp_p\":" + sqmsg_p +  "\"e:\" " + epocTimeInDays + "}]" +
-//              "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
-//      usersBucket.insertDocument(udId,jsonDoc);
-//    });
 
 //one profile for each profile type. optional days reduce from epoch time for both profiles types.
         Then("i inject new profile for udId \\{(.*)\\} on users bucket, platform = \\{(.*)\\}, single udmp_p profile is \\{(.*)\\} with (\\d+) days reduce and one sqmsg_p profile = \\{(.*)\\} with (\\d+) days reduce ", (String udId, String platform, String udmp_pString, Integer daysToReduceFromUdmp, String sqmsg_pString, Integer daysToReduceFromSqmg) -> {
