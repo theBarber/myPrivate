@@ -19,10 +19,12 @@ import static org.junit.Assert.assertTrue;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:HeaderBidding.feature", plugin = {"pretty",})
+@CucumberOptions(features = {
+        "classpath:hb/HeaderBidding.feature",
+        "classpath:hb/HeaderBiddingThrottling.feature"}, plugin = {"pretty",})
+
 public class HeaderBiddingTest extends BaseTest {
     final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/requestBodies.json";
-    final private Integer NO_UT_INDEX = 3;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode headerBiddingPostRequests;
     private List<JsonNode> responses;
