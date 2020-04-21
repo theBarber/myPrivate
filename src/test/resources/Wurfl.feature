@@ -6,7 +6,7 @@ Feature: wurfl tests - wurfl limitation in campaign and zone level
 
   Background: health check
     When Sending a healthcheck request to UAS
-    And I add {NY} ip header
+    And I add header of {x-forwarded-for} with value {78.31.205.183}
     Then The response code is 200
 
   Scenario: Wurfl Limitations - Zone UAS Filtering - Delivery
