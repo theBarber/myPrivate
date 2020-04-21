@@ -198,7 +198,7 @@ public class CrossDeviceCappingTest extends BaseTest {
 
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
-                    "\"u_p\":{\"" + e + "\":[" + udmp_pString + "]}" +
+                    "\"u_p\":{\"" + e + "\":[" + udmp_pString + "]}," +
                     "\"sqmp_p\": [{\"p\": " + "\"" + sqmsg_pString + "\"," + "\"e\": " + (epocTimeInDays - daysToReduceFromSqmg) + "}]," +
                     "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
 
