@@ -9,6 +9,7 @@ import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonElement;
 import gherkin.deps.com.google.gson.JsonParser;
 import infra.cli.conn.LinuxDefaultCliConnection;
+import infra.module.WithId;
 import infra.utils.SqlWorkflowUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -26,6 +27,7 @@ import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.CouchbaseBucketModule;
 
 import java.time.Instant;
+import java.util.Optional;
 
 import static steps.HeaderBiddingTest.*;
 
@@ -287,6 +289,22 @@ public class CrossDeviceCappingTest extends BaseTest {
             try {
                 sut.getUsersLogsBucket().deleteDocument(udId);
 
+            } catch (DocumentDoesNotExistException e) {
+                System.out.println(e.getMessage());
+            }
+        });
+
+        Then("I delete the history of campaign (.*) from metering bucket", (String campaignName) -> {
+            Optional<? extends WithId<Integer>> expectedEntity = sut.getExecutorCampaignManager().getterFor("campaign")
+                    .apply(campaignName);
+            int campaignId = expectedEntity.get().getId();
+            long millis = System.currentTimeMillis();
+            long days = millis/(24*60*60*1000);
+            String meteringRecordToDelete = "daily_impressions_" + campaignId + "_" + days + "_us-east-1";
+            System.out.println("meteringRecordToDelete --> " + meteringRecordToDelete);
+
+            try {
+                sut.getMeteringBucket().deleteDocument(meteringRecordToDelete);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
