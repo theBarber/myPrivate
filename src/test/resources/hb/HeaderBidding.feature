@@ -28,7 +28,7 @@ Feature: Header Bidding Flow Support
     And The response code is 200
     And The response contains {script}
 
-  Scenario: send HB request without publisherID configured
+  Scenario: send HB request without publisherID configured - TODO - CHECK VALIDITY
     Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
