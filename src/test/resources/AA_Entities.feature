@@ -1035,7 +1035,7 @@ Feature: Entities for tests
       | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | []                                                                            |
 
     And i update banner data by name
-      | Banner Name                                         | limitation
+      | Banner Name                                         | limitation                                                                                            |
       | campaign-CT-ST-1-banner-1                           | [[[64,"=~","1_7541","1_7531"]]]                                                                       |
       | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
       | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
