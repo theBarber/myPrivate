@@ -17,18 +17,18 @@ Feature: Header Bidding flow support
 
 
     # &&&&&&&&&&&&&&&&&&&&&&&&  Eitan need to fix 1
-#  Scenario: send HB basic request
-#    Given I Delete hbl logs
-#    Given i send 20 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
-#    And The response code is 200
-#    And The response contains {script}
-#    And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
-#    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
-#    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
-#    And all HB responses contains cpm with id 1
-#    And I send impression requests to UAS
-#    And The response code is 200
-#    And The response contains {script}
+  Scenario: send HB basic request
+    Given I Delete hbl logs
+    Given i send 20 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
+    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
+    And all HB responses contains cpm with id 1
+    And I send impression requests to UAS
+    And The response code is 200
+    And The response contains {script}
 #    And I send impression requests to UAS
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
 #    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-HB-Tablet-160x600} 100% of the time
