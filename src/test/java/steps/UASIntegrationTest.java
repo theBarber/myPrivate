@@ -13,6 +13,7 @@ import infra.cli.process.CliCommandExecution;
 import infra.module.WithId;
 import infra.support.StringUtils;
 import infra.utils.HttpContentTest;
+import model.Country;
 import model.ResponseType;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -439,6 +440,11 @@ public class UASIntegrationTest extends BaseTest {
 
         Given("I add header of \\{(.*)\\} with value \\{(.*)\\}", (String key, String value) -> {
             sut.getUASRquestModule().addHttpHeader(key, value);
+        });
+
+        Given("I add \\{([^\"]*)\\} ip header", (Country country) -> {
+            final String ip = country.getIps().iterator().next();
+            TestsRoutines.addCountryIpHeader(ip);
         });
 
         Given("I use \\{(.*)\\} as referer string to send my requests to uas", (String referer) -> {
