@@ -1043,7 +1043,7 @@ Feature: Entities for tests
 
     And i update campaign data by name
       | Campaign Name                             | limitation                              |
-      | campaign-CT-ST-1                          | [[[64,"=~","1_7541","1_7531"]]]
+      | campaign-CT-ST-1                          | [[[64,"=~","1_7541","1_7531"]]]         |
       | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84251001","2_84252026"]]] |
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
