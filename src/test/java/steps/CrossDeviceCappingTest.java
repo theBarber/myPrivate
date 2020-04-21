@@ -99,7 +99,6 @@ public class CrossDeviceCappingTest extends BaseTest {
             long epocTimeInDays = getEpocTimeInDays();
             long e = epocTimeInDays - daysToReduce;
 
-            String profileStructure_OLD = "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + e + "}],";
             String profileStructure = "\":{\"" + e + "\":[" + profileNum + "]},";
 
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
@@ -107,12 +106,6 @@ public class CrossDeviceCappingTest extends BaseTest {
                     "\"" + profileType + profileStructure +
                     "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
 
-            /// old. todo: remove
-//            String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-//                    "\"platform\": " + "\"" + platform + "\"" + ",\n" +
-//                    "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + (epocTimeInDays - daysToReduce) + "}]," +
-//                    "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
-//
             System.out.println("\nJson Doc to inject!!\n " + jsonDoc);
             usersBucket.insertDocument(udId, jsonDoc);
             sut.write("doc \n" + jsonDoc + "\ninjected to users bucket");
@@ -132,14 +125,8 @@ public class CrossDeviceCappingTest extends BaseTest {
 
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
-                    "\"" + profileType + "\":{\"" + epocTimeInDays + "\":[" + profileNum + "]}" +
+                    "\"" + profileType + "\":{\"" + epocTimeInDays + "\":[" + profileNum + "]}," +
                     "\"user-graph\": {" + otherDevices + "}}";
-
-            // todo: remove. old
-//            String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
-//                    "\"platform\": " + "\"" + platform + "\"" + ",\n" +
-//                    "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + epocTimeInDays + "}]," +
-//                    "\"user-graph\": {" + otherDevices + "}}";
 
             System.out.println("\nJson Doc to inject!!\n " + jsonDoc);
 
