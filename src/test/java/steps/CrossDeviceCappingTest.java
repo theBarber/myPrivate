@@ -97,10 +97,22 @@ public class CrossDeviceCappingTest extends BaseTest {
                 System.out.println(e.getMessage());
             }
             long epocTimeInDays = getEpocTimeInDays();
+            long e = epocTimeInDays - daysToReduce;
+
+            String profileStructure_OLD = "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + e + "}],";
+            String profileStructure = "\":{\"" + e + "\":[" + profileNum + "]},";
+
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
-                    "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + (epocTimeInDays - daysToReduce) + "}]," +
+                    "\"" + profileType + profileStructure +
                     "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
+
+            /// old. todo: remove
+//            String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
+//                    "\"platform\": " + "\"" + platform + "\"" + ",\n" +
+//                    "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + (epocTimeInDays - daysToReduce) + "}]," +
+//                    "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
+//
             System.out.println("\nJson Doc to inject!!\n " + jsonDoc);
             usersBucket.insertDocument(udId, jsonDoc);
             sut.write("doc \n" + jsonDoc + "\ninjected to users bucket");
@@ -117,10 +129,17 @@ public class CrossDeviceCappingTest extends BaseTest {
                 System.out.println(e.getMessage());
             }
             long epocTimeInDays = getEpocTimeInDays();
+
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
-                    "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + epocTimeInDays + "}]," +
+                    "\"" + profileType + "\":{\"" + epocTimeInDays + "\":[" + profileNum + "]}" +
                     "\"user-graph\": {" + otherDevices + "}}";
+
+            // todo: remove. old
+//            String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
+//                    "\"platform\": " + "\"" + platform + "\"" + ",\n" +
+//                    "\"" + profileType + "\": [{" + "\"p\": " + "\"" + profileNum + "\"" + "," + "\"e\": " + epocTimeInDays + "}]," +
+//                    "\"user-graph\": {" + otherDevices + "}}";
 
             System.out.println("\nJson Doc to inject!!\n " + jsonDoc);
 
@@ -147,7 +166,7 @@ public class CrossDeviceCappingTest extends BaseTest {
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
                     "\"" + emptyProfileType + "\": []," +
-                    "\"" + nonEmptyProfileType + "\": [{\"p\":\"123\", \"e\": " + epocTimeInDays + "}]," +
+                    "\"" + nonEmptyProfileType + "\":{\"" + epocTimeInDays + "\":[123]}" +
                     "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
 
             System.out.println("\nJson Doc to inject!!\n " + jsonDoc);
@@ -207,9 +226,11 @@ public class CrossDeviceCappingTest extends BaseTest {
                 System.out.println(e.getMessage());
             }
             long epocTimeInDays = getEpocTimeInDays();
+            long e = epocTimeInDays - daysToReduceFromUdmp;
+
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
-                    "\"udmp_p\": [{\"p\": " + "\"" + udmp_pString + "\"," + "\"e\": " + (epocTimeInDays - daysToReduceFromUdmp) + "}]," +
+                    "\"u_p\":{\"" + e + "\":[" + udmp_pString + "]}" +
                     "\"sqmp_p\": [{\"p\": " + "\"" + sqmsg_pString + "\"," + "\"e\": " + (epocTimeInDays - daysToReduceFromSqmg) + "}]," +
                     "\"user-graph\": {\"upid\": \"10.1.22b46d3d9ce4015fa47f2076c315ea23\", \"devices\": [{\"udid\": \"" + udId + "\"}]}\n}";
 
