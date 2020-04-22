@@ -299,14 +299,16 @@ public class CrossDeviceCappingTest extends BaseTest {
                     .apply(campaignName);
             int campaignId = expectedEntity.get().getId();
             long millis = System.currentTimeMillis();
-            long days = millis/(24*60*60*1000);
+            long days = 0;
+            for (int daysBack = 1; daysBack >= 0 ; daysBack--) {
+                days = millis/(24*60*60*1000) - daysBack;
             String meteringRecordToDelete = "daily_impressions_" + campaignId + "_" + days + "_us-east-1";
             System.out.println("meteringRecordToDelete --> " + meteringRecordToDelete);
-
             try {
                 sut.getMeteringBucket().deleteDocument(meteringRecordToDelete);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
+            }
             }
         });
 
