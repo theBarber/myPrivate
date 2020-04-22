@@ -40,7 +40,7 @@ Feature: contextual targeting tests
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons} for zone named {zone-zoneset-dv-campaignLevelLimit-exclude-ST} to UAS
     And The response code is 200
     And The responses are passback
-    When I send 1 times an ad request with parameter {optimize=1&loc=notarealweblala.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=http%3A%2F%2Fjustfakesite3.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
 
@@ -55,7 +55,7 @@ Feature: contextual targeting tests
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
-    When I send 1 times an ad request with parameter {optimize=1&loc=notarealweblala.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=http%3A%2F%2Fjustfakesite3.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
 
@@ -68,7 +68,7 @@ Feature: contextual targeting tests
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
-    When I send 1 times an ad request with parameter {optimize=1&loc=notarealweblala.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=http%3A%2F%2Fjustfakesite3.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The responses are passback
 
@@ -77,7 +77,7 @@ Feature: contextual targeting tests
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
-    When I send 1 times an ad request with parameter {optimize=1&loc=notarealweblala.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=http%3A%2F%2Fjustfakesite3.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The responses are passback
 
@@ -92,7 +92,7 @@ Feature: contextual targeting tests
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
-    When I send 1 times an ad request with parameter {optimize=1&loc=notarealweblala.com} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=http%3A%2F%2Fjustfakesite3.com} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
 
@@ -107,6 +107,6 @@ Feature: contextual targeting tests
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons} for zone named {zone-zoneset-dv-zoneLevelLimit-peer-ST} to UAS
     And The response code is 200
     And The responses are passback
-    When I send 1 times an ad request with parameter {optimize=1&loc=notarealweblala.com} for zone named {zone-zoneset-dv-zoneLevelLimit-peer-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=http%3A%2F%2Fjustfakesite3.com} for zone named {zone-zoneset-dv-zoneLevelLimit-peer-ST} to UAS
     And The response code is 200
     And The responses are passback
