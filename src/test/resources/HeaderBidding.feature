@@ -17,18 +17,18 @@ Feature: Header Bidding flow support
 
 
     # &&&&&&&&&&&&&&&&&&&&&&&&  Eitan need to fix 1
-#  Scenario: send HB basic request
-#    Given I Delete hbl logs
-#    Given i send 20 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
-#    And The response code is 200
-#    And The response contains {script}
-#    And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
-#    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
-#    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
-#    And all HB responses contains cpm with id 1
-#    And I send impression requests to UAS
-#    And The response code is 200
-#    And The response contains {script}
+  Scenario: send HB basic request
+    Given I Delete hbl logs
+    Given i send 20 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
+    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
+    And all HB responses contains cpm with id 1
+    And I send impression requests to UAS
+    And The response code is 200
+    And The response contains {script}
 #    And I send impression requests to UAS
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
 #    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-HB-Tablet-160x600} 100% of the time
@@ -417,8 +417,8 @@ Feature: Header Bidding flow support
     #   header bidding placment group test - throttling 60%  --> new_user = 1   device_type_id = 1 (3728001)
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 60%
     Given I clear all cookies from uas requests
-    Given i send synchronized 1000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
-    Then The synchronized response code is 200 460 responses from 1000 of the times
+    Given i send synchronized 2000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
+    Then The synchronized response code is 200 920 responses from 2000 of the times
 #
 ##----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -427,8 +427,8 @@ Feature: Header Bidding flow support
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 70%
     Given I clear all cookies from uas requests
     Given I add cookie UTID with random value to my requests to uas
-    Given i send synchronized 1000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728011} and extra params {&deviceid=throttling1&optimize=1&unlimited=1&sim_geo=1&country=us} cookies true
-    Then The synchronized response code is 200 370 responses from 1000 of the times
+    Given i send synchronized 2000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728011} and extra params {&deviceid=throttling1&optimize=1&unlimited=1&sim_geo=1&country=us} cookies true
+    Then The synchronized response code is 200 740 responses from 2000 of the times
 
 
   @throttling
@@ -436,16 +436,16 @@ Feature: Header Bidding flow support
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 50%
     Given I clear all cookies from uas requests
     Given I add cookie UTID with random value to my requests to uas
-    Given i send synchronized 1000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728011} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies true
-    Then The synchronized response code is 200 550 responses from 1000 of the times
+    Given i send synchronized 2000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728011} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies true
+    Then The synchronized response code is 200 1100 responses from 2000 of the times
 
 
   @throttling
     #   header bidding placment group test - pg disabled throttling 40% --> new_user = 1   device_type_id = 2
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 40%
     Given I clear all cookies from uas requests
-    Given i send synchronized 1000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params {&deviceid=throttling1234&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
-    Then The synchronized response code is 200 640 responses from 1000 of the times
+    Given i send synchronized 2000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params {&deviceid=throttling1234&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
+    Then The synchronized response code is 200 1280 responses from 2000 of the times
 
 
   @throttling
@@ -453,6 +453,6 @@ Feature: Header Bidding flow support
   Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected - throttling 100%
     Given I clear all cookies from uas requests
     Given I add cookie UTID with random value to my requests to uas
-    Given i send synchronized 1000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies true
-    Then The synchronized response code is 200 100 responses from 1000 of the times
+    Given i send synchronized 2000 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728001} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies true
+    Then The synchronized response code is 200 200 responses from 2000 of the times
 

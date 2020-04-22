@@ -14,6 +14,7 @@ import infra.cli.process.CliCommandExecution;
 import infra.module.WithId;
 import infra.support.StringUtils;
 import infra.utils.HttpContentTest;
+import model.Country;
 import model.ResponseType;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;

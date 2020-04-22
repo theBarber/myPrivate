@@ -166,19 +166,31 @@ Feature: Dynamic HB bid price
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES-banner-1}
     And all HB responses contains cpm with value {1}
 
-  Scenario: Publisher with non reserved dynamic bid price for MR, Campaign with margin
+#&&&&&&&&&&& zero margin NR &&&&&&
+  Scenario: Publisher with non reserved dynamic bid price for MR, Campaign with zero margin - need to return mock price
 #  Set fixed HB
 #    Given i update bid_price_type for publisher = 3836 for adunit = 10 to be 0
 #  Set floor price
 # Given i update floor_price for publisher = 3836 for adunit = 10 to be 1
 #  Campaign Direct
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin6.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with zero margin} for publisher 3836 with domain {DynamicPricingWithMargin6.com} with extra params {&requestid=returnMockPrice&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-banner-1}
-    And all HB responses contains cpm with value {2}
+    And all HB responses contains cpm with value {6.2}
+
+#&&&&&&&&&&& 20% margin NR &&&&&&
+  Scenario: Publisher with non reserved dynamic bid price for MR, Campaign with 20% margin - return price = 0.8*6.2 = 4.96$
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with 20 margin} for publisher 3836 with domain {DynamicPricingWithMarginMock.com} with extra params {&requestid=returnMockPrice&unlimited=1&optimize=1&sim_geo=1&country=us}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES}
+    And all HB responses contains adId with id of entity named {campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES-banner-1}
+    And all HB responses contains cpm with value {4.96}
+
 
   Scenario: zonetag - po price < max price, Campaign with margin
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
