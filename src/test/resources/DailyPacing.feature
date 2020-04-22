@@ -11,7 +11,7 @@ Feature: Pacing Hourly Test
     Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket
     And I restart {ramp-lift-services}
     And I sleep for 120 seconds
-    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    When I send 15 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
