@@ -46,6 +46,8 @@ Feature: contextual targeting tests
 
   Scenario:4.0 contextual targeting by dv - campaign level limitation
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    And I sleep for 20 seconds
+    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-campaignLevelLimit-ST-banner-1} 100% of the time
@@ -61,9 +63,13 @@ Feature: contextual targeting tests
 
   Scenario:5.0 contextual targeting - peer 39 banner level limitation backward compatibility
     When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
+    And I sleep for 20 seconds
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
+    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+    And I sleep for 20 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
@@ -74,6 +80,8 @@ Feature: contextual targeting tests
 
   Scenario:6.0 contextual targeting - peer 39 banner level limitation
     When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+    And I sleep for 20 seconds
+    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
@@ -82,6 +90,8 @@ Feature: contextual targeting tests
     And The responses are passback
 
   Scenario:7.0 contextual targeting by dv - zone level limitation
+    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
+    And I sleep for 20 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-zoneLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains {script}
@@ -97,6 +107,8 @@ Feature: contextual targeting tests
     And The responses are passback
 
   Scenario:8.0 contextual targeting by dv & peer 39 - zone level limitation
+    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-zoneLevelLimit-peer-ST} to UAS
+    And I sleep for 20 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-zoneLevelLimit-peer-ST} to UAS
     And The response code is 200
     And The response contains {script}
