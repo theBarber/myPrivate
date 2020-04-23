@@ -1543,6 +1543,7 @@ Feature: Entities for tests
 # Entities for New Render Test
 
 #   disable re-creating entities   @NewRenderTest
+
   Scenario: Create entities for New Render
     Given i disable campaigns by name on db
       | Campaign Name                                           |

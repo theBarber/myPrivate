@@ -50,11 +50,39 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     protected static final Pattern impressionURLPattern = Pattern
             .compile("(https?:\\\\?/\\\\?/[^:/?#]*(?::[0-9]+)?\\/l\\?[^\'\\\"]*)[\'\\\"]");
 
+    protected static final Pattern renderURLPattern = Pattern
+//            .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/e\\?[^\'\\\"]*)[\'\\\"]");
+    .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/e\\?[^\'\\\"]*&e=render)[\'\\\"]");
+
+    protected static final Pattern UDMSVariablePattern = Pattern
+        .compile("(rid:'[a-z0-9]*',zid:'[0-9]*',cid:'[0-9]*',bid:'[0-9]*'})");
+
+    protected static final Pattern eventFirstQuartileURLPattern = Pattern
+            .compile(".*?firstQuartile.*?(firstQuartile)");
+
+    protected static final Pattern eventMidpointURLPattern = Pattern
+            .compile(".*?midpoint.*?(midpoint)");
+
+    protected static final Pattern eventThirdQuartileURLPattern = Pattern
+            .compile(".*?thirdQuartile.*?(thirdQuartile)");
+
     protected static final Pattern eventCompleteURLPattern = Pattern
             .compile(".*?complete.*?(complete)");
 
+    protected static final Pattern eventPauseURLPattern = Pattern
+            .compile(".*?pause.*?(pause)");
+
     protected static final Pattern eventMuteURLPattern = Pattern
             .compile(".*?mute.*?(mute)");
+
+    protected static final Pattern eventCloseURLPattern = Pattern
+            .compile(".*?close.*?(close)");
+
+    protected static final Pattern eventStartURLPattern = Pattern
+            .compile(".*?start.*?(start)");
+
+    protected static final Pattern eventUnMuteURLPattern = Pattern
+            .compile(".*?unmute.*?(unmute)");
 
     protected static final Pattern clickURLPattern = Pattern
             .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/c\\?[^\'\\\"]*)[\'\\\"]");
@@ -327,6 +355,11 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 .map(UASRequestModule::getGroup1);
     }
 
+    public static Optional<String> getRenderUrlFrom(HttpResponse response) {
+        return Optional.of(renderURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+                .map(UASRequestModule::getGroup1);
+    }
+
     public Optional<String> getImpressionUrl(String url) {
         return Optional.of(impressionURLPattern.matcher(url))
                 .filter(Matcher::find)
@@ -338,13 +371,48 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 .map(UASRequestModule::getGroup1);
     }
 
+    public static Optional<String> getFirstQuartileUrlFrom(HttpResponse response) {
+        return Optional.of(eventFirstQuartileURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+                .map(UASRequestModule::getGroup1);
+    }
+
+    public static Optional<String> getMidpointUrlFrom(HttpResponse response) {
+        return Optional.of(eventMidpointURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+                .map(UASRequestModule::getGroup1);
+    }
+
+    public static Optional<String> getThirdQuartileUrlFrom(HttpResponse response) {
+        return Optional.of(eventThirdQuartileURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+                .map(UASRequestModule::getGroup1);
+    }
+
     public static Optional<String> getCompleteUrlFrom(HttpResponse response) {
         return Optional.of(eventCompleteURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
                 .map(UASRequestModule::getGroup1);
     }
 
+    public static Optional<String> getPauseUrlFrom(HttpResponse response) {
+        return Optional.of(eventPauseURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+                .map(UASRequestModule::getGroup1);
+    }
+
     public static Optional<String> getMuteUrlFrom(HttpResponse response) {
         return Optional.of(eventMuteURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+                .map(UASRequestModule::getGroup1);
+    }
+
+    public static Optional<String> getCloseUrlFrom(HttpResponse response) {
+        return Optional.of(eventCloseURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+                .map(UASRequestModule::getGroup1);
+    }
+
+    public static Optional<String> getStartUrlFrom(HttpResponse response) {
+        return Optional.of(eventStartURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
+                .map(UASRequestModule::getGroup1);
+    }
+
+    public static Optional<String> getUnMuteUrlFrom(HttpResponse response) {
+        return Optional.of(eventUnMuteURLPattern.matcher(getContentOf(response))).filter(Matcher::find)
                 .map(UASRequestModule::getGroup1);
     }
 

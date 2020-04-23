@@ -27,6 +27,10 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
+            <repository>
+                <id>jcenter</id>
+                <url>https://dl.bintray.com/cbeust/maven/</url>
+            </repository>
     </repositories>
 
     <profiles>
