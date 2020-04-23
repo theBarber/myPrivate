@@ -122,6 +122,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Then The response code is 200
     And The responses are passback
 
+  @SeqTargeting
   Scenario: 4. d. Seq-targeting for udmp, DT req, with deviceid - PART FOUR - Delivery
     Given I clear all cookies from uas requests
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {udmp_seq_profile_web&deviceid=01000000-0100-0100-0100-010000000000&tagid=170}
@@ -130,6 +131,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-SeqProfileTargetingUDMPforWeb-ST-1-banner-1} 100% of the time
 
 
+  @SeqTargeting
 #  UTID=a2b3c8faf45446dcbba3248cef1dc2bb is encoded to=9mrjt7trg1a57yd4pv1i3ltbv
   Scenario: 5. a. profile seq targeting for udmp, DT req, from desktop - PART ONE - Delivery
     Given I clear all cookies from uas requests
