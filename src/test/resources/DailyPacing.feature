@@ -1,4 +1,25 @@
-#@DailyPaicing
+@parallel
+@DailyPaicing
+
+Feature: Pacing Hourly Test
+
+  Background: health check
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
+  Scenario: 1.0 Daily Pacing. life time goal - 45, 3 days left , flex = 25% (pacing)  -> NDQ = 15
+    Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket
+    And I restart {ramp-lift-services}
+    And I sleep for 70 seconds
+    When I send 15 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    And The response contains {script}
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
+    And I send impression requests to UAS
+    And I sleep for 60 seconds
+    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    And The response code is 200
+    And The responses are passback
 #Feature: Daily Pacing, over 24 hours
 #
 #  Scenario: 1.a cdm 1, ASAP, hour num 1

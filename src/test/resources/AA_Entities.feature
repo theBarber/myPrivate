@@ -809,28 +809,22 @@ Feature: Entities for tests
 
 
   @wurfl
-
+  @wurflEntities
   Scenario: create entities for peer39 and wurfl feature
     Given i disable campaigns by name on db
       | Campaign Name    |
-      | campaign-CT-ST-1 |
-      | campaign-CT-ST-2 |
       | campaign-WL-ST-2 |
       | campaign-WL-ST-3 |
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name    | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | campaign-CT-ST-1 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-1} | []                   | 93       | 15182          | 3708         | 65991           | []             | []             |
-      | campaign-CT-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-2} | []                   | 93       | 15182          | 3708         | 65991           | []             | []             |
-      | campaign-WL-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-2} | [[[32,">=",201211]]] | 93       | 15183          | 3708         | 65991           | []             | []             |
-      | campaign-WL-ST-3 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-3} | []                   | 93       | 15183          | 3708         | 65991           | []             | []             |
+      | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | campaign-WL-ST-2 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-2} | []         | 93       | 15183          | 3708         | 65991           | []             | []             |
+      | campaign-WL-ST-3 | 75396 | 210722   | false                 | 8290          | {zone-zoneset-WL-ST-3} | []         | 93       | 15183          | 3708         | 65991           | []             | []             |
     And i update banner data by name
-      | Banner Name               | limitation                                |
-      | campaign-CT-ST-1-banner-1 | [[[26,"=~",7541],[26,"=~",7531]]]         |
-      | campaign-CT-ST-2-banner-1 | [[[64,"=~","1_7541"],[64,"=~","1_7531"]]] |
-      | campaign-WL-ST-2-banner-1 | [[[39,"=~","Windows"],[41,"=~","Chrome"]  |
+      | Banner Name               | limitation                                            |
+      | campaign-WL-ST-2-banner-1 | [[[12,"=~","chrome","firefox","safari"],[50,"==",1]]] |
     And i update zone data by name
-      | zone Name            | limitation                                |
-      | zone-zoneset-WL-ST-3 | [[[39,"=~","Desktop"],[43,"=~","mouse"]]] |
+      | zone Name            | limitation                                            |
+      | zone-zoneset-WL-ST-3 | [[[12,"=~","chrome","firefox","safari"],[50,"==",1]]] |
 
 
   Scenario:  create entites for vidAd
@@ -1016,14 +1010,15 @@ Feature: Entities for tests
       | campaign-region-bannerLevelLimit-ST-banner-1 | [[[7,"=~","us","co"]]] |
       | campaign-state-bannerLevelLimit-ST-banner-1  | [[[5,"=~","ca"]]]      |
     And i update zone data by name
-      | Zone Name                            | limitation                       |
-      | zone-zoneset-city-zoneLevelLimit-ST  | [[[8,"=~","bo",["l","la paz"]]]] |
-      | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                |
+      | Zone Name                            | limitation                                                                                                                                                                                                   |
+      | zone-zoneset-city-zoneLevelLimit-ST  | [[[8,\"=~\",\"us\",[\"dc\",\"washington\"],[\"ma\",\"boston\"],[\"md\",\"baltimore\"],[\"pa\",\"lehigh valley\",\"philadelphia\"],[\"ri\",\"providence\"]]],[[7,\"=~\",\"us\",\"ct\",\"nh\",\"nj\",\"ny\"]]] |
+      | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                                                                                                                                                                                            |
 
 
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                              |
+      | campaign-CT-ST-1                           |
       | campaign-dv-zoneLevelLimit-ST              |
       | campaign-dv-campaignLevelLimit-ST          |
       | campaign-dv-campaignLevelLimit-exclude-ST  |
@@ -1032,6 +1027,7 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                              | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude                                                                |
+      | campaign-CT-ST-1                           | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-1}                           | []         | 93       | 15182          | 3708         | 65991           | []                                                                            | []                                                                            |
       | campaign-dv-zoneLevelLimit-ST              | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-ST}              | []         | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-ST          | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-ST}          | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-exclude-ST  | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-exclude-ST}  | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
@@ -1040,13 +1036,15 @@ Feature: Entities for tests
 
     And i update banner data by name
       | Banner Name                                         | limitation                                                                                            |
-      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
+      | campaign-CT-ST-1-banner-1                           | [[[64,"=~","1_5252","1_5250"]]]                                                                       |
+      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84252026","2_82033230"]]]                                                               |
       | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
       | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105","2_80512001"]]] |
 
     And i update campaign data by name
       | Campaign Name                             | limitation                              |
-      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84251001","2_84252026"]]] |
+      | campaign-CT-ST-1                          | [[[64,"=~","1_5252","1_5250"]]]         |
+      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84252026","2_82033230"]]] |
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
@@ -1129,8 +1127,7 @@ Feature: Entities for tests
       | campaign-D-DailyFF-ST-5      | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
 
     Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
-    # suppose to be 3 --> will be changed back to 3  when BUG will be solved
-    Given I set campaign campaign-D-DailyPacing-ST-2 for 4 days
+    Given I set campaign campaign-D-DailyPacing-ST-2 for 10 days
     Given I set campaign campaign-D-ASAP-ST-3 for 3 days
     Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
     Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
@@ -1140,7 +1137,7 @@ Feature: Entities for tests
 #    pacing = hourly flex
       | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
       | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 25     | 36    | impressions |
+      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 150   | impressions |
       | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
       | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
       | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |
@@ -1198,6 +1195,7 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          |
       | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     |
       | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     |
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile |
@@ -1215,19 +1213,21 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 407981 | 234810   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES}          | []         | 58       | 15360          | 3836         | 69502           | []          | []          |
       | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 407981 | 234810   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES}       | []         | 58       | 15361          | 3836         | 69502           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES}        | []         | 10       | 15363          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-20-margin-MR-ES}     | []         | 10       | 15811          | 3836         | 69501           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}     | []         | 10       | 15362          | 3836         | 69501           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 407981 | 251116   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES}        | []         | 29       | 15356          | 3836         | 69503           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 251035   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15359          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
       | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority |
-      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              | -1       |
-      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 0                              | -1       |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              | -2       |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 20                             | -1       |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 30                             | -1       |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 20                             | -2       |
       | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | -2       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | -2       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
 
     And i update campaign data by name
@@ -1250,6 +1250,7 @@ Feature: Entities for tests
       | zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES          | 1         |
       | zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 1         |
@@ -1541,7 +1542,7 @@ Feature: Entities for tests
 
 # Entities for New Render Test
 
-#  disable re-creating entities @NewRenderTest
+#   disable re-creating entities   @NewRenderTest
 
   Scenario: Create entities for New Render
     Given i disable campaigns by name on db
@@ -1572,68 +1573,68 @@ Feature: Entities for tests
 
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                         | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-NewRenderTest-web-direct-zone-banner           | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}            | []         | 75       | 5893           | 3728         | 66832           | []          | []          |
-      | campaign-NewRenderTest-web-direct-DT-banner             | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-DT-Regular}              | []         | 75       | 11278          | 3728         | 66832           | []          | []          |
-      | campaign-NewRenderTest-web-direct-HB-banner             | 75396  | 249737   | false                 | 22986         | {zone-zoneset-NewRenderTest-Direct-HB-Regular}              | []         | 10       | 10062          | 3673         | 66814           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-zone-banner     | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-Zone}                      | []         | 75       | 2080           | 3728         | 66832           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-HB-banner       | 407981 | 265089   | true                  | 2499          | {zone-zoneset-NewRenderTest-Prog-HB}                        | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-DT-banner       | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-DT}                        | []         | 75       | 15015          | 3728         | 66832           | []          | []          |
-      | campaign-NewRenderTest-web-direct-zone-PGAction         | 75396  | 222908   | false                 | 14488         | {zone-zoneset-NewRenderTest-Direct-Zone-PGAction}           | []         | 92       | 14400          | 3673         | 67165           | []          | []          |
-      | campaign-NewRenderTest-web-direct-DT-PGAction           | 75396  | 222908   | false                 | 14488         | {zone-zoneset-NewRenderTest-Direct-DT-PGAction}             | []         | 92       | 15122          | 3673         | 67165           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-zone-PGAction   | 407981 | 265090   | true                  | 2500          | {zone-zoneset-NewRenderTest-Prog-Zone-PGAction}             | []         | 92       | 14400          | 3673         | 67165           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-DT-PGAction     | 407981 | 265090   | true                  | 2500          | {zone-zoneset-NewRenderTest-Prog-DT-PGAction}               | []         | 92       | 3047           | 3673         | 67165           | []          | []          |
-      | campaign-NewRenderTest-web-direct-zone-video            | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-zone-video}          | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-direct-DT-video              | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-DT-video}            | []         | 97       | 8615           | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-direct-HB-video              | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-HB-video}            | []         | 97       | 739            | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-zone-video      | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-zone-video}    | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-DT-video        | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-DT-video}      | []         | 97       | 6831           | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-HB-video        | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}      | []         | 97       | 4140           | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 407981 | 248986   | false                 | 25108         | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone}    | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 407981 | 265092   | true                  | 2502          | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P}  | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
-      | campaign-NewRenderTest-Instream-View-zone               | 75396  | 234808   | false                 | 24176         | {zone-zoneset-NewRenderTest-Instream-View-direct}           | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-NewRenderTest-Instream-View-SP                 | 407981 | 265093   | true                  | 2503          | {zone-zoneset-NewRenderTest-Instream-View-programmatic}     | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}          | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
+      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-NewRenderTest-web-direct-zone-banner           | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}           | []         | 75       | 5893           | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-direct-DT-banner             | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-DT-Regular}             | []         | 75       | 11278          | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-direct-HB-banner             | 75396  | 249737   | false                 | 22986         | {zone-zoneset-NewRenderTest-Direct-HB-Regular}             | []         | 10       | 10062          | 3673         | 66814           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-zone-banner     | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-Zone}                     | []         | 75       | 2080           | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-HB-banner       | 407981 | 265089   | true                  | 2499          | {zone-zoneset-NewRenderTest-Prog-HB}                       | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-DT-banner       | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-DT}                       | []         | 75       | 15015          | 3728         | 66832           | []          | []          |
+      | campaign-NewRenderTest-web-direct-zone-PGAction         | 75396  | 222908   | false                 | 14488         | {zone-zoneset-NewRenderTest-Direct-Zone-PGAction}          | []         | 92       | 14400          | 3673         | 67165           | []          | []          |
+      | campaign-NewRenderTest-web-direct-DT-PGAction           | 75396  | 222908   | false                 | 14488         | {zone-zoneset-NewRenderTest-Direct-DT-PGAction}            | []         | 92       | 15122          | 3673         | 67165           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-zone-PGAction   | 407981 | 265090   | true                  | 2500          | {zone-zoneset-NewRenderTest-Prog-Zone-PGAction}            | []         | 92       | 14400          | 3673         | 67165           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-DT-PGAction     | 407981 | 265090   | true                  | 2500          | {zone-zoneset-NewRenderTest-Prog-DT-PGAction}              | []         | 92       | 3047           | 3673         | 67165           | []          | []          |
+      | campaign-NewRenderTest-web-direct-zone-video            | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-zone-video}         | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-direct-DT-video              | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-DT-video}           | []         | 97       | 8615           | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-direct-HB-video              | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-HB-video}           | []         | 97       | 739            | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-zone-video      | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-zone-video}   | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-DT-video        | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-DT-video}     | []         | 97       | 6831           | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-web-programmatic-HB-video        | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}     | []         | 97       | 4140           | 3708         | 69992           | []          | []          |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 407981 | 248986   | false                 | 25108         | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone}   | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
+      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 407981 | 265092   | true                  | 2502          | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P} | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
+      | campaign-NewRenderTest-Instream-View-zone               | 75396  | 234808   | false                 | 24176         | {zone-zoneset-NewRenderTest-Instream-View-direct}          | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-NewRenderTest-Instream-View-SP                 | 407981 | 265093   | true                  | 2503          | {zone-zoneset-NewRenderTest-Instream-View-programmatic}    | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}         | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
 
 
     And i create new campaigns with new zoneset
-      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 8803           | 3586         | 67260           |
-      | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 8803           | 3586         | 67260           |
+      | Campaign Name                             | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-NewRenderTest-InApp-Direct       | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}       | []         | 80       | 8803           | 3586         | 67260           |
+      | campaign-NewRenderTest-InApp-Programmatic | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic} | []         | 80       | 8803           | 3586         | 67260           |
 
 
     And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
 
     And i update zone data by name
-      | Zone Name                                                 | is_secure |
-      | zone-zoneset-NewRenderTest-Direct-Zone-Regular            |   1       |
-      | zone-zoneset-NewRenderTest-Direct-DT-Regular              |   1       |
-      | zone-zoneset-NewRenderTest-Direct-HB-Regular              |   1       |
-      | zone-zoneset-NewRenderTest-Prog-Zone                      |   1       |
-      | zone-zoneset-NewRenderTest-Prog-HB                        |   1       |
-      | zone-zoneset-NewRenderTest-Prog-DT                        |   1       |
-      | zone-zoneset-NewRenderTest-Direct-Zone-PGAction           |   1       |
-      | zone-zoneset-NewRenderTest-Direct-DT-PGAction             |   1       |
-      | zone-zoneset-NewRenderTest-Prog-Zone-PGAction             |   1       |
-      | zone-zoneset-NewRenderTest-Prog-DT-PGAction               |   1       |
-      | zone-zoneset-NewRenderTest-web-direct-zone-video          |   1       |
-      | zone-zoneset-NewRenderTest-web-direct-DT-video            |   1       |
-      | zone-zoneset-NewRenderTest-web-direct-HB-video            |   1       |
-      | zone-zoneset-NewRenderTest-web-programmatic-zone-video    |   1       |
-      | zone-zoneset-NewRenderTest-web-programmatic-DT-video      |   1       |
-      | zone-zoneset-NewRenderTest-web-programmatic-HB-video      |   1       |
-      | zone-zoneset-NewRenderTest-InApp-Direct                   |   1       |
-      | zone-zoneset-NewRenderTest-InApp-Programmatic             |   1       |
-      | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone    |   1       |
-      | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P  |   1       |
-      | zone-zoneset-NewRenderTest-Instream-View-direct           |   1       |
-      | zone-zoneset-NewRenderTest-Instream-View-programmatic     |   1       |
-      | zone-zoneset-NewRenderTest-Direct-event-trackers          |   1       |
-      | zone-zoneset-NewRenderTest-Passback                       |   1       |
+      | Zone Name                                                | is_secure |
+      | zone-zoneset-NewRenderTest-Direct-Zone-Regular           | 1         |
+      | zone-zoneset-NewRenderTest-Direct-DT-Regular             | 1         |
+      | zone-zoneset-NewRenderTest-Direct-HB-Regular             | 1         |
+      | zone-zoneset-NewRenderTest-Prog-Zone                     | 1         |
+      | zone-zoneset-NewRenderTest-Prog-HB                       | 1         |
+      | zone-zoneset-NewRenderTest-Prog-DT                       | 1         |
+      | zone-zoneset-NewRenderTest-Direct-Zone-PGAction          | 1         |
+      | zone-zoneset-NewRenderTest-Direct-DT-PGAction            | 1         |
+      | zone-zoneset-NewRenderTest-Prog-Zone-PGAction            | 1         |
+      | zone-zoneset-NewRenderTest-Prog-DT-PGAction              | 1         |
+      | zone-zoneset-NewRenderTest-web-direct-zone-video         | 1         |
+      | zone-zoneset-NewRenderTest-web-direct-DT-video           | 1         |
+      | zone-zoneset-NewRenderTest-web-direct-HB-video           | 1         |
+      | zone-zoneset-NewRenderTest-web-programmatic-zone-video   | 1         |
+      | zone-zoneset-NewRenderTest-web-programmatic-DT-video     | 1         |
+      | zone-zoneset-NewRenderTest-web-programmatic-HB-video     | 1         |
+      | zone-zoneset-NewRenderTest-InApp-Direct                  | 1         |
+      | zone-zoneset-NewRenderTest-InApp-Programmatic            | 1         |
+      | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone   | 1         |
+      | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P | 1         |
+      | zone-zoneset-NewRenderTest-Instream-View-direct          | 1         |
+      | zone-zoneset-NewRenderTest-Instream-View-programmatic    | 1         |
+      | zone-zoneset-NewRenderTest-Direct-event-trackers         | 1         |
+      | zone-zoneset-NewRenderTest-Passback                      | 1         |
 
     And i update zone data by name
-      | Zone Name                                                 | passback                                                                                                                                                                                                                                                                                        |
-      | zone-zoneset-NewRenderTest-Passback                       | <script language="javascript" type="text/javascript">document.write(''<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"></scr'' + ''ipt>'');</script>    |
+      | Zone Name                           | passback                                                                                                                                                                                                                                                                                     |
+      | zone-zoneset-NewRenderTest-Passback | <script language="javascript" type="text/javascript">document.write(''<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"></scr'' + ''ipt>'');</script> |
 
     And i update zone data by name
       | Zone Name                                     | is_mraid |
@@ -1679,182 +1680,6 @@ Feature: Entities for tests
       | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 1                           | DV                         |
       | campaign-NewRenderTest-Instream-View-zone               | 1                           | DV                         |
       | campaign-NewRenderTest-Instream-View-SP                 | 1                           | DV                         |
-
-
-
-#  @AbishekExercise
-#  Scenario: Create entities for programmatic and direct campaign
-#    Given i disable campaigns by name on db
-#      |Campaign Name                    |
-#      |Direct-Campaign-Test-Zone        |
-#      |Direct-Campaign-Test-HB          |
-#      |Direct-Campaign-Test-DT          |
-#
-#    Given i create new campaigns, new zoneset with domains
-#      | Campaign Name                      | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-#      | Direct-Campaign-Test-Zone          | 407981 | 253288   | false                 | 27534         | {zone-zoneset-Abishek-Exercise-Direct} | []         | 95       | 2080           | 3728         | 69822           | []          | []          |
-#      | Direct-Campaign-Test-HB            | 407981 | 253288   | false                 | 27534         | {zone-zoneset-Abishek-Exercise-HB}     | []         | 95       | 2080           | 3728         | 69822           | []          | []          |
-#      | Direct-Campaign-Test-DT            | 407981 | 253288   | false                 | 27534         | {zone-zoneset-Abishek-Exercise-DT}     | []         | 95       | 2080           | 3728         | 69822           | []          | []          |
-#
-#    And i update zone data by name
-##        And i update zone data by name
-#      | Zone Name                            | is_secure |
-#      | zone-zoneset-Abishek-Exercise-Direct | 1         |
-#      | zone-zoneset-Abishek-Exercise-HB     | 1         |
-#      | zone-zoneset-Abishek-Exercise-DT     | 1         |
-#
-#    And i update campaign data by name
-#      | Campaign Name               | units | goal_type   |
-#      | Direct-Campaign-Test-Zone   | -1    | impressions |
-#      | Direct-Campaign-Test-HB     | -1    | impressions |
-#      | Direct-Campaign-Test-DT     | -1    | impressions |
-#
-#    And i update banner data by name
-#      | Banner Name                       | limitation |
-#      | Direct-Banner-Test-Zone-Banner-1  | []         |
-#      | Direct-Banner-Test-HB-Banner-1    | []         |
-#      | Direct-Banner-Test-DT-Banner-1    | []         |
-
-# disable re-creating entities  @NewRenderTest
-    Scenario: Create entities for New Render
-    Given i disable campaigns by name on db
-      | Campaign Name                                           |
-      | campaign-NewRenderTest-web-direct-zone-banner           |
-      | campaign-NewRenderTest-web-direct-DT-banner             |
-      | campaign-NewRenderTest-web-direct-HB-banner             |
-      | campaign-NewRenderTest-web-programmatic-zone-banner     |
-      | campaign-NewRenderTest-web-programmatic-HB-banner       |
-      | campaign-NewRenderTest-web-programmatic-DT-banner       |
-      | campaign-NewRenderTest-web-direct-zone-PGAction         |
-      | campaign-NewRenderTest-web-direct-DT-PGAction           |
-      | campaign-NewRenderTest-web-programmatic-zone-PGAction   |
-      | campaign-NewRenderTest-web-programmatic-DT-PGAction     |
-      | campaign-NewRenderTest-web-direct-zone-video            |
-      | campaign-NewRenderTest-web-direct-DT-video              |
-      | campaign-NewRenderTest-web-direct-HB-video              |
-      | campaign-NewRenderTest-web-programmatic-zone-video      |
-      | campaign-NewRenderTest-web-programmatic-DT-video        |
-      | campaign-NewRenderTest-web-programmatic-HB-video        |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog |
-      | campaign-NewRenderTest-Instream-View-zone               |
-      | campaign-NewRenderTest-Instream-View-SP                 |
-      | campaign-NewRenderTest-InApp-Direct                     |
-      | campaign-NewRenderTest-InApp-Programmatic               |
-      | campaign-NewRenderTest-web-direct-event-trackers        |
-
-
-    Given i create new campaigns, new zoneset with domains
-      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                         | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-NewRenderTest-web-direct-zone-banner           | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}            | []         | 75       | 5893           | 3728         | 66832           | []          | []          |
-      | campaign-NewRenderTest-web-direct-DT-banner             | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-DT-Regular}              | []         | 75       | 11278          | 3728         | 66832           | []          | []          |
-      | campaign-NewRenderTest-web-direct-HB-banner             | 75396  | 249737   | false                 | 22986         | {zone-zoneset-NewRenderTest-Direct-HB-Regular}              | []         | 10       | 10062          | 3673         | 66814           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-zone-banner     | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-Zone}                      | []         | 75       | 2080           | 3728         | 66832           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-HB-banner       | 407981 | 265089   | true                  | 2499          | {zone-zoneset-NewRenderTest-Prog-HB}                        | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-DT-banner       | 407981 | 265088   | true                  | 2498          | {zone-zoneset-NewRenderTest-Prog-DT}                        | []         | 75       | 15015          | 3728         | 66832           | []          | []          |
-      | campaign-NewRenderTest-web-direct-zone-PGAction         | 75396  | 222908   | false                 | 14488         | {zone-zoneset-NewRenderTest-Direct-Zone-PGAction}           | []         | 92       | 14400          | 3673         | 67165           | []          | []          |
-      | campaign-NewRenderTest-web-direct-DT-PGAction           | 75396  | 222908   | false                 | 14488         | {zone-zoneset-NewRenderTest-Direct-DT-PGAction}             | []         | 92       | 15122          | 3673         | 67165           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-zone-PGAction   | 407981 | 265090   | true                  | 2500          | {zone-zoneset-NewRenderTest-Prog-Zone-PGAction}             | []         | 92       | 14400          | 3673         | 67165           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-DT-PGAction     | 407981 | 265090   | true                  | 2500          | {zone-zoneset-NewRenderTest-Prog-DT-PGAction}               | []         | 92       | 3047           | 3673         | 67165           | []          | []          |
-      | campaign-NewRenderTest-web-direct-zone-video            | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-zone-video}          | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-direct-DT-video              | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-DT-video}            | []         | 97       | 8615           | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-direct-HB-video              | 75396  | 243707   | false                 | 21638         | {zone-zoneset-NewRenderTest-web-direct-HB-video}            | []         | 97       | 739            | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-zone-video      | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-zone-video}    | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-DT-video        | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-DT-video}      | []         | 97       | 6831           | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-web-programmatic-HB-video        | 407981 | 265091   | true                  | 2501          | {zone-zoneset-NewRenderTest-web-programmatic-HB-video}      | []         | 97       | 4140           | 3708         | 69992           | []          | []          |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 407981 | 248986   | false                 | 25108         | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone}    | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 407981 | 265092   | true                  | 2502          | {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P}  | []         | 97       | 14066          | 3708         | 70156           | []          | []          |
-      | campaign-NewRenderTest-Instream-View-zone               | 75396  | 234808   | false                 | 24176         | {zone-zoneset-NewRenderTest-Instream-View-direct}           | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-NewRenderTest-Instream-View-SP                 | 407981 | 265093   | true                  | 2503          | {zone-zoneset-NewRenderTest-Instream-View-programmatic}     | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}          | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
-
-
-    And i create new campaigns with new zoneset
-      | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                 | limitation           | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-NewRenderTest-InApp-Direct                     | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}           | []                   | 80       | 8803           | 3586         | 67260           |
-      | campaign-NewRenderTest-InApp-Programmatic               | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic}     | []                   | 80       | 8803           | 3586         | 67260           |
-
-
-    And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
-
-    And i update zone data by name
-      | Zone Name                                                 | is_secure |
-      | zone-zoneset-NewRenderTest-Direct-Zone-Regular            |   1       |
-      | zone-zoneset-NewRenderTest-Direct-DT-Regular              |   1       |
-      | zone-zoneset-NewRenderTest-Direct-HB-Regular              |   1       |
-      | zone-zoneset-NewRenderTest-Prog-Zone                      |   1       |
-      | zone-zoneset-NewRenderTest-Prog-HB                        |   1       |
-      | zone-zoneset-NewRenderTest-Prog-DT                        |   1       |
-      | zone-zoneset-NewRenderTest-Direct-Zone-PGAction           |   1       |
-      | zone-zoneset-NewRenderTest-Direct-DT-PGAction             |   1       |
-      | zone-zoneset-NewRenderTest-Prog-Zone-PGAction             |   1       |
-      | zone-zoneset-NewRenderTest-Prog-DT-PGAction               |   1       |
-      | zone-zoneset-NewRenderTest-web-direct-zone-video          |   1       |
-      | zone-zoneset-NewRenderTest-web-direct-DT-video            |   1       |
-      | zone-zoneset-NewRenderTest-web-direct-HB-video            |   1       |
-      | zone-zoneset-NewRenderTest-web-programmatic-zone-video    |   1       |
-      | zone-zoneset-NewRenderTest-web-programmatic-DT-video      |   1       |
-      | zone-zoneset-NewRenderTest-web-programmatic-HB-video      |   1       |
-      | zone-zoneset-NewRenderTest-InApp-Direct                   |   1       |
-      | zone-zoneset-NewRenderTest-InApp-Programmatic             |   1       |
-      | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone    |   1       |
-      | zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P  |   1       |
-      | zone-zoneset-NewRenderTest-Instream-View-direct           |   1       |
-      | zone-zoneset-NewRenderTest-Instream-View-programmatic     |   1       |
-      | zone-zoneset-NewRenderTest-Direct-event-trackers          |   1       |
-      | zone-zoneset-NewRenderTest-Passback                       |   1       |
-
-    And i update zone data by name
-      | Zone Name                                                 | passback                                                                                                                                                                                                                                                                                        |
-      | zone-zoneset-NewRenderTest-Passback                       | <script language="javascript" type="text/javascript">document.write(''<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"></scr'' + ''ipt>'');</script>    |
-
-    And i update zone data by name
-      | Zone Name                                     | is_mraid |
-      | zone-zoneset-NewRenderTest-InApp-Direct       | 1        |
-      | zone-zoneset-NewRenderTest-InApp-Programmatic | 1        |
-
-
-    And i update campaign data by name
-      | Campaign Name                                           | units | goal_type   |
-      | campaign-NewRenderTest-web-direct-zone-banner           | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-DT-banner             | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-HB-banner             | -1    | impressions |
-      | campaign-NewRenderTest-web-programmatic-zone-banner     | -1    | impressions |
-      | campaign-NewRenderTest-web-programmatic-HB-banner       | -1    | impressions |
-      | campaign-NewRenderTest-web-programmatic-DT-banner       | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-zone-PGAction         | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-DT-PGAction           | -1    | impressions |
-      | campaign-NewRenderTest-web-programmatic-zone-PGAction   | -1    | impressions |
-      | campaign-NewRenderTest-web-programmatic-DT-PGAction     | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-zone-video            | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-DT-video              | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-HB-video              | -1    | impressions |
-      | campaign-NewRenderTest-web-programmatic-zone-video      | -1    | impressions |
-      | campaign-NewRenderTest-web-programmatic-DT-video        | -1    | impressions |
-      | campaign-NewRenderTest-web-programmatic-HB-video        | -1    | impressions |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | -1    | impressions |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | -1    | impressions |
-      | campaign-NewRenderTest-Instream-View-zone               | -1    | impressions |
-      | campaign-NewRenderTest-Instream-View-SP                 | -1    | impressions |
-      | campaign-NewRenderTest-InApp-Direct                     | -1    | impressions |
-      | campaign-NewRenderTest-InApp-Programmatic               | -1    | impressions |
-      | campaign-NewRenderTest-web-direct-event-trackers        | -1    | impressions |
-
-    And i update campaign data by name
-      | Campaign Name                                           | viewability_wrapper_enabled | viewability_wrapper_vendor |
-      | campaign-NewRenderTest-web-direct-zone-video            | 1                           | IAS                        |
-      | campaign-NewRenderTest-web-direct-DT-video              | 1                           | IAS                        |
-      | campaign-NewRenderTest-web-direct-HB-video              | 1                           | IAS                        |
-      | campaign-NewRenderTest-web-programmatic-zone-video      | 1                           | IAS                        |
-      | campaign-NewRenderTest-web-programmatic-DT-video        | 1                           | IAS                        |
-      | campaign-NewRenderTest-web-programmatic-HB-video        | 1                           | DV                         |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone      | 1                           | DV                         |
-      | campaign-NewRenderTest-VidAd-w/o-leave-behind-zone-prog | 1                           | DV                         |
-      | campaign-NewRenderTest-Instream-View-zone               | 1                           | DV                         |
-      | campaign-NewRenderTest-Instream-View-SP                 | 1                           | DV                         |
-
-
-
 
 
   @DynamicPricing
@@ -1921,4 +1746,3 @@ Feature: Entities for tests
   @refresh
   Scenario: save entities to file
     And save all entities to json file
-

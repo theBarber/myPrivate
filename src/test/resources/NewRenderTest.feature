@@ -1,4 +1,6 @@
 @NewRenderTest
+@parallel
+
 
 Feature: Validate New Render Service
 
