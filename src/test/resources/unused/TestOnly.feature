@@ -18,7 +18,8 @@ Feature: for testing only
 #    And The response contains {script}
 
   Scenario: 3.0
-    Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket
+    Given i disable all tests except 53
+    And I set test id of test_strategy named {Highest_ad_id} to {1937}
    # When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&optimize=1&cb=test} for zone named {zone-zoneset-Inapp-SI-5} to UAS
 #    Then The response code is 200
 #    And The response contains {script}
