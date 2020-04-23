@@ -1036,15 +1036,15 @@ Feature: Entities for tests
 
     And i update banner data by name
       | Banner Name                                         | limitation                                                                                            |
-      | campaign-CT-ST-1-banner-1                           | [[[64,"=~","1_7541","1_7531"]]]                                                                       |
-      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
+      | campaign-CT-ST-1-banner-1                           | [[[64,"=~","1_5252","1_5250"]]]                                                                       |
+      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84252026","2_82033230"]]]                                                               |
       | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
       | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105","2_80512001"]]] |
 
     And i update campaign data by name
       | Campaign Name                             | limitation                              |
-      | campaign-CT-ST-1                          | [[[64,"=~","1_7541","1_7531"]]]         |
-      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84251001","2_84252026"]]] |
+      | campaign-CT-ST-1                          | [[[64,"=~","1_5252","1_5250"]]]         |
+      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84252026","2_82033230"]]] |
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
@@ -1127,7 +1127,7 @@ Feature: Entities for tests
       | campaign-D-DailyFF-ST-5      | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
 
     Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
-    Given I set campaign campaign-D-DailyPacing-ST-2 for 3 days
+    Given I set campaign campaign-D-DailyPacing-ST-2 for 10 days
     Given I set campaign campaign-D-ASAP-ST-3 for 3 days
     Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
     Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
@@ -1137,7 +1137,7 @@ Feature: Entities for tests
 #    pacing = hourly flex
       | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
       | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 25     | 36    | impressions |
+      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 150   | impressions |
       | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
       | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
       | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |

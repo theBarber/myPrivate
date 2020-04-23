@@ -90,7 +90,7 @@ Feature: Programmatic flow support
   Scenario: 9b. basic Call to Programmatic GW web, zone request, make sure b-url is sent
     When I send 1 times an ad request with parameter {requestid=BUrlTest&optimize=1&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
-    And The response contains {<script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com/burl"</script>}
+    And The response contains {<script type="text/javascript">new Image().src="http://ramplift-s-ut-ramp-uas-us-east-1-k8s-internal.ramp-ut.io/burl"</script>}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
@@ -101,6 +101,6 @@ Feature: Programmatic flow support
     When I send 1 times an ad request with parameter {requestid=BUrlTestInApp&unlimited=1&bundleid=app1} for zone named {zone-zoneset-server-prog-inApp-ST} to UAS
     And The response code is 200
     And The response contains {script}
-    And The response contains {<script type="text/javascript">new Image().src="http://ads-s-us-east-1.undertone.com/burl"</script>}
+    And The response contains {<script type="text/javascript">new Image().src="http://ramplift-s-ut-ramp-uas-us-east-1-k8s-internal.ramp-ut.io/burl"</script>}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-inApp-ST-1-banner-1} 100% of the time
