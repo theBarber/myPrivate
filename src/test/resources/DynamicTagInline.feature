@@ -2,7 +2,7 @@
 @uas
 @HeaderBidding
 @scheduled
-@DT
+@dynamic1
 @noAA
 
 Feature: Dynamic Tag inline flow support
