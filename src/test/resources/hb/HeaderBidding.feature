@@ -16,23 +16,6 @@ Feature: Header Bidding Flow Support
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
     Then The response code is 200
 
-  Scenario: send HB basic request with domain as array - TODO - CHECK VALIDITY
-    Given i send 1 headerBidding post request for scenario {Send HB basic request with domain as array for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
-    And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
-    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
-    And all HB responses contains cpm with value {1.0}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
-    And I send impression requests to UAS
-    And The response code is 200
-    And The response contains {script}
-
-  Scenario: send HB request without publisherID configured - TODO - CHECK VALIDITY
-    Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
-    And The response code is 200
-    And The response contains {script}
-
   Scenario: Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
