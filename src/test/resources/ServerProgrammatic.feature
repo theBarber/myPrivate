@@ -19,10 +19,10 @@ Feature: Programmatic flow support
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
     And all HB responses contains cpm with value {1.0}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
 #    And I send impression requests to UAS
 #    And The response code is 200
 #    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
 
   Scenario: 5. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 197 to UAS for publisher 3711 with domain {test.com&requestid=systemTestB&unlimited=1&optimize=1}
@@ -47,10 +47,10 @@ Feature: Programmatic flow support
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-ST-3-banner-1}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
 #    And I send impression requests to UAS
 #    And The response code is 200
 #    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
 
     #web Burl
   Scenario: 9b. basic Call to Programmatic GW web, zone request, make sure b-url is sent

@@ -86,7 +86,6 @@ public class CrossDeviceCappingTest extends BaseTest {
             sut.write("doc \n" + jsonDoc + "\ninjected to users bucket");
         });
 
-//for single profile type, and single profile. optional epoc time for this single profile
         Then("i create new profile doc with udId \\{(.*)\\} on users bucket, where platform = \\{(.*)\\}, profile type = \\{(.*)\\}, profile num = (\\d+), and reduce (\\d+) days from epoc time stamp", (String udId, String platform, String profileType, Integer profileNum, Integer daysToReduce) -> {
             CouchbaseBucketModule usersBucket = sut.getUsersBucket();
             CouchbaseBucketModule usersLogBucket = sut.getUsersLogsBucket();
@@ -100,6 +99,7 @@ public class CrossDeviceCappingTest extends BaseTest {
             long e = epocTimeInDays - daysToReduce;
 
             String profileStructure = "\":{\"" + e + "\":[" + profileNum + "]},";
+
 
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
