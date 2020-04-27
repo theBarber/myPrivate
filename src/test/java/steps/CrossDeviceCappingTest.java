@@ -98,8 +98,12 @@ public class CrossDeviceCappingTest extends BaseTest {
             long epocTimeInDays = getEpocTimeInDays();
             long e = epocTimeInDays - daysToReduce;
 
-            String profileStructure = "\":{\"" + e + "\":[" + profileNum + "]},";
-
+            String profileStructure = "";
+            if (!profileType.equals("sqmsg_p")) {
+                profileStructure = "\":{\"" + e + "\":[" + profileNum + "]},";
+            } else {
+                profileStructure = "\":[{\"p\":\"" + profileNum + "\",\"e\":" + e + "}],";
+            }
 
             String jsonDoc = "{" + "\"udid\": \"" + udId + "\"," + "\n" +
                     "\"platform\": " + "\"" + platform + "\"" + ",\n" +
