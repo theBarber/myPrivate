@@ -5,6 +5,7 @@
 @parallel
 @noAA
 @PGXFeature
+@request_service
 Feature: PGX - triggering ads tests
 
   Background: health check

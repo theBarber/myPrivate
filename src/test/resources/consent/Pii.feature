@@ -1,5 +1,6 @@
 @parallel
 @PiiTest
+@request_service
 Feature: Pii
 
   Background: health check

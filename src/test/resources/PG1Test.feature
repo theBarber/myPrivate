@@ -4,6 +4,7 @@
 @parallel
 @noAA
 @PG1Feature
+@request_service
 Feature: PG1 x - limitation support
 
   Background: health check
