@@ -4,6 +4,7 @@
 @noAA
 @daniellaPLT
 @PersonaLevelTargetingFeature
+@request_service
 Feature: Persona level targeting
 
   Background: health check

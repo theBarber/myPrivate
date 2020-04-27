@@ -9,6 +9,7 @@
 @noAA
 @eitan12
 @HeaderBiddingFlowSupport
+@request_service
 Feature: Header Bidding Flow Support
 
   Background: health check

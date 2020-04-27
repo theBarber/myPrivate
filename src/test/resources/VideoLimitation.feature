@@ -2,10 +2,7 @@
 @LinearVidFiltering
 @testeitan1973
 @uas
-
-#   Keren Levy
-#   2.2.2010
-
+@request_service
 Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation both on Mobile and Desktop
 
   Background: health check
