@@ -1,5 +1,6 @@
 @parallel
 @VideoDuration
+@request_service
 Feature: Duration Video tests UN-21695 & UN-21696
 
   Background: health check
