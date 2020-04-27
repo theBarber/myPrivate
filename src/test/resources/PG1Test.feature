@@ -3,42 +3,57 @@
 @scheduled
 @parallel
 @noAA
-
+@PG1Feature
 Feature: PG1 x - limitation support
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add header of {x-forwarded-for} with value {78.31.205.183}
     Then The response code is 200
 
-  Scenario: PG1 on Desktop - zone request
+  Scenario: 1. PG1 on Desktop - zone request
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-PG1-1-allowed} to UAS
     Then The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
+
+  Scenario: 2. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-PG1-2} to UAS
     Then The response code is 200
     And The response not contains script
+
+  Scenario: 3. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-ST-1} to UAS
     Then The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
+
+  Scenario: 4. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-ST-2} to UAS
     Then The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
+
+  Scenario: 5. PG1 on Desktop - zone request
     Given I use {Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko} as user-agent string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-PG1-1-allowed} to UAS
     Then The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
+
+  Scenario: 6. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-PG1-2} to UAS
     Then The response code is 200
     And The response not contains script
+
+  Scenario: 7. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-ST-1} to UAS
     Then The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
+
+  Scenario: 8. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-ST-2} to UAS
     Then The response code is 200
     And The response contains {script}
