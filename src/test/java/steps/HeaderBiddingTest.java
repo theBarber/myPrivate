@@ -20,8 +20,8 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = {
-        "classpath:hb/HeaderBidding.feature",
-        "classpath:hb/HeaderBiddingThrottling.feature"}, plugin = {"pretty",})
+        "classpath:HeaderBidding.feature",
+        "classpath:HeaderBiddingThrottling.feature"}, plugin = {"pretty",})
 
 public class HeaderBiddingTest extends BaseTest {
     final private String HEADER_BIDDING_SOURCE_FILE_PATH = "/input_files/requestBodies.json";
