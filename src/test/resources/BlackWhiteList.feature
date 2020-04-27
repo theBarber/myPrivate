@@ -4,7 +4,7 @@
 @parallel
 @noAA
 @blackAndWhite1
-
+@request_service
 Feature: Black and White testing
 
   Background: health check
