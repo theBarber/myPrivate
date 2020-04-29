@@ -125,18 +125,26 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name         |
       | campaign-API-1-a-GDPR |
+    #  goe --> city limitation
+      | campaign-San-Francisco-city |
 #    Given i update zone data by name
 #      |Zone Name                  | status  |
 #      |campaign-API-1-a-GDPR      |    1    |
     Given i create new campaigns with new zoneset
       | Campaign Name         | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name      | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-API-1-a-GDPR | 75396 | 210722   | false                 | 204           | {zone-zoneset-GDPR-1-a} | []         | 83       | 4737           | 2434         | 17116           |
+      # goe --> city limitation
+      | campaign-San-Francisco-city | 75396 | 210722   | false                 | 204           | {zone-zoneset-city-limitation} | []         | 83       | 4737           | 2434         | 17116           |
     And i update banner data by name
       | Banner Name                    | limitation        |
       | campaign-API-1-a-GDPR-banner-1 | [[[5,"=~","fr"]]] |
+      #  goe --> city limitation
+      | campaign-San-Francisco-city-banner-1 | [[[8,"=~","us",["ca","san francisco"]]]] |
     And i update zone data by name
       | Zone Name             | is_secure |
       | zone-zoneset-GDPR-1-a | 1         |
+      | zone-zoneset-city-limitation | 1         |
+
 
   @limitationSanity
   Scenario: create entities for zone Tag Sanity test
@@ -621,6 +629,11 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       |
 #     InApp Burl
       | campaign-server-prog-inApp-ST-1 |
+    # programmatic flow - Reserve
+      | campaign-reserve-AN-iter-1      |
+      | campaign-reserve-OX-iter-2      |
+      | campaign-reserve-AN-iter-3      |
+
 #     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1 |
 #      |campaign-server-prog-MultiBids-ST-2 |
