@@ -134,7 +134,7 @@ Feature: Entities for tests
       | Campaign Name               | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-API-1-a-GDPR       | 75396 | 210722   | false                 | 204           | {zone-zoneset-GDPR-1-a}        | []         | 83       | 4737           | 2434         | 17116           |
       # goe --> city limitation
-      | campaign-San-Francisco-city | 75396 | 210722   | false                 | 204           | {zone-zoneset-city-limitation} | []         | 83       | 4737           | 2434         | 17116           |
+      | campaign-San-Francisco-city | 75396 | 210722   | false                 | 204           | {zone-zoneset-city-limitation} | []         | 83       | 15853          | 2434         | 62229           |
     And i update banner data by name
       | Banner Name                          | limitation                               |
       | campaign-API-1-a-GDPR-banner-1       | [[[5,"=~","fr"]]]                        |
