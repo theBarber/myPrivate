@@ -2,6 +2,7 @@ package steps;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import entities.Zone;
 import model.Country;
 import model.ResponseType;
 import org.junit.runner.RunWith;
@@ -23,8 +24,8 @@ import util.consent.UtCcpaGenerator;
 //                "classpath:consent/gdpr/hb/NoParam.feature",
 //                "classpath:consent/gdpr/hb/SingleParam.feature",
 //                "classpath:consent/gdpr/hb/Params.feature",
-//                "classpath:consent/ccpa/zonereq/NoParam.feature",
-//                "classpath:consent/ccpa/zonereq/SingleParam.feature",
+//                "classpath:consent/ccpa/zonereq/NoParam.feature"
+//                "classpath:consent/ccpa/zonereq/SingleParam.feature"
 //                "classpath:consent/ccpa/hb/NoParam.feature",
 //                "classpath:consent/ccpa/hb/SingleParam.feature"
         },
@@ -61,6 +62,19 @@ public class ConsentTest extends BaseTest {
         Given("^I send (\\d+) times an ad request for consent entities to UAS with us privacy string containing opt-out=(Y|N|NOT_APPLICABLE)$", (Integer times, CcpaCharacter optOutChr) -> {
             sendParameteredConsentZoneReq(times, "ccpa=" + utCcpaStr(optOutChr));
         });
+
+
+        // sending zone request by zone name - CCPA
+        Given("^I send (\\d+) times an ad request for consent entities to UAS with us privacy string containing opt-out=(Y|N|NOT_APPLICABLE) for zone named? \\{(.*)\\} to UAS$", (Integer times, CcpaCharacter optOutChr, String zoneByName) -> {
+            //sendMultipleAdRequestsWithParameter(times, "ccpa=" + utCcpaStr(optOutChr), zoneName);
+            String parameter = "ccpa=" + utCcpaStr(optOutChr);
+            Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
+                    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+            sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(), parameter, times, true);
+        });
+
+
+
         Given("^I send (\\d+) times an ad request for consent entities to UAS with gdpr=(0|1)$", (Integer times, Integer gdpr) -> {
             sendParameteredConsentZoneReq(times, "gdpr=" + gdpr);
         });
@@ -68,17 +82,68 @@ public class ConsentTest extends BaseTest {
             final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, gdprstr, ZONE_ID, true);
         });
+
+
+        // sending zone request by with gdprstr & zone name
+        Given("^I send (\\d+) times an ad request for consent entities to UAS with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids for zone named? \\{(.*)\\} to UAS$", (Integer times, String utVendorIdInclusion, String utPurposeIdsInclusion, String zoneByName ) -> {
+            final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            //UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, gdprstr, ZONE_ID, true);
+            Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
+                    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+            sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(), gdprstr, times, true);
+        });
+
+
+
         Given("I send (\\d+) times an ad request for consent entities to UAS with an empty gdprstr", (Integer times) -> {
             UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=", ZONE_ID, true);
         });
+
+
+        // sending zone request by with empty gdprstr & zone name
+        Given("I send (\\d+) times an ad request for consent entities to UAS with an empty gdprstr for zone named? \\{(.*)\\} to UAS$", (Integer times,String zoneByName) -> {
+            //UasApi.sendMultipleZoneIdAdRequestsWithParameter(times, "gdprstr=", ZONE_ID, true);
+            String param = "gdprstr=";
+            Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
+                    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+            sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(), param, times, true);
+        });
+
+
         Given("^I send (\\d+) times an ad request for consent entities to UAS with gdpr=(0|1) and with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
             final String params = "gdpr=" + gdpr + "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             sendParameteredConsentZoneReq(times, params);
         });
+
+
+        // sending zone request by zone name - GDPR
+        Given("^I send (\\d+) times an ad request for consent entities to UAS with gdpr=(0|1) and with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids for zone named? \\{(.*)\\} to UAS$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion, String zoneByName) -> {
+            final String params = "gdpr=" + gdpr + "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            //sendParameteredConsentZoneReq(times, params);
+            Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
+                    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+            sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(), params, times, true);
+        });
+
+
+
         Given("^I send (\\d+) times an ad request for consent entities to UAS with gdpr=(0|1) and with an empty gdprstr$", (Integer times, Integer gdpr) -> {
             final String params = "gdpr=" + gdpr + "&gdprstr=";
             sendParameteredConsentZoneReq(times, params);
         });
+
+
+    // empty string by zone name - GDPR
+        Given("^I send (\\d+) times an ad request for consent entities to UAS with gdpr=(0|1) and with an empty gdprstr for zone named? \\{(.*)\\} to UAS$$", (Integer times, Integer gdpr, String zoneByName) -> {
+            final String params = "gdpr=" + gdpr + "&gdprstr=";
+            //sendParameteredConsentZoneReq(times, params);
+            Zone zone = sut.getExecutorCampaignManager().getZone(zoneByName)
+                    .orElseThrow(() -> new AssertionError("The Zone " + zoneByName + " does not exist!"));
+            sut.getUASRquestModule().zoneRequestsWithParameter(zone.getId(), params, times, true);
+        });
+
+
+
 
         /* dynamic tag reqs */
         Given("I send (\\d+) times Dynamic Tag ad request to UAS for consent publisher's entities", (Integer times) -> {
