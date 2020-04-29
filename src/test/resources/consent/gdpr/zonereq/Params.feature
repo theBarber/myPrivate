@@ -28,6 +28,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
     Then I expect delivery
 
   Scenario:4.0 gdpr=1  - zone request - city limitation on banner level
+    Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     When I send 1 times an ad request with parameter {gdpr=1} for zone named {zone-zoneset-city-limitation} to UAS
     Then The response code is 200
@@ -81,6 +82,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   Scenario:12.0 gdpr=0 - zone request - city limitation
+    Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     When I send 1 times an ad request with parameter {gdpr=0} for zone named {zone-zoneset-city-limitation} to UAS
     Then I expect delivery

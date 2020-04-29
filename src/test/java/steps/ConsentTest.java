@@ -15,8 +15,8 @@ import util.consent.UtCcpaGenerator;
 @CucumberOptions(
         features = {
 //                "classpath:consent/gdpr/zonereq/NoParam.feature"
-               // "classpath:consent/gdpr/zonereq/SingleParam.feature"
-                "classpath:consent/gdpr/zonereq/Params.feature"
+                "classpath:consent/gdpr/zonereq/SingleParam.feature"
+//                "classpath:consent/gdpr/zonereq/Params.feature"
 //                "classpath:consent/gdpr/dyntag/NoParam.feature",
 //                "classpath:consent/gdpr/dyntag/SingleParam.feature",
 //                "classpath:consent/gdpr/dyntag/Params.feature",
