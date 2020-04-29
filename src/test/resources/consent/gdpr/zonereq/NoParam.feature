@@ -18,6 +18,13 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - No Param Is Specified In URL
     Then I expect delivery
 
 
+  Scenario: zone req - no params are specified - request from outside EU with city limitation
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
+    #When I send 1 times display ad request with parameter {optimize=1&gdpr=0} for zone id 192649 to UAS
+    When I send 1 times an ad request for zone named {zone-zoneset-city-limitation} to UAS
+    Then I expect delivery
+
+
   @ZoneReqNoGdprParamNotEu
   Scenario: zone req - no params are specified - request not from Eu
     Given I reset the http headers sent to uas
