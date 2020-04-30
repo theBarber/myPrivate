@@ -4,7 +4,7 @@
 @parallel
 @noAA
 @pgwfeature
-
+@request_service
 Feature: Programmatic flow support
 
   Background: health check
