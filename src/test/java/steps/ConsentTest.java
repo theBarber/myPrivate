@@ -181,15 +181,47 @@ public class ConsentTest extends BaseTest {
             final String hbGdprParams = HB_EXTRA_URL_PARAMS + "&gdpr=" + gdpr;
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprParams, true, false,false);
         });
-        Given("I send (\\d+) times Header Bidding request for consent entities with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids", (Integer times, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
+        Given("I send (\\d+) times Header Bidding request for consent entities with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids" ,(Integer times, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
+
             final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&" + gdprstr;
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprGdprstrParams, true, false,false);
         });
+
+        //&&&&  sending HB request with body parameters  - GDPR
+        Given("I send (\\d+) times Header Bidding request for consent entities with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}",(
+                        Integer times,
+                        String utVendorIdInclusion,
+                        String utPurposeIdsInclusion,
+                        Integer publisherID,
+                        Integer h1,
+                        Integer w1,
+                        String domain)  -> {
+            final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            final String hbGdprGdprstrParams = "&" + gdprstr;
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(publisherID), domain, hbGdprGdprstrParams, true, false,false);
+        });
+
+
         Given("I send (\\d+) times Header Bidding request for consent entities with an empty gdprstr", (Integer times) -> {
             final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&gdprstr=";
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprGdprstrParams, true, false,false);
         });
+
+        //%%%% sending HB request with body parameters - empty gdprstr
+        Given("I send (\\d+) times Header Bidding request for consent entities with an empty gdprstr for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}", (
+                Integer times,
+                String utVendorIdInclusion,
+                String utPurposeIdsInclusion,
+                Integer publisherID,
+                Integer h1,
+                Integer w1,
+                String domain)  -> {
+            final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&gdprstr=";
+            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(publisherID), domain, hbGdprGdprstrParams, true, false,false);
+        });
+
+
         Given("^I send (\\d+) times Header Bidding request for consent entities with gdpr=(0|1) and gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
             final String gdprstr = utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&gdpr=" + gdpr + "&gdprstr=" + gdprstr;

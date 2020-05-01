@@ -10,7 +10,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
     Then The response code is 200
 
   @gdprgdprstr
-  Scenario:1.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - from --> CANADA
+  Scenario:1.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=1 and with gdprstr which includes ut vendor id and includes ut purpose ids for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -26,7 +26,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:3.0 gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - from --> CANADA
+  Scenario:3.0 gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=1 and with gdprstr which includes ut vendor id and excludes ut purpose ids for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -43,7 +43,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:5.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - from --> CANADA
+  Scenario:5.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=1 and with gdprstr which excludes ut vendor id and includes ut purpose ids for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -62,7 +62,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:7.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - from --> CANADA
+  Scenario:7.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=1 and with gdprstr which excludes ut vendor id and excludes ut purpose ids for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -79,7 +79,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:9.0 gdpr=1 and gdprstr=empty_string - from --> CANADA
+  Scenario:9.0 gdpr=1 and gdprstr=empty_string - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=1 and with an empty gdprstr for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -95,7 +95,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:11.0 gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_INCLUDED - from --> CANADA
+  Scenario:11.0 gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_INCLUDED - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=0 and with gdprstr which includes ut vendor id and includes ut purpose ids for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -112,7 +112,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:13.0 gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - from --> CANADA
+  Scenario:13.0 gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=0 and with gdprstr which includes ut vendor id and excludes ut purpose ids for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -128,7 +128,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:15.0 gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - from --> CANADA
+  Scenario:15.0 gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=0 and with gdprstr which excludes ut vendor id and includes ut purpose ids for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -143,7 +143,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
     Then I expect delivery
 
   @gdprgdprstr
-  Scenario:17.0 gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - from --> CANADA
+  Scenario:17.0 gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=0 and with gdprstr which excludes ut vendor id and excludes ut purpose ids for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -159,7 +159,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:19.0 gdpr=0 and gdprstr=empty_string - from --> CANADA
+  Scenario:19.0 gdpr=0 and gdprstr=empty_string - Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     And I send 1 times an ad request for consent entities to UAS with gdpr=0 and with an empty gdprstr for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS

@@ -14,7 +14,7 @@ Feature: CCPA - Zone Reqs - Canada Delivery Logic - Us Privacy String Param Is S
   @ccpaOptOut
   @ccpaOptOutTrue
   @ccpaOptOutTrueCa
-  Scenario:1.0 Ccpa Opt-Out={Y} - zone request from Canada
+  Scenario:1.0 Ccpa Opt-Out={Y} - zone request Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     Given I send 1 times an ad request for consent entities to UAS with us privacy string containing opt-out=Y for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -25,7 +25,7 @@ Feature: CCPA - Zone Reqs - Canada Delivery Logic - Us Privacy String Param Is S
     @ccpaOptOut
     @ccpaOptOutTrue
     @ccpaOptOutTrueNotCa
-    Scenario:2.0 Ccpa Opt-Out={Y} - zone request from city
+    Scenario:2.0 Ccpa Opt-Out={Y} - zone request city limitation
       Given I reset the http headers sent to uas
       Given I add header of {x-forwarded-for} with value {192.241.221.98}
       Given I send 1 times an ad request for consent entities to UAS with us privacy string containing opt-out=Y for zone named {zone-zoneset-city-limitation} to UAS
@@ -39,7 +39,7 @@ Feature: CCPA - Zone Reqs - Canada Delivery Logic - Us Privacy String Param Is S
   @ccpaOptOut
   @ccpaOptOutFalse
   @ccpaOptOutFalseCa
-  Scenario:3.0 Ccpa Opt-Out={N} - zone request from Canada
+  Scenario:3.0 Ccpa Opt-Out={N} - zone request Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     Given I send 1 times an ad request for consent entities to UAS with us privacy string containing opt-out=N for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -52,7 +52,7 @@ Feature: CCPA - Zone Reqs - Canada Delivery Logic - Us Privacy String Param Is S
   @ccpaOptOut
   @ccpaOptOutFalse
   @ccpaOptOutFalseNotCa
-  Scenario:4.0 Ccpa Opt-Out={N} - zone request from city
+  Scenario:4.0 Ccpa Opt-Out={N} - zone request city limitation
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     Given I send 1 times an ad request for consent entities to UAS with us privacy string containing opt-out=N for zone named {zone-zoneset-city-limitation} to UAS
@@ -63,7 +63,7 @@ Feature: CCPA - Zone Reqs - Canada Delivery Logic - Us Privacy String Param Is S
   @ccpaOptOut
   @ccpaOptOutNotApplicable
   @ccpaOptOutNotApplicableCa
-  Scenario:5.0 Ccpa Opt-Out={-} - zone request from Canada
+  Scenario:5.0 Ccpa Opt-Out={-} - zone request Country limitation --> Canada
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
     Given I send 1 times an ad request for consent entities to UAS with us privacy string containing opt-out=NOT_APPLICABLE for zone named {zone-zoneset-state-bannerLevelLimit-ST} to UAS
@@ -77,7 +77,7 @@ Feature: CCPA - Zone Reqs - Canada Delivery Logic - Us Privacy String Param Is S
   @ccpaOptOut
   @ccpaOptOutNotApplicable
   @ccpaOptOutNotApplicableNotCa
-  Scenario:6.0 Ccpa Opt-Out={-} - zone request from city
+  Scenario:6.0 Ccpa Opt-Out={-} - zone request city limitation
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     Given I send 1 times an ad request for consent entities to UAS with us privacy string containing opt-out=NOT_APPLICABLE for zone named {zone-zoneset-city-limitation} to UAS
