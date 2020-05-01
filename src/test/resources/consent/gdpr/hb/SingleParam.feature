@@ -73,12 +73,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param 
     And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
 
-#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-
   @gdprstr
   @hbGdprStrUtIdUtPurposesIncludedNotEu
   Scenario:6.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request - city limitation
