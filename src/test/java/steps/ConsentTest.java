@@ -15,14 +15,14 @@ import util.consent.UtCcpaGenerator;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = {
-                "classpath:consent/gdpr/zonereq/NoParam.feature"
+//                "classpath:consent/gdpr/zonereq/NoParam.feature"
 //                "classpath:consent/gdpr/zonereq/SingleParam.feature",
 //                "classpath:consent/gdpr/zonereq/Params.feature",
 //                "classpath:consent/gdpr/dyntag/NoParam.feature",
 //                "classpath:consent/gdpr/dyntag/SingleParam.feature",
 //                "classpath:consent/gdpr/dyntag/Params.feature",
 //                "classpath:consent/gdpr/hb/NoParam.feature",
-//                "classpath:consent/gdpr/hb/SingleParam.feature",
+                "classpath:consent/gdpr/hb/SingleParam.feature"
 //                "classpath:consent/gdpr/hb/Params.feature",
 //                "classpath:consent/ccpa/zonereq/NoParam.feature",
 //                "classpath:consent/ccpa/zonereq/SingleParam.feature"
@@ -199,7 +199,8 @@ public class ConsentTest extends BaseTest {
                         String domain)  -> {
             final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             final String hbGdprGdprstrParams = "&" + gdprstr;
-            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(publisherID), domain, hbGdprGdprstrParams, true, false,false);
+            String body = getJsonBody(publisherID, h1, w1, domain);
+            UasApi.sendHbPostReq(times, body, Integer.valueOf(publisherID), domain, hbGdprGdprstrParams, true, false,false);
         });
 
 
@@ -211,14 +212,13 @@ public class ConsentTest extends BaseTest {
         //%%%% sending HB request with body parameters - empty gdprstr
         Given("I send (\\d+) times Header Bidding request for consent entities with an empty gdprstr for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}", (
                 Integer times,
-                String utVendorIdInclusion,
-                String utPurposeIdsInclusion,
                 Integer publisherID,
                 Integer h1,
                 Integer w1,
                 String domain)  -> {
-            final String hbGdprGdprstrParams = HB_EXTRA_URL_PARAMS + "&gdprstr=";
-            UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(publisherID), domain, hbGdprGdprstrParams, true, false,false);
+            final String hbGdprGdprstrParams = "&gdprstr=";
+            String body = getJsonBody(publisherID, h1, w1, domain);
+            UasApi.sendHbPostReq(times, body, Integer.valueOf(publisherID), domain, hbGdprGdprstrParams, true, false,false);
         });
 
 
@@ -277,4 +277,20 @@ public class ConsentTest extends BaseTest {
     private String utCcpaStr(CcpaCharacter optoutChr) {
         return UtCcpaGenerator.getInstance().getUtDefaultUsPrivacyString(optoutChr);
     }
+
+    private String getJsonBody(Integer publisherID, Integer h1, Integer w1, String domain) {
+            String body =
+                    "{\"x-ut-hb-params\":[\n" +
+                            "  {\n" +
+                            " \"bidRequestId\": \"123\"," + "\n" +
+                            " \"domain\": \"" + domain + "\",\n" +
+                            " \"publisher_id\":  \"" + publisherID + "\",\n" +
+                            " \"sizes\":[" + h1 + "," + w1 + "],\n" +
+                            " \"timeout\": 700,\n" +
+                            " \"hbadaptor\": \"prebid\",\n" +
+                            " \"publisherId\" : \"" + publisherID + "\"\n" +
+                            " }\n" +
+                            "]}";
+            return body;
+        }
 }
