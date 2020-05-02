@@ -183,5 +183,8 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param 
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times Header Bidding request for consent entities with an empty gdprstr for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com}
-    Then The response code is 204
-    And The responses are passback
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-San-Francisco-city}
+    And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}
