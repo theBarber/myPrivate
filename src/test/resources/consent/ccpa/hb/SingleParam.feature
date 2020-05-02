@@ -91,7 +91,7 @@ Feature: CCPA - Header Bidding Reqs - California Delivery Logic - Us Privacy Str
   @ccpaUtInvalid
   @ccpaOptOutNotApplicable
   @ccpaOptOutNotApplicableCa
-  Scenario: Ccpa Opt-Out={-} - HB request - Country limitation --> from Canada - script expected
+  Scenario:5.0 Ccpa Opt-Out={-} - HB request - Country limitation --> from Canada - script expected
 #    Given I add {CA} ip header
 #    And I send 1 times Header Bidding request for consent entities with us privacy string containing opt-out=NOT_APPLICABLE
 #    Then The response code is 200
@@ -110,7 +110,7 @@ Feature: CCPA - Header Bidding Reqs - California Delivery Logic - Us Privacy Str
   @ccpaUtInvalid
   @ccpaOptOutNotApplicable
   @ccpaOptOutNotApplicableNotCa
-  Scenario:5.0 Ccpa Opt-Out={-} - HB request - city limitation - script expected
+  Scenario:6.0 Ccpa Opt-Out={-} - HB request - city limitation - script expected
 #    Given I reset the http headers sent to uas
 #    And I send 1 times Header Bidding request for consent entities with us privacy string containing opt-out=NOT_APPLICABLE
 #    Then The response code is 200
