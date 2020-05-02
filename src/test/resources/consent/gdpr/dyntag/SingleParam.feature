@@ -11,9 +11,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   @gdpr
   @DynTagGdprTrueParamEu
   Scenario:1.0 gdpr=1 - dyntag - request Country limitation --> Canada - script expected
-#    Given I add {UK} ip header
-#    And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=1
-#    Then The response code is 204
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -27,9 +24,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   @gdpr
   @DynTagGdprTrueParamNotEu
   Scenario:2.0 gdpr=1 - dyntag request - city limitation - passback expected
-#    Given I reset the http headers sent to uas
-#    And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=1
-#    Then The response code is 204
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -67,10 +61,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   @gdprstr
   @DynTagGdprStrUtIdUtPurposesIncludedEu
   Scenario:5.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - dyntag request Country limitation --> Canada - script expected
-#    Given I reset the http headers sent to uas
-#    And I add {UK} ip header
-#    And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which includes ut vendor id and includes ut purpose ids
-#    Then I expect delivery
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -84,9 +74,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   @gdprstr
   @DynTagGdprStrUtIdUtPurposesIncludedNotEu
   Scenario:6.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - dyntag request - city limitation - script expected
-#    Given I reset the http headers sent to uas
-#    And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which includes ut vendor id and includes ut purpose ids
-#    Then I expect delivery
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {192.241.221.98}}
@@ -100,9 +87,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   @gdprstr
   @DynTagGdprStrUtIdIncludedUtPurposeIdsExcludedEu
   Scenario:7.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - dyntag request Country limitation --> Canada - script expected
-#    Given I add {UK} ip header
-#    And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which includes ut vendor id and excludes ut purpose ids
-#    Then The response code is 204
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -116,9 +100,6 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   @gdprstr
   @DynTagGdprStrUtIdIncludedUtPurposeIdsExcludedNotEu
   Scenario:8.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - dyntag request - city limitation - script expected
-#    Given I reset the http headers sent to uas
-#    And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which includes ut vendor id and excludes ut purpose ids
-#    Then I expect delivery
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {192.241.221.98}}

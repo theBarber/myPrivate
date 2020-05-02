@@ -11,10 +11,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:1.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request Country limitation --> Canada
-#    Given I add {UK} ip header
-#    And I send 1 times Header Bidding request for consent entities with gdpr=1 and gdprstr which includes ut vendor id and includes ut purpose ids
-#    Then The response code is 200
-#    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -28,10 +24,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:2.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request - city limitation
-#    Given I reset the http headers sent to uas
-#    And I send 1 times Header Bidding request for consent entities with gdpr=1 and gdprstr which includes ut vendor id and includes ut purpose ids
-#    Then The response code is 200
-#    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -54,9 +46,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:4.0 gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
-#    Given I reset the http headers sent to uas
-#    And I send 1 times Header Bidding request for consent entities with gdpr=1 and gdprstr which includes ut vendor id and excludes ut purpose ids
-#    Then The response code is 204
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -110,9 +99,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:9.0 gdpr=1 and gdprstr=empty_string - hb request Country limitation --> Canada
-#    Given I add {UK} ip header
-#    And I send 1 times Header Bidding request for consent entities with gdpr=1 and an empty gdprstr
-#    Then The response code is 204
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -126,9 +112,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:10.0 gdpr=1 and gdprstr=empty_string - hb request - city limitation
-#    Given I reset the http headers sent to uas
-#    And I send 1 times Header Bidding request for consent entities with gdpr=1 and an empty gdprstr
-#    Then The response code is 204
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -139,10 +122,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:11.0 gdpr=0 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request Country limitation --> Canada
-#    Given I add {UK} ip header
-#    And I send 1 times Header Bidding request for consent entities with gdpr=0 and gdprstr which includes ut vendor id and includes ut purpose ids
-#    Then The response code is 200
-#    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -157,10 +136,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:12.0 gdpr=0 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - city limitation
-#    Given I reset the http headers sent to uas
-#    And I send 1 times Header Bidding request for consent entities with gdpr=0 and gdprstr which includes ut vendor id and includes ut purpose ids
-#    Then The response code is 200
-#    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -174,10 +149,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:13.0 gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
-#    Given I add {UK} ip header
-#    And I send 1 times Header Bidding request for consent entities with gdpr=0 and gdprstr which includes ut vendor id and excludes ut purpose ids
-#    Then The response code is 200
-#    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -190,10 +161,6 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
   @gdprgdprstr
   Scenario:14.0 gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
-#    Given I reset the http headers sent to uas
-#    And I send 1 times Header Bidding request for consent entities with gdpr=0 and gdprstr which includes ut vendor id and excludes ut purpose ids
-#    Then The response code is 200
-#    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -257,15 +224,8 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}
 
 
-
-
-
   @gdprgdprstr
   Scenario:19.0 gdpr=0 and gdprstr=empty_string - hb request Country limitation --> Canada
-#    Given I add {UK} ip header
-#    And I send 1 times Header Bidding request for consent entities with gdpr=0 and an empty gdprstr
-#    Then The response code is 200
-#    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
