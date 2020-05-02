@@ -60,7 +60,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
 
   @gdprstr
   @ZoneReqGdprStrUtIdUtPurposesIncludedNotEu
-  Scenario:6.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - city limitation
+  Scenario:6.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - city limitation  (no gdpr param --> banner expected)
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times an ad request for consent entities to UAS with gdprstr which includes ut vendor id and includes ut purpose ids for zone named {zone-zoneset-city-limitation} to UAS
@@ -80,7 +80,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
 
   @gdprstr
   @ZoneReqGdprStrUtIdIncludedUtPurposeIdsExcludedNotEu
-  Scenario:8.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - city limitation
+  Scenario:8.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - city limitation (no gdpr param --> banner expected)
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times an ad request for consent entities to UAS with gdprstr which includes ut vendor id and excludes ut purpose ids for zone named {zone-zoneset-city-limitation} to UAS
@@ -100,7 +100,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
 
   @gdprstr
   @ZoneReqGdprStrUtIdExcludedUtPurposeIdsIncludedNotEu
-  Scenario:10.0 gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - city limitation
+  Scenario:10.0 gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - city limitation (no gdpr param --> banner expected)
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times an ad request for consent entities to UAS with gdprstr which excludes ut vendor id and includes ut purpose ids for zone named {zone-zoneset-city-limitation} to UAS
@@ -117,7 +117,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
 
   @gdprstr
   @ZoneReqGdprStrUtIdExcludedUtPurposeIdsExcludedNotEu
-  Scenario:12.0 gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - city limitation
+  Scenario:12.0 gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - city limitation (no gdpr param --> banner expected)
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times an ad request for consent entities to UAS with gdprstr which excludes ut vendor id and excludes ut purpose ids for zone named {zone-zoneset-city-limitation} to UAS
@@ -133,7 +133,7 @@ Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specifi
 
   @gdprstr
   @ZoneReqGdprStrEmptyStringNotEu
-  Scenario:14.0 gdprstr=empty_string -  city limitation
+  Scenario:14.0 gdprstr=empty_string -  city limitation (no gdpr param --> banner expected)
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times an ad request for consent entities to UAS with an empty gdprstr for zone named {zone-zoneset-city-limitation} to UAS

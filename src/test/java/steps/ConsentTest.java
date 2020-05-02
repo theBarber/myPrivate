@@ -16,18 +16,18 @@ import util.consent.UtCcpaGenerator;
 @CucumberOptions(
         features = {
 //                "classpath:consent/gdpr/zonereq/NoParam.feature"
-//                "classpath:consent/gdpr/zonereq/SingleParam.feature",
-//                "classpath:consent/gdpr/zonereq/Params.feature",
+//                "classpath:consent/gdpr/zonereq/SingleParam.feature"
+//                "classpath:consent/gdpr/zonereq/Params.feature"
 //                "classpath:consent/gdpr/dyntag/NoParam.feature",
 //                "classpath:consent/gdpr/dyntag/SingleParam.feature",
 //                "classpath:consent/gdpr/dyntag/Params.feature",
-//                "classpath:consent/gdpr/hb/NoParam.feature",
+//                "classpath:consent/gdpr/hb/NoParam.feature"
 //                "classpath:consent/gdpr/hb/SingleParam.feature"
-                "classpath:consent/gdpr/hb/Params.feature"
-//                "classpath:consent/ccpa/zonereq/NoParam.feature",
+//                "classpath:consent/gdpr/hb/Params.feature"
+//                "classpath:consent/ccpa/zonereq/NoParam.feature"
 //                "classpath:consent/ccpa/zonereq/SingleParam.feature"
-//                "classpath:consent/ccpa/hb/NoParam.feature",
-//                "classpath:consent/ccpa/hb/SingleParam.feature"
+//                "classpath:consent/ccpa/hb/NoParam.feature"
+                "classpath:consent/ccpa/hb/SingleParam.feature"
         },
         plugin = {"pretty",})
 public class ConsentTest extends BaseTest {

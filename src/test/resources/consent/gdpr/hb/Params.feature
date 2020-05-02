@@ -10,7 +10,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     Then The response code is 200
 
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request Country limitation --> Canada
+  Scenario:1.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request Country limitation --> Canada
 #    Given I add {UK} ip header
 #    And I send 1 times Header Bidding request for consent entities with gdpr=1 and gdprstr which includes ut vendor id and includes ut purpose ids
 #    Then The response code is 200
@@ -26,10 +26,8 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
 
-
-
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request - city limitation
+  Scenario:2.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request - city limitation
 #    Given I reset the http headers sent to uas
 #    And I send 1 times Header Bidding request for consent entities with gdpr=1 and gdprstr which includes ut vendor id and includes ut purpose ids
 #    Then The response code is 200
@@ -42,9 +40,8 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And The responses are passback
 
 
-
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
+  Scenario:3.0 gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -56,7 +53,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
+  Scenario:4.0 gdpr=1 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
 #    Given I reset the http headers sent to uas
 #    And I send 1 times Header Bidding request for consent entities with gdpr=1 and gdprstr which includes ut vendor id and excludes ut purpose ids
 #    Then The response code is 204
@@ -68,10 +65,8 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And The responses are passback
 
 
-
-
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request Country limitation --> Canada
+  Scenario:5.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request Country limitation --> Canada
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -83,7 +78,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request - city limitation
+  Scenario:6.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request - city limitation
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -92,7 +87,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And The responses are passback
 
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
+  Scenario:7.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -104,7 +99,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
+  Scenario:8.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -113,9 +108,8 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And The responses are passback
 
 
-
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=empty_string - hb request Country limitation --> Canada
+  Scenario:9.0 gdpr=1 and gdprstr=empty_string - hb request Country limitation --> Canada
 #    Given I add {UK} ip header
 #    And I send 1 times Header Bidding request for consent entities with gdpr=1 and an empty gdprstr
 #    Then The response code is 204
@@ -131,7 +125,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=1 and gdprstr=empty_string - hb request - city limitation
+  Scenario:10.0 gdpr=1 and gdprstr=empty_string - hb request - city limitation
 #    Given I reset the http headers sent to uas
 #    And I send 1 times Header Bidding request for consent entities with gdpr=1 and an empty gdprstr
 #    Then The response code is 204
@@ -144,7 +138,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request Country limitation --> Canada
+  Scenario:11.0 gdpr=0 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request Country limitation --> Canada
 #    Given I add {UK} ip header
 #    And I send 1 times Header Bidding request for consent entities with gdpr=0 and gdprstr which includes ut vendor id and includes ut purpose ids
 #    Then The response code is 200
@@ -162,7 +156,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - city limitation
+  Scenario:12.0 gdpr=0 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - city limitation
 #    Given I reset the http headers sent to uas
 #    And I send 1 times Header Bidding request for consent entities with gdpr=0 and gdprstr which includes ut vendor id and includes ut purpose ids
 #    Then The response code is 200
@@ -179,7 +173,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
+  Scenario:13.0 gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
 #    Given I add {UK} ip header
 #    And I send 1 times Header Bidding request for consent entities with gdpr=0 and gdprstr which includes ut vendor id and excludes ut purpose ids
 #    Then The response code is 200
@@ -195,7 +189,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
+  Scenario:14.0 gdpr=0 and gdprstr=UT_ID_INCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
 #    Given I reset the http headers sent to uas
 #    And I send 1 times Header Bidding request for consent entities with gdpr=0 and gdprstr which includes ut vendor id and excludes ut purpose ids
 #    Then The response code is 200
@@ -212,7 +206,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request Country limitation --> Canada
+  Scenario:15.0 gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request Country limitation --> Canada
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -225,7 +219,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request - city limitation
+  Scenario:16.0 gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request - city limitation
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -238,7 +232,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
+  Scenario:17.0 gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - hb request Country limitation --> Canada
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.206.151.131}
@@ -251,7 +245,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
+  Scenario:18.0 gdpr=0 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_EXCLUDED - hb request - city limitation
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
@@ -267,7 +261,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=empty_string - hb request Country limitation --> Canada
+  Scenario:19.0 gdpr=0 and gdprstr=empty_string - hb request Country limitation --> Canada
 #    Given I add {UK} ip header
 #    And I send 1 times Header Bidding request for consent entities with gdpr=0 and an empty gdprstr
 #    Then The response code is 200
@@ -283,7 +277,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
   @gdprgdprstr
-  Scenario: gdpr=0 and gdprstr=empty_string - hb request - city limitation
+  Scenario:20.0 gdpr=0 and gdprstr=empty_string - hb request - city limitation
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
