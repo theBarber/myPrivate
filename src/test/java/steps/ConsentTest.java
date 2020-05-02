@@ -177,6 +177,20 @@ public class ConsentTest extends BaseTest {
             final String hbCcpaParams = HB_EXTRA_URL_PARAMS + "&ccpa=" + utCcpaStr(optOut);
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbCcpaParams, true, false,false);
         });
+
+        //&&&&  sending HB request with body parameters  - CCPA
+        Given("I send (\\d+) times Header Bidding request for consent entities for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\} with us privacy string containing opt-out=(Y|N|NOT_APPLICABLE)$",(
+                Integer times,
+                Integer publisherID,
+                Integer h1,
+                Integer w1,
+                String domain,
+                CcpaCharacter optOut)  -> {
+            final String hbCcpaParams = "&ccpa=" + utCcpaStr(optOut);
+            String body = getJsonBody(publisherID, h1, w1, domain);
+            UasApi.sendHbPostReq(times, body, Integer.valueOf(publisherID), domain, hbCcpaParams, true, false,false);
+        });
+
         Given("^I send (\\d+) times Header Bidding request for consent entities with gdpr=(0|1)$", (Integer times, Integer gdpr) -> {
             final String hbGdprParams = HB_EXTRA_URL_PARAMS + "&gdpr=" + gdpr;
             UasApi.sendHbPostReq(times, HB_REQ_BODY, Integer.valueOf(HB_PUB_ID), HB_REQ_DOMAIN, hbGdprParams, true, false,false);
