@@ -18,8 +18,8 @@ import util.consent.UtCcpaGenerator;
 //                "classpath:consent/gdpr/zonereq/NoParam.feature"
 //                "classpath:consent/gdpr/zonereq/SingleParam.feature"
 //                "classpath:consent/gdpr/zonereq/Params.feature"
-//                "classpath:consent/gdpr/dyntag/NoParam.feature",
-//                "classpath:consent/gdpr/dyntag/SingleParam.feature",
+//                "classpath:consent/gdpr/dyntag/NoParam.feature"
+                "classpath:consent/gdpr/dyntag/SingleParam.feature",
 //                "classpath:consent/gdpr/dyntag/Params.feature",
 //                "classpath:consent/gdpr/hb/NoParam.feature"
 //                "classpath:consent/gdpr/hb/SingleParam.feature"
@@ -27,7 +27,7 @@ import util.consent.UtCcpaGenerator;
 //                "classpath:consent/ccpa/zonereq/NoParam.feature"
 //                "classpath:consent/ccpa/zonereq/SingleParam.feature"
 //                "classpath:consent/ccpa/hb/NoParam.feature"
-                "classpath:consent/ccpa/hb/SingleParam.feature"
+//                "classpath:consent/ccpa/hb/SingleParam.feature"
         },
         plugin = {"pretty",})
 public class ConsentTest extends BaseTest {
@@ -153,9 +153,35 @@ public class ConsentTest extends BaseTest {
             final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(gdprstr));
         });
+
+
+        //@@@@@@@@@@@@@@@@  sending DT request with gdprstr - GDPR
+        Given("^I send (\\d+) times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids for publisher (\\d+) with extra params \\{(.*)\\}$", (
+                Integer times,
+                String utVendorIdInclusion,
+                String utPurposeIdsInclusion,
+                Integer publisherID,
+                String params) -> {
+            final String gdprstr = "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
+            String allParams = "&domain=" + params + gdprstr;
+            UasApi.sendDynamicTagRequestsToUASWithParams(times, publisherID.toString(), allParams);
+        });
+
+
+
         Given("I send (\\d+) times Dynamic Tag ad request to UAS for consent publisher's entities with an empty gdprstr", (Integer times) -> {
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams("gdprstr="));
         });
+
+        //@@@@@@@@@@@@@@@@  sending DT request with empty gdprstr - GDPR
+        Given("I send (\\d+) times Dynamic Tag ad request to UAS for consent publisher's entities with an empty gdprstr for publisher (\\d+) with extra params \\{(.*)\\}$", (
+                Integer times,
+                Integer publisherID,
+                String params) -> {
+            String allParams = "&domain=" + params + "&gdprstr=";
+            UasApi.sendDynamicTagRequestsToUASWithParams(times, publisherID.toString(), allParams);
+        });
+
         Given("^I send (\\d+) times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=(0|1) and with gdprstr which (includes|excludes) ut vendor id and (includes|excludes) ut purpose ids$", (Integer times, Integer gdpr, String utVendorIdInclusion, String utPurposeIdsInclusion) -> {
             final String params = "gdpr=" + gdpr + "&gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             UasApi.sendDynamicTagRequestsToUASWithParams(times, PUBLISHER_ID.toString(), getExtendedPubParams(params));
