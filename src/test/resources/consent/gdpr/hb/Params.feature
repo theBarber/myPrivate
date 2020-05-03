@@ -23,13 +23,16 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
 
 
   @gdprgdprstr
-  Scenario:2.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request - city limitation
+  Scenario:2.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - hb request - city limitation - script expected
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and includes ut purpose ids for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com&gdpr=1}
-    Then The response code is 204
-    And The responses are passback
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-San-Francisco-city}
+    And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}
 
 
   @gdprgdprstr
@@ -67,7 +70,7 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Sp
     And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
   @gdprgdprstr
-  Scenario:6.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request - city limitation
+  Scenario:6.0 gdpr=1 and gdprstr=UT_ID_EXCLUDED_AND_PURPOSE_INCLUDED - hb request - city limitation - passback expected
     Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
     Given I add header of {x-forwarded-for} with value {192.241.221.98}

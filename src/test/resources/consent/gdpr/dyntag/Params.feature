@@ -21,13 +21,15 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Both Params Are Specified
 
 
   @gdprgdprstr
-  Scenario:2.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - DT request - city limitation - passback expected
+  Scenario:2.0 gdpr=1 and gdprstr=UT_ID_AND_PURPOSE_ARE_INCLUDED - DT request - city limitation - script expected
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdpr=1 and with gdprstr which includes ut vendor id and includes ut purpose ids for publisher 2434 with extra params {consentweb.com&tagid=452&optimize=1}
     And The response code is 200
-    And The responses are passback
+    And The response contains {script}
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-San-Francisco-city-banner-1} 100% of the time
 
 
   @gdprgdprstr
