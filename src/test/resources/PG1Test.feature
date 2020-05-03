@@ -48,19 +48,6 @@ Feature: PG1 x - limitation support
     Then The response code is 200
     And The responses are passback
 
-  Scenario: 7. PG1 on Desktop - zone request
-    When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-ST-1} to UAS
-    Then The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
-
-  Scenario: 8. PG1 on Desktop - zone request
-    When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-ST-2} to UAS
-    Then The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
-
-
   # &&&&&&&&&&&&&&&&&  Eitan need to fix 2
 #  Scenario: PG1 on Desktop - Dynamic Tag
 #    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
