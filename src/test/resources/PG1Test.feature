@@ -4,6 +4,7 @@
 @parallel
 @noAA
 @PG1Feature
+@PGFeatures
 @request_service
 Feature: PG1 x - limitation support
 

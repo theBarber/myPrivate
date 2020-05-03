@@ -5,6 +5,7 @@
 @parallel
 @noAA
 @PGXFeature
+@PGFeatures
 @request_service
 Feature: PGX - triggering ads tests
 
