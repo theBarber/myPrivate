@@ -20,7 +20,7 @@ import util.consent.UtCcpaGenerator;
                 "classpath:consent/gdpr/zonereq/Params.feature",
                 "classpath:consent/gdpr/dyntag/NoParam.feature",
                 "classpath:consent/gdpr/dyntag/SingleParam.feature",
-                  "classpath:consent/gdpr/dyntag/Params.feature",
+                "classpath:consent/gdpr/dyntag/Params.feature",
                 "classpath:consent/gdpr/hb/NoParam.feature",
                 "classpath:consent/gdpr/hb/SingleParam.feature",
                 "classpath:consent/gdpr/hb/Params.feature",
