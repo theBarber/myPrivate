@@ -11,13 +11,14 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - No Param Is Specif
     Then The response code is 200
 
   @hbNoGdprParamEu
-  Scenario: hb req - no params are specified - request from Eu
+  Scenario:1.0 hb req - no params are specified - HB request - Country limitation --> Canada
     Given I add {UK} ip header
     And I send 1 times Header Bidding request for consent entities
-    Then The response code is 204
+    Then The response code is 200
+    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
 
   @hbNoGdprParamNotEu
-  Scenario: hb req - no params are specified - request not from Eu
+  Scenario:2.0 hb req - no params are specified - request not from Eu
     Given I reset the http headers sent to uas
     And I send 1 times Header Bidding request for consent entities
     Then The response code is 200

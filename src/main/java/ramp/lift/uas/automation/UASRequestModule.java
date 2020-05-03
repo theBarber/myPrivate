@@ -156,6 +156,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             reset();
         }
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/af?zoneid=" + forZone + "&ct=1&stid=999";
+        for (NameValuePair nvp : queryParams) {
+            url = url + "&" + nvp.toString();
+        }
         System.out.println(url);
         for (; times > 0; times--) {
             try {
@@ -213,6 +216,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
 
         String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/" + route + "?zoneid=" + forZone + "&ct=1&stid=999" + "&" + parameter;
+        for (NameValuePair nvp : queryParams) {
+            url = url + "&" + nvp.toString();
+        }
         System.out.println(url);
         for (; times > 0; times--) {
             try {

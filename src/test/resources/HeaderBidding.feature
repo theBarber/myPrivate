@@ -120,33 +120,34 @@ Feature: Header Bidding flow support
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
-#   client programmatic tests
-  Scenario: Send HBProg request with D first P selected
-    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1&sim_geo=1&country=us}
-    And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
-    And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
-    And all HB responses contains cpm with value {1}
-    And I send impression requests to UAS
-    And The response code is 200
-    And The response contains {script}
+##   client programmatic tests - NOT IN USE!!
+#  Scenario: Send HBProg request with D first P selected
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request with D first P selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1&sim_geo=1&country=us}
+#    And The response code is 200
+#    And The response contains {script}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
+#    And all HB responses contains cpm with value {1}
+#    And I send impression requests to UAS
+#    And The response code is 200
+#    And The response contains {script}
 
 #  Scenario: Send HBProg request with No D, No response from Pwai
 #    Given i send 1 headerBidding post request for scenario {Send HBProg request with No D, No response from P publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1&sim_geo=1&country=us}
 #    And The response code is 204
 
-  Scenario: Send HBProg request D selected
-    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1&sim_geo=1&country=us}
-    And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-Billboard-970X250-D}
-    And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
-    And all HB responses contains cpm with value {1}
-    And I send impression requests to UAS
-    And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Prog-Billboard-970X250-D-banner-1} 100% of the time
+  #  NOT IN USE!!
+#  Scenario: Send HBProg request D selected
+#    Given i send 1 headerBidding post request for scenario {Send HBProg request D selected publisher 3697} for publisher 3697 with domain {hbprog.com} with extra params {&unlimited=1&takeratemodel=0&optimize=1&sim_geo=1&country=us}
+#    And The response code is 200
+#    And The response contains {script}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-Billboard-970X250-D}
+#    And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
+#    And all HB responses contains cpm with value {1}
+#    And I send impression requests to UAS
+#    And The response code is 200
+#    And The response contains {script}
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Prog-Billboard-970X250-D-banner-1} 100% of the time
 
 
 
