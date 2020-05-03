@@ -9,12 +9,12 @@
 @parallel
 @noAA
 @FalseDomainFeature
-
-
+@request_service
 Feature: ROFD
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add header of {x-forwarded-for} with value {78.31.205.183}
     Then The response code is 200
 
 

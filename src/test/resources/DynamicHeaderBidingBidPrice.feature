@@ -6,6 +6,7 @@
 @HB
 @DHB
 @HB
+@request_service
 Feature: Dynamic HB bid price
 
   Background: health check

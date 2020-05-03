@@ -5,6 +5,7 @@
 @parallel
 @noAA
 @inappFeature
+@request_service
 Feature: InApp testing
 
   Background: health check

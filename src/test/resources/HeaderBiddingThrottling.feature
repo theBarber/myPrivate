@@ -1,3 +1,4 @@
+@parallel
 @throttling
 @HeaderBiddingThrottling
 Feature: Header Bidding Throttling

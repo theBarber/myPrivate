@@ -4,6 +4,7 @@
 @parallel
 @noAA
 @DomainTargetingFeature
+@request_service
 Feature: Domain Targeting tests
   Background: health check
     When Sending a healthcheck request to UAS

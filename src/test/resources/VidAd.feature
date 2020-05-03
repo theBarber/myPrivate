@@ -1,7 +1,8 @@
 @parallel
 @noAA
 @videoAdhesionScenarios
-Feature: video Adhision new ad unit tests
+@request_service
+Feature: video Adhsion new ad unit tests
 
   Background: health check
     When Sending a healthcheck request to UAS

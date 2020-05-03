@@ -1,6 +1,6 @@
 @parallel
 @wrapper1
-
+@request_service
 Feature: video viewability wrapper tests on cross screen video blend product
 
   Background: health check

@@ -4,7 +4,7 @@
 @parallel
 @noAA
 @PacingHourly
-
+@request_service
 Feature: Pacing Hourly Test
 
   Background: health check
