@@ -22,7 +22,7 @@ Feature: PG1 x - limitation support
   Scenario: 2. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-PG1-2} to UAS
     Then The response code is 200
-    And The response not contains script
+    And The responses are passback
 
   Scenario: 3. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-ST-1} to UAS
@@ -46,7 +46,7 @@ Feature: PG1 x - limitation support
   Scenario: 6. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-PG1-2} to UAS
     Then The response code is 200
-    And The response not contains script
+    And The responses are passback
 
   Scenario: 7. PG1 on Desktop - zone request
     When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-ST-1} to UAS
