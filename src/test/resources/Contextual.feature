@@ -1,6 +1,7 @@
 @parallel
 @contextualScenarios
 @contextual
+@request_service
 Feature: contextual targeting tests
 
   Background: health check

@@ -21,7 +21,6 @@ Feature: Persona level targeting
     And I inject profile doc for scenario {3.1 PLPT is not active, zone req. 1 users - 2 devices - one app one web} to users bucket
     And I inject profile doc for scenario {4. PLPT is not active, zone req. 1 users, 1 device that has both profiles} to users bucket
     And I inject profile doc for scenario {4.1 PLPT is not active, zone req. 1 users, 1 device that has both profiles} to users bucket
-    And I sleep for 3 seconds
 
   Scenario: 1. PLPT is active, zone req. 1 users - 2 devices - one app one web.
     Given I Delete req logs
