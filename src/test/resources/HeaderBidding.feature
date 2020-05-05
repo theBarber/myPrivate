@@ -86,9 +86,9 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-PGC-1X1-1}
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-PGC-1X1-1-banner-1}
     And all HB responses contains cpm with value {1.0}
-    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
+    And I send impression requests to UAS
 
   @HbProgDSelected
   Scenario: Send HBProg request D selected
@@ -98,10 +98,9 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-Billboard-970X250-D}
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
     And all HB responses contains cpm with value {1.0}
-    And I send impression requests to UAS
-    And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Prog-Billboard-970X250-D-banner-1} 100% of the time
+#    And I send impression requests to UAS
 
 
 
