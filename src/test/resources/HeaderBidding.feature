@@ -97,7 +97,7 @@ Feature: Header Bidding Flow Support
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-HB-Prog-Billboard-970X250-D}
     And all HB responses contains adId with id of entity named {campaign-HB-Prog-Billboard-970X250-D-banner-1}
-    And all HB responses contains cpm with value {1.0}
+#    And all HB responses contains cpm with value {1.0}
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Prog-Billboard-970X250-D-banner-1} 100% of the time
 #    And I send impression requests to UAS
