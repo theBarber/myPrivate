@@ -1,7 +1,6 @@
 @NewRenderTest
 @parallel
-
-
+@RenderScenarios
 Feature: Validate New Render Service
 
   Scenario: Send a web request to a zone linked to no banners and validate Passback
