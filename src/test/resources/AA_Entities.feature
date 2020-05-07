@@ -72,6 +72,7 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name         |
       | campaign-API-1-a-GDPR |
+      | campaign-San-Francisco-city |
     Given i create new campaigns with new zoneset
       | Campaign Name         | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name      | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-API-1-a-GDPR | 75396 | 210722   | false                 | 204           | {zone-zoneset-GDPR-1-a} | []         | 83       | 4737           | 2434         | 17116           |
