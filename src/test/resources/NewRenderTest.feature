@@ -1,6 +1,7 @@
 @NewRenderTest
 @parallel
 @RenderScenarios
+@request_service
 Feature: Validate New Render Service
 
   Scenario: Send a web request to a zone linked to no banners and validate Passback
@@ -184,7 +185,7 @@ Feature: Validate New Render Service
     And The response contains {https://tags.bluekai.com/site/15597?id=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
-  Scenario: Send a web zone request from US and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
+  Scenario: Send a web zone request from US and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-web-direct-zone-video} to UAS
     Then The response code is 200
@@ -265,7 +266,7 @@ Feature: Validate New Render Service
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
-  Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
+  Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {requestid=OX-VA-Render&unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-web-programmatic-zone-video} to UAS
     Then The response code is 200
@@ -351,7 +352,7 @@ Feature: Validate New Render Service
     And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
     And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
-  Scenario: Send a web zone request from US and validate the response of a Direct Video Adhesion Ad (Without Leave Behind)
+  Scenario: Send a web zone request from US and validate the response of a Direct Video Adhesion Ad (Without Leave Behind)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone} to UAS
     Then The response code is 200
@@ -378,7 +379,7 @@ Feature: Validate New Render Service
     And The response contains {https://tags.bluekai.com/site/15597?id=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
-  Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (Without Leave Behind)
+  Scenario: Send a web zone request from US and validate the response of a Programmatic Video Adhesion Ad (Without Leave Behind)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {requestid=AN-VA-Render&unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-VidAd-w/o-leave-behind-zone-P} to UAS
     Then The response code is 200
@@ -405,7 +406,7 @@ Feature: Validate New Render Service
     And The response contains {https://tags.bluekai.com/site/15597?id=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
-  Scenario: Send a web zone request from US and validate the response of a Direct Linear Video Ad
+  Scenario: Send a web zone request from US and validate the response of a Direct Linear Video Ad
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Instream-View-direct} to UAS
     Then The response code is 200
@@ -429,7 +430,7 @@ Feature: Validate New Render Service
     And The response contains {https://tags.bluekai.com/site/15597?id=}
     And The response contains {https://dpm.demdex.net/ibs:dpid=152416}
 
-  Scenario: Send a web zone request from US and validate the response of a Programmatic Linear Video Ad
+  Scenario: Send a web zone request from US and validate the response of a Programmatic Linear Video Ad
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {requestid=OX-CSVB-Render&unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Instream-View-programmatic} to UAS
     Then The response code is 200
@@ -472,7 +473,6 @@ Feature: Validate New Render Service
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
 
-  @renderInapp
   Scenario: Send an InApp request and validate the banner response (Viewable Change)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=appdevice&newrender=1} for zone named {zone-zoneset-Inapp-SI-3} to UAS
