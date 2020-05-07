@@ -71,10 +71,6 @@ class ReaderThread extends Thread {
 		this.e = e;
 		return;
 	    }
-	    try {
-		Thread.sleep(10);
-	    } catch (InterruptedException e1) {
-	    }
 	}
     }
 

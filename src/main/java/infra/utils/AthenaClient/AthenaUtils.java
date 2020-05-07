@@ -57,7 +57,6 @@ public class AthenaUtils {
             }
             else {
                 // Sleep an amount of time before retrying again.
-                Thread.sleep(ExampleConstants.SLEEP_AMOUNT_IN_MS);
             }
             System.out.println("Current Status is: " + queryState);
         }

@@ -60,7 +60,6 @@ public class FilterInputStream extends InOutInputStream implements Runnable {
 	// recieved within the 50 ms.
 	if (buf.length() > 0 && inconclusive == true) {
 	    try {
-		Thread.sleep(50);
 	    } catch (InterruptedException e) {
 		throw new IOException("interrupted");
 	    }

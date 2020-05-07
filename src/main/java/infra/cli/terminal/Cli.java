@@ -116,7 +116,6 @@ public class Cli {
      * @throws Exception
      */
     public void login(long timeout, boolean delayedTyping) throws IOException, InterruptedException {
-	Thread.sleep(1000);
 	command(null, timeout, true, delayedTyping);
     }
 

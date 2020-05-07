@@ -563,7 +563,6 @@ public abstract class CliConnectionImpl extends AbstractModuleImpl<String> imple
 		    }
 
 		}
-		Thread.sleep(command.getDelayInRetries());
 		retries++;
 	    }
 	}

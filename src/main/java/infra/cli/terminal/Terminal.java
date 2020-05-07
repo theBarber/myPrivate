@@ -77,7 +77,6 @@ public abstract class Terminal {
 	    for (int i = 0; i < buf.length; i++) {
 		out.write(buf[i]);
 		out.flush();
-		Thread.sleep(keyTypingDelay);
 	    }
 	} else {
 	    out.write(buf);
@@ -123,7 +122,6 @@ public abstract class Terminal {
 	    return true;
 	}
 	int avil0 = in.available();
-	Thread.sleep(scrollEndTimeout);
 	int avil1 = in.available();
 	if (avil1 > bufChar) {
 	    return false;
@@ -132,7 +130,6 @@ public abstract class Terminal {
 			      // bufChar
 	    return true;
 	}
-	Thread.sleep(scrollEndTimeout);
 	if (in.available() < bufChar) {
 	    return true;
 	}
@@ -200,8 +197,6 @@ public abstract class Terminal {
 			    }
 			}
 		    }
-		} else {
-		    Thread.sleep(10);
 		}
 	    }
 	} finally {
@@ -302,8 +297,6 @@ public abstract class Terminal {
 			    }
 			}
 		    }
-		} else {
-		    Thread.sleep(10);
 		}
 	    }
 	} finally {

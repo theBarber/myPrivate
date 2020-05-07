@@ -293,13 +293,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 } else {
                     response.setEntity(new StringEntity(""));
                 }
-                try {
-                    if (withSleepInMillis > 0) {
-                        Thread.sleep(withSleepInMillis);
-                    }
-                } catch (InterruptedException e) {
-                    withSleepInMillis = 0;
-                }
                 return response;
             } catch (IOException e) {
                 throw new UncheckedIOException("failed to send request (" + url + ") ", e);
@@ -594,13 +587,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             } else {
                 response.setEntity(new StringEntity(""));
             }
-            try {
-                if (withSleepInMillis > 0) {
-                    Thread.sleep(withSleepInMillis);
-                }
-            } catch (InterruptedException e) {
-                withSleepInMillis = 0;
-            }
             return response;
         } catch (IOException e) {
             throw new UncheckedIOException("failed to send request (" + url + ") ", e);
@@ -617,13 +603,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
             } else {
                 response.setEntity(new StringEntity(""));
-            }
-            try {
-                if (withSleepInMillis > 0) {
-                    Thread.sleep(withSleepInMillis);
-                }
-            } catch (InterruptedException e) {
-                withSleepInMillis = 0;
             }
             return response;
         } catch (IOException e) {
