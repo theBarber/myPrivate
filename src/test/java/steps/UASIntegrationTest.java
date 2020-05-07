@@ -538,6 +538,10 @@ public class UASIntegrationTest extends BaseTest {
         return future.thenApply(UASRequestModule::getImpressionUrlFrom);
     }
 
+    public static CompletableFuture<Optional<String>> getRenderUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getRenderUrlFrom);
+    }
+
     private static Optional<String> parsableClickUrl(Optional<String> originalClickUrl) {
         return originalClickUrl.map(s -> s.replaceAll("__", "&"));
     }
@@ -546,12 +550,40 @@ public class UASIntegrationTest extends BaseTest {
         return future.thenApply(UASRequestModule::getClickUrlFrom);
     }
 
+    private static CompletableFuture<Optional<String>> getFirstQuartileUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getFirstQuartileUrlFrom);
+    }
+
+    private static CompletableFuture<Optional<String>> getMidpointUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getMidpointUrlFrom);
+    }
+
+    private static CompletableFuture<Optional<String>> getThirdQuartileUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getThirdQuartileUrlFrom);
+    }
+
     private static CompletableFuture<Optional<String>> getCompleteUrl(CompletableFuture<HttpResponse> future) {
         return future.thenApply(UASRequestModule::getCompleteUrlFrom);
     }
 
+    private static CompletableFuture<Optional<String>> getPauseUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getPauseUrlFrom);
+    }
+
     private static CompletableFuture<Optional<String>> getMuteUrl(CompletableFuture<HttpResponse> future) {
         return future.thenApply(UASRequestModule::getMuteUrlFrom);
+    }
+
+    private static CompletableFuture<Optional<String>> getCloseUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getCloseUrlFrom);
+    }
+
+    private static CompletableFuture<Optional<String>> getStartUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getStartUrlFrom);
+    }
+
+    private static CompletableFuture<Optional<String>> getUnMuteUrl(CompletableFuture<HttpResponse> future) {
+        return future.thenApply(UASRequestModule::getUnMuteUrlFrom);
     }
 
     private static CompletableFuture<Optional<String>> getDspUrl(CompletableFuture<HttpResponse> future) {
@@ -680,18 +712,45 @@ public class UASIntegrationTest extends BaseTest {
         Function<CompletableFuture<HttpResponse>, CompletableFuture<Optional<String>>> urlExtractor = null;
         if (urlType.equalsIgnoreCase("impression")) {
             urlExtractor = UASIntegrationTest::getImpressionUrl;
-        } else if (urlType.equalsIgnoreCase("click")) {
+        }
+        else if (urlType.equalsIgnoreCase("render")){
+            urlExtractor = UASIntegrationTest::getRenderUrl;
+        }
+        else if (urlType.equalsIgnoreCase("click")) {
             urlExtractor = UASIntegrationTest::getClickUrl;
             urlExtractor = urlExtractor.andThen(cf -> {
                 CompletableFuture<Optional<String>> fixedOptionalUrlCF = cf
                         .thenApply(UASIntegrationTest::parsableClickUrl);
                 return fixedOptionalUrlCF;
             });
-        } else if (urlType.equalsIgnoreCase("complete")) {
-            urlExtractor = UASIntegrationTest::getCompleteUrl;
-        } else if (urlType.equalsIgnoreCase("mute")) {
-            urlExtractor = UASIntegrationTest::getCompleteUrl;
         }
+        else if (urlType.equalsIgnoreCase("firstQuartile")) {
+            urlExtractor = UASIntegrationTest::getFirstQuartileUrl;
+        }
+        else if (urlType.equalsIgnoreCase("midpoint")) {
+            urlExtractor = UASIntegrationTest::getMidpointUrl;
+        }
+        else if (urlType.equalsIgnoreCase("thirdQuartile")) {
+            urlExtractor = UASIntegrationTest::getThirdQuartileUrl;
+        }
+        else if (urlType.equalsIgnoreCase("complete")) {
+            urlExtractor = UASIntegrationTest::getCompleteUrl;
+        } else if (urlType.equalsIgnoreCase("pause")) {
+            urlExtractor = UASIntegrationTest::getPauseUrl;
+        }
+        else if (urlType.equalsIgnoreCase("mute")) {
+            urlExtractor = UASIntegrationTest::getMuteUrl;
+        }
+        else if (urlType.equalsIgnoreCase("close")) {
+            urlExtractor = UASIntegrationTest::getCloseUrl;
+        }
+        else if (urlType.equalsIgnoreCase("start")) {
+            urlExtractor = UASIntegrationTest::getStartUrl;
+        }
+        else if (urlType.equalsIgnoreCase("unmute")) {
+            urlExtractor = UASIntegrationTest::getUnMuteUrl;
+        }
+
 
         assertThat(entityType, isOneOf("campaign", "banner", "zone"));
         Optional<? extends WithId<Integer>> expectedEntity = sut.getExecutorCampaignManager().getterFor(entityType)
