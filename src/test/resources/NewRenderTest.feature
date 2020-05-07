@@ -474,6 +474,7 @@ Feature: Validate New Render Service
 
   @renderInapp
   Scenario: Send an InApp request and validate the banner response (Viewable Change)
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=appdevice&newrender=1} for zone named {zone-zoneset-Inapp-SI-3} to UAS
     Then The response code is 200
     And The response contains {script}
