@@ -53,13 +53,6 @@ public class Assert extends org.junit.Assert {
 	long timeUp = System.currentTimeMillis() + timeout;
 	do {
 	    assertLogic(actual, logic, null);
-	    if (!logic.status) {
-		try {
-		    Thread.sleep(3000);
-		} catch (InterruptedException e) {
-		    throw new TimeoutException("Assertion interrupted");
-		}
-	    }
 	} while (timeUp < System.currentTimeMillis() && !logic.status);
 	if (!logic.status) {
 	    throw new TimeoutException("Assertion failed");
@@ -214,12 +207,6 @@ public class Assert extends org.junit.Assert {
 		listener.assertionFailed(actual, logic, new NullPointerException(logic.getMessage()));
 	    }
 	    Assert.assertLogic(actual, logic, listener);
-	    try {
-		Thread.sleep(intervalUnit.toMillis(interval));
-	    } catch (InterruptedException e) {
-		Thread.currentThread().interrupt();
-		listener.assertionFailed(actual, logic);
-	    }
 	} while (end < System.currentTimeMillis());
 	listener.assertionPassed(actual, logic);
     }

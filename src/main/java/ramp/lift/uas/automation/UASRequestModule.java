@@ -176,11 +176,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
         System.out.println(url);
         for (; times > 0; times--) {
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                fail(e.getMessage());
-            }
             request(url, false);
         }
     }
@@ -292,13 +287,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                     response.setEntity(new BufferedHttpEntity(response.getEntity()));
                 } else {
                     response.setEntity(new StringEntity(""));
-                }
-                try {
-                    if (withSleepInMillis > 0) {
-                        Thread.sleep(withSleepInMillis);
-                    }
-                } catch (InterruptedException e) {
-                    withSleepInMillis = 0;
                 }
                 return response;
             } catch (IOException e) {
@@ -579,13 +567,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private void sendGetRequestsSync(Integer times, String url) {
         reset();
         for (; times > 0; times--) {
-
             synchronizedResponses.add(getRequest(url));
-            try {
-                TimeUnit.MILLISECONDS.sleep(100);
-            } catch (InterruptedException e) {
-                fail(e.getMessage());
-            }
         }
     }
 
@@ -599,13 +581,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
             } else {
                 response.setEntity(new StringEntity(""));
-            }
-            try {
-                if (withSleepInMillis > 0) {
-                    Thread.sleep(withSleepInMillis);
-                }
-            } catch (InterruptedException e) {
-                withSleepInMillis = 0;
             }
             return response;
         } catch (IOException e) {
@@ -623,13 +598,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
             } else {
                 response.setEntity(new StringEntity(""));
-            }
-            try {
-                if (withSleepInMillis > 0) {
-                    Thread.sleep(withSleepInMillis);
-                }
-            } catch (InterruptedException e) {
-                withSleepInMillis = 0;
             }
             return response;
         } catch (IOException e) {

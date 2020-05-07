@@ -112,11 +112,6 @@ public class BufferInputStream extends InOutInputStream implements Runnable {
 	    try {
 		int avail = in.available();
 		if (avail == 0) {
-		    try {
-			Thread.sleep(10);
-		    } catch (InterruptedException e) {
-			throw new IOException("Interrupted");
-		    }
 		    continue;
 		}
 		int c = in.read();

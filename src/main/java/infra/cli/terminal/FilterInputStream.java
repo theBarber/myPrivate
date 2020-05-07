@@ -56,15 +56,6 @@ public class FilterInputStream extends InOutInputStream implements Runnable {
 	if (ioExp != null) {
 	    throw ioExp;
 	}
-	// There could be a thoretical problem if the filter string is not
-	// recieved within the 50 ms.
-	if (buf.length() > 0 && inconclusive == true) {
-	    try {
-		Thread.sleep(50);
-	    } catch (InterruptedException e) {
-		throw new IOException("interrupted");
-	    }
-	}
 	return buf.length();
     }
 
