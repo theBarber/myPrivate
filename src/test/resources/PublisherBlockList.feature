@@ -150,7 +150,7 @@ Feature: Publisher blocklist tests
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND1-ST}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND1-ST-banner-1}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
 
   Scenario: 23. For a publisher 3843 for advertiser 28004 (sub domains) - HB request
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -159,7 +159,7 @@ Feature: Publisher blocklist tests
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND1-ST}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND1-ST-banner-1}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
 
   Scenario: 24. For a publisher 3843 for advertiser 3112 - HB request
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -178,7 +178,7 @@ Feature: Publisher blocklist tests
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND2-PGX}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND2-PGX-banner-1}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
 
   Scenario: 27. For a publisher 3843 block advertiser 28004 by categories - HB request
     Given I add header of {x-forwarded-for} with value {207.246.116.162}

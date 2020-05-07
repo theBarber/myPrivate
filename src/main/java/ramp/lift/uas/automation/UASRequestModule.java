@@ -242,7 +242,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
     public void healthCheckRequest() {
 
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/status";
+        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/health";
         request(url, true);
     }
 

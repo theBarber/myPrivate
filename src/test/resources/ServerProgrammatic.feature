@@ -19,7 +19,7 @@ Feature: Programmatic flow support
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
     And all HB responses contains campaignId with id of entity named {campaign-server-prog-SS-1}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
 
   Scenario: 5. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 197 to UAS for publisher 3711 with domain {test.com&requestid=systemTestB&unlimited=1&optimize=1}

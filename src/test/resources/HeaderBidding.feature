@@ -135,7 +135,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-1-a-1}
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-1-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-1-a}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
     And The response contains {script}
     And The response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-1-a-1-banner-1} 100% of the time
@@ -153,7 +153,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-2}
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
-    And all HB responses contains cpm with value {3.0}
+    And all HB responses contains cpm with value {3}
     Then i create new profile doc with udId {1.crmqc31wdld7y233cq5xaxrjv} on users bucket, where platform = {desktop}, profile type = {u_p}, profile num = 1, and reduce 0 days from epoc time stamp
     Then I add cookie UTID with value {d7a8b9caf43446d4bca3f48eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain2 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&optimize=1&sim_geo=1&country=us}
@@ -162,7 +162,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-1}
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
-    And all HB responses contains cpm with value {3.0}
+    And all HB responses contains cpm with value {3}
 
 
 #   header bidding placment group test
@@ -244,7 +244,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-2-a-1}
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-2-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-2-a}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
     And I send impression requests to UAS
     And The response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-2-a-1-banner-1} 100% of the time
@@ -259,7 +259,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-3-a-1}
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-3-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-3-a}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
     And I send impression requests to UAS
     And The response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-3-a-1-banner-1} 100% of the time
@@ -274,7 +274,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-4-a-1}
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-4-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-4-a}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {1}
     And I send impression requests to UAS
     And The response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-4-a-1-banner-1} 100% of the time
@@ -291,7 +291,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-2}
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
-    And all HB responses contains cpm with value {3.0}
+    And all HB responses contains cpm with value {3}
     Then i create new profile doc with udId {1.crmqc31wdld7y233cq5xaxrjv} on users bucket, where platform = {desktop}, profile type = {u_p}, profile num = 1, and reduce 0 days from epoc time stamp
     Then I add cookie UTID with value {d7a8b9caf43446d4bca3f48eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain2 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&optimize=1&sim_geo=1&country=us}
@@ -300,5 +300,5 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-1}
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
-    And all HB responses contains cpm with value {3.0}
+    And all HB responses contains cpm with value {3}
 
