@@ -247,7 +247,7 @@ Feature: Validate New Render Service
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-direct-HB-video}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-direct-HB-video-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-video-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
@@ -328,7 +328,7 @@ Feature: Validate New Render Service
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-video}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-video-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
     And The response contains {var ut_aniview={publisherId:'5912cb1028a06142db67f38a',channelId:'5b7d30c4073ef454a07d4d64'}}
     And The response contains {VASTAdTagURI}
     And The response contains {ut_udms}
