@@ -3,6 +3,7 @@
 @ZoneReqBothGdprParams
 @ZoneReqConsent
 @parallel
+@request_service
 Feature: GDPR - Zone Reqs - Europe Delivery Logic - Both Params Are Specified
 
   Background: health check

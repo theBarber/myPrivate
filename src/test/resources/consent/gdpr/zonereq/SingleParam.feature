@@ -3,6 +3,7 @@
 @ZoneReqSingleGdprParam
 @ZoneReqConsent
 @parallel
+@request_service
 Feature: GDPR - Zone Reqs - Europe Delivery Logic - Single Gdpr Param Is Specified In URL
 
   Background: health check

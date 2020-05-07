@@ -4,6 +4,7 @@
 @hbNoCcpaParam
 @hbCcpaConsent
 @parallel
+@request_service
 Feature: CCPA - Header Bidding Reqs - California Delivery Logic - No Param Is Specified In URL
 
   Background: health check

@@ -4,6 +4,7 @@
 @hbNoGdprParam
 @hbConsent
 @parallel
+@request_service
 Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - No Param Is Specified In URL
 
   Background: health check
