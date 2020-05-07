@@ -5,6 +5,8 @@
 @noAA
 @GeoLimitationTargetingFeature
 @request_service
+Feature: Geo limitation targeting
+
   Background: health check
     When Sending a healthcheck request to UAS
     Then The response code is 200
