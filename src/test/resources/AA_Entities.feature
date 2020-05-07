@@ -73,15 +73,22 @@ Feature: Entities for tests
       | Campaign Name         |
       | campaign-API-1-a-GDPR |
       | campaign-San-Francisco-city |
+
     Given i create new campaigns with new zoneset
-      | Campaign Name         | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name      | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-API-1-a-GDPR | 75396 | 210722   | false                 | 204           | {zone-zoneset-GDPR-1-a} | []         | 83       | 4737           | 2434         | 17116           |
+      | Campaign Name               | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-API-1-a-GDPR       | 75396 | 210722   | false                 | 204           | {zone-zoneset-GDPR-1-a}        | []         | 83       | 4737           | 2434         | 17116           |
+      # goe --> city limitation
+      | campaign-San-Francisco-city | 75396 | 210722   | false                 | 204           | {zone-zoneset-city-limitation} | []         | 83       | 15853          | 2434         | 62229           |
     And i update banner data by name
-      | Banner Name                    | limitation        |
-      | campaign-API-1-a-GDPR-banner-1 | [[[5,"=~","fr"]]] |
+      | Banner Name                          | limitation                               |
+      | campaign-API-1-a-GDPR-banner-1       | [[[5,"=~","fr"]]]                        |
+      #  goe --> city limitation
+      | campaign-San-Francisco-city-banner-1 | [[[8,"=~","us",["ca","san francisco"]]]] |
     And i update zone data by name
-      | Zone Name             | is_secure |
-      | zone-zoneset-GDPR-1-a | 1         |
+      | Zone Name                    | is_secure |
+      | zone-zoneset-GDPR-1-a        | 1         |
+      | zone-zoneset-city-limitation | 1         |
+
 
   @limitationSanity
   Scenario: create entities for zone Tag Sanity test
@@ -563,6 +570,11 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       |
 #     InApp Burl
       | campaign-server-prog-inApp-ST-1 |
+    # programmatic flow - Reserve
+      | campaign-reserve-AN-iter-1      |
+      | campaign-reserve-OX-iter-2      |
+      | campaign-reserve-AN-iter-3      |
+
 #     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1 |
 #      |campaign-server-prog-MultiBids-ST-2 |
@@ -582,6 +594,11 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-ST}       | []         | 83       | 2164           | 3711         | 66555           |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-inApp-ST} | []         | 83       | 2164           | 3711         | 66555           |
+      # programmatic flow - Reserve
+      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-reserve-AN-iter-3      | 407981 | 248362   | true                  | 2583          | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
+
 ##     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1  |407981        |243452     |true                  |1719               |{zone-zoneset-server-prog-MultiBids-SS-1}           |[]           |69        |15176              |3711           |66556             |
 #      |campaign-server-prog-MultiBids-ST-2  |407981        |229737     |true                  |1720               |{zone-zoneset-server-prog-MultiBids-ST-2}           |[]           |83        |15177              |3711           |66555             |
@@ -601,11 +618,17 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 1        | 4                        | 1                  | 1                      |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 1        | 4                        | 1                  | 1                      |
+      # programmatic flow - Reserve
+      | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-AN-iter-3      | 1        | 4                        | 2                  | 1                      |
+
     And i update zone data by name
       | Zone Name                    | is_secure |
       | zone-zoneset-server-prog-SS  | 1         |
       | zone-zoneset-server-prog-PGC | 1         |
       | zone-zoneset-server-prog-ST  | 1         |
+      | zone-zoneset-reserve-prog-PG | 1         |
 #     |zone-zoneset-server-prog-MultiBids-SS-1     |1            |
 #     |zone-zoneset-server-prog-MultiBids-ST-2      |1            |
 #     Given i sent an analize req to peer39 for the following website = {https://www.bbc.com/sport}
@@ -963,6 +986,7 @@ Feature: Entities for tests
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                              |
+      | campaign-CT-ST-1                           |
       | campaign-dv-zoneLevelLimit-ST              |
       | campaign-dv-campaignLevelLimit-ST          |
       | campaign-dv-campaignLevelLimit-exclude-ST  |
@@ -971,6 +995,7 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                              | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude                                                                |
+      | campaign-CT-ST-1                           | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-1}                           | []         | 93       | 15182          | 3708         | 65991           | []                                                                            | []                                                                            |
       | campaign-dv-zoneLevelLimit-ST              | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-ST}              | []         | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-ST          | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-ST}          | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-exclude-ST  | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-exclude-ST}  | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
@@ -979,13 +1004,15 @@ Feature: Entities for tests
 
     And i update banner data by name
       | Banner Name                                         | limitation                                                                                            |
-      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
+      | campaign-CT-ST-1-banner-1                           | [[[64,"=~","1_5252","1_5250"]]]                                                                       |
+      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84252026","2_82033230"]]]                                                               |
       | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
       | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105","2_80512001"]]] |
 
     And i update campaign data by name
       | Campaign Name                             | limitation                              |
-      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84251001","2_84252026"]]] |
+      | campaign-CT-ST-1                          | [[[64,"=~","1_5252","1_5250"]]]         |
+      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84252026","2_82033230"]]] |
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
@@ -1068,7 +1095,7 @@ Feature: Entities for tests
       | campaign-D-DailyFF-ST-5      | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
 
     Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
-    Given I set campaign campaign-D-DailyPacing-ST-2 for 3 days
+    Given I set campaign campaign-D-DailyPacing-ST-2 for 10 days
     Given I set campaign campaign-D-ASAP-ST-3 for 3 days
     Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
     Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
@@ -1078,7 +1105,7 @@ Feature: Entities for tests
 #    pacing = hourly flex
       | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
       | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 25     | 36    | impressions |
+      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 150   | impressions |
       | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
       | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
       | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |
@@ -1136,6 +1163,7 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          |
       | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     |
       | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     |
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile |
@@ -1153,19 +1181,21 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 407981 | 234810   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES}          | []         | 58       | 15360          | 3836         | 69502           | []          | []          |
       | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 407981 | 234810   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES}       | []         | 58       | 15361          | 3836         | 69502           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES}        | []         | 10       | 15363          | 3836         | 69501           | []          | []          |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-20-margin-MR-ES}     | []         | 10       | 15811          | 3836         | 69501           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 407981 | 249772   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES}     | []         | 10       | 15362          | 3836         | 69501           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 407981 | 251116   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES}        | []         | 29       | 15356          | 3836         | 69503           | []          | []          |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 251035   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15359          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
       | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority |
-      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 0                              | -1       |
-      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 0                              | -1       |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 0                              | -2       |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 20                             | -1       |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 30                             | -1       |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 20                             | -2       |
       | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | -2       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 0                              | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | -2       |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | -2       |
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
 
     And i update campaign data by name
@@ -1188,6 +1218,7 @@ Feature: Entities for tests
       | zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES          | 1         |
       | zone-zoneset-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 1         |
+      | zone-zoneset-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 1         |
       | zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 1         |
@@ -1479,7 +1510,8 @@ Feature: Entities for tests
 
 # Entities for New Render Test
 
-  @NewRenderTest
+#   disable re-creating entities   @NewRenderTest
+
   Scenario: Create entities for New Render
     Given i disable campaigns by name on db
       | Campaign Name                                           |

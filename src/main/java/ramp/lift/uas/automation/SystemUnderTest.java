@@ -572,6 +572,16 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
         return usersLogsBucket;
     }
 
+
+    //&&&&&&&&&&&&&& metering bucket &&&&&&
+
+    public CouchbaseBucketModule getMeteringBucket() {
+        if (usersLogsBucket == null) {
+            usersLogsBucket = createCouchbaseBucketModule("us-east-1-metering", config);
+        }
+        return usersLogsBucket;
+    }
+
     @Override
     public void init() throws Exception {
         super.init();

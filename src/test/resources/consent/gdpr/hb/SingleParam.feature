@@ -11,107 +11,193 @@ Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param 
 
   @gdpr
   @GdprTrueParamEu
-  Scenario: gdpr=1 - hb request from Eu
-    Given I add {UK} ip header
-    And I send 1 times Header Bidding request for consent entities with gdpr=1
-    Then The response code is 204
+  Scenario:1.0 gdpr=1 - hb request Country limitation --> Canada
+    Given I clear all cookies from uas requests
+    Given I reset the http headers sent to uas
+    Given I add header of {x-forwarded-for} with value {192.206.151.131}
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3708 with size - h1:1 w1:2, with domain {geo4}, placmentID group = {blabla} and extra params {&gdpr=1} cookies false
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-state-bannerLevelLimit-ST}
+    And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
 
   @gdpr
   @GdprTrueParamNotEu
-  Scenario: gdpr=1 - hb request not from Eu
+  Scenario:2.0 gdpr=1 - hb request - city limitation
+    Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for consent entities with gdpr=1
-    Then The response code is 204
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com}, placmentID group = {blabla} and extra params {&gdpr=1} cookies false
+    Then The response code is 200
+    And The responses are passback
 
   @gdpr
   @GdprFalseParamEu
-  Scenario: gdpr=0 - hb request from Eu
-    Given I add {UK} ip header
-    And I send 1 times Header Bidding request for consent entities with gdpr=0
-    Then The response code is 200
-    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
+  Scenario:3.0 gdpr=0 - hb request Country limitation --> Canada
+    Given I clear all cookies from uas requests
+    Given I reset the http headers sent to uas
+    Given I add header of {x-forwarded-for} with value {192.206.151.131}
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3708 with size - h1:1 w1:2, with domain {geo4}, placmentID group = {blabla} and extra params {&gdpr=0} cookies false
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-state-bannerLevelLimit-ST}
+    And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
+
 
   @gdpr
   @GdprFalseParamNotEu
-  Scenario: gdpr=0 - hb request not from Eu
+  Scenario:4.0 gdpr=0 - hb request not from Eu - city limitation
+    Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for consent entities with gdpr=0
-    Then The response code is 200
-    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com}, placmentID group = {blabla} and extra params {&gdpr=0} cookies false
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-San-Francisco-city}
+    And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}
 
   @gdprstr
   @hbGdprStrUtIdUtPurposesIncludedEu
-  Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request from eu
-    Given I add {UK} ip header
-    And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and includes ut purpose ids
-    Then The response code is 200
-    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
+  Scenario:5.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request - Country limitation --> Canada
+    Given I clear all cookies from uas requests
+    Given I reset the http headers sent to uas
+    Given I add header of {x-forwarded-for} with value {192.206.151.131}
+    And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and includes ut purpose ids for publisher 3708 with size - h1:1 w1:2, with domain {geo4}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-state-bannerLevelLimit-ST}
+    And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
+
 
   @gdprstr
   @hbGdprStrUtIdUtPurposesIncludedNotEu
-  Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request not from eu
+  Scenario:6.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request - city limitation  (no gdpr param --> banner expected)
+    Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and includes ut purpose ids
-    Then The response code is 200
-    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
+    And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and includes ut purpose ids for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-San-Francisco-city}
+    And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}
+
 
   @gdprstr
   @hbGdprStrUtIdIncludedUtPurposeIdsExcludedEu
-  Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request from eu
-    Given I add {UK} ip header
-    And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and excludes ut purpose ids
-    Then The response code is 204
+  Scenario:7.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request - Country limitation --> Canada
+    Given I clear all cookies from uas requests
+    Given I reset the http headers sent to uas
+    Given I add header of {x-forwarded-for} with value {192.206.151.131}
+    And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and excludes ut purpose ids for publisher 3708 with size - h1:1 w1:2, with domain {geo4}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-state-bannerLevelLimit-ST}
+    And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
+
 
   @gdprstr
   @hbGdprStrUtIdIncludedUtPurposeIdsExcludedNotEu
-  Scenario: gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request not from eu
+  Scenario:8.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request - city limitation (no gdpr param --> banner expected)
+    Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and excludes ut purpose ids
-    Then The response code is 200
-    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
+    And I send 1 times Header Bidding request for consent entities with gdprstr which includes ut vendor id and excludes ut purpose ids for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-San-Francisco-city}
+    And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}
+
 
   @gdprstr
   @hbGdprStrUtIdExcludedUtPurposeIdsIncludedEu
-  Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request from eu
-    Given I add {UK} ip header
-    And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and includes ut purpose ids
-    Then The response code is 204
+  Scenario:9.0 gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request - Country limitation --> Canada
+    Given I clear all cookies from uas requests
+    Given I reset the http headers sent to uas
+    Given I add header of {x-forwarded-for} with value {192.206.151.131}
+    And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and includes ut purpose ids for publisher 3708 with size - h1:1 w1:2, with domain {geo4}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-state-bannerLevelLimit-ST}
+    And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
+
 
 
   @gdprstr
   @hbGdprStrUtIdExcludedUtPurposeIdsIncludedNotEu
-  Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request not from eu
+  Scenario:10.0 gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_INCLUDED - hb request - city limitation (no gdpr param --> banner expected)
+    Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and includes ut purpose ids
-    Then The response code is 200
-    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
+    And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and includes ut purpose ids for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-San-Francisco-city}
+    And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}
+
+
 
   @gdprstr
   @hbGdprStrUtIdExcludedUtPurposeIdsExcludedEu
-  Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request from eu
-    Given I add {UK} ip header
-    And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and excludes ut purpose ids
-    Then The response code is 204
+  Scenario:11.0 gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request - Country limitation --> Canada
+    Given I clear all cookies from uas requests
+    Given I reset the http headers sent to uas
+    Given I add header of {x-forwarded-for} with value {192.206.151.131}
+    And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and excludes ut purpose ids for publisher 3708 with size - h1:1 w1:2, with domain {geo4}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-state-bannerLevelLimit-ST}
+    And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
+
+
 
   @gdprstr
   @hbGdprStrUtIdExcludedUtPurposeIdsExcludedNotEu
-  Scenario: gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request not from eu
+  Scenario:12.0 gdprstr=UT_ID_EXCLUDED_UT_PURPOSE_IDS_EXCLUDED - hb request - city limitation (no gdpr param --> banner expected)
+    Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and excludes ut purpose ids
-    Then The response code is 200
-    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
+    And I send 1 times Header Bidding request for consent entities with gdprstr which excludes ut vendor id and excludes ut purpose ids for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-San-Francisco-city}
+    And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}
+
+
 
   @gdprstr
   @hbGdprStrEmptyStringEu
-  Scenario: gdprstr=empty_string - hb request from eu
-    Given I add {UK} ip header
-    And I send 1 times Header Bidding request for consent entities with an empty gdprstr
-    Then The response code is 204
+  Scenario:13.0 gdprstr=empty_string - hb request - Country limitation --> Canada
+    Given I clear all cookies from uas requests
+    Given I reset the http headers sent to uas
+    Given I add header of {x-forwarded-for} with value {192.206.151.131}
+    And I send 1 times Header Bidding request for consent entities with an empty gdprstr for publisher 3708 with size - h1:1 w1:2, with domain {geo4}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-state-bannerLevelLimit-ST}
+    And all HB responses contains adId with id of entity named {campaign-state-bannerLevelLimit-ST-banner-1}
+
 
   @gdprstr
   @hbGdprStrEmptyStringNotEu
-  Scenario: gdprstr=empty_string - hb request not from eu
+  Scenario:14.0 gdprstr=empty_string - hb request - city limitation
+    Given I clear all cookies from uas requests
     Given I reset the http headers sent to uas
-    And I send 1 times Header Bidding request for consent entities with an empty gdprstr
-    Then The response code is 200
-    And The response contains {"publisherId": 3836,"bidRequestId": "21b46f0d859b35"}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
+    And I send 1 times Header Bidding request for consent entities with an empty gdprstr for publisher 2434 with size - h1:1 w1:2, with domain {consentweb.com}
+    And The response code is 200
+    And The response contains {script}
+    And The response contains {campaignId}
+    And all HB responses contains campaignId with id of entity named {campaign-San-Francisco-city}
+    And all HB responses contains adId with id of entity named {campaign-San-Francisco-city-banner-1}

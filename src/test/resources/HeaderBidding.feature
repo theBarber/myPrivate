@@ -16,6 +16,49 @@ Feature: Header Bidding Flow Support
     When Sending a healthcheck request to UAS
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
     Then The response code is 200
+    
+    # &&&&&&&&&&&&&&&&&&&&&&&&  Eitan need to fix 1
+  Scenario: send HB basic request
+    Given I Delete hbl logs
+    Given i send 20 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
+    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
+    And all HB responses contains cpm with id 1
+    And I send impression requests to UAS
+    And The response code is 200
+    And The response contains {script}
+#    And I send impression requests to UAS
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
+#    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-HB-Tablet-160x600} 100% of the time
+#    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600} 100% of the time
+#    And I read the latest hbl log file from uas
+#    And The field bannerid in the 12 column of the hbl log is the same as in impression-url
+#    And The field campaignid in the 13 column of the hbl log is the same as in impression-url
+#    And The field zoneid in the 14 column of the hbl log is the same as in impression-url
+#    And The field bid_request_id in the 30 column of the hbl log is: 21b46gfd59b33
+#    And The field Bid_price in the 15 column of the hbl log is: 1.00
+#    And The field Publisher_id in the 3 column of the hbl log is: 3673
+#    And The field Domain in the 5 column of the hbl log is: headerbiddingproptest.com
+
+  Scenario: send HB basic request with domain as array
+    Given i send 1 headerBidding post request for scenario {Send HB basic request with domain as array for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains campaignId with id of entity named {campaign-HB-Tablet-160x600}
+    And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
+    And all HB responses contains cpm with id 1
+    And I send impression requests to UAS
+    And The response code is 200
+    And The response contains {script}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Tablet-160x600-banner-1} 100% of the time
+
+  Scenario: send HB request without publisherID configured
+    Given i send 1 headerBidding post request for scenario {send HB request without publisherID configured for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
+    And The response code is 200
+    And The response contains {script}
 
   Scenario: Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
@@ -300,5 +343,6 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-1}
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-2}
+
     And all HB responses contains cpm with value {3}
 
