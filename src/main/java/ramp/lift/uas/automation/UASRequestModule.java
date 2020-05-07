@@ -242,7 +242,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
 
     public void healthCheckRequest() {
 
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/health";
+        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/status";
         request(url, true);
     }
 
@@ -266,7 +266,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 skipFlag = 0b0111;
                 break;
         }
-        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/health?stid=999&skip=" + skipFlag;
+        String url = "http://" + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + "/status?stid=999&skip=" + skipFlag;
         request(url, true);
     }
 
@@ -579,13 +579,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private void sendGetRequestsSync(Integer times, String url) {
         reset();
         for (; times > 0; times--) {
-
             synchronizedResponses.add(getRequest(url));
-            try {
-                TimeUnit.MILLISECONDS.sleep(100);
-            } catch (InterruptedException e) {
-                fail(e.getMessage());
-            }
         }
     }
 
