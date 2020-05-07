@@ -39,8 +39,6 @@ Feature: contextual targeting tests
 
   Scenario:4.0 contextual targeting by dv - campaign level limitation - PART ONE - Delivery Expected
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    And I sleep for 20 seconds
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-campaignLevelLimit-ST-banner-1} 100% of the time
@@ -61,8 +59,6 @@ Feature: contextual targeting tests
     And The responses are passback
 
   Scenario:5.0 contextual targeting - peer 39 banner level limitation backward compatibility - PART ONE - Delivery Expected
-    When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And I sleep for 20 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
