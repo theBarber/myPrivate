@@ -1,6 +1,7 @@
 @parallel
 @throttling
 @HeaderBiddingThrottling
+@request_service
 Feature: Header Bidding Throttling
 
   Background: health check
