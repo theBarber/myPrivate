@@ -12,6 +12,14 @@ Feature: Programmatic flow support
     And I add {NY} ip header
     Then The response code is 200
 
+  Scenario: 1. basic Call to Programmatic GW - zone tag
+    When I send 1 times an ad request with parameter {requestid=systemTestA&optimize=1&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
+    Then The response code is 200
+    And The response contains {script}
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
+    When I send impression requests to UAS
+
   Scenario: 3. basic Call to Programmatic GW - Header bidding
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=1&requestid=systemTestA}

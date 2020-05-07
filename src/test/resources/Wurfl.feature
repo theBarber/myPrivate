@@ -3,6 +3,7 @@
 @noAA
 @WurflLimitationFeature
 @request_service
+
 Feature: wurfl tests - wurfl limitation in campaign and zone level
 
   Background: health check

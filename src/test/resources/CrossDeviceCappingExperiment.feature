@@ -144,7 +144,6 @@ Feature: Cross Device Capping Experiment
     Then The response code is 200
     And The responses are passback
 
-
   Scenario: 6. verify campaign lifetime capping enforced when sending zone requests from same user (different cookies)
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
