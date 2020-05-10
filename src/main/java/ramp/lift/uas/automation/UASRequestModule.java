@@ -33,11 +33,13 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
     public enum requestTypesEnum {
         ZONE, DYNAMIC_TAG, HEADER_BIDDING, WEL, PRF, EVE
     }
+
     protected static SystemUnderTest sut = SystemUnderTest.getInstance();
     private ExecutorService requestSubmitter;
     private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_,%/=()]";
@@ -45,11 +47,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             .compile("(https?:\\\\?/\\\\?/[^:/?#]*(?::[0-9]+)?\\/l\\?[^\'\\\"]*)[\'\\\"]");
 
     protected static final Pattern renderURLPattern = Pattern
-//            .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/e\\?[^\'\\\"]*)[\'\\\"]");
-    .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/e\\?[^\'\\\"]*&e=render)[\'\\\"]");
+            .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/e\\?[^\'\\\"]*&e=render)[\'\\\"]");
 
     protected static final Pattern UDMSVariablePattern = Pattern
-        .compile("(rid:'[a-z0-9]*',zid:'[0-9]*',cid:'[0-9]*',bid:'[0-9]*'})");
+            .compile("(rid:'[a-z0-9]*',zid:'[0-9]*',cid:'[0-9]*',bid:'[0-9]*'})");
 
     protected static final Pattern eventFirstQuartileURLPattern = Pattern
             .compile(".*?firstQuartile.*?(firstQuartile)");
@@ -79,7 +80,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             .compile(".*?unmute.*?(unmute)");
 
     protected static final Pattern clickURLPattern = Pattern
-            .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/c\\?[^\'\\\"]*)[\'\\\"]");
+            .compile("(https?:/[^:/?#]*(?::[0-9]+)?/c\\?[^\'\\\"]*)[\'\\\"]");
+
 
     protected static final Pattern dspURLPattern = Pattern
             .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/ttj\\?[^\'\\\"]*)[\'\\\"]");
@@ -319,7 +321,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     public synchronized final void reset() {
-        if (synchronizedResponses.size() !=0)
+        if (synchronizedResponses.size() != 0)
             synchronizedResponses.clear();
         this.actual().stream()
                 .filter(((Predicate<Future<HttpResponse>>) Future::isDone).negate())
@@ -334,8 +336,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
 
-    public List<Header> getHttpHeaders()
-    {
+    public List<Header> getHttpHeaders() {
         return httpHeaders;
     }
 
@@ -463,19 +464,19 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private void sendMultipleGetRequestsToUAS(Integer times, String url, boolean isAsync) {
         System.out.println(url);
         if (isAsync)
-            sendGetRequestsAsync(times, url,true);
+            sendGetRequestsAsync(times, url, true);
         else
             sendGetRequestsSync(times, url);
     }
 
     @Attachment(value = "Post request: ", type = "text/plain")
-    private String sendMultiplePostRequestsToUAS(Integer times, String url, String body, boolean isAsync,boolean sendCookies) {
+    private String sendMultiplePostRequestsToUAS(Integer times, String url, String body, boolean isAsync, boolean sendCookies) {
         String post = "req sent = " + url + " body = " + body;
         System.out.println(post);
         if (isAsync)
             sendPostRequestsAsync(times, url, body);
         else {
-            sendPostRequestSync(times, url, body,sendCookies);
+            sendPostRequestSync(times, url, body, sendCookies);
         }
         return post;
     }
@@ -485,13 +486,13 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         sendMultipleGetRequestsToUAS(times, url, isAsync);
     }
 
-    public void sendMultipleTypePostRequestWithParameter(String requestTypes,String body, Integer times, String parameters, boolean isAsync, boolean isSecure, boolean sendCookies) {
+    public void sendMultipleTypePostRequestWithParameter(String requestTypes, String body, Integer times, String parameters, boolean isAsync, boolean isSecure, boolean sendCookies) {
         String url = getURL(requestTypes, parameters, false);
-        sendMultiplePostRequestsToUAS(times, url, body, isAsync,sendCookies);
+        sendMultiplePostRequestsToUAS(times, url, body, isAsync, sendCookies);
     }
 
     public void sendMultipleDynamicTagGetRequests(Integer times, String tagID, String publisherId, String domainParam, String extraParams, boolean isAsync, boolean isSecure) {
-        String params = "pid=" + publisherId +  Optional.ofNullable(domainParam).map(s -> "&domain=" + s).orElse("")+ Optional.ofNullable(tagID).filter(s -> !s.isEmpty()).map(s -> "&tagid=" + s).orElse("") + Optional.ofNullable(extraParams).orElse("");
+        String params = "pid=" + publisherId + Optional.ofNullable(domainParam).map(s -> "&domain=" + s).orElse("") + Optional.ofNullable(tagID).filter(s -> !s.isEmpty()).map(s -> "&tagid=" + s).orElse("") + Optional.ofNullable(extraParams).orElse("");
         String url = getURL("dynamicTag", params, isSecure);
         sendMultipleGetRequestsToUAS(times, url, isAsync);
     }
@@ -502,10 +503,10 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         sendMultiplePostRequestsToUAS(times, url, body, isAsync, sendCookies);
     }
 
-    public void sendHBSecurePostRequestBidIDcountEmptyDomain(Integer times, String body ,Integer publisherID, String extraParams, boolean isAsync, boolean isSecure) {
-        String params = "pid=" + publisherID +  Optional.ofNullable(extraParams).orElse("");
+    public void sendHBSecurePostRequestBidIDcountEmptyDomain(Integer times, String body, Integer publisherID, String extraParams, boolean isAsync, boolean isSecure) {
+        String params = "pid=" + publisherID + Optional.ofNullable(extraParams).orElse("");
         String url = getURL("headerBidding", params, isSecure);
-        sendMultiplePostRequestsToUAS(times, url, body, isAsync,false);
+        sendMultiplePostRequestsToUAS(times, url, body, isAsync, false);
     }
 
     private String getURL(String RequestType, String params, boolean isSecure) {
@@ -534,7 +535,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
                 request_type_in_string_format = "/p";
                 break;
         }
-        assertNotNull("request type "+RequestType+" wasn't found",request_type_in_string_format);
+        assertNotNull("request type " + RequestType + " wasn't found", request_type_in_string_format);
         return http + domain + Optional.ofNullable(port).filter(s -> !s.isEmpty()).map(s -> ":" + s).orElse("") + request_type_in_string_format + Optional.ofNullable(params).filter(s -> !s.isEmpty()).map(s -> "?" + s).orElse("");
     }
 
@@ -548,10 +549,9 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
 
-
     public void sendGetRequestsAsync(Integer times, String url, Boolean toReset) {
         //System.out.println(url);
-        if(toReset)
+        if (toReset)
             reset();
         for (; times > 0; times--) {
             actual().add(CompletableFuture.supplyAsync(() -> {
