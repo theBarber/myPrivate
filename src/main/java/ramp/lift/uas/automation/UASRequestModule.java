@@ -80,7 +80,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             .compile(".*?unmute.*?(unmute)");
 
     protected static final Pattern clickURLPattern = Pattern
-            .compile("https?://?([a-zA-Z0-9])+/c\\?.*");
+            .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/c\\?[^\'\\\"]*)[\'\\\"]");
 
     protected static final Pattern dspURLPattern = Pattern
             .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/ttj\\?[^\'\\\"]*)[\'\\\"]");
