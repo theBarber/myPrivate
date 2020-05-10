@@ -3,6 +3,7 @@
 @NoGdprParam
 @DynTagNoGdprParam
 @parallel
+@request_service
 Feature: GDPR - DynTag - Europe Delivery Logic - No Param Is Specified In URL
 
   Background: health check

@@ -5,7 +5,7 @@
 @scheduled
 @parallel
 @noAA
-
+@request_service
 Feature: UAS connectivity to other components
 	Background: health check
 		When Sending a healthcheck request to UAS

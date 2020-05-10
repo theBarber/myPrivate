@@ -4,6 +4,7 @@
 @ZoneReqNoCcpaParam
 @ZoneReqCcpaConsent
 @parallel
+@request_service
 Feature: CCPA - Zone Reqs - California Delivery Logic - No Param Is Specified In URL
 
   Background: health check

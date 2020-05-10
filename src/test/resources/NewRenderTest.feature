@@ -74,7 +74,7 @@ Feature: Validate New Render Service
     When I send 1 times an ad request with parameter {requestid=PGZoneRender&newrender=1&unlimited=1} for zone named {zone-zoneset-NewRenderTest-Prog-Zone} to UAS
     Then The response code is 200
     And The response contains {&e=render}
-#    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
+    And The renderUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The clickUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-zone-banner-banner-1} 100% of the time
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
@@ -91,7 +91,7 @@ Feature: Validate New Render Service
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1}
-    And all HB responses contains cpm with value {99999}
+    And all HB responses contains cpm with value {99999.0}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
     And The response contains {events-s-us-east-1.undertone.com\/c?}
@@ -247,7 +247,7 @@ Feature: Validate New Render Service
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-direct-HB-video}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-direct-HB-video-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-video-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
@@ -328,7 +328,7 @@ Feature: Validate New Render Service
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-video}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-video-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
     And The response contains {var ut_aniview={publisherId:'5912cb1028a06142db67f38a',channelId:'5b7d30c4073ef454a07d4d64'}}
     And The response contains {VASTAdTagURI}
     And The response contains {ut_udms}

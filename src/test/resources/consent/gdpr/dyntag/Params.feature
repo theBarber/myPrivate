@@ -2,6 +2,7 @@
 @UtConsent
 @DynTagBothGdprParams
 @parallel
+@request_service
 Feature: GDPR - DynTag - Europe Delivery Logic - Both Params Are Specified
 
   Background: health check
