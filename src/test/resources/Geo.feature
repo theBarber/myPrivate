@@ -4,6 +4,7 @@
 @parallel
 @noAA
 @GeoLimitationTargetingFeature
+@request_service
 Feature: Geo limitation targeting
 
   Background: health check

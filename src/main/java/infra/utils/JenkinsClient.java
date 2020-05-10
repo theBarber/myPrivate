@@ -32,7 +32,6 @@ public class JenkinsClient {
         QueueItem queueItem = js.getQueueItem(queueRef);
         while (!queueItem.isCancelled() && job.isInQueue()) {
             System.out.println("In Queue " + job.isInQueue());
-            Thread.sleep(200);
             job = js.getJob(jobName);
             queueItem = js.getQueueItem(queueRef);
         }
@@ -47,7 +46,6 @@ public class JenkinsClient {
         boolean isBuilding = lastBuild.details().isBuilding();
         while (isBuilding) {
             System.out.println("Is building...(" + lastBuild.getNumber() + ")");
-            Thread.sleep(2000);
             isBuilding = lastBuild.details().isBuilding();
         }
 

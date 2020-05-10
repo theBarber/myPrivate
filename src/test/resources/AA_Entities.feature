@@ -6,7 +6,7 @@
 Feature: Entities for tests
 
   Scenario: entities end-date update
-    And i update po_line_item end date by id {4584,67001,67002,69725,69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,69992,67163,67162,67166,69089,69134,66832,69158,69213,70473,70474}
+    And i update po_line_item end date by id {4584,66997,67000,67001,67002,69725,69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,69992,67163,67162,67166,69089,69134,66832,69158,69213,70473,70474}
     And i update io_line_item end date by id {243710,251644,253288,253747,210722,241783,223539,240827,198082,197418,224812,222908,234810,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
     And i update io_line_item with id {210722} filed {unit_price} to be {1}
     And i update io_line_item with id {210722} filed {budget} to be {1}
@@ -29,56 +29,6 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {2546}
     Given i remove all zones from publishers: {3585}
     Given i remove all zones from publishers: {3586}
-
-#  @zoneTagSanity
-#  Scenario: create entities for zone Tag Sanity test
-#    Given i create new priority campaigns with new zoneset
-#      |Campaign Name                           |IO            |LineItem   |isServerProgrammatic?  |Creative\Deal   |Zonesets-zone Name                      |limitation        |adUnitId  |Web_Section id   |publisher ID   |po_line_item ID   |campaign priority|
-#      |campaign-API-performance-1-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-2-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-3-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-3-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-4-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-5-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-6-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-7-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-8-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-9-sanity     |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-10-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-11-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-12-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-13-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-14-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-15-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-16-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-17-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-18-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-19-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-20-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-21-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-22-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-23-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-24-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-25-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-26-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-27-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-28-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-29-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-30-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[]                |83        |4737             |2434           |17116             |-2               |
-#      |campaign-API-performance-31-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-32-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-33-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-34-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-35-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-36-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-37-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-38-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-39-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#      |campaign-API-performance-40-sanity    |75396         |210722     |false                  |204             |{zone-zoneset-sanity-performance-1-a}   |[[[1,"!~",2601]]] |83        |4737             |2434           |17116             |-1               |
-#    And i update banner data by name
-#      |Campaign Name                                    |limitation                                                     |
-#      |campaign-API-performance-39-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","firefox"]]]                          |
-#      |campaign-API-performance-40-sanity-banner-1    |[[[5,"=~","il"],[12,"=~","chrome"]]]                           |
 
   @HB
   @HBEntitiesCreation
@@ -110,9 +60,6 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name           |
       | campaign-API-1-a-sanity |
-#    Given i update zone data by name
-#    |Zone Name                  | status  |
-#    |zone-zoneset-sanity-1-a    |    1    |
     Given i create new campaigns with new zoneset
       | Campaign Name           | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-API-1-a-sanity | 75396 | 210722   | false                 | 204           | {zone-zoneset-sanity-1-a} | []         | 83       | 4737           | 2434         | 17116           |
@@ -123,13 +70,10 @@ Feature: Entities for tests
   @GDPR
   Scenario: create entities for zone Tag Sanity test
     Given i disable campaigns by name on db
-      | Campaign Name               |
-      | campaign-API-1-a-GDPR       |
-    #  goe --> city limitation
+      | Campaign Name         |
+      | campaign-API-1-a-GDPR |
       | campaign-San-Francisco-city |
-#    Given i update zone data by name
-#      |Zone Name                  | status  |
-#      |campaign-API-1-a-GDPR      |    1    |
+
     Given i create new campaigns with new zoneset
       | Campaign Name               | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-API-1-a-GDPR       | 75396 | 210722   | false                 | 204           | {zone-zoneset-GDPR-1-a}        | []         | 83       | 4737           | 2434         | 17116           |
@@ -153,9 +97,6 @@ Feature: Entities for tests
       | campaign-API-limitations-test-F |
       | campaign-API-limitations-test-C |
       | campaign-API-limitations-test-W |
-#    And i update zone data by name
-#      |Zone Name                            |  status  |
-#      |zone-zoneset-limitations-test        |    1     |
     Given i create new campaigns with new zoneset
       | Campaign Name                   | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-API-limitations-test-F | 75396 | 210722   | false                 | 204           | {zone-zoneset-limitations-test} | []         | 83       | 4737           | 2434         | 17116           |
@@ -257,7 +198,7 @@ Feature: Entities for tests
       | campaign-DeviceCappingMultipleCampaigns-ST-5    | 2       | 0               | 0     | -2       |
       | campaign-DeviceCappingMultipleCampaigns-ST-6    | 1       | 0               | 0     | -1       |
       | campaign-DeviceCappingMultipleCampaigns-ST-7    | 0       | 0               | 0     | 1        |
-      | campaign-DeviceLiCapping-ST-8                   | 4       | 0               | 0     | -2       |
+      | campaign-DeviceLiCapping-ST-8                   | 3       | 0               | 0     | -2       |
       | campaign-DeviceSessionCapping-Inapp-ST-9        | 0       | 2               | 60    | -2       |
       | campaign-CrossDeviceSessionCapping-Inapp-ST-10  | 0       | 2               | 60    | -2       |
       | campaign-DeviceLifetimeCapping-Inapp-ST-11      | 2       | 0               | 0     | -2       |
@@ -973,6 +914,7 @@ Feature: Entities for tests
 #      |campaign-HB-FC-PL-PG-2      |75396         |241783     |false                  |13265              |{zone-zoneset-HB-FC-PL-PG-2}     |[]           |75        |15222             |3708           |69089             |
 
 
+  @HBEntitiesCreation
   Scenario: create entities for Header Bidding - Delivery by placement ID
 #    Given I send 2 times an ad request with parameter {dfa} for zone named {fas} to UAS
     Given i disable campaigns by name on db
@@ -1039,6 +981,8 @@ Feature: Entities for tests
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                                                                                                                                                                                            |
 
 
+#******  @contextualEntities
+#******  @contextual
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                              |
@@ -1072,10 +1016,10 @@ Feature: Entities for tests
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name
-      | Zone Name                                      | limitation                                                     |
-      | zone-zoneset-dv-zoneLevelLimit-ST              | [[[64,"=~","2_84251001","2_84252026"]]]                        |
-      | zone-zoneset-dv-zoneLevelLimit-peer-ST         | [[[64,"=~","2_84251001","2_84252026","1_5261"]]]               |
-      | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | [[[64,"!=","2_80012331"],[64,"=~","2_82045105","2_83051210"]]] |
+      | Zone Name                                      | limitation |
+      | zone-zoneset-dv-zoneLevelLimit-ST              | []         |
+      | zone-zoneset-dv-zoneLevelLimit-peer-ST         | []         |
+      | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | []         |
 
 
   Scenario:  create entites for effctive host choosing
@@ -1753,8 +1697,8 @@ Feature: Entities for tests
   @refresh
   @append
   @NDQFilteringTest
+  @refreshCaches
   Scenario: refresh caches
-#    And I refresh banner cache
     And I refresh zone cache
     And I restart {ramp-lift-services}
     And I restart {ut-programmatic-gw}
@@ -1768,5 +1712,6 @@ Feature: Entities for tests
   @optimize
   @append
   @refresh
+  @saveEntitiesToFile
   Scenario: save entities to file
     And save all entities to json file

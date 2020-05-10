@@ -2,6 +2,7 @@
 @UtConsent
 @DynTagCCPA1
 @parallel
+@request_service
 Feature: CCPA - DynTag
 
   Background: health check

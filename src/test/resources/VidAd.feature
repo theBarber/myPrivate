@@ -1,10 +1,12 @@
 @parallel
 @noAA
-
-Feature: video Adhision new ad unit tests
+@videoAdhesionScenarios
+@request_service
+Feature: video Adhsion new ad unit tests
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add {NY} ip header
     Then The response code is 200
 
   Scenario: vidAd server prog test, zone req
@@ -13,14 +15,12 @@ Feature: video Adhision new ad unit tests
     And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-vidAd-SP-banner-1} 100% of the time
-    When I send impression requests to UAS
 
   Scenario: vidAd server prog test, DT req
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 430 to UAS for publisher 3708 with domain {vidAd-SP&requestid=vidAd&unlimited=1&optimize=1}
     And The synchronized response code is 200
     And The response contains {bannerid}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-vidAd-SP-banner-1} 100% of the time
-    When I send impression requests to UAS
 
   Scenario: vidAd base test, zone req
     When I send 1 times an ad video request with parameter {optimize=1&unlimited=1&domain=dnu-tt&requestid=vidAd} for zone named {zone-zoneset-TN} to UAS
@@ -33,8 +33,6 @@ Feature: video Adhision new ad unit tests
     And The synchronized response code is 200
     And The response contains {bannerid}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-TN-banner-1} 100% of the time
-    When I send impression requests to UAS
-
 
   Scenario: 1. InstreamVid, zone req, vpaid_support=0, inapp. banner without moat wrapper expected
     When I send 1 times an ad video request with parameter {optimize=1&unlimited=1&domain=dnu-tt&vpaid_support=0&deviceid=123&requestid=vidAd} for zone named {zone-zoneset-InstreamVid-View-SP} to UAS

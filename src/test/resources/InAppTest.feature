@@ -4,12 +4,13 @@
 @uas
 @parallel
 @noAA
-
-
+@inappFeature
+@request_service
 Feature: InApp testing
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add header of {x-forwarded-for} with value {78.31.205.183}
     Then The response code is 200
 
   Scenario: Image and iframe - Zone request (viewableChange)

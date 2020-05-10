@@ -3,6 +3,7 @@
 @hbBothGdprParams
 @hbConsent
 @parallel
+@request_service
 Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Both Params Are Specified
 
   Background: health check

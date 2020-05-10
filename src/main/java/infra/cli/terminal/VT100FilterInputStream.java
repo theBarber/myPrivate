@@ -436,16 +436,6 @@ public class VT100FilterInputStream extends InOutInputStream {
 
 	} else {
 
-	    try {
-
-		Thread.sleep(10);
-
-	    } catch (InterruptedException e) {
-
-		throw new IOException("interrupted");
-
-	    }
-
 	    if (in.available() > 0) {
 
 		return in.read();

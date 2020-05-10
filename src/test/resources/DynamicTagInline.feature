@@ -4,11 +4,13 @@
 @scheduled
 @dynamic1
 @noAA
-
+@DynamicTagInlineFlowSupport
 Feature: Dynamic Tag inline flow support
 
   Background: health check
     When Sending a healthcheck request to UAS
+    Given I add header of {X-Forwarded-For} with value {78.31.205.183}
+    Given I add cookie UTID with random value to my requests to uas
     Then The response code is 200
 
 #  Scenario: 1. Dynamic Tag inline Basic - including migrated tags
@@ -78,3 +80,4 @@ Feature: Dynamic Tag inline flow support
 #    Then The synchronized responses are passback
 #    Then i send 1 times Dynamic Tag synchronized ad request with tag id 152 to UAS for publisher 3690 with domain {DynamicTagInline.com&unlimited=1&optimize=1}
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DT-Inline-ST-1-banner-1} 100% of the time
+

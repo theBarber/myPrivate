@@ -4,11 +4,12 @@
 @parallel
 @noAA
 @blackAndWhite1
-
+@request_service
 Feature: Black and White testing
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add header of {X-Forwarded-For} with value {78.31.205.183}
     Then The response code is 200
 
   @id:1
@@ -18,7 +19,6 @@ Feature: Black and White testing
     And The responses are passback
 
   Scenario: 1.b Advertiser has a black and a white list. send zone requests from an app in the white list
-    Given I sleep for 120 seconds
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app1} for zone named {zone-zoneset-InappBlackWhiteList-SI-1} to UAS
     And The response code is 200
     And The response contains {script}
@@ -80,13 +80,17 @@ Feature: Black and White testing
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-InappBlackWhiteList-SI-5-banner-1} 100% of the time
 
   @id:10
-  Scenario: 6.a Advertiser has a black list only. more than one item on list. send zone requests from an app in the black list
+  Scenario: 6.a Advertiser has a black list only. more than one item on list. send zone requests from an app in the black list - PART ONE
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app1} for zone named {zone-zoneset-InappBlackWhiteList-SI-6} to UAS
     And The response code is 200
     And The responses are passback
+
+  Scenario: 6.a Advertiser has a black list only. more than one item on list. send zone requests from an app in the black list - PART TWO
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app2} for zone named {zone-zoneset-InappBlackWhiteList-SI-6} to UAS
     And The response code is 200
     And The responses are passback
+
+  Scenario: 6.a Advertiser has a black list only. more than one item on list. send zone requests from an app in the black list - PART THREE
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app3} for zone named {zone-zoneset-InappBlackWhiteList-SI-6} to UAS
     And The response code is 200
     And The responses are passback
@@ -101,17 +105,21 @@ Feature: Black and White testing
 
 
   @id:12
-  Scenario: 7.a Advertiser has a white list only. more than one item on list. send zone requests from an app in the white list
+  Scenario: 7.a Advertiser has a white list only. more than one item on list. send zone requests from an app in the white list - PART ONE
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app1} for zone named {zone-zoneset-InappBlackWhiteList-SI-7} to UAS
     And The response code is 200
     And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-InappBlackWhiteList-SI-7-banner-1} 100% of the time
+
+  Scenario: 7.a Advertiser has a white list only. more than one item on list. send zone requests from an app in the white list - PART TWO
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app2} for zone named {zone-zoneset-InappBlackWhiteList-SI-7} to UAS
     And The response code is 200
     And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-InappBlackWhiteList-SI-7-banner-1} 100% of the time
+
+  Scenario: 7.a Advertiser has a white list only. more than one item on list. send zone requests from an app in the white list - PART THREE
     When I send 1 times an ad request with parameter {unlimited=1&bundleid=app3} for zone named {zone-zoneset-InappBlackWhiteList-SI-7} to UAS
     And The response code is 200
     And The response contains {script}

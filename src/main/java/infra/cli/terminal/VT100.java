@@ -54,10 +54,6 @@ public class VT100 {
      *             when writing or flushing data to the socket fails
      */
     public void sendCommand(String cmd) throws Exception {
-	long timeToWait = basicDelay - (System.currentTimeMillis() - lastCommand);
-	if (timeToWait > 0) {
-	    Thread.sleep(timeToWait);
-	}
 	socket.getOutputStream().write(cmd.getBytes());
 	socket.getOutputStream().flush();
 	lastCommand = System.currentTimeMillis();

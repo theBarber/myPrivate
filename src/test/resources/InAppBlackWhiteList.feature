@@ -3,11 +3,12 @@
 @uas
 @parallel
 @noAA
-
+@request_service
 Feature: Black and White testing
 
   Background: health check
     When Sending a healthcheck request to UAS
+    And I add header of {x-forwarded-for} with value {78.31.205.183}
     Then The response code is 200
 
   Scenario: 1.a Campaign has a black and a white list. send zone requests from an app in the white list

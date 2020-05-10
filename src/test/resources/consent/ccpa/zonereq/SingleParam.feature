@@ -3,6 +3,7 @@
 @ZoneReqSingleCcpaParam
 @ZoneReqCcpaConsent
 @parallel
+@request_service
 Feature: CCPA - Zone Reqs - Canada Delivery Logic - Us Privacy String Param Is Specified In URL
 
   Background: health check
