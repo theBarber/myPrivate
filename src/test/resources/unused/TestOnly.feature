@@ -3,7 +3,8 @@
 Feature: for testing only
 
   Background: health check
-    When Sending a healthcheck request to UAS
+    #When Sending a healthcheck request to UAS
+    When I send 1 times video ad request with parameter {domain=duration15_skip_yes.com} for zone id 189155 to UAS
     Then The response code is 200
 
 
@@ -22,14 +23,13 @@ Feature: for testing only
   Scenario: 2.0 gdpr=0  ---> geo limitation =  san francisco city entity
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
     When I send 1 times display ad request with parameter {optimize=1&gdpr=0} for zone id 192649 to UAS
-    Then I expect delivery
 
 
   Scenario: 3.0 gdpr=1
     Given I add header of {x-forwarded-for} with value {192.241.221.98}
-    When I send 1 times display ad request with parameter {optimize=1&gdpr=1} for zone id 192649 to UAS
+    When I send 1 times display ad request with parameter {domain=duration15_skip_yes.com} for zone id 192206 to UAS
     Then The response code is 200
-    And The responses are passback
+
 
 #  Scenario: 3.0
 #    Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket

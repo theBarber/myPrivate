@@ -9,6 +9,8 @@ Feature: Persona level targeting
 
   Background: health check
     When Sending a healthcheck request to UAS
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
     And I add {NY} ip header
     Then The response code is 200
 
@@ -47,7 +49,6 @@ Feature: Persona level targeting
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PLT-YesPersonaL-ST-1-banner-1} 100% of the time
     And The responses has click-urls
     When I send impression requests to UAS
-    Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb} to my requests to uas
     When I send 1 times an ad request with parameter {domain=PLT-YesPersonaL} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
     Then The response code is 200
@@ -75,7 +76,6 @@ Feature: Persona level targeting
     When I send 1 times an ad request with parameter {bundleid=PLT-NotPersonaL&deviceid=12300000-0000-0000-0000-000000000123} for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
-    Given I clear all cookies from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb} to my requests to uas
     When I send 1 times an ad request for zone named {zone-zoneset-PLT-NotPersonaL-ST-1} to UAS
     Then The response code is 200
