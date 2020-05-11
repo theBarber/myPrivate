@@ -9,6 +9,8 @@ Feature: Programmatic flow support
 
   Background: health check
     When Sending a healthcheck request to UAS
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
     And I add {NY} ip header
     Then The response code is 200
 
@@ -21,7 +23,7 @@ Feature: Programmatic flow support
     When I send impression requests to UAS
 
   Scenario: 3. basic Call to Programmatic GW - Header bidding
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=1&requestid=systemTestA}
     And The response code is 200
     And The response contains {script}
@@ -47,7 +49,7 @@ Feature: Programmatic flow support
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-ST-3-banner-1} 100% of the time
 
   Scenario: 8. basic Call to Programmatic GW, GW doing auction, last ad selected - Header bidding
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X2} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&requestid=systemTestC&optimize=1}
     And The response code is 200
     And The response contains {script}
