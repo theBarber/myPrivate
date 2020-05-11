@@ -16,7 +16,7 @@ Feature: InApp testing
   Scenario: Image and iframe - Zone request (viewableChange)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99} for zone named {zone-zoneset-Inapp-SI-1} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
     And The response contains {var ut_pixels}
@@ -70,7 +70,7 @@ Feature: InApp testing
   Scenario: just event tracker enabled - Zone request (viewableChange)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99} for zone named {zone-zoneset-Inapp-SI-2} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-2-banner-1} 100% of the time
     And The response contains {var ut_pixels}
@@ -104,7 +104,7 @@ Feature: InApp testing
   Scenario: image, markup and iframe - Zone request (render)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&cb=test} for zone named {zone-zoneset-Inapp-SI-5} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-5-banner-1} 100% of the time
     And The response contains {var ut_pixels}
@@ -118,7 +118,7 @@ Feature: InApp testing
   Scenario: image, markup and iframe - Zone request (ready)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&cb=test} for zone named {zone-zoneset-Inapp-SI-6} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-6-banner-1} 100% of the time
     And The response contains {var ut_pixels}
@@ -135,7 +135,7 @@ Feature: InApp testing
   Scenario: Image and iframe - Zone request (viewableChange)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&optimize=1} for zone named {zone-zoneset-Inapp-SI-1} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-1-banner-1} 100% of the time
     And The response contains {var ut_pixels}
@@ -189,7 +189,7 @@ Feature: InApp testing
   Scenario: just event tracker enabled - Zone request (viewableChange)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&optimize=1} for zone named {zone-zoneset-Inapp-SI-2} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-2-banner-1} 100% of the time
     And The response contains {var ut_pixels}
@@ -200,7 +200,7 @@ Feature: InApp testing
   Scenario: image, markup and iframe - Zone request (viewableChange)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&optimize=1&cb=test} for zone named {zone-zoneset-Inapp-SI-3} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-3-banner-1} 100% of the time
     And The response contains {var ut_pixels}
@@ -223,7 +223,7 @@ Feature: InApp testing
   Scenario: image, markup and iframe - Zone request (render)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&optimize=1&cb=test} for zone named {zone-zoneset-Inapp-SI-5} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-5-banner-1} 100% of the time
     And The response contains {var ut_pixels}
@@ -237,7 +237,7 @@ Feature: InApp testing
   Scenario: image, markup and iframe - Zone request (ready)
     When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&optimize=1&cb=test} for zone named {zone-zoneset-Inapp-SI-6} to UAS
     Then The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-6-banner-1} 100% of the time
     And The response contains {var ut_pixels}
