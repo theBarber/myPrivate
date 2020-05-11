@@ -5,9 +5,9 @@
 Feature: contextual targeting tests
 
   Background: health check
-    When Sending a healthcheck request to UAS
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
-    Then The response code is 200
 
 
   Scenario:1.a contextual targeting by dv - inapp - PART ONE - Delivery Expected
