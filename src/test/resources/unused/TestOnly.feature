@@ -3,9 +3,10 @@
 Feature: for testing only
 
   Background: health check
-    #When Sending a healthcheck request to UAS
-    When I add domain query parameter with value {one.co.il} to send my requests to uas
-    Then The response code is 200
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
+    And I add deviceid query parameter with value {19381945} to send my requests to uas
+
 
 
 
@@ -21,15 +22,22 @@ Feature: for testing only
 #    And The response contains {https://vast.adsafeprotected.com/vast}
 #
   Scenario: 2.0 gdpr=0  ---> geo limitation =  san francisco city entity
-    Given I add header of {x-forwarded-for} with value {192.241.221.98}
-    When I send 1 times display ad request with parameter {unlimited=1} for zone id 192649 to UAS
+    When I send 3 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&bundleid=aaaq1} for zone id 193170 to UAS
+    Then The response contains {bannerid}
+    And The responses has impression-urls
+    Then The response code is 200
+    And I send impression requests to UAS
+
 
 
   Scenario: 3.0 gdpr=1
-    Given I add header of {x-forwarded-for} with value {192.241.221.98}
-    When I send 1 times display ad request with parameter {unlimited=1} for zone id 192206 to UAS
+    Given I sleep for 1 seconds
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
+#  Scenario: 1.b. verify line items capping enforced when sending zone requests from same user (different cookies) - Passback
+    When I send 1 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&bundleid=aaaq1} for zone id 193170 to UAS
     Then The response code is 200
-
+    Then The response contains {bannerid}
 
 #  Scenario: 3.0
 #    Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket
