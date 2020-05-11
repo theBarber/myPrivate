@@ -541,9 +541,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private void sendPostRequestsAsync(Integer times, String url, String body) {
         reset();
         for (; times > 0; times--) {
-            actual().add(CompletableFuture.supplyAsync(() -> {
-                return postRequest(url, body);
-            }, requestSubmitter));
+            actual().add(CompletableFuture.supplyAsync(() -> postRequest(url, body), requestSubmitter));
         }
     }
 

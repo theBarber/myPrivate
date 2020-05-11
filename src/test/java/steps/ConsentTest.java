@@ -270,7 +270,7 @@ public class ConsentTest extends BaseTest {
             final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             final String hbGdprGdprstrParams = "&" + gdprstr;
             String body = getJsonBody(publisherID, h1, w1, domain);
-            UasApi.sendHbPostReq(times, body, Integer.valueOf(publisherID), domain, hbGdprGdprstrParams, true, false,false);
+            UasApi.sendHbPostReq(times, body, publisherID, domain, hbGdprGdprstrParams, true, false,false);
         });
 
 
@@ -354,7 +354,7 @@ public class ConsentTest extends BaseTest {
                             "  {\n" +
                             " \"bidRequestId\": \"123\"," + "\n" +
                             " \"domain\": \"" + domain + "\",\n" +
-                            " \"publisher_id\":  \"" + publisherID + "\",\n" +
+                            " \"publisher_id\":  " + publisherID + ",\n" +
                             " \"sizes\":[" + h1 + "," + w1 + "],\n" +
                             " \"timeout\": 700,\n" +
                             " \"hbadaptor\": \"prebid\",\n" +
