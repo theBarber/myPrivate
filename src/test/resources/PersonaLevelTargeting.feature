@@ -14,7 +14,7 @@ Feature: Persona level targeting
     And I add {NY} ip header
     Then The response code is 200
 
-  Scenario: 0. injection to cb
+#  Scenario: 0. injection to cb
 #    Given I inject profile doc for scenario {1. PLPT is active, zone req. 1 users - 2 devices - one app one web} to users bucket
 #    And I inject profile doc for scenario {1.1 PLPT is active, zone req. 1 users - 2 devices - one app one web} to users bucket
 #    And I inject profile doc for scenario {2. PLPT is active, zone req. 1 users, 1 device that has both profiles} to users bucket
@@ -35,6 +35,7 @@ Feature: Persona level targeting
     And The responses has click-urls
     When I send impression requests to UAS
     Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
     Given I add cookie UTID with value {a2b3c8faf45446dcbba3248ce123c2bb} to my requests to uas
     When I send 1 times an ad request with parameter {domain=PLT-YesPersonaL} for zone named {zone-zoneset-PLT-YesPersonaL-ST-1} to UAS
     Then The response code is 200

@@ -762,9 +762,14 @@ public class UASIntegrationTest extends BaseTest {
                 is(not(OptionalMatchers.empty())));
         Map<Integer, Long> theAmountOfTheOccurencesOfTheFieldValueById;
         theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
-                .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
-                .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
-                .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
+                .map(urlExtractor)
+                .map(CompletableFuture::join)
+                .map(UASIntegrationTest::toURL)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(UASIntegrationTest::splitQuery)
+                .flatMap(m -> m.entrySet().stream())
+                .filter(entry -> fieldName.equals(entry.getKey()))
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.groupingBy(Integer::parseInt, Collectors.counting()));
 
