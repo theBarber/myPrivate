@@ -198,7 +198,7 @@ Feature: Entities for tests
       | campaign-DeviceCappingMultipleCampaigns-ST-5    | 2       | 0               | 0     | -2       |
       | campaign-DeviceCappingMultipleCampaigns-ST-6    | 1       | 0               | 0     | -1       |
       | campaign-DeviceCappingMultipleCampaigns-ST-7    | 0       | 0               | 0     | 1        |
-      | campaign-DeviceLiCapping-ST-8                   | 3       | 0               | 0     | -2       |
+      | campaign-DeviceLiCapping-ST-8                   | 4       | 0               | 0     | -2       |
       | campaign-DeviceSessionCapping-Inapp-ST-9        | 0       | 2               | 60    | -2       |
       | campaign-CrossDeviceSessionCapping-Inapp-ST-10  | 0       | 2               | 60    | -2       |
       | campaign-DeviceLifetimeCapping-Inapp-ST-11      | 2       | 0               | 0     | -2       |
