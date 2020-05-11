@@ -349,18 +349,17 @@ public class ConsentTest extends BaseTest {
     }
 
     private String getJsonBody(Integer publisherID, Integer h1, Integer w1, String domain) {
-            String body =
-                    "{\"x-ut-hb-params\":[\n" +
-                            "  {\n" +
-                            " \"bidRequestId\": \"123\"," + "\n" +
-                            " \"domain\": \"" + domain + "\",\n" +
-                            " \"publisher_id\":  " + publisherID + ",\n" +
-                            " \"sizes\":[" + h1 + "," + w1 + "],\n" +
-                            " \"timeout\": 700,\n" +
-                            " \"hbadaptor\": \"prebid\",\n" +
-                            " \"publisherId\" : \"" + publisherID + "\"\n" +
-                            " }\n" +
-                            "]}";
-            return body;
-        }
+        String body =
+                "{\"x-ut-hb-params\":[\n" +
+                        "  {\n" +
+                        " \"bidRequestId\": \"123\"," + "\n" +
+                        " \"domain\": \"" + domain + "\",\n" +
+                        " \"sizes\":[" + h1 + "," + w1 + "],\n" +
+                        " \"timeout\": 700,\n" +
+                        " \"hbadaptor\": \"prebid\",\n" +
+                        " \"publisherId\" : " + publisherID + "\n" +
+                        " }\n" +
+                        "]}";
+        return body;
+    }
 }
