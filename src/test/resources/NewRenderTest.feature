@@ -409,7 +409,7 @@ Feature: Validate New Render Service
   @linearVidDirectAdRender
   Scenario:20 Send a web zone request from US and validate the response of a Direct Linear Video Ad
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Instream-View-direct} to UAS
+    Given I send 1 times an ad video request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Instream-View-direct} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
     And The response contains {[CDATA[https://vast.doubleverify.com/v3/vast?}
@@ -433,7 +433,7 @@ Feature: Validate New Render Service
 
   Scenario:21 Send a web zone request from US and validate the response of a Programmatic Linear Video Ad
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    When I send 1 times an ad request with parameter {requestid=OX-CSVB-Render&unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Instream-View-programmatic} to UAS
+    Given I send 1 times an ad video request with parameter {requestid=OX-CSVB-Render&unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Instream-View-programmatic} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
     And The response contains {[CDATA[https://vast.doubleverify.com/v3/vast?}
