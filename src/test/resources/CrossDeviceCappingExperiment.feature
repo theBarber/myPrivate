@@ -9,7 +9,7 @@
 @request_service
 Feature: Cross Device Capping Experiment
 
-  Background:
+  Background: health check
     Given I clear all cookies from uas requests
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
     When Sending a healthcheck request to UAS

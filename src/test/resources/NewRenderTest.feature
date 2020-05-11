@@ -5,6 +5,11 @@
 
 Feature: Validate New Render Service
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    And I add header of {X-Forwarded-For} with value {78.31.205.183}
+    Then The response code is 200
+
   Scenario: Send a web request to a zone linked to no banners and validate Passback
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Passback} to UAS
