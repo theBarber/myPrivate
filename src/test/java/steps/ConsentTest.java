@@ -323,7 +323,7 @@ public class ConsentTest extends BaseTest {
                 "        {\n" +
                 "            \"bidRequestId\": \"" + HB_BID_REQ_ID + "\",\n" +
                 "            \"domain\": \"" + HB_REQ_DOMAIN + "\",\n" +
-                "            \"publisherId\": \"" + HB_PUB_ID + "\",\n" +
+                "            \"publisherId\": " + HB_PUB_ID + ",\n" +
                 "            \"sizes\": " + HB_SIZES + ",\n" +
                 "            \"hbadaptor\": \"" + HB_REQ_ADAPTOR + "\"\n" +
                 "        }\n" +
