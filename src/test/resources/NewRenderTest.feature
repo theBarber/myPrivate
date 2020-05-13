@@ -107,6 +107,7 @@ Feature: Validate New Render Service
     And The response contains {https://tags.bluekai.com/site/15597?id=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
 
+  @RenderWebDtPg
   Scenario: Send a web DT request and validate the response of a programmatic PG banner
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When i send 1 times Dynamic Tag ad request to UAS for publisher 3728 with domain {damndelicious.net&requestid=PGZoneRender&tagid=238&newrender=1}
