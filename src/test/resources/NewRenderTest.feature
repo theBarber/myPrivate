@@ -93,13 +93,13 @@ Feature: Validate New Render Service
     And all HB responses contains cpm with value {99999}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
-    And The response contains {events-s-us-east-1.undertone.com\/c?}
-    And The response contains {https:\/\/ib.adnxs.com\/getuidnb?https:\/\/usr.undertone.com\/userPixel\/sync?partner=appnexus}
-    And The response contains {usr.undertone.com\/userPixel\/sync?partnerId=39}
-    And The response contains {https:\/\/cw.addthis.com\/t.gif?pid=46}
-    And The response contains {https:\/\/ads.scorecardresearch.com\/b?c1=9&c2=2113&c3=2&cs_xi}
-    And The response contains {https:\/\/tags.bluekai.com\/site\/15597?id=}
-    And The response contains {https:\/\/ads.undertone.com\/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc}
+    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
+    And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
+    And The response contains {cw.addthis.com/t.gif?pid=46}
+    And The response contains {ads.scorecardresearch.com/b?c1=9&c2=2113&c3=2&cs_xi}
+    And The response contains {tags.bluekai.com/site/15597}
+    And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com}
 
   Scenario:7 Send a web DT request and validate the response of a programmatic PG banner
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
