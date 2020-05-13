@@ -90,6 +90,7 @@ Feature: contextual targeting tests
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
 
-  Scenario:6.b contextual targeting - peer 39 banner level limitation - PART TWO - Passback Expected    When I send 1 times an ad request with parameter {optimize=1&loc=http://one.co.il} for zone named {zone-zoneset-CT-ST-1} to UAS
+  Scenario:6.b contextual targeting - peer 39 banner level limitation - PART TWO - Passback Expected
+    When I send 1 times an ad request with parameter {optimize=1&loc=http://one.co.il} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The responses are passback

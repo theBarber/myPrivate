@@ -1,313 +1,247 @@
-[{
-  "ioId": 75396,
-  "name": "RAMP Test IO",
-  "advertiserId": 20116,
-  "LI":
-  [
-    {
-      "ioLineItemId": 223755,
-      "pricingConvention": "CPM",
-      "Product":
+[
+  {
+    "ioId": 75396,
+    "name": "RAMP Test IO",
+    "advertiserId": 20116,
+    "LI": [
       {
-        "productId": 120,
-        "name": "Screen shift"
+        "ioLineItemId": 223755,
+        "pricingConvention": "CPM",
+        "Product": {
+          "productId": 120,
+          "name": "Screen shift"
+        },
+        "Campaigns": []
       },
-      "Campaigns":
-      [
-      ]
-    },
-    {
-      "ioLineItemId": 223757,
-      "pricingConvention": "CPM",
-      "Product":
       {
-        "productId": 120,
-        "name": "Screen shift"
+        "ioLineItemId": 223757,
+        "pricingConvention": "CPM",
+        "Product": {
+          "productId": 120,
+          "name": "Screen shift"
+        },
+        "Campaigns": []
       },
-      "Campaigns":
-      [
-      ]
-    },
-
-
-
-    {
-      "ioLineItemId": 209942,
-      "pricingConvention": "CPM",
-      "Product":
       {
-        "productId": 175,
-        "name": "See-Through"
-      },
-
-      "Campaigns":
-      [
-        {
-          "campaignId": 277923,
-          "campaignName": "75396-209942-1-Test-3",
-          "goalType": "impressions",
-          "deliveryMethod": 4,
-          "Zonesets":
+        "ioLineItemId": 234903,
+        "pricingConvention": "CPM",
+        "Product": {
+          "productId": 98,
+          "name": "Billboard"
+        },
+        "Campaigns": [
           {
-            "include":
-            [
-              64186
+            "campaignId": 365943,
+            "campaignName": "billboardTest",
+            "goalType": "impressions",
+            "deliveryMethod": 4,
+            "Zonesets": {
+              "include": [
+                72958
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1468785,
+                "bannerName": "75396-234903-365943-Billboard 970x250-productionBillboard"
+              }
             ],
-
-            "exclude":
-            [
-
-            ]
-          },
-
-          "Banners":
-          [
-            {
-              "bannerId": 1079323,
-              "bannerName": "75396-209942-277923-See Through-RampLift-1"
-            }
-          ],
-
-          "isUnlimited": false,
-          "CDM": 4
-        }
-      ]
-    },
-
-    {
-      "ioLineItemId": 208153,
-      "pricingConvention": "CPM",
-      "Product":
+            "isUnlimited": true,
+            "CDM": 4
+          }
+        ]
+      },
       {
-        "productId": 175,
-        "name": "See Through"
+        "ioLineItemId": 209942,
+        "pricingConvention": "CPM",
+        "Product": {
+          "productId": 175,
+          "name": "See-Through"
+        },
+        "Campaigns": [
+          {
+            "campaignId": 277923,
+            "campaignName": "75396-209942-1-Test-3",
+            "goalType": "impressions",
+            "deliveryMethod": 4,
+            "Zonesets": {
+              "include": [
+                64186
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1079323,
+                "bannerName": "75396-209942-277923-See Through-RampLift-1"
+              }
+            ],
+            "isUnlimited": false,
+            "CDM": 4
+          }
+        ]
       },
-
-      "Campaigns":
-      [
-        {
-          "campaignId": 275578,
-          "campaignName": "ramp-lift-ff-campaign",
-          "goalType": "impressions",
-          "deliveryMethod": 3,
-          "Zonesets":
-          {
-            "include":
-            [
-              63225
-            ],
-
-            "exclude":
-            [
-
-            ]
-          },
-
-          "Banners":
-          [
-            {
-              "bannerId": 1067986,
-              "bannerName": "75396-208153-275578-See Through-RampLift-1"
-            }
-          ],
-
-          "isUnlimited": true,
-          "CDM": 3
-        },
-
-        {
-          "campaignId": 275579,
-          "campaignName": "ramp-lift-ch-campaign",
-          "advertiserId": 20116,
-          "goalType": "impressions",
-          "deliveryMethod": 3,
-          "Zonesets":
-          {
-            "include":
-            [
-              63225
-            ],
-
-            "exclude":
-            [
-
-            ]
-          },
-
-          "Banners":
-          [
-            {
-              "bannerId": 1067987,
-              "bannerName": "75396-208153-275579-See Through-RampLift-1"
-            }
-          ],
-
-          "isUnlimited": true,
-          "CDM": 3
-        },
-        {
-          "campaignId": 275580,
-          "campaignName": "ramp-lift-ie-campaign",
-          "advertiserId": 20116,
-          "goalType": "impressions",
-          "deliveryMethod": 3,
-          "Zonesets":
-          {
-            "include":
-            [
-              63225
-            ],
-
-            "exclude":
-            [
-
-            ]
-          },
-
-          "Banners":
-          [
-            {
-              "bannerId": 1067988,
-              "bannerName": "75396-208153-275580-See Through-RampLift-1"
-            }
-          ],
-
-          "isUnlimited": true,
-          "CDM": 3
-        },
-
-        {
-          "campaignId": 275581,
-          "campaignName": "ramp-lift-unlimited-campaign",
-          "advertiserId": 20116,
-          "goalType": "impressions",
-          "deliveryMethod": 3,
-          "Zonesets":
-          {
-            "include":
-            [
-              63225
-            ],
-
-            "exclude":
-            [
-
-            ]
-          },
-
-          "Banners":
-          [
-            {
-              "bannerId": 1067989,
-              "bannerName": "75396-208153-275581-See Through-RampLift-1"
-            }
-          ],
-
-          "isUnlimited": true,
-          "CDM": 3
-        }
-      ]
-    },
-
-    {
-      "ioLineItemId": 210722,
-      "pricingConvention": "CPM",
-      "Product":
       {
+        "ioLineItemId": 208153,
+        "pricingConvention": "CPM",
+        "Product": {
+          "productId": 175,
+          "name": "See Through"
+        },
+        "Campaigns": [
+          {
+            "campaignId": 275578,
+            "campaignName": "ramp-lift-ff-campaign",
+            "goalType": "impressions",
+            "deliveryMethod": 3,
+            "Zonesets": {
+              "include": [
+                63225
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1067986,
+                "bannerName": "75396-208153-275578-See Through-RampLift-1"
+              }
+            ],
+            "isUnlimited": true,
+            "CDM": 3
+          },
+          {
+            "campaignId": 275579,
+            "campaignName": "ramp-lift-ch-campaign",
+            "advertiserId": 20116,
+            "goalType": "impressions",
+            "deliveryMethod": 3,
+            "Zonesets": {
+              "include": [
+                63225
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1067987,
+                "bannerName": "75396-208153-275579-See Through-RampLift-1"
+              }
+            ],
+            "isUnlimited": true,
+            "CDM": 3
+          },
+          {
+            "campaignId": 275580,
+            "campaignName": "ramp-lift-ie-campaign",
+            "advertiserId": 20116,
+            "goalType": "impressions",
+            "deliveryMethod": 3,
+            "Zonesets": {
+              "include": [
+                63225
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1067988,
+                "bannerName": "75396-208153-275580-See Through-RampLift-1"
+              }
+            ],
+            "isUnlimited": true,
+            "CDM": 3
+          },
+          {
+            "campaignId": 275581,
+            "campaignName": "ramp-lift-unlimited-campaign",
+            "advertiserId": 20116,
+            "goalType": "impressions",
+            "deliveryMethod": 3,
+            "Zonesets": {
+              "include": [
+                63225
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1067989,
+                "bannerName": "75396-208153-275581-See Through-RampLift-1"
+              }
+            ],
+            "isUnlimited": true,
+            "CDM": 3
+          }
+        ]
       },
-
-      "Campaigns":
-      [
-
-        {
-          "campaignId": 301511,
-          "campaignName": "See Through-DT-inline-1-campaign",
-          "goalType": "impressions",
-          "deliveryMethod": 3,
-          "Zonesets":
+      {
+        "ioLineItemId": 210722,
+        "pricingConvention": "CPM",
+        "Product": {},
+        "Campaigns": [
           {
-            "include":
-            [
-              63709
+            "campaignId": 301511,
+            "campaignName": "See Through-DT-inline-1-campaign",
+            "goalType": "impressions",
+            "deliveryMethod": 3,
+            "Zonesets": {
+              "include": [
+                63709
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1220887,
+                "bannerName": "See Through-DT-inline-1-banner"
+              }
             ],
-
-            "exclude":
-            [
-
-            ]
+            "isUnlimited": true,
+            "CDM": 3
           },
-
-          "Banners":
-          [
-            {
-              "bannerId": 1220887,
-              "bannerName": "See Through-DT-inline-1-banner"
-            }
-          ],
-
-          "isUnlimited": true,
-          "CDM": 3
-        },
-        {
-          "campaignId": 301512,
-          "campaignName": "See Through-DT-inline-2-campaign",
-          "goalType": "impressions",
-          "deliveryMethod": 3,
-          "Zonesets":
           {
-            "include":
-            [
-              63709
+            "campaignId": 301512,
+            "campaignName": "See Through-DT-inline-2-campaign",
+            "goalType": "impressions",
+            "deliveryMethod": 3,
+            "Zonesets": {
+              "include": [
+                63709
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1220888,
+                "bannerName": "See Through-DT-inline-2-banner"
+              }
             ],
-
-            "exclude":
-            [
-
-            ]
+            "isUnlimited": true,
+            "CDM": 3
           },
-
-          "Banners":
-          [
-            {
-              "bannerId": 1220888 ,
-              "bannerName": "See Through-DT-inline-2-banner"
-            }
-          ],
-
-          "isUnlimited": true,
-          "CDM": 3
-        },
-        {
-          "campaignId": 278956,
-          "campaignName": "75396-210722-ramp-lift-Test 1",
-          "goalType": "impressions",
-          "deliveryMethod": 3,
-          "Zonesets":
           {
-            "include":
-            [
-              63709
+            "campaignId": 278956,
+            "campaignName": "75396-210722-ramp-lift-Test 1",
+            "goalType": "impressions",
+            "deliveryMethod": 3,
+            "Zonesets": {
+              "include": [
+                63709
+              ],
+              "exclude": []
+            },
+            "Banners": [
+              {
+                "bannerId": 1353329,
+                "bannerName": "75396-210722-278956-See Through 2.0-Inline DynT Test"
+              }
             ],
-
-            "exclude":
-            [
-
-            ]
-          },
-
-          "Banners":
-          [
-            {
-              "bannerId": 1353329,
-              "bannerName": "75396-210722-278956-See Through 2.0-Inline DynT Test"
-            }
-          ],
-
-          "isUnlimited": true,
-          "CDM": 3
-        }
-      ]
-    }
-  ]
-}
+            "isUnlimited": true,
+            "CDM": 3
+          }
+        ]
+      }
+    ]
+  }
 ]
