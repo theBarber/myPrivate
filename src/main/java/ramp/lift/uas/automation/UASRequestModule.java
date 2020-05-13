@@ -573,7 +573,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
     }
 
-    @Attachment(value = "Request url: {0}", type = "text/plain")
+    @Attachment(value = "{url}", type = "text/plain")
     public HttpResponse getRequest(String url) {
         try {
             HttpGet get = new HttpGet(url);
