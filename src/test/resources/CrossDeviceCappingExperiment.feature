@@ -18,6 +18,7 @@ Feature: Cross Device Capping Experiment
     Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from user logs bucket
     Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from user logs bucket
     Given I delete the history of 2.yanivCappingTest from user logs bucket
+    And I sleep for 5 seconds
     Given I clear all cookies from uas requests
     Given I clear all headers from uas requests
     When Sending a healthcheck request to UAS
