@@ -10,13 +10,6 @@
 Feature: Cross Device Capping Experiment
 
   Background:
-    Given I clear all cookies from uas requests
-    Given I clear all headers from uas requests
-    And I add header of {X-Forwarded-For} with value {78.31.205.183}
-    When Sending a healthcheck request to UAS
-    Then The response code is 200
-
-  Scenario: 0. setup
     Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
     Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket
     Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from users bucket
@@ -25,6 +18,12 @@ Feature: Cross Device Capping Experiment
     Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from user logs bucket
     Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from user logs bucket
     Given I delete the history of 2.yanivCappingTest from user logs bucket
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
+    And I add header of {X-Forwarded-For} with value {207.246.116.162}
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
+
 
   Scenario: 1. verify line items capping enforced when sending zone requests from same user (different cookies) - Delivery
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
