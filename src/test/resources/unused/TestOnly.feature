@@ -39,14 +39,9 @@ Feature: for testing only
 
 
   Scenario: 3.0 gdpr=1
-    Given I clear all cookies from uas requests
-    Given I clear all headers from uas requests
-    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
-    Then The response contains {1471678}
+    When I send 1 times an ad request with parameter {optimize=1&domain=danifalse.com} for zone named {zone-zoneset-EHC-ST-1A} to UAS
+    And The response code is 200
+    And The response contains {bannerid}
 #    Given I clear all cookies from uas requests
 #    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
 #    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service

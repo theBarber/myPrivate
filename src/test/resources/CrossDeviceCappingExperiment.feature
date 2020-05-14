@@ -268,7 +268,7 @@ Feature: Cross Device Capping Experiment
     Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
-    Given I clear all headers from uas requests
+#    Given I clear all headers from uas requests
 #    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
