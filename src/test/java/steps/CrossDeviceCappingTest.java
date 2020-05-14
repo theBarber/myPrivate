@@ -337,6 +337,11 @@ public class CrossDeviceCappingTest extends BaseTest {
         });
 
 
+        Given("I add cookie (\\w+) with value \\{(.*)\\} to my impression requests to tracking service", (String paramName, String paramValue) -> {
+            sut.getUASRquestModule().addCookieToImpression(paramName, paramValue);
+        });
+
+
         Given("I clear all cookies from uas requests", () -> {
             sut.getUASRquestModule().clearCookies();
         });
