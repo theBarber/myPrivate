@@ -18,7 +18,6 @@ Feature: Cross Device Capping Experiment
     Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from user logs bucket
     Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from user logs bucket
     Given I delete the history of 2.yanivCappingTest from user logs bucket
-    And I sleep for 5 seconds
     Given I clear all cookies from uas requests
     Given I clear all headers from uas requests
     When Sending a healthcheck request to UAS
@@ -191,7 +190,7 @@ Feature: Cross Device Capping Experiment
 
   Scenario: 8. header bidding frequency capping from mobile - user 1
 #    Given I clear all headers from uas requests
-############    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add header of {X-Forwarded-For} with value {207.246.116.162}
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -203,10 +202,7 @@ Feature: Cross Device Capping Experiment
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
 #    Given I clear all headers from uas requests
-
-    And I sleep for 5 seconds
-
-############     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -214,17 +210,14 @@ Feature: Cross Device Capping Experiment
     And The response contains {script}
     Then The response contains {has_capping=1}
     Given I clear all cookies from uas requests
-############     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
 #    Given I clear all headers from uas requests
-############     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-
-    And I sleep for 5 seconds
-
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 204
 
@@ -232,7 +225,7 @@ Feature: Cross Device Capping Experiment
 
   Scenario: 9. header bidding frequency capping from Desktop user 1
 #    Given I clear all headers from uas requests
-############     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -241,12 +234,9 @@ Feature: Cross Device Capping Experiment
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
     And I send impression requests to UAS
-
-    And I sleep for 5 seconds
-
     Given I clear all cookies from uas requests
 #    Given I clear all headers from uas requests
-############     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -258,34 +248,28 @@ Feature: Cross Device Capping Experiment
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
 #    Given I clear all headers from uas requests
-############     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-
-    And I sleep for 5 seconds
-
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 204
 
 
   Scenario: 10. header bidding frequency capping from mobile - user 2
 #    Given I clear all headers from uas requests
-############     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
     Given I clear all cookies from uas requests
-############     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
-
-    And I sleep for 5 seconds
-
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
 #    Given I clear all headers from uas requests
-############     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -293,21 +277,15 @@ Feature: Cross Device Capping Experiment
     And The response code is 200
     And The response contains {script}
     Given I clear all cookies from uas requests
-############     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
-
-    And I sleep for 5 seconds
-
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
 #    Given I clear all headers from uas requests
-############     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-
-    And I sleep for 5 seconds
-
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 204
 
@@ -324,9 +302,6 @@ Feature: Cross Device Capping Experiment
     Given I clear all cookies from uas requests
 #    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
-
-    And I sleep for 5 seconds
-
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
 #    Given I clear all headers from uas requests
@@ -348,9 +323,6 @@ Feature: Cross Device Capping Experiment
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-
-    And I sleep for 5 seconds
-
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 204
 
