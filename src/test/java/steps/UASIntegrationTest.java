@@ -329,7 +329,11 @@ public class UASIntegrationTest extends BaseTest {
                             List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                             httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
                             HttpResponse response = httpclient.execute(httpGet, ctx);
-                            sut.getUASRquestModule().thatSleeps(1000);
+                            try {
+                                TimeUnit.SECONDS.sleep(1);
+                            } catch (InterruptedException e) {
+                                fail(e.getMessage());
+                            }
                             if (response.getEntity() != null) {
                                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
                                 InputStream is = response.getEntity().getContent();
