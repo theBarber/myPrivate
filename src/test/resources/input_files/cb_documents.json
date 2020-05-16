@@ -21,7 +21,7 @@
   },
 
   "1.1 PLPT is active, zone req. 1 users - 2 devices - one app one web": {
-    "udid": "2.12345600-0000-0000-0000-000000000123",
+    "udid": "2.12300000-0000-0000-0000-000000000123",
     "platform": "app",
     "u_p": {
       "18204": [
@@ -41,7 +41,7 @@
   }},
 
   "2. PLPT is active, zone req. 1 users, 1 device that has both profiles": {
-    "udid": "12300000456",
+    "udid": "2.12345600-0000-0000-0000-000000000123",
     "platform": "app",
     "u_p": {
       "18204": [
@@ -53,7 +53,7 @@
       "upid": "",
       "devices": [
         {
-          "udid": "12300000456"
+          "udid": "2.12345600-0000-0000-0000-000000000123"
         }
       ]
     }
