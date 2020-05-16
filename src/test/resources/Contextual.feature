@@ -41,7 +41,7 @@ Feature: contextual targeting tests
 
   Scenario:4.a contextual targeting by dv - campaign level limitation - PART ONE - Delivery Expected
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    And I sleep for 2 seconds
+    And I sleep for 12 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains {script}
