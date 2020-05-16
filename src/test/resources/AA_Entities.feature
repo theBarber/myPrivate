@@ -70,8 +70,8 @@ Feature: Entities for tests
   @GDPR
   Scenario: create entities for zone Tag Sanity test
     Given i disable campaigns by name on db
-      | Campaign Name         |
-      | campaign-API-1-a-GDPR |
+      | Campaign Name               |
+      | campaign-API-1-a-GDPR       |
       | campaign-San-Francisco-city |
 
     Given i create new campaigns with new zoneset
@@ -968,7 +968,7 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                       | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-city-zoneLevelLimit-ST     | 75396 | 244896   | false                 | 8290          | {zone-zoneset-city-zoneLevelLimit-ST}     | []         | 93       | 15288          | 3708         | 65991           | []             | []             |
-      | campaign-region-bannerLevelLimit-ST | 75396 | 244896   | false                 | 8290          | {zone-zoneset-region-bannerLevelLimit-ST} | []         | 93       | 15289          | 3708         | 65991           | []             | []             |
+      | campaign-region-bannerLevelLimit-ST | 75396 | 244896   | false                 | 8290          | {zone-zoneset-region-bannerLevelLimit-ST} | []         | 93       | 739            | 3708         | 65991           | []             | []             |
       | campaign-state-zoneLevelLimit-ST    | 75396 | 244896   | false                 | 8290          | {zone-zoneset-state-zoneLevelLimit-ST}    | []         | 93       | 15291          | 3708         | 65991           | []             | []             |
       | campaign-state-bannerLevelLimit-ST  | 75396 | 244896   | false                 | 8290          | {zone-zoneset-state-bannerLevelLimit-ST}  | []         | 93       | 15290          | 3708         | 65991           | []             | []             |
     And i update banner data by name
