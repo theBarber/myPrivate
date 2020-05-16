@@ -80,7 +80,7 @@ Feature: Geo limitation targeting
 
   Scenario: 3. DT req sent from the targeted city/region/state, banner ex - PART TWO
     Given I add header of {x-forwarded-for} with value {66.87.207.155}
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {geo2&tagid=170&optimize=1}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {autoshopper.com&tagid=170&optimize=1}
     And The response code is 200
     And The response contains {script}
     And The responses has impression-urls
@@ -110,7 +110,7 @@ Feature: Geo limitation targeting
 
   Scenario: 4. DT req sent not from the targeted city/region/state, pb ex - PART TWO
     Given I add header of {x-forwarded-for} with value {23.17.255.255}
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {geo2&tagid=170&optimize=1}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {autoshopper.com&tagid=170&optimize=1}
     And The response code is 200
     And The responses are passback
 
