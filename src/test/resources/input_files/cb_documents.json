@@ -26,7 +26,8 @@
     "u_p": {
       "18204": [
         123
-      ],
+      ]
+    },
     "user-graph": {
       "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
       "devices": [
@@ -38,7 +39,7 @@
         }
       ]
     }
-  }},
+  },
 
   "2. PLPT is active, zone req. 1 users, 1 device that has both profiles": {
     "udid": "2.12345600-0000-0000-0000-000000000123",
@@ -58,7 +59,6 @@
       ]
     }
   },
-
 
 
 
