@@ -138,6 +138,12 @@ public class UASIntegrationTest extends BaseTest {
                     sendMultipleAdRequestsWithRoute(times, parameter, zoneId,"ax", true);
                 });
 
+        When("I print local time",
+                () -> {
+                    System.out.println("the time is ==> " + java.time.LocalTime.now());
+                    sut.write("the time is ---> "+ java.time.LocalTime.now());
+                });
+
 
         When("I send (\\d+) times display ad request with parameter? \\{(.*)\\} for zone id (\\d+) to UAS",
                 (Integer times,String parameter, Integer zoneId) -> {
