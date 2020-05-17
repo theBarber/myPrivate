@@ -9,6 +9,10 @@ Feature: contextual targeting tests
     Given I clear all headers from uas requests
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
 
+  Scenario: 0. health check contextual service
+    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    And I sleep for 20 seconds
+    And The response code is 200
 
   Scenario:1.a contextual targeting by dv - inapp - PART ONE - Delivery Expected
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36} as user-agent string to send my requests to uas

@@ -123,6 +123,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
                             uas = new UASRequestModule();
                             //uas.setDomain(config.get("uas.host"));
                             uas.setDomain(config.get("uas.domain"));
+                            uas.setTrackingServiceDomain(config.get("tracking.service.domain"));
                             uas.setPort(config.get("uas.port"));
                             uas.init();
                         } catch (Exception e) {
@@ -440,6 +441,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
             try {
                 uas = new UASRequestModule();
                 uas.setDomain(config.get("uas.domain"));
+                uas.setTrackingServiceDomain(config.get("tracking.service.domain"));
                 uas.setPort(config.get("uas.port"));
                 uas.init();
             } catch (Exception e) {
