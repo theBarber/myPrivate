@@ -288,24 +288,6 @@
       }
     }]},
 
-  "Send HB request with only 1X1 size for publisher 3673":
-  {"x-ut-hb-params":[
-    {
-      "bidRequestId": "21b46f0d859b47",
-      "domain": "headerbiddingproptest.com",
-      "placementId": "10433394",
-      "publisherId": 3673,
-      "sizes": [
-        [1, 1]
-      ],
-      "timeout": 700,
-      "hbadaptor": "prebid",
-      "params": {"placementId" : "10433394",
-        "publisherId" : 3673
-      }
-    }]},
-
-
     "Send HB request with no 1X1 size for publisher 3673":
     {"x-ut-hb-params":[
       {
