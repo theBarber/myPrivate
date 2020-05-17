@@ -1697,8 +1697,9 @@ Feature: Entities for tests
   @refreshCaches
   Scenario: refresh caches
     And I refresh zone cache
-    And I restart {ramp-lift-services}
-    And I restart {ut-programmatic-gw}
+    #******** REMOVED *********
+#    And I restart {ramp-lift-services}
+#    And I restart {ut-programmatic-gw}
 
 
   @optimize
