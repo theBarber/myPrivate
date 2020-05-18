@@ -38,11 +38,11 @@ Feature: for testing only
 
 
 
-  Scenario: 3.0 gdpr=1
-    #When I send 1 times an ad request with parameter {optimize=1} for zone named {INT2434 - Billboard 970x250 - zone234903} to UAS
-    When I send 4 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192206 to UAS
-    And The response code is 200
-    When I print local time
+#  Scenario: 3.0 gdpr=1
+#    #When I send 1 times an ad request with parameter {optimize=1} for zone named {INT2434 - Billboard 970x250 - zone234903} to UAS
+#    When I send 4 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192206 to UAS
+#    And The response code is 200
+#    When I print local time
 #    And The impressionUrl has bannerid field matching the id of the banner named {billboardTest-banner-1} 100% of the time
 
 #    Given I clear all cookies from uas requests
@@ -50,10 +50,10 @@ Feature: for testing only
 #    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
 #    And I send impression requests to UAS
 
-#  Scenario: 3.0
+
 #    Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket
-   # When I send 1 times an ad request with parameter {unlimited=1&deviceid=2189F809D99&optimize=1&cb=test} for zone named {zone-zoneset-Inapp-SI-5} to UAS
-#    Then The response code is 200
-#    And The response contains {script}
-#    And The responses has impression-urls
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-Inapp-SI-5-banner-1} 100% of the time
+  #  &&&&&&&&&&&&&&&&&  Eitan need to fix 4
+  Scenario: 4. InstreamVid, zone req, vpaid_support=1, not inapp. banner with moat wrapper expected
+    When I send 1 times an ad video request with parameter {optimize=1&unlimited=1&domain=dnu-tt&vpaid_support=1&requestid=vidAd} for zone named {zone-zoneset-InstreamVid-View-SP} to UAS
+    And The response has a moat wrapper with params advanced string with advertiserid = 22420, ioid = 407981, iolineitemid = 244699, bannername = {campaign-InstreamVid-View-SP-banner-1}, campaignname = {campaign-InstreamVid-View-SP}, zonename = {zone-zoneset-InstreamVid-View-SP}, MoatWEBID = 3708
+    And The response contains {&zMoatWEBID=3708}
