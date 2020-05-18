@@ -123,6 +123,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
                             uas = new UASRequestModule();
                             //uas.setDomain(config.get("uas.host"));
                             uas.setDomain(config.get("uas.domain"));
+                            uas.setTrackingServiceDomain(config.get("tracking.service.domain"));
                             uas.setPort(config.get("uas.port"));
                             uas.init();
                         } catch (Exception e) {
@@ -356,11 +357,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 //		for (Address address : response.getAddresses()){
 //			cliConnectionsHostsParam += address.getPrivateIpAddress();
 //		}
-        String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
+        //*********** REMOVED *************
+//        String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
         String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
         String cliconnectionCron = config.getOrDefault("uas.cliconnection.cron", "");
 
-        JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
+
+        //********** REMOVED ************
+//        JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
         JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
         File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
                 .map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename))
@@ -371,12 +375,14 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
         }
 
         File finalKeyFile = keyFile;
-        hostsConfig.forEach(jsonElement -> {
-            String host = jsonElement.getAsString();
-            LinuxDefaultCliConnection conn = getConnection(host, finalKeyFile);
-            uasHostConnections.put(host, conn);
-            uasCliConnections.put(host, conn);
-        });
+
+        //************* REMOVED ***********
+//        hostsConfig.forEach(jsonElement -> {
+//            String host = jsonElement.getAsString();
+//            LinuxDefaultCliConnection conn = getConnection(host, finalKeyFile);
+//            uasHostConnections.put(host, conn);
+//            uasCliConnections.put(host, conn);
+//        });
 
         cronsConfig.forEach(jsonElement -> {
             String host = jsonElement.getAsString();
@@ -440,6 +446,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
             try {
                 uas = new UASRequestModule();
                 uas.setDomain(config.get("uas.domain"));
+                uas.setTrackingServiceDomain(config.get("tracking.service.domain"));
                 uas.setPort(config.get("uas.port"));
                 uas.init();
             } catch (Exception e) {

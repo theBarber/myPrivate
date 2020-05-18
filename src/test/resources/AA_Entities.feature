@@ -70,8 +70,8 @@ Feature: Entities for tests
   @GDPR
   Scenario: create entities for zone Tag Sanity test
     Given i disable campaigns by name on db
-      | Campaign Name         |
-      | campaign-API-1-a-GDPR |
+      | Campaign Name               |
+      | campaign-API-1-a-GDPR       |
       | campaign-San-Francisco-city |
 
     Given i create new campaigns with new zoneset
@@ -968,7 +968,7 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                       | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-city-zoneLevelLimit-ST     | 75396 | 244896   | false                 | 8290          | {zone-zoneset-city-zoneLevelLimit-ST}     | []         | 93       | 15288          | 3708         | 65991           | []             | []             |
-      | campaign-region-bannerLevelLimit-ST | 75396 | 244896   | false                 | 8290          | {zone-zoneset-region-bannerLevelLimit-ST} | []         | 93       | 15289          | 3708         | 65991           | []             | []             |
+      | campaign-region-bannerLevelLimit-ST | 75396 | 244896   | false                 | 8290          | {zone-zoneset-region-bannerLevelLimit-ST} | []         | 93       | 739            | 3708         | 65991           | []             | []             |
       | campaign-state-zoneLevelLimit-ST    | 75396 | 244896   | false                 | 8290          | {zone-zoneset-state-zoneLevelLimit-ST}    | []         | 93       | 15291          | 3708         | 65991           | []             | []             |
       | campaign-state-bannerLevelLimit-ST  | 75396 | 244896   | false                 | 8290          | {zone-zoneset-state-bannerLevelLimit-ST}  | []         | 93       | 15290          | 3708         | 65991           | []             | []             |
     And i update banner data by name
@@ -987,7 +987,6 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name                              |
       | campaign-CT-ST-1                           |
-      | campaign-dv-zoneLevelLimit-ST              |
       | campaign-dv-campaignLevelLimit-ST          |
       | campaign-dv-campaignLevelLimit-exclude-ST  |
       | campaign-dv-zoneLevelLimit-peer-ST         |
@@ -996,7 +995,6 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                              | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude                                                                |
       | campaign-CT-ST-1                           | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-1}                           | []         | 93       | 15182          | 3708         | 65991           | []                                                                            | []                                                                            |
-      | campaign-dv-zoneLevelLimit-ST              | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-ST}              | []         | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-ST          | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-ST}          | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-exclude-ST  | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-exclude-ST}  | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
       | campaign-dv-zoneLevelLimit-peer-ST         | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-peer-ST}         | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
@@ -1017,7 +1015,6 @@ Feature: Entities for tests
 
     And i update zone data by name
       | Zone Name                                      | limitation |
-      | zone-zoneset-dv-zoneLevelLimit-ST              | []         |
       | zone-zoneset-dv-zoneLevelLimit-peer-ST         | []         |
       | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | []         |
 
@@ -1700,8 +1697,9 @@ Feature: Entities for tests
   @refreshCaches
   Scenario: refresh caches
     And I refresh zone cache
-    And I restart {ramp-lift-services}
-    And I restart {ut-programmatic-gw}
+    #******** REMOVED *********
+#    And I restart {ramp-lift-services}
+#    And I restart {ut-programmatic-gw}
 
 
   @optimize

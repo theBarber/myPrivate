@@ -187,18 +187,19 @@ public class CacheProcessTest extends BaseTest {
 
 
             //download the zone.tch from s3 rto all machines, except cron
-            sut.getHostsConnection().forEach((host, conn) -> {
-                if (!host.equals(cron_ip)) { //need to remove
-                    System.out.println("pulling zone.tch "+host);
-                    try {
-                        CliCommandExecution pullCommand = new CliCommandExecution(conn, pullZoneCacheCmd)
-                                .error("doesn't exist").withTimeout(3, TimeUnit.MINUTES);
-                        pullCommand.execute();
-                    } catch (Exception e) {
-                        throw new AssertionError(e);
-                    }
-                }
-            });
+            //   ******** REMOVED - NO NEED TO PULL FROM S3 ANYMORE ****************
+//            sut.getHostsConnection().forEach((host, conn) -> {
+//                if (!host.equals(cron_ip)) { //need to remove
+//                    System.out.println("pulling zone.tch "+host);
+//                    try {
+//                        CliCommandExecution pullCommand = new CliCommandExecution(conn, pullZoneCacheCmd)
+//                                .error("doesn't exist").withTimeout(3, TimeUnit.MINUTES);
+//                        pullCommand.execute();
+//                    } catch (Exception e) {
+//                        throw new AssertionError(e);
+//                    }
+//                }
+//            });
         }
     }
 
@@ -265,49 +266,50 @@ public class CacheProcessTest extends BaseTest {
     }
 
     private void refreshDeliveryEngineCache() {
-        JsonArray hostsArray = new JsonParser().parse(config.get("uas.cliconnection.hosts")).getAsJsonArray();
-        CountDownLatch latch = new CountDownLatch(hostsArray.size());
-
-        try {
-
-            for (JsonElement el  : hostsArray) {
-                URIBuilder uriBuilderIad1 = new URIBuilder()
-                        .setScheme("http")
-                        .setPath("/delivery_engine/refreshCache")
-                        .setPort(8877)
-                        .setHost(el.getAsString());
-
-                StringEntity entity = new StringEntity("{\"action\":\"start\"}", ContentType.TEXT_PLAIN);
-                URI iad1 = uriBuilderIad1.build();
-                HttpPost postIad1 = new HttpPost(iad1);
-                postIad1.setEntity(entity);
-
-                HttpClient httpclient = HttpClients.custom()
-                        .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
-
-                CompletableFuture.runAsync(() -> {
-                    try {
-                        HttpResponse httpResponse1 = httpclient.execute(postIad1);
-                        Assert.assertEquals("status code should be 200", 200, httpResponse1.getStatusLine().getStatusCode());
-                        BufferedReader bufferedReader1 =
-                                new BufferedReader(new InputStreamReader(httpResponse1.getEntity().getContent()));
-                        boolean isRefresh1 = bufferedReader1.lines()
-                                .collect(Collectors.joining("\n"))
-                                .contains(START_REFRESH_CACHE);
-                        Assert.assertTrue("data cache should start refresh", isRefresh1);
-                        bufferedReader1.close();
-                        latch.countDown();
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                        Assert.fail("http post fail");
-                    }
-                });
-
-            }
-            latch.await(3, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+      //*********** REMOVE ******** NO REFRESH FOR DELIVER CACHE
+//        JsonArray hostsArray = new JsonParser().parse(config.get("uas.cliconnection.hosts")).getAsJsonArray();
+//        CountDownLatch latch = new CountDownLatch(hostsArray.size());
+//
+//        try {
+//
+//            for (JsonElement el  : hostsArray) {
+//                URIBuilder uriBuilderIad1 = new URIBuilder()
+//                        .setScheme("http")
+//                        .setPath("/delivery_engine/refreshCache")
+//                        .setPort(8877)
+//                        .setHost(el.getAsString());
+//
+//                StringEntity entity = new StringEntity("{\"action\":\"start\"}", ContentType.TEXT_PLAIN);
+//                URI iad1 = uriBuilderIad1.build();
+//                HttpPost postIad1 = new HttpPost(iad1);
+//                postIad1.setEntity(entity);
+//
+//                HttpClient httpclient = HttpClients.custom()
+//                        .setDefaultSocketConfig(SocketConfig.custom().setSoTimeout(5000).build()).build();
+//
+//                CompletableFuture.runAsync(() -> {
+//                    try {
+//                        HttpResponse httpResponse1 = httpclient.execute(postIad1);
+//                        Assert.assertEquals("status code should be 200", 200, httpResponse1.getStatusLine().getStatusCode());
+//                        BufferedReader bufferedReader1 =
+//                                new BufferedReader(new InputStreamReader(httpResponse1.getEntity().getContent()));
+//                        boolean isRefresh1 = bufferedReader1.lines()
+//                                .collect(Collectors.joining("\n"))
+//                                .contains(START_REFRESH_CACHE);
+//                        Assert.assertTrue("data cache should start refresh", isRefresh1);
+//                        bufferedReader1.close();
+//                        latch.countDown();
+//                    } catch (Exception e) {
+//                        System.out.println(e.getMessage());
+//                        Assert.fail("http post fail");
+//                    }
+//                });
+//
+//            }
+//            latch.await(3, TimeUnit.SECONDS);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 
     private void refreshCampaignCache() {

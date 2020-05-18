@@ -102,8 +102,16 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         return domain;
     }
 
+    public String getTrackingServiceDomain(){
+        return trackingServiceDomain;
+    }
+
     public void setDomain(String host) {
         this.domain = host;
+    }
+
+    public void setTrackingServiceDomain(String host) {
+        this.trackingServiceDomain = host;
     }
 
     public String getPort() {
@@ -115,6 +123,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     private String domain;
+    private String trackingServiceDomain;
     private String port;
     private long withSleepInMillis = 10;
     protected CloseableHttpClient httpclient;
@@ -444,6 +453,14 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         cookie.setPath("/");
         context.getCookieStore().addCookie(cookie);
     }
+
+    public void addCookieToImpression(String key, String value) {
+        BasicClientCookie cookie = new BasicClientCookie(key, value);
+        cookie.setDomain(trackingServiceDomain);
+        cookie.setPath("/");
+        context.getCookieStore().addCookie(cookie);
+    }
+
 
     public void setGenericCookie() {
         clearCookies();

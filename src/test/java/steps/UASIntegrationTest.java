@@ -138,6 +138,12 @@ public class UASIntegrationTest extends BaseTest {
                     sendMultipleAdRequestsWithRoute(times, parameter, zoneId,"ax", true);
                 });
 
+        When("I print local time",
+                () -> {
+                    System.out.println("the time is ==> " + java.time.LocalTime.now());
+                    sut.write("the time is ---> "+ java.time.LocalTime.now());
+                });
+
 
         When("I send (\\d+) times display ad request with parameter? \\{(.*)\\} for zone id (\\d+) to UAS",
                 (Integer times,String parameter, Integer zoneId) -> {
@@ -329,6 +335,11 @@ public class UASIntegrationTest extends BaseTest {
                             List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                             httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
                             HttpResponse response = httpclient.execute(httpGet, ctx);
+                            try {
+                                TimeUnit.SECONDS.sleep(1);
+                            } catch (InterruptedException e) {
+                                fail(e.getMessage());
+                            }
                             if (response.getEntity() != null) {
                                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
                                 InputStream is = response.getEntity().getContent();

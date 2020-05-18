@@ -140,7 +140,7 @@ Feature: Pii
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {66.87.207.155}
-    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {geo2&tagid=170&optimize=1&ccpa=1YYN}
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3708 with extra params {autoshopper.com&tagid=170&optimize=1&ccpa=1YYN}
     And The response code is 200
     And The response contains {script}
     And The responses has impression-urls
