@@ -13,7 +13,8 @@ Feature: contextual targeting tests
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdrugs.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
     When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And I sleep for 7 seconds
+    And The response code is 200
+    And I sleep for 5 seconds
 
 
 
