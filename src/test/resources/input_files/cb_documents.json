@@ -3,8 +3,8 @@
     "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn",
     "platform": "desktop",
     "u_p": {
-      "456": [
-        18204
+      "18204": [
+        456
       ]
     },
     "user-graph": {
@@ -19,87 +19,29 @@
       ]
     }
   },
+
   "1.1 PLPT is active, zone req. 1 users - 2 devices - one app one web": {
-    "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn",
-    "platform": "desktop",
-    "u_p": {
-      "18204": [
-        456
-      ]
-    },
-    "user-graph": {
-      "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
-      "devices": [
-        {
-          "udid": "2.12300000-0000-0000-0000-000000000123"
-        },
-        {
-          "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn"
-        }
-      ]
-    }
-  },
-  "2. PLPT is active, zone req. 1 users, 1 device that has both profiles": {
-    "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn",
-    "platform": "desktop",
-    "u_p": {
-      "456": [
-        18204
-      ]
-    },
-    "user-graph": {
-      "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
-      "devices": [
-        {
-          "udid": "2.12300000-0000-0000-0000-000000000123"
-        },
-        {
-          "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn"
-        }
-      ]
-    }
-  },
-  "2.1 PLPT is active, zone req. 1 users, 1 device that has both profiles": {
-    "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn",
-    "platform": "desktop",
-    "u_p": {
-      "18204": [
-        456
-      ]
-    },
-    "user-graph": {
-      "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
-      "devices": [
-        {
-          "udid": "2.12300000-0000-0000-0000-000000000123"
-        },
-        {
-          "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn"
-        }
-      ]
-    }
-  },
-  "3. PLPT is not active, zone req. 1 users - 2 devices - one app one web": {
-    "udid": "2.12345600-0000-0000-0000-000000000123",
+    "udid": "2.12300000-0000-0000-0000-000000000123",
     "platform": "app",
     "u_p": {
-      "123": [
-        18204
-      ],
-      "456": [
-        18204
+      "18204": [
+        123
       ]
     },
     "user-graph": {
-      "upid": "",
+      "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
       "devices": [
         {
-          "udid": "2.12345600-0000-0000-0000-000000000123"
+          "udid": "2.12300000-0000-0000-0000-000000000123"
+        },
+        {
+          "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn"
         }
       ]
     }
   },
-  "3.1 PLPT is not active, zone req. 1 users - 2 devices - one app one web": {
+
+  "2. PLPT is active, zone req. 1 users, 1 device that has both profiles": {
     "udid": "2.12345600-0000-0000-0000-000000000123",
     "platform": "app",
     "u_p": {
@@ -117,46 +59,9 @@
       ]
     }
   },
-  "4. PLPT is not active, zone req. 1 users, 1 device that has both profiles": {
-    "udid": "2.12300000-0000-0000-0000-000000000123",
-    "platform": "app",
-    "u_p": {
-      "123": [
-        18198
-      ]
-    },
-    "user-graph": {
-      "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
-      "devices": [
-        {
-          "udid": "2.12300000-0000-0000-0000-000000000123"
-        },
-        {
-          "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn"
-        }
-      ]
-    }
-  },
-  "4.1 PLPT is not active, zone req. 1 users, 1 device that has both profiles": {
-    "udid": "2.12300000-0000-0000-0000-000000000123",
-    "platform": "app",
-    "u_p": {
-      "18198": [
-        123
-      ]
-    },
-    "user-graph": {
-      "upid": "66.3.45b46d3d9ae4015fa47f2076c315ea23",
-      "devices": [
-        {
-          "udid": "2.12300000-0000-0000-0000-000000000123"
-        },
-        {
-          "udid": "1.9mrjt7trg1a57yd4pv1e7zxdn"
-        }
-      ]
-    }
-  },
+
+
+
   "Header bidding - profile targeting": {
     "udid": "1.crmqc31wdld7y233cq5xaxrjv",
     "platform": "desktop",
