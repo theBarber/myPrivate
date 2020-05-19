@@ -280,15 +280,14 @@ Feature: Entities for tests
     #    40% gives cpm = 0.6
     #    70% gives cpm = 0.3
     And i update campaign data by name
-      | Campaign Name                               | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
-#      |campaign-HB-DynamicPrice-1                    |40                                   |40                           |
-      | campaign-HB-DynamicPrice-2                  | 70                              | 70                             |
-      | campaign-HB-DynamicPrice-3                  | 40                              | 40                             |
-      | campaign-HB-DynamicPrice-4                  | 50                              | 70                             |
-      | campaign-HB-DynamicPrice-ST-1x2-5a          | 40                              | 40                             |
-      | campaign-HB-DynamicPrice-Desktop-300X250-5b | 50                              | 50                             |
-      | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 40                              | 40                             |
-      | campaign-HB-DP-ServerPr-PGC-6b              | 40                              | 40                             |
+      | Campaign Name                               | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
+      | campaign-HB-DynamicPrice-2                  | 70                              | 70                             | 0                  |
+      | campaign-HB-DynamicPrice-3                  | 40                              | 40                             | 0                  |
+      | campaign-HB-DynamicPrice-4                  | 50                              | 70                             | 0                  |
+      | campaign-HB-DynamicPrice-ST-1x2-5a          | 40                              | 40                             | 0                  |
+      | campaign-HB-DynamicPrice-Desktop-300X250-5b | 50                              | 50                             | 0                  |
+      | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 40                              | 40                             | 0                  |
+      | campaign-HB-DP-ServerPr-PGC-6b              | 40                              | 40                             | 0                  |
     And i update zone data by name
       | Zone Name                                       | is_secure |
       | zone-zoneset-HB-Tablet-160x600                  | 1         |
@@ -1184,16 +1183,16 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 251035   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15359          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
-      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority |
-      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 20                             | -1       |
-      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 30                             | -1       |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 20                             | -2       |
-      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
+      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority | use_default_margin |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 20                             | -1       | 0                  |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 30                             | -1       | 0                  |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 20                             | -2       | 0                  |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       | 0                  |
 
     And i update campaign data by name
       | Campaign Name                                          | priority |
