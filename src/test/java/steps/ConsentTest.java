@@ -34,7 +34,7 @@ import util.consent.UtCcpaGenerator;
 public class ConsentTest extends BaseTest {
     private static final Integer ZONE_ID = 2;
     private static final Integer PUBLISHER_ID = 3711;
-    private static final String PUBLISHER_PARAMS = "&domain=test.com&requestid=systemTestC&unlimited=1&optimize=1&tagid=198";
+    private static final String PUBLISHER_PARAMS = "&domain=test.com&requestid=newGDPR&unlimited=1&optimize=1&tagid=198";
 
     private static final String HB_REQ_BODY = getGdprHbReqBody();
     private static final String HB_REQ_DOMAIN = "DynamicPricingWithMargin.com";
