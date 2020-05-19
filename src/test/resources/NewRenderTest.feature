@@ -65,7 +65,7 @@ Feature: Validate New Render Service
     And all HB responses contains cpm with value {2.5}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {cw.addthis.com/t.gif?pid=46}
@@ -98,7 +98,7 @@ Feature: Validate New Render Service
     And all HB responses contains cpm with value {99999.0}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {cw.addthis.com/t.gif?pid=46}
@@ -265,7 +265,7 @@ Feature: Validate New Render Service
     And The response contains {&e=start}
     And The response contains {&e=unmute}
     And The response contains {&e=render}
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {s-us-east-1.undertone.com/c?}
     And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {cw.addthis.com/t.gif?pid=46}
@@ -351,7 +351,7 @@ Feature: Validate New Render Service
     And The response contains {&e=start}
     And The response contains {&e=unmute}
     And The response contains {&e=render}
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {usus-east-1.undertone.com/c?}
     And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {cw.addthis.com/t.gif?pid=46}
@@ -431,7 +431,7 @@ Feature: Validate New Render Service
     And The response contains {&e=close}
     And The response contains {&e=start}
     And The response contains {&e=unmute}
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {usus-east-1.undertone.com/c?}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
@@ -455,7 +455,7 @@ Feature: Validate New Render Service
     And The response contains {&e=close}
     And The response contains {&e=start}
     And The response contains {&e=unmute}
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
