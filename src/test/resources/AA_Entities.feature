@@ -70,8 +70,8 @@ Feature: Entities for tests
   @GDPR
   Scenario: create entities for zone Tag Sanity test
     Given i disable campaigns by name on db
-      | Campaign Name         |
-      | campaign-API-1-a-GDPR |
+      | Campaign Name               |
+      | campaign-API-1-a-GDPR       |
       | campaign-San-Francisco-city |
 
     Given i create new campaigns with new zoneset
@@ -198,7 +198,7 @@ Feature: Entities for tests
       | campaign-DeviceCappingMultipleCampaigns-ST-5    | 2       | 0               | 0     | -2       |
       | campaign-DeviceCappingMultipleCampaigns-ST-6    | 1       | 0               | 0     | -1       |
       | campaign-DeviceCappingMultipleCampaigns-ST-7    | 0       | 0               | 0     | 1        |
-      | campaign-DeviceLiCapping-ST-8                   | 3       | 0               | 0     | -2       |
+      | campaign-DeviceLiCapping-ST-8                   | 4       | 0               | 0     | -2       |
       | campaign-DeviceSessionCapping-Inapp-ST-9        | 0       | 2               | 60    | -2       |
       | campaign-CrossDeviceSessionCapping-Inapp-ST-10  | 0       | 2               | 60    | -2       |
       | campaign-DeviceLifetimeCapping-Inapp-ST-11      | 2       | 0               | 0     | -2       |
@@ -280,15 +280,14 @@ Feature: Entities for tests
     #    40% gives cpm = 0.6
     #    70% gives cpm = 0.3
     And i update campaign data by name
-      | Campaign Name                               | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage |
-#      |campaign-HB-DynamicPrice-1                    |40                                   |40                           |
-      | campaign-HB-DynamicPrice-2                  | 70                              | 70                             |
-      | campaign-HB-DynamicPrice-3                  | 40                              | 40                             |
-      | campaign-HB-DynamicPrice-4                  | 50                              | 70                             |
-      | campaign-HB-DynamicPrice-ST-1x2-5a          | 40                              | 40                             |
-      | campaign-HB-DynamicPrice-Desktop-300X250-5b | 50                              | 50                             |
-      | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 40                              | 40                             |
-      | campaign-HB-DP-ServerPr-PGC-6b              | 40                              | 40                             |
+      | Campaign Name                               | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
+      | campaign-HB-DynamicPrice-2                  | 70                              | 70                             | 0                  |
+      | campaign-HB-DynamicPrice-3                  | 40                              | 40                             | 0                  |
+      | campaign-HB-DynamicPrice-4                  | 50                              | 70                             | 0                  |
+      | campaign-HB-DynamicPrice-ST-1x2-5a          | 40                              | 40                             | 0                  |
+      | campaign-HB-DynamicPrice-Desktop-300X250-5b | 50                              | 50                             | 0                  |
+      | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 40                              | 40                             | 0                  |
+      | campaign-HB-DP-ServerPr-PGC-6b              | 40                              | 40                             | 0                  |
     And i update zone data by name
       | Zone Name                                       | is_secure |
       | zone-zoneset-HB-Tablet-160x600                  | 1         |
@@ -968,7 +967,7 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                       | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-city-zoneLevelLimit-ST     | 75396 | 244896   | false                 | 8290          | {zone-zoneset-city-zoneLevelLimit-ST}     | []         | 93       | 15288          | 3708         | 65991           | []             | []             |
-      | campaign-region-bannerLevelLimit-ST | 75396 | 244896   | false                 | 8290          | {zone-zoneset-region-bannerLevelLimit-ST} | []         | 93       | 15289          | 3708         | 65991           | []             | []             |
+      | campaign-region-bannerLevelLimit-ST | 75396 | 244896   | false                 | 8290          | {zone-zoneset-region-bannerLevelLimit-ST} | []         | 93       | 739            | 3708         | 65991           | []             | []             |
       | campaign-state-zoneLevelLimit-ST    | 75396 | 244896   | false                 | 8290          | {zone-zoneset-state-zoneLevelLimit-ST}    | []         | 93       | 15291          | 3708         | 65991           | []             | []             |
       | campaign-state-bannerLevelLimit-ST  | 75396 | 244896   | false                 | 8290          | {zone-zoneset-state-bannerLevelLimit-ST}  | []         | 93       | 15290          | 3708         | 65991           | []             | []             |
     And i update banner data by name
@@ -987,7 +986,6 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name                              |
       | campaign-CT-ST-1                           |
-      | campaign-dv-zoneLevelLimit-ST              |
       | campaign-dv-campaignLevelLimit-ST          |
       | campaign-dv-campaignLevelLimit-exclude-ST  |
       | campaign-dv-zoneLevelLimit-peer-ST         |
@@ -996,7 +994,6 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                              | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude                                                                |
       | campaign-CT-ST-1                           | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-1}                           | []         | 93       | 15182          | 3708         | 65991           | []                                                                            | []                                                                            |
-      | campaign-dv-zoneLevelLimit-ST              | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-ST}              | []         | 93       | 15288          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-ST          | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-ST}          | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-campaignLevelLimit-exclude-ST  | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-exclude-ST}  | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
       | campaign-dv-zoneLevelLimit-peer-ST         | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-peer-ST}         | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
@@ -1017,7 +1014,6 @@ Feature: Entities for tests
 
     And i update zone data by name
       | Zone Name                                      | limitation |
-      | zone-zoneset-dv-zoneLevelLimit-ST              | []         |
       | zone-zoneset-dv-zoneLevelLimit-peer-ST         | []         |
       | zone-zoneset-dv-zoneLevelLimit-brand-safety-ST | []         |
 
@@ -1187,16 +1183,16 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 251035   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15359          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
-      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority |
-      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 20                             | -1       |
-      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 30                             | -1       |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 20                             | -2       |
-      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       |
+      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority | use_default_margin |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 20                             | -1       | 0                  |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 30                             | -1       | 0                  |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 20                             | -2       | 0                  |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | -2       | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       | 0                  |
 
     And i update campaign data by name
       | Campaign Name                                          | priority |
@@ -1700,8 +1696,9 @@ Feature: Entities for tests
   @refreshCaches
   Scenario: refresh caches
     And I refresh zone cache
-    And I restart {ramp-lift-services}
-    And I restart {ut-programmatic-gw}
+    #******** REMOVED *********
+#    And I restart {ramp-lift-services}
+#    And I restart {ut-programmatic-gw}
 
 
   @optimize
