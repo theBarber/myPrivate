@@ -352,7 +352,7 @@ public class ConsentTest extends BaseTest {
         String body =
                 "{\"x-ut-hb-params\":[\n" +
                         "  {\n" +
-                        " \"bidRequestId\": \"123\"," + "\n" +
+                        " \"bidRequestId\": \"" + HB_BID_REQ_ID + "\"," + "\n" +
                         " \"domain\": \"" + domain + "\",\n" +
                         " \"sizes\":[" + h1 + "," + w1 + "],\n" +
                         " \"timeout\": 700,\n" +
