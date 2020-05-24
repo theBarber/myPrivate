@@ -9,6 +9,8 @@
 Feature: PG1 x - limitation support
 
   Background: health check
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
     When Sending a healthcheck request to UAS
     And I add header of {x-forwarded-for} with value {78.31.205.183}
     Then The response code is 200
@@ -49,33 +51,51 @@ Feature: PG1 x - limitation support
     Then The response code is 200
     And The responses are passback
 
+
+
+
+
+
+
   # &&&&&&&&&&&&&&&&&  Eitan need to fix 2
-#  Scenario: PG1 on Desktop - Dynamic Tag
-#    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=254&optimize=1}
-#    Then The response code is 200
-#    And The response contains {script}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
-#    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=255&optimize=1}
-#    Then The response code is 200
-#    And The response not contains script
-#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=482&optimize=1}
-#    Then The response code is 200
-#    And The response contains {script}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
-#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=483&optimize=1}
-#    Then The response code is 200
-#    And The response contains {script}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
-#    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
-#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=254&optimize=1}
-#    Then The response code is 200
-#    And The response contains {script}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
-#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=255&optimize=1}
-#    Then The response code is 200
-#    And The response not contains script
+  Scenario:7.1 PG1 on Desktop - Dynamic Tag - PG product
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=254&optimize=1}
+    Then The response code is 200
+    And The response contains {script}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
+
+  Scenario:7.2 PG1 disabled - Dynamic Tag - PG product
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=255&optimize=1}
+    Then The response code is 200
+    And The responses are passback
+
+  Scenario:7.3 PG1 on Desktop - Dynamic Tag - see through product - banner expected
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=482&optimize=1}
+    Then The response code is 200
+    And The response contains {script}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
+
+  Scenario:7.4 PG1 disabled - Dynamic Tag - see through product - banner expected
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=483&optimize=1}
+    Then The response code is 200
+    And The response contains {script}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
+
+  Scenario:7.5 PG1 enabled - Dynamic Tag - PG product - firefox - banner expected
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=254&optimize=1}
+    Then The response code is 200
+    And The response contains {script}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
+
+  Scenario:7.6 PG1 disabled - Dynamic Tag - see through - firefox - banner expected
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=255&optimize=1}
+    Then The response code is 200
+    And The responses are passback
 #    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=482&optimize=1}
 #    Then The response code is 200
 #    And The response contains {script}
