@@ -53,11 +53,7 @@ Feature: PG1 x - limitation support
 
 
 
-
-
-
-
-  # &&&&&&&&&&&&&&&&&  Eitan need to fix 2
+  # *************  Pg1 Dynamic tag *************
   Scenario:7.1 PG1 on Desktop - Dynamic Tag - PG product
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=254&optimize=1}
@@ -92,41 +88,55 @@ Feature: PG1 x - limitation support
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Desktop-limited-banner-1} 100% of the time
 
-  Scenario:7.6 PG1 disabled - Dynamic Tag - see through - firefox - banner expected
+  Scenario:7.6 PG1 disabled - Dynamic Tag - page grabber - firefox - passback expected
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=255&optimize=1}
     Then The response code is 200
     And The responses are passback
-#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=482&optimize=1}
-#    Then The response code is 200
-#    And The response contains {script}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
-#    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=483&optimize=1}
-#    Then The response code is 200
-#    And The response contains {script}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
+
+  Scenario:7.7 PG1 enabled - Dynamic Tag - see through - firefox - banner expected
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3666 with domain {Dynamic2.com&tagid=482&optimize=1}
+    Then The response code is 200
+    And The response contains {script}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
+
+  Scenario:7.8 PG1 disabled - Dynamic Tag - see through - firefox - banner expected
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
+    Then i send 1 times Dynamic Tag ad request to UAS for publisher 3675 with domain {Dynamic3.com&tagid=483&optimize=1}
+    Then The response code is 200
+    And The response contains {script}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-ST1-Desktop-banner-1} 100% of the time
+
+# *************  Pg1 Header Bidding *************
+  Scenario:8.1 PG1 on Desktop - Header Bidding - PG1 enabled - page grabber product - banner expected
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send 1 headerBidding post request for scenario {Send HB request 1X1 size for publisher 3666} for publisher 3666 with domain {Dynamic2.com} with extra params {&optimize=1}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
+
+  Scenario:8.2 PG1 on Desktop - Header Bidding - PG1 disabled - page grabber product - passback expected
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send 1 headerBidding post request for scenario {Send HB request 1X1 size for publisher 3675} for publisher 3675 with domain {Dynamic3.com} with extra params {&optimize=1}
+    And The response code is 204
+
+  Scenario:8.3 PG1 on Desktop - Header Bidding - PG1 enabled, firefox - page grabber product - banner expected
+    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding post request for scenario {Send HB request 1X1 size for publisher 3666} for publisher 3666 with domain {Dynamic2.com} with extra params {&optimize=1}
+    Then The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
 
 
-#  Scenario: PG1 on Desktop - Header Bidding
-#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-#    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-#    Given i send 1 headerBidding post request for scenario {Send HB request 1X1 size for publisher 3666} for publisher 3666 with domain {Dynamic2.com} with extra params {&optimize=1}
-#    And The response code is 200
-#    And The response contains {script}
-#    And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
-#    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
-#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-#    Given i send 1 headerBidding post request for scenario {Send HB request 1X1 size for publisher 3675} for publisher 3675 with domain {Dynamic3.com} with extra params {&optimize=1}
-#    And The response code is 204
-#    Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0} as user-agent string to send my requests to uas
-#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-#    Given i send 1 headerBidding post request for scenario {Send HB request 1X1 size for publisher 3666} for publisher 3666 with domain {Dynamic2.com} with extra params {&optimize=1}
-#    Then The response code is 200
-#    And The response contains {script}
-#    And all HB responses contains adId with id of entity named {campaign-PG1-Desktop-limited-banner-1}
-#    Given I use {Mozilla/4.0 (compatible; MSIE 10.0; Windows NT 6.0)} as user-agent string to send my requests to uas
-#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-#    Given i send 1 headerBidding post request for scenario {Send HB request 1X1 size for publisher 3675} for publisher 3675 with domain {Dynamic3.com} with extra params {&optimize=1}
-#    Then The response code is 204
+  Scenario:8.4 PG1 on Desktop - Header Bidding - PG1 disabled, IE explorer - page grabber product - passback expected
+    Given I use {Mozilla/4.0 (compatible; MSIE 10.0; Windows NT 6.0)} as user-agent string to send my requests to uas
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    Given i send 1 headerBidding post request for scenario {Send HB request 1X1 size for publisher 3675} for publisher 3675 with domain {Dynamic3.com} with extra params {&optimize=1}
+    Then The response code is 204
+
 
 #  Scenario: PG1 on Mobile - zone request
 #    Given I use {Mozilla/5.0 (Linux; Android 4.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19} as user-agent string to send my requests to uas
@@ -134,6 +144,8 @@ Feature: PG1 x - limitation support
 #    Then The response code is 200
 #    And The response contains {script}
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-PG1-Smartphone-limited-banner-1} 100% of the time
+
+
 #    When I send 1 times an ad request with parameter {optimize=1} for zone named {zone-zoneset-PG1-4} to UAS
 #    Then The response code is 200
 #    And The response contains {script}
