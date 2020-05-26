@@ -1648,6 +1648,36 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-SP                 | 1                           | DV                         |
 
 
+# ************ VIEWABILITY ************
+  Scenario: create entities for viewability tests
+    Given i disable campaigns by name on db
+      | Campaign Name                 |
+      | campaign-IAS-low-viewability  |
+      | campaign-IAS-high-viewability |
+      | campaign-DV-low-viewability   |
+      | campaign-DV-high-viewability  |
+
+    Given i create new campaigns with viewability
+      | Campaign Name                 | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | avThreshold | avVendor |
+      | campaign-IAS-low-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-low}  | []         | 83       | 4737           | 2434         | 62229           | 10          | ias      |
+      | campaign-IAS-high-viewability | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-high} | []         | 83       | 4737           | 2434         | 62229           | 90          | ias      |
+      | campaign-DV-low-viewability   | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-low}   | []         | 83       | 4737           | 2434         | 62229           | 10          | dv       |
+      | campaign-DV-high-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-high}  | []         | 83       | 4737           | 2434         | 62229           | 90          | dv       |
+    And i update banner data by name
+      | Banner Name                            | limitation |
+      | campaign-IAS-low-viewability-banner-1  | []         |
+      | campaign-IAS-high-viewability-banner-1 | []         |
+      | campaign-DV-low-viewability-banner-1   | []         |
+      | campaign-DV-high-viewability-banner-1  | []         |
+
+    And i update zone data by name
+      | Zone Name                         | is_secure |
+      | zone-zoneset-viewability-IAS-low  | 1         |
+      | zone-zoneset-viewability-IAS-high | 1         |
+      | zone-zoneset-viewability-DV-low   | 1         |
+      | zone-zoneset-viewability-DV-high  | 1         |
+
+
   @DynamicPricing
   @InAppBlackWhiteList
   @OpenX
