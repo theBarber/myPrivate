@@ -1661,8 +1661,8 @@ Feature: Entities for tests
       | Campaign Name                 | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | avThreshold | avVendor |
       | campaign-IAS-low-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-low}  | []         | 83       | 4737           | 2434         | 62229           | 10          | ias      |
       | campaign-IAS-high-viewability | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-high} | []         | 83       | 4737           | 2434         | 62229           | 90          | ias      |
-      | campaign-DV-low-viewability   | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-low}   | []         | 83       | 4737           | 2434         | 62229           | 10          | DV       |
-      | campaign-DV-high-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-high}  | []         | 83       | 4737           | 2434         | 62229           | 90          | DV       |
+      | campaign-DV-low-viewability   | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-low}   | []         | 83       | 4737           | 2434         | 62229           | 10          | dv       |
+      | campaign-DV-high-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-high}  | []         | 83       | 4737           | 2434         | 62229           | 90          | dv       |
     And i update banner data by name
       | Banner Name                            | limitation |
       | campaign-IAS-low-viewability-banner-1  | []         |
