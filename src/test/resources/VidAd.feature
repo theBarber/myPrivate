@@ -53,6 +53,6 @@ Feature: video Adhsion new ad unit tests
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-InstreamVid-View-SP-banner-1} 100% of the time
 
   Scenario:8 InstreamVid, zone req, vpaid_support=1, not inapp. banner with moat wrapper expected
-    When I send 1 times an ad video request with parameter {optimize=1&unlimited=1&domain=dnu-tt&vpaid_support=1&requestid=vidAd} for zone named {zone-zoneset-InstreamVid-View-SP} to UAS
-    And The response has a moat wrapper with params advanced string with advertiserid = 22420, ioid = 407981, iolineitemid = 244699, bannername = {campaign-InstreamVid-View-SP-banner-1}, campaignname = {campaign-InstreamVid-View-SP}, zonename = {zone-zoneset-InstreamVid-View-SP}, MoatWEBID = 3708
+    When I send 1 times an ad video request with parameter {optimize=1&unlimited=1&domain=dnu-tt&vpaid_support=1&requestid=vidAd} for zone named {zone-zoneset-InstreamVid-Moat} to UAS
+    And The response has a moat wrapper with params advanced string with advertiserid = 22420, ioid = 407981, iolineitemid = 244699, bannername = {campaign-InstreamVid-Moat-banner-1}, campaignname = {campaign-InstreamVid-Moat}, zonename = {zone-zoneset-InstreamVid-Moat}, MoatWEBID = 3708
     And The response contains {&zMoatWEBID=3708}
