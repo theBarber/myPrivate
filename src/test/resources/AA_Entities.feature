@@ -982,8 +982,7 @@ Feature: Entities for tests
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                                                                                                                                                                                            |
 
 
-#******  @contextualEntities
-#******  @contextual
+#******  CONTEXTUAL  ********
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                              |
@@ -1686,7 +1685,6 @@ Feature: Entities for tests
   @PGX
   @PG1
   @SupplyType
-  @viewability
   @GDPR
   @appnexus
   @cacheRefresh
@@ -1713,7 +1711,6 @@ Feature: Entities for tests
   @PG1
   @PLT
   @SupplyType
-  @viewability
   @appnexus
   @cacheRefresh
   @bannerCache
