@@ -476,11 +476,10 @@ Feature: Entities for tests
       | campaign-DT-SI-1-t-1   |
       | campaign-DT-SI-2-t-1   |
       | campaign-DT-PGC-2-t-1  |
-      | campaign-DT-SS-1-t-2   |
-      | campaign-DT-SI-2-t-2   |
-      | campaign-DT-PGC-3-t-2  |
-      | campaign-DT-SI-1-t-3-L |
-      | campaign-DT-SI-2-t-3   |
+#      | campaign-DT-SS-1-t-2   |
+#      | campaign-DT-SI-2-t-2   |
+#      | campaign-DT-SI-1-t-3-L |
+#      | campaign-DT-SI-2-t-3   |
     Given i create new campaigns with new zoneset
       | Campaign Name          | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name         | limitation        | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-DT-SS-1-t-1   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}   | []                | 69       | 14401          | 3674         | 64397           |
@@ -488,11 +487,10 @@ Feature: Entities for tests
       | campaign-DT-SI-1-t-1   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}   | []                | 61       | 14401          | 3674         | 64398           |
       | campaign-DT-SI-2-t-1   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}   | []                | 61       | 14401          | 3674         | 64398           |
       | campaign-DT-PGC-2-t-1  | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-PGC-t-1}  | []                | 75       | 14401          | 3674         | 64399           |
-      | campaign-DT-SS-1-t-2   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-2}   | []                | 69       | 14402          | 3666         | 64400           |
-      | campaign-DT-SI-2-t-2   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-2}   | []                | 61       | 14402          | 3666         | 64401           |
-      | campaign-DT-PGC-3-t-2  | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-PGC-t-2}  | []                | 75       | 14402          | 3666         | 64402           |
-      | campaign-DT-SI-1-t-3-L | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3-L} | [[[5,"=~","af"]]] | 61       | 14403          | 3675         | 64403           |
-      | campaign-DT-SI-2-t-3   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3}   | []                | 61       | 14403          | 3675         | 64403           |
+#      | campaign-DT-SS-1-t-2   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-2}   | []                | 69       | 14402          | 3666         | 64400           |
+#      | campaign-DT-SI-2-t-2   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-2}   | []                | 61       | 14402          | 3666         | 64401           |
+#      | campaign-DT-SI-1-t-3-L | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3-L} | [[[5,"=~","af"]]] | 61       | 14403          | 3675         | 64403           |
+#      | campaign-DT-SI-2-t-3   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3}   | []                | 61       | 14403          | 3675         | 64403           |
     And i update campaign data by name
       | Campaign Name          | Priority | campaign_delivery_method |
       | campaign-DT-SS-1-t-1   | -2       | 1                        |
@@ -500,21 +498,19 @@ Feature: Entities for tests
       | campaign-DT-SI-1-t-1   | -2       | 1                        |
       | campaign-DT-SI-2-t-1   | -1       | 2                        |
       | campaign-DT-PGC-2-t-1  | -1       | 2                        |
-      | campaign-DT-SS-1-t-2   | -2       | 1                        |
-      | campaign-DT-SI-2-t-2   | -1       | 2                        |
-      | campaign-DT-PGC-3-t-2  | 1        | 4                        |
-      | campaign-DT-SI-1-t-3-L | -2       | 1                        |
-      | campaign-DT-SI-2-t-3   | -1       | 2                        |
+#      | campaign-DT-SS-1-t-2   | -2       | 1                        |
+#      | campaign-DT-SI-2-t-2   | -1       | 2                        |
+#      | campaign-DT-SI-1-t-3-L | -2       | 1                        |
+#      | campaign-DT-SI-2-t-3   | -1       | 2                        |
     And i update zone data by name
       | Zone Name                | is_secure |
       | zone-zoneset-DT-SS-t-1   | 1         |
       | zone-zoneset-DT-SI-t-1   | 1         |
       | zone-zoneset-DT-PGC-t-1  | 1         |
-      | zone-zoneset-DT-SS-t-2   | 1         |
-      | zone-zoneset-DT-SI-t-2   | 1         |
-      | zone-zoneset-DT-PGC-t-2  | 1         |
-      | zone-zoneset-DT-SI-t-3-L | 1         |
-      | zone-zoneset-DT-SI-t-3   | 1         |
+#      | zone-zoneset-DT-SS-t-2   | 1         |
+#      | zone-zoneset-DT-SI-t-2   | 1         |
+#      | zone-zoneset-DT-SI-t-3-L | 1         |
+#      | zone-zoneset-DT-SI-t-3   | 1         |
 
   @GDPR
   @DT
@@ -935,25 +931,31 @@ Feature: Entities for tests
     Given i disable campaigns by name on db
       | Campaign Name                |
       | campaign-InstreamVid-View-SP |
+      | campaign-InstreamVid-Moat    |
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | campaign-InstreamVid-View-SP | 407981 | 244699   | true                  | 816           | {zone-zoneset-InstreamVid-View-SP} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+      | campaign-InstreamVid-Moat    | 407981 | 244699   | true                  | 816           | {zone-zoneset-InstreamVid-Moat}    | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
      # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
     And i update campaign data by name
       | Campaign Name                | is_sync | is_video |
       | campaign-InstreamVid-View-SP | 1       | 1        |
+      | campaign-InstreamVid-Moat    | 1       | 1        |
 
-#    And i update campaign data by name
-#      | Campaign Name                | viewability_wrapper_enabled | viewability_wrapper_vendor |
-#      | campaign-InstreamVid-View-SP | 1                           | MOAT                       |
+    And i update campaign data by name
+      | Campaign Name             | viewability_wrapper_enabled | viewability_wrapper_vendor |
+      | campaign-InstreamVid-Moat | 1                           | MOAT                       |
+
       # ****  update is_sync=1 parameter of the zone ***
     And i update zone data by name
       | Zone Name                        | is_sync |
       | zone-zoneset-InstreamVid-View-SP | 1       |
+      | zone-zoneset-InstreamVid-Moat    | 1       |
      # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
     And i update zoneset data by name
       | Zoneset Name                     | is_sync | is_video |
       | zone-zoneset-InstreamVid-View-SP | 1       | 1        |
+      | zone-zoneset-InstreamVid-Moat    | 1       | 1        |
 
 
   Scenario:  create entities for enrich geo filter
@@ -980,8 +982,7 @@ Feature: Entities for tests
       | zone-zoneset-state-zoneLevelLimit-ST | [[[5,"=~","ca"]]]                                                                                                                                                                                            |
 
 
-#******  @contextualEntities
-#******  @contextual
+#******  CONTEXTUAL  ********
   Scenario:  create entities for contextual targeting - double verify
     Given i disable campaigns by name on db
       | Campaign Name                              |
@@ -1646,6 +1647,36 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-SP                 | 1                           | DV                         |
 
 
+# ************ VIEWABILITY ************
+  Scenario: create entities for viewability tests
+    Given i disable campaigns by name on db
+      | Campaign Name                 |
+      | campaign-IAS-low-viewability  |
+      | campaign-IAS-high-viewability |
+      | campaign-DV-low-viewability   |
+      | campaign-DV-high-viewability  |
+
+    Given i create new campaigns with viewability
+      | Campaign Name                 | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | avThreshold | avVendor |
+      | campaign-IAS-low-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-low}  | []         | 83       | 4737           | 2434         | 62229           | 10          | ias      |
+      | campaign-IAS-high-viewability | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-high} | []         | 83       | 4737           | 2434         | 62229           | 90          | ias      |
+      | campaign-DV-low-viewability   | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-low}   | []         | 83       | 4737           | 2434         | 62229           | 10          | dv       |
+      | campaign-DV-high-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-high}  | []         | 83       | 4737           | 2434         | 62229           | 90          | dv       |
+    And i update banner data by name
+      | Banner Name                            | limitation |
+      | campaign-IAS-low-viewability-banner-1  | []         |
+      | campaign-IAS-high-viewability-banner-1 | []         |
+      | campaign-DV-low-viewability-banner-1   | []         |
+      | campaign-DV-high-viewability-banner-1  | []         |
+
+    And i update zone data by name
+      | Zone Name                         | is_secure |
+      | zone-zoneset-viewability-IAS-low  | 1         |
+      | zone-zoneset-viewability-IAS-high | 1         |
+      | zone-zoneset-viewability-DV-low   | 1         |
+      | zone-zoneset-viewability-DV-high  | 1         |
+
+
   @DynamicPricing
   @InAppBlackWhiteList
   @OpenX
@@ -1654,7 +1685,6 @@ Feature: Entities for tests
   @PGX
   @PG1
   @SupplyType
-  @viewability
   @GDPR
   @appnexus
   @cacheRefresh
@@ -1681,7 +1711,6 @@ Feature: Entities for tests
   @PG1
   @PLT
   @SupplyType
-  @viewability
   @appnexus
   @cacheRefresh
   @bannerCache
