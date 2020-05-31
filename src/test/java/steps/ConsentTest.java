@@ -40,7 +40,7 @@ public class ConsentTest extends BaseTest {
     private static final String HB_REQ_DOMAIN = "DynamicPricingWithMargin.com";
     private static final String HB_REQ_ADAPTOR = "prebid";
     private static final String HB_BID_REQ_ID = "21b46f0d859b35";
-    private static final String HB_PUB_ID = "3836";
+    private static final Integer HB_PUB_ID = 3836;
     private static final String HB_SIZES = "[[970,250]]";
     private static final String HB_EXTRA_URL_PARAMS = "&sim_geo=1&country=us";
 
