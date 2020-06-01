@@ -33,13 +33,11 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-
 public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<HttpResponse>>> {
 
     public enum requestTypesEnum {
         ZONE, DYNAMIC_TAG, HEADER_BIDDING, WEL, PRF, EVE
     }
-
     protected static SystemUnderTest sut = SystemUnderTest.getInstance();
     private ExecutorService requestSubmitter;
     private static final String lettersDigitsAndHyphen = "[0-9a-zA-Z-+_,%/=()]";
@@ -47,6 +45,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
             .compile("(https?:\\\\?/\\\\?/[^:/?#]*(?::[0-9]+)?\\/l\\?[^\'\\\"]*)[\'\\\"]");
 
     protected static final Pattern renderURLPattern = Pattern
+//            .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/e\\?[^\'\\\"]*)[\'\\\"]");
             .compile("(https?:\\/\\/[^:/?#]*(?::[0-9]+)?\\/e\\?[^\'\\\"]*&e=render)[\'\\\"]");
 
     protected static final Pattern UDMSVariablePattern = Pattern
@@ -103,8 +102,16 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         return domain;
     }
 
+    public String getTrackingServiceDomain(){
+        return trackingServiceDomain;
+    }
+
     public void setDomain(String host) {
         this.domain = host;
+    }
+
+    public void setTrackingServiceDomain(String host) {
+        this.trackingServiceDomain = host;
     }
 
     public String getPort() {
@@ -116,6 +123,7 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
     private String domain;
+    private String trackingServiceDomain;
     private String port;
     private long withSleepInMillis = 10;
     protected CloseableHttpClient httpclient;
@@ -177,11 +185,6 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         }
         System.out.println(url);
         for (; times > 0; times--) {
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                fail(e.getMessage());
-            }
             request(url, false);
         }
     }
@@ -335,7 +338,8 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     }
 
 
-    public List<Header> getHttpHeaders() {
+    public List<Header> getHttpHeaders()
+    {
         return httpHeaders;
     }
 
@@ -450,6 +454,14 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
         context.getCookieStore().addCookie(cookie);
     }
 
+    public void addCookieToImpression(String key, String value) {
+        BasicClientCookie cookie = new BasicClientCookie(key, value);
+        cookie.setDomain(trackingServiceDomain);
+        cookie.setPath("/");
+        context.getCookieStore().addCookie(cookie);
+    }
+
+
     public void setGenericCookie() {
         clearCookies();
         BasicCookieStore cookie = new BasicCookieStore();
@@ -541,9 +553,12 @@ public class UASRequestModule extends AbstractModuleImpl<List<CompletableFuture<
     private void sendPostRequestsAsync(Integer times, String url, String body) {
         reset();
         for (; times > 0; times--) {
-            actual().add(CompletableFuture.supplyAsync(() -> postRequest(url, body), requestSubmitter));
+            actual().add(CompletableFuture.supplyAsync(() -> {
+                return postRequest(url, body);
+            }, requestSubmitter));
         }
     }
+
 
 
     public void sendGetRequestsAsync(Integer times, String url, Boolean toReset) {

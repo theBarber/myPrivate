@@ -335,6 +335,11 @@ public class UASIntegrationTest extends BaseTest {
                             List<Header> httpHeaders = sut.getUASRquestModule().getHttpHeaders();
                             httpGet.setHeaders(httpHeaders.toArray(new Header[httpHeaders.size()]));
                             HttpResponse response = httpclient.execute(httpGet, ctx);
+                            try {
+                                TimeUnit.SECONDS.sleep(1);
+                            } catch (InterruptedException e) {
+                                fail(e.getMessage());
+                            }
                             if (response.getEntity() != null) {
                                 response.setEntity(new BufferedHttpEntity(response.getEntity()));
                                 InputStream is = response.getEntity().getContent();
@@ -768,9 +773,14 @@ public class UASIntegrationTest extends BaseTest {
                 is(not(OptionalMatchers.empty())));
         Map<Integer, Long> theAmountOfTheOccurencesOfTheFieldValueById;
         theAmountOfTheOccurencesOfTheFieldValueById = sut.getUASRquestModule().responses()
-                .map(urlExtractor).map(CompletableFuture::join).map(UASIntegrationTest::toURL)
-                .filter(Optional::isPresent).map(Optional::get).map(UASIntegrationTest::splitQuery)
-                .flatMap(m -> m.entrySet().stream()).filter(entry -> fieldName.equals(entry.getKey()))
+                .map(urlExtractor)
+                .map(CompletableFuture::join)
+                .map(UASIntegrationTest::toURL)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(UASIntegrationTest::splitQuery)
+                .flatMap(m -> m.entrySet().stream())
+                .filter(entry -> fieldName.equals(entry.getKey()))
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.groupingBy(Integer::parseInt, Collectors.counting()));
 
