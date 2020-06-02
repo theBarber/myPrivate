@@ -17,7 +17,7 @@ Feature: Header Bidding Flow Support
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
     Then The response code is 200
     
-  Scenario: send HB basic request
+  Scenario:1 send HB basic request
     Given i send 20 headerBidding post request for scenario {Send HB basic request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
@@ -27,69 +27,69 @@ Feature: Header Bidding Flow Support
     And all HB responses contains cpm with value {1.0}
     And I send impression requests to UAS
 
-  Scenario: Send HB request with Empty domain
+  Scenario:2 Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
 
-  Scenario: Send HB request with Empty placementID
+  Scenario:3 Send HB request with Empty placementID
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty placementID for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
-  Scenario: Send HB request with Empty sizes
+  Scenario:4 Send HB request with Empty sizes
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: Send HB request with Empty timeout
+  Scenario:5 Send HB request with Empty timeout
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty timeout for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
-  Scenario: Send HB request with wrong values
+  Scenario:6 Send HB request with wrong values
     Given i send 1 headerBidding post request for scenario {Send HB request with wrong values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: Send HB request with wrong values - sizes as string
+  Scenario:7 Send HB request with wrong values - sizes as string
     Given i send 1 headerBidding post request for scenario {Send HB request with sizes as string for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: Send HB request with wrong values - sizes as string array
+  Scenario:8 Send HB request with wrong values - sizes as string array
     Given i send 1 headerBidding post request for scenario {Send HB request with string array sizes for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: Send HB request with wrong values - everything is empty in parmeters
+  Scenario:9 Send HB request with wrong values - everything is empty in parmeters
     Given i send 1 headerBidding post request for scenario {Send HB request with empty values for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: Send HB request with wrong values - partial data
+  Scenario:10 Send HB request with wrong values - partial data
     Given i send 1 headerBidding post request for scenario {Send HB request with partial data for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: Send HB request with wrong values - empty data
+  Scenario:11 Send HB request with wrong values - empty data
     Given i send 1 headerBidding post request for scenario {Send HB request with empty for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: Send HB request with wrong values - wrong format
+  Scenario:12 Send HB request with wrong values - wrong format
     Given i send 1 headerBidding post request for scenario {Send HB request with wrong format for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: Send HB request with one size
+  Scenario:13 Send HB request with one size
     Given i send 1 headerBidding post request for scenario {Send HB request with one size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
 
-  Scenario: Send HB request with no 1X1 size
+  Scenario:14 Send HB request with no 1X1 size
     Given i send 1 headerBidding post request for scenario {Send HB request with no 1X1 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
 #   bid price per platform tests
-  Scenario: Send Price per platform request with 970X250
+  Scenario:15 Send Price per platform request with 970X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 970X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
@@ -99,7 +99,7 @@ Feature: Header Bidding Flow Support
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
     And I send impression requests to UAS
 
-  Scenario: Send Price per platform request with 300X250
+  Scenario:16 Send Price per platform request with 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
@@ -109,7 +109,7 @@ Feature: Header Bidding Flow Support
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
     And I send impression requests to UAS
 
-  Scenario: Send Price per platform request with 970X250, 300X250
+  Scenario:17 Send Price per platform request with 970X250, 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with [970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
@@ -120,7 +120,7 @@ Feature: Header Bidding Flow Support
     And I send impression requests to UAS
 
 #   header bidding multiple bids tests
-  Scenario: header bidding multiple bids requests
+  Scenario:18 header bidding multiple bids requests
     Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
     And The response contains {script}
@@ -130,7 +130,7 @@ Feature: Header Bidding Flow Support
     And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
 
 #   header bidding multiple domains tests
-  Scenario: header bidding multiple domains - domain1
+  Scenario:19 header bidding multiple domains - domain1
     Given I add cookie UTID with value {d7a8b9faf42446dcbca3748eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
@@ -146,7 +146,7 @@ Feature: Header Bidding Flow Support
 
 #   header bidding profile targeting tests
   @HBProfileTargeting
-  Scenario: Header bidding - profile targeting - Ver1
+  Scenario:20 Header bidding - profile targeting - Ver1
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&optimize=1&sim_geo=1&country=us}
     And The response code is 200
@@ -167,7 +167,7 @@ Feature: Header Bidding Flow Support
 
 
 #   header bidding placment group test
-  Scenario: 1. 2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected
+  Scenario:21 -  2 sizes - 1*1 (SS, PG), 1 placment (PG), PG banner expected
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding secure post request for publisher 3728 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {slader.com} and placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
@@ -175,7 +175,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
-  Scenario: 2. 1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
+  Scenario:22  -  1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728002} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 200
@@ -183,7 +183,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-SS-1*1}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-SS-1*1-banner-1}
 
-  Scenario: 3. 1 size 1*2 (ST), 1 placement (PG), PG banner expected
+  Scenario:23 -  1 size 1*2 (ST), 1 placement (PG), PG banner expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 200
@@ -191,12 +191,12 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
-  Scenario: 4. 1 size 300*250 (doesn't have a suitable ad), no placement, passback expected
+  Scenario:24 -  1 size 300*250 (doesn't have a suitable ad), no placement, passback expected
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 300 size2 = 250, with domain {slader.com} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us}
     And The response code is 204
 
-  Scenario: 5. wrong size, 1 placement group (PG), PG banner expected
+  Scenario:25 -  wrong size, 1 placement group (PG), PG banner expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 200
@@ -205,7 +205,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
-  Scenario: 6. size doesn't belong to placement group, banner from placement group expected
+  Scenario:26. size doesn't belong to placement group, banner from placement group expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 200
@@ -214,7 +214,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
 
-  Scenario: 7. valid size, invalid placement group, banner ST according to sizes expected
+  Scenario:27 -  valid size, invalid placement group, banner ST according to sizes expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:970 w1:250, with domain {slader.com}, placmentID group = {blabla} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 200
@@ -223,7 +223,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
 
-  Scenario: 8. valid size 1*1 with suitable ad, no placement filed -BB 970*250 banner expected
+  Scenario:28 -  valid size 1*1 with suitable ad, no placement filed -BB 970*250 banner expected
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us}
     And The response code is 200
@@ -232,12 +232,12 @@ Feature: Header Bidding Flow Support
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
 
-  Scenario: 9. valid size 1*1 with suitable add, unactive placement group. should ignore sizes and return pb
+  Scenario:29 -  valid size 1*1 with suitable add, unactive placement group. should ignore sizes and return pb
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728005} and extra params {&optimize=1&unlimited=1&sim_geo=1&country=us} cookies false
     And The response code is 204
 
-  Scenario: header bidding multiple domains - domain2
+  Scenario:30 -  header bidding multiple domains - domain2
     Given I add cookie UTID with value {1112223331114444} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain2 request for publisher 3673} for publisher 3673 with domain {HBTest2.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
@@ -251,7 +251,7 @@ Feature: Header Bidding Flow Support
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} 100% of the time
     And I send impression requests to UAS
 
-  Scenario: header bidding multiple domains - domain3
+  Scenario:31 -  header bidding multiple domains - domain3
     Given I add cookie UTID with value {1112226661114444} to my requests to uas
     Given i send 2 headerBidding post request for scenario {Send HB Domain3 request for publisher 3673} for publisher 3673 with domain {HBTest3.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
@@ -265,7 +265,7 @@ Feature: Header Bidding Flow Support
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} 100% of the time
     And I send impression requests to UAS
 
-  Scenario: header bidding multiple domains - domain4
+  Scenario:32 -  header bidding multiple domains - domain4
     Given I add cookie UTID with value {d7a8b9caf42446dcbca3248eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain4 request for publisher 3673} for publisher 3673 with domain {HBTest4.com} with extra params {&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
@@ -281,7 +281,7 @@ Feature: Header Bidding Flow Support
 
 #   header bidding profile targeting tests
   @HBProfileTargeting
-  Scenario: Header bidding - profile targeting - Ver2
+  Scenario:33 -  Header bidding - profile targeting - Ver2
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&optimize=1&sim_geo=1&country=us}
     And The response code is 200
