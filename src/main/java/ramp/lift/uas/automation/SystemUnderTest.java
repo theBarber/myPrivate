@@ -367,7 +367,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 //        JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
         JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
         File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
-                .map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename))
+                .map(filename -> new File(filename))
                 .orElse(null);
 
         if (config.get("is.remote").equals("true")) {
