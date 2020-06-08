@@ -367,16 +367,12 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
         //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
-        File tmpFile = new File(System.getProperty("user.home"), ".ssh");
-        File keyFile = null;
-        if (tmpFile.exists()){
-            keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
-                    .map(filename -> new File(new File(System.getProperty("user.home"), ".ssh"), filename))
-                    .orElse(null);
-        } else {
-            keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
-                    .map(filename -> new File(filename))
-                    .orElse(null);
+        File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
+                .map(filename -> new File(filename))
+                .orElse(null);
+
+        if (config.get("is.remote").equals("true")) {
+            keyFile = new File("perion-automation/pems/" + cliconnectionKeyname);
         }
 
 //        JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
