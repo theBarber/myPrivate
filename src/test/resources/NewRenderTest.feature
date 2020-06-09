@@ -106,8 +106,7 @@ Feature: Validate New Render Service
     And The response contains {tags.bluekai.com/site/15597}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com}
 
-  @RenderWebDtPg
-  Scenario: Send a web DT request and validate the response of a programmatic PG banner
+  Scenario:7 Send a web DT request and validate the response of a programmatic PG banner
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When i send 1 times Dynamic Tag ad request to UAS for publisher 3728 with domain {damndelicious.net&requestid=PGZoneRender&tagid=238&newrender=1}
     And The response code is 200
@@ -175,8 +174,7 @@ Feature: Validate New Render Service
     And The response contains {https://tags.bluekai.com/site/15597?id=}
     And The response contains {https://ads.undertone.com/u?dp=44&url=https%3A%2F%2Fpx.tvadsync.com%2Fcom.snowplowanalytics.iglu%2Fv1%3Fschema%3Diglu%3Acom.tvadsync.poc%2Fad_impression%2Fjsonschema%2F1-2-0%26aid%3DUndertone-sync%26partnercookieID%3D}
 
-  @DtPgActionBanner
-  Scenario: Send a web DT request and validate the response of a programmatic PG Action banner
+  Scenario:11 Send a web DT request and validate the response of a programmatic PG Action banner
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When i send 1 times Dynamic Tag ad request to UAS for publisher 3673 with domain {gamesradar.com&requestid=AN-PGA-Render&tagid=617&newrender=1}
     And The response code is 200

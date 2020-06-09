@@ -103,7 +103,7 @@ Feature: Dynamic HB bid price
     And all HB responses contains cpm with value {1.0}
 
 
-  Scenario: Publisher with non reserved fixed bid price for BB, Campaign with no margin
+  Scenario:10.0 Publisher with non reserved fixed bid price for BB, Campaign with no margin
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved fixed bid price for campaign with no margin} for publisher 3836 with domain {DynamicPricingWithMargin5.com} with extra params {&requestid=OXbidDynMarg&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
@@ -123,7 +123,7 @@ Feature: Dynamic HB bid price
 #    And all HB responses contains cpm with value {6.2}
 
 #&&&&&&&&&&& 20% margin NR &&&&&&
-  Scenario: Publisher with non reserved dynamic bid price for MR, Campaign with 20% margin - return price = 0.8*6.2 = 4.96$
+  Scenario:12.0 Publisher with non reserved dynamic bid price for MR, Campaign with 20% margin - return price = 0.8*6.2 = 4.96$
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with non reserved dynamic bid price for campaign with 20 margin} for publisher 3836 with domain {DynamicPricingWithMarginMock.com} with extra params {&requestid=returnMockPrice&unlimited=1&optimize=1&sim_geo=1&country=us}
     And The response code is 200
