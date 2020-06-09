@@ -57,7 +57,7 @@ Feature: Validate New Render Service
 
   Scenario:4 Send a web HB request and validate the response of a direct ES banner
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {americanow.com} with extra params {&unlimited=1&newrender=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {americanow.com} with extra params {&unlimited=1&newrender=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-direct-HB-banner}
@@ -90,7 +90,7 @@ Feature: Validate New Render Service
 
   Scenario:6 Send a web HB request and validate the response of a Programmatic ES banner
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB PPP request for publisher 3728 with 300X250} for publisher 3728 with domain {testing.com} with extra params {&requestid=OXESRender&unlimited=1&newrender=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB PPP request for publisher 3728 with 300X250} for publisher 3728 with domain {testing.com} with extra params {&requestid=OXESRender&unlimited=1&newrender=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner}
@@ -246,7 +246,7 @@ Feature: Validate New Render Service
 
   Scenario:14 Send a web HB request and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3708 with 320X50} for publisher 3708 with domain {autoshopper.com} with extra params {&unlimited=1&newrender=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3708 with 320X50} for publisher 3708 with domain {autoshopper.com} with extra params {&unlimited=1&newrender=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-direct-HB-video}
@@ -327,7 +327,7 @@ Feature: Validate New Render Service
 
   Scenario:17 Send a web HB request and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3708 with 320X50} for publisher 3708 with domain {cnn.com} with extra params {&requestid=OX-VA-Render&unlimited=1&newrender=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3708 with 320X50} for publisher 3708 with domain {cnn.com} with extra params {&requestid=OX-VA-Render&unlimited=1&newrender=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-video}
