@@ -470,43 +470,43 @@ Feature: Entities for tests
   @DT
   Scenario: create entities for DT tests
     Given i disable campaigns by name on db
-      | Campaign Name          |
-      | campaign-DT-SS-1-t-1   |
-      | campaign-DT-SI-2-t-1   |
-      | campaign-DT-SI-1-t-1   |
-      | campaign-DT-SI-2-t-1   |
-      | campaign-DT-PGC-2-t-1  |
+      | Campaign Name         |
+      | campaign-DT-SS-1-t-1  |
+      | campaign-DT-SI-2-t-1  |
+      | campaign-DT-SI-1-t-1  |
+      | campaign-DT-SI-2-t-1  |
+      | campaign-DT-PGC-2-t-1 |
 #      | campaign-DT-SS-1-t-2   |
 #      | campaign-DT-SI-2-t-2   |
 #      | campaign-DT-SI-1-t-3-L |
 #      | campaign-DT-SI-2-t-3   |
     Given i create new campaigns with new zoneset
-      | Campaign Name          | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name         | limitation        | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-DT-SS-1-t-1   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}   | []                | 69       | 14401          | 3674         | 64397           |
-      | campaign-DT-SS-2-t-1   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}   | []                | 69       | 14401          | 3674         | 64397           |
-      | campaign-DT-SI-1-t-1   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}   | []                | 61       | 14401          | 3674         | 64398           |
-      | campaign-DT-SI-2-t-1   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}   | []                | 61       | 14401          | 3674         | 64398           |
-      | campaign-DT-PGC-2-t-1  | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-PGC-t-1}  | []                | 75       | 14401          | 3674         | 64399           |
+      | Campaign Name         | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-DT-SS-1-t-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}  | []         | 69       | 14401          | 3674         | 64397           |
+      | campaign-DT-SS-2-t-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}  | []         | 69       | 14401          | 3674         | 64397           |
+      | campaign-DT-SI-1-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
+      | campaign-DT-SI-2-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
+      | campaign-DT-PGC-2-t-1 | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-PGC-t-1} | []         | 75       | 14401          | 3674         | 64399           |
 #      | campaign-DT-SS-1-t-2   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-2}   | []                | 69       | 14402          | 3666         | 64400           |
 #      | campaign-DT-SI-2-t-2   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-2}   | []                | 61       | 14402          | 3666         | 64401           |
 #      | campaign-DT-SI-1-t-3-L | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3-L} | [[[5,"=~","af"]]] | 61       | 14403          | 3675         | 64403           |
 #      | campaign-DT-SI-2-t-3   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3}   | []                | 61       | 14403          | 3675         | 64403           |
     And i update campaign data by name
-      | Campaign Name          | Priority | campaign_delivery_method |
-      | campaign-DT-SS-1-t-1   | -2       | 1                        |
-      | campaign-DT-SI-2-t-1   | -1       | 2                        |
-      | campaign-DT-SI-1-t-1   | -2       | 1                        |
-      | campaign-DT-SI-2-t-1   | -1       | 2                        |
-      | campaign-DT-PGC-2-t-1  | -1       | 2                        |
+      | Campaign Name         | Priority | campaign_delivery_method |
+      | campaign-DT-SS-1-t-1  | -2       | 1                        |
+      | campaign-DT-SI-2-t-1  | -1       | 2                        |
+      | campaign-DT-SI-1-t-1  | -2       | 1                        |
+      | campaign-DT-SI-2-t-1  | -1       | 2                        |
+      | campaign-DT-PGC-2-t-1 | -1       | 2                        |
 #      | campaign-DT-SS-1-t-2   | -2       | 1                        |
 #      | campaign-DT-SI-2-t-2   | -1       | 2                        |
 #      | campaign-DT-SI-1-t-3-L | -2       | 1                        |
 #      | campaign-DT-SI-2-t-3   | -1       | 2                        |
     And i update zone data by name
-      | Zone Name                | is_secure |
-      | zone-zoneset-DT-SS-t-1   | 1         |
-      | zone-zoneset-DT-SI-t-1   | 1         |
-      | zone-zoneset-DT-PGC-t-1  | 1         |
+      | Zone Name               | is_secure |
+      | zone-zoneset-DT-SS-t-1  | 1         |
+      | zone-zoneset-DT-SI-t-1  | 1         |
+      | zone-zoneset-DT-PGC-t-1 | 1         |
 #      | zone-zoneset-DT-SS-t-2   | 1         |
 #      | zone-zoneset-DT-SI-t-2   | 1         |
 #      | zone-zoneset-DT-SI-t-3-L | 1         |
@@ -1662,12 +1662,6 @@ Feature: Entities for tests
       | campaign-IAS-high-viewability | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-high} | []         | 83       | 4737           | 2434         | 62229           | 90          | ias      |
       | campaign-DV-low-viewability   | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-low}   | []         | 83       | 4737           | 2434         | 62229           | 10          | dv       |
       | campaign-DV-high-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-high}  | []         | 83       | 4737           | 2434         | 62229           | 90          | dv       |
-    And i update banner data by name
-      | Banner Name                            | limitation |
-      | campaign-IAS-low-viewability-banner-1  | []         |
-      | campaign-IAS-high-viewability-banner-1 | []         |
-      | campaign-DV-low-viewability-banner-1   | []         |
-      | campaign-DV-high-viewability-banner-1  | []         |
 
     And i update zone data by name
       | Zone Name                         | is_secure |
@@ -1675,6 +1669,32 @@ Feature: Entities for tests
       | zone-zoneset-viewability-IAS-high | 1         |
       | zone-zoneset-viewability-DV-low   | 1         |
       | zone-zoneset-viewability-DV-high  | 1         |
+
+
+
+# ************ DISTRICT LIMITATION ************
+  Scenario: create entities for District tests
+    Given i disable campaigns by name on db
+      | Campaign Name            |
+      | campaign-single-District |
+      | campaign-two-Districts   |
+
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name            | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-single-District | 75396 | 210722   | false                 | 204           | {zone-zoneset-single-district} | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+      | campaign-two-Districts   | 75396 | 210722   | false                 | 204           | {zone-zoneset-two-districts}   | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+
+
+    And i update zone data by name
+      | Zone Name                    | is_secure |
+      | zone-zoneset-single-district | 1         |
+      | zone-zoneset-two-districts   | 1         |
+
+    And i update banner data by name
+      | Banner Name                       | limitation                  |
+      | campaign-single-District-banner-1 | [[[68,"=~","ny09"]]]        |
+      | campaign-two-Districts-banner-1   | [[[68,"=~","ca40","il07"]]] |
 
 
   @DynamicPricing
