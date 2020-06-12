@@ -1675,26 +1675,26 @@ Feature: Entities for tests
 # ************ DISTRICT LIMITATION ************
   Scenario: create entities for District tests
     Given i disable campaigns by name on db
-      | Campaign Name            |
-      | campaign-single-District |
-      | campaign-two-Districts   |
+      | Campaign Name                |
+      | campaign-WY99-District       |
+      | campaign-CA40-CO06-Districts |
 
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name            | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-single-District | 75396 | 210722   | false                 | 204           | {zone-zoneset-single-district} | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
-      | campaign-two-Districts   | 75396 | 210722   | false                 | 204           | {zone-zoneset-two-districts}   | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+      | Campaign Name                | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-WY99-District       | 75396 | 210722   | false                 | 204           | {zone-zoneset-WY99-district}       | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+      | campaign-CA40-CO06-Districts | 75396 | 210722   | false                 | 204           | {zone-zoneset-CA40-CO06-districts} | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
 
 
     And i update zone data by name
-      | Zone Name                    | is_secure |
-      | zone-zoneset-single-district | 1         |
-      | zone-zoneset-two-districts   | 1         |
+      | Zone Name                        | is_secure |
+      | zone-zoneset-WY99-district       | 1         |
+      | zone-zoneset-CA40-CO06-districts | 1         |
 
     And i update banner data by name
-      | Banner Name                       | limitation                  |
-      | campaign-single-District-banner-1 | [[[68,"=~","ny09"]]]        |
-      | campaign-two-Districts-banner-1   | [[[68,"=~","ca40","il07"]]] |
+      | Banner Name                           | limitation                  |
+      | campaign-WY99-District-banner-1       | [[[68,"=~","wy99"]]]        |
+      | campaign-CA40-CO06-Districts-banner-1 | [[[68,"=~","ca40","co06"]]] |
 
 
   @DynamicPricing
