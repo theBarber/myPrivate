@@ -1699,10 +1699,10 @@ Feature: Entities for tests
 #  @Zonerefresh
 #  @yaniv
 #  @NDQFilteringTest
-#  Scenario: refresh zone cache with wait
 #    Given i kill replay on the machines
+  Scenario: refresh zone cache with wait
     And I setup the db
-    And I sleep for 60 seconds
+    And I sleep for 6 seconds
 #
 #
 #  @DynamicPricing
