@@ -1723,11 +1723,11 @@ Feature: Entities for tests
 #  @append
 #  @NDQFilteringTest
 #  @refreshCaches
-#  Scenario: refresh caches
-#    And I refresh zone cache
-#    #******** REMOVED *********
-##    And I restart {ramp-lift-services}
-##    And I restart {ut-programmatic-gw}
+  Scenario: refresh caches
+    And I refresh zone cache
+    #******** REMOVED *********
+#    And I restart {ramp-lift-services}
+#    And I restart {ut-programmatic-gw}
 
 
   @optimize
