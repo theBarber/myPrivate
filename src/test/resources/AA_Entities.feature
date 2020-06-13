@@ -592,7 +592,7 @@ Feature: Entities for tests
       # for open market flow
       | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
       | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-OPEN-MARKET-1          | 407981 | 253287   | true                  | 2777          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-OPEN-MARKET-1          | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
 
 ##     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1  |407981        |243452     |true                  |1719               |{zone-zoneset-server-prog-MultiBids-SS-1}           |[]           |69        |15176              |3711           |66556             |
