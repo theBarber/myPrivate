@@ -568,7 +568,7 @@ Feature: Entities for tests
     # programmatic flow - Reserve
       | campaign-reserve-AN-iter-1      |
       | campaign-reserve-OX-iter-2      |
-      | campaign-reserve-AN-iter-3      |
+      | campaign-OPEN-MARKET-1          |
 
 #     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1 |
@@ -589,10 +589,10 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-ST}       | []         | 83       | 2164           | 3711         | 66555           |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-inApp-ST} | []         | 83       | 2164           | 3711         | 66555           |
-      # programmatic flow - Reserve
-      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-reserve-AN-iter-3      | 407981 | 248362   | true                  | 2583          | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
+      # for open market flow
+      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-OPEN-MARKET-1          | 407981 | 248362   | true                  | 2777          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
 
 ##     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1  |407981        |243452     |true                  |1719               |{zone-zoneset-server-prog-MultiBids-SS-1}           |[]           |69        |15176              |3711           |66556             |
@@ -613,17 +613,17 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 1        | 4                        | 1                  | 1                      |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 1        | 4                        | 1                  | 1                      |
-      # programmatic flow - Reserve
+      # for open market flow
       | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
       | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
-      | campaign-reserve-AN-iter-3      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1          | 1        | 4                        | 2                  | 1                      |
 
     And i update zone data by name
       | Zone Name                    | is_secure |
       | zone-zoneset-server-prog-SS  | 1         |
       | zone-zoneset-server-prog-PGC | 1         |
       | zone-zoneset-server-prog-ST  | 1         |
-      | zone-zoneset-reserve-prog-PG | 1         |
+      | zone-zoneset-test-OM-PG      | 1         |
 #     |zone-zoneset-server-prog-MultiBids-SS-1     |1            |
 #     |zone-zoneset-server-prog-MultiBids-ST-2      |1            |
 #     Given i sent an analize req to peer39 for the following website = {https://www.bbc.com/sport}
@@ -1675,7 +1675,6 @@ Feature: Entities for tests
       | zone-zoneset-viewability-IAS-high | 1         |
       | zone-zoneset-viewability-DV-low   | 1         |
       | zone-zoneset-viewability-DV-high  | 1         |
-
 
 
   Scenario: refresh zone cache with wait
