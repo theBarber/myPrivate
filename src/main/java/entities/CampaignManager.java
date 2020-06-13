@@ -121,27 +121,6 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
     }
 
 
-    public void insertCampaignToIOMapOld(Campaign campaign, Integer lineItemID, Integer io_id) {
-        Optional<IO> io_O;
-        Optional<LineItem> li_O;
-
-        if (getCampaign(campaign.getName()).isPresent())
-            throw new AssertionError("campaign is already exist!");
-        else if ((li_O = getLineItem(lineItemID)).isPresent())
-            li_O.get().addCampaign(campaign);
-        else {
-            LineItem li = new LineItem(lineItemID);
-            li.addCampaign(campaign);
-            if ((io_O = getIO(io_id)).isPresent())
-                io_O.get().addLineItem(li);
-            else {
-                IO io = new IO(io_id);
-                io.addLineItem(li);
-                this.io = new ArrayList<>(this.io);
-                this.io.add(io);
-            }
-        }
-    }
 
     public void insertCampaignToIOMap(Campaign campaign, Integer lineItemID, Integer io_id) {
         IO io;
@@ -152,24 +131,26 @@ public class CampaignManager implements ParameterProvider<WithId<Integer>> {
             io = getIO(io_id).get();
         else {
             io = new IO(io_id);
+            this.io = new ArrayList<>(this.io);
+            this.io.add(io);
         }
 
         //figure if li exists
-        if (getLineItem(lineItemID).isPresent())
+        if (getLineItem(lineItemID).isPresent()){
             li = getLineItem(lineItemID).get();
-        else
-            //if not - create
+        }
+        else {
+            //if not - create and add to the list
             li = new LineItem(lineItemID);
+            io.addLineItem(li);
+        }
 
         //figure if campaign exists, delete it and add new one
-        if (getCampaign(campaign.getName()).isPresent())
+        if (getCampaign(campaign.getName()).isPresent()) {
             removeCampaignFromIOMap(campaign, li);
+        }
 
         li.addCampaign(campaign);
-        io.addLineItem(li);
-
-        this.io = new ArrayList<>(this.io);
-        this.io.add(io);
     }
 
 
