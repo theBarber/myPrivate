@@ -1677,52 +1677,11 @@ Feature: Entities for tests
       | zone-zoneset-viewability-DV-high  | 1         |
 
 
-  @DynamicPricing
-  @InAppBlackWhiteList
-  @OpenX
-  @Inapp
-  @UDMP
-  @PGX
-  @PG1
-  @SupplyType
-  @GDPR
-  @appnexus
-  @cacheRefresh
-  @HB
-  @DOT
-  @DT
-  @AB
-  @PLT
-  @zoneTagSanity
-  @Keren
-  @limitationSanity
-  @Zonerefresh
-  @yaniv
-  @NDQFilteringTest
+
   Scenario: refresh zone cache with wait
-    Given i kill replay on the machines
     And I setup the db
-    And I sleep for 60 seconds
+    And I sleep for 6 seconds
 
-
-  @DynamicPricing
-  @InAppBlackWhiteList
-  @UDMP
-  @PG1
-  @PLT
-  @SupplyType
-  @appnexus
-  @cacheRefresh
-  @bannerCache
-  @HB
-  @DOT
-  @DT
-  @Keren
-  @yaniv
-  @refresh
-  @append
-  @NDQFilteringTest
-  @refreshCaches
   Scenario: refresh caches
     And I refresh zone cache
     #******** REMOVED *********
