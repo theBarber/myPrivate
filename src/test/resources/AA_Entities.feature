@@ -470,43 +470,43 @@ Feature: Entities for tests
   @DT
   Scenario: create entities for DT tests
     Given i disable campaigns by name on db
-      | Campaign Name          |
-      | campaign-DT-SS-1-t-1   |
-      | campaign-DT-SI-2-t-1   |
-      | campaign-DT-SI-1-t-1   |
-      | campaign-DT-SI-2-t-1   |
-      | campaign-DT-PGC-2-t-1  |
+      | Campaign Name         |
+      | campaign-DT-SS-1-t-1  |
+      | campaign-DT-SI-2-t-1  |
+      | campaign-DT-SI-1-t-1  |
+      | campaign-DT-SI-2-t-1  |
+      | campaign-DT-PGC-2-t-1 |
 #      | campaign-DT-SS-1-t-2   |
 #      | campaign-DT-SI-2-t-2   |
 #      | campaign-DT-SI-1-t-3-L |
 #      | campaign-DT-SI-2-t-3   |
     Given i create new campaigns with new zoneset
-      | Campaign Name          | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name         | limitation        | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-DT-SS-1-t-1   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}   | []                | 69       | 14401          | 3674         | 64397           |
-      | campaign-DT-SS-2-t-1   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}   | []                | 69       | 14401          | 3674         | 64397           |
-      | campaign-DT-SI-1-t-1   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}   | []                | 61       | 14401          | 3674         | 64398           |
-      | campaign-DT-SI-2-t-1   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}   | []                | 61       | 14401          | 3674         | 64398           |
-      | campaign-DT-PGC-2-t-1  | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-PGC-t-1}  | []                | 75       | 14401          | 3674         | 64399           |
+      | Campaign Name         | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-DT-SS-1-t-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}  | []         | 69       | 14401          | 3674         | 64397           |
+      | campaign-DT-SS-2-t-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}  | []         | 69       | 14401          | 3674         | 64397           |
+      | campaign-DT-SI-1-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
+      | campaign-DT-SI-2-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
+      | campaign-DT-PGC-2-t-1 | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-PGC-t-1} | []         | 75       | 14401          | 3674         | 64399           |
 #      | campaign-DT-SS-1-t-2   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-2}   | []                | 69       | 14402          | 3666         | 64400           |
 #      | campaign-DT-SI-2-t-2   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-2}   | []                | 61       | 14402          | 3666         | 64401           |
 #      | campaign-DT-SI-1-t-3-L | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3-L} | [[[5,"=~","af"]]] | 61       | 14403          | 3675         | 64403           |
 #      | campaign-DT-SI-2-t-3   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3}   | []                | 61       | 14403          | 3675         | 64403           |
     And i update campaign data by name
-      | Campaign Name          | Priority | campaign_delivery_method |
-      | campaign-DT-SS-1-t-1   | -2       | 1                        |
-      | campaign-DT-SI-2-t-1   | -1       | 2                        |
-      | campaign-DT-SI-1-t-1   | -2       | 1                        |
-      | campaign-DT-SI-2-t-1   | -1       | 2                        |
-      | campaign-DT-PGC-2-t-1  | -1       | 2                        |
+      | Campaign Name         | Priority | campaign_delivery_method |
+      | campaign-DT-SS-1-t-1  | -2       | 1                        |
+      | campaign-DT-SI-2-t-1  | -1       | 2                        |
+      | campaign-DT-SI-1-t-1  | -2       | 1                        |
+      | campaign-DT-SI-2-t-1  | -1       | 2                        |
+      | campaign-DT-PGC-2-t-1 | -1       | 2                        |
 #      | campaign-DT-SS-1-t-2   | -2       | 1                        |
 #      | campaign-DT-SI-2-t-2   | -1       | 2                        |
 #      | campaign-DT-SI-1-t-3-L | -2       | 1                        |
 #      | campaign-DT-SI-2-t-3   | -1       | 2                        |
     And i update zone data by name
-      | Zone Name                | is_secure |
-      | zone-zoneset-DT-SS-t-1   | 1         |
-      | zone-zoneset-DT-SI-t-1   | 1         |
-      | zone-zoneset-DT-PGC-t-1  | 1         |
+      | Zone Name               | is_secure |
+      | zone-zoneset-DT-SS-t-1  | 1         |
+      | zone-zoneset-DT-SI-t-1  | 1         |
+      | zone-zoneset-DT-PGC-t-1 | 1         |
 #      | zone-zoneset-DT-SS-t-2   | 1         |
 #      | zone-zoneset-DT-SI-t-2   | 1         |
 #      | zone-zoneset-DT-SI-t-3-L | 1         |
@@ -568,7 +568,7 @@ Feature: Entities for tests
     # programmatic flow - Reserve
       | campaign-reserve-AN-iter-1      |
       | campaign-reserve-OX-iter-2      |
-      | campaign-reserve-AN-iter-3      |
+      | campaign-OPEN-MARKET-1          |
 
 #     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1 |
@@ -589,10 +589,10 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-ST}       | []         | 83       | 2164           | 3711         | 66555           |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-inApp-ST} | []         | 83       | 2164           | 3711         | 66555           |
-      # programmatic flow - Reserve
-      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-reserve-AN-iter-3      | 407981 | 248362   | true                  | 2583          | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
+      # for open market flow
+      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-OPEN-MARKET-1          | 407981 | 248362   | true                  | 2777          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
 
 ##     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1  |407981        |243452     |true                  |1719               |{zone-zoneset-server-prog-MultiBids-SS-1}           |[]           |69        |15176              |3711           |66556             |
@@ -613,17 +613,17 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 1        | 4                        | 1                  | 1                      |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 1        | 4                        | 1                  | 1                      |
-      # programmatic flow - Reserve
+      # for open market flow
       | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
       | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
-      | campaign-reserve-AN-iter-3      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1          | 1        | 4                        | 2                  | 1                      |
 
     And i update zone data by name
       | Zone Name                    | is_secure |
       | zone-zoneset-server-prog-SS  | 1         |
       | zone-zoneset-server-prog-PGC | 1         |
       | zone-zoneset-server-prog-ST  | 1         |
-      | zone-zoneset-reserve-prog-PG | 1         |
+      | zone-zoneset-test-OM-PG      | 1         |
 #     |zone-zoneset-server-prog-MultiBids-SS-1     |1            |
 #     |zone-zoneset-server-prog-MultiBids-ST-2      |1            |
 #     Given i sent an analize req to peer39 for the following website = {https://www.bbc.com/sport}
@@ -1675,7 +1675,6 @@ Feature: Entities for tests
       | zone-zoneset-viewability-IAS-high | 1         |
       | zone-zoneset-viewability-DV-low   | 1         |
       | zone-zoneset-viewability-DV-high  | 1         |
-
 
 
   Scenario: refresh zone cache with wait
