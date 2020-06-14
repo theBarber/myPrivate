@@ -1697,28 +1697,7 @@ Feature: Entities for tests
       | campaign-CA40-CO06-Districts-banner-1 | [[[68,"=~","ca40","co06"]]] |
 
 
-  @DynamicPricing
-  @InAppBlackWhiteList
-  @OpenX
-  @Inapp
-  @UDMP
-  @PGX
-  @PG1
-  @SupplyType
-  @GDPR
-  @appnexus
-  @cacheRefresh
-  @HB
-  @DOT
-  @DT
-  @AB
-  @PLT
-  @zoneTagSanity
-  @Keren
-  @limitationSanity
-  @Zonerefresh
-  @yaniv
-  @NDQFilteringTest
+
   Scenario: refresh zone cache with wait
     And I setup the db
     And I sleep for 6 seconds
