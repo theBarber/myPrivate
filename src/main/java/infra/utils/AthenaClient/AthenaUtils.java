@@ -55,9 +55,6 @@ public class AthenaUtils {
             else if (queryState.equals(QueryExecutionState.SUCCEEDED.toString())) {
                 isQueryStillRunning = false;
             }
-            else {
-                // Sleep an amount of time before retrying again.
-            }
             System.out.println("Current Status is: " + queryState);
         }
     }

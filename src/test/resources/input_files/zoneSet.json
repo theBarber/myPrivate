@@ -1,17 +1,32 @@
-[{
-	"zonesetId": 62185,
-	"zonesetName": "zoneset-auto-1-test-dnu",
-	"Zones": [
-		{
-			"zoneId": 155605,
-			"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test",
-			"adUnitId": 10,
-			"isSync": true,
-			"isSecure": false,
-			"status": 0
-		}
-	]
-},
+[
+	{
+		"zonesetId": 62185,
+		"zonesetName": "zoneset-auto-1-test-dnu",
+		"Zones": [
+			{
+				"zoneId": 155605,
+				"zoneName": "INT2434 - Medium Rectangle 300x250 - ramp-lift-auto-zone1-test",
+				"adUnitId": 10,
+				"isSync": true,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
+	{
+		"zonesetId": 72958,
+		"zonesetName": "zoneset234903",
+		"Zones": [
+			{
+				"zoneId": 192206,
+				"zoneName": "INT2434 - Billboard 970x250 - zone234903",
+				"adUnitId": 58,
+				"isSync": false,
+				"isSecure": false,
+				"status": 0
+			}
+		]
+	},
 	{
 		"zonesetId": 72958,
 		"zonesetName": "zoneset234903",
