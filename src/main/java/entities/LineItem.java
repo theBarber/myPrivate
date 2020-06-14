@@ -20,7 +20,7 @@ public class LineItem implements WithId<Integer> {
     @JsonProperty("ioId")
     public IO Io;
     @JsonProperty("Campaigns")
-    public List<Campaign> campaigns;
+    public List<Campaign> campaigns = new ArrayList<>();
     @JsonProperty("ioLineItemId")
     private Integer ioLineItemId;
     public static final DateTimeFormatter formatter;
