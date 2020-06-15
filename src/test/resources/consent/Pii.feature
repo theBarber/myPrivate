@@ -1,5 +1,6 @@
 @parallel
 @PiiTest
+@UtConsent
 @request_service
 Feature: Pii
 

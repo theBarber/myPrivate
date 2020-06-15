@@ -40,9 +40,9 @@ public class ConsentTest extends BaseTest {
     private static final String HB_REQ_DOMAIN = "DynamicPricingWithMargin.com";
     private static final String HB_REQ_ADAPTOR = "prebid";
     private static final String HB_BID_REQ_ID = "21b46f0d859b35";
-    private static final String HB_PUB_ID = "3836";
+    private static final Integer HB_PUB_ID = 3836;
     private static final String HB_SIZES = "[[970,250]]";
-    private static final String HB_EXTRA_URL_PARAMS = "&sim_geo=1&country=us";
+    private static final String HB_EXTRA_URL_PARAMS = "";  // "&sim_geo=1&country=us";
 
     private static final String INCLUDES = "includes";
 
@@ -270,7 +270,7 @@ public class ConsentTest extends BaseTest {
             final String gdprstr = "gdprstr=" + utGdprStr(utVendorIdInclusion.equalsIgnoreCase(INCLUDES), utPurposeIdsInclusion.equalsIgnoreCase(INCLUDES));
             final String hbGdprGdprstrParams = "&" + gdprstr;
             String body = getJsonBody(publisherID, h1, w1, domain);
-            UasApi.sendHbPostReq(times, body, Integer.valueOf(publisherID), domain, hbGdprGdprstrParams, true, false,false);
+            UasApi.sendHbPostReq(times, body, publisherID, domain, hbGdprGdprstrParams, true, false,false);
         });
 
 
@@ -323,7 +323,7 @@ public class ConsentTest extends BaseTest {
                 "        {\n" +
                 "            \"bidRequestId\": \"" + HB_BID_REQ_ID + "\",\n" +
                 "            \"domain\": \"" + HB_REQ_DOMAIN + "\",\n" +
-                "            \"publisherId\": \"" + HB_PUB_ID + "\",\n" +
+                "            \"publisherId\": " + HB_PUB_ID + ",\n" +
                 "            \"sizes\": " + HB_SIZES + ",\n" +
                 "            \"hbadaptor\": \"" + HB_REQ_ADAPTOR + "\"\n" +
                 "        }\n" +
@@ -349,18 +349,17 @@ public class ConsentTest extends BaseTest {
     }
 
     private String getJsonBody(Integer publisherID, Integer h1, Integer w1, String domain) {
-            String body =
-                    "{\"x-ut-hb-params\":[\n" +
-                            "  {\n" +
-                            " \"bidRequestId\": \"123\"," + "\n" +
-                            " \"domain\": \"" + domain + "\",\n" +
-                            " \"publisher_id\":  \"" + publisherID + "\",\n" +
-                            " \"sizes\":[" + h1 + "," + w1 + "],\n" +
-                            " \"timeout\": 700,\n" +
-                            " \"hbadaptor\": \"prebid\",\n" +
-                            " \"publisherId\" : \"" + publisherID + "\"\n" +
-                            " }\n" +
-                            "]}";
-            return body;
-        }
+        String body =
+                "{\"x-ut-hb-params\":[\n" +
+                        "  {\n" +
+                        " \"bidRequestId\": \"" + HB_BID_REQ_ID + "\"," + "\n" +
+                        " \"domain\": \"" + domain + "\",\n" +
+                        " \"sizes\":[[" + h1 + "," + w1 + "]],\n" +
+                        " \"timeout\": 700,\n" +
+                        " \"hbadaptor\": \"prebid\",\n" +
+                        " \"publisherId\" : " + publisherID + "\n" +
+                        " }\n" +
+                        "]}";
+        return body;
+    }
 }
