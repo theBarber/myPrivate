@@ -565,14 +565,7 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       |
 #     InApp Burl
       | campaign-server-prog-inApp-ST-1 |
-    # programmatic flow - Reserve
-      | campaign-reserve-AN-iter-1      |
-      | campaign-reserve-OX-iter-2      |
-      | campaign-OPEN-MARKET-1          |
 
-#     multiple bids
-#      |campaign-server-prog-MultiBids-SS-1 |
-#      |campaign-server-prog-MultiBids-ST-2 |
     Given i create new campaigns with new zoneset
       | Campaign Name                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-server-prog-SS-1       | 407981 | 228962   | true                  | 17            | {zone-zoneset-server-prog-SS}       | []         | 69       | 2164           | 3711         | 66556           |
@@ -1718,10 +1711,16 @@ Feature: Entities for tests
       | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15823          | 3708         | 27656           |
 
     And i update campaign data by name
-      | Campaign Name              | Priority | campaign_delivery_method | delivery_algorithm | run_on_unknown_domains |
-      | campaign-reserve-AN-iter-1 | 1        | 4                        | 2                  | 1                      |
-      | campaign-reserve-OX-iter-2 | 1        | 4                        | 2                  | 1                      |
-      | campaign-OPEN-MARKET-1     | 1        | 4                        | 2                  | 1                      |
+      | Campaign Name                   | Priority | campaign_delivery_method | delivery_algorithm | run_on_unknown_domains |
+      | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1          | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-1              | 1        | 4                        | 2                  | 1                      |
+      | campaign-non-reserve-1          | 1        | 4                        | 2                  | 1                      |
+      | campaign-direct-not-chosen      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1-chosen   | 1        | 4                        | 2                  | 1                      |
+      | campaign-direct-must-be-chosen  | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-not-chosen | 1        | 4                        | 2                  | 1                      |
 
     And i update zone data by name
       | Zone Name                | is_secure |
