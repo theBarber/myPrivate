@@ -77,7 +77,7 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   Scenario:6.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_INCLUDED - dyntag request - city limitation - script expected
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {192.241.221.98}}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which includes ut vendor id and includes ut purpose ids for publisher 2434 with extra params {consentweb.com&tagid=452&optimize=1}
     And The response code is 200
     And The response contains {script}
@@ -103,7 +103,7 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
   Scenario:8.0 gdprstr=UT_ID_INCLUDED_UT_PURPOSE_IDS_EXCLUDED - dyntag request - city limitation - script expected
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {192.241.221.98}}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which includes ut vendor id and excludes ut purpose ids for publisher 2434 with extra params {consentweb.com&tagid=452&optimize=1}
     And The response code is 200
     And The response contains {script}
@@ -138,7 +138,7 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
 #    Then I expect delivery
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {192.241.221.98}}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which excludes ut vendor id and includes ut purpose ids for publisher 2434 with extra params {consentweb.com&tagid=452&optimize=1}
     And The response code is 200
     And The response contains {script}
@@ -172,7 +172,7 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
 #    Then I expect delivery
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {192.241.221.98}}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with gdprstr which excludes ut vendor id and excludes ut purpose ids for publisher 2434 with extra params {consentweb.com&tagid=452&optimize=1}
     And The response code is 200
     And The response contains {script}
@@ -203,7 +203,7 @@ Feature: GDPR - DynTag - Europe Delivery Logic - Single Gdpr Param Is Specified 
 #    Then I expect delivery
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {192.241.221.98}}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
     And I send 1 times Dynamic Tag ad request to UAS for consent publisher's entities with an empty gdprstr for publisher 2434 with extra params {consentweb.com&tagid=452&optimize=1}
     And The response code is 200
     And The response contains {script}

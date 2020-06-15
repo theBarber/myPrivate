@@ -21,8 +21,6 @@ Feature: contextual targeting tests
     When I print local time
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36} as user-agent string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=1&bundleid=com.outfit7.mytalkingtomfree} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
-    And I sleep for 2 seconds
-    When I send 1 times an ad request with parameter {optimize=1&bundleid=com.outfit7.mytalkingtomfree} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1} 100% of the time
@@ -55,7 +53,6 @@ Feature: contextual targeting tests
   Scenario:4.a contextual targeting by dv - campaign level limitation - PART ONE - Delivery Expected
     When I print local time
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    And I sleep for 2 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The response contains {script}
@@ -82,7 +79,6 @@ Feature: contextual targeting tests
   Scenario:5.a contextual targeting - peer 39 banner level limitation backward compatibility - PART ONE - Delivery Expected
     When I print local time
     When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And I sleep for 2 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
@@ -91,7 +87,6 @@ Feature: contextual targeting tests
   Scenario:5.b contextual targeting - peer 39 banner level limitation backward compatibility - PART TWO - Delivery Expected
     When I print local time
     When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And I sleep for 2 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
@@ -106,7 +101,6 @@ Feature: contextual targeting tests
   Scenario:6.a contextual targeting - peer 39 banner level limitation  - PART ONE - Delivery Expected
     When I print local time
     When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And I sleep for 2 seconds
     When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
