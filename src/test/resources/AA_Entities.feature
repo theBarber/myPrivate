@@ -589,10 +589,6 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-ST}       | []         | 83       | 2164           | 3711         | 66555           |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-inApp-ST} | []         | 83       | 2164           | 3711         | 66555           |
-      # for open market flow
-      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-OPEN-MARKET-1          | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-PG}           | []         | 75       | 15823          | 3708         | 27656           |
 
 ##     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1  |407981        |243452     |true                  |1719               |{zone-zoneset-server-prog-MultiBids-SS-1}           |[]           |69        |15176              |3711           |66556             |
@@ -613,21 +609,12 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 1        | 4                        | 1                  | 1                      |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 1        | 4                        | 1                  | 1                      |
-      # for open market flow
-      | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
-      | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
-      | campaign-OPEN-MARKET-1          | 1        | 4                        | 2                  | 1                      |
 
     And i update zone data by name
       | Zone Name                    | is_secure |
       | zone-zoneset-server-prog-SS  | 1         |
       | zone-zoneset-server-prog-PGC | 1         |
       | zone-zoneset-server-prog-ST  | 1         |
-      | zone-zoneset-test-OM-PG      | 1         |
-#     |zone-zoneset-server-prog-MultiBids-SS-1     |1            |
-#     |zone-zoneset-server-prog-MultiBids-ST-2      |1            |
-#     Given i sent an analize req to peer39 for the following website = {https://www.bbc.com/sport}
-
 
     Given i create new campaigns with new zoneset
       | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name       | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
@@ -1662,12 +1649,6 @@ Feature: Entities for tests
       | campaign-IAS-high-viewability | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-high} | []         | 83       | 4737           | 2434         | 62229           | 90          | ias      |
       | campaign-DV-low-viewability   | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-low}   | []         | 83       | 4737           | 2434         | 62229           | 10          | dv       |
       | campaign-DV-high-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-high}  | []         | 83       | 4737           | 2434         | 62229           | 90          | dv       |
-    And i update banner data by name
-      | Banner Name                            | limitation |
-      | campaign-IAS-low-viewability-banner-1  | []         |
-      | campaign-IAS-high-viewability-banner-1 | []         |
-      | campaign-DV-low-viewability-banner-1   | []         |
-      | campaign-DV-high-viewability-banner-1  | []         |
 
     And i update zone data by name
       | Zone Name                         | is_secure |
@@ -1675,6 +1656,78 @@ Feature: Entities for tests
       | zone-zoneset-viewability-IAS-high | 1         |
       | zone-zoneset-viewability-DV-low   | 1         |
       | zone-zoneset-viewability-DV-high  | 1         |
+
+
+
+# ************ DISTRICT LIMITATION ************
+  Scenario: create entities for District tests
+    Given i disable campaigns by name on db
+      | Campaign Name                |
+      | campaign-WY99-District       |
+      | campaign-CA40-CO06-Districts |
+
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-WY99-District       | 75396 | 210722   | false                 | 204           | {zone-zoneset-WY99-district}       | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+      | campaign-CA40-CO06-Districts | 75396 | 210722   | false                 | 204           | {zone-zoneset-CA40-CO06-districts} | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+
+
+    And i update zone data by name
+      | Zone Name                        | is_secure |
+      | zone-zoneset-WY99-district       | 1         |
+      | zone-zoneset-CA40-CO06-districts | 1         |
+
+    And i update banner data by name
+      | Banner Name                           | limitation                  |
+      | campaign-WY99-District-banner-1       | [[[68,"=~","wy99"]]]        |
+      | campaign-CA40-CO06-Districts-banner-1 | [[[68,"=~","ca40","co06"]]] |
+
+
+
+ #   ************** OPEN-MARKET ************
+  Scenario: create entities for Open-market tests
+    Given i disable campaigns by name on db
+
+         # R ----  R -----  OM
+      | campaign-reserve-AN-iter-1      |
+      | campaign-reserve-OX-iter-2      |
+      | campaign-OPEN-MARKET-1          |
+         # R ----  NR ----- D ---- OM
+      | campaign-reserve-1              |
+      | campaign-non-reserve-1          |
+      | campaign-direct-not-chosen      |
+      | campaign-OPEN-MARKET-1-chosen   |
+         # D ---- OM
+      | campaign-direct-must-be-chosen  |
+      | campaign-OPEN-MARKET-not-chosen |
+
+    Given i create new campaigns with new zoneset
+         # R ----  R -----  OM
+      | Campaign Name                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}  | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-OPEN-MARKET-1          | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15823          | 3708         | 27656           |
+         # R ----  NR ----- D ---- OM
+      | campaign-reserve-1              | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-WIN} | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-non-reserve-1          | 407981 | 265090   | true                  | 2500          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 1068          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-OPEN-MARKET-1-chosen   | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15823          | 3708         | 27656           |
+         #  D ---- OM
+      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 1068          | {zone-zoneset-test-Direct} | []         | 75       | 15823          | 3708         | 27656           |
+      | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15823          | 3708         | 27656           |
+
+    And i update campaign data by name
+      | Campaign Name              | Priority | campaign_delivery_method | delivery_algorithm | run_on_unknown_domains |
+      | campaign-reserve-AN-iter-1 | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-OX-iter-2 | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1     | 1        | 4                        | 2                  | 1                      |
+
+    And i update zone data by name
+      | Zone Name                | is_secure |
+      | zone-zoneset-test-OM-PG  | 1         |
+      | zone-zoneset-test-OM-WIN | 1         |
+      | zone-zoneset-test-Direct | 1         |
 
 
   Scenario: refresh zone cache with wait
