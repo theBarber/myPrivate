@@ -8,10 +8,10 @@
 Feature: Persona level targeting
 
   Background: health check
-    When Sending a healthcheck request to UAS
     Given I clear all cookies from uas requests
     Given I clear all headers from uas requests
     And I add {NY} ip header
+    When Sending a healthcheck request to UAS
     Then The response code is 200
 
   Scenario: 0. injection to cb

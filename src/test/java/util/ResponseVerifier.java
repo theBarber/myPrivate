@@ -50,8 +50,8 @@ public class ResponseVerifier {
                         .collect(Collectors.groupingBy(Optional::isPresent, Collectors.counting()));
 
         assertThat(
-                "all of the responses should not have an impression url", countUrls.getOrDefault(true, 0l),
-                Matchers.is(0l));
+                "all of the responses should not have an impression url", countUrls.getOrDefault(true, 0L),
+                Matchers.is(0L));
     }
 
     public void verifyNoHeaders(String... headersNames) {
