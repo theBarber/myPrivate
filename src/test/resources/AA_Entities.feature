@@ -565,7 +565,10 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       |
 #     InApp Burl
       | campaign-server-prog-inApp-ST-1 |
-
+    # programmatic flow - Reserve
+      | campaign-reserve-AN-iter-1      |
+      | campaign-reserve-OX-iter-2      |
+      | campaign-OPEN-MARKET-1          |
 
 #     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1 |
@@ -1646,12 +1649,6 @@ Feature: Entities for tests
       | campaign-IAS-high-viewability | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-high} | []         | 83       | 4737           | 2434         | 62229           | 90          | ias      |
       | campaign-DV-low-viewability   | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-low}   | []         | 83       | 4737           | 2434         | 62229           | 10          | dv       |
       | campaign-DV-high-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-high}  | []         | 83       | 4737           | 2434         | 62229           | 90          | dv       |
-    And i update banner data by name
-      | Banner Name                            | limitation |
-      | campaign-IAS-low-viewability-banner-1  | []         |
-      | campaign-IAS-high-viewability-banner-1 | []         |
-      | campaign-DV-low-viewability-banner-1   | []         |
-      | campaign-DV-high-viewability-banner-1  | []         |
 
     And i update zone data by name
       | Zone Name                         | is_secure |
@@ -1659,6 +1656,33 @@ Feature: Entities for tests
       | zone-zoneset-viewability-IAS-high | 1         |
       | zone-zoneset-viewability-DV-low   | 1         |
       | zone-zoneset-viewability-DV-high  | 1         |
+
+
+
+# ************ DISTRICT LIMITATION ************
+  Scenario: create entities for District tests
+    Given i disable campaigns by name on db
+      | Campaign Name                |
+      | campaign-WY99-District       |
+      | campaign-CA40-CO06-Districts |
+
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-WY99-District       | 75396 | 210722   | false                 | 204           | {zone-zoneset-WY99-district}       | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+      | campaign-CA40-CO06-Districts | 75396 | 210722   | false                 | 204           | {zone-zoneset-CA40-CO06-districts} | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+
+
+    And i update zone data by name
+      | Zone Name                        | is_secure |
+      | zone-zoneset-WY99-district       | 1         |
+      | zone-zoneset-CA40-CO06-districts | 1         |
+
+    And i update banner data by name
+      | Banner Name                           | limitation                  |
+      | campaign-WY99-District-banner-1       | [[[68,"=~","wy99"]]]        |
+      | campaign-CA40-CO06-Districts-banner-1 | [[[68,"=~","ca40","co06"]]] |
+
 
 
  #   ************** OPEN-MARKET ************
