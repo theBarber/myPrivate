@@ -1711,10 +1711,16 @@ Feature: Entities for tests
       | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15823          | 3708         | 27656           |
 
     And i update campaign data by name
-      | Campaign Name              | Priority | campaign_delivery_method | delivery_algorithm | run_on_unknown_domains |
-      | campaign-reserve-AN-iter-1 | 1        | 4                        | 2                  | 1                      |
-      | campaign-reserve-OX-iter-2 | 1        | 4                        | 2                  | 1                      |
-      | campaign-OPEN-MARKET-1     | 1        | 4                        | 2                  | 1                      |
+      | Campaign Name                   | Priority | campaign_delivery_method | delivery_algorithm | run_on_unknown_domains |
+      | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1          | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-1              | 1        | 4                        | 2                  | 1                      |
+      | campaign-non-reserve-1          | 1        | 4                        | 2                  | 1                      |
+      | campaign-direct-not-chosen      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1-chosen   | 1        | 4                        | 2                  | 1                      |
+      | campaign-direct-must-be-chosen  | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-not-chosen | 1        | 4                        | 2                  | 1                      |
 
     And i update zone data by name
       | Zone Name                | is_secure |
