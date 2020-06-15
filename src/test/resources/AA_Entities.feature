@@ -565,14 +565,7 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       |
 #     InApp Burl
       | campaign-server-prog-inApp-ST-1 |
-    # programmatic flow - Reserve
-      | campaign-reserve-AN-iter-1      |
-      | campaign-reserve-OX-iter-2      |
-      | campaign-OPEN-MARKET-1          |
 
-#     multiple bids
-#      |campaign-server-prog-MultiBids-SS-1 |
-#      |campaign-server-prog-MultiBids-ST-2 |
     Given i create new campaigns with new zoneset
       | Campaign Name                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-server-prog-SS-1       | 407981 | 228962   | true                  | 17            | {zone-zoneset-server-prog-SS}       | []         | 69       | 2164           | 3711         | 66556           |
