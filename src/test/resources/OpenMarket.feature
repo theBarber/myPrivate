@@ -35,7 +35,7 @@ Feature: Open Market Testing
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-OPEN-MARKET-1-chosen-banner-1} 100% of the time
 
   Scenario: 2.b  zone request    R(AN) ---  NR(AN) --- D --- OM     App-nexus NR banner expected to return in second iteration
-    When I send 1 times an ad request with parameter {optimize=1&requestid=AN-PGA-Render} for zone named {zone-zoneset-test-OM-WIN} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-AN} for zone named {zone-zoneset-test-OM-WIN} to UAS
     And The response code is 200
     And The response contains {bannerid}
     And The responses has impression-urls
@@ -72,7 +72,7 @@ Feature: Open Market Testing
     And all HB responses contains campaignId with id of entity named {campaign-OPEN-MARKET-1-chosen}
 
   Scenario: 5.b  HB request   R(AN) ---  NR(AN) --- D --- OM     App-nexus NR banner expected to return in second iteration
-    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=AN-PGA-Render} with extra params {&unlimited=1&optimize=1}
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-AN} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-non-reserve-1-banner-1}
