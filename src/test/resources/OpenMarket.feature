@@ -19,7 +19,7 @@ Feature: Open Market Testing
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-OPEN-MARKET-1-banner-1} 100% of the time
 
 
-  Scenario: 2.a  zone request  R(AN) ---  R(OX) --- OM     OpenX banner expected to return in second iteration
+  Scenario: 1.b  zone request  R(AN) ---  R(OX) --- OM     OpenX banner expected to return in second iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OX} for zone named {zone-zoneset-test-OM-PG} to UAS
     And The response code is 200
     And The response contains {bannerid}
@@ -27,30 +27,60 @@ Feature: Open Market Testing
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-reserve-OX-iter-2-banner-1} 100% of the time
 
 
-  Scenario: 3.a  zone request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
+  Scenario: 2.a  zone request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OM} for zone named {zone-zoneset-test-OM-WIN} to UAS
     And The response code is 200
     And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-OPEN-MARKET-1-chosen-banner-1} 100% of the time
 
-  Scenario: 3.b  zone request    R(AN) ---  NR(AN) --- D --- OM     App-nexus NR banner expected to return in second iteration
+  Scenario: 2.b  zone request    R(AN) ---  NR(AN) --- D --- OM     App-nexus NR banner expected to return in second iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=AN-PGA-Render} for zone named {zone-zoneset-test-OM-WIN} to UAS
     And The response code is 200
     And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-non-reserve-1-banner-1} 100% of the time
 
-  Scenario: 4   zone request   D --- OM     Direct banner expected to return in first iteration (the PGW not even get approached)
+  Scenario: 3   zone request   D --- OM     Direct banner expected to return in first iteration (the PGW not even get approached)
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OM} for zone named {zone-zoneset-test-Direct} to UAS
     And The response code is 200
     And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-direct-must-be-chosen-banner-1} 100% of the time
 
-  Scenario: 5   HB request   R(AN) ---  R(OX) --- OM      Open Market banner expected to return in first iteration
-    When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OM} for zone named {zone-zoneset-test-OM-PG} to UAS
+
+    #&&&&&&&&&&&&&&&&  Header Bidding  %%%%%%%%%%%%%%%
+  Scenario: 4.a   HB request   R(AN) ---  R(OX) --- OM      Open Market banner expected to return in first iteration
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R R OM} for publisher 3708 with domain {open-market1.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {bannerid}
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-OPEN-MARKET-1-banner-1} 100% of the time
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-OPEN-MARKET-1-banner-1}
+    And all HB responses contains campaignId with id of entity named {campaign-OPEN-MARKET-1}
+
+  Scenario: 4.b   HB request   R(AN) ---  R(OX) --- OM     OpenX banner expected to return in second iteration
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R R OM} for publisher 3708 with domain {open-market1.com&requestid=Automation-OX} with extra params {&unlimited=1&optimize=1}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-reserve-OX-iter-2-banner-1}
+    And all HB responses contains campaignId with id of entity named {campaign-reserve-OX-iter-2}
+
+  Scenario: 5.a  HB request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-OX} with extra params {&unlimited=1&optimize=1}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-OPEN-MARKET-1-chosen-banner-1}
+    And all HB responses contains campaignId with id of entity named {campaign-OPEN-MARKET-1-chosen}
+
+  Scenario: 5.b  HB request   R(AN) ---  NR(AN) --- D --- OM     App-nexus NR banner expected to return in second iteration
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=AN-PGA-Render} with extra params {&unlimited=1&optimize=1}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-non-reserve-1-banner-1}
+    And all HB responses contains campaignId with id of entity named {campaign-non-reserve-1}
+
+  Scenario: 6  HB request   D --- OM     Direct banner expected to return in first iteration (the PGW not even get approached)
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - D OM} for publisher 3708 with domain {open-market3.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
+    And The response code is 200
+    And The response contains {script}
+    And all HB responses contains adId with id of entity named {campaign-direct-must-be-chosen-banner-1}
+    And all HB responses contains campaignId with id of entity named {campaign-direct-must-be-chosen}

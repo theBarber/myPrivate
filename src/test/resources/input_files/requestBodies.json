@@ -1250,6 +1250,70 @@
         }
       }
     ]
+  },
+
+  "Send HB request for Open Market with 1X1 publisher 3708 - R R OM":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "open-market1.com",
+        "publisherId": 3708,
+        "sizes": [
+          [
+            1,
+            1
+          ]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 3708
+        }
+      }
+    ]
+  },
+  "Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "open-market2.com",
+        "publisherId": 3708,
+        "sizes": [
+          [
+            1,
+            1
+          ]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 3708
+        }
+      }
+    ]
+  },
+  "Send HB request for Open Market with 1X1 publisher 3708 - D OM":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "open-market3.com",
+        "publisherId": 3708,
+        "sizes": [
+          [
+            1,
+            1
+          ]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 3708
+        }
+      }
+    ]
   }
 }
 
