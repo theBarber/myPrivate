@@ -9,7 +9,7 @@ Feature: Black and White testing
 
   Background: health check
     When Sending a healthcheck request to UAS
-    And I add header of {X-Forwarded-For} with value {78.31.205.183}
+    And I add header of {x-forwarded-For} with value {78.31.205.183}
     Then The response code is 200
 
   @id:1
