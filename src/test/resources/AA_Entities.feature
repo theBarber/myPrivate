@@ -486,7 +486,7 @@ Feature: Entities for tests
       | campaign-DT-SS-2-t-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}  | []         | 69       | 14401          | 3674         | 64397           |
       | campaign-DT-SI-1-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
       | campaign-DT-SI-2-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
-      | campaign-DT-PGC-2-t-1 | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-PGC-t-1} | []         | 75       | 14401          | 3674         | 64399           |
+      | campaign-DT-PGC-2-t-1 | 75396 | 222908   | false                 | 34670          | {zone-zoneset-DT-PGC-t-1} | []         | 75       | 14401          | 3674         | 64399           |
 #      | campaign-DT-SS-1-t-2   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-2}   | []                | 69       | 14402          | 3666         | 64400           |
 #      | campaign-DT-SI-2-t-2   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-2}   | []                | 61       | 14402          | 3666         | 64401           |
 #      | campaign-DT-SI-1-t-3-L | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3-L} | [[[5,"=~","af"]]] | 61       | 14403          | 3675         | 64403           |
@@ -529,7 +529,7 @@ Feature: Entities for tests
       | campaign-DT-Inline-ST-2  | 75396 | 210722   | false                 | 204           | {zone-zoneset-DT-inline-ST}   | []         | 83       | 14470          | 3690         | 65422           |
       | campaign-DT-Inline-SS-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-inline-SS-1} | []         | 69       | 14470          | 3690         | 65423           |
       | campaign-DT-Inline-SS-3  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-inline-SS-3} | []         | 69       | 14470          | 3690         | 65423           |
-      | campaign-DT-Inline-PGC-2 | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-inline-PGC}  | []         | 75       | 14470          | 3690         | 65424           |
+      | campaign-DT-Inline-PGC-2 | 75396 | 222908   | false                 | 34670          | {zone-zoneset-DT-inline-PGC}  | []         | 75       | 14470          | 3690         | 65424           |
     And i update campaign data by name
       | Campaign Name            | Priority | campaign_delivery_method |
       | campaign-DT-Inline-ST-1  | -2       | 1                        |
@@ -904,7 +904,7 @@ Feature: Entities for tests
       | campaign-HB-PlacementG-SS-1*1            | 75396 | 197418   | false                 | 86              | {zone-zoneset-HB-PlacementG-SS-1*1}            | []         | 69       | 15227          | 3728         | 66831           |
       | campaign-HB-PlacementG-ST-1*2            | 75396 | 210722   | false                 | 8290            | {zone-zoneset-HB-PlacementG-ST-1*2}            | []         | 93       | 15227          | 3728         | 66830           |
       | campaign-HB-PlacementG-Billabord-970*250 | 75396 | 198082   | false                 | 64              | {zone-zoneset-HB-PlacementG-Billabord-970*250} | []         | 58       | 15227          | 3728         | 67231           |
-      | campaign-HB-PlacementG-PG-1*1            | 75396 | 241783   | false                 | 1068            | {zone-zoneset-HB-PlacementG-PG-1*1}            | []         | 75       | 15227          | 3728         | 66832           |
+      | campaign-HB-PlacementG-PG-1*1            | 75396 | 241783   | false                 | 34670            | {zone-zoneset-HB-PlacementG-PG-1*1}            | []         | 75       | 15227          | 3728         | 66832           |
 
 
   Scenario:  create entites for instream_video viewbility
@@ -1704,10 +1704,10 @@ Feature: Entities for tests
          # R ----  NR ----- D ---- OM
       | campaign-reserve-1              | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
       | campaign-non-reserve-1          | 407981 | 240083   | true                  | 410           | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
-      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 1068          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
+      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
       | campaign-OPEN-MARKET-1-chosen   | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
          #  D ---- OM
-      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 1068          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
+      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 34670          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
       | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
 
     And i update campaign data by name
