@@ -24,22 +24,41 @@ Feature: Cross Device Capping Experiment
     Then The response code is 200
 
 
-
-
-
-  Scenario: 2. verify capping enforced when sending zone requests from same user (different cookies) - Delivery
+  Scenario: 1. verify line items capping enforced when sending zone requests from same user (different cookies)
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    When I send 4 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
+    When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
     Then The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceLiCapping-ST-8-banner-1} 100% of the time
     Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
+    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
+    Then The response code is 200
+    And The responses are passback
+    Given I clear all cookies from uas requests
     Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
-    When I send 4 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
+    Then The response code is 200
+    And The responses are passback
+
+
+  Scenario: 2. verify capping enforced when sending zone requests from same user (different cookies) - Delivery
+    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+    Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+    When I send 4 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST} to UAS
+    Then The response contains {script}
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-banner-1} 100% of the time
+    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
+    And I send impression requests to UAS
+    Given I clear all cookies from uas requests
+    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
+    When I send 4 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST} to UAS
     Then The response code is 200
     And The responses are passback
 

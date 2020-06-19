@@ -148,6 +148,7 @@ Feature: Entities for tests
   Scenario: create entities for cross device capping
     Given i disable campaigns by name on db
       | Campaign Name                                   |
+      | campaign-CrossDeviceCapping-ST                  |
       | campaign-DeviceSessionCapping-ST-1              |
       | campaign-CrossDeviceSessionCapping-ST-2         |
       | campaign-DeviceLifetimeCapping-ST-3             |
@@ -163,6 +164,7 @@ Feature: Entities for tests
 
     Given i create new campaigns with new zoneset
       | Campaign Name                                   | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                           | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-CrossDeviceCapping-ST                  | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST}                  | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceSessionCapping-ST-1              | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceSessionCapping-ST-1}              | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-CrossDeviceSessionCapping-ST-2         | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2}         | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceLifetimeCapping-ST-3             | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3}             | []         | 93       | 14892          | 3708         | 27807           |
@@ -178,6 +180,7 @@ Feature: Entities for tests
 
     And i update zone data by name
       | Zone Name                                                   | is_mraid | is_secure |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST                  | 0        | 1         |
       | INT3708-zone-zoneset-DeviceSessionCapping-ST-1              | 0        | 1         |
       | INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2         | 0        | 1         |
       | INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3             | 0        | 1         |
@@ -191,6 +194,7 @@ Feature: Entities for tests
 
     Given i update campaign data by name
       | Campaign Name                                   | capping | session_capping | block | priority |
+      | campaign-CrossDeviceCapping-ST                  | 4       | 0               | 0     | -2       |
       | campaign-DeviceSessionCapping-ST-1              | 0       | 2               | 60    | -2       |
       | campaign-CrossDeviceSessionCapping-ST-2         | 0       | 2               | 60    | -2       |
       | campaign-DeviceLifetimeCapping-ST-3             | 2       | 0               | 0     | -2       |
@@ -198,7 +202,6 @@ Feature: Entities for tests
       | campaign-DeviceCappingMultipleCampaigns-ST-5    | 2       | 0               | 0     | -2       |
       | campaign-DeviceCappingMultipleCampaigns-ST-6    | 1       | 0               | 0     | -1       |
       | campaign-DeviceCappingMultipleCampaigns-ST-7    | 0       | 0               | 0     | 1        |
-      | campaign-DeviceLiCapping-ST-8                   | 4       | 0               | 0     | -2       |
       | campaign-DeviceSessionCapping-Inapp-ST-9        | 0       | 2               | 60    | -2       |
       | campaign-CrossDeviceSessionCapping-Inapp-ST-10  | 0       | 2               | 60    | -2       |
       | campaign-DeviceLifetimeCapping-Inapp-ST-11      | 2       | 0               | 0     | -2       |
@@ -486,7 +489,7 @@ Feature: Entities for tests
       | campaign-DT-SS-2-t-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}  | []         | 69       | 14401          | 3674         | 64397           |
       | campaign-DT-SI-1-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
       | campaign-DT-SI-2-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
-      | campaign-DT-PGC-2-t-1 | 75396 | 222908   | false                 | 34670          | {zone-zoneset-DT-PGC-t-1} | []         | 75       | 14401          | 3674         | 64399           |
+      | campaign-DT-PGC-2-t-1 | 75396 | 222908   | false                 | 34670         | {zone-zoneset-DT-PGC-t-1} | []         | 75       | 14401          | 3674         | 64399           |
 #      | campaign-DT-SS-1-t-2   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-2}   | []                | 69       | 14402          | 3666         | 64400           |
 #      | campaign-DT-SI-2-t-2   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-2}   | []                | 61       | 14402          | 3666         | 64401           |
 #      | campaign-DT-SI-1-t-3-L | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3-L} | [[[5,"=~","af"]]] | 61       | 14403          | 3675         | 64403           |
@@ -529,7 +532,7 @@ Feature: Entities for tests
       | campaign-DT-Inline-ST-2  | 75396 | 210722   | false                 | 204           | {zone-zoneset-DT-inline-ST}   | []         | 83       | 14470          | 3690         | 65422           |
       | campaign-DT-Inline-SS-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-inline-SS-1} | []         | 69       | 14470          | 3690         | 65423           |
       | campaign-DT-Inline-SS-3  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-inline-SS-3} | []         | 69       | 14470          | 3690         | 65423           |
-      | campaign-DT-Inline-PGC-2 | 75396 | 222908   | false                 | 34670          | {zone-zoneset-DT-inline-PGC}  | []         | 75       | 14470          | 3690         | 65424           |
+      | campaign-DT-Inline-PGC-2 | 75396 | 222908   | false                 | 34670         | {zone-zoneset-DT-inline-PGC}  | []         | 75       | 14470          | 3690         | 65424           |
     And i update campaign data by name
       | Campaign Name            | Priority | campaign_delivery_method |
       | campaign-DT-Inline-ST-1  | -2       | 1                        |
@@ -904,7 +907,7 @@ Feature: Entities for tests
       | campaign-HB-PlacementG-SS-1*1            | 75396 | 197418   | false                 | 86              | {zone-zoneset-HB-PlacementG-SS-1*1}            | []         | 69       | 15227          | 3728         | 66831           |
       | campaign-HB-PlacementG-ST-1*2            | 75396 | 210722   | false                 | 8290            | {zone-zoneset-HB-PlacementG-ST-1*2}            | []         | 93       | 15227          | 3728         | 66830           |
       | campaign-HB-PlacementG-Billabord-970*250 | 75396 | 198082   | false                 | 64              | {zone-zoneset-HB-PlacementG-Billabord-970*250} | []         | 58       | 15227          | 3728         | 67231           |
-      | campaign-HB-PlacementG-PG-1*1            | 75396 | 241783   | false                 | 34670            | {zone-zoneset-HB-PlacementG-PG-1*1}            | []         | 75       | 15227          | 3728         | 66832           |
+      | campaign-HB-PlacementG-PG-1*1            | 75396 | 241783   | false                 | 34670           | {zone-zoneset-HB-PlacementG-PG-1*1}            | []         | 75       | 15227          | 3728         | 66832           |
 
 
   Scenario:  create entites for instream_video viewbility
@@ -1704,10 +1707,10 @@ Feature: Entities for tests
          # R ----  NR ----- D ---- OM
       | campaign-reserve-1              | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
       | campaign-non-reserve-1          | 407981 | 240083   | true                  | 410           | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
-      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
+      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
       | campaign-OPEN-MARKET-1-chosen   | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
          #  D ---- OM
-      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 34670          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
+      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
       | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
 
     And i update campaign data by name
