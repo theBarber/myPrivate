@@ -37,42 +37,38 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     Then i inject new profile doc with udId {2.89000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {u_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.90000000-0000-0000-0000-000000000000"},{"udid": "2.89000000-0000-0000-0000-000000000000"}]
     Then i inject new profile doc with udId {2.90000000-0000-0000-0000-000000000000} on users bucket, where platform = {app}, profile type = {u_p}, profile num = 1992, and reduce 0 days from epoc time stamp and extra devices string = "upid": "12.3.45b46d3d9ce4015fa47f2076c315ea23", "devices": [{ "udid": "2.90000000-0000-0000-0000-000000000000"},{"udid": "2.89000000-0000-0000-0000-000000000000"}]
 
-  Scenario: 1. a. cross device capping for udmp,zone req when capping = 2, cross device capping = true - PART ONE - Delivery
+  Scenario: 1  cross device capping for udmp,zone req when capping = 2, cross device capping = true - PART ONE - Delivery
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=11000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCappingUDMP-ST-1-banner-1} 100% of the time
-
-  Scenario: 1. b. cross device capping for udmp,zone req when capping = 2, cross device capping = true - PART TWO - Delivery
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=12000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCappingUDMP-ST-1-banner-1} 100% of the time
-
-  Scenario: 1. c. cross device capping for udmp,zone req when capping = 2, cross device capping = true - PART THREE - Passback
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=13000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1} for zone named {zone-zoneset-CrossDeviceCappingUDMP-ST-1} to UAS
     And The response code is 200
     And The responses are passback
 
-  Scenario: 2. a. profile targeting for udmp, zone req, from app - PART ONE - Passback
+  Scenario: 2.a  profile targeting for udmp, zone req, from app - PART ONE - Passback
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=66600000-6660-6660-6660-666000000000&optimize=1&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The responses are passback
 
-  Scenario: 2. b. profile targeting for udmp, zone req, from app - PART TWO - Delivery
+  Scenario: 2.b  profile targeting for udmp, zone req, from app - PART TWO - Delivery
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=00000000-0000-0000-0000-000000000000&optimize=1&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-ProfileTargetingUDMPforApp-ST-1-banner-1} 100% of the time
 
-  Scenario: 2. c. profile targeting for udmp, zone req, from app - PART THREE - Passback
+  Scenario: 2.c  profile targeting for udmp, zone req, from app - PART THREE - Passback
     Given I clear all cookies from uas requests
     When I send 1 times an ad request with parameter {deviceid=61000000-6100-6100-6100-610000000000&optimize=1&bundleid=app1} for zone named {zone-zoneset-ProfileTargetingUDMPforApp-ST-1} to UAS
     Then The response code is 200
