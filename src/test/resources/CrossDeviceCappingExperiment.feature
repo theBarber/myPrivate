@@ -90,23 +90,19 @@ Feature: Cross Device Capping Experiment
     And The responses are passback
 
   Scenario: 4. verify campaign session capping enforced when sending zone requests from user using inapp - in time frame
-    #Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=2189F809D99} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
     Then The response contains {script}
     Then The response contains {has_capping=1}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceSessionCapping-Inapp-ST-9-banner-1} 100% of the time
-    #Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
     And I send impression requests to UAS
     When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=2189F809D99} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
     Then The response contains {script}
     Then The response contains {has_capping=1}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceSessionCapping-Inapp-ST-9-banner-1} 100% of the time
-    #Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
     And I send impression requests to UAS
-    #Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1&deviceid=2189F809D99} for zone named {INT3708-zone-zoneset-DeviceSessionCapping-Inapp-ST-9} to UAS
     Then The response code is 200
     And The responses are passback
