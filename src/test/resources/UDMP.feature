@@ -200,7 +200,7 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
 #    And The response code is 200
 #    And The response contains {script}
 #    And I send impression requests to UAS
-#    Given I sleep for 3 seconds
+#    Given I sleep for 1 seconds
 ##  step 2: 2 req from device 90
 #    Given I clear all cookies from uas requests
 #    Given I add header of {x-forwarded-for} with value {207.246.116.162}
