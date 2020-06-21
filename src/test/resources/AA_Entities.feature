@@ -1732,6 +1732,38 @@ Feature: Entities for tests
       | zone-zoneset-test-Direct | 1         |
 
 
+#%%%%%%%%%%%%%%  VCR - Video Completion Rate Entities %%%%%%%%%%%%%
+
+  Scenario:  create entites for Video Completion Rate
+    Given i disable campaigns by name on db
+      | Campaign Name        |
+      | campaign-CSVB-VCR-10 |
+      | campaign-CSVB-VCR-90 |
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name        | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name   | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | campaign-CSVB-VCR-10 | 75396 | 259848   | false                 | 31797         | {zone-zoneset-VCR-10} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+      | campaign-CSVB-VCR-90 | 75396 | 259848   | false                 | 31797         | {zone-zoneset-VCR-90} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+     # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
+    And i update campaign data by name
+      | Campaign Name        | is_sync | is_video | vcr_enabled | vcr_threshold |
+      | campaign-CSVB-VCR-10 | 1       | 1        | 1           | 10            |
+      | campaign-CSVB-VCR-90 | 1       | 1        | 1           | 90            |
+
+    And i update zone data by name
+      | Zone Name           | is_sync |
+      | zone-zoneset-VCR-10 | 1       |
+      | zone-zoneset-VCR-90 | 1       |
+     # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name        | is_sync | is_video |
+      | zone-zoneset-VCR-10 | 1       | 1        |
+      | zone-zoneset-VCR-90 | 1       | 1        |
+
+
+
+
+
+
   Scenario: refresh zone cache with wait
     And I setup the db
     And I sleep for 6 seconds
