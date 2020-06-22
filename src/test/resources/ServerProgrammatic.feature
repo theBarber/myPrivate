@@ -56,7 +56,7 @@ Feature: Programmatic flow support
     And all HB responses contains adId with id of entity named {campaign-server-prog-ST-3-banner-1}
 
     #web Burl
-  Scenario: 9b. basic Call to Programmatic GW web, zone request, make sure b-url is sent
+  Scenario: 9a. basic Call to Programmatic GW web, zone request, make sure b-url is sent
     When I send 1 times an ad request with parameter {requestid=BUrlTest&optimize=1&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The response contains {<script type="text/javascript">new Image().src="http://ramplift-s-ut-ramp-uas-us-east-1-k8s-internal.ramp-ut.io/burl"</script>}

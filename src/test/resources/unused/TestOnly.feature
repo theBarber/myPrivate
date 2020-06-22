@@ -20,10 +20,11 @@ Feature: for testing only
 #    And The response contains {VASTAdTagURI}
 #    And The response contains {https://vast.adsafeprotected.com/vast}
 #
-#  Scenario: 2.0 gdpr=0  ---> geo limitation =  san francisco city entity
+  Scenario: 2.0 gdpr=0  ---> geo limitation =  san francisco city entity
 #    Given I clear all cookies from uas requests
 #    Given I add cookie UTID with value {92B1BB139A75C} to my requests to uas
-#    When I send 4 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192206 to UAS
+    When I print local time
+    When I send 4 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192206 to UAS
 #    Then The response contains {bannerid}
 #    And The responses has impression-urls
 #    Then The response code is 200
