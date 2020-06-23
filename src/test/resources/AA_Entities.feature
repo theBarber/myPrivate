@@ -1746,8 +1746,8 @@ Feature: Entities for tests
      # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
     And i update campaign data by name
       | Campaign Name        | is_sync | is_video | vcr_enabled | vcr_threshold |
-      | campaign-CSVB-VCR-10 | 1       | 1        | 1           | 10            |
-      | campaign-CSVB-VCR-90 | 1       | 1        | 1           | 90            |
+      | campaign-CSVB-VCR-10 | 1       | 1        | 1           | 0.1           |
+      | campaign-CSVB-VCR-90 | 1       | 1        | 1           | 0.9           |
 
     And i update zone data by name
       | Zone Name           | is_sync |
@@ -1758,10 +1758,6 @@ Feature: Entities for tests
       | Zoneset Name        | is_sync | is_video |
       | zone-zoneset-VCR-10 | 1       | 1        |
       | zone-zoneset-VCR-90 | 1       | 1        |
-
-
-
-
 
 
   Scenario: refresh zone cache with wait
