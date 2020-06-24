@@ -1,4 +1,4 @@
-@parallel
+####@parallel
 @DailyPaicing
 @request_service
 Feature: Pacing Hourly Test
