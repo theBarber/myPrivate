@@ -16,7 +16,7 @@ Feature: VCR feature
     When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-VCR-10} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-IAS-low-viewability-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CSVB-VCR-10-banner-1} 100% of the time
 
   Scenario:2 High VCR (90%)  - expected Passback
     When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-VCR-90} to UAS
