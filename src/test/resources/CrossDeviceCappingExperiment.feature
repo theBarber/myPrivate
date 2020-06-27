@@ -23,7 +23,7 @@ Feature: Cross Device Capping Experiment
     Then The response code is 200
 
 
-  Scenario: 1. verify line items capping enforced when sending zone requests from same user (different cookies)
+  Scenario: 1.a  *single device*  verify line items capping enforced when sending zone requests from same user (different cookies)
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
@@ -39,13 +39,35 @@ Feature: Cross Device Capping Experiment
     Then The response code is 200
     And The responses are passback
     Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
+    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
     Then The response code is 200
     And The responses are passback
 
+#$$$$$$$$$$$$$$$$$$$$$$$$$ CROSS (Persona) $$$$$$$$$$$$$$$$$
+#  Scenario: 1.b *cross* verify line items capping enforced when sending zone requests from same user (different cookies)
+#    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+#    Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+#    When I send 3 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
+#    Then The response contains {script}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceLiCapping-ST-8-banner-1} 100% of the time
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
+#    And I send impression requests to UAS
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+#    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
+#    Then The response code is 200
+#    And The responses are passback
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
+#    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-DeviceLiCapping-ST-8} to UAS
+#    Then The response code is 200
+#    And The responses are passback
 
-  Scenario: 2. verify capping enforced when sending zone requests from same user (different cookies) - Delivery
+
+  Scenario: 2.a *single device* verify capping enforced when sending zone requests from same user (different cookies) - Delivery
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
@@ -56,10 +78,28 @@ Feature: Cross Device Capping Experiment
     Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
-    When I send 4 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST} to UAS
+    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST} to UAS
     Then The response code is 200
     And The responses are passback
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$ CROSS (Persona) $$$$$$$$$$$$$$$$$
+#  Scenario: 2.b *cross* verify capping enforced when sending zone requests from same user (different cookies) - Delivery
+#    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+#    Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+#    When I send 4 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST} to UAS
+#    Then The response contains {script}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceCapping-ST-banner-1} 100% of the time
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
+#    And I send impression requests to UAS
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
+#    When I send 1 times an ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone named {INT3708-zone-zoneset-CrossDeviceCapping-ST} to UAS
+#    Then The response code is 200
+#    And The responses are passback
+
 
   Scenario: 3. verify campaign session capping enforced when sending zone requests from user - in time frame
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"},{"udid":"2.41hun7qe6bn47gfxgfbzwh938"}]}}> to user info
@@ -107,9 +147,7 @@ Feature: Cross Device Capping Experiment
     Then The response code is 200
     And The responses are passback
 
-  Scenario: 5. verify campaign session capping enforced when sending zone requests from same user (different cookies)
-    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
-    Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+  Scenario: 5.a *single device* verify campaign session capping enforced when sending zone requests from same user
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
@@ -132,13 +170,46 @@ Feature: Cross Device Capping Experiment
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceSessionCapping-ST-2-banner-1} 100% of the time
     Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
+    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2} to UAS
     Then The response code is 200
     And The responses are passback
 
-  Scenario: 6. verify campaign lifetime capping enforced when sending zone requests from user
-    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}]}}> to user info
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$ CROSS (Persona) $$$$$$$$$$$$$$$$$
+#  Scenario: 5.b *cross* verify campaign session capping enforced when sending zone requests from same user
+#    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+#    Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+#    And I add unlimited query parameter with value {1} to send my requests to uas
+#    And I add optimize query parameter with value {1} to send my requests to uas
+#    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2} to UAS
+#    Then The response contains {script}
+#    Then The response contains {has_capping=1}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceSessionCapping-ST-2-banner-1} 100% of the time
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
+#    And I send impression requests to UAS
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+#    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2} to UAS
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
+#    And I send impression requests to UAS
+#    Then The response contains {script}
+#    Then The response contains {has_capping=1}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceSessionCapping-ST-2-banner-1} 100% of the time
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
+#    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2} to UAS
+#    Then The response code is 200
+#    And The responses are passback
+
+
+
+  Scenario: 6. verify campaign lifetime capping enforced when sending zone requests from same device
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add unlimited query parameter with value {1} to send my requests to uas
     And I add optimize query parameter with value {1} to send my requests to uas
@@ -166,33 +237,34 @@ Feature: Cross Device Capping Experiment
     Then The response code is 200
     And The responses are passback
 
-  Scenario: 7. verify campaign lifetime capping enforced when sending zone requests from same user (different cookies)
-    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
-    Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    And I add unlimited query parameter with value {1} to send my requests to uas
-    And I add optimize query parameter with value {1} to send my requests to uas
-    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4} to UAS
-    Then The response contains {script}
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceLifetimeCapping-ST-4-banner-1} 100% of the time
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
-    And I send impression requests to UAS
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4} to UAS
-    Then The response contains {script}
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceLifetimeCapping-ST-4-banner-1} 100% of the time
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
-    And I send impression requests to UAS
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
-    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4} to UAS
-    Then The response code is 200
-    And The responses are passback
+    #$$$$$$$$$$$$$$$$$$$$$$$$$ CROSS (Persona) $$$$$$$$$$$$$$$$$ (there is already for single device - 1.a)
+#  Scenario: 7. *cross* verify campaign lifetime capping enforced when sending zone requests from same user (different cookies)
+#    Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+#    Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+#    And I add unlimited query parameter with value {1} to send my requests to uas
+#    And I add optimize query parameter with value {1} to send my requests to uas
+#    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4} to UAS
+#    Then The response contains {script}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceLifetimeCapping-ST-4-banner-1} 100% of the time
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
+#    And I send impression requests to UAS
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
+#    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4} to UAS
+#    Then The response contains {script}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CrossDeviceLifetimeCapping-ST-4-banner-1} 100% of the time
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
+#    And I send impression requests to UAS
+#    Given I clear all cookies from uas requests
+#    Given I add cookie UTID with value {33333333333333333333333333333333} to my requests to uas
+#    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-CrossDeviceLifetimeCapping-ST-4} to UAS
+#    Then The response code is 200
+#    And The responses are passback
 
   Scenario: 8. Request from browser without a cookie - verify no capping is enforced & ad is being delivered
     Given I add unlimited query parameter with value {1} to send my requests to uas
@@ -239,6 +311,7 @@ Feature: Cross Device Capping Experiment
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
+    Then The response contains {has_capping=1}
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
     And I send impression requests to UAS
@@ -248,6 +321,7 @@ Feature: Cross Device Capping Experiment
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
+    Then The response contains {has_capping=1}
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
     And I send impression requests to UAS
@@ -265,23 +339,23 @@ Feature: Cross Device Capping Experiment
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
+    Then The response contains {has_capping=1}
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
+    Then The response contains {has_capping=1}
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 3 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 204
 
@@ -290,20 +364,20 @@ Feature: Cross Device Capping Experiment
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 15 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
+    Then The response contains {has_capping=1}
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
     And I send impression requests to UAS
     Given I clear all cookies from uas requests
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 10 headerBidding post request for scenario {Send HB request with 1X1,1X2 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
+    Then The response contains {has_capping=1}
     Given I clear all cookies from uas requests
     Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
     And I send impression requests to UAS
