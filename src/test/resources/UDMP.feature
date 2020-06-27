@@ -189,36 +189,67 @@ Feature: UDMP TESTS = profile targeting, seq targeting, cross decice capping
     And I send impression requests to UAS
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LI-FC-ST-1-banner-1} 100% of the time
 
+
   #  &&&&&&&&&&&&&&&&&  Eitan need to fix 3
-  Scenario: 1.a HB frequency capping persona level.
+  Scenario: 1.a ** BUG Publisher capping **  *single device*  HB frequency capping persona level.
 #  step 1: 3 req from device 89
-    Given I delete the history of 2.89000000-0000-0000-0000-000000000000 from user logs bucket
-    Given I delete the history of 2.90000000-0000-0000-0000-000000000000 from user logs bucket
-    Given I sleep for 1 seconds
     Given I clear all cookies from uas requests
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 3 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
     And The response code is 200
     And The response contains {script}
+    Then The response contains {has_capping=1}
     And I send impression requests to UAS
     Given I sleep for 1 seconds
-#  step 2: 2 req from device 90
-    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
+    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
     And The response code is 200
     And The response contains {script}
     And I send impression requests to UAS
     Given I sleep for 1 seconds
-    #  step 3: 2 req from device 89. should return passback since capping = 5;
-    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The responses are passback
     Given I sleep for 1 seconds
-#  step 4: renewal after 4 mins
+#  step 4: renewal after 1 min
     And I sleep for 62 seconds
-    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
+    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
+
+
+      #  &&&&&&&&&&&&&&&&&  Eitan need to fix 3
+    #$$$$$$$$$$$$$$$$$$$$$$$$$ CROSS (Persona) $$$$$$$$$$$$$$$$$
+#  Scenario: 1.b *cross*  HB frequency capping persona level.
+##  step 1: 3 req from device 89
+#    Given I delete the history of 2.89000000-0000-0000-0000-000000000000 from user logs bucket
+#    Given I delete the history of 2.90000000-0000-0000-0000-000000000000 from user logs bucket
+#    Given I sleep for 1 seconds
+#    Given I clear all cookies from uas requests
+#    Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
+#    Given i send 3 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=89000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
+#    And The response code is 200
+#    And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
+#    And The response code is 200
+#    And The response contains {script}
+#    And I send impression requests to UAS
+#    Given I sleep for 1 seconds
+##  step 2: 2 req from device 90
+#    Given i send 2 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
+#    And The response code is 200
+#    And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
+#    And The response code is 200
+#    And The response contains {script}
+#    And I send impression requests to UAS
+#    Given I sleep for 1 seconds
+#    #  step 3: 2 req from device 89. should return passback since capping = 5;
+#    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
+#    And The responses are passback
+#    Given I sleep for 1 seconds
+##  step 4: renewal after 4 mins
+#    And I sleep for 62 seconds
+#    Given i send 1 headerBidding secure post request for publisher 3708 with size1 = 1 size2 = 1, with domain {HB-FC-PL.com} and extra params {&deviceid=90000000-0000-0000-0000-000000000000&unlimited=1&optimize=1&bundleid=app1}
+#    And The response code is 200
+#    And all HB responses contains adId with id of entity named {campaign-HB-FC-PL-PG-1-banner-1}
