@@ -13,9 +13,7 @@ Feature: Open Market Testing
 
      #&&&&&&&&&&&&&&&&  Zone request %%%%%%%%%%%%%%%
 
-
      #***********************  R(AN)    R(OX)    OM    ***********************
-
 
   Scenario: 1.a  zone request   R(AN) ---  R(OX) --- OM      Open Market banner expected to return in first iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OM} for zone named {zone-zoneset-test-OM-PG} to UAS
@@ -35,7 +33,7 @@ Feature: Open Market Testing
 
     #***********************  R(AN)     NR(AN)     D     OM   ***********************
 
-  Scenario: 2.a  zone request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
+  Scenario: 2.a (** BUG UN-24430 **)  zone request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OM} for zone named {zone-zoneset-test-OM-WIN} to UAS
     And The response code is 200
     And The response contains {bannerid}
@@ -80,7 +78,7 @@ Feature: Open Market Testing
 
      #***********************  R(AN)     NR(AN)    D     OM   ***********************
 
-  Scenario: 5.a  HB request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
+  Scenario: 5.a  (** BUG UN-24430 **)  HB request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
     Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}

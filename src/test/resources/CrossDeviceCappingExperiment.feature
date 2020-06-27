@@ -275,7 +275,7 @@ Feature: Cross Device Capping Experiment
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceSessionCapping-ST-1-banner-1} 100% of the time
     And I send impression requests to UAS
 
-  Scenario: 9. header bidding frequency capping from mobile - user 1
+  Scenario: 9. ** BUG Publisher capping **  header bidding frequency capping from mobile - user 1
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     And I add header of {X-Forwarded-For} with value {207.246.116.162}
@@ -304,7 +304,7 @@ Feature: Cross Device Capping Experiment
 
 
 
-  Scenario: 10. header bidding frequency capping from Desktop user 1
+  Scenario: 10. ** BUG Publisher capping ** header bidding frequency capping from Desktop user 1
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -332,7 +332,7 @@ Feature: Cross Device Capping Experiment
     And The response code is 204
 
 
-  Scenario: 11. header bidding frequency capping from mobile - user 2
+  Scenario: 11. ** BUG Publisher capping ** header bidding frequency capping from mobile - user 2
     Given I use {Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -360,7 +360,7 @@ Feature: Cross Device Capping Experiment
     And The response code is 204
 
 
-  Scenario: 12. header bidding frequency capping from Desktop user 2
+  Scenario: 12. ** BUG Publisher capping ** header bidding frequency capping from Desktop user 2
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
