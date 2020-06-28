@@ -653,7 +653,7 @@ Feature: Entities for tests
       | zone-zoneset-Inapp-SI-5 | 1         |
       | zone-zoneset-Inapp-SI-6 | 1         |
 
-  @InAppBlackWhiteList
+ ### In App Black White List
   Scenario: create entities for Black and white app listu
     Given i disable campaigns by name on db
       | Campaign Name                     |
