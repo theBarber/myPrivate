@@ -1764,24 +1764,28 @@ Feature: Entities for tests
 
   Scenario:  create entites for Video Location
     Given i disable campaigns by name on db
-      | Campaign Name           |
-      | campaign-vidAd-location |
+      | Campaign Name            |
+      | campaign-vidAd-location  |
+      | campaign-inline-location |
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name           | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name           | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | campaign-vidAd-location | 75396 | 255831   | false                 | 32966         | {zone-zoneset-vidAd-location} | []         | 97       | 15901          | 3708         | 69992           | []             | []             |
+      | Campaign Name            | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name            | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | campaign-vidAd-location  | 75396 | 255831   | false                 | 34854         | {zone-zoneset-vidAd-location}  | []         | 97       | 15901          | 3708         | 69992           | []             | []             |
+      | campaign-inline-location | 75396 | 269751   | false                 | 34853         | {zone-zoneset-inline-location} | []         | 98       | 15901          | 3708         | 71479           | []             | []             |
      # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
     And i update campaign data by name
-      | Campaign Name           | is_sync | is_video | vcr_enabled | vcr_threshold |
-      | campaign-vidAd-location | 1       | 1        | 1           | 0.1           |
+      | Campaign Name            | is_sync | is_video | vcr_enabled | vcr_threshold |
+      | campaign-vidAd-location  | 1       | 1        | 1           | 0.1           |
+      | campaign-inline-location | 1       | 1        | 1           | 0.1           |
 
     And i update zone data by name
-      | Zone Name                   | is_sync |
-      | zone-zoneset-vidAd-location | 1       |
+      | Zone Name                    | is_sync |
+      | zone-zoneset-vidAd-location  | 1       |
+      | zone-zoneset-inline-location | 1       |
      # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
     And i update zoneset data by name
-      | Zoneset Name                | is_sync | is_video |
-      | zone-zoneset-vidAd-location | 1       | 1        |
-
+      | Zoneset Name                 | is_sync | is_video |
+      | zone-zoneset-vidAd-location  | 1       | 1        |
+      | zone-zoneset-inline-location | 1       | 1        |
 
 
   Scenario: refresh zone cache with wait
