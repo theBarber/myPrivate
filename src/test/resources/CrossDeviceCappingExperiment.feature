@@ -22,7 +22,7 @@ Feature: Cross Device Capping Experiment
     When Sending a healthcheck request to UAS
     Then The response code is 200
 
-  Scenario: 2. *single device* verify capping enforced when sending zone requests from same user (different cookies) - Delivery
+  Scenario: 2. *single device* verify capping enforced when sending zone requests from same user  - Delivery
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
@@ -267,10 +267,8 @@ Feature: Cross Device Capping Experiment
     Given I use {Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36} as user-agent string to send my requests to uas
     Given I add cookie UTID with value {44444444444444444444444444444444} to my requests to uas
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 10 headerBidding post request for scenario {send basic HB request for publisher 3470} for publisher 3470 with domain {ranker.com} with extra params {&unlimited=1&optimize=1}
+    Given i send 10 headerBidding post request for scenario {send basic HB request for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {44444444444444444444444444444444} to my impression requests to tracking service
-    And I send impression requests to UAS
     And The response code is 200
     And The response contains {script}
     Then The response contains {has_capping=0}
