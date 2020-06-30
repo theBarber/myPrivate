@@ -22,7 +22,7 @@ Feature: Cross Device Capping Experiment
     When Sending a healthcheck request to UAS
     Then The response code is 200
 
-  Scenario: 2. *single device* verify capping enforced when sending zone requests from same user (different cookies) - Delivery
+  Scenario: 2. *single device* verify capping enforced when sending zone requests from same user  - Delivery
     Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add device 1.314dzessmqqc5lby3bhzxcxtf with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}, {"udid":"1.314dzessmqqc5lby3bhzxcxtf"}]}}> to user info
     Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
