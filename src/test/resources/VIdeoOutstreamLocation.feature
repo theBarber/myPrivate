@@ -123,7 +123,7 @@ Feature: outstream video duration feature
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     When I send 1 times an ad request with parameter {optimize=1&domain=kentucky.com} for zone named {zone-zoneset-vidAd-pub2434} to UAS
     Then The response code is 200
-    And The response contains {float: 'left'}
+    And The response contains {float: 'bottom-left'}
     And The response contains {placement: '97'}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-stg-vidAd-pub2434-banner-1} 100% of the time
