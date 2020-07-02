@@ -1260,7 +1260,7 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
 
- ##  &&&&&&&&&&&&&&&&&&&&&    Video Duration Filter --> duration & skip  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ ##  %%%%%%%%%%%%%     Video Duration Filter --> duration & skip  %%%%%%%%%%%%%
   Scenario: create entities for Linear Video Duration
     Given i disable campaigns by name on db
       | Campaign Name                      |
@@ -1355,7 +1355,6 @@ Feature: Entities for tests
       | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1         | 1       |
       | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1         | 1       |
       | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1         | 1       |
-     #*************  Video Adhesion duration filter *************
       | zone-zoneset-video-adhesion-campaign-30-skip-Y  | 1         | 1       |
       | zone-zoneset-video-adhesion-campaign-30-skip-N  | 1         | 1       |
 
@@ -1456,7 +1455,7 @@ Feature: Entities for tests
       | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1       | 1        |
 
 
-   ##  &&&&&&&&&&&&&&&&&    VIDEO Wrapper IAS, MOAT , DV    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+   ##  %%%%%%%%%%%%%    VIDEO Wrapper IAS, MOAT , DV    %%%%%%%%%%%%%
 
   Scenario:  create entites for instream_video viewbility
     Given i disable campaigns by name on db
@@ -1519,7 +1518,6 @@ Feature: Entities for tests
       | campaign-NewRenderTest-InApp-Programmatic               |
       | campaign-NewRenderTest-web-direct-event-trackers        |
 
-
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-NewRenderTest-web-direct-zone-banner           | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}           | []         | 75       | 5893           | 3728         | 66832           | []          | []          |
@@ -1544,12 +1542,10 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-SP                 | 407981 | 265093   | true                  | 2503          | {zone-zoneset-NewRenderTest-Instream-View-programmatic}    | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
       | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}         | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
 
-
     And i create new campaigns with new zoneset
       | Campaign Name                             | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-NewRenderTest-InApp-Direct       | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}       | []         | 80       | 8803           | 3586         | 67260           |
       | campaign-NewRenderTest-InApp-Programmatic | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic} | []         | 80       | 8803           | 3586         | 67260           |
-
 
     And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
 
@@ -1583,12 +1579,10 @@ Feature: Entities for tests
     And i update zone data by name
       | Zone Name                           | passback                                                                                                                                                                                                                                                                                     |
       | zone-zoneset-NewRenderTest-Passback | <script language="javascript" type="text/javascript">document.write(''<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"></scr'' + ''ipt>'');</script> |
-
     And i update zone data by name
       | Zone Name                                     | is_mraid |
       | zone-zoneset-NewRenderTest-InApp-Direct       | 1        |
       | zone-zoneset-NewRenderTest-InApp-Programmatic | 1        |
-
 
     And i update campaign data by name
       | Campaign Name                                           | units | goal_type   |
@@ -1630,7 +1624,7 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-SP                 | 1                           | DV                         |
 
 
-# ************ VIEWABILITY ************
+# %%%%%%%%%%%%%  VIEWABILITY  %%%%%%%%%%%%%
   Scenario: create entities for viewability tests
     Given i disable campaigns by name on db
       | Campaign Name                 |
@@ -1655,7 +1649,7 @@ Feature: Entities for tests
 
 
 
-# ************ DISTRICT LIMITATION ************
+# %%%%%%%%%%%%%  DISTRICT LIMITATION %%%%%%%%%%%%%
   Scenario: create entities for District tests
     Given i disable campaigns by name on db
       | Campaign Name                |
@@ -1681,7 +1675,7 @@ Feature: Entities for tests
 
 
 
- #   ************** OPEN-MARKET ************
+ #   %%%%%%%%%%%%%  OPEN-MARKET %%%%%%%%%%%%%
   Scenario: create entities for Open-market tests
     Given i disable campaigns by name on db
 
