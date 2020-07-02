@@ -6,6 +6,8 @@
 Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation both on Mobile and Desktop
 
   Background: health check
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
     When Sending a healthcheck request to UAS
     And I add {NY} ip header
     Then The response code is 200

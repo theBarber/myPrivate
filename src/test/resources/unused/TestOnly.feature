@@ -3,13 +3,6 @@
 Feature: test1
 
   Background:
-    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from users bucket
-    Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from users bucket
-    Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from users bucket
-    Given I delete the history of 1.20qxblv735tk3q7yq7nzy8mjm from user logs bucket
-    Given I delete the history of 1.314dzessmqqc5lby3bhzxcxtf from user logs bucket
-    Given I delete the history of 1.41hun7qe6bn47gfxgfbzwh938 from user logs bucket
-    Given I delete the history of 2.2189F809D99 from user logs bucket
     Given I clear all cookies from uas requests
     Given I clear all headers from uas requests
     When Sending a healthcheck request to UAS
@@ -23,40 +16,20 @@ Feature: test1
 #    And I send 1 times an ad request for consent entities to UAS
 #    Then I expect req consent passback
 
-#  Scenario: 1.0 just test video zone request  -  193.117.138.126
-#    When I send 1 times video ad request with parameter {domain=duration15_skip_yes.com} for zone id 189155 to UAS
+#  Scenario: 1.0 just test video zone request
+#    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+#    When I send 1 times an ad request for zone id 192494 to UAS
 #    Then The response code is 200
-#    And The response contains {VASTAdTagURI}
-#    And The response contains {https://vast.adsafeprotected.com/vast}
+#    And The response contains {float: 'bottom-right'}
+#    And The response contains {placement: '98'}
 #
-  Scenario: 2.0 just test
-    #Given I add device 1.20qxblv735tk3q7yq7nzy8mjm with record <{"user-graph": {"upid":"11111111111111111111111111111111", "devices":[{"udid":"1.20qxblv735tk3q7yq7nzy8mjm"}]}}> to user info
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    And I add unlimited query parameter with value {1} to send my requests to uas
-    And I add optimize query parameter with value {1} to send my requests to uas
-    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3} to UAS
-    Then The response contains {script}
-    Then The response contains {has_capping=1}
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceLifetimeCapping-ST-3-banner-1} 100% of the time
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
-    And I send impression requests to UAS
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3} to UAS
-    Then The response contains {script}
-    Then The response contains {has_capping=1}
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-DeviceLifetimeCapping-ST-3-banner-1} 100% of the time
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my impression requests to tracking service
-    And I send impression requests to UAS
-    Given I clear all cookies from uas requests
-    Given I add cookie UTID with value {22222222222222222222222222222222} to my requests to uas
-    When I send 1 times an ad request for zone named {INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3} to UAS
+  Scenario: 3. non outstream entitiy - should not contain float string
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    When I send 1 times an ad request with parameter {optimize=1} for zone named {INT2434 - Billboard 970x250 - zone234903} to UAS
     Then The response code is 200
-    And The responses are passback
+    And The responses has impression-urls
+    And The impressionUrl has bannerid field matching the id of the banner named {75396-234903-365943-Billboard 970x250-productionBillboard} 100% of the time
+    And The response not contains float
 
 #    Then The response contains {bannerid}
 #    And The responses has impression-urls
