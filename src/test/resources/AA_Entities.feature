@@ -1789,8 +1789,8 @@ Feature: Entities for tests
       | Zoneset Name                | is_sync | is_video |
       | zone-zoneset-vidAd-pub2434  | 1       | 1        |
       | zone-zoneset-inline-pub2434 | 1       | 1        |
-      | campaign-stg-vidAd-pub3708  | 1       | 1        |
-      | campaign-stg-inline-pub3708 | 1       | 1        |
+      | zone-zoneset-vidAd-pub3708  | 1       | 1        |
+      | zone-zoneset-inline-pub3708 | 1       | 1        |
 
 
   Scenario: refresh zone cache with wait
