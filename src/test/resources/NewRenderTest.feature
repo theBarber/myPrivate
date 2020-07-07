@@ -10,11 +10,11 @@ Feature: Validate New Render Service
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
     Then The response code is 200
 
-  Scenario: Send a web request to a zone linked to no banners and validate Passback
+  Scenario:1 Send a web request to a zone linked to no banners and validate Passback
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Passback} to UAS
     Then The response code is 200
-    And The response contains {https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600}
+    #And The response contains {https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
