@@ -24,12 +24,17 @@ Feature: test1
 #    And The response contains {placement: '98'}
 #
   Scenario: 3. non outstream entitiy - should not contain float string
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
-    When I send 1 times an ad request with parameter {optimize=1} for zone named {INT2434 - Billboard 970x250 - zone234903} to UAS
-    Then The response code is 200
+    #Given I reset metering bucket record of campaign campaign-D-DailyPacing-ST-2
+    And I sleep for 1 seconds
+    When I send 15 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    And The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {75396-234903-365943-Billboard 970x250-productionBillboard} 100% of the time
-    And The response not contains float
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
+    And I send impression requests to UAS
+    And I sleep for 1 seconds
+    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    And The response code is 200
+    And The responses are passback
 
 #    Then The response contains {bannerid}
 #    And The responses has impression-urls

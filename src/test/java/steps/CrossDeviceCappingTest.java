@@ -286,24 +286,20 @@ public class CrossDeviceCappingTest extends BaseTest {
                 System.out.println(e.getMessage());
             }
         });
-
-        Then("I delete the history of campaign (.*) from metering bucket", (String campaignName) -> {
-            Optional<? extends WithId<Integer>> expectedEntity = sut.getExecutorCampaignManager().getterFor("campaign")
-                    .apply(campaignName);
-            int campaignId = expectedEntity.get().getId();
-            long millis = System.currentTimeMillis();
-            long days = 0;
-            for (int daysBack = 1; daysBack >= 0 ; daysBack--) {
-                days = millis/(24*60*60*1000) - daysBack;
-            String meteringRecordToDelete = "daily_impressions_" + campaignId + "_" + days + "_us-east-1";
-            System.out.println("meteringRecordToDelete --> " + meteringRecordToDelete);
+        //%%%%%%%%%%%%%%%%%   Restart Metering Bucket record %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        Given("^I reset metering bucket record of campaign (.*)$", (String campaignName) -> {
+            String meteringRecordToDelete = "daily_impressions_370316_18450_us-east-1";
+            this.deleteTodaysRecord(campaignName);
+            String jsonDoc = "{\"c\":0}";
             try {
-                sut.getMeteringBucket().deleteDocument(meteringRecordToDelete);
+                sut.getMeteringBucket().insertDocument(meteringRecordToDelete, jsonDoc);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
-            }
         });
+        //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+        Then("I delete the history of campaign (.*) from metering bucket", this::deleteTodaysRecord);
 
 
         Then("I delete the history of \\{(.*)\\} from users bucket with prefix = \\{(.*)\\}", (String udId, String prefix) -> {
@@ -394,5 +390,23 @@ public class CrossDeviceCappingTest extends BaseTest {
         JsonNode jsonNode = couchDocs.get(scenario);
         Assert.assertNotNull("There is no suitable doc for scenario: " + scenario, jsonNode);
         return jsonNode;
+    }
+
+    private void deleteTodaysRecord(String campaignName) {
+        Optional<? extends WithId<Integer>> expectedEntity = sut.getExecutorCampaignManager().getterFor("campaign")
+                .apply(campaignName);
+        int campaignId = expectedEntity.get().getId();
+        long millis = System.currentTimeMillis();
+        long days = 0;
+        for (int daysBack = 1; daysBack >= 0; daysBack--) {
+            days = millis / (24 * 60 * 60 * 1000) - daysBack;
+            String meteringRecordToDelete = "daily_impressions_" + campaignId + "_" + days + "_us-east-1";
+            System.out.println("meteringRecordToDelete --> " + meteringRecordToDelete);
+            try {
+                sut.getMeteringBucket().deleteDocument(meteringRecordToDelete);
+            } catch (DocumentDoesNotExistException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
