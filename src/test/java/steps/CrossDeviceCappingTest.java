@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import entities.Campaign;
 import gherkin.deps.com.google.gson.JsonArray;
 import gherkin.deps.com.google.gson.JsonElement;
 import gherkin.deps.com.google.gson.JsonParser;
@@ -26,7 +27,7 @@ import org.junit.Assert;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.CouchbaseBucketModule;
 
-import java.time.Instant;
+import java.time.*;
 import java.util.Optional;
 
 import static steps.HeaderBiddingTest.*;
@@ -286,25 +287,22 @@ public class CrossDeviceCappingTest extends BaseTest {
                 System.out.println(e.getMessage());
             }
         });
-
-        Then("I delete the history of campaign (.*) from metering bucket", (String campaignName) -> {
+        //%%%%%%%%%%%%%%%%%   Reset Metering Bucket record %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        Given("^I reset metering bucket record impression counter of campaign (.*)$", (String campaignName) -> {
             Optional<? extends WithId<Integer>> expectedEntity = sut.getExecutorCampaignManager().getterFor("campaign")
                     .apply(campaignName);
             int campaignId = expectedEntity.get().getId();
-            long millis = System.currentTimeMillis();
-            long days = 0;
-            for (int daysBack = 1; daysBack >= 0 ; daysBack--) {
-                days = millis/(24*60*60*1000) - daysBack;
-            String meteringRecordToDelete = "daily_impressions_" + campaignId + "_" + days + "_us-east-1";
-            System.out.println("meteringRecordToDelete --> " + meteringRecordToDelete);
+            long days = getEpocTimeInDays();
+            String meteringRecordToReset = "daily_impressions_" + campaignId + "_" + days + "_us-east-1";
+            //String meteringRecordToReset = "daily_impressions_371262_18451_us-east-1";
+            String jsonDoc = "{\"c\":0}";
             try {
-                sut.getMeteringBucket().deleteDocument(meteringRecordToDelete);
+                sut.getMeteringBucket().insertDocument(meteringRecordToReset, jsonDoc);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());
             }
-            }
         });
-
+        //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         Then("I delete the history of \\{(.*)\\} from users bucket with prefix = \\{(.*)\\}", (String udId, String prefix) -> {
             try {
