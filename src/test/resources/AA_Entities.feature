@@ -1085,7 +1085,7 @@ Feature: Entities for tests
 #    pacing = hourly flex
       | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
       | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 150   | impressions |
+      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 100   | impressions |
       | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
       | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
       | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |

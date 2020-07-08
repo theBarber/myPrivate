@@ -5,6 +5,7 @@ Feature: test1
   Background:
     Given I clear all cookies from uas requests
     Given I clear all headers from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When Sending a healthcheck request to UAS
     Then The response code is 200
 
@@ -16,7 +17,8 @@ Feature: test1
 #    And I send 1 times an ad request for consent entities to UAS
 #    Then I expect req consent passback
 
-#  Scenario: 1.0 just test video zone request
+  #Scenario: 1.0 reseting metering bucket
+#    Given I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
 #    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
 #    When I send 1 times an ad request for zone id 192494 to UAS
 #    Then The response code is 200
@@ -24,17 +26,30 @@ Feature: test1
 #    And The response contains {placement: '98'}
 #
   Scenario: 3. non outstream entitiy - should not contain float string
-    #Given I reset metering bucket record of campaign campaign-D-DailyPacing-ST-2
-    And I sleep for 1 seconds
-    When I send 15 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
-    And The response contains {script}
+#    And I sleep for 1 seconds
+#    When I send 5 times an ad request for zone id 193211 to UAS
+    When I send 7 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The responses has impression-urls
+    And The response contains {bannerid}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
     And I send impression requests to UAS
     And I sleep for 1 seconds
     When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The response code is 200
+    And The response not contains bannerid
     And The responses are passback
+    And I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
+#    When I send 1 times an ad request for zone id 193211 to UAS
+#    And The response contains {bannerid}
+#    And I sleep for 1 seconds
+#    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+#    And The response code is 200
+#    And The responses are passback
+
+
+
+
+
 
 #    Then The response contains {bannerid}
 #    And The responses has impression-urls
