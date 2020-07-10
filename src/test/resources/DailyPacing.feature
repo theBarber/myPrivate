@@ -1,7 +1,7 @@
 @parallel
 @DailyPaicing
 @request_service
-Feature: Pacing Hourly Test
+Feature: Pacing Daily Test
 
   Background: health check
     Given I clear all cookies from uas requests
@@ -11,13 +11,13 @@ Feature: Pacing Hourly Test
     Then The response code is 200
 
   Scenario: 1.0 Daily Pacing. life time goal - 100, 10 days left , flex = 0% (pacing)  -> NDQ = 10 (10 units per day)
-    When I send 10 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    When I send 10 times an ad request with parameter {unlimited=1&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The responses has impression-urls
     And The response contains {bannerid}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
     And I send impression requests to UAS
     And I sleep for 1 seconds
-    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    When I send 1 times an ad request with parameter {unlimited=1&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The response code is 200
     And The response not contains bannerid
     And The responses are passback

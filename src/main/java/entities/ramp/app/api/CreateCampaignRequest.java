@@ -41,8 +41,6 @@ public class CreateCampaignRequest {
     private Integer trafficType;
     @JsonProperty("CampaignPassBacks")
     private List<Integer> CampaignPassBacks;
-
-
     @JsonProperty("optimizeReason")
     String optimizeReason = "10";
     @JsonProperty("campaignType")
@@ -55,6 +53,8 @@ public class CreateCampaignRequest {
     Boolean isUnlimited = true;
     @JsonProperty("limitation")
     String limitation = "[]";
+    @JsonProperty("campaignCategorizationId")
+    private int campaignCategorizationId;
 
 
     public CreateCampaignRequest(String campaignName, String lineItemId, Zonesets zonesets, List<Integer> selectedCreativeId,Integer selectedDealId, String startDateTime, String endDateTime,List<Integer> playerSizesIDs,List<Integer> playbackMethodsIDs)
@@ -71,6 +71,7 @@ public class CreateCampaignRequest {
         this.endDateTime = endDateTime;
         this.playerSizesIDs = playerSizesIDs;
         this.playbackMethodsIDs = playbackMethodsIDs;
+        this.campaignCategorizationId = 1;
     }
 
     @JsonProperty("priority")
@@ -148,6 +149,10 @@ public class CreateCampaignRequest {
         return avVendor;
     }
 
+    @JsonProperty("campaignCategorizationId")
+    public int getCampaignCategorizationId() {
+        return campaignCategorizationId;
+    }
 
     public void setViewability(String avThreshold, String avVendor, Boolean avEnabled ) {
         this.avThreshold = avThreshold;
@@ -242,5 +247,10 @@ public class CreateCampaignRequest {
     @JsonProperty("limitation")
     public void setLimitation(String limitation) {
         this.limitation = limitation;
+    }
+
+    @JsonProperty("campaignCategorizationId")
+    public void setCampaignCategorizationId(int campaignCategorizationId) {
+        this.campaignCategorizationId = campaignCategorizationId;
     }
 }
