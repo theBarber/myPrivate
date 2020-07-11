@@ -25,7 +25,7 @@ Feature: Agnostic Header bidding feature
 
   Scenario: 2 Agnostic - fictive placement , fictive sizes - passback expected
     Given i send 1 headerBidding post request for scenario {Send HB Agnostic - fictive placement - fictive sizes - publisher 2434} for publisher 2434 with domain {agnostic.com} with extra params {&optimize=1}
-    Then The response code is 200
+    Then The response code is 204
     And The responses are passback
 
   Scenario: 3 Agnostic - valid placement , valid sizes [1,1],[1,2],[970,250] -  expected 970X250
