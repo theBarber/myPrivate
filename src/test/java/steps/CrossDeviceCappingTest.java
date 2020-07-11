@@ -295,6 +295,7 @@ public class CrossDeviceCappingTest extends BaseTest {
             long days = getEpocTimeInDays();
             String meteringRecordToReset = "daily_impressions_" + campaignId + "_" + days + "_us-east-1";
             //String meteringRecordToReset = "daily_impressions_370959_18452_us-east-1";
+            System.out.println("meteringRecordToReset is ==> " + meteringRecordToReset);
             String jsonDoc = "{\"c\":0}";
             try {
                 sut.getMeteringBucket().insertDocument(meteringRecordToReset, jsonDoc);
