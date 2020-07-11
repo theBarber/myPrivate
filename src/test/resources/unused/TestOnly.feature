@@ -14,18 +14,12 @@ Feature: test1
 
 
   Scenario:22  -  1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
-    And I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
-    And I sleep for 3 seconds
-    When I send 10 times an ad request with parameter {unlimited=1&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
-    And The responses has impression-urls
-    And The response contains {bannerid}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
-    And I send impression requests to UAS
-    And I sleep for 1 seconds
-    When I send 1 times an ad request with parameter {unlimited=1&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    Given i send 1 headerBidding post request for scenario {Send HB Agnostic - fictive placement - correct sizes - publisher 2434} for publisher 2434 with domain {agnostic.com} with extra params {&optimize=1}
     And The response code is 200
-    And The response not contains bannerid
-    And The responses are passback
+    And The response contains {bannerid}
+    And all HB responses contains cpm with value {3.0}
+    And The response contains {"width":970}
+    And The response contains {"height":250}
 #    When I send 10 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192979 to UAS
 #    And The responses has impression-urls
 #    And The response contains {bannerid}
