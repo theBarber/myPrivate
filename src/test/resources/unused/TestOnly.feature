@@ -11,15 +11,14 @@ Feature: test1
 
 
 
-
-
-  Scenario:22  -  1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
-    Given i send 1 headerBidding post request for scenario {Send HB Agnostic - fictive placement - correct sizes - publisher 2434} for publisher 2434 with domain {agnostic.com} with extra params {&optimize=1}
+  Scenario:18 header bidding multiple bids requests
+    Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {bannerid}
-    And all HB responses contains cpm with value {3.0}
-    And The response contains {"width":970}
-    And The response contains {"height":250}
+    And The response contains {script}
+    And i read all HB responses and map their bidId by adId
+    And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
+    And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
+    And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
 #    When I send 10 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192979 to UAS
 #    And The responses has impression-urls
 #    And The response contains {bannerid}

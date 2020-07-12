@@ -120,7 +120,7 @@ Feature: Header Bidding Flow Support
     And I send impression requests to UAS
 
 #   header bidding multiple bids tests
-  Scenario:18 header bidding multiple bids requests
+  Scenario:18 (** BUG UN-25283 **) header bidding multiple bids requests
     Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
