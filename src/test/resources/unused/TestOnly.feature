@@ -11,40 +11,41 @@ Feature: test1
 
 
 
-
-#  Scenario: zone req - no params are specified - request from Eu
-#    Given I add {UK} ip header
-#    And I send 1 times an ad request for consent entities to UAS
-#    Then I expect req consent passback
-
-  #Scenario: 1.0 reseting metering bucket
-#    Given I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
-#    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
-#    When I send 1 times an ad request for zone id 192494 to UAS
-#    Then The response code is 200
-#    And The response contains {float: 'bottom-right'}
-#    And The response contains {placement: '98'}
-#
-  Scenario: 3. non outstream entitiy - should not contain float string
-#    And I sleep for 1 seconds
-#    When I send 5 times an ad request for zone id 193211 to UAS
-    When I send 7 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
-    And The responses has impression-urls
-    And The response contains {bannerid}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
-    And I send impression requests to UAS
-    And I sleep for 1 seconds
-    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+  Scenario:18 header bidding multiple bids requests
+    Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response not contains bannerid
-    And The responses are passback
-    And I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
-#    When I send 1 times an ad request for zone id 193211 to UAS
+    And The response contains {script}
+    And i read all HB responses and map their bidId by adId
+    And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
+    And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
+    And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
+#    When I send 10 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192979 to UAS
+#    And The responses has impression-urls
 #    And The response contains {bannerid}
-#    And I sleep for 1 seconds
-#    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+#    #And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
+#    And I send impression requests to UAS
+#    And I sleep for 3 seconds
+#    #When I send 1 times an ad request with parameter {unlimited=1&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+#    When I send 1 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192979 to UAS
 #    And The response code is 200
+#    And The response not contains bannerid
 #    And The responses are passback
+#    And I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
+#    Given I clear all cookies from uas requests
+#    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728002} and extra params {&optimize=1&unlimited=1} cookies false
+#    And The response code is 200
+#    And The response contains {script}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-SS-1*1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-SS-1*1-banner-1}
+#
+#  Scenario:23 -  1 size 1*2 (ST), 1 placement (PG), PG banner expected
+#    Given I clear all cookies from uas requests
+#    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
+#    And The response code is 200
+#    And The response contains {script}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+
 
 
 

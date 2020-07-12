@@ -1,5 +1,5 @@
 @parallel
-@videoDuration1
+@outstream1
 
 Feature: outstream video duration feature
 
