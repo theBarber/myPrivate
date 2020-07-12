@@ -380,12 +380,6 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 
         //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-
-
-        if (config.get("is.remote").equals("true")) {
-            keyFile = new File("perion-automation/pems/" + cliconnectionKeyname);
-        }
-
         File finalKeyFile = keyFile;
 
         //************* REMOVED ***********
