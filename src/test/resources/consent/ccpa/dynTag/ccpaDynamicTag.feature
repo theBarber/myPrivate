@@ -42,7 +42,7 @@ Feature: CCPA - DynTag
   Scenario:4.0   ccpa=1NNN - DT request - city limitation - script expected
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    Given I add header of {x-forwarded-for} with value {192.241.221.98}}
+    Given I add header of {x-forwarded-for} with value {192.241.221.98}
     Then i send 1 times Dynamic Tag ad request to UAS for publisher 2434 with extra params {consentweb.com&tagid=452&ccpa=1NNN}
     And The response code is 200
     And The response contains {script}

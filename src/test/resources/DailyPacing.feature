@@ -4,22 +4,26 @@
 Feature: Pacing Hourly Test
 
   Background: health check
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When Sending a healthcheck request to UAS
     Then The response code is 200
 
-  Scenario: 1.0 Daily Pacing. life time goal - 45, 3 days left , flex = 25% (pacing)  -> NDQ = 15
-    Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket
-    And I restart {ramp-lift-services}
-    And I sleep for 70 seconds
-    When I send 15 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
-    And The response contains {script}
+  Scenario: 1.0 Daily Pacing. life time goal - 100, 10 days left , flex = 0% (pacing)  -> NDQ = 10 (10 units per day)
+    When I send 10 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The responses has impression-urls
+    And The response contains {bannerid}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
     And I send impression requests to UAS
-    And I sleep for 60 seconds
+    And I sleep for 1 seconds
     When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
     And The response code is 200
+    And The response not contains bannerid
     And The responses are passback
+    And I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
+
+
 #Feature: Daily Pacing, over 24 hours
 #
 #  Scenario: 1.a cdm 1, ASAP, hour num 1

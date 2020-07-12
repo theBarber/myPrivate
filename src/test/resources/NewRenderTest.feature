@@ -5,11 +5,16 @@
 
 Feature: Validate New Render Service
 
+  Background: health check
+    When Sending a healthcheck request to UAS
+    And I add header of {X-Forwarded-For} with value {78.31.205.183}
+    Then The response code is 200
+
   Scenario:1 Send a web request to a zone linked to no banners and validate Passback
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     When I send 1 times an ad request with parameter {unlimited=1&newrender=1} for zone named {zone-zoneset-NewRenderTest-Passback} to UAS
     Then The response code is 200
-    And The response contains {https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600}
+    #And The response contains {https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {https://us-u.openx.net/w/1.0/cm?id=fba3d144-1026-4d31-a758-943b9545e305&r=https://usr.undertone.com/userPixel/sync?partnerId=39&uid=}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
@@ -52,7 +57,7 @@ Feature: Validate New Render Service
 
   Scenario:4 Send a web HB request and validate the response of a direct ES banner
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {americanow.com} with extra params {&unlimited=1&newrender=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {americanow.com} with extra params {&unlimited=1&newrender=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-direct-HB-banner}
@@ -60,7 +65,7 @@ Feature: Validate New Render Service
     And all HB responses contains cpm with value {2.5}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-banner-banner-1} 100% of the time
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {cw.addthis.com/t.gif?pid=46}
@@ -85,15 +90,15 @@ Feature: Validate New Render Service
 
   Scenario:6 Send a web HB request and validate the response of a Programmatic ES banner
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB PPP request for publisher 3728 with 300X250} for publisher 3728 with domain {testing.com} with extra params {&requestid=OXESRender&unlimited=1&newrender=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB PPP request for publisher 3728 with 300X250} for publisher 3728 with domain {testing.com} with extra params {&requestid=OXESRender&unlimited=1&newrender=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1}
-    And all HB responses contains cpm with value {99999}
+    And all HB responses contains cpm with value {99999.0}
     And The response contains {&e=render}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-programmatic-HB-banner-banner-1} 100% of the time
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {cw.addthis.com/t.gif?pid=46}
@@ -241,12 +246,12 @@ Feature: Validate New Render Service
 
   Scenario:14 Send a web HB request and validate the response of a Direct Video Adhesion Ad (With Leave Behind)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3708 with 320X50} for publisher 3708 with domain {autoshopper.com} with extra params {&unlimited=1&newrender=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3708 with 320X50} for publisher 3708 with domain {autoshopper.com} with extra params {&unlimited=1&newrender=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-direct-HB-video}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-direct-HB-video-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-NewRenderTest-web-direct-HB-video-banner-1} 100% of the time
     And The response contains {&e=firstQuartile}
     And The response contains {&e=midpoint}
@@ -258,7 +263,7 @@ Feature: Validate New Render Service
     And The response contains {&e=start}
     And The response contains {&e=unmute}
     And The response contains {&e=render}
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {cw.addthis.com/t.gif?pid=46}
@@ -322,12 +327,12 @@ Feature: Validate New Render Service
 
   Scenario:17 Send a web HB request and validate the response of a Programmatic Video Adhesion Ad (With Leave Behind)
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3708 with 320X50} for publisher 3708 with domain {cnn.com} with extra params {&requestid=OX-VA-Render&unlimited=1&newrender=1&sim_geo=1&country=us}
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3708 with 320X50} for publisher 3708 with domain {cnn.com} with extra params {&requestid=OX-VA-Render&unlimited=1&newrender=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-video}
     And all HB responses contains adId with id of entity named {campaign-NewRenderTest-web-programmatic-HB-video-banner-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
     And The response contains {var ut_aniview={publisherId:'5912cb1028a06142db67f38a',channelId:'5b7d30c4073ef454a07d4d64'}}
     And The response contains {VASTAdTagURI}
     And The response contains {ut_udms}
@@ -344,7 +349,7 @@ Feature: Validate New Render Service
     And The response contains {&e=start}
     And The response contains {&e=unmute}
     And The response contains {&e=render}
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {cw.addthis.com/t.gif?pid=46}
@@ -424,7 +429,7 @@ Feature: Validate New Render Service
     And The response contains {&e=close}
     And The response contains {&e=start}
     And The response contains {&e=unmute}
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}
@@ -448,7 +453,7 @@ Feature: Validate New Render Service
     And The response contains {&e=close}
     And The response contains {&e=start}
     And The response contains {&e=unmute}
-    And The response contains {evt-s-us-east-1.undertone.com/c?}
+    And The response contains {us-east-1.undertone.com/c?}
     And The response contains {https://ib.adnxs.com/getuidnb?https://usr.undertone.com/userPixel/sync?partner=appnexus&uid=}
     And The response contains {usr.undertone.com/userPixel/sync?partnerId=39}
     And The response contains {https://cw.addthis.com/t.gif?pid=46&pdid=}

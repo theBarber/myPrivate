@@ -1,10 +1,13 @@
 @testlocally
 
-Feature: for testing only
+Feature: test1
 
-#  Background: health check
-#    Given I delete the history of 1.person6258 from user logs bucket
-    #And I add deviceid query parameter with value {19381945} to send my requests to uas
+  Background:
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
+    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+    When Sending a healthcheck request to UAS
+    Then The response code is 200
 
 
 
@@ -14,16 +17,40 @@ Feature: for testing only
 #    And I send 1 times an ad request for consent entities to UAS
 #    Then I expect req consent passback
 
-#  Scenario: 1.0 just test video zone request  -  193.117.138.126
-#    When I send 1 times video ad request with parameter {domain=duration15_skip_yes.com} for zone id 189155 to UAS
+  #Scenario: 1.0 reseting metering bucket
+#    Given I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
+#    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+#    When I send 1 times an ad request for zone id 192494 to UAS
 #    Then The response code is 200
-#    And The response contains {VASTAdTagURI}
-#    And The response contains {https://vast.adsafeprotected.com/vast}
+#    And The response contains {float: 'bottom-right'}
+#    And The response contains {placement: '98'}
 #
-#  Scenario: 2.0 gdpr=0  ---> geo limitation =  san francisco city entity
-#    Given I clear all cookies from uas requests
-#    Given I add cookie UTID with value {92B1BB139A75C} to my requests to uas
-#    When I send 4 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192206 to UAS
+  Scenario: 3. non outstream entitiy - should not contain float string
+#    And I sleep for 1 seconds
+#    When I send 5 times an ad request for zone id 193211 to UAS
+    When I send 7 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    And The responses has impression-urls
+    And The response contains {bannerid}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
+    And I send impression requests to UAS
+    And I sleep for 1 seconds
+    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    And The response code is 200
+    And The response not contains bannerid
+    And The responses are passback
+    And I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
+#    When I send 1 times an ad request for zone id 193211 to UAS
+#    And The response contains {bannerid}
+#    And I sleep for 1 seconds
+#    When I send 1 times an ad request with parameter {unlimited=1&domain=pacing.houry.direct&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+#    And The response code is 200
+#    And The responses are passback
+
+
+
+
+
+
 #    Then The response contains {bannerid}
 #    And The responses has impression-urls
 #    Then The response code is 200
@@ -52,8 +79,3 @@ Feature: for testing only
 
 
 #    Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket
-  #  &&&&&&&&&&&&&&&&&  Eitan need to fix 4
-  Scenario: 4. InstreamVid, zone req, vpaid_support=1, not inapp. banner with moat wrapper expected
-    When I send 1 times an ad video request with parameter {optimize=1&unlimited=1&domain=dnu-tt&vpaid_support=1&requestid=vidAd} for zone named {zone-zoneset-InstreamVid-View-SP} to UAS
-    And The response has a moat wrapper with params advanced string with advertiserid = 22420, ioid = 407981, iolineitemid = 244699, bannername = {campaign-InstreamVid-View-SP-banner-1}, campaignname = {campaign-InstreamVid-View-SP}, zonename = {zone-zoneset-InstreamVid-View-SP}, MoatWEBID = 3708
-    And The response contains {&zMoatWEBID=3708}

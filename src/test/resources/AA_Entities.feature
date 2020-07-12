@@ -148,6 +148,7 @@ Feature: Entities for tests
   Scenario: create entities for cross device capping
     Given i disable campaigns by name on db
       | Campaign Name                                   |
+      | campaign-CrossDeviceCapping-ST                  |
       | campaign-DeviceSessionCapping-ST-1              |
       | campaign-CrossDeviceSessionCapping-ST-2         |
       | campaign-DeviceLifetimeCapping-ST-3             |
@@ -163,6 +164,7 @@ Feature: Entities for tests
 
     Given i create new campaigns with new zoneset
       | Campaign Name                                   | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                           | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-CrossDeviceCapping-ST                  | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceCapping-ST}                  | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceSessionCapping-ST-1              | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceSessionCapping-ST-1}              | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-CrossDeviceSessionCapping-ST-2         | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2}         | []         | 93       | 14892          | 3708         | 27807           |
       | campaign-DeviceLifetimeCapping-ST-3             | 75396 | 210722   | false                 | 8290          | {INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3}             | []         | 93       | 14892          | 3708         | 27807           |
@@ -178,6 +180,7 @@ Feature: Entities for tests
 
     And i update zone data by name
       | Zone Name                                                   | is_mraid | is_secure |
+      | INT3708-zone-zoneset-CrossDeviceCapping-ST                  | 0        | 1         |
       | INT3708-zone-zoneset-DeviceSessionCapping-ST-1              | 0        | 1         |
       | INT3708-zone-zoneset-CrossDeviceSessionCapping-ST-2         | 0        | 1         |
       | INT3708-zone-zoneset-DeviceLifetimeCapping-ST-3             | 0        | 1         |
@@ -191,6 +194,7 @@ Feature: Entities for tests
 
     Given i update campaign data by name
       | Campaign Name                                   | capping | session_capping | block | priority |
+      | campaign-CrossDeviceCapping-ST                  | 4       | 0               | 0     | -2       |
       | campaign-DeviceSessionCapping-ST-1              | 0       | 2               | 60    | -2       |
       | campaign-CrossDeviceSessionCapping-ST-2         | 0       | 2               | 60    | -2       |
       | campaign-DeviceLifetimeCapping-ST-3             | 2       | 0               | 0     | -2       |
@@ -198,7 +202,6 @@ Feature: Entities for tests
       | campaign-DeviceCappingMultipleCampaigns-ST-5    | 2       | 0               | 0     | -2       |
       | campaign-DeviceCappingMultipleCampaigns-ST-6    | 1       | 0               | 0     | -1       |
       | campaign-DeviceCappingMultipleCampaigns-ST-7    | 0       | 0               | 0     | 1        |
-      | campaign-DeviceLiCapping-ST-8                   | 4       | 0               | 0     | -2       |
       | campaign-DeviceSessionCapping-Inapp-ST-9        | 0       | 2               | 60    | -2       |
       | campaign-CrossDeviceSessionCapping-Inapp-ST-10  | 0       | 2               | 60    | -2       |
       | campaign-DeviceLifetimeCapping-Inapp-ST-11      | 2       | 0               | 0     | -2       |
@@ -470,43 +473,43 @@ Feature: Entities for tests
   @DT
   Scenario: create entities for DT tests
     Given i disable campaigns by name on db
-      | Campaign Name          |
-      | campaign-DT-SS-1-t-1   |
-      | campaign-DT-SI-2-t-1   |
-      | campaign-DT-SI-1-t-1   |
-      | campaign-DT-SI-2-t-1   |
-      | campaign-DT-PGC-2-t-1  |
+      | Campaign Name         |
+      | campaign-DT-SS-1-t-1  |
+      | campaign-DT-SI-2-t-1  |
+      | campaign-DT-SI-1-t-1  |
+      | campaign-DT-SI-2-t-1  |
+      | campaign-DT-PGC-2-t-1 |
 #      | campaign-DT-SS-1-t-2   |
 #      | campaign-DT-SI-2-t-2   |
 #      | campaign-DT-SI-1-t-3-L |
 #      | campaign-DT-SI-2-t-3   |
     Given i create new campaigns with new zoneset
-      | Campaign Name          | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name         | limitation        | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-DT-SS-1-t-1   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}   | []                | 69       | 14401          | 3674         | 64397           |
-      | campaign-DT-SS-2-t-1   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}   | []                | 69       | 14401          | 3674         | 64397           |
-      | campaign-DT-SI-1-t-1   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}   | []                | 61       | 14401          | 3674         | 64398           |
-      | campaign-DT-SI-2-t-1   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}   | []                | 61       | 14401          | 3674         | 64398           |
-      | campaign-DT-PGC-2-t-1  | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-PGC-t-1}  | []                | 75       | 14401          | 3674         | 64399           |
+      | Campaign Name         | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-DT-SS-1-t-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}  | []         | 69       | 14401          | 3674         | 64397           |
+      | campaign-DT-SS-2-t-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-1}  | []         | 69       | 14401          | 3674         | 64397           |
+      | campaign-DT-SI-1-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
+      | campaign-DT-SI-2-t-1  | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-1}  | []         | 61       | 14401          | 3674         | 64398           |
+      | campaign-DT-PGC-2-t-1 | 75396 | 222908   | false                 | 34670         | {zone-zoneset-DT-PGC-t-1} | []         | 75       | 14401          | 3674         | 64399           |
 #      | campaign-DT-SS-1-t-2   | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-SS-t-2}   | []                | 69       | 14402          | 3666         | 64400           |
 #      | campaign-DT-SI-2-t-2   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-2}   | []                | 61       | 14402          | 3666         | 64401           |
 #      | campaign-DT-SI-1-t-3-L | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3-L} | [[[5,"=~","af"]]] | 61       | 14403          | 3675         | 64403           |
 #      | campaign-DT-SI-2-t-3   | 75396 | 211456   | false                 | 210           | {zone-zoneset-DT-SI-t-3}   | []                | 61       | 14403          | 3675         | 64403           |
     And i update campaign data by name
-      | Campaign Name          | Priority | campaign_delivery_method |
-      | campaign-DT-SS-1-t-1   | -2       | 1                        |
-      | campaign-DT-SI-2-t-1   | -1       | 2                        |
-      | campaign-DT-SI-1-t-1   | -2       | 1                        |
-      | campaign-DT-SI-2-t-1   | -1       | 2                        |
-      | campaign-DT-PGC-2-t-1  | -1       | 2                        |
+      | Campaign Name         | Priority | campaign_delivery_method |
+      | campaign-DT-SS-1-t-1  | -2       | 1                        |
+      | campaign-DT-SI-2-t-1  | -1       | 2                        |
+      | campaign-DT-SI-1-t-1  | -2       | 1                        |
+      | campaign-DT-SI-2-t-1  | -1       | 2                        |
+      | campaign-DT-PGC-2-t-1 | -1       | 2                        |
 #      | campaign-DT-SS-1-t-2   | -2       | 1                        |
 #      | campaign-DT-SI-2-t-2   | -1       | 2                        |
 #      | campaign-DT-SI-1-t-3-L | -2       | 1                        |
 #      | campaign-DT-SI-2-t-3   | -1       | 2                        |
     And i update zone data by name
-      | Zone Name                | is_secure |
-      | zone-zoneset-DT-SS-t-1   | 1         |
-      | zone-zoneset-DT-SI-t-1   | 1         |
-      | zone-zoneset-DT-PGC-t-1  | 1         |
+      | Zone Name               | is_secure |
+      | zone-zoneset-DT-SS-t-1  | 1         |
+      | zone-zoneset-DT-SI-t-1  | 1         |
+      | zone-zoneset-DT-PGC-t-1 | 1         |
 #      | zone-zoneset-DT-SS-t-2   | 1         |
 #      | zone-zoneset-DT-SI-t-2   | 1         |
 #      | zone-zoneset-DT-SI-t-3-L | 1         |
@@ -529,7 +532,7 @@ Feature: Entities for tests
       | campaign-DT-Inline-ST-2  | 75396 | 210722   | false                 | 204           | {zone-zoneset-DT-inline-ST}   | []         | 83       | 14470          | 3690         | 65422           |
       | campaign-DT-Inline-SS-1  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-inline-SS-1} | []         | 69       | 14470          | 3690         | 65423           |
       | campaign-DT-Inline-SS-3  | 75396 | 197418   | false                 | 86            | {zone-zoneset-DT-inline-SS-3} | []         | 69       | 14470          | 3690         | 65423           |
-      | campaign-DT-Inline-PGC-2 | 75396 | 222908   | false                 | 1068          | {zone-zoneset-DT-inline-PGC}  | []         | 75       | 14470          | 3690         | 65424           |
+      | campaign-DT-Inline-PGC-2 | 75396 | 222908   | false                 | 34670         | {zone-zoneset-DT-inline-PGC}  | []         | 75       | 14470          | 3690         | 65424           |
     And i update campaign data by name
       | Campaign Name            | Priority | campaign_delivery_method |
       | campaign-DT-Inline-ST-1  | -2       | 1                        |
@@ -565,14 +568,7 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       |
 #     InApp Burl
       | campaign-server-prog-inApp-ST-1 |
-    # programmatic flow - Reserve
-      | campaign-reserve-AN-iter-1      |
-      | campaign-reserve-OX-iter-2      |
-      | campaign-reserve-AN-iter-3      |
 
-#     multiple bids
-#      |campaign-server-prog-MultiBids-SS-1 |
-#      |campaign-server-prog-MultiBids-ST-2 |
     Given i create new campaigns with new zoneset
       | Campaign Name                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-server-prog-SS-1       | 407981 | 228962   | true                  | 17            | {zone-zoneset-server-prog-SS}       | []         | 69       | 2164           | 3711         | 66556           |
@@ -589,10 +585,6 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-ST}       | []         | 83       | 2164           | 3711         | 66555           |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 407981 | 224533   | true                  | 33            | {zone-zoneset-server-prog-inApp-ST} | []         | 83       | 2164           | 3711         | 66555           |
-      # programmatic flow - Reserve
-      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
-      | campaign-reserve-AN-iter-3      | 407981 | 248362   | true                  | 2583          | {zone-zoneset-reserve-prog-PG}      | []         | 75       | 15823          | 3708         | 27656           |
 
 ##     multiple bids
 #      |campaign-server-prog-MultiBids-SS-1  |407981        |243452     |true                  |1719               |{zone-zoneset-server-prog-MultiBids-SS-1}           |[]           |69        |15176              |3711           |66556             |
@@ -613,21 +605,12 @@ Feature: Entities for tests
       | campaign-server-prog-ST-4       | 1        | 4                        | 1                  | 1                      |
       #     InApp Burl
       | campaign-server-prog-inApp-ST-1 | 1        | 4                        | 1                  | 1                      |
-      # programmatic flow - Reserve
-      | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
-      | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
-      | campaign-reserve-AN-iter-3      | 1        | 4                        | 2                  | 1                      |
 
     And i update zone data by name
       | Zone Name                    | is_secure |
       | zone-zoneset-server-prog-SS  | 1         |
       | zone-zoneset-server-prog-PGC | 1         |
       | zone-zoneset-server-prog-ST  | 1         |
-      | zone-zoneset-reserve-prog-PG | 1         |
-#     |zone-zoneset-server-prog-MultiBids-SS-1     |1            |
-#     |zone-zoneset-server-prog-MultiBids-ST-2      |1            |
-#     Given i sent an analize req to peer39 for the following website = {https://www.bbc.com/sport}
-
 
     Given i create new campaigns with new zoneset
       | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name       | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
@@ -670,7 +653,7 @@ Feature: Entities for tests
       | zone-zoneset-Inapp-SI-5 | 1         |
       | zone-zoneset-Inapp-SI-6 | 1         |
 
-  @InAppBlackWhiteList
+ ### In App Black White List
   Scenario: create entities for Black and white app listu
     Given i disable campaigns by name on db
       | Campaign Name                     |
@@ -924,7 +907,7 @@ Feature: Entities for tests
       | campaign-HB-PlacementG-SS-1*1            | 75396 | 197418   | false                 | 86              | {zone-zoneset-HB-PlacementG-SS-1*1}            | []         | 69       | 15227          | 3728         | 66831           |
       | campaign-HB-PlacementG-ST-1*2            | 75396 | 210722   | false                 | 8290            | {zone-zoneset-HB-PlacementG-ST-1*2}            | []         | 93       | 15227          | 3728         | 66830           |
       | campaign-HB-PlacementG-Billabord-970*250 | 75396 | 198082   | false                 | 64              | {zone-zoneset-HB-PlacementG-Billabord-970*250} | []         | 58       | 15227          | 3728         | 67231           |
-      | campaign-HB-PlacementG-PG-1*1            | 75396 | 241783   | false                 | 1068            | {zone-zoneset-HB-PlacementG-PG-1*1}            | []         | 75       | 15227          | 3728         | 66832           |
+      | campaign-HB-PlacementG-PG-1*1            | 75396 | 241783   | false                 | 34670           | {zone-zoneset-HB-PlacementG-PG-1*1}            | []         | 75       | 15227          | 3728         | 66832           |
 
 
   Scenario:  create entites for instream_video viewbility
@@ -1102,7 +1085,7 @@ Feature: Entities for tests
 #    pacing = hourly flex
       | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
       | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 150   | impressions |
+      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 100   | impressions |
       | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
       | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
       | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |
@@ -1277,7 +1260,7 @@ Feature: Entities for tests
       | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
 
 
- ##  &&&&&&&&&&&&&&&&&&&&&    Video Duration Filter --> duration & skip  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ ##  %%%%%%%%%%%%%     Video Duration Filter --> duration & skip  %%%%%%%%%%%%%
   Scenario: create entities for Linear Video Duration
     Given i disable campaigns by name on db
       | Campaign Name                      |
@@ -1372,7 +1355,6 @@ Feature: Entities for tests
       | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1         | 1       |
       | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1         | 1       |
       | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1         | 1       |
-     #*************  Video Adhesion duration filter *************
       | zone-zoneset-video-adhesion-campaign-30-skip-Y  | 1         | 1       |
       | zone-zoneset-video-adhesion-campaign-30-skip-N  | 1         | 1       |
 
@@ -1473,7 +1455,7 @@ Feature: Entities for tests
       | zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2 | 1       | 1        |
 
 
-   ##  &&&&&&&&&&&&&&&&&    VIDEO Wrapper IAS, MOAT , DV    &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+   ##  %%%%%%%%%%%%%    VIDEO Wrapper IAS, MOAT , DV    %%%%%%%%%%%%%
 
   Scenario:  create entites for instream_video viewbility
     Given i disable campaigns by name on db
@@ -1536,7 +1518,6 @@ Feature: Entities for tests
       | campaign-NewRenderTest-InApp-Programmatic               |
       | campaign-NewRenderTest-web-direct-event-trackers        |
 
-
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-NewRenderTest-web-direct-zone-banner           | 75396  | 241783   | false                 | 1068          | {zone-zoneset-NewRenderTest-Direct-Zone-Regular}           | []         | 75       | 5893           | 3728         | 66832           | []          | []          |
@@ -1561,12 +1542,10 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-SP                 | 407981 | 265093   | true                  | 2503          | {zone-zoneset-NewRenderTest-Instream-View-programmatic}    | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
       | campaign-NewRenderTest-web-direct-event-trackers        | 75396  | 249737   | false                 | 97            | {zone-zoneset-NewRenderTest-Direct-event-trackers}         | []         | 10       | 2080           | 3728         | 66833           | []          | []          |
 
-
     And i create new campaigns with new zoneset
       | Campaign Name                             | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                             | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-NewRenderTest-InApp-Direct       | 75396  | 241783   | false                 | 14619         | {zone-zoneset-NewRenderTest-InApp-Direct}       | []         | 80       | 8803           | 3586         | 67260           |
       | campaign-NewRenderTest-InApp-Programmatic | 407981 | 265094   | true                  | 2504          | {zone-zoneset-NewRenderTest-InApp-Programmatic} | []         | 80       | 8803           | 3586         | 67260           |
-
 
     And i create new zone named {zone-zoneset-NewRenderTest-Passback} with limitation {[]} with adUnitId 75 and web_section id 2080 with affiliateId 3728 with po_line_item_id 66832
 
@@ -1600,12 +1579,10 @@ Feature: Entities for tests
     And i update zone data by name
       | Zone Name                           | passback                                                                                                                                                                                                                                                                                     |
       | zone-zoneset-NewRenderTest-Passback | <script language="javascript" type="text/javascript">document.write(''<script type="text/javascript" language="javascript" src="https://optimized-by.rubiconproject.com/a/dk.js?defaulting_ad=x3059e7.js&size_id=9&account_id=7847&site_id=13097&size=160x600"></scr'' + ''ipt>'');</script> |
-
     And i update zone data by name
       | Zone Name                                     | is_mraid |
       | zone-zoneset-NewRenderTest-InApp-Direct       | 1        |
       | zone-zoneset-NewRenderTest-InApp-Programmatic | 1        |
-
 
     And i update campaign data by name
       | Campaign Name                                           | units | goal_type   |
@@ -1647,7 +1624,7 @@ Feature: Entities for tests
       | campaign-NewRenderTest-Instream-View-SP                 | 1                           | DV                         |
 
 
-# ************ VIEWABILITY ************
+# %%%%%%%%%%%%%  VIEWABILITY  %%%%%%%%%%%%%
   Scenario: create entities for viewability tests
     Given i disable campaigns by name on db
       | Campaign Name                 |
@@ -1662,12 +1639,6 @@ Feature: Entities for tests
       | campaign-IAS-high-viewability | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-IAS-high} | []         | 83       | 4737           | 2434         | 62229           | 90          | ias      |
       | campaign-DV-low-viewability   | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-low}   | []         | 83       | 4737           | 2434         | 62229           | 10          | dv       |
       | campaign-DV-high-viewability  | 75396 | 210722   | false                 | 204           | {zone-zoneset-viewability-DV-high}  | []         | 83       | 4737           | 2434         | 62229           | 90          | dv       |
-    And i update banner data by name
-      | Banner Name                            | limitation |
-      | campaign-IAS-low-viewability-banner-1  | []         |
-      | campaign-IAS-high-viewability-banner-1 | []         |
-      | campaign-DV-low-viewability-banner-1   | []         |
-      | campaign-DV-high-viewability-banner-1  | []         |
 
     And i update zone data by name
       | Zone Name                         | is_secure |
@@ -1677,52 +1648,155 @@ Feature: Entities for tests
       | zone-zoneset-viewability-DV-high  | 1         |
 
 
-  @DynamicPricing
-  @InAppBlackWhiteList
-  @OpenX
-  @Inapp
-  @UDMP
-  @PGX
-  @PG1
-  @SupplyType
-  @GDPR
-  @appnexus
-  @cacheRefresh
-  @HB
-  @DOT
-  @DT
-  @AB
-  @PLT
-  @zoneTagSanity
-  @Keren
-  @limitationSanity
-  @Zonerefresh
-  @yaniv
-  @NDQFilteringTest
+
+# %%%%%%%%%%%%%  DISTRICT LIMITATION %%%%%%%%%%%%%
+  Scenario: create entities for District tests
+    Given i disable campaigns by name on db
+      | Campaign Name                |
+      | campaign-WY99-District       |
+      | campaign-CA40-CO06-Districts |
+
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-WY99-District       | 75396 | 210722   | false                 | 204           | {zone-zoneset-WY99-district}       | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+      | campaign-CA40-CO06-Districts | 75396 | 210722   | false                 | 204           | {zone-zoneset-CA40-CO06-districts} | []         | 83       | 4737           | 2434         | 62229           | []          | []          |
+
+
+    And i update zone data by name
+      | Zone Name                        | is_secure |
+      | zone-zoneset-WY99-district       | 1         |
+      | zone-zoneset-CA40-CO06-districts | 1         |
+
+    And i update banner data by name
+      | Banner Name                           | limitation                  |
+      | campaign-WY99-District-banner-1       | [[[68,"=~","wy99"]]]        |
+      | campaign-CA40-CO06-Districts-banner-1 | [[[68,"=~","ca40","co06"]]] |
+
+
+
+ #   %%%%%%%%%%%%%  OPEN-MARKET %%%%%%%%%%%%%
+  Scenario: create entities for Open-market tests
+    Given i disable campaigns by name on db
+
+         # R ----  R -----  OM
+      | campaign-reserve-AN-iter-1      |
+      | campaign-reserve-OX-iter-2      |
+      | campaign-OPEN-MARKET-1          |
+         # R ----  NR ----- D ---- OM
+      | campaign-reserve-1              |
+      | campaign-non-reserve-1          |
+      | campaign-direct-not-chosen      |
+      | campaign-OPEN-MARKET-1-chosen   |
+         # D ---- OM
+      | campaign-direct-must-be-chosen  |
+      | campaign-OPEN-MARKET-not-chosen |
+
+    Given i create new campaigns with new zoneset
+         # R ----  R -----  OM
+      | Campaign Name                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
+      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
+      | campaign-OPEN-MARKET-1          | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
+         # R ----  NR ----- D ---- OM
+      | campaign-reserve-1              | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
+      | campaign-non-reserve-1          | 407981 | 240083   | true                  | 410           | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
+      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
+      | campaign-OPEN-MARKET-1-chosen   | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
+         #  D ---- OM
+      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
+      | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
+
+    And i update campaign data by name
+      | Campaign Name                   | Priority | campaign_delivery_method | delivery_algorithm | run_on_unknown_domains |
+      | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1          | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-1              | 1        | 4                        | 2                  | 1                      |
+      | campaign-non-reserve-1          | 1        | 4                        | 2                  | 1                      |
+      | campaign-direct-not-chosen      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1-chosen   | 1        | 4                        | 2                  | 1                      |
+      | campaign-direct-must-be-chosen  | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-not-chosen | 1        | 4                        | 2                  | 1                      |
+
+    And i update zone data by name
+      | Zone Name                | is_secure |
+      | zone-zoneset-test-OM-PG  | 1         |
+      | zone-zoneset-test-OM-WIN | 1         |
+      | zone-zoneset-test-Direct | 1         |
+
+
+#%%%%%%%%%%%%%%  VCR - Video Completion Rate Entities %%%%%%%%%%%%%
+
+  Scenario:  create entites for Video Completion Rate
+    Given i disable campaigns by name on db
+      | Campaign Name        |
+      | campaign-CSVB-VCR-10 |
+      | campaign-CSVB-VCR-90 |
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name        | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name   | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | campaign-CSVB-VCR-10 | 75396 | 259848   | false                 | 31797         | {zone-zoneset-VCR-10} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+      | campaign-CSVB-VCR-90 | 75396 | 259848   | false                 | 31797         | {zone-zoneset-VCR-90} | []         | 35       | 15196          | 3708         | 69158           | []             | []             |
+
+    And i update campaign data by name
+      | Campaign Name        | is_sync | is_video | vcr_enabled | vcr_threshold |
+      | campaign-CSVB-VCR-10 | 1       | 1        | 1           | 0.1           |
+      | campaign-CSVB-VCR-90 | 1       | 1        | 1           | 0.9           |
+
+    And i update zone data by name
+      | Zone Name           | is_sync |
+      | zone-zoneset-VCR-10 | 1       |
+      | zone-zoneset-VCR-90 | 1       |
+     # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name        | is_sync | is_video |
+      | zone-zoneset-VCR-10 | 1       | 1        |
+      | zone-zoneset-VCR-90 | 1       | 1        |
+
+
+#%%%%%%%%%%%%%%  VIdeo Location Entities %%%%%%%%%%%%%
+
+  Scenario:  create entites for Video Location
+    Given i disable campaigns by name on db
+      | Campaign Name               |
+      | campaign-stg-vidAd-pub2434  |
+      | campaign-stg-inline-pub2434 |
+      | campaign-stg-vidAd-pub3708  |
+      | campaign-stg-inline-pub3708 |
+
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name               | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name           | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
+      | campaign-stg-vidAd-pub2434  | 75396 | 255831   | false                 | 34854         | {zone-zoneset-vidAd-pub2434}  | []         | 97       | 15902          | 2434         | 70156           | []             | []             |
+      | campaign-stg-inline-pub2434 | 75396 | 269751   | false                 | 34853         | {zone-zoneset-inline-pub2434} | []         | 98       | 15902          | 2434         | 70770           | []             | []             |
+      | campaign-stg-vidAd-pub3708  | 75396 | 255831   | false                 | 34854         | {zone-zoneset-vidAd-pub3708}  | []         | 97       | 15901          | 3708         | 69992           | []             | []             |
+      | campaign-stg-inline-pub3708 | 75396 | 269751   | false                 | 34853         | {zone-zoneset-inline-pub3708} | []         | 98       | 15901          | 3708         | 71479           | []             | []             |
+
+    And i update campaign data by name
+      | Campaign Name               | is_sync | is_video | vcr_enabled | vcr_threshold |
+      | campaign-stg-vidAd-pub2434  | 1       | 1        | 1           | 0.1           |
+      | campaign-stg-inline-pub2434 | 1       | 1        | 1           | 0.1           |
+      | campaign-stg-vidAd-pub3708  | 1       | 1        | 1           | 0.1           |
+      | campaign-stg-inline-pub3708 | 1       | 1        | 1           | 0.1           |
+
+    And i update zone data by name
+      | Zone Name                   | is_sync |
+      | zone-zoneset-vidAd-pub2434  | 1       |
+      | zone-zoneset-inline-pub2434 | 1       |
+      | zone-zoneset-vidAd-pub3708  | 1       |
+      | zone-zoneset-inline-pub3708 | 1       |
+     # ****  update is_sync=1 & is_video=1 parameter of the zoneset ***
+    And i update zoneset data by name
+      | Zoneset Name                | is_sync | is_video |
+      | zone-zoneset-vidAd-pub2434  | 1       | 1        |
+      | zone-zoneset-inline-pub2434 | 1       | 1        |
+      | zone-zoneset-vidAd-pub3708  | 1       | 1        |
+      | zone-zoneset-inline-pub3708 | 1       | 1        |
+
+
   Scenario: refresh zone cache with wait
-    Given i kill replay on the machines
     And I setup the db
-    And I sleep for 60 seconds
+    And I sleep for 6 seconds
 
-
-  @DynamicPricing
-  @InAppBlackWhiteList
-  @UDMP
-  @PG1
-  @PLT
-  @SupplyType
-  @appnexus
-  @cacheRefresh
-  @bannerCache
-  @HB
-  @DOT
-  @DT
-  @Keren
-  @yaniv
-  @refresh
-  @append
-  @NDQFilteringTest
-  @refreshCaches
   Scenario: refresh caches
     And I refresh zone cache
     #******** REMOVED *********

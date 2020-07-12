@@ -4,8 +4,10 @@
 Feature: Duration Video tests UN-21695 & UN-21696
 
   Background: health check
-    When Sending a healthcheck request to UAS
+    Given I clear all cookies from uas requests
+    Given I clear all headers from uas requests
     And I add {NY} ip header
+    When Sending a healthcheck request to UAS
     Then The response code is 200
 
   Scenario: 1.1.a. For a publisher 3708 which has single domain with 15s video duration & skippable = Yes - zone tag request

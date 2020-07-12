@@ -29,7 +29,7 @@ Feature: Programmatic flow support
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
     And all HB responses contains campaignId with id of entity named {campaign-server-prog-SS-1}
-    And all HB responses contains cpm with value {1}
+    And all HB responses contains cpm with value {1.0}
 
   Scenario: 5. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 197 to UAS for publisher 3711 with domain {test.com&requestid=systemTestB&unlimited=1&optimize=1}
@@ -56,7 +56,7 @@ Feature: Programmatic flow support
     And all HB responses contains adId with id of entity named {campaign-server-prog-ST-3-banner-1}
 
     #web Burl
-  Scenario: 9b. basic Call to Programmatic GW web, zone request, make sure b-url is sent
+  Scenario: 9a. basic Call to Programmatic GW web, zone request, make sure b-url is sent
     When I send 1 times an ad request with parameter {requestid=BUrlTest&optimize=1&unlimited=1} for zone named {zone-zoneset-server-prog-SS} to UAS
     Then The response code is 200
     And The response contains {<script type="text/javascript">new Image().src="http://ramplift-s-ut-ramp-uas-us-east-1-k8s-internal.ramp-ut.io/burl"</script>}
