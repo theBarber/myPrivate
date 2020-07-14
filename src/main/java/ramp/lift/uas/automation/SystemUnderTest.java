@@ -361,14 +361,6 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 //        String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
         String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
 
-
-
-
-
-
-        //********** REMOVED ************
-
-        //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
                 .map(filename -> new File(filename))
                 .orElse(null);
@@ -377,12 +369,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
             keyFile = new File("perion-automation/pems/" + cliconnectionKeyname);
         }
 
-//        JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
-
-
-        //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
-        File finalKeyFile = keyFile;
+        //File finalKeyFile = keyFile;
 
         //************* REMOVED ***********
 //        hostsConfig.forEach(jsonElement -> {
@@ -441,7 +428,6 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
             Assume.assumeThat("connection to " + host + " password is not set", conn.getPassword(),
                     not(isEmptyOrNullString()));
         }
-
         return conn;
 
     }
