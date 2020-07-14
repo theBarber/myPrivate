@@ -360,13 +360,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
         //*********** REMOVED *************
 //        String cliConnectionsHostsParam = config.get("uas.cliconnection.hosts");
         String cliconnectionKeyname = config.getOrDefault("uas.cliconnection.keyname", "");
-        String cliconnectionCron = config.getOrDefault("uas.cliconnection.cron", "");
 
-
-        //********** REMOVED ************
-
-        //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-        JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
         File keyFile = Optional.of(cliconnectionKeyname).filter(StringUtils.nonEmpty)
                 .map(filename -> new File(filename))
                 .orElse(null);
@@ -375,12 +369,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
             keyFile = new File("perion-automation/pems/" + cliconnectionKeyname);
         }
 
-//        JsonArray hostsConfig = new JsonParser().parse(cliConnectionsHostsParam).getAsJsonArray();
-
-
-        //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
-        File finalKeyFile = keyFile;
+        //File finalKeyFile = keyFile;
 
         //************* REMOVED ***********
 //        hostsConfig.forEach(jsonElement -> {
@@ -390,22 +379,26 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
 //            uasCliConnections.put(host, conn);
 //        });
 
-        cronsConfig.forEach(jsonElement -> {
-            String host = jsonElement.getAsString();
-            LinuxDefaultCliConnection conn = getConnection(host, finalKeyFile);
-            cronCliConnection.put(host, conn);
-            uasCliConnections.put(host, conn);
-        });
-
-        //for all connections
-        uasCliConnections.values().forEach(conn -> {
-            try {
-                conn.init();
-            } catch (IOException cause) {
-                delegate(exception, cause);
-            }
-        });
+        //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% REMOVED 2  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+//        String cliconnectionCron = config.getOrDefault("uas.cliconnection.cron", "");
+//        JsonArray cronsConfig = new JsonParser().parse(cliconnectionCron).getAsJsonArray();
+//        cronsConfig.forEach(jsonElement -> {
+//            String host = jsonElement.getAsString();
+//            LinuxDefaultCliConnection conn = getConnection(host, finalKeyFile);
+//            cronCliConnection.put(host, conn);
+//            uasCliConnections.put(host, conn);
+//        });
+//
+//        //for all connections
+//        uasCliConnections.values().forEach(conn -> {
+//            try {
+//                conn.init();
+//            } catch (IOException cause) {
+//                delegate(exception, cause);
+//            }
+//        });
     }
+        //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     private LinuxDefaultCliConnection getConnection(String host, File keyFile) {
         String uasCliConnectionUser = config.get("uas.cliconnection.user");
@@ -435,7 +428,6 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
             Assume.assumeThat("connection to " + host + " password is not set", conn.getPassword(),
                     not(isEmptyOrNullString()));
         }
-
         return conn;
 
     }
