@@ -1067,12 +1067,12 @@ Feature: Entities for tests
       | campaign-D-HourlyFF-ST-4     |
       | campaign-D-DailyFF-ST-5      |
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-D-HourlyPacing-ST-1 | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyPacing-ST-1} | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-DailyPacing-ST-2  | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-DailyPacing-ST-2}  | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-ASAP-ST-3         | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-ASAP-ST-3}         | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-HourlyFF-ST-4     | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyFF-ST-4}     | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-DailyFF-ST-5      | 75396 | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | Campaign Name                | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-D-HourlyPacing-ST-1 | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyPacing-ST-1} | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | campaign-D-DailyPacing-ST-2  | 407981 | 257595   | false                 | 35284         | {zone-zoneset-D-DailyPacing-ST-2}  | []         | 58       | 4737           | 2434         | 38734           | []          | []          |
+      | campaign-D-ASAP-ST-3         | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-ASAP-ST-3}         | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | campaign-D-HourlyFF-ST-4     | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyFF-ST-4}     | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | campaign-D-DailyFF-ST-5      | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
 
     Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
     Given I set campaign campaign-D-DailyPacing-ST-2 for 10 days
