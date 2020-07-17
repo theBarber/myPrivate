@@ -130,7 +130,7 @@ Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation b
   request:  playback_method = 1     |   player_size = 2
   response: playback_method = all   |   player_size = medium
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
-    Given I send 1 times an ad video request with parameter {cw=300&ch=300&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackall-allsizes} to UAS
+    Given I send 1 times an ad video request with parameter {cw=400&ch=300&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackall-allsizes} to UAS
     Then The response code is 200
     And The response contains {VASTAdTagURI}
     And The responses has impression-urls
