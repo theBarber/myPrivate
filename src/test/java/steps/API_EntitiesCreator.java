@@ -574,9 +574,7 @@ public class API_EntitiesCreator extends BaseTest {
             if (playbackMethodID.size() != 0)
                 playbackMethodIDs.addAll(playbackMethodID);
         }
-        return new CreateCampaignRequest(campaignName, lineItemId,
-                zonesets, creatives, dealID,
-                dateFromNow(0), dateFromNow(365),playerSizeIDs,playbackMethodIDs);
+        return new CreateCampaignRequest(campaignName, lineItemId,zonesets, creatives, dealID,dateFromNow(0), dateFromNow(365),playerSizeIDs,playbackMethodIDs);
     }
 
     private String dateFromNow(Integer daysToAdd) {
