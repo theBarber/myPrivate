@@ -868,17 +868,17 @@ Feature: Entities for tests
       | zone-zoneset-PGX-PG-1-b | 1         |
       | zone-zoneset-PGX-PG-1-c | 1         |
 
-  Scenario: create entities for line item level persona level frequency capping
-    Given i disable campaigns by name on db
-      | Campaign Name       |
-      | campaign-LI-FC-ST-1 |
-      | campaign-LI-FC-ST-2 |
-    Given i create new campaigns with new zoneset
-#      first is Inapp
-      | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\  Creative | Zonesets-zones Name       | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-LI-FC-ST-1 | 75396 | 244895   | false                 | 8290            | {zone-zoneset-LI-FC-ST-1} | []         | 93       | 15220          | 3708         | 65991           |
-      | campaign-LI-FC-ST-2 | 75396 | 244896   | false                 | 8290            | {zone-zoneset-LI-FC-ST-2} | []         | 93       | 15221          | 3708         | 65991           |
-
+#  Scenario: create entities for line item level persona level frequency capping
+#    Given i disable campaigns by name on db
+#      | Campaign Name       |
+#      | campaign-LI-FC-ST-1 |
+#      | campaign-LI-FC-ST-2 |
+#    Given i create new campaigns with new zoneset
+##      first is Inapp
+#      | Campaign Name       | IO    | LineItem | isServerProgrammatic? | Deal\  Creative | Zonesets-zones Name       | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+#      | campaign-LI-FC-ST-1 | 75396 | 244895   | false                 | 8290            | {zone-zoneset-LI-FC-ST-1} | []         | 93       | 15220          | 3708         | 65991           |
+#      | campaign-LI-FC-ST-2 | 75396 | 244896   | false                 | 8290            | {zone-zoneset-LI-FC-ST-2} | []         | 93       | 15221          | 3708         | 65991           |
+#
 
   Scenario: create entities for HB persona level frequency capping
     Given i disable campaigns by name on db
