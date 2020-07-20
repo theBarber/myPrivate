@@ -68,6 +68,7 @@ public class API_EntitiesCreator extends BaseTest {
         Given("I run (select|update) SQL query? (.*)", this::runSqlQuery);
         Given("^I set (mobile|desktop) margin (\\d+)% for campaign? (.*)$", this::setMarginForCampaign);
         Given("^I set campaign (.*) for (\\d+) days$", this::updateCampaignEndDate);
+        Given("^I set campaign (.*) for UTC time zone$", this::updateCampaignStartDateUTC);
     }
 
     private void setMarginForCampaign(String method, Integer margin, String campaignName) {
@@ -500,6 +501,16 @@ public class API_EntitiesCreator extends BaseTest {
         String endDate = formatter.format(cal.getTime());
         SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '" + currentDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status` = 0;");
     }
+
+    private void updateCampaignStartDateUTC(String campaign_name) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        TimeZone etTimeZone = TimeZone.getTimeZone("UTC");
+        formatter.setTimeZone(etTimeZone);
+        Date date = new Date();
+        String currentDate = formatter.format(date);
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `activate` = '" + currentDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status` = 0;");
+    }
+
 
 
     private void updateEntityDataByID(String entity, String updateBy, DataTable entities) {
