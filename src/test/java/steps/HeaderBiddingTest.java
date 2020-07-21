@@ -191,6 +191,47 @@ public class HeaderBiddingTest extends BaseTest {
         return body;
     }
 
+    //&&&&&&&&&&&&&&&&  FOR VIDEO HB  &&&&&&&&&&&&&&&&&&
+
+    private String getJsonForHbVideo(Integer publisherID,
+                                     Integer h1, Integer w1,
+                                     String domain,
+                                     String placementId,
+                                     Integer playerWidth, Integer playerHeight,
+                                     String streamType,
+                                     Integer playbackMethod,
+                                     Integer maxDuration,
+                                     Boolean skippable) {
+        String body = "{\n" +
+                "  \"x-ut-hb-params\": [\n" +
+                "    {\n" +
+                "      \"bidRequestId\": \"2a06ed752de49f\",\n" +
+                "      \"hbadaptor\": \"prebid\",\n" +
+                "      \"domain\": \"" + domain +  "\",\n" +
+                "      \"placementId\":" + placementId +  ",\n" +
+                "      \"publisherId\":"+ publisherID +",\n" +
+                "      \"sizes\": [\n" +
+                "        [" + w1 + "," + h1 + "]\n" +
+                "      ],\n" +
+                "      \"params\": {\n" +
+                "        \"publisherId\":"+ publisherID +"\n" +
+                "      },\n" +
+                "      \"video\": {\n" +
+                "        \"playerSize\": [\n" +
+                "          [" + playerWidth + "," + playerHeight + "]\n" +
+                "        ],\n" +
+                "        \"streamType\": \""+ streamType +"\",\n" +
+                "        \"playbackMethod\": "+ playbackMethod +",\n" +
+                "        \"maxDuration\": "+ maxDuration +",\n" +
+                "        \"skippable\": "+ skippable +"\n" +
+                "      },\n" +
+                "      \"mediaType\": \"video\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        return body;
+    }
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
     private void setBidMapByEntity(String entity) {
         mapByEntity = entity;

@@ -22,14 +22,11 @@ Feature: Header Bidding Video instream & outstream
   request:           playback_method = 1             |  player_size = 1
   response:          playback_method = ATP(No sound) |  player_size = small
 
-    Given i send 1 headerBidding post request for scenario {Send HB video instream request for publisher 3708 with placement 3708002} for publisher 3708 with domain {HB-Video.com} with extra params {&optimize=1}
+    Given i send 1 headerBidding post................
     And The response code is 200
     And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
-    And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
-    And all HB responses contains cpm with value {2.5}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
-    And I send impression requests to UAS
+    And all HB responses contains campaignId with id of entity named {campaign-LinearVideoFiltering-playbackAll-noSize}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-noSize-banner-1} 100% of the time
 
 #    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
 #    Given I send 1 times an ad video request with parameter {cw=300&ch=250&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-noSize} to UAS
