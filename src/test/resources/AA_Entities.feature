@@ -1075,7 +1075,8 @@ Feature: Entities for tests
       | campaign-D-DailyFF-ST-5      | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
 
     Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
-    Given I set campaign campaign-D-DailyPacing-ST-2 for 20 days
+    Given I set campaign campaign-D-DailyPacing-ST-2 for 10 days
+    Given I set campaign campaign-D-DailyPacing-ST-2 for UTC time zone
     Given I set campaign campaign-D-ASAP-ST-3 for 3 days
     Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
     Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
@@ -1085,7 +1086,7 @@ Feature: Entities for tests
 #    pacing = hourly flex
       | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
       | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 200   | impressions |
+      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 100   | impressions |
       | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
       | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
       | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |
@@ -1289,23 +1290,23 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                      | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
       | campaign-large-D-skip-Y            | 75396 | 259848   | false                 | 31793         | {zone-zoneset-large-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-small-D-skip-Y            | 75396 | 259848   | false                 | 31797         | {zone-zoneset-small-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-small-D-skip-Y            | 75396 | 259848   | false                 | 31797         | {zone-zoneset-small-D-skip-Y-CS-Video}            | []         | 35       | 15924          | 3708         | 69158           | []          | []          |
       | campaign-large-D-skip-N            | 75396 | 259848   | false                 | 31792         | {zone-zoneset-large-D-skip-N-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-small-D-skip-N            | 75396 | 259848   | false                 | 31796         | {zone-zoneset-small-D-skip-N-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-equal-D-skip-Y            | 75396 | 259848   | false                 | 31795         | {zone-zoneset-equal-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-equal-D-skip-N            | 75396 | 259848   | false                 | 31794         | {zone-zoneset-equal-D-skip-N-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-small-D-skip-N            | 75396 | 259848   | false                 | 31796         | {zone-zoneset-small-D-skip-N-CS-Video}            | []         | 35       | 15925          | 3708         | 69158           | []          | []          |
+      | campaign-equal-D-skip-Y            | 75396 | 259848   | false                 | 31795         | {zone-zoneset-equal-D-skip-Y-CS-Video}            | []         | 35       | 15928          | 3708         | 69158           | []          | []          |
+      | campaign-equal-D-skip-N            | 75396 | 259848   | false                 | 31794         | {zone-zoneset-equal-D-skip-N-CS-Video}            | []         | 35       | 15927          | 3708         | 69158           | []          | []          |
       | campaign-pub1-level-large-D-skip-Y | 75396 | 259848   | false                 | 31793         | {zone-zoneset-pub1-level-large-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-small-D-skip-Y | 75396 | 259848   | false                 | 31797         | {zone-zoneset-pub1-level-small-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-small-D-skip-Y | 75396 | 259848   | false                 | 31797         | {zone-zoneset-pub1-level-small-D-skip-Y-CS-Video} | []         | 35       | 15924          | 3843         | 70473           | []          | []          |
       | campaign-pub1-level-large-D-skip-N | 75396 | 259848   | false                 | 31792         | {zone-zoneset-pub1-level-large-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-small-D-skip-N | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub1-level-small-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub1-level-equal-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-small-D-skip-N | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub1-level-small-D-skip-N-CS-Video} | []         | 35       | 15925          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15926          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub1-level-equal-D-skip-N-CS-Video} | []         | 35       | 15927          | 3843         | 70473           | []          | []          |
       | campaign-pub2-level-large-D-skip-Y | 75396 | 259848   | false                 | 31793         | {zone-zoneset-pub2-level-large-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-small-D-skip-Y | 75396 | 259848   | false                 | 31797         | {zone-zoneset-pub2-level-small-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-small-D-skip-Y | 75396 | 259848   | false                 | 31797         | {zone-zoneset-pub2-level-small-D-skip-Y-CS-Video} | []         | 35       | 15924          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-large-D-skip-N | 75396 | 259848   | false                 | 31792         | {zone-zoneset-pub2-level-large-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-small-D-skip-N | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub2-level-small-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-equal-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-small-D-skip-N | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub2-level-small-D-skip-N-CS-Video} | []         | 35       | 15925          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15926          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-equal-D-skip-N-CS-Video} | []         | 35       | 15927          | 3728         | 70474           | []          | []          |
  #*************  Video Adhesion duration filter *************
       | campaign-vid-adhesion-30-skip-Y    | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
       | campaign-vid-adhesion-30-skip-N    | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |

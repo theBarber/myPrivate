@@ -68,6 +68,7 @@ public class API_EntitiesCreator extends BaseTest {
         Given("I run (select|update) SQL query? (.*)", this::runSqlQuery);
         Given("^I set (mobile|desktop) margin (\\d+)% for campaign? (.*)$", this::setMarginForCampaign);
         Given("^I set campaign (.*) for (\\d+) days$", this::updateCampaignEndDate);
+        Given("^I set campaign (.*) for UTC time zone$", this::updateCampaignStartDateUTC);
     }
 
     private void setMarginForCampaign(String method, Integer margin, String campaignName) {
@@ -488,7 +489,7 @@ public class API_EntitiesCreator extends BaseTest {
     }
 
     private void updateCampaignEndDate(String campaign_name, Integer days) {
-        int deFactoDays=days-1;
+        ////////////int deFactoDays=days-1;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         TimeZone etTimeZone = TimeZone.getTimeZone("America/New_York");
         formatter.setTimeZone(etTimeZone);
@@ -496,10 +497,20 @@ public class API_EntitiesCreator extends BaseTest {
         String currentDate = formatter.format(date);
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(Calendar.DATE, deFactoDays);
+        cal.add(Calendar.DATE, days);
         String endDate = formatter.format(cal.getTime());
         SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `expire` = '" + endDate + "', `activate` = '" + currentDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status` = 0;");
     }
+
+    private void updateCampaignStartDateUTC(String campaign_name) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        TimeZone etTimeZone = TimeZone.getTimeZone("UTC");
+        formatter.setTimeZone(etTimeZone);
+        Date date = new Date();
+        String currentDate = formatter.format(date);
+        SqlWorkflowUtils.WorkflowQuery("UPDATE `undertone`.`campaigns` SET `activate` = '" + currentDate + "' WHERE `campaignname` like '%" + campaign_name + "%' and `status` = 0;");
+    }
+
 
 
     private void updateEntityDataByID(String entity, String updateBy, DataTable entities) {
