@@ -59,10 +59,24 @@ public class HeaderBiddingTest extends BaseTest {
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi bids. first bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+), sec bid - bidreqID=\\{(.*)\\}, h:(\\d+) w:(\\d+) with domain \\{(.*)\\} and extra params \\{(.*)\\}", this::sendHBSecurePostRequestMultibid);
         Given("i send 1 headerBidding secure post request for publisher (\\d+) with multi sizes - h1:(\\d+) w1:(\\d+), h2:(\\d+) w2:(\\d+) with domain \\{(.*)\\} and placmentID group = \\{(.*)\\} and extra params \\{(.*)\\}", this::sendHBSecurePostRequestMultiSized);
         Given("i send synchronized (\\d+) basic headerBidding secure post request for publisher (\\d+) with size - h1:(\\d+) w1:(\\d+), with domain \\{(.*)\\}, placmentID group = \\{(.*)\\} and extra params \\{(.*)\\} cookies (true|false)", this::sendBasicHBSecurePostRequest);
-
         And("^I setup throttling for publisher (\\d+) by scenario \\{(.*)\\}$", (Integer publisherId, String scenario) -> {
             sut.getRampAppPublisherRequestModule().setupThrottling(publisherId, scenario);
         });
+        Given("i send instream video HB post request for publisher (\\d+) with domain \\{(.*)\\}, placementID group \\{(.*)\\}, playerWidth = (\\d+), playerHeight = (\\d+), playbackMethod = (\\d+), maxDuration = (\\d+)", this::sendHBVideoPostRequest);
+    }
+
+
+    private void sendHBVideoPostRequest(Integer publisherID,String domain,String placementId,
+                                        Integer playerWidth, Integer playerHeight,Integer playbackMethod,
+                                        Integer maxDuration) {
+        String extraParams = "&optimize=1";
+        Integer w1 = 1111;
+        Integer h1 = 2222;
+        String streamType = "instream";
+        Integer times = 1;
+        Boolean skippable = true;
+        String body = getJsonForHbVideo(publisherID,w1, h1,domain,placementId,playerWidth, playerHeight,streamType,playbackMethod,maxDuration,skippable);
+        sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, false, false,false);
     }
 
 
@@ -194,7 +208,7 @@ public class HeaderBiddingTest extends BaseTest {
     //&&&&&&&&&&&&&&&&  FOR VIDEO HB  &&&&&&&&&&&&&&&&&&
 
     private String getJsonForHbVideo(Integer publisherID,
-                                     Integer h1, Integer w1,
+                                     Integer w1, Integer h1,
                                      String domain,
                                      String placementId,
                                      Integer playerWidth, Integer playerHeight,
