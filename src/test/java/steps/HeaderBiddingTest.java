@@ -69,7 +69,7 @@ public class HeaderBiddingTest extends BaseTest {
     private void sendHBVideoPostRequestOnlyDurationAndSkip(Integer publisherID, String domain, String placementId,
                                                            Integer playbackMethod,
                                                            Integer maxDuration,
-                                                           String skippable) {
+                                                           Character skippable) {
         String extraParams = "&optimize=1";
         Integer w1 = 1111;
         Integer h1 = 2222;
@@ -77,7 +77,7 @@ public class HeaderBiddingTest extends BaseTest {
         Integer playerHeight = 0;
         String streamType = "instream";
         Integer times = 1;
-        Boolean skip = Boolean.parseBoolean(skippable);
+        Boolean skip = true ? skippable == 'Y' : false;
         String body = getJsonForHbVideo(publisherID,w1, h1,domain,placementId,playerWidth, playerHeight,streamType,playbackMethod,maxDuration,skip);
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, false, false,false);
     }

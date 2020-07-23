@@ -28,11 +28,14 @@ Feature: Header Bidding Video instream & outstream
     And The response not contains html
 
     Examples:
-      | pubId | domain                  | placementId | maxDuration | skip  | campaignId                     | bannerId                                |
-      | 3843  | duration15_skip_yes.com | 3708002     | 15          | true  | campaign-pub1-level-6-D-skip-Y | campaign-pub1-level-6-D-skip-Y-banner-1 |
-      | 3843  | HB-Video.com            | 3708002     | 5           | false | bbb                            | aa                                      |
-      | 3843  | HB-Video.com            | 3708002     | 16          | false | ccc                            | aa                                      |
-      | 3843  | HB-Video.com            | 3708002     | 22          | false | ddd                            | aa                                      |
+      | pubId | domain                  | placementId | maxDuration | skip | campaignId                      | bannerId                                 | JIRA                  |
+      | 3708  | duration15_skip_yes.com | 3708002     | 15          | Y    | campaign-pub1-level-6-D-skip-Y  | campaign-pub1-level-6-D-skip-Y-banner-1  | UN-25361              |
+      | 3708  | duration15_skip_yes.com | 3708002     | 20          | N    | campaign-15-D-skip-Y            | campaign-15-D-skip-Y-banner-1            | UN-25509-change-step2 |
+      | 3708  | duration15_skip_yes.com | 3708002     | 30          | N    | campaign-30-D-skip-N            | campaign-30-D-skip-N-banner-1            | UN-25509-change-step3 |
+      | 3843  | duration6Y.com          | 3843002     | 15          | Y    | campaign-pub1-level-6-D-skip-Y  | campaign-pub1-level-6-D-skip-Y-banner-1  | UN-25358-step1        |
+      | 3843  | duration15Y.com         | 3843002     | 15          | Y    | campaign-pub1-level-15-D-skip-Y | campaign-pub1-level-15-D-skip-Y-banner-1 | UN-25358-step3        |
+      | 3843  | duration6Y.com          | 3843002     | 8           | N    | campaign-pub1-level-6-D-skip-Y  | campaign-pub1-level-6-D-skip-Y-banner-1  | UN-25359-change-step1 |
+      | 3843  | duration15N.com         | 3843002     | 16          | N    | campaign-pub1-level-15-D-skip-N | campaign-pub1-level-15-D-skip-N-banner-1 | UN-25359-change-step3 |
 
    #  *********************************************************************************
 
