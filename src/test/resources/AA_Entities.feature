@@ -1264,125 +1264,125 @@ Feature: Entities for tests
  ##  %%%%%%%%%%%%%     Video Duration Filter --> duration & skip  %%%%%%%%%%%%%
   Scenario: create entities for Linear Video Duration
     Given i disable campaigns by name on db
-      | Campaign Name                      |
-      | campaign-large-D-skip-Y            |
-      | campaign-small-D-skip-Y            |
-      | campaign-large-D-skip-N            |
-      | campaign-small-D-skip-N            |
-      | campaign-equal-D-skip-Y            |
-      | campaign-equal-D-skip-N            |
-      | campaign-pub1-level-large-D-skip-Y |
-      | campaign-pub1-level-small-D-skip-Y |
-      | campaign-pub1-level-large-D-skip-N |
-      | campaign-pub1-level-small-D-skip-N |
-      | campaign-pub1-level-equal-D-skip-Y |
-      | campaign-pub1-level-equal-D-skip-N |
-      | campaign-pub2-level-large-D-skip-Y |
-      | campaign-pub2-level-small-D-skip-Y |
-      | campaign-pub2-level-large-D-skip-N |
-      | campaign-pub2-level-small-D-skip-N |
-      | campaign-pub2-level-equal-D-skip-Y |
-      | campaign-pub2-level-equal-D-skip-N |
+      | Campaign Name                     |
+      | campaign-30-D-skip-Y              |
+      | campaign-6-D-skip-Y               |
+      | campaign-30-D-skip-N              |
+      | campaign-6-D-skip-N               |
+      | campaign-15-D-skip-Y              |
+      | campaign-15-D-skip-N              |
+      | campaign-pub1-level-30-D-skip-Y   |
+      | campaign-pub1-level-6-D-skip-Y    |
+      | campaign-pub1-level-30-D-skip-N   |
+      | campaign-pub1-level-6-D-skip-N    |
+      | campaign-pub1-level-15-D-skip-Y   |
+      | campaign-pub1-level-15-D-skip-N   |
+      | campaign-pub2-level-30-D-skip-Y   |
+      | campaign-pub2-level-6-D-skip-Y    |
+      | campaign-pub2-level-30-D-skip-N   |
+      | campaign-pub2-level-6-D-skip-N    |
+      | campaign-pub2-level-15-D-skip-Y   |
+      | campaign-pub2-level-15-D-skip-N   |
     #*************  Video Adhesion duration filter *************
-      | video-adhesion-campaign-30-skip-Y  |
-      | video-adhesion-campaign-30-skip-N  |
+      | video-adhesion-campaign-30-skip-Y |
+      | video-adhesion-campaign-30-skip-N |
 
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                      | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-large-D-skip-Y            | 75396 | 259848   | false                 | 31793         | {zone-zoneset-large-D-skip-Y-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-small-D-skip-Y            | 75396 | 259848   | false                 | 31797         | {zone-zoneset-small-D-skip-Y-CS-Video}            | []         | 35       | 15924          | 3708         | 69158           | []          | []          |
-      | campaign-large-D-skip-N            | 75396 | 259848   | false                 | 31792         | {zone-zoneset-large-D-skip-N-CS-Video}            | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
-      | campaign-small-D-skip-N            | 75396 | 259848   | false                 | 31796         | {zone-zoneset-small-D-skip-N-CS-Video}            | []         | 35       | 15925          | 3708         | 69158           | []          | []          |
-      | campaign-equal-D-skip-Y            | 75396 | 259848   | false                 | 31795         | {zone-zoneset-equal-D-skip-Y-CS-Video}            | []         | 35       | 15928          | 3708         | 69158           | []          | []          |
-      | campaign-equal-D-skip-N            | 75396 | 259848   | false                 | 31794         | {zone-zoneset-equal-D-skip-N-CS-Video}            | []         | 35       | 15927          | 3708         | 69158           | []          | []          |
-      | campaign-pub1-level-large-D-skip-Y | 75396 | 259848   | false                 | 31793         | {zone-zoneset-pub1-level-large-D-skip-Y-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-small-D-skip-Y | 75396 | 259848   | false                 | 31797         | {zone-zoneset-pub1-level-small-D-skip-Y-CS-Video} | []         | 35       | 15924          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-large-D-skip-N | 75396 | 259848   | false                 | 31792         | {zone-zoneset-pub1-level-large-D-skip-N-CS-Video} | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-small-D-skip-N | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub1-level-small-D-skip-N-CS-Video} | []         | 35       | 15925          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15926          | 3843         | 70473           | []          | []          |
-      | campaign-pub1-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub1-level-equal-D-skip-N-CS-Video} | []         | 35       | 15927          | 3843         | 70473           | []          | []          |
-      | campaign-pub2-level-large-D-skip-Y | 75396 | 259848   | false                 | 31793         | {zone-zoneset-pub2-level-large-D-skip-Y-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-small-D-skip-Y | 75396 | 259848   | false                 | 31797         | {zone-zoneset-pub2-level-small-D-skip-Y-CS-Video} | []         | 35       | 15924          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-large-D-skip-N | 75396 | 259848   | false                 | 31792         | {zone-zoneset-pub2-level-large-D-skip-N-CS-Video} | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-small-D-skip-N | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub2-level-small-D-skip-N-CS-Video} | []         | 35       | 15925          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-equal-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video} | []         | 35       | 15926          | 3728         | 70474           | []          | []          |
-      | campaign-pub2-level-equal-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-equal-D-skip-N-CS-Video} | []         | 35       | 15927          | 3728         | 70474           | []          | []          |
+      | Campaign Name                   | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-30-D-skip-Y            | 75396 | 259848   | false                 | 31793         | {zone-zoneset-30-D-skip-Y-CS-Video}              | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-6-D-skip-Y             | 75396 | 259848   | false                 | 31797         | {zone-zoneset-6-D-skip-Y-CS-Video}               | []         | 35       | 15924          | 3708         | 69158           | []          | []          |
+      | campaign-30-D-skip-N            | 75396 | 259848   | false                 | 31792         | {zone-zoneset-30-D-skip-N-CS-Video}              | []         | 35       | 15196          | 3708         | 69158           | []          | []          |
+      | campaign-6-D-skip-N             | 75396 | 259848   | false                 | 31796         | {zone-zoneset-6-D-skip-N-CS-Video}               | []         | 35       | 15925          | 3708         | 69158           | []          | []          |
+      | campaign-15-D-skip-Y            | 75396 | 259848   | false                 | 31795         | {zone-zoneset-15-D-skip-Y-CS-Video}              | []         | 35       | 15928          | 3708         | 69158           | []          | []          |
+      | campaign-15-D-skip-N            | 75396 | 259848   | false                 | 31794         | {zone-zoneset-15-D-skip-N-CS-Video}              | []         | 35       | 15927          | 3708         | 69158           | []          | []          |
+      | campaign-pub1-level-30-D-skip-Y | 75396 | 259848   | false                 | 31793         | {zone-zoneset-pub1-level-30-D-skip-Y-CS-Video}   | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-6-D-skip-Y  | 75396 | 259848   | false                 | 31797         | {zone-zoneset-pub1-level-6-D-skip-Y-CS-Video}    | []         | 35       | 15924          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-30-D-skip-N | 75396 | 259848   | false                 | 31792         | {zone-zoneset-pub1-level-30-D-skip-N-CS-Video}   | []         | 35       | 15376          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-6-D-skip-N  | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub1-level-6-D-skip-N-CS-Video}    | []         | 35       | 15925          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-15-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub1-level-15-D-skip-Y-CS-Video}   | []         | 35       | 15926          | 3843         | 70473           | []          | []          |
+      | campaign-pub1-level-15-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub1-level-15-D-skip-N-CS-Video}   | []         | 35       | 15927          | 3843         | 70473           | []          | []          |
+      | campaign-pub2-level-30-D-skip-Y | 75396 | 259848   | false                 | 31793         | {zone-zoneset-pub2-level-30-D-skip-Y-CS-Video}   | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-6-D-skip-Y  | 75396 | 259848   | false                 | 31797         | {zone-zoneset-pub2-level-6-D-skip-Y-CS-Video}    | []         | 35       | 15924          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-30-D-skip-N | 75396 | 259848   | false                 | 31792         | {zone-zoneset-pub2-level-30-D-skip-N-CS-Video}   | []         | 35       | 15227          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-6-D-skip-N  | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub2-level-6-D-skip-N-CS-Video}    | []         | 35       | 15925          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-15-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-15-D-skip-Y-CS-Video}   | []         | 35       | 15926          | 3728         | 70474           | []          | []          |
+      | campaign-pub2-level-15-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-15-D-skip-N-CS-Video}   | []         | 35       | 15927          | 3728         | 70474           | []          | []          |
  #*************  Video Adhesion duration filter *************
-      | campaign-vid-adhesion-30-skip-Y    | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
-      | campaign-vid-adhesion-30-skip-N    | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N}  | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-vid-adhesion-30-skip-Y | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y} | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
+      | campaign-vid-adhesion-30-skip-N | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N} | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
 
          # ****  update is_sync=1 & is_video=1 parameters of the campaign ***
     And i update campaign data by name
-      | Campaign Name                      | is_sync | is_video | goal_type   |
-      | campaign-large-D-skip-Y            | 1       | 1        | impressions |
-      | campaign-small-D-skip-Y            | 1       | 1        | impressions |
-      | campaign-large-D-skip-N            | 1       | 1        | impressions |
-      | campaign-small-D-skip-N            | 1       | 1        | impressions |
-      | campaign-equal-D-skip-Y            | 1       | 1        | impressions |
-      | campaign-equal-D-skip-N            | 1       | 1        | impressions |
-      | campaign-pub1-level-large-D-skip-Y | 1       | 1        | impressions |
-      | campaign-pub1-level-small-D-skip-Y | 1       | 1        | impressions |
-      | campaign-pub1-level-large-D-skip-N | 1       | 1        | impressions |
-      | campaign-pub1-level-small-D-skip-N | 1       | 1        | impressions |
-      | campaign-pub1-level-equal-D-skip-Y | 1       | 1        | impressions |
-      | campaign-pub1-level-equal-D-skip-N | 1       | 1        | impressions |
-      | campaign-pub2-level-large-D-skip-Y | 1       | 1        | impressions |
-      | campaign-pub2-level-small-D-skip-Y | 1       | 1        | impressions |
-      | campaign-pub2-level-large-D-skip-N | 1       | 1        | impressions |
-      | campaign-pub2-level-small-D-skip-N | 1       | 1        | impressions |
-      | campaign-pub2-level-equal-D-skip-Y | 1       | 1        | impressions |
-      | campaign-pub2-level-equal-D-skip-N | 1       | 1        | impressions |
-      | campaign-vid-adhesion-30-skip-Y    | 1       | 1        | impressions |
-      | campaign-vid-adhesion-30-skip-N    | 1       | 1        | impressions |
+      | Campaign Name                   | is_sync | is_video | goal_type   |
+      | campaign-30-D-skip-Y            | 1       | 1        | impressions |
+      | campaign-6-D-skip-Y             | 1       | 1        | impressions |
+      | campaign-30-D-skip-N            | 1       | 1        | impressions |
+      | campaign-6-D-skip-N             | 1       | 1        | impressions |
+      | campaign-15-D-skip-Y            | 1       | 1        | impressions |
+      | campaign-15-D-skip-N            | 1       | 1        | impressions |
+      | campaign-pub1-level-30-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub1-level-6-D-skip-Y  | 1       | 1        | impressions |
+      | campaign-pub1-level-30-D-skip-N | 1       | 1        | impressions |
+      | campaign-pub1-level-6-D-skip-N  | 1       | 1        | impressions |
+      | campaign-pub1-level-15-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub1-level-15-D-skip-N | 1       | 1        | impressions |
+      | campaign-pub2-level-30-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub2-level-6-D-skip-Y  | 1       | 1        | impressions |
+      | campaign-pub2-level-30-D-skip-N | 1       | 1        | impressions |
+      | campaign-pub2-level-6-D-skip-N  | 1       | 1        | impressions |
+      | campaign-pub2-level-15-D-skip-Y | 1       | 1        | impressions |
+      | campaign-pub2-level-15-D-skip-N | 1       | 1        | impressions |
+      | campaign-vid-adhesion-30-skip-Y | 1       | 1        | impressions |
+      | campaign-vid-adhesion-30-skip-N | 1       | 1        | impressions |
 
 # ****  update is_sync=1 & is_secure=1 parameters of the zone ***
     And i update zone data by name
-      | Zone Name                                       | is_secure | is_sync |
-      | zone-zoneset-large-D-skip-Y-CS-Video            | 1         | 1       |
-      | zone-zoneset-small-D-skip-Y-CS-Video            | 1         | 1       |
-      | zone-zoneset-large-D-skip-N-CS-Video            | 1         | 1       |
-      | zone-zoneset-small-D-skip-N-CS-Video            | 1         | 1       |
-      | zone-zoneset-equal-D-skip-Y-CS-Video            | 1         | 1       |
-      | zone-zoneset-equal-D-skip-N-CS-Video            | 1         | 1       |
-      | zone-zoneset-pub1-level-large-D-skip-Y-CS-Video | 1         | 1       |
-      | zone-zoneset-pub1-level-small-D-skip-Y-CS-Video | 1         | 1       |
-      | zone-zoneset-pub1-level-large-D-skip-N-CS-Video | 1         | 1       |
-      | zone-zoneset-pub1-level-small-D-skip-N-CS-Video | 1         | 1       |
-      | zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video | 1         | 1       |
-      | zone-zoneset-pub1-level-equal-D-skip-N-CS-Video | 1         | 1       |
-      | zone-zoneset-pub2-level-large-D-skip-Y-CS-Video | 1         | 1       |
-      | zone-zoneset-pub2-level-small-D-skip-Y-CS-Video | 1         | 1       |
-      | zone-zoneset-pub2-level-large-D-skip-N-CS-Video | 1         | 1       |
-      | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1         | 1       |
-      | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1         | 1       |
-      | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1         | 1       |
-      | zone-zoneset-video-adhesion-campaign-30-skip-Y  | 1         | 1       |
-      | zone-zoneset-video-adhesion-campaign-30-skip-N  | 1         | 1       |
+      | Zone Name                                      | is_secure | is_sync |
+      | zone-zoneset-30-D-skip-Y-CS-Video              | 1         | 1       |
+      | zone-zoneset-6-D-skip-Y-CS-Video               | 1         | 1       |
+      | zone-zoneset-30-D-skip-N-CS-Video              | 1         | 1       |
+      | zone-zoneset-6-D-skip-N-CS-Video               | 1         | 1       |
+      | zone-zoneset-15-D-skip-Y-CS-Video              | 1         | 1       |
+      | zone-zoneset-15-D-skip-N-CS-Video              | 1         | 1       |
+      | zone-zoneset-pub1-level-30-D-skip-Y-CS-Video   | 1         | 1       |
+      | zone-zoneset-pub1-level-6-D-skip-Y-CS-Video    | 1         | 1       |
+      | zone-zoneset-pub1-level-30-D-skip-N-CS-Video   | 1         | 1       |
+      | zone-zoneset-pub1-level-6-D-skip-N-CS-Video    | 1         | 1       |
+      | zone-zoneset-pub1-level-15-D-skip-Y-CS-Video   | 1         | 1       |
+      | zone-zoneset-pub1-level-15-D-skip-N-CS-Video   | 1         | 1       |
+      | zone-zoneset-pub2-level-30-D-skip-Y-CS-Video   | 1         | 1       |
+      | zone-zoneset-pub2-level-6-D-skip-Y-CS-Video    | 1         | 1       |
+      | zone-zoneset-pub2-level-30-D-skip-N-CS-Video   | 1         | 1       |
+      | zone-zoneset-pub2-level-6-D-skip-N-CS-Video    | 1         | 1       |
+      | zone-zoneset-pub2-level-15-D-skip-Y-CS-Video   | 1         | 1       |
+      | zone-zoneset-pub2-level-15-D-skip-N-CS-Video   | 1         | 1       |
+      | zone-zoneset-video-adhesion-campaign-30-skip-Y | 1         | 1       |
+      | zone-zoneset-video-adhesion-campaign-30-skip-N | 1         | 1       |
 
 # ****  update is_sync=1 & is_video=1 parameters of the zoneset ***
     And i update zoneset data by name
-      | Zoneset Name                                    | is_sync | is_video |
-      | zone-zoneset-large-D-skip-Y-CS-Video            | 1       | 1        |
-      | zone-zoneset-small-D-skip-Y-CS-Video            | 1       | 1        |
-      | zone-zoneset-large-D-skip-N-CS-Video            | 1       | 1        |
-      | zone-zoneset-small-D-skip-N-CS-Video            | 1       | 1        |
-      | zone-zoneset-equal-D-skip-Y-CS-Video            | 1       | 1        |
-      | zone-zoneset-equal-D-skip-N-CS-Video            | 1       | 1        |
-      | zone-zoneset-pub1-level-large-D-skip-Y-CS-Video | 1       | 1        |
-      | zone-zoneset-pub1-level-small-D-skip-Y-CS-Video | 1       | 1        |
-      | zone-zoneset-pub1-level-large-D-skip-N-CS-Video | 1       | 1        |
-      | zone-zoneset-pub1-level-small-D-skip-N-CS-Video | 1       | 1        |
-      | zone-zoneset-pub1-level-equal-D-skip-Y-CS-Video | 1       | 1        |
-      | zone-zoneset-pub1-level-equal-D-skip-N-CS-Video | 1       | 1        |
-      | zone-zoneset-pub2-level-large-D-skip-Y-CS-Video | 1       | 1        |
-      | zone-zoneset-pub2-level-small-D-skip-Y-CS-Video | 1       | 1        |
-      | zone-zoneset-pub2-level-large-D-skip-N-CS-Video | 1       | 1        |
-      | zone-zoneset-pub2-level-small-D-skip-N-CS-Video | 1       | 1        |
-      | zone-zoneset-pub2-level-equal-D-skip-Y-CS-Video | 1       | 1        |
-      | zone-zoneset-pub2-level-equal-D-skip-N-CS-Video | 1       | 1        |
+      | Zoneset Name                                   | is_sync | is_video |
+      | zone-zoneset-30-D-skip-Y-CS-Video              | 1       | 1        |
+      | zone-zoneset-6-D-skip-Y-CS-Video               | 1       | 1        |
+      | zone-zoneset-30-D-skip-N-CS-Video              | 1       | 1        |
+      | zone-zoneset-6-D-skip-N-CS-Video               | 1       | 1        |
+      | zone-zoneset-15-D-skip-Y-CS-Video              | 1       | 1        |
+      | zone-zoneset-15-D-skip-N-CS-Video              | 1       | 1        |
+      | zone-zoneset-pub1-level-30-D-skip-Y-CS-Video   | 1       | 1        |
+      | zone-zoneset-pub1-level-6-D-skip-Y-CS-Video    | 1       | 1        |
+      | zone-zoneset-pub1-level-30-D-skip-N-CS-Video   | 1       | 1        |
+      | zone-zoneset-pub1-level-6-D-skip-N-CS-Video    | 1       | 1        |
+      | zone-zoneset-pub1-level-15-D-skip-Y-CS-Video   | 1       | 1        |
+      | zone-zoneset-pub1-level-15-D-skip-N-CS-Video   | 1       | 1        |
+      | zone-zoneset-pub2-level-30-D-skip-Y-CS-Video   | 1       | 1        |
+      | zone-zoneset-pub2-level-6-D-skip-Y-CS-Video    | 1       | 1        |
+      | zone-zoneset-pub2-level-30-D-skip-N-CS-Video   | 1       | 1        |
+      | zone-zoneset-pub2-level-6-D-skip-N-CS-Video    | 1       | 1        |
+      | zone-zoneset-pub2-level-15-D-skip-Y-CS-Video   | 1       | 1        |
+      | zone-zoneset-pub2-level-15-D-skip-N-CS-Video   | 1       | 1        |
      #*************  Video Adhesion duration filter *************
-      | zone-zoneset-video-adhesion-campaign-30-skip-Y  | 1       | 1        |
-      | zone-zoneset-video-adhesion-campaign-30-skip-N  | 1       | 1        |
+      | zone-zoneset-video-adhesion-campaign-30-skip-Y | 1       | 1        |
+      | zone-zoneset-video-adhesion-campaign-30-skip-N | 1       | 1        |
 
 
 

@@ -18,31 +18,21 @@ Feature: Header Bidding Video instream & outstream
     Then The response code is 200
 
 
-  Scenario: 1.0      playback_method = all           |  player_size = none
-  request:           playback_method = 1             |  player_size = 1
-  response:          playback_method = ATP(No sound) |  player_size = small
-
-    Given i send 1 headerBidding post................
+  Scenario Outline: Video HB - Duration & skip --> expected VAST XML in response
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send instream video HB post request skip & duration for publisher <pubId> with domain <domain>, placementID group <placementId>, maxDuration = <maxDuration> and skippable = <skip>
     And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-LinearVideoFiltering-playbackAll-noSize}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-noSize-banner-1} 100% of the time
+    And The response contains {VASTAdTagURI}
+    And all HB responses contains campaignId with id of entity named {<campaignId>}
+    And The impressionUrl has bannerid field matching the id of the banner named {<bannerId>} 100% of the time
+    And The response not contains html
 
-#    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
-#    Given I send 1 times an ad video request with parameter {cw=300&ch=250&vpmt=1} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-noSize} to UAS
-#    Then The response code is 200
-#    And The response contains {VASTAdTagURI}
-#    And The responses has impression-urls
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-noSize-banner-1} 100% of the time
-
-
-  Scenario: 1.1      playback_method = all      |  player_size = none
-  request:  playback_method = 5        |  player_size = 1
-  response: playback_method = default  |  player_size = small
-    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
-    Given I send 1 times an ad video request with parameter {cw=300&ch=250&vpmt=5} for zone named {zone-zoneset-LinearVideoFiltering-playbackAll-noSize} to UAS
-    Then The response code is 200
-    And The responses are passback
+    Examples:
+      | pubId | domain                  | placementId | maxDuration | skip  | campaignId                     | bannerId                                |
+      | 3843  | duration15_skip_yes.com | 3708002     | 15          | true  | campaign-pub1-level-6-D-skip-Y | campaign-pub1-level-6-D-skip-Y-banner-1 |
+      | 3843  | HB-Video.com            | 3708002     | 5           | false | bbb                            | aa                                      |
+      | 3843  | HB-Video.com            | 3708002     | 16          | false | ccc                            | aa                                      |
+      | 3843  | HB-Video.com            | 3708002     | 22          | false | ddd                            | aa                                      |
 
    #  *********************************************************************************
 

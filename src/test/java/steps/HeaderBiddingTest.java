@@ -62,20 +62,23 @@ public class HeaderBiddingTest extends BaseTest {
         And("^I setup throttling for publisher (\\d+) by scenario \\{(.*)\\}$", (Integer publisherId, String scenario) -> {
             sut.getRampAppPublisherRequestModule().setupThrottling(publisherId, scenario);
         });
-        Given("i send instream video HB post request for publisher (\\d+) with domain \\{(.*)\\}, placementID group \\{(.*)\\}, playerWidth = (\\d+), playerHeight = (\\d+), playbackMethod = (\\d+), maxDuration = (\\d+)", this::sendHBVideoPostRequest);
+        Given("i send instream video HB post request skip & duration for publisher (.+) with domain (.+), placementID group (.+), maxDuration = (.+) and skippable = (.+)$", this::sendHBVideoPostRequestOnlyDurationAndSkip);
     }
 
 
-    private void sendHBVideoPostRequest(Integer publisherID,String domain,String placementId,
-                                        Integer playerWidth, Integer playerHeight,Integer playbackMethod,
-                                        Integer maxDuration) {
+    private void sendHBVideoPostRequestOnlyDurationAndSkip(Integer publisherID, String domain, String placementId,
+                                                           Integer playbackMethod,
+                                                           Integer maxDuration,
+                                                           String skippable) {
         String extraParams = "&optimize=1";
         Integer w1 = 1111;
         Integer h1 = 2222;
+        Integer playerWidth = 0;
+        Integer playerHeight = 0;
         String streamType = "instream";
         Integer times = 1;
-        Boolean skippable = true;
-        String body = getJsonForHbVideo(publisherID,w1, h1,domain,placementId,playerWidth, playerHeight,streamType,playbackMethod,maxDuration,skippable);
+        Boolean skip = Boolean.parseBoolean(skippable);
+        String body = getJsonForHbVideo(publisherID,w1, h1,domain,placementId,playerWidth, playerHeight,streamType,playbackMethod,maxDuration,skip);
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, false, false,false);
     }
 
