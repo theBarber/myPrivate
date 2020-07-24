@@ -10,7 +10,7 @@
   # linear adunit id = 35
   #video adhesion adunit id = 97
 
-Feature: Header Bidding Video instream & outstream
+Feature: HB - Instream Video
 
   Background: health check
     When Sending a healthcheck request to UAS
@@ -18,7 +18,7 @@ Feature: Header Bidding Video instream & outstream
     Then The response code is 200
 
 
-  Scenario Outline: Video HB - Duration & skip --> expected VAST XML in response
+  Scenario Outline:1.1 Duration & skip --> expected VAST XML
     Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
     Given i send instream video HB post request skip & duration for publisher <pubId> with domain <domain>, placementID group <placementId>, maxDuration = <maxDuration> and skippable = <skip>
     And The response code is 200
@@ -46,7 +46,7 @@ Feature: Header Bidding Video instream & outstream
       | 3843  | -1          | -    | 3843002     | duration6Y.com          | campaign-pub1-level-6-D-skip-Y  | campaign-pub1-level-6-D-skip-Y-banner-1  | UN-25360-Inherit-step3 |
    #  *********************************************************************************
 
-  Scenario Outline: Video HB - Duration & skip --> expected Passback
+  Scenario Outline:1.2 Video HB - Duration & skip --> expected Passback
     Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
     Given i send instream video HB post request skip & duration for publisher <pubId> with domain <domain>, placementID group <placementId>, maxDuration = <maxDuration> and skippable = <skip>
     Then The response code is 204
@@ -65,5 +65,24 @@ Feature: Header Bidding Video instream & outstream
       | 3708  | 6           | -    | 3708002     | duration15_skip_yes.com | campaign-15-D-skip-Y            | --       | UN-25510-Inherit-step2 |
       | 3843  | 40          | -    | 3843002     | duration6N.com          | campaign-pub1-level-6-D-skip-N  | --       | UN-25360-Inherit-step2 |
       | 3843  | -1          | -    | 3843002     | duration6N.com          | campaign-pub1-level-6-D-skip-N  | --       | UN-25360-Inherit-step4 |
-      | 3843  | -           | Y    | 3843002     | HB-Video.com            | campaign-pub1-level-30-D-skip-Y | --       | none                   |
+      | 3843  | -1          | Y    | 3843002     | HB-Video.com            | campaign-pub1-level-30-D-skip-Y | --       | none                   |
 
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ VIDEO LOCATION $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+##*********************  DESKTOP *******************
+#  Scenario Outline:2.1 Desktop - Player size & player method --> expected VAST XML
+#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
+#    Given i send instream video HB post request skip & duration for publisher <pubId> with domain <domain>, placementID group <placementId>, maxDuration = <maxDuration> and skippable = <skip>
+#    And The response code is 200
+#    And The response contains {VASTAdTagURI}
+#    And all HB responses contains campaignId with id of entity named {<campaignId>}
+#    And The impressionUrl has bannerid field matching the id of the banner named {<bannerId>} 100% of the time
+#    And The response not contains html
+#
+#    Examples:
+#      | pubId | maxDuration | skip | placementId | domain                  | campaignId                      | bannerId                                 | JIRA                   |
+#      # same as Publisher config
+#      | 3708  | 15          | Y    | 3708002     | duration15_skip_yes.com | campaign-15-D-skip-Y            | campaign-15-D-skip-Y-banner-1            | UN-25361-Udrive        |
+#      | 3843  | 15          | Y    | 3843002     | duration6Y.com          | campaign-pub1-level-6-D-skip-Y  | campaign-pub1-level-6-D-skip-Y-banner-1  | UN-25358-Udrive-step1  |
+#      | 3843  | 15          | Y    | 3843002     | duration15Y.com         | campaign-pub1-level-15-D-skip-Y | campaign-pub1-level-15-D-skip-Y-banner-1 | UN-25358-Udrive-step3  |
