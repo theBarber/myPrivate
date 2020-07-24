@@ -25,17 +25,17 @@ Feature: Header Bidding Flow Support
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600}
     And all HB responses contains cpm with value {1.0}
-    And I send impression requests to UAS
+    #And I send impression requests to UAS
 
   Scenario:2 Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
 
   Scenario:3 Send HB request with Empty placementID
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty placementID for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
   Scenario:4 Send HB request with Empty sizes
@@ -45,7 +45,7 @@ Feature: Header Bidding Flow Support
   Scenario:5 Send HB request with Empty timeout
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty timeout for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
   Scenario:6 Send HB request with wrong values
@@ -79,13 +79,13 @@ Feature: Header Bidding Flow Support
   Scenario:13 Send HB request with one size
     Given i send 1 headerBidding post request for scenario {Send HB request with one size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
 
   Scenario:14 Send HB request with no 1X1 size
     Given i send 1 headerBidding post request for scenario {Send HB request with no 1X1 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
 #   bid price per platform tests
@@ -200,7 +200,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And The response contains {campaignId}
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
@@ -209,7 +209,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid}
     And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
     And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
