@@ -1390,6 +1390,50 @@
         }
       }
     ]
+  },
+  "Send HB video with no skip mo duration no vpmt - inherit pub 3843":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "2a06ed752de49f",
+        "hbadaptor": "prebid",
+        "domain": "noSkipNoDuration.com",
+        "placementId":3843002,
+        "publisherId":3843,
+        "sizes": [
+          [1111,2222]
+        ],
+        "params": {
+          "publisherId":3843
+        },
+        "video": {
+          "streamType": "instream"
+        },
+        "mediaType": "video"
+      }
+    ]
+  },
+  "Send HB video with no skip mo duration no vpmt - inherit pub 3728":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "2a06ed752de49f",
+        "hbadaptor": "prebid",
+        "domain": "noSkipNoDuration.com",
+        "placementId":3843002,
+        "publisherId":3728,
+        "sizes": [
+          [1111,2222]
+        ],
+        "params": {
+          "publisherId":3728
+        },
+        "video": {
+          "streamType": "instream"
+        },
+        "mediaType": "video"
+      }
+    ]
   }
 }
 

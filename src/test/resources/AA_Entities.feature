@@ -1283,7 +1283,7 @@ Feature: Entities for tests
       | campaign-pub2-level-6-D-skip-N    |
       | campaign-pub2-level-15-D-skip-Y   |
       | campaign-pub2-level-15-D-skip-N   |
-      | campaign-instream-general-6N      |
+      | campaign-instream-general         |
       | campaign-display1-not-chosen      |
       | campaign-noSkip-noDuration3843    |
       | campaign-noSkip-noDuration3728    |
@@ -1312,7 +1312,7 @@ Feature: Entities for tests
       | campaign-pub2-level-15-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-15-D-skip-Y-CS-Video}   | []         | 35       | 15926          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-15-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-15-D-skip-N-CS-Video}   | []         | 35       | 15927          | 3728         | 70474           | []          | []          |
       #----------- Special cases scenarios ---------------
-      | campaign-instream-general-6N    | 75396 | 259848   | false                 | 31796         | {zone-zoneset-instream-general}                  | []         | 35       | 15930          | 3708         | 69158           | []          | []          |
+      | campaign-instream-general       | 75396 | 259848   | false                 | 24176         | {zone-zoneset-instream-general}                  | []         | 35       | 15930          | 3708         | 69158           | []          | []          |
       | campaign-display1-not-chosen    | 75396 | 251648   | false                 | 34670         | {zone-zoneset-display1-not-chosen}               | []         | 75       | 15930          | 3708         | 66487           | []          | []          |
       | campaign-noSkip-noDuration3843  | 75396 | 259848   | false                 | 24176         | {zone-zoneset-noSkip-noDuration3843}             | []         | 35       | 15941          | 3843         | 70473           | []          | []          |
       | campaign-noSkip-noDuration3728  | 75396 | 259848   | false                 | 24176         | {zone-zoneset-noSkip-noDuration3728}             | []         | 35       | 15941          | 3728         | 70474           | []          | []          |
@@ -1344,7 +1344,7 @@ Feature: Entities for tests
       | campaign-pub2-level-15-D-skip-N | 1       | 1        | impressions |
       | campaign-vid-adhesion-30-skip-Y | 1       | 1        | impressions |
       | campaign-vid-adhesion-30-skip-N | 1       | 1        | impressions |
-      | campaign-instream-general-6N    | 1       | 1        | impressions |
+      | campaign-instream-general       | 1       | 1        | impressions |
       | campaign-noSkip-noDuration3843  | 1       | 1        | impressions |
       | campaign-noSkip-noDuration3728  | 1       | 1        | impressions |
 
