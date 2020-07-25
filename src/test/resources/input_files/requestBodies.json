@@ -1434,6 +1434,28 @@
         }
       }
     ]
+  },
+  "Send HB video with 2 eligible zones - display and video":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "2a06ed752de49f",
+        "hbadaptor": "prebid",
+        "domain": "noSize-vpmtAll.com",
+        "placementId":11111111,
+        "publisherId":3708,
+        "sizes": [
+          [1,1]
+        ],
+        "params": {
+          "publisherId":3708
+        },
+        "video": {
+          "streamType": "instream",
+          "mediaType": "video"
+        }
+      }
+    ]
   }
 }
 

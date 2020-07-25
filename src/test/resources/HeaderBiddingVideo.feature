@@ -345,7 +345,12 @@ Feature: HB - Instream Video
     And The response code is 200
 
 
-
+  Scenario: 17.0 Two eligible zones 1X1 - display and video - no placement group --> video Vast return
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send 1 headerBidding post request for scenario {Send HB video with 2 eligible zones - display and video} for publisher 3708 with domain {noSize-vpmtAll.com} with extra params {&optimize=1}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-instream-general-banner-1} 100% of the time
+    And The response code is 200
 
 
 
