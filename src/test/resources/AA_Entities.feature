@@ -1283,6 +1283,10 @@ Feature: Entities for tests
       | campaign-pub2-level-6-D-skip-N    |
       | campaign-pub2-level-15-D-skip-Y   |
       | campaign-pub2-level-15-D-skip-N   |
+      | campaign-instream-general-6N      |
+      | campaign-display1-not-chosen      |
+      | campaign-noSkip-noDuration3843    |
+      | campaign-noSkip-noDuration3728    |
     #*************  Video Adhesion duration filter *************
       | video-adhesion-campaign-30-skip-Y |
       | video-adhesion-campaign-30-skip-N |
@@ -1307,6 +1311,12 @@ Feature: Entities for tests
       | campaign-pub2-level-6-D-skip-N  | 75396 | 259848   | false                 | 31796         | {zone-zoneset-pub2-level-6-D-skip-N-CS-Video}    | []         | 35       | 15925          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-15-D-skip-Y | 75396 | 259848   | false                 | 31795         | {zone-zoneset-pub2-level-15-D-skip-Y-CS-Video}   | []         | 35       | 15926          | 3728         | 70474           | []          | []          |
       | campaign-pub2-level-15-D-skip-N | 75396 | 259848   | false                 | 31794         | {zone-zoneset-pub2-level-15-D-skip-N-CS-Video}   | []         | 35       | 15927          | 3728         | 70474           | []          | []          |
+      #----------- Special cases scenarios ---------------
+      | campaign-instream-general-6N    | 75396 | 259848   | false                 | 31796         | {zone-zoneset-instream-general}                  | []         | 35       | 15929          | 3708         | 69158           | []          | []          |
+      | campaign-display1-not-chosen    | 75396 | 251648   | false                 | 34670         | {zone-zoneset-display1-not-chosen}               | []         | 75       | 15929          | 3708         | 66487           | []          | []          |
+      | campaign-noSkip-noDuration3843  | 75396 | 259848   | false                 | 24176         | {zone-zoneset-noSkip-noDuration3843}             | []         | 35       | 15941          | 3843         | 70473           | []          | []          |
+      | campaign-noSkip-noDuration3728  | 75396 | 259848   | false                 | 24176         | {zone-zoneset-noSkip-noDuration3728}             | []         | 35       | 15941          | 3728         | 70474           | []          | []          |
+
  #*************  Video Adhesion duration filter *************
       | campaign-vid-adhesion-30-skip-Y | 75396 | 255831   | false                 | 32965         | {zone-zoneset-video-adhesion-campaign-30-skip-Y} | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
       | campaign-vid-adhesion-30-skip-N | 75396 | 255831   | false                 | 32966         | {zone-zoneset-video-adhesion-campaign-30-skip-N} | []         | 97       | 15196          | 3708         | 69992           | []          | []          |
@@ -1334,6 +1344,9 @@ Feature: Entities for tests
       | campaign-pub2-level-15-D-skip-N | 1       | 1        | impressions |
       | campaign-vid-adhesion-30-skip-Y | 1       | 1        | impressions |
       | campaign-vid-adhesion-30-skip-N | 1       | 1        | impressions |
+      | campaign-instream-general-6N    | 1       | 1        | impressions |
+      | campaign-noSkip-noDuration3843  | 1       | 1        | impressions |
+      | campaign-noSkip-noDuration3728  | 1       | 1        | impressions |
 
 # ****  update is_sync=1 & is_secure=1 parameters of the zone ***
     And i update zone data by name
@@ -1358,6 +1371,10 @@ Feature: Entities for tests
       | zone-zoneset-pub2-level-15-D-skip-N-CS-Video   | 1         | 1       |
       | zone-zoneset-video-adhesion-campaign-30-skip-Y | 1         | 1       |
       | zone-zoneset-video-adhesion-campaign-30-skip-N | 1         | 1       |
+      | zone-zoneset-instream-general                  | 1         | 1       |
+      | zone-zoneset-display1-not-chosen               | 1         | 0       |
+      | zone-zoneset-noSkip-noDuration3843             | 1         | 1       |
+      | zone-zoneset-noSkip-noDuration3728             | 1         | 1       |
 
 # ****  update is_sync=1 & is_video=1 parameters of the zoneset ***
     And i update zoneset data by name
@@ -1380,6 +1397,9 @@ Feature: Entities for tests
       | zone-zoneset-pub2-level-6-D-skip-N-CS-Video    | 1       | 1        |
       | zone-zoneset-pub2-level-15-D-skip-Y-CS-Video   | 1       | 1        |
       | zone-zoneset-pub2-level-15-D-skip-N-CS-Video   | 1       | 1        |
+      | zone-zoneset-instream-general                  | 1       | 1        |
+      | zone-zoneset-noSkip-noDuration3843             | 1       | 1        |
+      | zone-zoneset-noSkip-noDuration3728             | 1       | 1        |
      #*************  Video Adhesion duration filter *************
       | zone-zoneset-video-adhesion-campaign-30-skip-Y | 1       | 1        |
       | zone-zoneset-video-adhesion-campaign-30-skip-N | 1       | 1        |
@@ -1404,16 +1424,16 @@ Feature: Entities for tests
 
     Given i create new campaigns, new zoneset with video params
       | Campaign Name                                       | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                       | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude | player_size_id | playback_method_id |
-      | campaign-LinearVideoFiltering-playbackAll-noSize    | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackAll-noSize}    | []         | 35       | 15930          | 3708         | 69158           | []          | []          |                | 1,2,3,4            |
-      | campaign-LinearVideoFiltering-playback1-size1       | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback1-size1}       | []         | 35       | 15931          | 3708         | 69158           | []          | []          | 1              | 1                  |
-      | campaign-LinearVideoFiltering-playback2-size2       | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback2-size2}       | []         | 35       | 15932          | 3708         | 69158           | []          | []          | 2              | 2                  |
-      | campaign-LinearVideoFiltering-playback3-size3       | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback3-size3}       | []         | 35       | 15933          | 3708         | 69158           | []          | []          | 3              | 3                  |
-      | campaign-LinearVideoFiltering-playback4-allsizes    | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback4-allsizes}    | []         | 35       | 15934          | 3708         | 69158           | []          | []          | 1,2,3          | 4                  |
-      | campaign-LinearVideoFiltering-playbackAll-size3     | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackAll-size3}     | []         | 35       | 15935          | 3708         | 69158           | []          | []          | 3              | 1,2,3,4            |
-      | campaign-LinearVideoFiltering-playbackall-allsizes  | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackall-allsizes}  | []         | 35       | 15936          | 3708         | 69158           | []          | []          | 1,2,3          | 1,2,3,4            |
-      | campaign-LinearVideoFiltering-noPlayback-allsizes   | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-allsizes}   | []         | 35       | 15937          | 3708         | 69158           | []          | []          | 1,2,3          |                    |
-      | campaign-LinearVideoFiltering-noPlayback-noSize     | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-noSize}     | []         | 35       | 15938          | 3708         | 69158           | []          | []          |                |                    |
-      | campaign-LinearVideoFiltering-noPlayback-sizes1And2 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2} | []         | 35       | 15939          | 3708         | 69158           | []          | []          | 1,2            |                    |
+      | campaign-LinearVideoFiltering-playbackAll-noSize    | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackAll-noSize}    | []         | 35       | 15931          | 3708         | 69158           | []          | []          |                | 1,2,3,4            |
+      | campaign-LinearVideoFiltering-playback1-size1       | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback1-size1}       | []         | 35       | 15932          | 3708         | 69158           | []          | []          | 1              | 1                  |
+      | campaign-LinearVideoFiltering-playback2-size2       | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback2-size2}       | []         | 35       | 15933          | 3708         | 69158           | []          | []          | 2              | 2                  |
+      | campaign-LinearVideoFiltering-playback3-size3       | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback3-size3}       | []         | 35       | 15934          | 3708         | 69158           | []          | []          | 3              | 3                  |
+      | campaign-LinearVideoFiltering-playback4-allsizes    | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playback4-allsizes}    | []         | 35       | 15935          | 3708         | 69158           | []          | []          | 1,2,3          | 4                  |
+      | campaign-LinearVideoFiltering-playbackAll-size3     | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackAll-size3}     | []         | 35       | 15936          | 3708         | 69158           | []          | []          | 3              | 1,2,3,4            |
+      | campaign-LinearVideoFiltering-playbackall-allsizes  | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-playbackall-allsizes}  | []         | 35       | 15937          | 3708         | 69158           | []          | []          | 1,2,3          | 1,2,3,4            |
+      | campaign-LinearVideoFiltering-noPlayback-allsizes   | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-allsizes}   | []         | 35       | 15938          | 3708         | 69158           | []          | []          | 1,2,3          |                    |
+      | campaign-LinearVideoFiltering-noPlayback-noSize     | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-noSize}     | []         | 35       | 15939          | 3708         | 69158           | []          | []          |                |                    |
+      | campaign-LinearVideoFiltering-noPlayback-sizes1And2 | 75396 | 234808   | false                 | 24176         | {zone-zoneset-LinearVideoFiltering-noPlayback-sizes1And2} | []         | 35       | 15940          | 3708         | 69158           | []          | []          | 1,2            |                    |
 
     And i update campaign data by name
       | Campaign Name                                       | units | goal_type   | is_sync | is_video |
