@@ -21,7 +21,7 @@ Feature: HB - Instream Video
 
 
 #  Scenario Outline:1.1 Duration & skip --> expected VAST XML
-#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
+#    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
 #    Given i send instream video HB post request skip & duration for publisher <pubId> with domain <domain>, placementID group <placementId>, maxDuration = <maxDuration> and skippable = <skip>
 #    And The response code is 200
 #    And The response contains {VASTAdTagURI}
@@ -48,7 +48,7 @@ Feature: HB - Instream Video
 ##   #  *********************************************************************************
 #
 #  Scenario Outline:1.2 Video HB - Duration & skip --> expected Passback
-#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
+#    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
 #    Given i send sync instream video HB post request skip & duration for publisher <pubId> with domain <domain>, placementID group <placementId>, maxDuration = <maxDuration> and skippable = <skip>
 #    Then The response code is 204
 #    And The responses are passback
@@ -72,53 +72,126 @@ Feature: HB - Instream Video
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ VIDEO LOCATION $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 #*********************  DESKTOP *******************
-#  Scenario: 1.0 playback method = all  |  size = none
-#    request:  vpmt = 1 , player_size = 1  , response = Vast
-#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-#    Given i send sync video HB request with vpmt & size for pub 3708, domain vpmtAll-noSize.com, placementID 3708002, playerW = 300, playerH = 15, vpmt = 1 and skip = N
-#    And The response contains {VASTAdTagURI}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-noSize-banner-1} 100% of the time
-#    And The response code is 200
-#    #And The response not contains html
-#
-#  Scenario: 1.1 playback method = all  |  size = none
-#  request:       vpmt = 0 (not exists) | player_size = 1  , response = passback
-#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-#    Given i send sync video HB request with vpmt & size for pub 3708, domain vpmtAll-noSize.com, placementID 3708002, playerW = 300, playerH = 15, vpmt = 0 and skip = N
-#    Then The response code is 204
-#    And The responses are passback
-#
-#  Scenario: 2.0 playback method = 1  |  size = 1
-#  request:                 vpmt = 1  | player_size = 1  , response = Vast
-#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-#    Given i send sync video HB request with vpmt & size for pub 3708, domain vpmt1-Size1.com, placementID 3708002, playerW = 300, playerH = 15, vpmt = 1 and skip = N
-#    And The response contains {VASTAdTagURI}
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback1-size1-banner-1} 100% of the time
-#    And The response code is 200
-#    #And The response not contains html
-#
-#  Scenario: 2.1 playback method = 1  |  size = 1
-#  request:                 vpmt = 1  |  player_size = 2  , response = passback
-#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-#    Given i send sync video HB request with vpmt & size for pub 3708, domain vpmt1-Size1.com, placementID 3708002, playerW = 500, playerH = 15, vpmt = 1 and skip = N
-#    Then The response code is 204
-#    And The responses are passback
-#
-#  Scenario: 2.2 playback method = 1  |  size = 1
-#  request:                 vpmt = 2  |  player_size = 1  , response = passback
-#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-#    Given i send sync video HB request with vpmt & size for pub 3708, domain vpmt1-Size1.com, placementID 3708002, playerW = 300, playerH = 15, vpmt = 2 and skip = N
-#    Then The response code is 204
-#    And The responses are passback
+  Scenario: 1.0 playback method = all  |  size = none
+    request:  vpmt = 1 , player_size = 1  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-noSize.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 1 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-noSize-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+  Scenario: 1.1 playback method = all  |  size = none
+  request:       vpmt = 0 (not exists) | player_size = 1  , response = passback
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-noSize.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 0 and skip = {N}
+    Then The response code is 204
+    And The responses are passback
+
+  Scenario: 2.0 playback method = 1  |  size = 1
+  request:                 vpmt = 1  | player_size = 1  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt1-Size1.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 1 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback1-size1-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+  Scenario: 2.1 playback method = 1  |  size = 1
+  request:                 vpmt = 1  |  player_size = 2  , response = passback
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt1-Size1.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 1 and skip = {N}
+    Then The response code is 204
+    And The responses are passback
+
+  Scenario: 2.2 playback method = 1  |  size = 1
+  request:                 vpmt = 2  |  player_size = 1  , response = passback
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt1-Size1.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 2 and skip = {N}
+    Then The response code is 204
+    And The responses are passback
 
   Scenario: 3.0 playback method = 2  |  size = 2
   request:                 vpmt = 2  | player_size = 2  , response = Vast
-    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-    Given i send sync video HB request with vpmt and size for pub 3708 and domain {vpmt2-Size2.com} and placementID {3708002} and playerW = 500 and playerH = 15 and vpmt = 2 and skip = {N}
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt2-Size2.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 2 and skip = {N}
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback2-size2-banner-1} 100% of the time
     And The response code is 200
     #And The response not contains html
+
+  Scenario: 4.0 playback method = 3  |  size = 3
+  request:                 vpmt = 3  | player_size = 3  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt3-Size3.com}, placementID {3708002}, playerW = 800, playerH = 15, vpmt = 3 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback3-size3-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+  Scenario: 5.0 playback method = 4  |  size = all
+  request:                 vpmt = 4  | player_size = 3  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt4-allSizes.com}, placementID {3708002}, playerW = 800, playerH = 15, vpmt = 4 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback4-allsizes-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+  Scenario: 6.0 playback method = all  |  size = 3
+  request:                   vpmt = 4  | player_size = 3  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-Size3.com}, placementID {3708002}, playerW = 800, playerH = 15, vpmt = 4 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-size3-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+  Scenario: 6.1 playback method = all  |  size = 3
+  request:                   vpmt = 4  | player_size = 2  , response = passback
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-Size3.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 4 and skip = {N}
+    Then The response code is 204
+    And The responses are passback
+
+  Scenario: 7.0 playback method = all  |  size = all
+  request:                   vpmt = 1  | player_size = 2  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-allSize.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 1 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackall-allsizes-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+  Scenario: 7.1 playback method = all  |  size = all
+  request:       vpmt = 0 (not exists) | player_size = 2  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-allSize.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 0 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackall-allsizes-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+  Scenario: 8.0 playback method = none  |  size = all
+  request:                     vpmt = 1 | player_size = 2  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-allSize.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 1 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-allsizes-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+
+  Scenario: 9.0 playback method = none  |  size = none
+  request:                   vpmt = 1 | player_size = 2  , response = Vast
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
+    Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-noSize.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 1 and skip = {N}
+    And The response contains {VASTAdTagURI}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-noSize-banner-1} 100% of the time
+    And The response code is 200
+    #And The response not contains html
+
+
 
 #    Examples:
 #      | pubId | playerW | playerH | playerMethod | skip | placementId | domain          | campaignId                                    | bannerId                                               |

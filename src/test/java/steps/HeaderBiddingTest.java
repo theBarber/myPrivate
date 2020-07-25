@@ -64,18 +64,10 @@ public class HeaderBiddingTest extends BaseTest {
         // ********* Duration & skip *********
         Given("^i send sync instream video HB post request skip & duration for publisher (.+) with domain (.+), placementID group (.+), maxDuration = (.+) and skippable = (.+)$", this::sendHBVideoPostRequestOnlyDurationAndSkip);
 
-
-
-
         // ********* player size & method *********
-        Given("^i send sync video HB request with vpmt and size for pub (\\d+) and domain \\{(.*)\\} and placementID \\{(.*)\\} and playerW = (\\d+) and playerH = (\\d+) and vpmt = (\\d+) and skip = \\{(.*)\\}$", this::sendHBVideoPostRequestOnlyPlayerSizeAndMethod);
-
+        Given("^i send sync video HB request with vpmt & size for pub (\\d+), domain \\{(.*)\\}, placementID \\{(.*)\\}, playerW = (\\d+), playerH = (\\d+), vpmt = (\\d+) and skip = \\{(.*)\\}$", this::sendHBVideoPostRequestOnlyPlayerSizeAndMethod);
     }
 
-//    private void nis(String pub,String dom,String pl, Integer w, Integer h, Integer vpmt){
-//        System.out.println(pub + "  + " + dom );
-//
-//    }
 
     // ********* Duration & skip *********
     private void sendHBVideoPostRequestOnlyDurationAndSkip(Integer publisherID,
