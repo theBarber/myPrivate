@@ -97,7 +97,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
     And all HB responses contains cpm with value {0.5}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Billboard-970X250-banner-1} 100% of the time
-    And I send impression requests to UAS
+    #And I send impression requests to UAS
 
   Scenario:16 Send Price per platform request with 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -107,7 +107,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
-    And I send impression requests to UAS
+    #And I send impression requests to UAS
 
   Scenario:17 Send Price per platform request with 970X250, 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with [970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
@@ -117,7 +117,7 @@ Feature: Header Bidding Flow Support
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-Desktop-300X250-banner-1} 100% of the time
-    And I send impression requests to UAS
+    #And I send impression requests to UAS
 
 #   header bidding multiple bids tests
   Scenario:18 (** BUG UN-25283 **) header bidding multiple bids requests
@@ -142,7 +142,7 @@ Feature: Header Bidding Flow Support
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-1-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-1-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-1-a} 100% of the time
-    And I send impression requests to UAS
+    #And I send impression requests to UAS
 
 #   header bidding profile targeting tests
   @HBProfileTargeting
@@ -171,25 +171,32 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding secure post request for publisher 3728 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {slader.com} and placmentID group = {3728003} and extra params {&optimize=1&unlimited=1}
     And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
-    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+    And The response contains {bannerid}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
+
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
   Scenario:22  -  1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728002} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-SS-1*1}
-    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-SS-1*1-banner-1}
+    And The response contains {bannerid}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-SS-1*1-banner-1} 100% of the time
+
+#    And The response contains {script}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-SS-1*1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-SS-1*1-banner-1}
 
   Scenario:23 -  1 size 1*2 (ST), 1 placement (PG), PG banner expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {script}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
-    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+    And The response contains {bannerid}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
+#    And The response contains {script}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
   Scenario:24 -  1 size 300*250 (doesn't have a suitable ad), no placement, passback expected
     Given I clear all cookies from uas requests
@@ -201,36 +208,44 @@ Feature: Header Bidding Flow Support
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
     And The response contains {bannerid}
-    And The response contains {campaignId}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
-    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
+#    And The response contains {bannerid}
+#    And The response contains {campaignId}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
   Scenario:26. size doesn't belong to placement group, banner from placement group expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
     And The response contains {bannerid}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
-    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
+#    And The response contains {bannerid}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-PG-1*1-banner-1}
 
 
   Scenario:27 -  valid size, invalid placement group, banner ST according to sizes expected
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:970 w1:250, with domain {slader.com}, placmentID group = {blabla} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {script}
-    And The response contains {campaignId}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
-    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
+    And The response contains {bannerid}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-Billabord-970*250-banner-1} 100% of the time
+#    And The response contains {script}
+#    And The response contains {campaignId}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
 
   Scenario:28 -  valid size 1*1 with suitable ad, no placement filed -BB 970*250 banner expected
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=1&unlimited=1}
     And The response code is 200
-    And The response contains {script}
-    And The response contains {campaignId}
-    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
-    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
+    And The response contains {bannerid}
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-Billabord-970*250-banner-1} 100% of the time
+#    And The response contains {script}
+#    And The response contains {campaignId}
+#    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-Billabord-970*250}
+#    And all HB responses contains adId with id of entity named {campaign-HB-PlacementG-Billabord-970*250-banner-1}
 
   Scenario:29 -  valid size 1*1 with suitable add, unactive placement group. should ignore sizes and return pb
     Given I clear all cookies from uas requests
@@ -249,7 +264,6 @@ Feature: Header Bidding Flow Support
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-2-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-2-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-2-a} 100% of the time
-    And I send impression requests to UAS
 
   Scenario:31 -  header bidding multiple domains - domain3
     Given I add cookie UTID with value {1112226661114444} to my requests to uas
@@ -263,7 +277,6 @@ Feature: Header Bidding Flow Support
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-3-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-3-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-3-a} 100% of the time
-    And I send impression requests to UAS
 
   Scenario:32 -  header bidding multiple domains - domain4
     Given I add cookie UTID with value {d7a8b9caf42446dcbca3248eef7d47bb} to my requests to uas
@@ -277,7 +290,6 @@ Feature: Header Bidding Flow Support
     And The impressionUrl has bannerid field matching the id of the banner named {HB-Tablet-160x600-D-4-a-1-banner-1} 100% of the time
     And The impressionUrl has campaignid field matching the id of the campaign named {HB-Tablet-160x600-D-4-a-1} 100% of the time
     And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-HB-Tablet-160x600-D-4-a} 100% of the time
-    And I send impression requests to UAS
 
 #   header bidding profile targeting tests
   @HBProfileTargeting

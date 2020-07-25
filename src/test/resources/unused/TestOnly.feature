@@ -10,12 +10,18 @@ Feature: test1
     Then The response code is 200
 
 
-#  Scenario Outline: try to consume all impressions
-#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-#    When I send 1 times an ad request with parameter {unlimited=1} for zone named {<zone>} to UAS
-#    And The response code is 200
-#    And The impressionUrl has bannerid field matching the id of the banner named {<bannerId>} 100% of the time
-#
+#    Given I send 1 times an ad video request with parameter {unlimited=1&domain=duration15_skip_yes.com} for zone named {zone-zoneset-15-D-skip-Y-CS-Video} to UAS
+#    Then The response code is 200
+#    And The response contains {VASTAdTagURI}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-15-D-skip-Y-banner-1} 100% of the time
+#    And The response not contains html
+  Scenario:22  -  1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
+    And The response code is 200
+    And The response not contains bannerid
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
+
 #    Examples:
 #      | zone                             | bannerId                              |
 #      | zone-zoneset-viewability-IAS-low | campaign-IAS-low-viewability-banner-1 |
@@ -24,20 +30,19 @@ Feature: test1
 
 
 
-  Scenario Outline: Video HB - Location - Desktop
-    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
-    Given i send instream video HB post request for publisher <publisherId> with domain {<domain>}, placementID group {<placementId>}, playerWidth = <playerWidth>, playerHeight = <playerHeight>, playbackMethod = <playbackMethod>, maxDuration = <maxDuration> and skippable = <skippable>
-    And The response code is 200
-    And The response contains {VASTAdTagURI}
-    And all HB responses contains campaignId with id of entity named {<campaignId>}
-    And The impressionUrl has bannerid field matching the id of the banner named {<bannerId>} 100% of the time
-
-    Examples:
-      | publisherId | domain       | placementId | playerWidth | playerHeight | playbackMethod | maxDuration | skippable | campaignId | bannerId |
-      | 3708        | HB-Video.com | 3708002     | 300         | 100          | 1              | 30          | true      | aaa        | aa       |
-      | 3708        | HB-Video.com | 3708002     | 500         | 100          | 2              | 5           | false     | bbb        | aa       |
-      | 3708        | HB-Video.com | 3708002     | 300         | 100          | 3              | 16          | true      | ccc        | aa       |
-      | 3708        | HB-Video.com | 3708002     | 800         | 100          | 4              | 22          | false     | ddd        | aa       |
+#  Scenario Outline: Video HB - Location - Desktop
+#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
+#    Given i send instream video HB post request for publisher <publisherId> with domain {<domain>}, placementID group {<placementId>}, playerWidth = <playerWidth>, playerHeight = <playerHeight>, playbackMethod = <playbackMethod>, maxDuration = <maxDuration> and skippable = <skippable>
+#    And The response code is 200
+#    And all HB responses contains campaignId with id of entity named {<campaignId>}
+#    And The impressionUrl has bannerid field matching the id of the banner named {<bannerId>} 100% of the time
+#
+#    Examples:
+#      | publisherId | domain       | placementId | playerWidth | playerHeight | playbackMethod | maxDuration | skippable | campaignId | bannerId |
+#      | 3708        | HB-Video.com | 3708002     | 300         | 100          | 1              | 30          | true      | aaa        | aa       |
+#      | 3708        | HB-Video.com | 3708002     | 500         | 100          | 2              | 5           | false     | bbb        | aa       |
+#      | 3708        | HB-Video.com | 3708002     | 300         | 100          | 3              | 16          | true      | ccc        | aa       |
+#      | 3708        | HB-Video.com | 3708002     | 800         | 100          | 4              | 22          | false     | ddd        | aa       |
 
 
   #    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728005} and extra params {&optimize=1&unlimited=1} cookies false

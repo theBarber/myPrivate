@@ -61,11 +61,23 @@ public class HeaderBiddingTest extends BaseTest {
         And("^I setup throttling for publisher (\\d+) by scenario \\{(.*)\\}$", (Integer publisherId, String scenario) -> {
             sut.getRampAppPublisherRequestModule().setupThrottling(publisherId, scenario);
         });
-        Given("^i send instream video HB post request skip & duration for publisher (.+) with domain (.+), placementID group (.+), maxDuration = (.+) and skippable = (.+)$", this::sendHBVideoPostRequestOnlyDurationAndSkip);
+        // ********* Duration & skip *********
+        Given("^i send sync instream video HB post request skip & duration for publisher (.+) with domain (.+), placementID group (.+), maxDuration = (.+) and skippable = (.+)$", this::sendHBVideoPostRequestOnlyDurationAndSkip);
+
+
+
+
+        // ********* player size & method *********
+        Given("^i send sync video HB request with vpmt and size for pub (\\d+) and domain \\{(.*)\\} and placementID \\{(.*)\\} and playerW = (\\d+) and playerH = (\\d+) and vpmt = (\\d+) and skip = \\{(.*)\\}$", this::sendHBVideoPostRequestOnlyPlayerSizeAndMethod);
 
     }
 
+//    private void nis(String pub,String dom,String pl, Integer w, Integer h, Integer vpmt){
+//        System.out.println(pub + "  + " + dom );
+//
+//    }
 
+    // ********* Duration & skip *********
     private void sendHBVideoPostRequestOnlyDurationAndSkip(Integer publisherID,
                                                            String domain,
                                                            String placementId,
@@ -85,20 +97,23 @@ public class HeaderBiddingTest extends BaseTest {
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, false, false, false);
     }
 
+
+    // ********* player size & method *********
     private void sendHBVideoPostRequestOnlyPlayerSizeAndMethod(Integer publisherID,
                                                                String domain,
                                                                String placementId,
-                                                               Integer playbackMethod,
                                                                Integer playerWidth,
                                                                Integer playerHeight,
-                                                               Character skippable) {
+                                                               Integer playbackMethod,
+                                                               String skippable) {
         String extraParams = "&optimize=1";
         Integer w1 = 1111;
         Integer h1 = 2222;
         String streamType = "instream";
         Integer times = 1;
         Integer maxDuration = -1;
-        Boolean skip = true ? skippable == 'Y' : false;
+        Character skipTmp = skippable.charAt(0);
+        Boolean skip = ( (skipTmp != 'Y') && (skipTmp !='N')  ) ? null : skipTmp == 'Y';
         String body = getJsonForHbVideo(publisherID, w1, h1, domain, placementId, playerWidth, playerHeight, streamType, playbackMethod, maxDuration, skip);
         sut.getUASRquestModule().sendMultipleHeaderBiddingPostRequests(times, body, publisherID, domain, extraParams, false, false, false);
     }
@@ -235,7 +250,8 @@ public class HeaderBiddingTest extends BaseTest {
                                      Integer w1, Integer h1,
                                      String domain,
                                      String placementId,
-                                     Integer playerWidth, Integer playerHeight,
+                                     Integer playerWidth,
+                                     Integer playerHeight,
                                      String streamType,
                                      Integer playbackMethod,
                                      Integer maxDuration,
@@ -390,15 +406,19 @@ public class HeaderBiddingTest extends BaseTest {
     }
 
     public void responsesContainEntityWithId(String entity, Integer id) {
-
         responsesContainEntityWithValue(entity, String.valueOf(id));
     }
 
     public void responsesAdsContainEntityWithName(String entity, String name) {
         String value = String.valueOf(getEntityId(entity, name));
         responsesAdsContainEntityWithId(entity, value);
-
     }
+
+//    //&&&&&&&&&&&& check Sync response &&&&&&&&&&&&&&&&&&&&&
+//    public void syncResponsesAdsContainEntityWithName(String entity, String name) {
+//        String value = String.valueOf(getEntityId(entity, name));
+//        syncResponsesAdsContainEntityWithId(entity, value);
+//    }
 
 
     public void responsesAdsContainEntityWithId(String entity, String value) {
@@ -412,6 +432,19 @@ public class HeaderBiddingTest extends BaseTest {
             }
         });
     }
+//    //&&&&&&&&&&&& check Sync response &&&&&&&&&&&&&&&&&&&&&
+//    public void syncResponsesAdsContainEntityWithId(String entity, String value) {
+//        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+//            try {
+//                Assert.assertNotNull("response not contains entity named: " + entity.toLowerCase(), content);
+//                assertTrue("responses not contains " + entity + " with value: " + value + ", response has ad: " + content,
+//                        content.contains(entity.toLowerCase() + "=" + value));
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+//    }
+//    syncResponsesAdsContainEntityWithId
 
 
     private void responsesContainEntityWithName(String entity, String name) {
