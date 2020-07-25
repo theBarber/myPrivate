@@ -62,7 +62,7 @@ public class HeaderBiddingTest extends BaseTest {
             sut.getRampAppPublisherRequestModule().setupThrottling(publisherId, scenario);
         });
         // ********* Duration & skip *********
-        Given("^i send sync instream video HB post request skip & duration for publisher (.+) with domain (.+), placementID group (.+), maxDuration = (.+) and skippable = (.+)$", this::sendHBVideoPostRequestOnlyDurationAndSkip);
+        Given("^i send sync instream video HB post request skip & duration for publisher (\\d+) with domain \\{(.*)\\}, placementID group \\{(.*)\\}, maxDuration = (.+) and skippable = \\{(.*)\\}$", this::sendHBVideoPostRequestOnlyDurationAndSkip);
 
         // ********* player size & method *********
         Given("^i send sync video HB request with vpmt & size for pub (\\d+), domain \\{(.*)\\}, placementID \\{(.*)\\}, playerW = (\\d+), playerH = (\\d+), vpmt = (\\d+) and skip = \\{(.*)\\}$", this::sendHBVideoPostRequestOnlyPlayerSizeAndMethod);
