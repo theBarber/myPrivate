@@ -31,6 +31,7 @@ Feature: HB - Instream Video
       | 3708  | 30          | N    | 3708002     | HB-Video.com            | campaign-30-D-skip-N            | campaign-30-D-skip-N-banner-1            | UN-25509-change-step4  |
       | 3843  | 8           | N    | 3843002     | duration6Y.com          | campaign-pub1-level-6-D-skip-Y  | campaign-pub1-level-6-D-skip-Y-banner-1  | UN-25359-change-step1  |
       | 3843  | 16          | N    | 3843002     | duration15N.com         | campaign-pub1-level-15-D-skip-N | campaign-pub1-level-15-D-skip-N-banner-1 | UN-25359-change-step3  |
+      | 3843  | 16          | N    | 3843002     | duration6N.com          | campaign-pub1-level-6-D-skip-N  | campaign-pub1-level-6-D-skip-N-banner-1  | UN-25359-change-step3  |
       # Inherit Publisher config
       | 3708  | -1          | N    | 3708002     | duration15_skip_yes.com | campaign-15-D-skip-Y            | campaign-15-D-skip-Y-banner-1            | UN-25510-Udrive-step1  |
       | 3708  | -1          | -    | 3708002     | duration15_skip_yes.com | campaign-15-D-skip-Y            | campaign-15-D-skip-Y-banner-1            | UN-25510-Udrive-step3  |
@@ -69,7 +70,7 @@ Feature: HB - Instream Video
 #     above 700  --> large
 
   Scenario: 1.0 playback method = all  |  size = none
-    request:  vpmt = 1 , player_size = 1  , response = Vast
+  request:  vpmt = 1 , player_size = 1  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-noSize.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 1 and skip = {N}
     And The response contains {VASTAdTagURI}
