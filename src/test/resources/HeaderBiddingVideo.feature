@@ -331,13 +331,13 @@ Feature: HB - Instream Video
 
 #&&&&&&&&&&&&&&&&&&&&&& special scenarios --  no skip no duration campaigns &&&&&&&&&&&&&&&&&&&
 
-  Scenario: 16.0 No skip and no duration no player size campaign - publisher 3843 (15Y) - passback
+  Scenario: 16.0 No skip and no duration no player size campaign - publisher 3843 (15Y) - passback - UN-25541
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB video with no skip mo duration no vpmt - inherit pub 3843} for publisher 3843 with domain {noSkipNoDuration.com} with extra params {&optimize=1}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 16.1 No skip and no duration no player size campaign - publisher 3728 (15N) - VAST
+  Scenario: 16.1 No skip and no duration no player size campaign - publisher 3728 (15N) - VAST - UN-25541
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB video with no skip mo duration no vpmt - inherit pub 3728} for publisher 3728 with domain {noSkipNoDuration.com} with extra params {&optimize=1}
     And The response contains {VASTAdTagURI}
@@ -345,7 +345,7 @@ Feature: HB - Instream Video
     And The response code is 200
 
 
-  Scenario: 17.0 Two eligible zones 1X1 - display and video - no placement group --> video Vast return
+  Scenario: 17.0 Two eligible zones 1X1 - display and video - no placement group --> video Vast return - UN-25542
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB video with 2 eligible zones - display and video} for publisher 3708 with domain {noSize-vpmtAll.com} with extra params {&optimize=1}
     And The response contains {VASTAdTagURI}
