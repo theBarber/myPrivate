@@ -17,7 +17,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {<bannerId>} 100% of the time
-    #And The response not contains html
+    And The response not contains html
 
     Examples:
       | pubId | maxDuration | skip | placementId | domain                  | campaignId                      | bannerId                                 | JIRA                   |
@@ -76,7 +76,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-noSize-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 1.1 playback method = all  |  size = none
   request:       vpmt = 0 (not exists) | player_size = 1  , response = passback
@@ -92,7 +92,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback1-size1-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 2.1 playback method = 1  |  size = 1
   request:                 vpmt = 1  |  player_size = 2  , response = passback
@@ -124,7 +124,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback3-size3-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 5.0 playback method = 4  |  size = all
   request:                 vpmt = 4  | player_size = 3  , response = Vast
@@ -133,7 +133,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback4-allsizes-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 6.0 playback method = all  |  size = 3
   request:                   vpmt = 4  | player_size = 3  , response = Vast
@@ -142,7 +142,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackAll-size3-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 6.1 playback method = all  |  size = 3
   request:                   vpmt = 4  | player_size = 2  , response = passback
@@ -158,7 +158,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackall-allsizes-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 7.1 playback method = all  |  size = all
   request:       vpmt = 0 (not exists) | player_size = 2  , response = Vast
@@ -167,7 +167,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playbackall-allsizes-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 8.0 playback method = none  |  size = all
   request:                     vpmt = 1 | player_size = 2  , response = Vast
@@ -176,7 +176,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-allsizes-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
 
   Scenario: 9.0 playback method = none  |  size = none
@@ -186,7 +186,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-noSize-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
 #*********************  MOBILE  ******************* user-agent --> 640  X 360
 #         player size = request size / (phone screen size) * 100
@@ -201,7 +201,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback1-size1-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 10.1   playback method = 1  |  size = 1
   request:                     vpmt = 1 | player_size = 2  , response = passback
@@ -218,7 +218,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback2-size2-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 11.1 playback method = 2  |  size = 2
   request:                  vpmt = 2  | player_size = 1  , response = passback
@@ -241,7 +241,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback3-size3-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 12.1 playback method = 3  |  size = 3
   request:                  vpmt = 3  | player_size = 2  , response = passback
@@ -257,7 +257,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback4-allsizes-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 13.1 playback method = 4  |  size = all
   request:                  vpmt = 4  | player_size = 2  , response = Vast
@@ -275,7 +275,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-playback4-allsizes-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 14.0 playback method = none  |  size = 1 & 2
   request:         vpmt = 0 (not exists) | player_size = 1  , response = Vast
@@ -284,7 +284,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-sizes1And2-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 14.1 playback method = none  |  size = 1 & 2
   request:         vpmt = 0 (not exists) | player_size = 2  , response = Vast
@@ -293,7 +293,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-sizes1And2-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 14.1 playback method = none  |  size = 1 & 2
   request:         vpmt = 0 (not exists) | player_size = 3  , response = passback
@@ -318,7 +318,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-noSize-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
   Scenario: 15.2 playback method = none  |  size = none
   request:         vpmt = 0 (not exists) | player_size = 3 , response = Vast
@@ -327,7 +327,7 @@ Feature: HB - Instream Video
     And The response contains {VASTAdTagURI}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-LinearVideoFiltering-noPlayback-noSize-banner-1} 100% of the time
     And The response code is 200
-    #And The response not contains html
+    And The response not contains html
 
 #&&&&&&&&&&&&&&&&&&&&&& special scenarios --  no skip no duration campaigns &&&&&&&&&&&&&&&&&&&
 
