@@ -9,13 +9,12 @@ import org.junit.Assert;
 import org.junit.runner.RunWith;
 import ramp.lift.uas.automation.UASRequestModule;
 import util.ResponseVerifier;
-import util.TestsRoutines;
-
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 
 @CucumberOptions(features = "classpath:UASHealthcheck.feature", plugin = {"pretty",})
@@ -35,22 +34,58 @@ public class HealthCheckTest extends BaseTest {
         Then("^The synchronized response code is (\\d+)$", this::allSynchronizedResponsesHaveCode);
         Then("^The synchronized response code is (\\d+) (\\d+) responses from (\\d+) of the times", this::allSynchronizedResponsesHaveCodePartially);
         Then("^All requests are sent$", this::allResponsesFinished);
-        Then("^The response contains \\{(.*)\\}$", this::healthCheckResponseContains);
-        Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
+        //Then("^The response contains \\{(.*)\\}$", this::healthCheckResponseContains);
+        Then("^The response contains \\{(.*)\\}$", this::checkResponseContains);  // check if sync response or async reponse first
+        //Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
+        Then("^The response not contains (.*)$", this::checkResponseNotContains); // check if sync response or async reponse first
+        //Then("^The synchronized response contains special script which is (.*)$", this::allSynchronizedResponsesContainScript);
 
     }
 
+    //&&&&&&&&& Checking first if response is sync or async &&&&&&&&&&&&&&&&&&&&&&&&&&
+    public void checkResponseNotContains(String something){
+        if (sut.getUASRquestModule().getSynchronizedResponses().size() == 0){
+            this.healthCheckResponseNotContains(something); // Async
+        } else {
+            this.CheckSyncResponseNotContains(something); //Sync
+        }
+    }
+
+    //*** Async check
     public void healthCheckResponseNotContains(String something) {
         sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
-            //System.out.println(content); // for checks only
             Assert.assertThat(content, not(Matchers.containsString(something)));
         });
     }
+
+    //&&&&&&&&&&&&&& check not contains on a sync response &&&&&
+    public void CheckSyncResponseNotContains(String something) {
+        sut.getUASRquestModule().getSynchronizedResponses().stream().map(UASRequestModule::getContentOf).forEach(syncResponseString -> {
+            Assert.assertThat(syncResponseString, not(Matchers.containsString(something)));
+        } );
+    }
+
+
+    //&&&&&&&&& Checking first if response is sync or async &&&&&&&&&&&&&&&&&&&&&&&&&&
+    public void checkResponseContains(String something){
+        if (sut.getUASRquestModule().getSynchronizedResponses().size() == 0){
+            this.healthCheckResponseContains(something);  // Async
+        } else {
+            this.allSynchronizedResponsesContainScript(something); //Sync
+        }
+    }
+
 
     public void healthCheckResponseContains(String something) {
         ResponseVerifier.getInstance().verifyContains(something);
     }
 
+    //&&&&&&&&&&&&&&&& Validating script within sync responses &&&&&&&&&&&&&&
+    public void allSynchronizedResponsesContainScript(String something) {
+        sut.getUASRquestModule().getSynchronizedResponses().stream().map(UASRequestModule::getContentOf).forEach(responseString -> {
+            assertThat(responseString, Matchers.containsString(something));
+        } );
+    }
 
     public void healthCheckRequestSkip(String servicenameToSkip) {
         sut.getUASRquestModule().healthCheckRequestSkip(servicenameToSkip);

@@ -10,15 +10,44 @@ Feature: test1
     Then The response code is 200
 
 
-
-  Scenario:18 header bidding multiple bids requests
-    Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
+#    Given I send 1 times an ad video request with parameter {unlimited=1&domain=duration15_skip_yes.com} for zone named {zone-zoneset-15-D-skip-Y-CS-Video} to UAS
+#    Then The response code is 200
+#    And The response contains {VASTAdTagURI}
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-15-D-skip-Y-banner-1} 100% of the time
+#    And The response not contains html
+  Scenario:22  -  1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
+    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {script}
-    And i read all HB responses and map their bidId by adId
-    And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
-    And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
-    And in HB responses bidid bid3 has entity of adId with name {campaign-HB-Desktop-300X250-banner-1} 100% of the times
+    And The response not contains bannerid
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
+
+#    Examples:
+#      | zone                             | bannerId                              |
+#      | zone-zoneset-viewability-IAS-low | campaign-IAS-low-viewability-banner-1 |
+#      | zone-zoneset-viewability-DV-low  | campaign-DV-low-viewability-banner-1  |
+#      | zone-zoneset-inline-pub3708      | campaign-stg-inline-pub3708-banner-1  |
+
+
+
+#  Scenario Outline: Video HB - Location - Desktop
+#    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
+#    Given i send instream video HB post request for publisher <publisherId> with domain {<domain>}, placementID group {<placementId>}, playerWidth = <playerWidth>, playerHeight = <playerHeight>, playbackMethod = <playbackMethod>, maxDuration = <maxDuration> and skippable = <skippable>
+#    And The response code is 200
+#    And all HB responses contains campaignId with id of entity named {<campaignId>}
+#    And The impressionUrl has bannerid field matching the id of the banner named {<bannerId>} 100% of the time
+#
+#    Examples:
+#      | publisherId | domain       | placementId | playerWidth | playerHeight | playbackMethod | maxDuration | skippable | campaignId | bannerId |
+#      | 3708        | HB-Video.com | 3708002     | 300         | 100          | 1              | 30          | true      | aaa        | aa       |
+#      | 3708        | HB-Video.com | 3708002     | 500         | 100          | 2              | 5           | false     | bbb        | aa       |
+#      | 3708        | HB-Video.com | 3708002     | 300         | 100          | 3              | 16          | true      | ccc        | aa       |
+#      | 3708        | HB-Video.com | 3708002     | 800         | 100          | 4              | 22          | false     | ddd        | aa       |
+
+
+  #    Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728005} and extra params {&optimize=1&unlimited=1} cookies false
+
+
 #    When I send 10 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192979 to UAS
 #    And The responses has impression-urls
 #    And The response contains {bannerid}
