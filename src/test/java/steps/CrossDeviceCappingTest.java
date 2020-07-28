@@ -29,6 +29,7 @@ import ramp.lift.uas.automation.CouchbaseBucketModule;
 
 import java.time.*;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import static steps.HeaderBiddingTest.*;
 
@@ -294,10 +295,12 @@ public class CrossDeviceCappingTest extends BaseTest {
             int campaignId = expectedEntity.get().getId();
             long days = getEpocTimeInDays();
             String meteringRecordToReset = "daily_impressions_" + campaignId + "_" + days + "_us-east-1";
-            //String meteringRecordToReset = "daily_impressions_370959_18452_us-east-1";
+            //String meteringRecordToReset = "daily_impressions_371552_18471_us-east-1";
             System.out.println("meteringRecordToReset is ==> " + meteringRecordToReset);
             String jsonDoc = "{\"c\":0}";
             try {
+                sut.getMeteringBucket().deleteDocument(meteringRecordToReset);
+                TimeUnit.SECONDS.sleep(3);
                 sut.getMeteringBucket().insertDocument(meteringRecordToReset, jsonDoc);
             } catch (DocumentDoesNotExistException e) {
                 System.out.println(e.getMessage());

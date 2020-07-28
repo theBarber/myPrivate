@@ -17,13 +17,11 @@ Feature: test1
 #    And The impressionUrl has bannerid field matching the id of the banner named {campaign-15-D-skip-Y-banner-1} 100% of the time
 #    And The response not contains html
   Scenario:22  -  1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
-    When I send 10 times an ad request with parameter {unlimited=1&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    When I send 10 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192828 to UAS
     And The responses has impression-urls
-    And The response contains {bannerid}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-D-DailyPacing-ST-2-banner-1} 100% of the time
     And I send impression requests to UAS
     And I sleep for 1 seconds
-    When I send 1 times an ad request with parameter {unlimited=1&optimize=1} for zone named {zone-zoneset-D-DailyPacing-ST-2} to UAS
+    When I send 1 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192828 to UAS
     And The response code is 200
     And The responses are passback
     And I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
