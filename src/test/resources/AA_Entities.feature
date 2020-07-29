@@ -311,7 +311,7 @@ Feature: Entities for tests
       | zone-zoneset-HB-DP-ServerPr-PGC-6b              | 1         |
 
 
-    Given i update bid_price_type for publisher = 3708 for adunit = 93 to be 1
+    ##############  working with Rate card !!!    Given i update bid_price_type for publisher = 3708 for adunit = 93 to be 1
 #    Given i update bid_price_type for publisher = 3711 for adunit = 69 to be 1
 #    Given i update bid_price_type for publisher = 3711 for adunit = 75 to be 1
 
