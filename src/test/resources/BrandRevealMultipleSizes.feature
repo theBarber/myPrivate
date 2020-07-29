@@ -15,6 +15,9 @@ Feature: Brand reveal support new size 300X600
     Then The response code is 200
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {NewBrandReveal-BR-Direct-banner-1} 100% of the time
+    And The response contains {https://ads.sparkflow.net?g=44649}
+    And The response contains {var tag}
+    Then The parameter {var tag=} from response does not contain empty string
 
 
   Scenario:2 send request expect delivery NonGuaranteed
@@ -22,6 +25,9 @@ Feature: Brand reveal support new size 300X600
     Then The response code is 200
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {NewBrandReveal-BR-PROG-NonGuaranteed-banner-1} 100% of the time
+    And The response contains {https://ads.sparkflow.net?g=44649}
+    And The response contains {var tag}
+    Then The parameter {var tag=} from response does not contain empty string
 
 
   Scenario:3 send request expect delivery NonGuaranteed300x600
@@ -29,3 +35,6 @@ Feature: Brand reveal support new size 300X600
     Then The response code is 200
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {NewBrandReveal-BR-PROG-NonGuaranteed300x600-banner-1} 100% of the time
+    And The response contains {https://ads.sparkflow.net?g=44649}
+    And The response contains {var tag}
+    Then The parameter {var tag=} from response does not contain empty string

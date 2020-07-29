@@ -1848,14 +1848,12 @@ Feature: Entities for tests
       | interstitial-standard-PG-Direct        |
       | interstitial-standard-PG-Programmatic  |
       | campaign-see-through-check-wrapper     |
-      | campaign-ST-check-wrapper-Programmatic |
 
     Given i create new campaigns with new zoneset
       | Campaign Name                          | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | interstitial-standard-PG-Direct        | 703688 | 270762   | false                 | 35659         | {zone-zoneset-interstitial-standard-PG-Direct}       | []         | 75       | 15944          | 2434         | 37496           |
       | interstitial-standard-PG-Programmatic  | 407981 | 270838   | true                  | 2777          | {zone-zoneset-interstitial-standard-PG-Programmatic} | []         | 75       | 15944          | 2434         | 37496           |
       | campaign-see-through-check-wrapper     | 75396  | 210722   | false                 | 204           | {zone-zoneset-check-wrapper-ST}                      | []         | 83       | 15944          | 2434         | 69992           |
-      | campaign-ST-check-wrapper-Programmatic | 407981 | 224533   | true                  | 2708          | {zone-zoneset-ST-check-wrapper-Programmatic}         | []         | 83       | 15944          | 2434         | 69992           |
 
 
 
@@ -1864,14 +1862,12 @@ Feature: Entities for tests
       | interstitial-standard-PG-Direct        | -1    | impressions |
       | interstitial-standard-PG-Programmatic  | -1    | impressions |
       | campaign-see-through-check-wrapper     | -1    | impressions |
-      | campaign-ST-check-wrapper-Programmatic | -1    | impressions |
 
     And i update zone data by name
       | Zone Name                                          | is_secure |
       | zone-zoneset-interstitial-standard-PG-Direct       | 1         |
       | zone-zoneset-interstitial-standard-PG-Programmatic | 1         |
       | zone-zoneset-check-wrapper-ST                      | 1         |
-      | zone-zoneset-ST-check-wrapper-Programmatic         | 1         |
 
 
   Scenario: refresh zone cache with wait

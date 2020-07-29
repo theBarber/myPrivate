@@ -36,6 +36,8 @@ public class HealthCheckTest extends BaseTest {
         Then("^All requests are sent$", this::allResponsesFinished);
         //Then("^The response contains \\{(.*)\\}$", this::healthCheckResponseContains);
         Then("^The response contains \\{(.*)\\}$", this::checkResponseContains);  // check if sync response or async reponse first
+        Then("^The parameter \\{(.*)\\} from response does not contain empty string$", this::parameterStringNotEmpty);  // check if not empty string
+
         //Then("^The response not contains (.*)$", this::healthCheckResponseNotContains);
         Then("^The response not contains (.*)$", this::checkResponseNotContains); // check if sync response or async reponse first
         //Then("^The synchronized response contains special script which is (.*)$", this::allSynchronizedResponsesContainScript);
@@ -75,6 +77,17 @@ public class HealthCheckTest extends BaseTest {
         }
     }
 
+
+    //&&&&&&&&&&&&&&&& Validating parameter not empty  &&&&&&&&&&&&&&
+    public void parameterStringNotEmpty(String parameter) {
+        sut.getUASRquestModule().responses().map(CompletableFuture::join).map(UASRequestModule::getContentOf).forEach(content -> {
+            //content = "window.ut_tag=''aa";
+            int start = content.indexOf(parameter);
+            int end = start + parameter.length();
+            String stringToCheck = content.substring(end, end+2);
+            assertThat(stringToCheck, Matchers.allOf(Matchers.not("''"), Matchers.not("")));
+        });
+    }
 
     public void healthCheckResponseContains(String something) {
         ResponseVerifier.getInstance().verifyContains(something);
