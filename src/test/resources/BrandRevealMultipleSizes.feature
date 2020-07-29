@@ -13,7 +13,6 @@ Feature: Brand reveal support new size 300X600
   Scenario:1 send request expect delivery Direct
     Given I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-NewBrandReveal-BR-Direct} to UAS
     Then The response code is 200
-    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {NewBrandReveal-BR-Direct-banner-1} 100% of the time
 
@@ -21,14 +20,12 @@ Feature: Brand reveal support new size 300X600
   Scenario:2 send request expect delivery NonGuaranteed
     Given I send 1 times an ad request with parameter {unlimited=1&requestid=OX_BrandReveal} for zone named {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed} to UAS
     Then The response code is 200
-    And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {NewBrandReveal-BR-PROG-NonGuaranteed-banner-1} 100% of the time
 
 
-  Scenario:3 send request expect delivery NonGuaranteed600x600
-    Given I send 1 times an ad request with parameter {unlimited=1&requestid=OX_BrandReveal} for zone named {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} to UAS
+  Scenario:3 send request expect delivery NonGuaranteed300x600
+    Given I send 1 times an ad request with parameter {unlimited=1&requestid=OX_BrandReveal} for zone named {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed300x600} to UAS
     Then The response code is 200
-    And The response contains {script}
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {NewBrandReveal-BR-PROG-NonGuaranteed300x600-banner-1} 100% of the time

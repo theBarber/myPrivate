@@ -1234,31 +1234,31 @@ Feature: Entities for tests
       | Campaign Name                               |
       | NewBrandReveal-BR-Direct                    |
       | NewBrandReveal-BR-PROG-NonGuaranteed        |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 |
+      | NewBrandReveal-BR-PROG-NonGuaranteed300x600 |
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                               | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
       | NewBrandReveal-BR-PROG-NonGuaranteed        | 407981 | 253287   | true                  | 1653          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed}        | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 407981 | 253748   | true                  | 1652          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600} | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
+      | NewBrandReveal-BR-PROG-NonGuaranteed300x600 | 407981 | 253748   | true                  | 1652          | {zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed300x600} | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
       | NewBrandReveal-BR-Direct                    | 407981 | 253288   | false                 | 28428         | {zone-zoneset-NewBrandReveal-BR-Direct}                    | []         | 95       | 15376          | 3728         | 69810           | []             | []             |
 
     And i update campaign data by name
       | Campaign Name                               | units | goal_type   |
       | NewBrandReveal-BR-Direct                    | -1    | impressions |
       | NewBrandReveal-BR-PROG-NonGuaranteed        | -1    | impressions |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600 | -1    | impressions |
+      | NewBrandReveal-BR-PROG-NonGuaranteed300x600 | -1    | impressions |
 
     And i update zone data by name
       | Zone Name                                                | is_secure |
       | zone-zoneset-NewBrandReveal-BR-Direct                    | 1         |
       | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed        | 1         |
-      | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed600x600 | 1         |
+      | zone-zoneset-NewBrandReveal-BR-PROG-NonGuaranteed300x600 | 1         |
 
     And i update banner data by name
       | Banner Name                                          | limitation |
       | NewBrandReveal-BR-Direct-banner-1                    | []         |
       | NewBrandReveal-BR-PROG-NonGuaranteed-banner-1        | []         |
-      | NewBrandReveal-BR-PROG-NonGuaranteed600x600-banner-1 | []         |
+      | NewBrandReveal-BR-PROG-NonGuaranteed300x600-banner-1 | []         |
 
 
  ##  %%%%%%%%%%%%%     Video Duration Filter --> duration & skip  %%%%%%%%%%%%%
@@ -1838,6 +1838,40 @@ Feature: Entities for tests
     And i update zoneset data by name
       | Zoneset Name                      | is_sync | is_video |
       | zone-zoneset-agnostic-InlineVideo | 1       | 1        |
+
+
+
+
+#%%%%%%%%%%%%%%  Interstitial web in Open Market UN-24533 Entities %%%%%%%%%%%%%
+    Given i disable campaigns by name on db
+      | Campaign Name                          |
+      | interstitial-standard-PG-Direct        |
+      | interstitial-standard-PG-Programmatic  |
+      | campaign-see-through-check-wrapper     |
+      | campaign-ST-check-wrapper-Programmatic |
+
+    Given i create new campaigns with new zoneset
+      | Campaign Name                          | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | interstitial-standard-PG-Direct        | 703688 | 270762   | false                 | 35659         | {zone-zoneset-interstitial-standard-PG-Direct}       | []         | 75       | 15944          | 2434         | 37496           |
+      | interstitial-standard-PG-Programmatic  | 407981 | 270838   | true                  | 2777          | {zone-zoneset-interstitial-standard-PG-Programmatic} | []         | 75       | 15944          | 2434         | 37496           |
+      | campaign-see-through-check-wrapper     | 75396  | 210722   | false                 | 204           | {zone-zoneset-check-wrapper-ST}                      | []         | 83       | 15944          | 2434         | 69992           |
+      | campaign-ST-check-wrapper-Programmatic | 407981 | 224533   | true                  | 2708          | {zone-zoneset-ST-check-wrapper-Programmatic}         | []         | 83       | 15944          | 2434         | 69992           |
+
+
+
+    And i update campaign data by name
+      | Campaign Name                          | units | goal_type   |
+      | interstitial-standard-PG-Direct        | -1    | impressions |
+      | interstitial-standard-PG-Programmatic  | -1    | impressions |
+      | campaign-see-through-check-wrapper     | -1    | impressions |
+      | campaign-ST-check-wrapper-Programmatic | -1    | impressions |
+
+    And i update zone data by name
+      | Zone Name                                          | is_secure |
+      | zone-zoneset-interstitial-standard-PG-Direct       | 1         |
+      | zone-zoneset-interstitial-standard-PG-Programmatic | 1         |
+      | zone-zoneset-check-wrapper-ST                      | 1         |
+      | zone-zoneset-ST-check-wrapper-Programmatic         | 1         |
 
 
   Scenario: refresh zone cache with wait
