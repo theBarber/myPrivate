@@ -10,21 +10,11 @@ Feature: test1
     Then The response code is 200
 
 
-#    Given I send 1 times an ad video request with parameter {unlimited=1&domain=duration15_skip_yes.com} for zone named {zone-zoneset-15-D-skip-Y-CS-Video} to UAS
-#    Then The response code is 200
-#    And The response contains {VASTAdTagURI}
-#    And The responses has impression-urls
-#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-15-D-skip-Y-banner-1} 100% of the time
-#    And The response not contains html
-  Scenario:22  -  1 size 1*1 SS, 1 placement with SS adunit, SS banner expected
-    When I send 10 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192828 to UAS
+  Scenario:1 send request expect delivery Direct
+    When I send 1 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192834 to UAS
+    Then The response code is 200
     And The responses has impression-urls
-    And I send impression requests to UAS
-    And I sleep for 1 seconds
-    When I send 1 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192828 to UAS
-    And The response code is 200
-    And The responses are passback
-    And I reset metering bucket record impression counter of campaign campaign-D-DailyPacing-ST-2
+    And The response contains {INTERSTITIAL TEST WRAPPER}
 
 #    Examples:
 #      | zone                             | bannerId                              |

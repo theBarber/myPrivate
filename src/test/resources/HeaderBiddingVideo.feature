@@ -69,7 +69,7 @@ Feature: HB - Instream Video
 #     400 - 700  --> medium
 #     above 700  --> large
 
-  Scenario: 1.0 playback method = all  |  size = none
+  Scenario: 2.0 playback method = all  |  size = none
   request:  vpmt = 1 , player_size = 1  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-noSize.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 1 and skip = {N}
@@ -78,14 +78,14 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 1.1 playback method = all  |  size = none
+  Scenario: 2.1 playback method = all  |  size = none
   request:       vpmt = 0 (not exists) | player_size = 1  , response = passback
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-noSize.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 0 and skip = {N}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 2.0 playback method = 1  |  size = 1
+  Scenario: 3.0 playback method = 1  |  size = 1
   request:                 vpmt = 1  | player_size = 1  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt1-Size1.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 1 and skip = {N}
@@ -94,21 +94,21 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 2.1 playback method = 1  |  size = 1
+  Scenario: 3.1 playback method = 1  |  size = 1
   request:                 vpmt = 1  |  player_size = 2  , response = passback
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt1-Size1.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 1 and skip = {N}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 2.2 playback method = 1  |  size = 1
+  Scenario: 3.2 playback method = 1  |  size = 1
   request:                 vpmt = 2  |  player_size = 1  , response = passback
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt1-Size1.com}, placementID {3708002}, playerW = 300, playerH = 15, vpmt = 2 and skip = {N}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 3.0 playback method = 2  |  size = 2
+  Scenario: 4.0 playback method = 2  |  size = 2
   request:                 vpmt = 2  | player_size = 2  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt2-Size2.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 2 and skip = {N}
@@ -117,7 +117,7 @@ Feature: HB - Instream Video
     And The response code is 200
     #And The response not contains html
 
-  Scenario: 4.0 playback method = 3  |  size = 3
+  Scenario: 5.0 playback method = 3  |  size = 3
   request:                 vpmt = 3  | player_size = 3  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt3-Size3.com}, placementID {3708002}, playerW = 800, playerH = 15, vpmt = 3 and skip = {N}
@@ -126,7 +126,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 5.0 playback method = 4  |  size = all
+  Scenario: 6.0 playback method = 4  |  size = all
   request:                 vpmt = 4  | player_size = 3  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt4-allSizes.com}, placementID {3708002}, playerW = 800, playerH = 15, vpmt = 4 and skip = {N}
@@ -135,7 +135,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 6.0 playback method = all  |  size = 3
+  Scenario: 7.0 playback method = all  |  size = 3
   request:                   vpmt = 4  | player_size = 3  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-Size3.com}, placementID {3708002}, playerW = 800, playerH = 15, vpmt = 4 and skip = {N}
@@ -144,14 +144,14 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 6.1 playback method = all  |  size = 3
+  Scenario: 7.1 playback method = all  |  size = 3
   request:                   vpmt = 4  | player_size = 2  , response = passback
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-Size3.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 4 and skip = {N}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 7.0 playback method = all  |  size = all
+  Scenario: 8.0 playback method = all  |  size = all
   request:                   vpmt = 1  | player_size = 2  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-allSize.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 1 and skip = {N}
@@ -160,7 +160,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 7.1 playback method = all  |  size = all
+  Scenario: 8.1 playback method = all  |  size = all
   request:       vpmt = 0 (not exists) | player_size = 2  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtAll-allSize.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 0 and skip = {N}
@@ -169,7 +169,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 8.0 playback method = none  |  size = all
+  Scenario: 9.0 playback method = none  |  size = all
   request:                     vpmt = 1 | player_size = 2  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-allSize.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 1 and skip = {N}
@@ -179,7 +179,7 @@ Feature: HB - Instream Video
     And The response not contains html
 
 
-  Scenario: 9.0 playback method = none  |  size = none
+  Scenario: 10.0 playback method = none  |  size = none
   request:                   vpmt = 1 | player_size = 2  , response = Vast
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-noSize.com}, placementID {3708002}, playerW = 500, playerH = 15, vpmt = 1 and skip = {N}
@@ -194,7 +194,7 @@ Feature: HB - Instream Video
 #     20% - 90% --> medium
 #     above 90% --> large
 
-  Scenario: 10.0 playback method = 1  |  size = 1
+  Scenario: 11.0 playback method = 1  |  size = 1
   request:                  vpmt = 1  | player_size = 1  , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt1-Size1.com}, placementID {3708002}, playerW = 150, playerH = 200, vpmt = 1 and skip = {N}
@@ -203,7 +203,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 10.1   playback method = 1  |  size = 1
+  Scenario: 11.1   playback method = 1  |  size = 1
   request:                     vpmt = 1 | player_size = 2  , response = passback
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt1-Size1.com}, placementID {3708002}, playerW = 250, playerH = 350, vpmt = 1 and skip = {N}
@@ -211,7 +211,7 @@ Feature: HB - Instream Video
     And The responses are passback
 
 
-  Scenario: 11.0 playback method = 2  |  size = 2
+  Scenario: 12.0 playback method = 2  |  size = 2
   request:                  vpmt = 2  | player_size = 2  , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt2-Size2.com}, placementID {3708002}, playerW = 250, playerH = 350, vpmt = 2 and skip = {N}
@@ -220,21 +220,21 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 11.1 playback method = 2  |  size = 2
+  Scenario: 12.1 playback method = 2  |  size = 2
   request:                  vpmt = 2  | player_size = 1  , response = passback
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt2-Size2.com}, placementID {3708002}, playerW = 150, playerH = 200, vpmt = 2 and skip = {N}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 11.2 playback method = 2  |  size = 2
+  Scenario: 12.2 playback method = 2  |  size = 2
   request:                  vpmt = 2  | player_size = 3  , response = passback
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt2-Size2.com}, placementID {3708002}, playerW = 450, playerH = 500, vpmt = 2 and skip = {N}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 12.0 playback method = 3  |  size = 3
+  Scenario: 13.0 playback method = 3  |  size = 3
   request:                  vpmt = 3  | player_size = 3  , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt3-Size3.com}, placementID {3708002}, playerW = 450, playerH = 500, vpmt = 3 and skip = {N}
@@ -243,14 +243,14 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 12.1 playback method = 3  |  size = 3
+  Scenario: 13.1 playback method = 3  |  size = 3
   request:                  vpmt = 3  | player_size = 2  , response = passback
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt3-Size3.com}, placementID {3708002}, playerW = 250, playerH = 350, vpmt = 3 and skip = {N}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 13.0 playback method = 4  |  size = all
+  Scenario: 14.0 playback method = 4  |  size = all
   request:                  vpmt = 4  | player_size = 1  , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt4-allSizes.com}, placementID {3708002}, playerW = 150, playerH = 200, vpmt = 4 and skip = {N}
@@ -259,7 +259,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 13.1 playback method = 4  |  size = all
+  Scenario: 14.1 playback method = 4  |  size = all
   request:                  vpmt = 4  | player_size = 2  , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt4-allSizes.com}, placementID {3708002}, playerW = 250, playerH = 350, vpmt = 4 and skip = {N}
@@ -268,7 +268,7 @@ Feature: HB - Instream Video
     And The response code is 200
     #And The response not contains html
 
-  Scenario: 13.2 playback method = 4  |  size = all
+  Scenario: 14.2 playback method = 4  |  size = all
   request:                  vpmt = 4  | player_size = 3  , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmt4-allSizes.com}, placementID {3708002}, playerW = 450, playerH = 500, vpmt = 4 and skip = {N}
@@ -277,7 +277,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 14.0 playback method = none  |  size = 1 & 2
+  Scenario: 15.0 playback method = none  |  size = 1 & 2
   request:         vpmt = 0 (not exists) | player_size = 1  , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-Size1_2.com}, placementID {3708002}, playerW = 150, playerH = 200, vpmt = 0 and skip = {N}
@@ -286,7 +286,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 14.1 playback method = none  |  size = 1 & 2
+  Scenario: 15.1 playback method = none  |  size = 1 & 2
   request:         vpmt = 0 (not exists) | player_size = 2  , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-Size1_2.com}, placementID {3708002}, playerW = 250, playerH = 350, vpmt = 0 and skip = {N}
@@ -295,14 +295,14 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 14.1 playback method = none  |  size = 1 & 2
+  Scenario: 15.2 playback method = none  |  size = 1 & 2
   request:         vpmt = 0 (not exists) | player_size = 3  , response = passback
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-Size1_2.com}, placementID {3708002}, playerW = 450, playerH = 500, vpmt = 0 and skip = {N}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 15.0 playback method = none  |  size = none
+  Scenario: 16.0 playback method = none  |  size = none
   request:         vpmt = 0 (not exists) | player_size = 1 , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-noSize.com}, placementID {3708002}, playerW = 150, playerH = 200, vpmt = 0 and skip = {N}
@@ -311,7 +311,7 @@ Feature: HB - Instream Video
     And The response code is 200
     #And The response not contains html
 
-  Scenario: 15.1 playback method = none  |  size = none
+  Scenario: 16.1 playback method = none  |  size = none
   request:         vpmt = 0 (not exists) | player_size = 2 , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-noSize.com}, placementID {3708002}, playerW = 250, playerH = 350, vpmt = 0 and skip = {N}
@@ -320,7 +320,7 @@ Feature: HB - Instream Video
     And The response code is 200
     And The response not contains html
 
-  Scenario: 15.2 playback method = none  |  size = none
+  Scenario: 16.2 playback method = none  |  size = none
   request:         vpmt = 0 (not exists) | player_size = 3 , response = Vast
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send sync video HB request with vpmt & size for pub 3708, domain {vpmtNon-noSize.com}, placementID {3708002}, playerW = 450, playerH = 500, vpmt = 0 and skip = {N}
@@ -331,13 +331,13 @@ Feature: HB - Instream Video
 
 #&&&&&&&&&&&&&&&&&&&&&& special scenarios --  no skip no duration campaigns &&&&&&&&&&&&&&&&&&&
 
-  Scenario: 16.0 No skip and no duration no player size campaign - publisher 3843 (15Y) - passback - UN-25541
+  Scenario: 17.0 No skip and no duration no player size campaign - publisher 3843 (15Y) - passback - UN-25541
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB video with no skip mo duration no vpmt - inherit pub 3843} for publisher 3843 with domain {noSkipNoDuration.com} with extra params {&optimize=1}
     Then The response code is 204
     And The responses are passback
 
-  Scenario: 16.1 No skip and no duration no player size campaign - publisher 3728 (15N) - VAST - UN-25541
+  Scenario: 17.1 No skip and no duration no player size campaign - publisher 3728 (15N) - VAST - UN-25541
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB video with no skip mo duration no vpmt - inherit pub 3728} for publisher 3728 with domain {noSkipNoDuration.com} with extra params {&optimize=1}
     And The response contains {VASTAdTagURI}
@@ -345,7 +345,7 @@ Feature: HB - Instream Video
     And The response code is 200
 
 
-  Scenario: 17.0 Two eligible zones 1X1 - display and video - no placement group --> video Vast return - UN-25542
+  Scenario: 18.0 Two eligible zones 1X1 - display and video - no placement group --> video Vast return - UN-25542
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB video with 2 eligible zones - display and video} for publisher 3708 with domain {noSize-vpmtAll.com} with extra params {&optimize=1}
     And The response contains {VASTAdTagURI}

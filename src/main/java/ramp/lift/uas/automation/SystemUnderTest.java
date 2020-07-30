@@ -427,6 +427,7 @@ public class SystemUnderTest extends AbstractModuleImpl<SystemUnderTest> impleme
         } else {
             Assume.assumeThat("connection to " + host + " password is not set", conn.getPassword(),
                     not(isEmptyOrNullString()));
+
         }
         return conn;
 
