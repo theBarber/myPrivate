@@ -33,8 +33,8 @@ Feature: ** Support interstitial web in the open market UN-24533 **
 
 
   Scenario:3 send see through request, expected Generic custom wrapper
-    Given I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-check-wrapper-ST} to UAS
+    Given I send 1 times an ad request with parameter {unlimited=1} for zone named {INT2434 - Billboard 970x250 - zone234903} to UAS
     Then The response code is 200
     And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-see-through-check-wrapper-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {75396-234903-365943-Billboard 970x250-productionBillboard} 100% of the time
     And The response contains {INTERSTITIAL TEST WRAPPER}
