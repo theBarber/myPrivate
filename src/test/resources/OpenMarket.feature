@@ -31,7 +31,7 @@ Feature: Open Market Testing
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-reserve-OX-iter-2-banner-1} 100% of the time
 
 
-    #***********************  R(AN)     NR(AN)     D     OM   ***********************
+    #***********************  R(AN)     NR(AN)    OM     D  ***********************
 
   Scenario: 2.a (** BUG UN-24430 **)  zone request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OM} for zone named {zone-zoneset-test-OM-WIN} to UAS
@@ -76,7 +76,7 @@ Feature: Open Market Testing
     And all HB responses contains campaignId with id of entity named {campaign-reserve-OX-iter-2}
 
 
-     #***********************  R(AN)     NR(AN)    D     OM   ***********************
+     #***********************  R(AN)     NR(AN)      OM       D   ***********************
 
   Scenario: 5.a  (** BUG UN-24430 **)  HB request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
     Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
