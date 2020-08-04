@@ -33,14 +33,14 @@ Feature: Open Market Testing
 
     #***********************  R(AN)     NR(AN)    OM     D  ***********************
 
-  Scenario: 2.a (** BUG UN-24430 **)  zone request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
+  Scenario: 2.a   zone request   R(AN) ---  NR(AN) --- OM --- D     Open Market banner expected to return in first iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OM} for zone named {zone-zoneset-test-OM-WIN} to UAS
     And The response code is 200
     And The response contains {bannerid}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-OPEN-MARKET-1-chosen-banner-1} 100% of the time
 
-  Scenario: 2.b  zone request    R(AN) ---  NR(AN) --- D --- OM     App-nexus NR banner expected to return in second iteration
+  Scenario: 2.b  zone request    R(AN) ---  NR(AN) --- OM ----- D     App-nexus NR banner expected to return in second iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-AN} for zone named {zone-zoneset-test-OM-WIN} to UAS
     And The response code is 200
     And The response contains {bannerid}
