@@ -1840,34 +1840,56 @@ Feature: Entities for tests
       | zone-zoneset-agnostic-InlineVideo | 1       | 1        |
 
 
-
-
 #%%%%%%%%%%%%%%  Interstitial web in Open Market UN-24533 Entities %%%%%%%%%%%%%
     Given i disable campaigns by name on db
-      | Campaign Name                          |
-      | interstitial-standard-PG-Direct        |
-      | interstitial-standard-PG-Programmatic  |
-      | campaign-see-through-check-wrapper     |
+      | Campaign Name                         |
+      | interstitial-standard-PG-Direct       |
+      | interstitial-standard-PG-Programmatic |
+      | campaign-see-through-check-wrapper    |
 
     Given i create new campaigns with new zoneset
-      | Campaign Name                          | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | interstitial-standard-PG-Direct        | 703688 | 270762   | false                 | 35659         | {zone-zoneset-interstitial-standard-PG-Direct}       | []         | 75       | 15944          | 2434         | 37496           |
-      | interstitial-standard-PG-Programmatic  | 407981 | 270838   | true                  | 2777          | {zone-zoneset-interstitial-standard-PG-Programmatic} | []         | 75       | 15944          | 2434         | 37496           |
-      | campaign-see-through-check-wrapper     | 75396  | 210722   | false                 | 204           | {zone-zoneset-check-wrapper-ST}                      | []         | 83       | 15944          | 2434         | 69992           |
-
-
+      | Campaign Name                         | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | interstitial-standard-PG-Direct       | 703688 | 270762   | false                 | 35659         | {zone-zoneset-interstitial-standard-PG-Direct}       | []         | 75       | 15944          | 2434         | 37496           |
+      | interstitial-standard-PG-Programmatic | 407981 | 270838   | true                  | 2777          | {zone-zoneset-interstitial-standard-PG-Programmatic} | []         | 75       | 15944          | 2434         | 37496           |
+      | campaign-see-through-check-wrapper    | 75396  | 210722   | false                 | 204           | {zone-zoneset-check-wrapper-ST}                      | []         | 83       | 15944          | 2434         | 69992           |
 
     And i update campaign data by name
-      | Campaign Name                          | units | goal_type   |
-      | interstitial-standard-PG-Direct        | -1    | impressions |
-      | interstitial-standard-PG-Programmatic  | -1    | impressions |
-      | campaign-see-through-check-wrapper     | -1    | impressions |
+      | Campaign Name                         | units | goal_type   |
+      | interstitial-standard-PG-Direct       | -1    | impressions |
+      | interstitial-standard-PG-Programmatic | -1    | impressions |
+      | campaign-see-through-check-wrapper    | -1    | impressions |
 
     And i update zone data by name
       | Zone Name                                          | is_secure |
       | zone-zoneset-interstitial-standard-PG-Direct       | 1         |
       | zone-zoneset-interstitial-standard-PG-Programmatic | 1         |
       | zone-zoneset-check-wrapper-ST                      | 1         |
+
+
+#%%%%%%%%%%%%%%  floor price rate card Entities %%%%%%%%%%%%%
+    Given i disable campaigns by name on db
+      | Campaign Name                  |
+      | rate-card-medium-rectangle     |
+      | adunit-no-rate-card-PG         |
+      | no-ratecard-no-adunit-halfpage |
+
+    Given i create new campaigns with new zoneset
+      | Campaign Name                  | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | rate-card-medium-rectangle     | 703688 | 271140   | false                 | 36398         | {zone-zoneset-cross-screen-blend} | []         | 10       | 15946          | 2434         | 70992           |
+      | adunit-no-rate-card-PG         | 75396  | 251648   | false                 | 34670         | {zone-zoneset-PG-no-rate-card}    | []         | 75       | 15947          | 2434         | 37496           |
+      | no-ratecard-no-adunit-halfpage | 75396  | 234809   | false                 | 14607         | {zone-zoneset-half-page}          | []         | 29       | 15948          | 2434         | 18952           |
+
+    And i update campaign data by name
+      | Campaign Name                  | units | goal_type   |
+      | rate-card-medium-rectangle     | -1    | impressions |
+      | adunit-no-rate-card-PG         | -1    | impressions |
+      | no-ratecard-no-adunit-halfpage | -1    | impressions |
+
+    And i update zone data by name
+      | Zone Name                       | is_secure |
+      | zone-zoneset-cross-screen-blend | 1         |
+      | zone-zoneset-PG-no-rate-card    | 1         |
+      | zone-zoneset-half-page          | 1         |
 
 
   Scenario: refresh zone cache with wait
