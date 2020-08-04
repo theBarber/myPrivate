@@ -1707,8 +1707,8 @@ Feature: Entities for tests
          # R ----  NR ----- D ---- OM
       | campaign-reserve-1              |
       | campaign-non-reserve-1          |
-      | campaign-direct-not-chosen      |
       | campaign-OPEN-MARKET-1-chosen   |
+      | campaign-direct-not-chosen      |
          # D ---- OM
       | campaign-direct-must-be-chosen  |
       | campaign-OPEN-MARKET-not-chosen |
@@ -1719,11 +1719,11 @@ Feature: Entities for tests
       | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
       | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
       | campaign-OPEN-MARKET-1          | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
-         # R ----  NR ----- D ---- OM
+         # R ----  NR ----- OM ----- D
       | campaign-reserve-1              | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
       | campaign-non-reserve-1          | 407981 | 240083   | true                  | 410           | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
-      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
       | campaign-OPEN-MARKET-1-chosen   | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
+      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
          #  D ---- OM
       | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
       | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
