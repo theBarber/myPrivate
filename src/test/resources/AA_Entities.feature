@@ -1814,7 +1814,7 @@ Feature: Entities for tests
       | zone-zoneset-inline-pub3708 | 1       | 1        |
 
 #%%%%%%%%%%%%%%  Agnostic UN-24547 Entities %%%%%%%%%%%%%
-  Scenario:  create entites for Video Location
+  Scenario:  create entites for Agnostic feature
     Given i disable campaigns by name on db
       | Campaign Name                 |
       | campaign-agnostic-Billboard   |
@@ -1841,6 +1841,7 @@ Feature: Entities for tests
 
 
 #%%%%%%%%%%%%%%  Interstitial web in Open Market UN-24533 Entities %%%%%%%%%%%%%
+  Scenario:  create entites for Interstitial to Open market feature
     Given i disable campaigns by name on db
       | Campaign Name                         |
       | interstitial-standard-PG-Direct       |
@@ -1867,6 +1868,7 @@ Feature: Entities for tests
 
 
 #%%%%%%%%%%%%%%  floor price rate card Entities %%%%%%%%%%%%%
+  Scenario:  create entites for floor price scenarios
     Given i disable campaigns by name on db
       | Campaign Name                           |
       | campaign-rate-card-medium-rectangle     |
