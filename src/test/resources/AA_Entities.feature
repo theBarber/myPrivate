@@ -1870,35 +1870,54 @@ Feature: Entities for tests
 #%%%%%%%%%%%%%%  floor price rate card Entities %%%%%%%%%%%%%
   Scenario:  create entites for floor price scenarios
     Given i disable campaigns by name on db
-      | Campaign Name                           |
-      | campaign-rate-card-medium-rectangle     |
-      | campaign-adunit-no-rate-card-PG         |
-      | campaign-no-ratecard-no-adunit-halfpage |
+      | Campaign Name                            |
+      | campaign-rate-card-medium-rectangle      |
+      | campaign-adunit-no-rate-card-PG          |
+      | campaign-no-ratecard-no-adunit-BR        |
+#------------- Programmatic --------------------
+      | campaign-rate-card-medium-rectangle-prog |
+      | campaign-adunit-no-rate-card-PG-prog     |
+      | campaign-no-ratecard-no-adunit-BR-prog   |
 
     Given i create new campaigns with new zoneset
-      | Campaign Name                           | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-rate-card-medium-rectangle     | 703688 | 271140   | false                 | 36398         | {zone-zoneset-cross-screen-blend} | []         | 10       | 15946          | 2434         | 70992           |
-      | campaign-adunit-no-rate-card-PG         | 75396  | 251648   | false                 | 34670         | {zone-zoneset-PG-no-rate-card}    | []         | 75       | 15947          | 2434         | 37496           |
-      | campaign-no-ratecard-no-adunit-halfpage | 75396  | 234809   | false                 | 14607         | {zone-zoneset-half-page}          | []         | 29       | 15948          | 2434         | 18952           |
+      | Campaign Name                            | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                    | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-rate-card-medium-rectangle      | 703688 | 271140   | false                 | 36398         | {zone-zoneset-cross-screen-blend}      | []         | 10       | 15946          | 2434         | 70992           |
+      | campaign-adunit-no-rate-card-PG          | 75396  | 251648   | false                 | 34670         | {zone-zoneset-PG-no-rate-card}         | []         | 75       | 15947          | 2434         | 37496           |
+      | campaign-no-ratecard-no-adunit-BR        | 703688 | 270763   | false                 | 36020         | {zone-zoneset-brand-reveal}            | []         | 95       | 15948          | 2434         | 68022           |
+#------------- Programmatic --------------------
+      | campaign-rate-card-medium-rectangle-prog | 407982 | 262286   | true                  | 2962          | {zone-zoneset-cross-screen-blend-prog} | []         | 10       | 15949          | 2434         | 70992           |
+      | campaign-adunit-no-rate-card-PG-prog     | 407982 | 240083   | true                  | 410           | {zone-zoneset-PG-no-rate-card-prog}    | []         | 75       | 15950          | 2434         | 37496           |
+      | campaign-no-ratecard-no-adunit-BR-prog   | 407982 | 253748   | true                  | 1652          | {zone-zoneset-brand-reveal-prog}       | []         | 95       | 15951          | 2434         | 68022           |
 
     And i update campaign data by name
-      | Campaign Name                           | units | goal_type   |
-      | campaign-rate-card-medium-rectangle     | -1    | impressions |
-      | campaign-adunit-no-rate-card-PG         | -1    | impressions |
-      | campaign-no-ratecard-no-adunit-halfpage | -1    | impressions |
+      | Campaign Name                            | units | goal_type   |
+      | campaign-rate-card-medium-rectangle      | -1    | impressions |
+      | campaign-adunit-no-rate-card-PG          | -1    | impressions |
+      | campaign-no-ratecard-no-adunit-BR        | -1    | impressions |
+#------------- Programmatic --------------------
+      | campaign-rate-card-medium-rectangle-prog | -1    | impressions |
+      | campaign-adunit-no-rate-card-PG-prog     | -1    | impressions |
+      | campaign-no-ratecard-no-adunit-BR-prog   | -1    | impressions |
 
     And i update zone data by name
-      | Zone Name                       | is_secure |
-      | zone-zoneset-cross-screen-blend | 1         |
-      | zone-zoneset-PG-no-rate-card    | 1         |
-      | zone-zoneset-half-page          | 1         |
+      | Zone Name                            | is_secure |
+      | zone-zoneset-cross-screen-blend      | 1         |
+      | zone-zoneset-PG-no-rate-card         | 1         |
+      | zone-zoneset-brand-reveal            | 1         |
+#------------- Programmatic --------------------
+      | zone-zoneset-cross-screen-blend-prog | 1         |
+      | zone-zoneset-PG-no-rate-card-prog    | 1         |
+      | zone-zoneset-brand-reveal-prog       | 1         |
 
 
     And i update campaign data by name
-      | Campaign Name                           | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
-      | campaign-rate-card-medium-rectangle     | NULL                            | NULL                           | 0                  |
-      | campaign-adunit-no-rate-card-PG         | NULL                            | NULL                           | 0                  |
-      | campaign-no-ratecard-no-adunit-halfpage | NULL                            | NULL                           | 0                  |
+      | Campaign Name                            | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
+      | campaign-rate-card-medium-rectangle      | NULL                            | NULL                           | 0                  |
+      | campaign-adunit-no-rate-card-PG          | NULL                            | NULL                           | 0                  |
+      | campaign-no-ratecard-no-adunit-BR        | NULL                            | NULL                           | 0                  |
+      | campaign-rate-card-medium-rectangle-prog | NULL                            | NULL                           | 0                  |
+      | campaign-adunit-no-rate-card-PG-prog     | NULL                            | NULL                           | 0                  |
+      | campaign-no-ratecard-no-adunit-BR-prog   | NULL                            | NULL                           | 0                  |
 
 
   Scenario: refresh zone cache with wait
