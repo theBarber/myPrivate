@@ -1458,6 +1458,67 @@
         "mediaType": "video"
       }
     ]
+  },
+  "Send HB Direct - Rate card exists":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "ratecard-floor.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [
+            300,
+            250
+          ]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB Direct - ad unit exists - yes rate card":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "adunit-floor.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [1,1]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB Direct - ad unit exists - no rate card":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "nodelivery.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [1,2]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
   }
+
 }
 

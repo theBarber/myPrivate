@@ -1867,7 +1867,7 @@ Feature: Entities for tests
       | zone-zoneset-check-wrapper-ST                      | 1         |
 
 
-#%%%%%%%%%%%%%%  floor price rate card Entities %%%%%%%%%%%%%
+#%%%%%%%%%%%%%% HB min floor price rate card Entities %%%%%%%%%%%%%
   Scenario:  create entites for floor price scenarios
     Given i disable campaigns by name on db
       | Campaign Name                            |
@@ -1908,7 +1908,6 @@ Feature: Entities for tests
       | zone-zoneset-cross-screen-blend-prog | 1         |
       | zone-zoneset-PG-no-rate-card-prog    | 1         |
       | zone-zoneset-brand-reveal-prog       | 1         |
-
 
     And i update campaign data by name
       | Campaign Name                            | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |

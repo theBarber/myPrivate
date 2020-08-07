@@ -30,12 +30,12 @@ Feature: Header Bidding Flow Support
   Scenario:2 Send HB request with Empty domain
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty domain for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
 
   Scenario:3 Send HB request with Empty placementID
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty placementID for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
   Scenario:4 Send HB request with Empty sizes
@@ -45,7 +45,7 @@ Feature: Header Bidding Flow Support
   Scenario:5 Send HB request with Empty timeout
     Given i send 1 headerBidding post request for scenario {Send HB request with Empty timeout for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
   Scenario:6 Send HB request with wrong values
@@ -79,20 +79,20 @@ Feature: Header Bidding Flow Support
   Scenario:13 Send HB request with one size
     Given i send 1 headerBidding post request for scenario {Send HB request with one size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And all HB responses contains adId with id of entity named {campaign-HB-See-Through-1X2-banner-1}
 
   Scenario:14 Send HB request with no 1X1 size
     Given i send 1 headerBidding post request for scenario {Send HB request with no 1X1 size for publisher 3673} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And all HB responses contains adId with id of entity named {campaign-HB-Tablet-160x600-banner-1}
 
 #   bid price per platform tests
   Scenario:15 Send Price per platform request with 970X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 970X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid=}
     And all HB responses contains campaignId with id of entity named {campaign-HB-Billboard-970X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Billboard-970X250-banner-1}
     And all HB responses contains cpm with value {0.5}
@@ -102,7 +102,7 @@ Feature: Header Bidding Flow Support
   Scenario:16 Send Price per platform request with 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with 300X250} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid=}
     And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
@@ -112,7 +112,7 @@ Feature: Header Bidding Flow Support
   Scenario:17 Send Price per platform request with 970X250, 300X250
     Given i send 1 headerBidding post request for scenario {Send HB PPP request for publisher 3673 with [970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid=}
     And all HB responses contains campaignId with id of entity named {campaign-HB-Desktop-300X250}
     And all HB responses contains adId with id of entity named {campaign-HB-Desktop-300X250-banner-1}
     And all HB responses contains cpm with value {2.5}
@@ -123,7 +123,7 @@ Feature: Header Bidding Flow Support
   Scenario:18 (** BUG UN-25283 **) header bidding multiple bids requests
     Given i send 30 headerBidding post request for scenario {Send HB Multiple bid request for publisher 3673 with [1:2],[160:600],[970:250],[300:250]} for publisher 3673 with domain {headerbiddingproptest.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid=}
     And i read all HB responses and map their bidId by adId
     And in HB responses bidid bid1 has entity of adId with name {campaign-HB-Tablet-160x600-banner-1} 100% of the times
     And in HB responses bidid bid2 has entity of adId with name {campaign-HB-Billboard-970X250-banner-1} 100% of the times
@@ -134,7 +134,7 @@ Feature: Header Bidding Flow Support
     Given I add cookie UTID with value {d7a8b9faf42446dcbca3748eef7d47bb} to my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid=}
     And all HB responses contains campaignId with id of entity named {HB-Tablet-160x600-D-1-a-1}
     And all HB responses contains adId with id of entity named {HB-Tablet-160x600-D-1-a-1-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-Tablet-160x600-D-1-a}
@@ -150,7 +150,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&optimize=1}
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid=}
     And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-2}
     And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
     And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
@@ -171,7 +171,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding secure post request for publisher 3728 with multi sizes - h1:1 w1:1, h2:1 w2:2 with domain {slader.com} and placmentID group = {3728003} and extra params {&optimize=1&unlimited=1}
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
 
 #    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -181,7 +181,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:1, with domain {slader.com}, placmentID group = {3728002} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-SS-1*1-banner-1} 100% of the time
 
 #    And The response contains {script}
@@ -192,7 +192,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:1 w1:2, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
 #    And The response contains {script}
 #    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -207,7 +207,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:123 w1:321, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
 #    And The response contains {bannerid}
 #    And The response contains {campaignId}
@@ -218,7 +218,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:300 w1:250, with domain {slader.com}, placmentID group = {3728003} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-PG-1*1-banner-1} 100% of the time
 #    And The response contains {bannerid}
 #    And all HB responses contains campaignId with id of entity named {campaign-HB-PlacementG-PG-1*1}
@@ -229,7 +229,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send synchronized 1 basic headerBidding secure post request for publisher 3728 with size - h1:970 w1:250, with domain {slader.com}, placmentID group = {blabla} and extra params {&optimize=1&unlimited=1} cookies false
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-Billabord-970*250-banner-1} 100% of the time
 #    And The response contains {script}
 #    And The response contains {campaignId}
@@ -240,7 +240,7 @@ Feature: Header Bidding Flow Support
     Given I clear all cookies from uas requests
     Given i send 1 headerBidding secure post request for publisher 3728 with size1 = 970 size2 = 250, with domain {slader.com} and extra params {&optimize=1&unlimited=1}
     And The response code is 200
-    And The response contains {bannerid}
+    And The response contains {bannerid=}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-HB-PlacementG-Billabord-970*250-banner-1} 100% of the time
 #    And The response contains {script}
 #    And The response contains {campaignId}
