@@ -23,7 +23,7 @@ Feature: Open Market Testing
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-OPEN-MARKET-1-banner-1} 100% of the time
 
 
-  Scenario: 1.b  zone request  R(AN) ---  R(OX) --- OM     OpenX banner expected to return in second iteration
+  Scenario: 1.b  zone request  R(AN) ---  R(OX) --- OM     Reserve OX banner expected to return in second iteration
     When I send 1 times an ad request with parameter {optimize=1&requestid=Automation-OX} for zone named {zone-zoneset-test-OM-PG} to UAS
     And The response code is 200
     And The response contains {bannerid}
