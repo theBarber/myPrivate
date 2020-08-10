@@ -22,29 +22,29 @@ Feature: HB min floor price
     And all HB responses contains cpm with value {2.0}
 
   Scenario: 1.1 - Direct - no rate card , yes ad unit
-    Given i send 1 headerBidding post request for scenario {Send HB Direct - ad unit exists - yes rate card} for publisher 2434 with domain {adunit-floor.com} with extra params {&optimize=1}
+    Given i send 1 headerBidding post request for scenario {Send HB Direct - ad unit exists - no rate card} for publisher 2434 with domain {adunit-floor.com} with extra params {&optimize=1}
     And The response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-adunit-no-rate-card-PG-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.8}
 
   Scenario: 1.2 - Direct - no rate card , no ad unit
-    Given i send 1 headerBidding post request for scenario {Send HB Direct - ad unit exists - no rate card} for publisher 2434 with domain {nodelivery.com} with extra params {&optimize=1}
+    Given i send 1 headerBidding post request for scenario {Send HB Direct - no adunit - no rate card} for publisher 2434 with domain {nodelivery.com} with extra params {&optimize=1}
     And The response code is 204
 
     #&&&&&&&&&&&&&&&&& Programmatic  &&&&&&&&&&&&&&&&&&&&&&
 
   Scenario: 2.0 - Programmatic - rate card exists
-    Given i send 1 headerBidding post request for scenario {Send HB Direct - Rate card exists} for publisher 2434 with domain {ratecard-floor.com} with extra params {&requestid=OpenMarketMed}
+    Given i send 1 headerBidding post request for scenario {Send HB programmatic - Rate card exists} for publisher 2434 with domain {prog1.com} with extra params {&requestid=OpenMarketMed}
     And The response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-rate-card-medium-rectangle-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-rate-card-medium-rectangle-prog-banner-1} 100% of the time
     And all HB responses contains cpm with value {2.0}
 
   Scenario: 2.1 - Programmatic - no rate card , yes ad unit
-    Given i send 1 headerBidding post request for scenario {Send HB Direct - ad unit exists - yes rate card} for publisher 2434 with domain {adunit-floor.com} with extra params {&requestid=Automation-AN}
+    Given i send 1 headerBidding post request for scenario {Send HB programmatic - ad unit exists - no rate card} for publisher 2434 with domain {prog2.com} with extra params {&requestid=Automation-AN}
     And The response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-adunit-no-rate-card-PG-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-adunit-no-rate-card-PG-prog-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.8}
 
   Scenario: 2.2 - Programmatic - no rate card , no ad unit
-    Given i send 1 headerBidding post request for scenario {Send HB Direct - ad unit exists - no rate card} for publisher 2434 with domain {nodelivery.com} with extra params {&requestid=OX_BrandReveal}
+    Given i send 1 headerBidding post request for scenario {Send HB programmatic - no adunit - no rate card} for publisher 2434 with domain {prog3.com} with extra params {&requestid=OX_BrandReveal}
     And The response code is 204
