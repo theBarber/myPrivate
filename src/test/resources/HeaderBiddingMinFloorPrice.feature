@@ -45,6 +45,6 @@ Feature: HB min floor price
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-adunit-no-rate-card-PG-prog-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.8}
 
-  Scenario: 2.2 - Programmatic - no rate card , no ad unit
+  Scenario: 2.2 - Programmatic - no rate card , no ad unit - passback expected
     Given i send 1 headerBidding post request for scenario {Send HB programmatic - no adunit - no rate card} for publisher 2434 with domain {prog3.com} with extra params {&requestid=OX_BrandReveal}
     And The response code is 204
