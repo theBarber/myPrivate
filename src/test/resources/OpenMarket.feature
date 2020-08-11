@@ -78,14 +78,14 @@ Feature: Open Market Testing
 
      #***********************  R(AN)     NR(AN)      OM       D   ***********************
 
-  Scenario: 5.a  (** BUG UN-24430 **)  HB request   R(AN) ---  NR(AN) --- D --- OM     Open Market banner expected to return in first iteration
+  Scenario: 5.a   HB request   R(AN) ---  NR(AN) --- OM --- D     Open Market banner expected to return in first iteration
     Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-OPEN-MARKET-1-chosen-banner-1}
     And all HB responses contains campaignId with id of entity named {campaign-OPEN-MARKET-1-chosen}
 
-  Scenario: 5.b  HB request   R(AN) ---  NR(AN) --- D --- OM     App-nexus NR banner expected to return in second iteration
+  Scenario: 5.b  HB request   R(AN) ---  NR(AN) --- OM --- D     App-nexus NR banner expected to return in second iteration
     Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-AN} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
