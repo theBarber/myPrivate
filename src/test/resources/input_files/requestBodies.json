@@ -1490,7 +1490,7 @@
         "placementId": "11112222",
         "publisherId": 2434,
         "sizes": [
-          [1,1]
+          [970,250]
         ],
         "timeout": 700,
         "hbadaptor": "prebid",
@@ -1547,7 +1547,7 @@
         "placementId": "11112222",
         "publisherId": 2434,
         "sizes": [
-          [1,1]
+          [970,250]
         ],
         "timeout": 700,
         "hbadaptor": "prebid",
