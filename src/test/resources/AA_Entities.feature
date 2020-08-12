@@ -1882,11 +1882,11 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
       | Campaign Name                                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                         | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
       | campaign-rate-card-medium-rectangle             | 703688 | 271140   | false                 | 36398         | {zone-zoneset-cross-screen-blend}           | []         | 10       | 15946          | 2434         | 70992           |
-      | campaign-no-rate-card-yes-adunit-BillBoard      | 75396  | 251648   | false                 | 34670         | {zone-zoneset-no-rate-card-yes-adunit}      | []         | 75       | 15947          | 2434         | 37496           |
+      | campaign-no-rate-card-yes-adunit-BillBoard      | 75396  | 234903   | false                 | 33214         | {zone-zoneset-no-rate-card-yes-adunit}      | []         | 58       | 15947          | 2434         | 38734           |
       | campaign-no-ratecard-no-adunit-BR               | 703688 | 270763   | false                 | 36020         | {zone-zoneset-brand-reveal}                 | []         | 95       | 15948          | 2434         | 68022           |
 #------------- Programmatic --------------------
       | campaign-rate-card-medium-rectangle-prog        | 407982 | 262286   | true                  | 2962          | {zone-zoneset-cross-screen-blend-prog}      | []         | 10       | 15949          | 2434         | 70992           |
-      | campaign-no-rate-card-yes-adunit-BillBoard-prog | 407982 | 240083   | true                  | 410           | {zone-zoneset-no-rate-card-yes-adunit-prog} | []         | 75       | 15950          | 2434         | 37496           |
+      | campaign-no-rate-card-yes-adunit-BillBoard-prog | 407982 | 234810   | true                  | 1401          | {zone-zoneset-no-rate-card-yes-adunit-prog} | []         | 58       | 15950          | 2434         | 38734           |
       | campaign-no-ratecard-no-adunit-BR-prog          | 407982 | 253748   | true                  | 1652          | {zone-zoneset-brand-reveal-prog}            | []         | 95       | 15951          | 2434         | 68022           |
 
     And i update campaign data by name
