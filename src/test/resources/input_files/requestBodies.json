@@ -1575,6 +1575,44 @@
         }
       }
     ]
+  },
+  "Send HB getting 4.98 price":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "Dynamic1.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [300,250]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB getting below floor price":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "Dynamic2.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [300,250]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
   }
 
 }

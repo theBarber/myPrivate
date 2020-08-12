@@ -1878,6 +1878,8 @@ Feature: Entities for tests
       | campaign-rate-card-medium-rectangle-prog        |
       | campaign-no-rate-card-yes-adunit-BillBoard-prog |
       | campaign-no-ratecard-no-adunit-BR-prog          |
+      | campaign-cross-screen-price4.98                 |
+      | campaign-cross-screen-below-floor-price         |
 
     Given i create new campaigns with new zoneset
       | Campaign Name                                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                         | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
@@ -1888,6 +1890,8 @@ Feature: Entities for tests
       | campaign-rate-card-medium-rectangle-prog        | 407982 | 262286   | true                  | 2962          | {zone-zoneset-cross-screen-blend-prog}      | []         | 10       | 15949          | 2434         | 70992           |
       | campaign-no-rate-card-yes-adunit-BillBoard-prog | 407982 | 234810   | true                  | 1401          | {zone-zoneset-no-rate-card-yes-adunit-prog} | []         | 58       | 15950          | 2434         | 38734           |
       | campaign-no-ratecard-no-adunit-BR-prog          | 407982 | 253748   | true                  | 1652          | {zone-zoneset-brand-reveal-prog}            | []         | 95       | 15951          | 2434         | 68022           |
+      | campaign-cross-screen-price4.98                 | 407982 | 262286   | true                  | 2962          | {zone-zoneset-cross-blend4.98}              | []         | 10       | 14401          | 2434         | 70992           |
+      | campaign-cross-screen-below-floor-price         | 407982 | 262286   | true                  | 2962          | {zone-zoneset-below-floor-price}            | []         | 10       | 14402          | 2434         | 70992           |
 
     And i update campaign data by name
       | Campaign Name                                   | units | goal_type   |
@@ -1898,6 +1902,8 @@ Feature: Entities for tests
       | campaign-rate-card-medium-rectangle-prog        | -1    | impressions |
       | campaign-no-rate-card-yes-adunit-BillBoard-prog | -1    | impressions |
       | campaign-no-ratecard-no-adunit-BR-prog          | -1    | impressions |
+      | campaign-cross-screen-price4.98                 | -1    | impressions |
+      | campaign-cross-screen-below-floor-price         | -1    | impressions |
 
     And i update zone data by name
       | Zone Name                                 | is_secure |
@@ -1908,6 +1914,8 @@ Feature: Entities for tests
       | zone-zoneset-cross-screen-blend-prog      | 1         |
       | zone-zoneset-no-rate-card-yes-adunit-prog | 1         |
       | zone-zoneset-brand-reveal-prog            | 1         |
+      | zone-zoneset-cross-blend4.98              | 1         |
+      | zone-zoneset-below-floor-price            | 1         |
 
     And i update campaign data by name
       | Campaign Name                                   | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
@@ -1917,6 +1925,8 @@ Feature: Entities for tests
       | campaign-rate-card-medium-rectangle-prog        | NULL                            | NULL                           | 0                  |
       | campaign-no-rate-card-yes-adunit-BillBoard-prog | NULL                            | NULL                           | 0                  |
       | campaign-no-ratecard-no-adunit-BR-prog          | NULL                            | NULL                           | 0                  |
+      | campaign-cross-screen-price4.98                 | 20                              | 20                             | 0                  |
+      | campaign-cross-screen-below-floor-price         | 80                              | 80                             | 0                  |
 
 
   Scenario: refresh zone cache with wait
