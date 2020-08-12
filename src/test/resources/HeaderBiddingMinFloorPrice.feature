@@ -33,13 +33,13 @@ Feature: HB min floor price
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Direct - ad unit exists - no rate card} for publisher 2434 with domain {adunit-floor.com} with extra params {&optimize=1}
     And The response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-adunit-no-rate-card-PG-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-no-rate-card-yes-adunit-BillBoard-banner-1} 100% of the time
     And all HB responses contains cpm with value {1.77}
 
   Scenario: 1.1.b - Direct - no rate card , yes ad unit - Mobile
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     And The response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-adunit-no-rate-card-PG-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-no-rate-card-yes-adunit-BillBoard-banner-1} 100% of the time
     And all HB responses contains cpm with value {2.66}
 
   Scenario: 1.2 - Direct - no rate card , no ad unit
@@ -66,14 +66,14 @@ Feature: HB min floor price
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB programmatic - ad unit exists - no rate card} for publisher 2434 with domain {prog2.com} with extra params {&requestid=Automation-AN}
     And The response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-adunit-no-rate-card-PG-prog-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-no-rate-card-yes-adunit-BillBoard-prog-banner-1} 100% of the time
     And all HB responses contains cpm with value {1.77}
 
   Scenario: 2.1.b - Programmatic - no rate card , yes ad unit - Mobile
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB programmatic - ad unit exists - no rate card} for publisher 2434 with domain {prog2.com} with extra params {&requestid=Automation-AN}
     And The response code is 200
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-adunit-no-rate-card-PG-prog-banner-1} 100% of the time
+    And The impressionUrl has bannerid field matching the id of the banner named {campaign-no-rate-card-yes-adunit-BillBoard-prog-banner-1} 100% of the time
     And all HB responses contains cpm with value {2.66}
 
   Scenario: 2.2 - Programmatic - no rate card , no ad unit - passback expected
