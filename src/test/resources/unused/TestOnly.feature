@@ -10,11 +10,11 @@ Feature: test1
     Then The response code is 200
 
 
-  Scenario:1 send request expect delivery Direct
-    When I send 1 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192834 to UAS
-    Then The response code is 200
-    And The responses has impression-urls
-    And The response contains {INTERSTITIAL TEST WRAPPER}
+#&&&&&&&&&&& 20% margin NR &&&&&&
+  Scenario: 2.2 - Programmatic - zone -  no rate card , no ad unit - passback expected
+    When I send 1 times an ad request with parameter {optimize=1&requestid=OX_BrandReveal} for zone named {zone-zoneset-brand-reveal-prog} to UAS
+    And The responses are passback
+
 
 #    Examples:
 #      | zone                             | bannerId                              |
