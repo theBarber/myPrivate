@@ -3,7 +3,7 @@
 @testeitan1973
 @uas
 @request_service
-Feature: Linear Video Filtering tests - ATP/CTP & Video Player size Limitation both on Mobile and Desktop
+Feature: Linear Video Filtering tests
 
   Background: health check
     Given I clear all cookies from uas requests

@@ -10,10 +10,10 @@ Feature: test1
     Then The response code is 200
 
 
-#&&&&&&&&&&& 20% margin NR &&&&&&
-  Scenario: 2.2 - Programmatic - zone -  no rate card , no ad unit - passback expected
-    When I send 1 times an ad request with parameter {optimize=1&requestid=OX_BrandReveal} for zone named {zone-zoneset-brand-reveal-prog} to UAS
-    And The responses are passback
+  Scenario: create campaign with new zoneset (and zone linked to it)
+    Given i create new campaigns with new zoneset
+      | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zoneset-zone Name      | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-API-1-c | 75396 | 210722   | false                 | 204           | {zone-zoneset-API-1-a} | []         | 83       | 4737           | 2434         | 62229           |
 
 
 #    Examples:
