@@ -17,7 +17,7 @@ Feature: Entities for tests
     Given i remove all zones from publishers: {3843}
     Given i remove all zones from publishers: {3673}
     Given i remove all zones from publishers: {3697}
-    ###Given i remove all zones from publishers: {3708}
+    Given i remove all zones from publishers: {3708}
     Given i remove all zones from publishers: {3674}
     Given i remove all zones from publishers: {3675}
     Given i remove all zones from publishers: {3666}
