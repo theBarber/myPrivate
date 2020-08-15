@@ -10,18 +10,22 @@ Feature: test1
     Then The response code is 200
 
 
-  Scenario: create campaign with new zoneset (and zone linked to it)
-    Given i create new campaigns with new zoneset
-      | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zoneset-zone Name      | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-API-1-c | 75396 | 210722   | false                 | 204           | {zone-zoneset-API-1-a} | []         | 83       | 4737           | 2434         | 62229           |
+#  Scenario: create campaign with new zoneset (and zone linked to it)
+#    Given i create new campaigns with new zoneset
+#      | Campaign Name    | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zoneset-zone Name      | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+#      | campaign-API-1-c | 75396 | 210722   | false                 | 204           | {zone-zoneset-API-1-a} | []         | 83       | 4737           | 2434         | 62229           |
+#
+#
 
-
-#    Examples:
-#      | zone                             | bannerId                              |
-#      | zone-zoneset-viewability-IAS-low | campaign-IAS-low-viewability-banner-1 |
-#      | zone-zoneset-viewability-DV-low  | campaign-DV-low-viewability-banner-1  |
-#      | zone-zoneset-inline-pub3708      | campaign-stg-inline-pub3708-banner-1  |
-
+  Scenario:20 Header bidding - profile targeting - Ver1
+    Given I clear all cookies from uas requests
+    Given i send 1 headerBidding post request for scenario {Send HB Domain1 with 1X1 size request for publisher 3673} for publisher 3673 with domain {HBTest1.com} with extra params {&optimize=1}
+    And The response code is 200
+    And The response contains {bannerid=}
+    And all HB responses contains campaignId with id of entity named {campaign-HB-SS-1X1-D-2}
+    And all HB responses contains adId with id of entity named {campaign-HB-SS-1X1-D-2-banner-1}
+    And all HB responses contains ad impression with zoneId of entity named {zone-zoneset-HB-SS-1X1-D-1}
+    And all HB responses contains cpm with value {3.0}
 
 
 #  Scenario Outline: Video HB - Location - Desktop
