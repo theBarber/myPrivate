@@ -6,13 +6,13 @@ Feature: Open Market Testing
   Background: health check
     Given I clear all headers from uas requests
     Given I clear all cookies from uas requests
-    And I add header of {x-forwarded-For} with value {78.31.205.183}
+    And I add header of {x-forwarded-For} with value {17.43.41.128}
     When Sending a healthcheck request to UAS
     Then The response code is 200
 
 
      #&&&&&&&&&&&&&&&&  Zone request %%%%%%%%%%%%%%%
-
+    # MEXICO ip address --> for rate card & publisher selected ad unit
      #***********************  R(AN)    R(OX)    OM    ***********************
 
   Scenario: 1.a  zone request   R(AN) ---  R(OX) --- OM      Open Market banner expected to return in first iteration
@@ -62,14 +62,14 @@ Feature: Open Market Testing
        #***********************  R(AN)    R(OX)    OM    ***********************
 
   Scenario: 4.a   HB request   R(AN) ---  R(OX) --- OM      Open Market banner expected to return in first iteration
-    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R R OM} for publisher 3708 with domain {open-market1.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3836 - R R OM} for publisher 3708 with domain {open-market1.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-OPEN-MARKET-1-banner-1}
     And all HB responses contains campaignId with id of entity named {campaign-OPEN-MARKET-1}
 
-  Scenario: 4.b   HB request   R(AN) ---  R(OX) --- OM     OpenX banner expected to return in second iteration
-    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R R OM} for publisher 3708 with domain {open-market1.com&requestid=Automation-OX} with extra params {&unlimited=1&optimize=1}
+  Scenario: 4.b   HB request   R(AN) ---  R(OX) --- OM     Reserve banner expected to return in second iteration
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3836 - R R OM} for publisher 3708 with domain {open-market1.com&requestid=Automation-OX} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-reserve-OX-iter-2-banner-1}
@@ -79,14 +79,14 @@ Feature: Open Market Testing
      #***********************  R(AN)     NR(AN)      OM       D   ***********************
 
   Scenario: 5.a   HB request   R(AN) ---  NR(AN) --- OM --- D     Open Market banner expected to return in first iteration
-    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3836 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-OPEN-MARKET-1-chosen-banner-1}
     And all HB responses contains campaignId with id of entity named {campaign-OPEN-MARKET-1-chosen}
 
   Scenario: 5.b  HB request   R(AN) ---  NR(AN) --- OM --- D     App-nexus NR banner expected to return in second iteration
-    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-AN} with extra params {&unlimited=1&optimize=1}
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3836 - R NR D OM} for publisher 3708 with domain {open-market2.com&requestid=Automation-AN} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-non-reserve-1-banner-1}
@@ -95,7 +95,7 @@ Feature: Open Market Testing
      #***********************  D      OM    ***********************
 
   Scenario: 6  HB request   D --- OM     Direct banner expected to return in first iteration (the PGW not even get approached)
-    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3708 - D OM} for publisher 3708 with domain {open-market3.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3836 - D OM} for publisher 3708 with domain {open-market3.com&requestid=Automation-OM} with extra params {&unlimited=1&optimize=1}
     And The response code is 200
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-direct-must-be-chosen-banner-1}
