@@ -1925,7 +1925,7 @@ Feature: Entities for tests
       | campaign-no-rate-card-yes-adunit-BillBoard-prog | NULL                            | NULL                           | 0                  |
       | campaign-no-ratecard-no-adunit-BR-prog          | NULL                            | NULL                           | 0                  |
       | campaign-cross-screen-price4.98                 | 20                              | 20                             | 0                  |
-      | campaign-cross-screen-below-floor-price         | 80                              | 80                             | 0                  |
+      | campaign-cross-screen-below-floor-price         | 88                              | 88                             | 0                  |
 
 
   Scenario: refresh zone cache with wait
