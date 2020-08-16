@@ -69,6 +69,31 @@ public class SqlWorkflowUtils {
         }
     }
 
+
+    //&&&&&&&&&&&&&&&&&&& UPDATE NULL VALUE &&&&&&&&&&&&&&&&&&&&&
+    public static void setNullValueInWf(String tableName, String columnName, String columnValue, String columnNameToChange){
+        String columnValueToChange = null;
+        try {
+            Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();
+            String query = "UPDATE undertone." + tableName + " SET " + columnNameToChange + " = " + columnValueToChange + "  WHERE " + columnName + "="
+                    + columnValue + ";";
+            System.out.println(query);
+            sut.write(query);
+            if (stmt.executeUpdate(query) == 1) {
+                System.out.println("update " + columnNameToChange + " to " + columnValueToChange + " succeeded");
+            }
+
+        } catch (SQLException e) {
+//      		if(tableName.equals("zones") && columnName.equals("status") && columnValueToChange.equals("1")){
+//				System.out.println("zone doesn't exist in database");
+//				return;
+//			}
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+    }
+
+
     public static void WorkflowQuery(String query) {
         try {
             Statement stmt = sut.getWorkflowDbConnector().actual().createStatement();

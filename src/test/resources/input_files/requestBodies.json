@@ -1252,13 +1252,13 @@
     ]
   },
 
-  "Send HB request for Open Market with 1X1 publisher 3708 - R R OM":
+  "Send HB request for Open Market with 1X1 publisher 3836 - R R OM":
   {
     "x-ut-hb-params": [
       {
         "bidRequestId": "21b46f0d859b3312",
         "domain": "open-market1.com",
-        "publisherId": 3708,
+        "publisherId": 3836,
         "sizes": [
           [
             1,
@@ -1268,18 +1268,18 @@
         "timeout": 700,
         "hbadaptor": "prebid",
         "params": {
-          "publisherId": 3708
+          "publisherId": 3836
         }
       }
     ]
   },
-  "Send HB request for Open Market with 1X1 publisher 3708 - R NR D OM":
+  "Send HB request for Open Market with 1X1 publisher 3836 - R NR D OM":
   {
     "x-ut-hb-params": [
       {
         "bidRequestId": "21b46f0d859b3312",
         "domain": "open-market2.com",
-        "publisherId": 3708,
+        "publisherId": 3836,
         "sizes": [
           [
             1,
@@ -1289,18 +1289,18 @@
         "timeout": 700,
         "hbadaptor": "prebid",
         "params": {
-          "publisherId": 3708
+          "publisherId": 3836
         }
       }
     ]
   },
-  "Send HB request for Open Market with 1X1 publisher 3708 - D OM":
+  "Send HB request for Open Market with 1X1 publisher 3836 - D OM":
   {
     "x-ut-hb-params": [
       {
         "bidRequestId": "21b46f0d859b3312",
         "domain": "open-market3.com",
-        "publisherId": 3708,
+        "publisherId": 3836,
         "sizes": [
           [
             1,
@@ -1310,7 +1310,7 @@
         "timeout": 700,
         "hbadaptor": "prebid",
         "params": {
-          "publisherId": 3708
+          "publisherId": 3836
         }
       }
     ]
@@ -1458,6 +1458,162 @@
         "mediaType": "video"
       }
     ]
+  },
+  "Send HB Direct - Rate card exists":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "ratecard-floor.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [
+            300,
+            250
+          ]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB Direct - ad unit exists - no rate card":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "adunit-floor.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [970,250]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB Direct - no adunit - no rate card":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "nodelivery.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [1,2]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB programmatic - Rate card exists":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "prog1.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [300,250]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB programmatic - ad unit exists - no rate card":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "prog2.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [970,250]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB programmatic - no adunit - no rate card":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "prog3.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [1,2]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB getting 4.99 price":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "Dynamic1.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [300,250]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
+  },
+  "Send HB getting below floor price":
+  {
+    "x-ut-hb-params": [
+      {
+        "bidRequestId": "21b46f0d859b3312",
+        "domain": "Dynamic2.com",
+        "placementId": "11112222",
+        "publisherId": 2434,
+        "sizes": [
+          [300,250]
+        ],
+        "timeout": 700,
+        "hbadaptor": "prebid",
+        "params": {
+          "publisherId": 2434
+        }
+      }
+    ]
   }
+
 }
 

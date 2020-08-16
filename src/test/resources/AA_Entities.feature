@@ -1168,23 +1168,22 @@ Feature: Entities for tests
       | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 407981 | 251035   | true                  | 1401          | {zone-zoneset-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile} | []         | 10       | 15359          | 3836         | 69501           | []          | []          |
 
     And i update campaign data by name
-      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | priority | use_default_margin |
-      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 20                             | -1       | 0                  |
-      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 30                             | -1       | 0                  |
-      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 20                             | -2       | 0                  |
-      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | -2       | 0                  |
-      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | -2       | 0                  |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | -2       | 0                  |
-      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | -2       | 0                  |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | -2       | 0                  |
-      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | -2       | 0                  |
-
-    And i update campaign data by name
-      | Campaign Name                                          | priority |
-      | campaign-dpm-direct-fixed-no-margin-BB-ES              | -1       |
-      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES   | -2       |
-      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES       | -2       |
-      | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES | -2       |
+      | Campaign Name                                              | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
+      | campaign-dpm-direct-fixed-no-margin-BB-ES                  | NULL                            | NULL                           | 0                  |
+      | campaign-dpm-direct-fixed-margin-BB-ES                     | 20                              | 20                             | 0                  |
+      | campaign-dpm-direct-dynamic-no-margin-MR-ES                | NULL                            | NULL                           | 0                  |
+      | campaign-dpm-direct-dynamic-margin-MR-ES                   | 30                              | 30                             | 0                  |
+      | campaign-dpm-prog-reserved-fixed-margin-BB-ES              | 20                              | 20                             | 0                  |
+      | campaign-dpm-prog-reserved-fixed-no-margin-BB-ES           | NULL                            | NULL                           | 0                  |
+      | campaign-dpm-prog-reserved-dynamic-margin-MR-ES            | 20                              | 60                             | 0                  |
+      | campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES         | NULL                            | NULL                           | 0                  |
+      | campaign-dpm-prog-non-reserved-fixed-margin-BB-ES          | 90                              | 90                             | 0                  |
+      | campaign-dpm-prog-non-reserved-fixed-no-margin-BB-ES       | NULL                            | NULL                           | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES        | 0                               | 0                              | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-20-margin-MR-ES     | 20                              | 20                             | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-no-margin-MR-ES     | NULL                            | NULL                           | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-HP-ES        | 70                              | 70                             | 0                  |
+      | campaign-dpm-prog-non-reserved-dynamic-margin-MR-ES-mobile | 90                              | 20                             | 0                  |
 
     And i update zone data by name
       | Zone Name                                                      | is_secure |
@@ -1716,17 +1715,17 @@ Feature: Entities for tests
     Given i create new campaigns with new zoneset
          # R ----  R -----  OM
       | Campaign Name                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
-      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
-      | campaign-OPEN-MARKET-1          | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3708         | 66487           |
+      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3836         | 71672           |
+      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3836         | 71672           |
+      | campaign-OPEN-MARKET-1          | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3836         | 71672           |
          # R ----  NR ----- OM ----- D
-      | campaign-reserve-1              | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
-      | campaign-non-reserve-1          | 407981 | 240083   | true                  | 410           | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
-      | campaign-OPEN-MARKET-1-chosen   | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
-      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3708         | 66487           |
+      | campaign-reserve-1              | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3836         | 71672           |
+      | campaign-non-reserve-1          | 407981 | 240083   | true                  | 410           | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3836         | 71672           |
+      | campaign-OPEN-MARKET-1-chosen   | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3836         | 71672           |
+      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3836         | 71672           |
          #  D ---- OM
-      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
-      | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3708         | 66487           |
+      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3836         | 71672           |
+      | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3836         | 71672           |
 
     And i update campaign data by name
       | Campaign Name                   | Priority | campaign_delivery_method | delivery_algorithm | run_on_unknown_domains |
@@ -1814,7 +1813,7 @@ Feature: Entities for tests
       | zone-zoneset-inline-pub3708 | 1       | 1        |
 
 #%%%%%%%%%%%%%%  Agnostic UN-24547 Entities %%%%%%%%%%%%%
-  Scenario:  create entites for Video Location
+  Scenario:  create entites for Agnostic feature
     Given i disable campaigns by name on db
       | Campaign Name                 |
       | campaign-agnostic-Billboard   |
@@ -1840,34 +1839,93 @@ Feature: Entities for tests
       | zone-zoneset-agnostic-InlineVideo | 1       | 1        |
 
 
-
-
 #%%%%%%%%%%%%%%  Interstitial web in Open Market UN-24533 Entities %%%%%%%%%%%%%
+  Scenario:  create entites for Interstitial to Open market feature
     Given i disable campaigns by name on db
-      | Campaign Name                          |
-      | interstitial-standard-PG-Direct        |
-      | interstitial-standard-PG-Programmatic  |
-      | campaign-see-through-check-wrapper     |
+      | Campaign Name                         |
+      | interstitial-standard-PG-Direct       |
+      | interstitial-standard-PG-Programmatic |
+      | campaign-see-through-check-wrapper    |
 
     Given i create new campaigns with new zoneset
-      | Campaign Name                          | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | interstitial-standard-PG-Direct        | 703688 | 270762   | false                 | 35659         | {zone-zoneset-interstitial-standard-PG-Direct}       | []         | 75       | 15944          | 2434         | 37496           |
-      | interstitial-standard-PG-Programmatic  | 407981 | 270838   | true                  | 2777          | {zone-zoneset-interstitial-standard-PG-Programmatic} | []         | 75       | 15944          | 2434         | 37496           |
-      | campaign-see-through-check-wrapper     | 75396  | 210722   | false                 | 204           | {zone-zoneset-check-wrapper-ST}                      | []         | 83       | 15944          | 2434         | 69992           |
-
-
+      | Campaign Name                         | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | interstitial-standard-PG-Direct       | 703688 | 270762   | false                 | 35659         | {zone-zoneset-interstitial-standard-PG-Direct}       | []         | 75       | 15944          | 2434         | 37496           |
+      | interstitial-standard-PG-Programmatic | 407981 | 270838   | true                  | 2777          | {zone-zoneset-interstitial-standard-PG-Programmatic} | []         | 75       | 15944          | 2434         | 37496           |
+      | campaign-see-through-check-wrapper    | 75396  | 210722   | false                 | 204           | {zone-zoneset-check-wrapper-ST}                      | []         | 83       | 15944          | 2434         | 69992           |
 
     And i update campaign data by name
-      | Campaign Name                          | units | goal_type   |
-      | interstitial-standard-PG-Direct        | -1    | impressions |
-      | interstitial-standard-PG-Programmatic  | -1    | impressions |
-      | campaign-see-through-check-wrapper     | -1    | impressions |
+      | Campaign Name                         | units | goal_type   |
+      | interstitial-standard-PG-Direct       | -1    | impressions |
+      | interstitial-standard-PG-Programmatic | -1    | impressions |
+      | campaign-see-through-check-wrapper    | -1    | impressions |
 
     And i update zone data by name
       | Zone Name                                          | is_secure |
       | zone-zoneset-interstitial-standard-PG-Direct       | 1         |
       | zone-zoneset-interstitial-standard-PG-Programmatic | 1         |
       | zone-zoneset-check-wrapper-ST                      | 1         |
+
+
+#%%%%%%%%%%%%%% HB min floor price rate card Entities %%%%%%%%%%%%%
+  Scenario:  create entites for floor price scenarios
+    Given i disable campaigns by name on db
+      | Campaign Name                                   |
+      | campaign-rate-card-medium-rectangle             |
+      | campaign-no-rate-card-yes-adunit-BillBoard      |
+      | campaign-no-ratecard-no-adunit-BR               |
+#------------- Programmatic --------------------
+      | campaign-rate-card-medium-rectangle-prog        |
+      | campaign-no-rate-card-yes-adunit-BillBoard-prog |
+      | campaign-no-ratecard-no-adunit-BR-prog          |
+      | campaign-cross-screen-price4.98                 |
+      | campaign-cross-screen-below-floor-price         |
+
+    Given i create new campaigns with new zoneset
+      | Campaign Name                                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                         | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-rate-card-medium-rectangle             | 703688 | 271140   | false                 | 36398         | {zone-zoneset-cross-screen-blend}           | []         | 10       | 15946          | 2434         | 70992           |
+      | campaign-no-rate-card-yes-adunit-BillBoard      | 75396  | 234903   | false                 | 33214         | {zone-zoneset-no-rate-card-yes-adunit}      | []         | 58       | 15947          | 2434         | 38734           |
+      | campaign-no-ratecard-no-adunit-BR               | 703688 | 270763   | false                 | 36020         | {zone-zoneset-brand-reveal}                 | []         | 95       | 15948          | 2434         | 68022           |
+#------------- Programmatic --------------------
+      | campaign-rate-card-medium-rectangle-prog        | 407982 | 262286   | true                  | 2962          | {zone-zoneset-cross-screen-blend-prog}      | []         | 10       | 15949          | 2434         | 70992           |
+      | campaign-no-rate-card-yes-adunit-BillBoard-prog | 407982 | 234810   | true                  | 1401          | {zone-zoneset-no-rate-card-yes-adunit-prog} | []         | 58       | 15950          | 2434         | 38734           |
+      | campaign-no-ratecard-no-adunit-BR-prog          | 407982 | 253748   | true                  | 1652          | {zone-zoneset-brand-reveal-prog}            | []         | 95       | 15951          | 2434         | 68022           |
+      | campaign-cross-screen-price4.98                 | 407982 | 262286   | true                  | 2962          | {zone-zoneset-cross-blend4.98}              | []         | 10       | 14401          | 2434         | 70992           |
+      | campaign-cross-screen-below-floor-price         | 407982 | 262286   | true                  | 2962          | {zone-zoneset-below-floor-price}            | []         | 10       | 14402          | 2434         | 70992           |
+
+    And i update campaign data by name
+      | Campaign Name                                   | units | goal_type   |
+      | campaign-rate-card-medium-rectangle             | -1    | impressions |
+      | campaign-no-rate-card-yes-adunit-BillBoard      | -1    | impressions |
+      | campaign-no-ratecard-no-adunit-BR               | -1    | impressions |
+#------------- Programmatic --------------------
+      | campaign-rate-card-medium-rectangle-prog        | -1    | impressions |
+      | campaign-no-rate-card-yes-adunit-BillBoard-prog | -1    | impressions |
+      | campaign-no-ratecard-no-adunit-BR-prog          | -1    | impressions |
+      | campaign-cross-screen-price4.98                 | -1    | impressions |
+      | campaign-cross-screen-below-floor-price         | -1    | impressions |
+
+    And i update zone data by name
+      | Zone Name                                 | is_secure |
+      | zone-zoneset-cross-screen-blend           | 1         |
+      | zone-zoneset-no-rate-card-yes-adunit      | 1         |
+      | zone-zoneset-brand-reveal                 | 1         |
+#------------- Programmatic --------------------
+      | zone-zoneset-cross-screen-blend-prog      | 1         |
+      | zone-zoneset-no-rate-card-yes-adunit-prog | 1         |
+      | zone-zoneset-brand-reveal-prog            | 1         |
+      | zone-zoneset-cross-blend4.98              | 1         |
+      | zone-zoneset-below-floor-price            | 1         |
+
+    And i update campaign data by name
+      | Campaign Name                                   | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
+      | campaign-rate-card-medium-rectangle             | NULL                            | NULL                           | 0                  |
+      | campaign-no-rate-card-yes-adunit-BillBoard      | NULL                            | NULL                           | 0                  |
+      | campaign-no-ratecard-no-adunit-BR               | NULL                            | NULL                           | 0                  |
+      | campaign-rate-card-medium-rectangle-prog        | NULL                            | NULL                           | 0                  |
+      | campaign-no-rate-card-yes-adunit-BillBoard-prog | NULL                            | NULL                           | 0                  |
+      | campaign-no-ratecard-no-adunit-BR-prog          | NULL                            | NULL                           | 0                  |
+      | campaign-cross-screen-price4.98                 | 20                              | 20                             | 0                  |
+      | campaign-cross-screen-below-floor-price         | 88                              | 88                             | 0                  |
 
 
   Scenario: refresh zone cache with wait

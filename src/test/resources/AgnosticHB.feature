@@ -18,7 +18,7 @@ Feature: Agnostic Header bidding feature
     And The response code is 200
     And The response contains {bannerid}
     And all HB responses contains campaignId with id of entity named {campaign-agnostic-Billboard}
-    And all HB responses contains cpm with value {3.0}
+    And all HB responses contains cpm with value {1.0}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-agnostic-Billboard-banner-1} 100% of the time
     And The response contains {"width":970}
     And The response contains {"height":250}
@@ -33,7 +33,7 @@ Feature: Agnostic Header bidding feature
     And The response code is 200
     And The response contains {bannerid}
     And all HB responses contains campaignId with id of entity named {campaign-agnostic-Billboard}
-    And all HB responses contains cpm with value {3.0}
+    And all HB responses contains cpm with value {1.0}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-agnostic-Billboard-banner-1} 100% of the time
     And The response contains {"width":970}
     And The response contains {"height":250}
@@ -44,7 +44,7 @@ Feature: Agnostic Header bidding feature
     And The response code is 200
     And The response contains {bannerid}
     And all HB responses contains campaignId with id of entity named {campaign-agnostic-Billboard}
-    And all HB responses contains cpm with value {3.0}
+    And all HB responses contains cpm with value {1.0}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-agnostic-Billboard-banner-1} 100% of the time
     And The response contains {"width":111}
     And The response contains {"height":444}

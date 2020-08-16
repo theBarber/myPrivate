@@ -2,27 +2,62 @@
 
 Feature: test1
 
-  Background:
-    Given I clear all cookies from uas requests
-    Given I clear all headers from uas requests
-    Given I add header of {x-forwarded-for} with value {207.246.116.162}
-    When Sending a healthcheck request to UAS
-    Then The response code is 200
+#  Background:
+#    Given I clear all cookies from uas requests
+#    Given I clear all headers from uas requests
+#    Given I add header of {x-forwarded-for} with value {207.246.116.162}
+#    When Sending a healthcheck request to UAS
+#    Then The response code is 200
 
 
-  Scenario:1 send request expect delivery Direct
-    When I send 1 times display ad request with parameter {optimize=1&ct=1&unlimited=1&stid=1} for zone id 192834 to UAS
-    Then The response code is 200
-    And The responses has impression-urls
-    And The response contains {INTERSTITIAL TEST WRAPPER}
+  Scenario: create entities for Open-market tests
+    Given i disable campaigns by name on db
 
-#    Examples:
-#      | zone                             | bannerId                              |
-#      | zone-zoneset-viewability-IAS-low | campaign-IAS-low-viewability-banner-1 |
-#      | zone-zoneset-viewability-DV-low  | campaign-DV-low-viewability-banner-1  |
-#      | zone-zoneset-inline-pub3708      | campaign-stg-inline-pub3708-banner-1  |
+         # R ----  R -----  OM
+      | campaign-reserve-AN-iter-1      |
+      | campaign-reserve-OX-iter-2      |
+      | campaign-OPEN-MARKET-1          |
+         # R ----  NR ----- D ---- OM
+      | campaign-reserve-1              |
+      | campaign-non-reserve-1          |
+      | campaign-OPEN-MARKET-1-chosen   |
+      | campaign-direct-not-chosen      |
+         # D ---- OM
+      | campaign-direct-must-be-chosen  |
+      | campaign-OPEN-MARKET-not-chosen |
 
+    Given i create new campaigns with new zoneset
+         # R ----  R -----  OM
+      | Campaign Name                   | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name        | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-reserve-AN-iter-1      | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3836         | 71671           |
+      | campaign-reserve-OX-iter-2      | 407981 | 251874   | true                  | 2582          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3836         | 71671           |
+      | campaign-OPEN-MARKET-1          | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-PG}  | []         | 75       | 15880          | 3836         | 71671           |
+         # R ----  NR ----- OM ----- D
+      | campaign-reserve-1              | 407981 | 228961   | true                  | 21            | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3836         | 71671           |
+      | campaign-non-reserve-1          | 407981 | 240083   | true                  | 410           | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3836         | 71671           |
+      | campaign-OPEN-MARKET-1-chosen   | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3836         | 71671           |
+      | campaign-direct-not-chosen      | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-OM-WIN} | []         | 75       | 15881          | 3836         | 71671           |
+         #  D ---- OM
+      | campaign-direct-must-be-chosen  | 75396  | 251648   | false                 | 34670         | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3836         | 71671           |
+      | campaign-OPEN-MARKET-not-chosen | 407981 | 269144   | true                  | 2777          | {zone-zoneset-test-Direct} | []         | 75       | 15882          | 3836         | 71671           |
 
+    And i update campaign data by name
+      | Campaign Name                   | Priority | campaign_delivery_method | delivery_algorithm | run_on_unknown_domains |
+      | campaign-reserve-AN-iter-1      | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-OX-iter-2      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1          | 1        | 4                        | 2                  | 1                      |
+      | campaign-reserve-1              | 1        | 4                        | 2                  | 1                      |
+      | campaign-non-reserve-1          | 1        | 4                        | 2                  | 1                      |
+      | campaign-direct-not-chosen      | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-1-chosen   | 1        | 4                        | 2                  | 1                      |
+      | campaign-direct-must-be-chosen  | 1        | 4                        | 2                  | 1                      |
+      | campaign-OPEN-MARKET-not-chosen | 1        | 4                        | 2                  | 1                      |
+
+    And i update zone data by name
+      | Zone Name                | is_secure |
+      | zone-zoneset-test-OM-PG  | 1         |
+      | zone-zoneset-test-OM-WIN | 1         |
+      | zone-zoneset-test-Direct | 1         |
 
 #  Scenario Outline: Video HB - Location - Desktop
 #    Given I use {Mozilla/5.0 (Linux; Android 4.4.2; GT-P5220 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Safari/537.36} as user-agent string to send my requests to uas
