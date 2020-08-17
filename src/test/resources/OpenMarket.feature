@@ -47,6 +47,10 @@ Feature: Open Market Testing
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-non-reserve-1-banner-1} 100% of the time
 
+
+
+
+
      #***********************  D      OM    ***********************
 
   Scenario: 3   zone request   D --- OM     Direct banner expected to return in first iteration (the PGW not even get approached)
@@ -91,6 +95,15 @@ Feature: Open Market Testing
     And The response contains {script}
     And all HB responses contains adId with id of entity named {campaign-non-reserve-1-banner-1}
     And all HB responses contains campaignId with id of entity named {campaign-non-reserve-1}
+
+
+        #**************** scenario relate to rate card - request from US should get passback    *************
+  Scenario: 5.c rate card - different country - deal price = AMAP -  request from US - should get Passback !
+    Given I clear all headers from uas requests
+    Given I clear all cookies from uas requests
+    And I add header of {X-Forwarded-For} with value {78.31.205.183}
+    Given i send 1 headerBidding post request for scenario {Send HB request for Open Market with 1X1 publisher 3836 - R NR D OM} for publisher 3836 with domain {open-market2.com&requestid=Automation-AN} with extra params {&unlimited=1&optimize=1}
+    And The response code is 204
 
      #***********************  D      OM    ***********************
 
