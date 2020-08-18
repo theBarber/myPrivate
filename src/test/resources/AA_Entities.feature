@@ -978,7 +978,7 @@ Feature: Entities for tests
     Given i create new campaigns, new zoneset with domains
       | Campaign Name                              | IO    | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                              | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include                                                                | domain_exclude                                                                |
       | campaign-CT-ST-1                           | 75396 | 210722   | false                 | 8290          | {zone-zoneset-CT-ST-1}                           | []         | 93       | 15182          | 3708         | 65991           | []                                                                            | []                                                                            |
-      | campaign-dv-campaignLevelLimit-ST          | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-ST}          | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
+      | campaign-dv-campaignLevelLimit-ST          | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-ST}          | []         | 93       | 15289          | 3708         | 65991           | [{americannaziparty.com,1};{disney.com,1}]                                    | []                                                                            |
       | campaign-dv-campaignLevelLimit-exclude-ST  | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-campaignLevelLimit-exclude-ST}  | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] |
       | campaign-dv-zoneLevelLimit-peer-ST         | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-peer-ST}         | []         | 93       | 15289          | 3708         | 65991           | [{disney.com,1};{drugs.com,1};{https://www.military.com/equipment/weapons,1}] | []                                                                            |
       | campaign-dv-zoneLevelLimit-brand-safety-ST | 75396 | 208153   | false                 | 8290          | {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} | []         | 93       | 15289          | 3708         | 65991           | []                                                                            | []                                                                            |
@@ -986,14 +986,14 @@ Feature: Entities for tests
     And i update banner data by name
       | Banner Name                                         | limitation                                                                                            |
       | campaign-CT-ST-1-banner-1                           | [[[64,"=~","1_5252","1_5250"]]]                                                                       |
-      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_84252026","2_82033230"]]]                                                               |
+      | campaign-dv-campaignLevelLimit-ST-banner-1          | [[[64,"=~","2_80012005","2_80011001"]]]                                                               |
       | campaign-dv-campaignLevelLimit-exclude-ST-banner-1  | [[[64,"=~","2_84251001","2_84252026"]]]                                                               |
       | campaign-dv-zoneLevelLimit-brand-safety-ST-banner-1 | [[[64,"!=","2_80012001"],[64,"=~","2_80510000","2_80520000","2_82043105","2_82045105","2_80512001"]]] |
 
     And i update campaign data by name
       | Campaign Name                             | limitation                              |
       | campaign-CT-ST-1                          | [[[64,"=~","1_5252","1_5250"]]]         |
-      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_84252026","2_82033230"]]] |
+      | campaign-dv-campaignLevelLimit-ST         | [[[64,"=~","2_80012005","2_80011001"]]] |
       | campaign-dv-campaignLevelLimit-exclude-ST | [[[64,"=~","2_84251001","2_84252026"]]] |
 
     And i update zone data by name

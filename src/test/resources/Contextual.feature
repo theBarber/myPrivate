@@ -8,11 +8,11 @@ Feature: contextual targeting tests
     Given I clear all cookies from uas requests
     Given I clear all headers from uas requests
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    When I send 1 times an ad request with parameter {optimize=1&bundleid=com.outfit7.mytalkingtomfree} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdrugs.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
-    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+#    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+#    When I send 1 times an ad request with parameter {optimize=1&bundleid=com.outfit7.mytalkingtomfree} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
+#    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdrugs.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+#    When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
+#    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And I sleep for 1 seconds
 
     And The response code is 200
@@ -40,76 +40,69 @@ Feature: contextual targeting tests
     And The response code is 200
     And The responses are passback
 
-  Scenario:3.b contextual targeting by dv - campaign level limitation domain exclude - PART TWO - Passback Expected
+  Scenario:3.b contextual targeting by dv - dv categories are not included - PART TWO - Passback Expected
     When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons} for zone named {zone-zoneset-dv-campaignLevelLimit-exclude-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://guns.com} for zone named {zone-zoneset-dv-campaignLevelLimit-exclude-ST} to UAS
     And The response code is 200
     And The responses are passback
 
-  Scenario:3.c contextual targeting by dv - campaign level limitation domain exclude - PART THREE - Passback Expected
-    When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=http://one.co.il} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    And The response code is 200
-    And The responses are passback
+#  Scenario:4.a contextual targeting by dv - campaign level limitation - PART ONE - Delivery Expected
+#    When I print local time
+#    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+#    And The response code is 200
+#    And The response contains {script}
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-campaignLevelLimit-ST-banner-1} 100% of the time
 
-  Scenario:4.a contextual targeting by dv - campaign level limitation - PART ONE - Delivery Expected
+  Scenario:4.b contextual targeting by dv - un-permited site contains DV categories  - PART TWO - script Expected
     When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://americannaziparty.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
-    And The response contains {script}
+    And The response contains {bannerid=}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-dv-campaignLevelLimit-ST-banner-1} 100% of the time
 
-  Scenario:4.b contextual targeting by dv - campaign level limitation - PART TWO - Passback Expected
+  Scenario:4.c contextual targeting by dv - kids site does not contain DV categpries - PART THREE - Passback Expected
     When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdrugs.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://disney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
     And The response code is 200
     And The responses are passback
 
-  Scenario:4.c contextual targeting by dv - campaign level limitation - PART THREE - Passback Expected
-    When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    And The response code is 200
-    And The responses are passback
+#  Scenario:4.d contextual targeting by dv - campaign level limitation - PART FOUR - Passback Expected
+#    When I print local time
+#    When I send 1 times an ad request with parameter {optimize=1&loc=http://one.co.il} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+#    And The response code is 200
+#    And The responses are passback
 
-  Scenario:4.d contextual targeting by dv - campaign level limitation - PART FOUR - Passback Expected
+  Scenario:5.a contextual targeting - containing peer 39 categories - PART ONE - Delivery Expected
     When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=http://one.co.il} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-    And The response code is 200
-    And The responses are passback
-
-  Scenario:5.a contextual targeting - peer 39 banner level limitation backward compatibility - PART ONE - Delivery Expected
-    When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
-    When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The response contains {script}
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
 
-  Scenario:5.b contextual targeting - peer 39 banner level limitation backward compatibility - PART TWO - Delivery Expected
-    When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
-    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
+#  Scenario:5.b contextual targeting - peer 39 banner level limitation backward compatibility - PART TWO - Delivery Expected
+#    When I print local time
+#    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+#    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+#    And The response code is 200
+#    And The response contains {script}
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
 
-  Scenario:5.c contextual targeting - peer 39 banner level limitation backward compatibility - PART THREE - Passback Expected
+  Scenario:5.c contextual targeting - not containing specific peer39 categories - PART THREE - Passback Expected
     When I print local time
     When I send 1 times an ad request with parameter {optimize=1&loc=http://one.co.il} for zone named {zone-zoneset-CT-ST-1} to UAS
     And The response code is 200
     And The responses are passback
 
-  Scenario:6.a contextual targeting - peer 39 banner level limitation  - PART ONE - Delivery Expected
-    When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
-    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And The response code is 200
-    And The response contains {script}
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
+#  Scenario:6.a contextual targeting - peer 39 banner level limitation  - PART ONE - Delivery Expected
+#    When I print local time
+#    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+#    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+#    And The response code is 200
+#    And The response contains {script}
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-CT-ST-1-banner-1} 100% of the time
 
-  Scenario:6.b contextual targeting - peer 39 banner level limitation - PART TWO - Passback Expected
-    When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=http://one.co.il} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And The response code is 200
-    And The responses are passback
+#  Scenario:6.b contextual targeting - peer 39 banner level limitation - PART TWO - Passback Expected
+#    When I print local time
+#    When I send 1 times an ad request with parameter {optimize=1&loc=http://one.co.il} for zone named {zone-zoneset-CT-ST-1} to UAS
+#    And The response code is 200
+#    And The responses are passback

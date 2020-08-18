@@ -21,14 +21,6 @@ Feature: HB min floor price
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-rate-card-medium-rectangle-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.99}
 
-  Scenario: 1.0.a.1 - HB - MR - Desktop - from Mexico - rate card - different country -  request from MX - should get Passback !
-    Given I clear all headers from uas requests
-    Given I clear all cookies from uas requests
-    And I add header of {X-Forwarded-For} with value {17.43.41.128}
-    Given i send 1 headerBidding post request for scenario {Send HB Direct - Rate card exists} for publisher 2434 with domain {ratecard-floor.com} with extra params {&optimize=1}
-    And The response code is 204
-
-
   Scenario: 1.0.b - HB - MR - Mobile - rate card exists - taking floor price from rate card
     Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB Direct - Rate card exists} for publisher 2434 with domain {ratecard-floor.com} with extra params {&optimize=1}
@@ -36,6 +28,12 @@ Feature: HB min floor price
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-rate-card-medium-rectangle-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.88}
 
+  Scenario: 1.0.c - Negative - HB - MR - Desktop - from Mexico - rate card - different country -  request from MX - should get Passback !
+    Given I clear all headers from uas requests
+    Given I clear all cookies from uas requests
+    And I add header of {X-Forwarded-For} with value {17.43.41.128}
+    Given i send 1 headerBidding post request for scenario {Send HB Direct - Rate card exists} for publisher 2434 with domain {ratecard-floor.com} with extra params {&optimize=1}
+    And The response code is 204
 
   Scenario: 1.1.a - HB - BB - Desktop - no rate card , yes ad unit - taking floor price from publisher adunit
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas

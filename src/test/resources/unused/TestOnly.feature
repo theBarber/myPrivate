@@ -16,7 +16,7 @@ Feature: test1
 
     Given i create new campaigns, new zoneset with domains
       | Campaign Name | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | domain_include | domain_exclude |
-      | campaign-BB   | 407981 | 271880   | false                 | 35284         | {zone-bb}           | []         | 58       | 4737           | 2434         | 38734           | []             | []             |
+      | campaign-BB   | 407981 | 271931   | false                 | 35284         | {zone-bb}           | []         | 58       | 4737           | 2434         | 38734           | []             | []             |
 
 
     And i update zone data by name
