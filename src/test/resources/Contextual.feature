@@ -40,9 +40,9 @@ Feature: contextual targeting tests
     And The response code is 200
     And The responses are passback
 
-  Scenario:3.b contextual targeting by dv - campaign level limitation domain exclude - PART TWO - Passback Expected
+  Scenario:3.b contextual targeting by dv - dv categories are not included - PART TWO - Passback Expected
     When I print local time
-    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fwww.military.com%2Fequipment%2Fweapons} for zone named {zone-zoneset-dv-campaignLevelLimit-exclude-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://guns.com} for zone named {zone-zoneset-dv-campaignLevelLimit-exclude-ST} to UAS
     And The response code is 200
     And The responses are passback
 
