@@ -218,27 +218,27 @@ Feature: Entities for tests
       | campaign-HB-Desktop-300X250                 |
       | campaign-HB-Billboard-970X250               |
       | campaign-HB-SS-1X1                          |
-      | campaign-HB-Prog-PGC-1X1-1                  |
-      | campaign-HB-Prog-PGC-1X1-2                  |
-      | campaign-HB-Prog-PGC-1X1-3                  |
-      | campaign-HB-Prog-See-Through-1X2-1          |
-      | campaign-HB-Prog-See-Through-1X2-2          |
-      | campaign-HB-Prog-See-Through-1X2-3          |
-      | campaign-HB-Prog-Billboard-970X250-D        |
-      | campaign-HB-Prog-Billboard-970X250-P        |
-#        fixed price, po sp is less
-      | campaign-HB-DynamicPrice-1                  |
-#       dynamic price, camp sp is less
-      | campaign-HB-DynamicPrice-2                  |
-#        dynamic price with po sp < camp sp
-      | campaign-HB-DynamicPrice-3                  |
-#        dynamic price with campaign mobile sp < po sales price < campaign desktop
-      | campaign-HB-DynamicPrice-4                  |
-#        2 ad units senario
-      | campaign-HB-DynamicPrice-ST-1x2-5a          |
-      | campaign-HB-DynamicPrice-Desktop-300X250-5b |
-      | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6   |
-      | campaign-HB-DP-ServerPr-PGC-6b              |
+#      | campaign-HB-Prog-PGC-1X1-1                  |
+#      | campaign-HB-Prog-PGC-1X1-2                  |
+#      | campaign-HB-Prog-PGC-1X1-3                  |
+#      | campaign-HB-Prog-See-Through-1X2-1          |
+#      | campaign-HB-Prog-See-Through-1X2-2          |
+#      | campaign-HB-Prog-See-Through-1X2-3          |
+#      | campaign-HB-Prog-Billboard-970X250-D        |
+#      | campaign-HB-Prog-Billboard-970X250-P        |
+##        fixed price, po sp is less
+#      | campaign-HB-DynamicPrice-1                  |
+##       dynamic price, camp sp is less
+#      | campaign-HB-DynamicPrice-2                  |
+##        dynamic price with po sp < camp sp
+#      | campaign-HB-DynamicPrice-3                  |
+##        dynamic price with campaign mobile sp < po sales price < campaign desktop
+#      | campaign-HB-DynamicPrice-4                  |
+##        2 ad units senario
+#      | campaign-HB-DynamicPrice-ST-1x2-5a          |
+#      | campaign-HB-DynamicPrice-Desktop-300X250-5b |
+#      | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6   |
+#      | campaign-HB-DP-ServerPr-PGC-6b              |
 
     Given i create new campaigns with new zoneset
       | Campaign Name                               | IO     | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name                                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
@@ -247,24 +247,24 @@ Feature: Entities for tests
       | campaign-HB-Desktop-300X250                 | 75396  | 240827   | false                 | 85            | {zone-zoneset-Desktop-300X250}                    | []         | 10       | 14400          | 3673         | 66814           |
       | campaign-HB-Billboard-970X250               | 75396  | 198082   | false                 | 64            | {zone-zoneset-HB-Billboard-970X250}               | []         | 58       | 14400          | 3673         | 66813           |
       | campaign-HB-SS-1X1                          | 75396  | 197418   | false                 | 86            | {zone-zoneset-HB-SS-1X1}                          | []         | 69       | 14400          | 3673         | 66933           |
-      | campaign-HB-Prog-PGC-1X1-1                  | 407981 | 224812   | false                 | 6499          | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
-      | campaign-HB-Prog-PGC-1X1-2                  | 407981 | 224812   | false                 | 6499          | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
-      | campaign-HB-Prog-PGC-1X1-3                  | 75396  | 222908   | false                 | 86            | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
-      | campaign-HB-Prog-See-Through-1X2-1          | 407981 | 224810   | false                 | 6497          | {zone-zoneset-HB-Prog-See-Through-1X2}            | []         | 83       | 14507          | 3697         | 66002           |
-      | campaign-HB-Prog-See-Through-1X2-2          | 407981 | 224810   | false                 | 6497          | {zone-zoneset-HB-Prog-See-Through-1X2}            | []         | 83       | 14507          | 3697         | 66002           |
-      | campaign-HB-Prog-See-Through-1X2-3          | 407981 | 224810   | false                 | 6497          | {zone-zoneset-HB-Prog-See-Through-1X2}            | []         | 83       | 14507          | 3697         | 66002           |
-      | campaign-HB-Prog-Billboard-970X250-D        | 75396  | 198082   | false                 | 64            | {zone-zoneset-HB-Prog-Billboard-970X250}          | []         | 58       | 14507          | 3697         | 66736           |
-      | campaign-HB-Prog-Billboard-970X250-P        | 407981 | 224539   | false                 | 7143          | {zone-zoneset-HB-Prog-Billboard-970X250}          | []         | 58       | 14507          | 3697         | 66736           |
+     # | campaign-HB-Prog-PGC-1X1-1                  | 407981 | 224812   | false                 | 6499          | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
+     # | campaign-HB-Prog-PGC-1X1-2                  | 407981 | 224812   | false                 | 6499          | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
+     # | campaign-HB-Prog-PGC-1X1-3                  | 75396  | 222908   | false                 | 86            | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
+     # | campaign-HB-Prog-See-Through-1X2-1          | 407981 | 224810   | false                 | 6497          | {zone-zoneset-HB-Prog-See-Through-1X2}            | []         | 83       | 14507          | 3697         | 66002           |
+     # | campaign-HB-Prog-See-Through-1X2-2          | 407981 | 224810   | false                 | 6497          | {zone-zoneset-HB-Prog-See-Through-1X2}            | []         | 83       | 14507          | 3697         | 66002           |
+     # | campaign-HB-Prog-See-Through-1X2-3          | 407981 | 224810   | false                 | 6497          | {zone-zoneset-HB-Prog-See-Through-1X2}            | []         | 83       | 14507          | 3697         | 66002           |
+   #   | campaign-HB-Prog-Billboard-970X250-D        | 75396  | 198082   | false                 | 64            | {zone-zoneset-HB-Prog-Billboard-970X250}          | []         | 58       | 14507          | 3697         | 66736           |
+   #   | campaign-HB-Prog-Billboard-970X250-P        | 407981 | 224539   | false                 | 7143          | {zone-zoneset-HB-Prog-Billboard-970X250}          | []         | 58       | 14507          | 3697         | 66736           |
 #       sales price for polineitem 65991 = 0.4 (new), for polineitem 67354 = 2
-      | campaign-HB-DynamicPrice-1                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-1}                  | []         | 10       | 15133          | 3708         | 66736           |
-      | campaign-HB-DynamicPrice-2                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-2}                  | []         | 10       | 15143          | 3708         | 66736           |
-      | campaign-HB-DynamicPrice-3                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-3}                  | []         | 10       | 15134          | 3708         | 66736           |
-      | campaign-HB-DynamicPrice-4                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-4}                  | []         | 10       | 15144          | 3708         | 66736           |
-      | campaign-HB-DynamicPrice-ST-1x2-5a          | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-ST-1x2-5a}          | []         | 93       | 15145          | 3708         | 67354           |
-      | campaign-HB-DynamicPrice-Desktop-300X250-5b | 75396  | 240829   | false                 | 85            | {zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b} | []         | 10       | 15145          | 3708         | 66811           |
+     # | campaign-HB-DynamicPrice-1                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-1}                  | []         | 10       | 15133          | 3708         | 66736           |
+     # | campaign-HB-DynamicPrice-2                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-2}                  | []         | 10       | 15143          | 3708         | 66736           |
+     # | campaign-HB-DynamicPrice-3                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-3}                  | []         | 10       | 15134          | 3708         | 66736           |
+     # | campaign-HB-DynamicPrice-4                  | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-4}                  | []         | 10       | 15144          | 3708         | 66736           |
+     # | campaign-HB-DynamicPrice-ST-1x2-5a          | 75396  | 210722   | false                 | 8290          | {zone-zoneset-HB-DynamicPrice-ST-1x2-5a}          | []         | 93       | 15145          | 3708         | 67354           |
+     # | campaign-HB-DynamicPrice-Desktop-300X250-5b | 75396  | 240829   | false                 | 85            | {zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b} | []         | 10       | 15145          | 3708         | 66811           |
 #       for SP !!!!!!!after DB copy - change web section
-      | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 407981 | 224533   | true                  | 31            | {zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a}  | []         | 83       | 15168          | 3711         | 66555           |
-      | campaign-HB-DP-ServerPr-PGC-6b              | 407981 | 224530   | true                  | 20            | {zone-zoneset-HB-DP-ServerPr-PGC-6b}              | []         | 75       | 15168          | 3711         | 66557           |
+      #| campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 407981 | 224533   | true                  | 31            | {zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a}  | []         | 83       | 15168          | 3711         | 66555           |
+      #| campaign-HB-DP-ServerPr-PGC-6b              | 407981 | 224530   | true                  | 20            | {zone-zoneset-HB-DP-ServerPr-PGC-6b}              | []         | 75       | 15168          | 3711         | 66557           |
     And i update campaign data by name
       | Campaign Name                        | status | Priority | units | limitation | campaign_delivery_method |
       | campaign-HB-Tablet-160x600           | 0      | -2       | -1    | []         | 1                        |
@@ -272,25 +272,25 @@ Feature: Entities for tests
       | campaign-HB-Desktop-300X250          | 0      | -2       | -1    | []         | 1                        |
       | campaign-HB-Billboard-970X250        | 0      | -1       | -1    | []         | 2                        |
       | campaign-HB-SS-1X1                   | 0      | -2       | -1    | []         | 1                        |
-      | campaign-HB-Prog-PGC-1X1-1           | 0      | -2       | -1    | []         | 1                        |
-      | campaign-HB-Prog-PGC-1X1-2           | 0      | -1       | -1    | []         | 2                        |
-      | campaign-HB-Prog-PGC-1X1-3           | 0      | 1        | -1    | []         | 4                        |
-      | campaign-HB-Prog-See-Through-1X2-1   | 0      | -2       | -1    | []         | 1                        |
-      | campaign-HB-Prog-See-Through-1X2-2   | 0      | -1       | -1    | []         | 2                        |
-      | campaign-HB-Prog-See-Through-1X2-3   | 0      | 1        | -1    | []         | 4                        |
-      | campaign-HB-Prog-Billboard-970X250-D | 0      | -2       | -1    | []         | 1                        |
-      | campaign-HB-Prog-Billboard-970X250-P | 0      | -1       | -1    | []         | 2                        |
+    #  | campaign-HB-Prog-PGC-1X1-1           | 0      | -2       | -1    | []         | 1                        |
+    #  | campaign-HB-Prog-PGC-1X1-2           | 0      | -1       | -1    | []         | 2                        |
+    #  | campaign-HB-Prog-PGC-1X1-3           | 0      | 1        | -1    | []         | 4                        |
+    #  | campaign-HB-Prog-See-Through-1X2-1   | 0      | -2       | -1    | []         | 1                        |
+    #  | campaign-HB-Prog-See-Through-1X2-2   | 0      | -1       | -1    | []         | 2                        |
+    #  | campaign-HB-Prog-See-Through-1X2-3   | 0      | 1        | -1    | []         | 4                        |
+   #   | campaign-HB-Prog-Billboard-970X250-D | 0      | -2       | -1    | []         | 1                        |
+   #   | campaign-HB-Prog-Billboard-970X250-P | 0      | -1       | -1    | []         | 2                        |
     #    40% gives cpm = 0.6
     #    70% gives cpm = 0.3
-    And i update campaign data by name
-      | Campaign Name                               | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
-      | campaign-HB-DynamicPrice-2                  | 70                              | 70                             | 0                  |
-      | campaign-HB-DynamicPrice-3                  | 40                              | 40                             | 0                  |
-      | campaign-HB-DynamicPrice-4                  | 50                              | 70                             | 0                  |
-      | campaign-HB-DynamicPrice-ST-1x2-5a          | 40                              | 40                             | 0                  |
-      | campaign-HB-DynamicPrice-Desktop-300X250-5b | 50                              | 50                             | 0                  |
-      | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 40                              | 40                             | 0                  |
-      | campaign-HB-DP-ServerPr-PGC-6b              | 40                              | 40                             | 0                  |
+   # And i update campaign data by name
+   #   | Campaign Name                               | hb_desktop_bid_price_percentage | hb_mobile_bid_price_percentage | use_default_margin |
+   #   | campaign-HB-DynamicPrice-2                  | 70                              | 70                             | 0                  |
+   #   | campaign-HB-DynamicPrice-3                  | 40                              | 40                             | 0                  |
+   #   | campaign-HB-DynamicPrice-4                  | 50                              | 70                             | 0                  |
+     # | campaign-HB-DynamicPrice-ST-1x2-5a          | 40                              | 40                             | 0                  |
+     # | campaign-HB-DynamicPrice-Desktop-300X250-5b | 50                              | 50                             | 0                  |
+     # | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 40                              | 40                             | 0                  |
+     # | campaign-HB-DP-ServerPr-PGC-6b              | 40                              | 40                             | 0                  |
     And i update zone data by name
       | Zone Name                                       | is_secure |
       | zone-zoneset-HB-Tablet-160x600                  | 1         |
@@ -298,17 +298,17 @@ Feature: Entities for tests
       | zone-zoneset-Desktop-300X250                    | 1         |
       | zone-zoneset-HB-Billboard-970X250               | 1         |
       | zone-zoneset-HB-SS-1X1                          | 1         |
-      | zone-zoneset-HB-Prog-PGC-1X1                    | 1         |
-      | zone-zoneset-HB-Prog-See-Through-1X2            | 1         |
-      | zone-zoneset-HB-Prog-Billboard-970X250          | 1         |
-      | zone-zoneset-HB-DynamicPrice-1                  | 1         |
-      | zone-zoneset-HB-DynamicPrice-2                  | 1         |
-      | zone-zoneset-HB-DynamicPrice-3                  | 1         |
-      | zone-zoneset-HB-DynamicPrice-4                  | 1         |
-      | zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b | 1         |
-      | zone-zoneset-HB-DynamicPrice-ST-1x2-5a          | 1         |
-      | zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 1         |
-      | zone-zoneset-HB-DP-ServerPr-PGC-6b              | 1         |
+#      | zone-zoneset-HB-Prog-PGC-1X1                    | 1         |
+#      | zone-zoneset-HB-Prog-See-Through-1X2            | 1         |
+#      | zone-zoneset-HB-Prog-Billboard-970X250          | 1         |
+#      | zone-zoneset-HB-DynamicPrice-1                  | 1         |
+#      | zone-zoneset-HB-DynamicPrice-2                  | 1         |
+#      | zone-zoneset-HB-DynamicPrice-3                  | 1         |
+#      | zone-zoneset-HB-DynamicPrice-4                  | 1         |
+#      | zone-zoneset-HB-DynamicPrice-Desktop-300X250-5b | 1         |
+#      | zone-zoneset-HB-DynamicPrice-ST-1x2-5a          | 1         |
+#      | zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 1         |
+#      | zone-zoneset-HB-DP-ServerPr-PGC-6b              | 1         |
 
 
     ##############  working with Rate card !!!    Given i update bid_price_type for publisher = 3708 for adunit = 93 to be 1
