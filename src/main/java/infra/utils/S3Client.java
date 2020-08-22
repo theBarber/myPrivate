@@ -45,7 +45,7 @@ public class S3Client {
                 .withCredentials(credentialsProvider)
                 .build();
         // Get the existing object ACL that we want to modify.
-        AccessControlList acl = amazonS3.getObjectAcl("ramp-delievery-qa", prop.getProperty("s3_secret_key"));
+        AccessControlList acl = amazonS3.getObjectAcl("ramp-delivery-qa-east-new", prop.getProperty("s3_secret_key"));
 
         // Clear the existing list of grants.
         acl.getGrantsAsList().clear();
@@ -55,7 +55,7 @@ public class S3Client {
 //        acl.grantPermission(new EmailAddressGrantee(emailGrantee), Permission.WriteAcp);
 
         // Save the modified ACL back to the object.
-        amazonS3.setObjectAcl("ramp-delievery-qa", prop.getProperty("s3_secret_key"), acl);
+        amazonS3.setObjectAcl("ramp-delivery-qa-east-new", prop.getProperty("s3_secret_key"), acl);
         } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process
             // it, so it returned an error response.
