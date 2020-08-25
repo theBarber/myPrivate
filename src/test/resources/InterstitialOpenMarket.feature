@@ -2,7 +2,7 @@
 @interstitial1
 
 
-Feature: ** Support interstitial web in the open market UN-24533 **
+Feature:  Support interstitial web in the open market UN-24533
 
   Background: health check
     Given I clear all cookies from uas requests
