@@ -4,7 +4,7 @@
 @hbConsent
 @parallel
 @request_service
-Feature: GDPR - Header Bidding Reqs - Europe Delivery Logic - Single Gdpr Param Is Specified In URL
+Feature: GDPR - HB - Europe Delivery - Single Gdpr Param Is Specified In URL
 
   Background: health check
     When Sending a healthcheck request to UAS
