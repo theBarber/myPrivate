@@ -8,16 +8,17 @@ Feature: contextual targeting tests
     Given I clear all cookies from uas requests
     Given I clear all headers from uas requests
     And I add header of {X-Forwarded-For} with value {78.31.205.183}
-#    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-#    When I send 1 times an ad request with parameter {optimize=1&bundleid=com.outfit7.mytalkingtomfree} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
-#    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdrugs.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
-#    When I send 1 times an ad request with parameter {optimize=1&loc=https://edition.cnn.com/sport} for zone named {zone-zoneset-CT-ST-1} to UAS
-#    When I send 1 times an ad request with parameter {optimize=1&loc=http://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
-    And I sleep for 1 seconds
-
     And The response code is 200
 
-
+  Scenario: 0 sent contextual requests before feature testing
+    When I send 1 times an ad request with parameter {optimize=1&bundleid=com.outfit7.mytalkingtomfree} for zone named {zone-zoneset-dv-zoneLevelLimit-brand-safety-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https%3A%2F%2Fdisney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-exclude-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://americannaziparty.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://guns.com} for zone named {zone-zoneset-dv-campaignLevelLimit-exclude-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://americannaziparty.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://disney.com} for zone named {zone-zoneset-dv-campaignLevelLimit-ST} to UAS
+    When I send 1 times an ad request with parameter {optimize=1&loc=https://cnn.com} for zone named {zone-zoneset-CT-ST-1} to UAS
+    And I sleep for 10 seconds
 
   Scenario:1.a contextual targeting by dv - inapp - PART ONE - Delivery Expected
     When I print local time
