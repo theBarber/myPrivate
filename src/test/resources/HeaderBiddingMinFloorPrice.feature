@@ -84,7 +84,7 @@ Feature: HB min floor price
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-no-rate-card-yes-adunit-BillBoard-prog-banner-1} 100% of the time
     And all HB responses contains cpm with value {0.66}
 
-  Scenario: 2.2 -  Programmatic ZONE - no rate card , no ad unit - passback expected
+  Scenario: 2.2 -  Programmatic ZONE - no rate card , no ad unit - passback expected - deal price has to be AMAP !
     When I send 1 times an ad request with parameter {optimize=1&requestid=OX_BrandReveal} for zone named {zone-zoneset-brand-reveal-prog} to UAS
     And The responses are passback
 
