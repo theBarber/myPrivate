@@ -142,7 +142,7 @@ Feature: Publisher blocklist tests
     And The response contains {script}
     And The responses has impression-urls
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-pbl-BRAND1-ST-banner-1} 100% of the time
-    
+
   Scenario: 22. For a publisher 3843 for advertiser 28004 - HB request
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding secure post request for publisher 3843 with size1 = 1 size2 = 2, with domain {publisherblocklist.com} and extra params {&unlimited=1&optimize=1}
@@ -150,7 +150,7 @@ Feature: Publisher blocklist tests
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND1-ST}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND1-ST-banner-1}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {0.5}
 
   Scenario: 23. For a publisher 3843 for advertiser 28004 (sub domains) - HB request
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -159,7 +159,7 @@ Feature: Publisher blocklist tests
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND1-ST}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND1-ST-banner-1}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {0.5}
 
   Scenario: 24. For a publisher 3843 for advertiser 3112 - HB request
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
@@ -178,7 +178,7 @@ Feature: Publisher blocklist tests
     And The response contains {script}
     And all HB responses contains campaignId with id of entity named {campaign-pbl-BRAND2-PGX}
     And all HB responses contains adId with id of entity named {campaign-pbl-BRAND2-PGX-banner-1}
-    And all HB responses contains cpm with value {1.0}
+    And all HB responses contains cpm with value {0.5}
 
   Scenario: 27. For a publisher 3843 block advertiser 28004 by categories - HB request
     Given I add header of {x-forwarded-for} with value {207.246.116.162}
