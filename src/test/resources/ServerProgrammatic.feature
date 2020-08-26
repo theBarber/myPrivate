@@ -26,7 +26,7 @@ Feature: Programmatic flow support
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=1&requestid=systemTestA}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
-    And all HB responses contains campaignId with id of entity named {campaign-server-prog-SS-1}
+    And all HB responses contains campaignId with id of entity named {c}
     And all HB responses contains cpm with value {0.5}
 
   Scenario: 3. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
