@@ -95,7 +95,7 @@ Feature: HB min floor price
 
     #*******************************  below floor price ****************
 
-  Scenario: 3.2 - HB - CS - Direct campaign - calculated SSP price < floor price - expected floor price returned (Mock price = 6.234)
+  Scenario: 3.2 - HB - campaign margin = 88% , rate card floor = 0.99$, calculated SSP price < floor price - expected floor price returned (Mock price = 6.234)
     Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding post request for scenario {Send HB getting below floor price} for publisher 2434 with domain {Dynamic2.com} with extra params {&optimize=1&requestid=OpenMarketMed}
     And The response code is 200
