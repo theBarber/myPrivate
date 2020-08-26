@@ -79,12 +79,22 @@ Feature: Dynamic HB bid price
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-reserved-dynamic-no-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {0.33}
 
-  Scenario:8.0 Campaign with 20% margin , Programmatic LI - Reserved - price expected 2.4$ (similar with scenario 5.0)
+  Scenario:8.0 Campaign with 20% margin - Desktop , Programmatic LI (3$) - Reserved - price expected 2.4$ (similar with scenario 5.0)
+    Given I use {Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36} as user-agent string to send my requests to uas
     Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved dynamic bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin12.com} with extra params {&requestid=ANbidDynMarg&unlimited=1&optimize=1}
     And The response code is 200
     And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-dynamic-margin-MR-ES}
     And all HB responses contains adId with id of entity named {campaign-dpm-prog-reserved-dynamic-margin-MR-ES-banner-1}
     And all HB responses contains cpm with value {2.4}
+
+
+  Scenario:8.1 Campaign with 60% margin - Mobile , Programmatic LI (3$) - Reserved - price expected 1.2$
+    Given I use {Mozilla/5.0 (Linux; Android 4.4.4; 2014821 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/35.0.1916.138 Mobile Safari/537.36 T7/7.5 baidubrowser/7.5.22.0 (Baidu; P1 4.4.4)} as user-agent string to send my requests to uas
+    Given i send 1 headerBidding secure post request for scenario {Send HB request for publisher 3836 with reserved dynamic bid price for campaign with margin} for publisher 3836 with domain {DynamicPricingWithMargin12.com} with extra params {&requestid=ANbidDynMarg&unlimited=1&optimize=1}
+    And The response code is 200
+    And all HB responses contains campaignId with id of entity named {campaign-dpm-prog-reserved-dynamic-margin-MR-ES}
+    And all HB responses contains adId with id of entity named {campaign-dpm-prog-reserved-dynamic-margin-MR-ES-banner-1}
+    And all HB responses contains cpm with value {1.2}
 
 
   Scenario:9.0 Campaign with 90% margin , Programmatic LI - Non Reserved (mock price=10) - price expected 1$
@@ -131,20 +141,20 @@ Feature: Dynamic HB bid price
     And all HB responses contains cpm with value {4.96}
 
 
-  Scenario:13.0 zonetag -  Campaign with margin - rate card wxists
-    When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-dpm-direct-fixed-margin-BB-ES} to UAS
-    And The response code is 200
-    And The responses has impression-urls
-    And The impressionUrl has bannerid field matching the id of the banner named {campaign-dpm-direct-fixed-margin-BB-ES-banner-1} 100% of the time
-    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-dpm-direct-fixed-margin-BB-ES} 100% of the time
-    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-dpm-direct-fixed-margin-BB-ES} 100% of the time
+#  Scenario:13.0 zonetag -  Campaign with margin - rate card exists
+#    When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-dpm-direct-fixed-margin-BB-ES} to UAS
+#    And The response code is 200
+#    And The responses has impression-urls
+#    And The impressionUrl has bannerid field matching the id of the banner named {campaign-dpm-direct-fixed-margin-BB-ES-banner-1} 100% of the time
+#    And The impressionUrl has zoneid field matching the id of the zone named {zone-zoneset-dpm-direct-fixed-margin-BB-ES} 100% of the time
+#    And The impressionUrl has campaignid field matching the id of the campaign named {campaign-dpm-direct-fixed-margin-BB-ES} 100% of the time
 
 #   Scenario:14.0 zonetag - po price > max price, Campaign with margin
 #     When I send 1 times an ad request with parameter {unlimited=1} for zone named {zone-zoneset-dpm-prog-non-reserved-fixed-margin-BB-ES} to UAS
 #     And The response code is 200
 #     And The responses are passback
 
-  Scenario: 14.0 - Direct - beyond floor price - 4.99$
+  Scenario: 14.0 - Open Market deal, (deal price = AMAP, Mock price - 6.234$, margin = 20%) - beyond floor price - 4.99$
     Given i send 1 headerBidding post request for scenario {Send HB getting 4.99 price} for publisher 2434 with domain {Dynamic1.com} with extra params {&optimize=1&requestid=OpenMarketMed}
     And The response code is 200
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-cross-screen-price4.98-banner-1} 100% of the time

@@ -7,7 +7,7 @@ Feature: Entities for tests
 
   Scenario: entities end-date update
     And i update po_line_item end date by id {4584,62229,38734,70156,70770,37496,66997,67000,67001,67002,69725,69608,69625,69723,67164,17116,27807,67638,27809,65421,64396,66814,66813,64397,64398,64399,64400,64401,64402,64403,65422,65423,65424,66418,66486,66487,66488,66810,66811,62229,66556,66557,66555,66556,67259,67260,67261,66833,66831,66830,67182,67231,66933,66004,66002,66736,65991,67354,66811,66555,66557,67165,69992,67163,67162,67166,69089,69134,66832,69158,69213,70473,70474}
-    And i update io_line_item end date by id {253748,253287,243710,251644,253288,253747,210722,241783,223539,240827,198082,197418,224812,222908,234810,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
+    And i update io_line_item end date by id {260626,253748,253287,243710,251644,253288,253747,210722,241783,223539,240827,198082,197418,224812,222908,234810,224810,224539,240829,224533,224530,211456,228962,224531,228961,229737,243452,234550,234656,243707,243711,244895,244896,244699}
     #And i update io_line_item with id {210722} filed {unit_price} to be {1}
     #And i update io_line_item with id {210722} filed {budget} to be {1}
 
@@ -1886,11 +1886,11 @@ Feature: Entities for tests
       | campaign-no-rate-card-yes-adunit-BillBoard      | 75396  | 234903   | false                 | 33214         | {zone-zoneset-no-rate-card-yes-adunit}      | []         | 58       | 15947          | 2434         | 38734           |
       | campaign-no-ratecard-no-adunit-BR               | 703688 | 270763   | false                 | 36020         | {zone-zoneset-brand-reveal}                 | []         | 95       | 15948          | 2434         | 68022           |
 #------------- Programmatic --------------------
-      | campaign-rate-card-medium-rectangle-prog        | 407982 | 262286   | true                  | 2962          | {zone-zoneset-cross-screen-blend-prog}      | []         | 10       | 15949          | 2434         | 70992           |
-      | campaign-no-rate-card-yes-adunit-BillBoard-prog | 407982 | 234810   | true                  | 1401          | {zone-zoneset-no-rate-card-yes-adunit-prog} | []         | 58       | 15950          | 2434         | 38734           |
-      | campaign-no-ratecard-no-adunit-BR-prog          | 407982 | 253748   | true                  | 1652          | {zone-zoneset-brand-reveal-prog}            | []         | 95       | 15951          | 2434         | 68022           |
-      | campaign-cross-screen-price4.98                 | 407982 | 262286   | true                  | 2962          | {zone-zoneset-cross-blend4.98}              | []         | 10       | 14401          | 2434         | 70992           |
-      | campaign-cross-screen-below-floor-price         | 407982 | 262286   | true                  | 2962          | {zone-zoneset-below-floor-price}            | []         | 10       | 14402          | 2434         | 70992           |
+      | campaign-rate-card-medium-rectangle-prog        | 407981 | 262286   | true                  | 2962          | {zone-zoneset-cross-screen-blend-prog}      | []         | 10       | 15949          | 2434         | 70992           |
+      | campaign-no-rate-card-yes-adunit-BillBoard-prog | 407981 | 234810   | true                  | 1401          | {zone-zoneset-no-rate-card-yes-adunit-prog} | []         | 58       | 15950          | 2434         | 38734           |
+      | campaign-no-ratecard-no-adunit-BR-prog          | 407981 | 260626   | true                  | 2212          | {zone-zoneset-brand-reveal-prog}            | []         | 95       | 15951          | 2434         | 68022           |
+      | campaign-cross-screen-price4.98                 | 407981 | 262286   | true                  | 2962          | {zone-zoneset-cross-blend4.98}              | []         | 10       | 14401          | 2434         | 70992           |
+      | campaign-cross-screen-below-floor-price         | 407981 | 262286   | true                  | 2962          | {zone-zoneset-below-floor-price}            | []         | 10       | 14402          | 2434         | 70992           |
 
     And i update campaign data by name
       | Campaign Name                                   | units | goal_type   |

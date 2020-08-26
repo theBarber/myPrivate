@@ -21,13 +21,13 @@ Feature: Programmatic flow support
     And The impressionUrl has bannerid field matching the id of the banner named {campaign-server-prog-SS-1-banner-1} 100% of the time
     When I send impression requests to UAS
 
-  Scenario: 2. basic Call to Programmatic GW - Header bidding - default Margin (50%) expected price = 1.1
+  Scenario: 2. basic Call to Programmatic GW - Header bidding - default Margin (50%) expected price = 0.5
 #    Given I add header of {x-forwarded-for} with value {207.246.116.162}
     Given i send 1 headerBidding post request for scenario {Send HB request for publisher 3711 - 1X1} for publisher 3711 with domain {test.com} with extra params {&unlimited=1&optimize=1&requestid=systemTestA}
     And The response code is 200
     And all HB responses contains adId with id of entity named {campaign-server-prog-SS-1-banner-1}
-    And all HB responses contains campaignId with id of entity named {campaign-server-prog-SS-1}
-    And all HB responses contains cpm with value {1.1}
+    And all HB responses contains campaignId with id of entity named {c}
+    And all HB responses contains cpm with value {0.5}
 
   Scenario: 3. Call Programmatic GW, GW doing auction, last ad selected - dynamic tag
     Then i send 1 times Dynamic Tag synchronized ad request with tag id 197 to UAS for publisher 3711 with domain {test.com&requestid=systemTestB&unlimited=1&optimize=1}
