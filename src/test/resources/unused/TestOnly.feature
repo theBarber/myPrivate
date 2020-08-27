@@ -17,16 +17,25 @@ Feature: test1
 #    #When I print local time
 #    And The impressionUrl has bannerid field matching the id of the banner named {75396-234903-365943-Billboard 970x250-productionBillboard} 100% of the time
 
-  Scenario: 3.0 gdpr=1
-    Given i create new campaigns with new zoneset
-         # R ----  R -----  OM
-      | Campaign Name                      | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-no-ratecard-no-adunitaaaa | 407981 | 260626   | true                  | 2212          | {zone-zoneset-brand-reveal-progaaaa} | []         | 95       | 15951          | 2434         | 68022           |
-      #| campaign-r      | 703688 | 271140   | false                 | 36398         | {zone-zoneset-cross-screen-blend} | []         | 10       | 15946          | 2434         | 70992           |
+  Scenario:  create entites for new pacing mechanism
+    Given i disable campaigns by name on db
+      | Campaign Name                 |
+      | campaign-D-DailyPacing-ST-aaa |
+    Given i create new campaigns, new zoneset with domains
+      | Campaign Name                 | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                 | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-D-DailyPacing-ST-aaa | 407981 | 257595   | false                 | 35284         | {zone-zoneset-D-DailyPacing-ST-aaa} | []         | 58       | 4737           | 2434         | 38734           | []          | []          |
+
+    Given I set campaign campaign-D-DailyPacing-ST-aaa for 10 days
+
+    And i update campaign data by name
+#    deliveryPacing = 1 = hourly pacing
+#    pacing = hourly flex
+      | Campaign Name                 | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
+      | campaign-D-DailyPacing-ST-aaa | 1            | 0               | 0      | 100   | impressions |
 
     And i update zone data by name
-      | Zone Name                          | is_secure |
-      | zone-zoneset-brand-reveal-progaaaa | 1         |
+      | Zone Name                         | is_secure | zone_type_id |
+      | zone-zoneset-D-DailyPacing-ST-aaa | 1         | 10           |
 
 
 
@@ -49,4 +58,4 @@ Feature: test1
 #    And I send impression requests to UAS
 
 
-#    Given I delete the history of campaign campaign-D-DailyPacing-ST-2 from metering bucket
+#    Given I delete the history of campaign campaign-D-DailyPacing-ST-aaa from metering bucket

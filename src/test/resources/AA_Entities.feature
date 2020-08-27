@@ -212,12 +212,12 @@ Feature: Entities for tests
   @HB
   Scenario: create entities for HB tests
     And i disable campaigns by name on db
-      | Campaign Name                               |
-      | campaign-HB-Tablet-160x600                  |
-      | campaign-HB-See-Through-1X2                 |
-      | campaign-HB-Desktop-300X250                 |
-      | campaign-HB-Billboard-970X250               |
-      | campaign-HB-SS-1X1                          |
+      | Campaign Name                 |
+      | campaign-HB-Tablet-160x600    |
+      | campaign-HB-See-Through-1X2   |
+      | campaign-HB-Desktop-300X250   |
+      | campaign-HB-Billboard-970X250 |
+      | campaign-HB-SS-1X1            |
 #      | campaign-HB-Prog-PGC-1X1-1                  |
 #      | campaign-HB-Prog-PGC-1X1-2                  |
 #      | campaign-HB-Prog-PGC-1X1-3                  |
@@ -241,12 +241,12 @@ Feature: Entities for tests
 #      | campaign-HB-DP-ServerPr-PGC-6b              |
 
     Given i create new campaigns with new zoneset
-      | Campaign Name                               | IO     | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name                                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
-      | campaign-HB-Tablet-160x600                  | 75396  | 223539   | false                 | 148           | {zone-zoneset-HB-Tablet-160x600}                  | []         | 8        | 14400          | 3673         | 65421           |
-      | campaign-HB-See-Through-1X2                 | 75396  | 210722   | false                 | 204           | {zone-zoneset-HB-See Through 1X2}                 | []         | 83       | 14400          | 3673         | 64396           |
-      | campaign-HB-Desktop-300X250                 | 75396  | 240827   | false                 | 85            | {zone-zoneset-Desktop-300X250}                    | []         | 10       | 14400          | 3673         | 66814           |
-      | campaign-HB-Billboard-970X250               | 75396  | 198082   | false                 | 64            | {zone-zoneset-HB-Billboard-970X250}               | []         | 58       | 14400          | 3673         | 66813           |
-      | campaign-HB-SS-1X1                          | 75396  | 197418   | false                 | 86            | {zone-zoneset-HB-SS-1X1}                          | []         | 69       | 14400          | 3673         | 66933           |
+      | Campaign Name                 | IO    | LineItem | isServerProgrammatic? | Creative\Deal | Zonesets-zone Name                  | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID |
+      | campaign-HB-Tablet-160x600    | 75396 | 223539   | false                 | 148           | {zone-zoneset-HB-Tablet-160x600}    | []         | 8        | 14400          | 3673         | 65421           |
+      | campaign-HB-See-Through-1X2   | 75396 | 210722   | false                 | 204           | {zone-zoneset-HB-See Through 1X2}   | []         | 83       | 14400          | 3673         | 64396           |
+      | campaign-HB-Desktop-300X250   | 75396 | 240827   | false                 | 85            | {zone-zoneset-Desktop-300X250}      | []         | 10       | 14400          | 3673         | 66814           |
+      | campaign-HB-Billboard-970X250 | 75396 | 198082   | false                 | 64            | {zone-zoneset-HB-Billboard-970X250} | []         | 58       | 14400          | 3673         | 66813           |
+      | campaign-HB-SS-1X1            | 75396 | 197418   | false                 | 86            | {zone-zoneset-HB-SS-1X1}            | []         | 69       | 14400          | 3673         | 66933           |
      # | campaign-HB-Prog-PGC-1X1-1                  | 407981 | 224812   | false                 | 6499          | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
      # | campaign-HB-Prog-PGC-1X1-2                  | 407981 | 224812   | false                 | 6499          | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
      # | campaign-HB-Prog-PGC-1X1-3                  | 75396  | 222908   | false                 | 86            | {zone-zoneset-HB-Prog-PGC-1X1}                    | []         | 69       | 14507          | 3697         | 66004           |
@@ -266,12 +266,12 @@ Feature: Entities for tests
       #| campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 407981 | 224533   | true                  | 31            | {zone-zoneset-HB-DP-ServerPr-ST-DynamicAtPub-6a}  | []         | 83       | 15168          | 3711         | 66555           |
       #| campaign-HB-DP-ServerPr-PGC-6b              | 407981 | 224530   | true                  | 20            | {zone-zoneset-HB-DP-ServerPr-PGC-6b}              | []         | 75       | 15168          | 3711         | 66557           |
     And i update campaign data by name
-      | Campaign Name                        | status | Priority | units | limitation | campaign_delivery_method |
-      | campaign-HB-Tablet-160x600           | 0      | -2       | -1    | []         | 1                        |
-      | campaign-HB-See-Through-1X2          | 0      | -1       | -1    | []         | 2                        |
-      | campaign-HB-Desktop-300X250          | 0      | -2       | -1    | []         | 1                        |
-      | campaign-HB-Billboard-970X250        | 0      | -1       | -1    | []         | 2                        |
-      | campaign-HB-SS-1X1                   | 0      | -2       | -1    | []         | 1                        |
+      | Campaign Name                 | status | Priority | units | limitation | campaign_delivery_method |
+      | campaign-HB-Tablet-160x600    | 0      | -2       | -1    | []         | 1                        |
+      | campaign-HB-See-Through-1X2   | 0      | -1       | -1    | []         | 2                        |
+      | campaign-HB-Desktop-300X250   | 0      | -2       | -1    | []         | 1                        |
+      | campaign-HB-Billboard-970X250 | 0      | -1       | -1    | []         | 2                        |
+      | campaign-HB-SS-1X1            | 0      | -2       | -1    | []         | 1                        |
     #  | campaign-HB-Prog-PGC-1X1-1           | 0      | -2       | -1    | []         | 1                        |
     #  | campaign-HB-Prog-PGC-1X1-2           | 0      | -1       | -1    | []         | 2                        |
     #  | campaign-HB-Prog-PGC-1X1-3           | 0      | 1        | -1    | []         | 4                        |
@@ -292,12 +292,12 @@ Feature: Entities for tests
      # | campaign-HB-DP-ServerPr-ST-DynamicAtPub-6a  | 40                              | 40                             | 0                  |
      # | campaign-HB-DP-ServerPr-PGC-6b              | 40                              | 40                             | 0                  |
     And i update zone data by name
-      | Zone Name                                       | is_secure |
-      | zone-zoneset-HB-Tablet-160x600                  | 1         |
-      | zone-zoneset-HB-See Through 1X2                 | 1         |
-      | zone-zoneset-Desktop-300X250                    | 1         |
-      | zone-zoneset-HB-Billboard-970X250               | 1         |
-      | zone-zoneset-HB-SS-1X1                          | 1         |
+      | Zone Name                         | is_secure |
+      | zone-zoneset-HB-Tablet-160x600    | 1         |
+      | zone-zoneset-HB-See Through 1X2   | 1         |
+      | zone-zoneset-Desktop-300X250      | 1         |
+      | zone-zoneset-HB-Billboard-970X250 | 1         |
+      | zone-zoneset-HB-SS-1X1            | 1         |
 #      | zone-zoneset-HB-Prog-PGC-1X1                    | 1         |
 #      | zone-zoneset-HB-Prog-See-Through-1X2            | 1         |
 #      | zone-zoneset-HB-Prog-Billboard-970X250          | 1         |
@@ -1060,44 +1060,44 @@ Feature: Entities for tests
 
   Scenario:  create entites for new pacing mechanism
     Given i disable campaigns by name on db
-      | Campaign Name                |
-      | campaign-D-HourlyPacing-ST-1 |
-      | campaign-D-DailyPacing-ST-2  |
-      | campaign-D-ASAP-ST-3         |
-      | campaign-D-HourlyFF-ST-4     |
-      | campaign-D-DailyFF-ST-5      |
+      | Campaign Name               |
+      | campaign-D-DailyPacing-ST-2 |
+#      | campaign-D-HourlyPacing-ST-1 |
+#      | campaign-D-ASAP-ST-3         |
+#      | campaign-D-HourlyFF-ST-4     |
+#      | campaign-D-DailyFF-ST-5      |
     Given i create new campaigns, new zoneset with domains
-      | Campaign Name                | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name                | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
-      | campaign-D-HourlyPacing-ST-1 | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyPacing-ST-1} | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-DailyPacing-ST-2  | 407981 | 257595   | false                 | 35284         | {zone-zoneset-D-DailyPacing-ST-2}  | []         | 58       | 4737           | 2434         | 38734           | []          | []          |
-      | campaign-D-ASAP-ST-3         | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-ASAP-ST-3}         | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-HourlyFF-ST-4     | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyFF-ST-4}     | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
-      | campaign-D-DailyFF-ST-5      | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+      | Campaign Name               | IO     | LineItem | isServerProgrammatic? | Deal\Creative | Zonesets-zones Name               | limitation | adUnitId | Web_Section id | publisher ID | po_line_item ID | app_include | app_exclude |
+      | campaign-D-DailyPacing-ST-2 | 407981 | 257595   | false                 | 35284         | {zone-zoneset-D-DailyPacing-ST-2} | []         | 58       | 4737           | 2434         | 38734           | []          | []          |
+#      | campaign-D-HourlyPacing-ST-1 | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyPacing-ST-1} | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+#      | campaign-D-ASAP-ST-3         | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-ASAP-ST-3}         | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+#      | campaign-D-HourlyFF-ST-4     | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-HourlyFF-ST-4}     | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
+#      | campaign-D-DailyFF-ST-5      | 75396  | 247767   | false                 | 8290          | {zone-zoneset-D-DailyFF-ST-5}      | []         | 93       | 15303          | 3821         | 69255           | []          | []          |
 
-    Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
     Given I set campaign campaign-D-DailyPacing-ST-2 for 10 days
-    Given I set campaign campaign-D-DailyPacing-ST-2 for UTC time zone
-    Given I set campaign campaign-D-ASAP-ST-3 for 3 days
-    Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
-    Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
+#    Given I set campaign campaign-D-HourlyPacing-ST-1 for 3 days
+#    Given I set campaign campaign-D-DailyPacing-ST-2 for UTC time zone
+#    Given I set campaign campaign-D-ASAP-ST-3 for 3 days
+#    Given I set campaign campaign-D-HourlyFF-ST-4 for 3 days
+#    Given I set campaign campaign-D-DailyFF-ST-5 for 3 days
 
     And i update campaign data by name
 #    deliveryPacing = 1 = hourly pacing
 #    pacing = hourly flex
-      | Campaign Name                | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
-      | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
-      | campaign-D-DailyPacing-ST-2  | 1            | 0               | 0      | 100   | impressions |
-      | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
-      | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
-      | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |
+      | Campaign Name               | is_wholesale | skip_daily_goal | pacing | units | goal_type   |
+      | campaign-D-DailyPacing-ST-2 | 1            | 0               | 0      | 100   | impressions |
+#      | campaign-D-HourlyPacing-ST-1 | 0            | 0               | 0      | 720   | impressions |
+#      | campaign-D-ASAP-ST-3         | 1            | 1               | 0      | 20    | impressions |
+#      | campaign-D-HourlyFF-ST-4     | 0            | 0               | 5      | 720   | impressions |
+#      | campaign-D-DailyFF-ST-5      | 1            | 0               | 10     | 45    | impressions |
 
     And i update zone data by name
-      | Zone Name                        | is_secure | zone_type_id |
-      | zone-zoneset-D-HourlyPacing-ST-1 | 1         | 10           |
-      | zone-zoneset-D-DailyPacing-ST-2  | 1         | 10           |
-      | zone-zoneset-D-ASAP-ST-3         | 1         | 10           |
-      | zone-zoneset-D-HourlyFF-ST-4     | 1         | 10           |
-      | zone-zoneset-D-DailyFF-ST-5      | 1         | 10           |
+      | Zone Name                       | is_secure | zone_type_id |
+      | zone-zoneset-D-DailyPacing-ST-2 | 1         | 10           |
+#      | zone-zoneset-D-HourlyPacing-ST-1 | 1         | 10           |
+#      | zone-zoneset-D-ASAP-ST-3         | 1         | 10           |
+#      | zone-zoneset-D-HourlyFF-ST-4     | 1         | 10           |
+#      | zone-zoneset-D-DailyFF-ST-5      | 1         | 10           |
 
 
   Scenario:  create entites for new pacing mechanism
